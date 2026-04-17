@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="preconnect" href="https://api.postalpincode.in" crossorigin>
+  <link rel="dns-prefetch" href="//api.postalpincode.in">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PIN Code Finder India - Search Post Office by Pincode | UpTools</title>
+  <meta name="description" content="Find post office details by PIN code in India. Get district, state, taluk, and all post offices under a pincode. Bulk lookup, CSV export, shareable links. Fast & free." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <meta name="theme-color" content="#0b1020" />
+  <meta name="keywords" content="pin code finder,pincode search india,post office pincode,india postal code,pincode lookup,district by pincode,state by pincode,uptools" />
+  <link rel="canonical" href="https://www.uptools.in/pin-code-finder/" />
+  <meta property="og:title" content="PIN Code Finder India - Search Post Office by Pincode" />
+  <meta property="og:description" content="Find district, state, taluk and all post offices by PIN code. Bulk lookup + CSV export. Free & fast." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.uptools.in/pin-code-finder/" />
+  <meta property="og:site_name" content="UpTools" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg" />
+
+  <link rel="preload" href="/style.css?v=1.3.0" as="style">
+  <link rel="stylesheet" href="/style.css?v=1.3.0" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"PIN Code Finder India","url":"https://www.uptools.in/pin-code-finder/","description":"Find post office details, district, state and taluk by Indian PIN code. Bulk lookup and CSV export.","areaServed":{"@type":"Country","name":"India"},"applicationCategory":"UtilityApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},{"@type":"ListItem","position":2,"name":"PIN Code Finder","item":"https://www.uptools.in/pin-code-finder/"}]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I find a PIN code in India?","acceptedAnswer":{"@type":"Answer","text":"Enter the 6-digit PIN code in the search box and click Find. You'll get the district, state, taluk, and all post offices under that PIN code."}},{"@type":"Question","name":"Can I search multiple PIN codes at once?","acceptedAnswer":{"@type":"Answer","text":"Yes! Use the Bulk Lookup section to paste multiple PIN codes (one per line) and export results as CSV."}}]}
+  </script>
+
+  <style>
+    :root{--bg:#0f1419;--surface:#121826;--text:#e6edf3;--muted:#9aa4b2;--brand:#7aa2ff;--radius:.75rem;--cardBorder:#212a3a}
+    *{box-sizing:border-box}
+    body{margin:0;font:400 16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:var(--brand)}
+    .card{background:var(--surface);border:1px solid var(--cardBorder);border-radius:var(--radius);padding:1rem}
+    .btn{display:inline-block;padding:.6rem .9rem;border-radius:var(--radius);background:var(--brand);color:#0b1020;border:0;font-weight:700;cursor:pointer}
+    .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--cardBorder)}
+    .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--cardBorder)}
+    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+    body{--accent:#7aa2ff}
+    .tool-header{display:flex;align-items:center;gap:10px;margin:12px 0}
+    .search-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .input.pin{letter-spacing:.1em;font-weight:700;font-size:1.1rem}
+    .muted{color:var(--muted);font-size:12px}
+    .chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;border:1px solid var(--cardBorder);background:var(--bg);color:var(--text);cursor:pointer;font-size:12px}
+    .chip:hover{border-color:var(--brand)}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
+    .row:last-child{border-bottom:0}
+    .row.key{font-weight:700}
+    .divider{height:1px;background:var(--cardBorder);margin:10px 0}
+    .po-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin-top:8px}
+    .po-card{background:#0d1626;border:1px solid var(--cardBorder);border-radius:.5rem;padding:.6rem .75rem;font-size:.9rem}
+    .po-name{font-weight:700;color:var(--brand)}
+    .po-type{font-size:.75rem;color:var(--muted)}
+    .skeleton{background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.09),rgba(255,255,255,.05));background-size:200% 100%;animation:loading 1.2s infinite;border-radius:6px;height:16px}
+    @keyframes loading{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .table{width:100%;border-collapse:separate;border-spacing:0}
+    .table th,.table td{padding:8px;border-bottom:1px solid var(--cardBorder);text-align:left;font-size:.9rem}
+    .table th{font-weight:700}
+    .status-ok{color:#9cffbf}.status-err{color:#ff9aa2}
+    .copy-btn{border:1px solid var(--cardBorder);background:var(--bg);color:var(--text);border-radius:8px;padding:5px 10px;cursor:pointer;font-size:12px}
+    .copy-btn:hover{border-color:var(--brand)}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .video-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:.75rem;overflow:hidden;border:1px solid var(--cardBorder)}
+    .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  </style>
+</head>
+<body>
+  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/ifsc-finder/">IFSC Finder</a>
+        <a href="/games/">Games</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="main">
+    <a class="sr-only" href="#search">Skip to search</a>
+
+    <div class="tool-header">
+      <div style="font-size:22px" aria-hidden="true">📮</div>
+      <h1>PIN Code Finder India</h1>
+    </div>
+
+    <section class="card" role="search" aria-labelledby="pinLabel" id="search">
+      <form id="pinForm" novalidate>
+        <label id="pinLabel" class="label" for="pinInput">PIN Code (6 digits)</label>
+        <div class="search-row">
+          <input id="pinInput" class="input pin" name="code" inputmode="numeric" autocomplete="off" spellcheck="false"
+                 placeholder="e.g. 110001" maxlength="6" minlength="6" pattern="[0-9]{6}" aria-describedby="pinHint" required />
+          <button id="findBtn" class="btn" type="submit">Find</button>
+          <button id="pasteBtn" class="btn ghost" type="button">Paste & Search</button>
+          <button id="clearBtn" class="btn secondary" type="button">Clear</button>
+        </div>
+        <div id="pinHint" class="muted" style="margin-top:6px">
+          Enter a 6-digit Indian PIN code. Tip: Press <kbd>/</kbd> to focus. Shareable URL: <code>/pin-code-finder/?code=110001</code>
+        </div>
+      </form>
+
+      <div id="recentWrap" style="margin-top:12px;display:none">
+        <div style="margin-bottom:6px;font-weight:600">Recent searches</div>
+        <div id="recent" class="chips"></div>
+      </div>
+
+      <div id="result" style="margin-top:16px" aria-live="polite" aria-atomic="true"></div>
+      <div id="actions" class="toolbar" style="display:none;margin-top:10px">
+        <button class="btn secondary" id="btnJson">Copy JSON</button>
+        <button class="btn secondary" id="btnCsv">Copy CSV</button>
+        <button class="btn secondary" id="btnShare">Share Link</button>
+        <button class="btn secondary" id="btnMaps">Open in Maps</button>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:12px" aria-labelledby="bulkTitle">
+      <div class="toolbar" style="justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <h2 id="bulkTitle" style="margin:0">Bulk PIN Code Lookup</h2>
+        <div style="display:flex;gap:8px">
+          <button id="bulkRun" class="btn">Run</button>
+          <button id="bulkCsv" class="btn secondary" disabled>Export CSV</button>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:6px">Paste multiple PIN codes (one per line). Fetches in parallel, export as CSV.</p>
+      <textarea id="bulkBox" class="input" rows="5" placeholder="110001&#10;400001&#10;600001" style="width:100%;resize:vertical;margin-top:8px"></textarea>
+      <div id="bulkOut" style="margin-top:10px"></div>
+    </section>
+
+    <section class="card" style="margin-top:12px">
+      <h2 style="margin-top:0">🎥 How India's postal system works</h2>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube-nocookie.com/embed/GmOzih6I1zs?rel=0&modestbranding=1&playsinline=1"
+          title="How India's postal system and PIN codes work"
+          loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <p class="muted" style="margin-top:6px">Video: Understanding India's 6-digit PIN code system and postal zones.</p>
+    </section>
+
+    <section class="card" style="margin-top:12px">
+      <h2 style="margin-top:0">Related Tools</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <a class="btn secondary" href="/ifsc-finder/">IFSC Finder</a>
+        <a class="btn secondary" href="/pan-validator/">PAN Validator</a>
+        <a class="btn secondary" href="/vehicle-registration-details/">Vehicle Registration</a>
+        <a class="btn secondary" href="/ip-address/">IP Address Lookup</a>
+      </div>
+    </section>
+
+    <footer class="note small site-footer" role="contentinfo" style="margin-top:12px">
+      © <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a> . <a href="/about/">About</a> . <a href="/contact/">Contact</a>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    const $ = s => document.querySelector(s);
+    const PIN_RE = /^[1-9][0-9]{5}$/;
+    const STORAGE_KEY = 'pin:recent';
+    const CACHE_KEY = 'pin:cache:v1';
+    const CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
+
+    addEventListener('DOMContentLoaded', () => $('#pinInput')?.focus({ preventScroll: true }));
+    addEventListener('keydown', e => {
+      if (e.key === '/' && !/input|textarea/i.test(document.activeElement.tagName)) {
+        e.preventDefault(); $('#pinInput')?.focus();
+      }
+    });
+
+    const getRecent = () => { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; } };
+    const setRecent = arr => localStorage.setItem(STORAGE_KEY, JSON.stringify(arr.slice(0, 8)));
+    const addRecent = code => { const a = [code, ...getRecent().filter(c => c !== code)]; setRecent(a); renderRecent(); };
+
+    function renderRecent() {
+      const list = getRecent();
+      const wrap = $('#recentWrap'), box = $('#recent');
+      if (!list.length) { wrap.style.display = 'none'; return; }
+      wrap.style.display = 'block';
+      box.innerHTML = list.map(c => `<button class="chip" data-code="${c}">${c}</button>`).join('');
+      box.querySelectorAll('.chip').forEach(ch => ch.addEventListener('click', () => { $('#pinInput').value = ch.dataset.code; runSearch(); }));
+    }
+
+    const toast = msg => {
+      const n = document.createElement('div'); n.textContent = msg;
+      Object.assign(n.style, { position: 'fixed', left: '50%', transform: 'translateX(-50%)', bottom: '18px', background: '#121826', color: '#e6edf3', padding: '8px 14px', border: '1px solid #212a3a', borderRadius: '8px', fontSize: '13px', zIndex: 9999 });
+      document.body.appendChild(n); setTimeout(() => n.remove(), 1400);
+    };
+    const copyText = t => navigator.clipboard?.writeText(t).then(() => toast('Copied!')).catch(() => {});
+
+    // Cache
+    const mem = new Map();
+    const readCache = () => { try { return JSON.parse(localStorage.getItem(CACHE_KEY) || '{}'); } catch { return {}; } };
+    const writeCache = obj => localStorage.setItem(CACHE_KEY, JSON.stringify(obj));
+    function getCached(code) {
+      if (mem.has(code)) return mem.get(code);
+      const s = readCache(); const r = s[code];
+      if (r && Date.now() - r.ts < CACHE_TTL) { mem.set(code, r.data); return r.data; }
+      return null;
+    }
+    function setCached(code, data) {
+      mem.set(code, data);
+      const s = readCache(); s[code] = { data, ts: Date.now() }; writeCache(s);
+    }
+
+    async function fetchPIN(code) {
+      const cached = getCached(code);
+      if (cached) return cached;
+      const r = await fetch(`https://api.postalpincode.in/pincode/${code}`, { credentials: 'omit' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const json = await r.json();
+      if (!json?.[0] || json[0].Status !== 'Success') throw new Error('NOT_FOUND');
+      const data = json[0];
+      setCached(code, data);
+      return data;
+    }
+
+    function renderSkeleton() {
+      $('#result').innerHTML = `
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+          <div class="skeleton" style="width:48px;height:48px;border-radius:8px"></div>
+          <div style="flex:1"><div class="skeleton" style="width:40%;height:16px;margin-bottom:6px"></div><div class="skeleton" style="width:60%;height:12px"></div></div>
+        </div>
+        <div class="divider"></div>
+        ${['PIN Code','District','State','Taluk','Post Offices'].map(k => `<div class="row"><span>${k}</span><div class="skeleton" style="width:140px"></div></div>`).join('')}`;
+      $('#actions').style.display = 'none';
+    }
+
+    function renderResult(data, code) {
+      const offices = data.PostOffice || [];
+      const first = offices[0] || {};
+      const district = first.District || '—';
+      const state = first.State || '—';
+      const taluk = first.Taluk || '—';
+      const country = first.Country || 'India';
+      const division = first.Division || '—';
+
+      $('#result').innerHTML = `
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <div style="width:48px;height:48px;border-radius:10px;background:#182033;display:grid;place-items:center;font-size:1.5rem">📮</div>
+          <div>
+            <div style="font-weight:800;font-size:1.1rem">${code} — ${district}</div>
+            <div class="muted">${state}, ${country}</div>
+          </div>
+          <button class="copy-btn" id="copyPin" style="margin-left:auto">Copy PIN</button>
+        </div>
+        <div class="divider"></div>
+        <div class="row key"><span>PIN Code</span><span>${code}</span></div>
+        <div class="row"><span>District</span><span>${district}</span></div>
+        <div class="row"><span>State</span><span>${state}</span></div>
+        <div class="row"><span>Taluk / Tehsil</span><span>${taluk}</span></div>
+        <div class="row"><span>Division</span><span>${division}</span></div>
+        <div class="row"><span>Post Offices</span><span>${offices.length}</span></div>
+        <div class="divider"></div>
+        <div style="font-weight:700;margin-bottom:8px">All Post Offices (${offices.length})</div>
+        <div class="po-grid">
+          ${offices.map(o => `
+            <div class="po-card">
+              <div class="po-name">${o.Name || '—'}</div>
+              <div class="po-type">${o.BranchType || ''} · ${o.DeliveryStatus || ''}</div>
+              <div class="muted" style="font-size:.75rem">${o.Block || ''}</div>
+            </div>`).join('')}
+        </div>`;
+
+      $('#actions').style.display = 'flex';
+      $('#copyPin').addEventListener('click', () => copyText(code));
+
+      const d = { pinCode: code, district, state, taluk, division, postOffices: offices.length, offices };
+      $('#btnJson').onclick = () => copyText(JSON.stringify(d, null, 2));
+      $('#btnCsv').onclick = () => {
+        const rows = [['PIN','Name','Type','District','State','Taluk','Delivery'], ...offices.map(o => [code, o.Name, o.BranchType, o.District, o.State, o.Taluk, o.DeliveryStatus])];
+        copyText(rows.map(r => r.map(v => `"${(v||'').replace(/"/g,'""')}"`).join(',')).join('\n'));
+      };
+      $('#btnShare').onclick = () => {
+        const url = `${location.origin}/pin-code-finder/?code=${code}`;
+        if (navigator.share) navigator.share({ title: `PIN ${code} — ${district}, ${state}`, url });
+        else copyText(url);
+      };
+      $('#btnMaps').onclick = () => window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(district + ', ' + state + ', India')}`, '_blank', 'noopener');
+    }
+
+    const renderError = msg => { $('#result').innerHTML = `<p class="muted" role="status">${msg}</p>`; $('#actions').style.display = 'none'; };
+
+    function setPermalink(code) {
+      const u = new URL(location.href);
+      code ? u.searchParams.set('code', code) : u.searchParams.delete('code');
+      history.replaceState({}, '', u);
+    }
+
+    async function runSearch() {
+      const raw = $('#pinInput').value.trim().replace(/\D/g, '');
+      $('#pinInput').value = raw;
+      if (!raw) { renderError('Enter a PIN code.'); return; }
+      if (!PIN_RE.test(raw)) { renderError('Invalid PIN code. Must be 6 digits starting with 1–9.'); return; }
+      setPermalink(raw);
+      renderSkeleton();
+      try {
+        const data = await fetchPIN(raw);
+        renderResult(data, raw);
+        addRecent(raw);
+      } catch {
+        renderError('Not found or temporarily unavailable. Please check the PIN code and try again.');
+      }
+    }
+
+    // Bulk
+    async function runBulk() {
+      const codes = [...new Set($('#bulkBox').value.split(/\r?\n/).map(s => s.trim().replace(/\D/g, '')).filter(s => s))];
+      if (!codes.length) return;
+      const out = $('#bulkOut');
+      out.innerHTML = '<p class="muted">Fetching…</p>';
+      const results = await Promise.allSettled(codes.map(c => fetchPIN(c).then(d => ({ code: c, ok: true, d })).catch(() => ({ code: c, ok: false }))));
+      const rows = results.map(r => r.value || r.reason);
+      out.innerHTML = `<div style="overflow:auto"><table class="table"><thead><tr><th>#</th><th>Status</th><th>PIN</th><th>District</th><th>State</th><th>Post Offices</th></tr></thead><tbody>
+        ${rows.map((r, i) => `<tr><td>${i + 1}</td><td>${r.ok ? '<span class="status-ok">OK</span>' : '<span class="status-err">Error</span>'}</td><td>${r.code}</td><td>${r.ok ? (r.d?.PostOffice?.[0]?.District || '—') : '—'}</td><td>${r.ok ? (r.d?.PostOffice?.[0]?.State || '—') : '—'}</td><td>${r.ok ? (r.d?.PostOffice?.length || 0) : '—'}</td></tr>`).join('')}
+      </tbody></table></div>`;
+      $('#bulkCsv').disabled = false;
+      $('#bulkCsv').onclick = () => {
+        const header = ['PIN', 'District', 'State', 'Taluk', 'PostOffices'];
+        const data = rows.map(r => [r.code, r.ok ? (r.d?.PostOffice?.[0]?.District || '') : 'ERROR', r.ok ? (r.d?.PostOffice?.[0]?.State || '') : '', r.ok ? (r.d?.PostOffice?.[0]?.Taluk || '') : '', r.ok ? (r.d?.PostOffice?.length || 0) : '']);
+        const csv = [header, ...data].map(row => row.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'pincode-bulk.csv'; a.click();
+      };
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderRecent();
+      $('#pinForm').addEventListener('submit', e => { e.preventDefault(); runSearch(); });
+      $('#pasteBtn').addEventListener('click', async () => {
+        try { const t = await navigator.clipboard.readText(); if (t) { $('#pinInput').value = t.trim(); runSearch(); } } catch { toast('Clipboard unavailable'); }
+      });
+      $('#clearBtn').addEventListener('click', () => { $('#pinInput').value = ''; $('#result').innerHTML = ''; $('#actions').style.display = 'none'; setPermalink(''); });
+      $('#pinInput').addEventListener('input', () => { $('#pinInput').value = $('#pinInput').value.replace(/\D/g, '').slice(0, 6); });
+      $('#pinInput').addEventListener('paste', () => setTimeout(() => { if (PIN_RE.test($('#pinInput').value)) runSearch(); }, 0));
+      $('#bulkRun').addEventListener('click', runBulk);
+      const qs = new URLSearchParams(location.search);
+      const code = qs.get('code') || '';
+      if (code) { $('#pinInput').value = code; runSearch(); }
+    });
+  </script>
+</body>
+</html>

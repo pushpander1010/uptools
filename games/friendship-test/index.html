@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Best Friend Compatibility Test 👫 How Well Do You Know Each Other? | UpTools</title>
+  <meta name="description" content="Play the ultimate best friend compatibility quiz! Answer questions about each other and see how well you really know your BFF. 2-player, challenge link, full-screen. Free, no sign-up." />
+  <meta name="keywords" content="best friend quiz,friendship test,bff quiz,how well do you know me,friend compatibility,friendship compatibility test,2 player quiz" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta name="theme-color" content="#6366f1" />
+  <link rel="canonical" href="https://www.uptools.in/games/friendship-test/" />
+  <link rel="icon" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg" />
+  <meta property="og:title" content="Best Friend Compatibility Test 👫 How Well Do You Know Each Other?" />
+  <meta property="og:description" content="2-player friendship quiz. Answer questions, compare with your BFF, get a compatibility score. Share a challenge link!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.uptools.in/games/friendship-test/" />
+  <meta property="og:site_name" content="UpTools" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Best Friend Compatibility Test","applicationCategory":"Game","operatingSystem":"Any","url":"https://www.uptools.in/games/friendship-test/","publisher":{"@type":"Organization","name":"UpTools"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+  <link rel="preload" href="/style.css?v=1.3.0" as="style">
+  <link rel="stylesheet" href="/style.css?v=1.3.0" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+  <style>
+    :root{--accent:#6366f1;--accent2:#818cf8;--bg:#0d0f1a;--card:#131629;--muted:#a5b4fc;--cardBorder:color-mix(in oklab,#6366f1 30%,#1e2040)}
+    body{background:radial-gradient(1200px 700px at 10% -10%,#1a1040 0%,transparent 45%),radial-gradient(1000px 600px at 110% 10%,#0d1a40 0%,transparent 45%),linear-gradient(135deg,#0d0f1a,#111428) fixed;min-height:100svh;color:#e6edf3}
+    body::after{content:"";position:fixed;inset:-40px 0 0 0;z-index:0;pointer-events:none;opacity:.12;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><text y="30" font-size="24" fill="%236366f1" opacity="0.6">⭐</text></svg>');background-size:48px 48px;animation:starDrift 60s linear infinite}
+    @keyframes starDrift{0%{background-position:0 0}100%{background-position:0 800px}}
+    header.site,main,footer,#playScreen{position:relative;z-index:1}
+    .game-wrap{max-width:1100px;margin:0 auto;padding:1rem}
+    .panel{background:color-mix(in oklab,var(--card) 95%,transparent);border:1px solid var(--cardBorder);border-radius:.9rem;padding:1rem}
+    .hud{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:.75rem}
+    @media(max-width:720px){.hud{grid-template-columns:repeat(2,1fr)}}
+    .kpi{text-align:center;padding:.6rem .75rem;border:1px solid var(--cardBorder);border-radius:.75rem;background:rgba(255,255,255,.03)}
+    .kpi .value{font-weight:900;font-size:1.15rem;color:var(--accent)}
+    .kpi .label{font-size:.78rem;color:var(--muted)}
+    .bar,.controls{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:.5rem}
+    .difficulty-btn{padding:.55rem .9rem;border-radius:.6rem;border:1px solid var(--cardBorder);background:#131629;color:#e6edf3;font-weight:800;cursor:pointer;transition:all .12s}
+    .difficulty-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:var(--accent)}
+    .btn{padding:.66rem 1.05rem;border:none;border-radius:.75rem;font-weight:900;cursor:pointer}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+    .btn.secondary{background:transparent;color:#e6edf3;border:1px solid var(--cardBorder)}
+    .btn.danger{background:#ef4444;color:#fff}
+    #playScreen{position:fixed;inset:0;display:none;z-index:50;background:linear-gradient(180deg,rgba(13,15,26,.96),rgba(17,20,40,.985));padding:max(8px,env(safe-area-inset-top)) clamp(8px,2vw,18px) max(10px,env(safe-area-inset-bottom))}
+    #playScreen.open{display:grid;grid-template-rows:auto 1fr auto;gap:.6rem}
+    .ps-top{display:flex;align-items:center;justify-content:space-between;gap:.5rem;background:rgba(255,255,255,.04);border:1px solid var(--cardBorder);border-radius:.75rem;padding:.5rem .65rem;flex-wrap:wrap}
+    .ps-btn{padding:.5rem .8rem;border-radius:.6rem;border:1px solid var(--cardBorder);background:#131629;color:#e6edf3;font-weight:800;cursor:pointer}
+    .ps-btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:var(--accent)}
+    .ps-progress{font-weight:900;font-variant-numeric:tabular-nums;padding:.28rem .55rem;border:1px solid var(--cardBorder);border-radius:.5rem;background:#131629}
+    .ps-stage{min-height:0;display:grid;align-items:center;justify-items:center}
+    .board{width:min(1100px,100%);height:100%;background:color-mix(in oklab,var(--card) 96%,transparent);border:1px solid var(--cardBorder);border-radius:.9rem;padding:clamp(.6rem,2vw,1rem);display:grid;grid-template-rows:1fr auto;gap:.6rem;overflow:hidden}
+    .qs{overflow:auto;overscroll-behavior:contain}
+    .qcard{display:grid;gap:.75rem;padding:clamp(.6rem,2.2vw,1rem);border:1px solid var(--cardBorder);border-radius:.8rem;background:#0d0f1a}
+    .qtitle{font-size:1.1rem;font-weight:900}
+    .opt{display:flex;align-items:center;gap:.55rem;padding:.5rem .6rem;border:1px solid var(--cardBorder);border-radius:.65rem;background:#0d0f1a;cursor:pointer}
+    .opt input{accent-color:var(--accent)}
+    .qnav{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+    .result{text-align:center;padding:.8rem;border:1px solid var(--cardBorder);border-radius:.75rem;background:rgba(255,255,255,.04)}
+    .ps-bottom{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+    .tiny{font-size:.82rem;color:var(--muted);text-align:center}
+    .note{color:var(--muted)}
+    .video-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:.75rem;overflow:hidden;border:1px solid var(--cardBorder)}
+    .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    [hidden]{display:none!important}
+  </style>
+</head>
+<body style="--accent:#6366f1;--accent2:#818cf8">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/games/">Games</a>
+        <a href="/games/love-test/">Love Test</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap" role="main">
+    <div style="text-align:center;margin:1rem 0 .25rem">
+      <h1 style="display:flex;gap:.5rem;align-items:center;justify-content:center">👫 Best Friend Compatibility Test</h1>
+      <p class="note">Two-player friendship quiz. Answer questions about each other and see your BFF score. Share a challenge link!</p>
+    </div>
+
+    <section class="game-wrap">
+      <div class="panel">
+        <div class="hud" aria-live="polite">
+          <div class="kpi"><div class="value" id="bestScore">--%</div><div class="label">Best BFF Score</div></div>
+          <div class="kpi"><div class="value" id="lastPair">—</div><div class="label">Last Played</div></div>
+          <div class="kpi"><div class="value" id="lastWhen">—</div><div class="label">Last Time</div></div>
+          <div class="kpi"><div class="value" id="plays">0</div><div class="label">Total Plays</div></div>
+        </div>
+        <div class="bar">
+          <button class="difficulty-btn active" data-len="10">Short (10)</button>
+          <button class="difficulty-btn" data-len="15">Standard (15)</button>
+          <button class="difficulty-btn" data-len="20">Long (20)</button>
+        </div>
+        <div class="controls">
+          <button id="startBtn" class="btn primary">👫 Start Quiz</button>
+          <button id="copyInvite" class="btn secondary">🔗 Challenge Link</button>
+          <button id="resetStats" class="btn danger">Reset Stats</button>
+        </div>
+        <p class="note" style="text-align:center;margin:.5rem 0 0;font-size:.9rem">Scores saved on this device only.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-top:.85rem">
+        <article class="card">
+          <h3 style="margin-bottom:.25rem">You might also like</h3>
+          <ul style="padding-left:1.2rem;margin:0">
+            <li><a href="/games/love-test/">❤️ Couple Love Test</a></li>
+            <li><a href="/games/quiz-trivia/">🧠 Quiz Trivia</a></li>
+            <li><a href="/games/memory-match/">🧠 Memory Match</a></li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3 style="margin-bottom:.25rem">Friendship resources</h3>
+          <ul style="padding-left:1.2rem;margin:0">
+            <li><a href="https://www.psychologytoday.com/us/basics/friendship" target="_blank" rel="noopener">Psychology of Friendship</a></li>
+            <li><a href="https://greatergood.berkeley.edu/topic/friendship" target="_blank" rel="noopener">Greater Good: Friendship</a></li>
+          </ul>
+        </article>
+      </div>
+
+      <section style="margin-top:12px">
+        <h2>🎥 Fun friendship challenge ideas</h2>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube-nocookie.com/embed/IltsOcCj1Ak?rel=0&modestbranding=1"
+            title="Fun friendship challenge ideas and games"
+            loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <p class="note" style="margin-top:8px;font-size:.9rem">Fun challenges to try with your best friend after the quiz!</p>
+      </section>
+
+      <footer style="text-align:center;margin:1rem 0 2rem">
+        <nav style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a href="/">UpTools</a> <a href="/games/">Games</a> <a href="/about/">About</a>
+        </nav>
+        <p class="note" style="font-size:.85rem">Privacy-first · Works offline once loaded</p>
+      </footer>
+    </section>
+  </main>
+
+  <section id="playScreen" role="dialog" aria-modal="true" inert>
+    <div class="ps-top">
+      <div style="display:flex;gap:.5rem;align-items:center">
+        <button id="psBack" class="ps-btn">⟵ Back</button>
+        <span style="font-weight:900">Best Friend Compatibility Test</span>
+      </div>
+      <span class="ps-progress" id="psProg">Q 1/10</span>
+      <button id="psShare" class="ps-btn">🔗 Share</button>
+    </div>
+    <div class="ps-stage">
+      <div class="board">
+        <div class="qs" id="qs" role="region" aria-live="polite"></div>
+        <div class="qnav">
+          <button id="prevBtn" class="ps-btn" disabled>◀ Prev</button>
+          <button id="nextBtn" class="ps-btn primary">Next ▶</button>
+        </div>
+      </div>
+    </div>
+    <div class="ps-bottom">
+      <div class="tiny">Tip: Use ↑/↓ to navigate options, Space/Enter to select.</div>
+    </div>
+  </section>
+
+  <script>
+    const $ = s => document.querySelector(s);
+    const $$ = s => [...document.querySelectorAll(s)];
+    const persist = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+    const read = (k, d = null) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
+
+    const BANK = [
+      { id:1, t:"I prefer texting over calling.", a:["Always","Usually","Rarely","Never"] },
+      { id:2, t:"I'm the one who plans our hangouts.", a:["Always","Usually","Rarely","Never"] },
+      { id:3, t:"I'd rather stay in than go out.", a:["Strongly agree","Agree","Disagree","Strongly disagree"] },
+      { id:4, t:"I remember important dates (birthdays, anniversaries).", a:["Always","Usually","Rarely","Never"] },
+      { id:5, t:"I'm the one who starts conversations.", a:["Always","Usually","Rarely","Never"] },
+      { id:6, t:"I share food without being asked.", a:["Always","Usually","Rarely","Never"] },
+      { id:7, t:"I'm brutally honest even if it hurts.", a:["Always","Usually","Rarely","Never"] },
+      { id:8, t:"I'd drop everything for a friend in need.", a:["Always","Usually","Rarely","Never"] },
+      { id:9, t:"I enjoy long deep conversations.", a:["Strongly agree","Agree","Disagree","Strongly disagree"] },
+      { id:10, t:"I'm the funny one in the group.", a:["Strongly agree","Agree","Disagree","Strongly disagree"] },
+      { id:11, t:"I keep secrets well.", a:["Always","Usually","Rarely","Never"] },
+      { id:12, t:"I'm the one who suggests new activities.", a:["Always","Usually","Rarely","Never"] },
+      { id:13, t:"I get jealous when my friend hangs out with others.", a:["Always","Usually","Rarely","Never"] },
+      { id:14, t:"I prefer small gatherings over big parties.", a:["Strongly agree","Agree","Disagree","Strongly disagree"] },
+      { id:15, t:"I'm the one who apologizes first after a fight.", a:["Always","Usually","Rarely","Never"] },
+      { id:16, t:"I enjoy giving gifts and surprises.", a:["Strongly agree","Agree","Disagree","Strongly disagree"] },
+      { id:17, t:"I'm a good listener.", a:["Always","Usually","Rarely","Never"] },
+      { id:18, t:"I'd travel with my best friend.", a:["Strongly agree","Agree","Disagree","Strongly disagree"] },
+      { id:19, t:"I'm the one who takes photos for memories.", a:["Always","Usually","Rarely","Never"] },
+      { id:20, t:"I'd be friends with this person for life.", a:["Strongly agree","Agree","Disagree","Strongly disagree"] },
+    ];
+
+    const F_BEST = 'ft-best', F_PLAYS = 'ft-plays';
+    const state = { step: 'names', length: 10, qIdx: [], cur: 0, a: [], b: [], nameA: '', nameB: '' };
+
+    function renderHUD() {
+      const best = read(F_BEST, null);
+      $('#bestScore').textContent = best ? best.score.toFixed(1) + '%' : '--%';
+      $('#lastPair').textContent = best?.pair ?? '—';
+      $('#lastWhen').textContent = best?.when ?? '—';
+      $('#plays').textContent = String(read(F_PLAYS, 0));
+      $$('.difficulty-btn').forEach(b => b.classList.toggle('active', +b.dataset.len === state.length));
+    }
+    renderHUD();
+
+    $$('.difficulty-btn').forEach(b => b.addEventListener('click', () => {
+      state.length = +b.dataset.len;
+      $$('.difficulty-btn').forEach(x => x.classList.toggle('active', x === b));
+    }));
+
+    function pickQuestions() {
+      const pool = [...BANK].sort(() => Math.random() - 0.5);
+      state.qIdx = pool.slice(0, state.length).map(q => q.id);
+    }
+
+    function getQ(idx) { return BANK.find(q => q.id === state.qIdx[idx]); }
+
+    function renderNameForm() {
+      $('#qs').innerHTML = `
+        <div class="qcard">
+          <div class="qtitle">👫 Enter your names to begin</div>
+          <label style="display:block;margin-bottom:4px;font-size:.9rem;color:#a5b4fc">Player 1 (answers first)</label>
+          <input id="nameA" class="input" type="text" placeholder="Your name" maxlength="20" style="width:100%;margin-bottom:10px" />
+          <label style="display:block;margin-bottom:4px;font-size:.9rem;color:#a5b4fc">Player 2 (answers second)</label>
+          <input id="nameB" class="input" type="text" placeholder="Friend's name" maxlength="20" style="width:100%" />
+        </div>`;
+      $('#nextBtn').textContent = 'Start ▶';
+      $('#prevBtn').disabled = true;
+      $('#psProg').textContent = 'Names';
+    }
+
+    function renderQuestion(idx, player) {
+      const q = getQ(idx);
+      const answers = player === 'a' ? state.a : state.b;
+      const name = player === 'a' ? state.nameA : state.nameB;
+      $('#qs').innerHTML = `
+        <div class="qcard">
+          <div style="font-size:.85rem;color:#a5b4fc;margin-bottom:4px">${name}'s turn · Question ${idx + 1} of ${state.length}</div>
+          <div class="qtitle">${q.t}</div>
+          ${q.a.map((opt, i) => `
+            <label class="opt">
+              <input type="radio" name="q${idx}" value="${i}" ${answers[idx] === i ? 'checked' : ''}>
+              <span>${opt}</span>
+            </label>`).join('')}
+        </div>`;
+      $('#psProg').textContent = `Q ${idx + 1}/${state.length}`;
+      $('#prevBtn').disabled = idx === 0 && player === 'a';
+      $('#nextBtn').textContent = (player === 'a' && idx === state.length - 1) ? 'Hand off to ' + state.nameB + ' ▶' : (player === 'b' && idx === state.length - 1) ? 'See Results ▶' : 'Next ▶';
+    }
+
+    function renderHandoff() {
+      $('#qs').innerHTML = `
+        <div class="qcard" style="text-align:center">
+          <div style="font-size:3rem">🤝</div>
+          <div class="qtitle">${state.nameA} is done!</div>
+          <p style="color:#a5b4fc">Now hand the device to <strong>${state.nameB}</strong> to answer the same questions.</p>
+          <p style="color:#a5b4fc;font-size:.9rem">Don't peek at ${state.nameA}'s answers!</p>
+        </div>`;
+      $('#nextBtn').textContent = state.nameB + "'s Turn ▶";
+      $('#prevBtn').disabled = true;
+      $('#psProg').textContent = 'Handoff';
+    }
+
+    function calcScore() {
+      let matches = 0;
+      for (let i = 0; i < state.length; i++) {
+        if (state.a[i] === state.b[i]) matches++;
+      }
+      return Math.round((matches / state.length) * 100);
+    }
+
+    function renderResult() {
+      const score = calcScore();
+      const emoji = score >= 80 ? '🏆' : score >= 60 ? '🌟' : score >= 40 ? '👍' : '💪';
+      const msg = score >= 80 ? 'You two are basically the same person!' : score >= 60 ? 'Great friendship! You know each other well.' : score >= 40 ? 'Good friends with room to grow closer!' : 'You have a lot to learn about each other!';
+
+      // Save best
+      const best = read(F_BEST, null);
+      if (!best || score > best.score) {
+        persist(F_BEST, { score, pair: `${state.nameA} & ${state.nameB}`, when: new Date().toLocaleDateString() });
+      }
+      persist(F_PLAYS, (read(F_PLAYS, 0) || 0) + 1);
+
+      $('#qs').innerHTML = `
+        <div class="result">
+          <div style="font-size:3rem">${emoji}</div>
+          <div style="font-size:2.5rem;font-weight:900;color:var(--accent)">${score}%</div>
+          <div style="font-size:1.1rem;font-weight:700;margin:.5rem 0">BFF Compatibility Score</div>
+          <p style="color:#a5b4fc">${state.nameA} & ${state.nameB}: ${msg}</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;text-align:left">
+            ${Array.from({length: state.length}, (_, i) => {
+              const q = getQ(i);
+              const match = state.a[i] === state.b[i];
+              return `<div style="background:#0d0f1a;border:1px solid ${match ? '#1e6641' : '#661e1e'};border-radius:.5rem;padding:.5rem;font-size:.8rem">
+                <div style="font-weight:700;color:${match ? '#00e5a0' : '#ff6b6b'}">${match ? '✅ Match' : '❌ Different'}</div>
+                <div style="color:#a5b4fc;margin-top:2px">${q.t.slice(0, 40)}…</div>
+                <div style="font-size:.75rem;margin-top:2px">${state.nameA}: ${q.a[state.a[i]] || '—'}</div>
+                <div style="font-size:.75rem">${state.nameB}: ${q.a[state.b[i]] || '—'}</div>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>`;
+      $('#nextBtn').textContent = 'Play Again ▶';
+      $('#prevBtn').disabled = true;
+      $('#psProg').textContent = 'Results';
+      renderHUD();
+    }
+
+    function openPlay() {
+      const ps = $('#playScreen');
+      ps.classList.add('open');
+      ps.removeAttribute('inert');
+      document.body.style.overflow = 'hidden';
+      state.step = 'names';
+      state.a = []; state.b = []; state.cur = 0;
+      pickQuestions();
+      renderNameForm();
+    }
+
+    function closePlay() {
+      const ps = $('#playScreen');
+      ps.classList.remove('open');
+      ps.setAttribute('inert', '');
+      document.body.style.overflow = '';
+      renderHUD();
+    }
+
+    function handleNext() {
+      if (state.step === 'names') {
+        const nameA = $('#nameA')?.value.trim() || 'Player 1';
+        const nameB = $('#nameB')?.value.trim() || 'Player 2';
+        state.nameA = nameA; state.nameB = nameB;
+        state.step = 'a'; state.cur = 0;
+        renderQuestion(0, 'a');
+      } else if (state.step === 'a') {
+        const sel = document.querySelector(`input[name="q${state.cur}"]:checked`);
+        if (!sel) { alert('Please select an answer!'); return; }
+        state.a[state.cur] = parseInt(sel.value);
+        if (state.cur < state.length - 1) { state.cur++; renderQuestion(state.cur, 'a'); }
+        else { state.step = 'handoff'; renderHandoff(); }
+      } else if (state.step === 'handoff') {
+        state.step = 'b'; state.cur = 0;
+        renderQuestion(0, 'b');
+      } else if (state.step === 'b') {
+        const sel = document.querySelector(`input[name="q${state.cur}"]:checked`);
+        if (!sel) { alert('Please select an answer!'); return; }
+        state.b[state.cur] = parseInt(sel.value);
+        if (state.cur < state.length - 1) { state.cur++; renderQuestion(state.cur, 'b'); }
+        else { state.step = 'result'; renderResult(); }
+      } else if (state.step === 'result') {
+        closePlay(); openPlay();
+      }
+    }
+
+    function handlePrev() {
+      if (state.step === 'a' && state.cur > 0) { state.cur--; renderQuestion(state.cur, 'a'); }
+      else if (state.step === 'b' && state.cur > 0) { state.cur--; renderQuestion(state.cur, 'b'); }
+    }
+
+    $('#startBtn').addEventListener('click', openPlay);
+    $('#psBack').addEventListener('click', closePlay);
+    $('#nextBtn').addEventListener('click', handleNext);
+    $('#prevBtn').addEventListener('click', handlePrev);
+    $('#resetStats').addEventListener('click', () => {
+      if (confirm('Reset all stats?')) { localStorage.removeItem(F_BEST); localStorage.removeItem(F_PLAYS); renderHUD(); }
+    });
+    $('#copyInvite').addEventListener('click', () => {
+      navigator.clipboard?.writeText(location.href).then(() => alert('Link copied! Share with your friend.'));
+    });
+    $('#psShare').addEventListener('click', () => {
+      if (navigator.share) navigator.share({ title: 'Best Friend Compatibility Test', url: location.href });
+      else navigator.clipboard?.writeText(location.href).then(() => alert('Link copied!'));
+    });
+
+    document.addEventListener('keydown', e => {
+      if (!$('#playScreen').classList.contains('open')) return;
+      if (e.key === 'Enter') handleNext();
+      if (e.key === 'Escape') closePlay();
+    });
+  </script>
+</body>
+</html>
