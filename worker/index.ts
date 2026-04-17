@@ -15,7 +15,7 @@ export interface Env {
 }
 
 const TOGETHER_BASE = "https://api.together.xyz/v1";
-const TOGETHER_MODEL = "mistralai/Mistral-Small-24B-Instruct-2501";
+const TOGETHER_MODEL = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo";
 
 const enc = new TextEncoder();
 
@@ -71,16 +71,29 @@ export default {
         max_tokens: 4096,
       };
 
-      const res = await fetch(`${TOGETHER_BASE}/chat/completions`, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${env.TOGETHER_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 25000);
+
+      let res: Response;
+      try {
+        res = await fetch(`${TOGETHER_BASE}/chat/completions`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${env.TOGETHER_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+          signal: controller.signal,
+        });
+      } catch (e: any) {
+        clearTimeout(timeout);
+        const msg = e?.name === "AbortError" ? "Upstream timeout" : "Upstream unreachable";
+        return json({ error: msg }, 503, cors);
+      }
+      clearTimeout(timeout);
 
       if (!res.ok) return relayJsonError(res, cors);
+      if (!res.body) return json({ error: "Empty upstream body" }, 502, cors);
       if (!stream) return json(await res.json(), 200, cors);
       return translateOpenAIStyleSSE(res, cors);
 
@@ -1293,7 +1306,7 @@ function translateOpenAIStyleSSE(upstream: Response, cors: HeadersInit): Respons
             const json = JSON.parse(payload);
             const delta = json?.choices?.[0]?.delta?.content ?? "";
             if (delta) enqueue({ choices: [{ delta: { content: delta } }] });
-          } catch {}
+          } catch (e) { console.warn("SSE parse error:", e); }
         }
       }
       controller.enqueue(enc.encode("data: [DONE]\n\n"));
