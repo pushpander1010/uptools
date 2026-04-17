@@ -15,7 +15,7 @@ export interface Env {
 }
 
 const TOGETHER_BASE = "https://api.together.xyz/v1";
-const TOGETHER_MODEL = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo";
+const TOGETHER_MODEL = "meta-llama/Meta-Llama-3-8B-Instruct-Lite";
 
 const enc = new TextEncoder();
 
