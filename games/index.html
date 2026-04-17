@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Free Online Games (No Sign-up) - Snake, 2048, Tic Tac Toe & More | UpTools</title>
+  <title>Free Online Games (No Sign-up) - Snake, 2048, Hangman, Typing Test & More | UpTools</title>
   <meta name="description"
-    content="Play 16+ free online games instantly: Snake, 2048, Tetris, Pac-Man, Flappy Bird, Tic Tac Toe, Minesweeper, Memory Match, Sudoku and more. No downloads, no sign-ups. Mobile-friendly, ad-light, and blazing fast." />
+    content="Play 24+ free online games instantly: Snake, 2048, Tetris, Pac-Man, Hangman, Typing Speed Test, Word Scramble, Quiz Trivia, Dice Roller, Coin Flip, Ping Pong and more. No downloads, no sign-ups. Mobile-friendly." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <meta name="theme-color" content="#0f1419" />
 
@@ -378,7 +378,7 @@
     "@context":"https://schema.org",
     "@type":"CollectionPage",
     "name":"Free Online Games - UpTools",
-    "description":"Play free browser games like Snake, 2048, Tic Tac Toe, Memory Match, Breakout, Tetris, Pac-Man and more. No downloads or sign-ups.",
+    "description":"Play free browser games like Snake, 2048, Tic Tac Toe, Memory Match, Breakout, Tetris, Pac-Man, Hangman, Typing Speed Test, Word Scramble, Quiz Trivia, Dice Roller, Coin Flip, Ping Pong and more. No downloads or sign-ups.",
     "url":"https://www.uptools.in/games/",
     "isPartOf":{"@type":"WebSite","name":"UpTools","url":"https://www.uptools.in/"},
     "hasPart":[
@@ -397,7 +397,14 @@
       {"@type":"VideoGame","name":"Simon Says","url":"https://www.uptools.in/games/simon-says/","applicationCategory":"Game","genre":["Brain","Memory"]},
       {"@type":"VideoGame","name":"Tetris","url":"https://www.uptools.in/games/tetris/","applicationCategory":"Game","genre":["Puzzle","Classic"]},
       {"@type":"VideoGame","name":"Whack-a-Mole","url":"https://www.uptools.in/games/whack-a-mole/","applicationCategory":"Game","genre":["Arcade","Reflex"]},
-      {"@type":"VideoGame","name":"Minesweeper","url":"https://www.uptools.in/games/minesweeper/","applicationCategory":"Game","genre":["Puzzle","Logic"]}
+      {"@type":"VideoGame","name":"Minesweeper","url":"https://www.uptools.in/games/minesweeper/","applicationCategory":"Game","genre":["Puzzle","Logic"]},
+      {"@type":"VideoGame","name":"Typing Speed Test","url":"https://www.uptools.in/games/typing-speed/","applicationCategory":"Game","genre":["Educational","Quick Play"]},
+      {"@type":"VideoGame","name":"Hangman","url":"https://www.uptools.in/games/hangman/","applicationCategory":"Game","genre":["Word","Classic","Puzzle"]},
+      {"@type":"VideoGame","name":"Word Scramble","url":"https://www.uptools.in/games/word-scramble/","applicationCategory":"Game","genre":["Word","Puzzle","Brain"]},
+      {"@type":"VideoGame","name":"Quiz Trivia","url":"https://www.uptools.in/games/quiz-trivia/","applicationCategory":"Game","genre":["Quiz","Brain","Educational"]},
+      {"@type":"VideoGame","name":"Dice Roller","url":"https://www.uptools.in/games/dice-roller/","applicationCategory":"Game","genre":["Casual","Quick Play"]},
+      {"@type":"VideoGame","name":"Coin Flip","url":"https://www.uptools.in/games/coin-flip/","applicationCategory":"Game","genre":["Casual","Quick Play"]},
+      {"@type":"VideoGame","name":"Ping Pong","url":"https://www.uptools.in/games/ping-pong/","applicationCategory":"Game","genre":["Arcade","Classic","Reflex"]}
     ]
   }
   </script>
@@ -460,6 +467,9 @@
         <label class="chip"><input type="checkbox" value="quick" /> Quick Play</label>
         <label class="chip"><input type="checkbox" value="memory" /> Memory</label>
         <label class="chip"><input type="checkbox" value="logic" /> Logic</label>
+        <label class="chip"><input type="checkbox" value="word" /> Word</label>
+        <label class="chip"><input type="checkbox" value="quiz" /> Quiz</label>
+        <label class="chip"><input type="checkbox" value="casual" /> Casual</label>
       </div>
     </section>
 
@@ -643,6 +653,62 @@
         desc: "Flag mines and clear safe tiles to win.",
         tags: ["puzzle", "logic", "classic"],
         href: "/games/minesweeper/"
+      },
+      {
+        slug: "typing-speed",
+        title: "Typing Speed Test",
+        icon: "⌨️",
+        desc: "Test your WPM and accuracy. How fast can you type?",
+        tags: ["quick", "brain", "educational"],
+        href: "/games/typing-speed/"
+      },
+      {
+        slug: "hangman",
+        title: "Hangman",
+        icon: "🪢",
+        desc: "Guess the word letter by letter before time runs out.",
+        tags: ["word", "classic", "puzzle", "brain"],
+        href: "/games/hangman/"
+      },
+      {
+        slug: "word-scramble",
+        title: "Word Scramble",
+        icon: "🔀",
+        desc: "Unscramble jumbled letters to find the hidden word.",
+        tags: ["word", "puzzle", "brain", "quick"],
+        href: "/games/word-scramble/"
+      },
+      {
+        slug: "quiz-trivia",
+        title: "Quiz Trivia",
+        icon: "🧠",
+        desc: "Test your general knowledge with 100+ trivia questions.",
+        tags: ["quiz", "brain", "educational"],
+        href: "/games/quiz-trivia/"
+      },
+      {
+        slug: "dice-roller",
+        title: "Dice Roller",
+        icon: "🎲",
+        desc: "Roll D4 to D20 virtual dice for board games and RPGs.",
+        tags: ["casual", "quick", "fun"],
+        href: "/games/dice-roller/"
+      },
+      {
+        slug: "coin-flip",
+        title: "Coin Flip",
+        icon: "🪙",
+        desc: "Flip a virtual coin. Heads or tails? With stats and history.",
+        tags: ["casual", "quick", "fun"],
+        href: "/games/coin-flip/"
+      },
+      {
+        slug: "ping-pong",
+        title: "Ping Pong",
+        icon: "🏓",
+        desc: "Classic Pong against AI. First to 7 wins!",
+        tags: ["arcade", "classic", "reflex"],
+        href: "/games/ping-pong/"
       }
     ];
 

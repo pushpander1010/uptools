@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Typing Speed Test - WPM Test Online Free | UpTools Games</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  <meta name="description" content="Test your typing speed online. Free WPM (words per minute) typing test with accuracy tracking. No sign-up, instant results." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://www.uptools.in/games/typing-speed/" />
+  <meta property="og:title" content="Typing Speed Test - WPM Test Online Free" />
+  <meta property="og:description" content="Test your typing speed (WPM) and accuracy online. Free, instant, no sign-up." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.uptools.in/games/typing-speed/" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="/style.css?v=1.3.0" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"VideoGame","name":"Typing Speed Test","url":"https://www.uptools.in/games/typing-speed/","applicationCategory":"Game","genre":["Educational","Quick Play"],"description":"Test your typing speed in WPM with accuracy tracking."}
+  </script>
+  <style>
+    body { --accent: #00e5ff; }
+    .game-wrap { max-width: 760px; margin: 0 auto; }
+    .text-display { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; font-size: 1.2rem; line-height: 2; letter-spacing: .02em; min-height: 100px; }
+    .char.correct { color: #00e5ff; }
+    .char.wrong { color: #ff6b6b; background: #3a0a0a; border-radius: 2px; }
+    .char.current { border-bottom: 2px solid #7aa2ff; }
+    .char.pending { color: #4a5568; }
+    #typingInput { width: 100%; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .75rem; font-size: 1.1rem; margin-top: 12px; }
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+    @media(max-width:500px){ .stats-row { grid-template-columns: repeat(2,1fr); } }
+    .stat-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .75rem; text-align: center; }
+    .stat-val { font-size: 1.8rem; font-weight: 900; color: #00e5ff; }
+    .stat-lbl { font-size: .8rem; color: #9aa4b2; }
+    .progress-bar { height: 6px; background: #0d1626; border-radius: 999px; margin-top: 8px; overflow: hidden; }
+    .progress-fill { height: 100%; background: #00e5ff; border-radius: 999px; transition: width .1s; }
+    .result-box { background: #0d1626; border: 1px solid #2a3a5a; border-radius: .75rem; padding: 1.5rem; text-align: center; display: none; }
+    .result-wpm { font-size: 3rem; font-weight: 900; color: #00e5ff; }
+    .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/games/">← Games</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="game-wrap">
+      <section class="card hero" aria-labelledby="title">
+        <div>
+          <h1 id="title">⌨️ Typing Speed Test</h1>
+          <p class="note">How fast can you type? Test your WPM and accuracy. Click the input below to start!</p>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
+          <label style="font-size:.9rem;color:#9aa4b2">Duration:</label>
+          <button class="btn secondary" data-time="30" id="t30">30s</button>
+          <button class="btn" data-time="60" id="t60">60s</button>
+          <button class="btn secondary" data-time="120" id="t120">2min</button>
+          <button id="restartBtn" class="btn secondary" style="margin-left:auto">↺ Restart</button>
+        </div>
+
+        <div class="text-display" id="textDisplay" aria-label="Text to type"></div>
+        <input id="typingInput" type="text" placeholder="Click here and start typing…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Type here" />
+
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+        <div class="stats-row">
+          <div class="stat-box"><div class="stat-val" id="wpmVal">0</div><div class="stat-lbl">WPM</div></div>
+          <div class="stat-box"><div class="stat-val" id="accVal">100%</div><div class="stat-lbl">Accuracy</div></div>
+          <div class="stat-box"><div class="stat-val" id="timeVal">60</div><div class="stat-lbl">Seconds</div></div>
+          <div class="stat-box"><div class="stat-val" id="errVal">0</div><div class="stat-lbl">Errors</div></div>
+        </div>
+      </section>
+
+      <div class="result-box card" id="resultBox" style="margin-top:12px">
+        <div class="result-wpm" id="finalWpm">0</div>
+        <p style="color:#9aa4b2;margin:4px 0">Words Per Minute</p>
+        <p id="finalStats" style="margin:8px 0"></p>
+        <button id="tryAgainBtn" class="btn" style="margin-top:12px">Try Again</button>
+      </div>
+
+      <section class="card" style="margin-top:12px">
+        <h2 style="margin-top:0">🎥 How to type faster</h2>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube-nocookie.com/embed/1ArVtCQqQRE?rel=0&modestbranding=1"
+            title="How to type faster - touch typing tutorial"
+            loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <p class="note small" style="margin-top:8px">Learn touch typing to dramatically improve your WPM.</p>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h2 style="margin-top:0">More Games</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <a class="btn secondary" href="/games/word-scramble/">Word Scramble</a>
+          <a class="btn secondary" href="/games/hangman/">Hangman</a>
+          <a class="btn secondary" href="/games/memory-match/">Memory Match</a>
+          <a class="btn secondary" href="/games/">All Games</a>
+        </div>
+      </section>
+
+      <footer class="note small site-footer" role="contentinfo" style="margin-top:12px">
+        © <span id="y"></span> UpTools . <a href="/games/">Games</a> . <a href="/">Home</a>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    const TEXTS = [
+      "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.",
+      "Programming is the art of telling another human what one wants the computer to do. Code is like humor. When you have to explain it, it is bad.",
+      "The best way to predict the future is to invent it. Technology is best when it brings people together. Innovation distinguishes between a leader and a follower.",
+      "Success is not final, failure is not fatal: it is the courage to continue that counts. The only way to do great work is to love what you do.",
+      "In the middle of every difficulty lies opportunity. Life is what happens when you are busy making other plans. The future belongs to those who believe in the beauty of their dreams.",
+      "To be or not to be that is the question. All that glitters is not gold. The lady doth protest too much methinks. What a piece of work is a man.",
+      "Science is not only a disciple of reason but also one of romance and passion. The universe is under no obligation to make sense to you. Look up at the stars and not down at your feet.",
+    ];
+
+    let duration = 60;
+    let timer = null;
+    let timeLeft = 60;
+    let started = false;
+    let currentText = '';
+    let errors = 0;
+    let totalTyped = 0;
+
+    const textDisplay = document.getElementById('textDisplay');
+    const typingInput = document.getElementById('typingInput');
+    const wpmVal = document.getElementById('wpmVal');
+    const accVal = document.getElementById('accVal');
+    const timeVal = document.getElementById('timeVal');
+    const errVal = document.getElementById('errVal');
+    const progressFill = document.getElementById('progressFill');
+    const resultBox = document.getElementById('resultBox');
+
+    function pickText() {
+      return TEXTS[Math.floor(Math.random() * TEXTS.length)];
+    }
+
+    function renderText(typed) {
+      const chars = currentText.split('');
+      textDisplay.innerHTML = chars.map((c, i) => {
+        let cls = 'char pending';
+        if (i < typed.length) cls = typed[i] === c ? 'char correct' : 'char wrong';
+        else if (i === typed.length) cls = 'char current';
+        return `<span class="${cls}">${c === ' ' ? '&nbsp;' : c}</span>`;
+      }).join('');
+    }
+
+    function calcWPM(typed, elapsed) {
+      const words = typed.trim().split(/\s+/).filter(Boolean).length;
+      return elapsed > 0 ? Math.round((words / elapsed) * 60) : 0;
+    }
+
+    function init() {
+      clearInterval(timer);
+      started = false;
+      timeLeft = duration;
+      errors = 0;
+      totalTyped = 0;
+      currentText = pickText();
+      typingInput.value = '';
+      typingInput.disabled = false;
+      renderText('');
+      wpmVal.textContent = '0';
+      accVal.textContent = '100%';
+      timeVal.textContent = duration;
+      errVal.textContent = '0';
+      progressFill.style.width = '0%';
+      resultBox.style.display = 'none';
+    }
+
+    typingInput.addEventListener('input', () => {
+      const typed = typingInput.value;
+      if (!started && typed.length > 0) {
+        started = true;
+        const startTime = Date.now();
+        timer = setInterval(() => {
+          timeLeft--;
+          timeVal.textContent = timeLeft;
+          progressFill.style.width = `${((duration - timeLeft) / duration) * 100}%`;
+          const elapsed = (Date.now() - startTime) / 1000;
+          wpmVal.textContent = calcWPM(typed, elapsed);
+          if (timeLeft <= 0) {
+            clearInterval(timer);
+            typingInput.disabled = true;
+            showResult(typed, elapsed);
+          }
+        }, 1000);
+      }
+
+      renderText(typed);
+      totalTyped = typed.length;
+
+      // Count errors
+      let e = 0;
+      for (let i = 0; i < typed.length; i++) {
+        if (typed[i] !== currentText[i]) e++;
+      }
+      errors = e;
+      errVal.textContent = errors;
+      const acc = totalTyped > 0 ? Math.round(((totalTyped - errors) / totalTyped) * 100) : 100;
+      accVal.textContent = acc + '%';
+
+      // Auto-advance if text complete
+      if (typed.length >= currentText.length) {
+        currentText = pickText();
+        typingInput.value = '';
+        renderText('');
+      }
+    });
+
+    function showResult(typed, elapsed) {
+      const wpm = calcWPM(typed, elapsed);
+      const acc = totalTyped > 0 ? Math.round(((totalTyped - errors) / totalTyped) * 100) : 100;
+      document.getElementById('finalWpm').textContent = wpm;
+      document.getElementById('finalStats').textContent = `Accuracy: ${acc}% | Errors: ${errors} | Characters typed: ${totalTyped}`;
+      resultBox.style.display = 'block';
+    }
+
+    document.querySelectorAll('[data-time]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        duration = parseInt(btn.dataset.time);
+        document.querySelectorAll('[data-time]').forEach(b => b.className = 'btn secondary');
+        btn.className = 'btn';
+        init();
+      });
+    });
+
+    document.getElementById('restartBtn').addEventListener('click', init);
+    document.getElementById('tryAgainBtn').addEventListener('click', init);
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coin Flip Online - Virtual Coin Toss Free | UpTools Games</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  <meta name="description" content="Flip a virtual coin online. Heads or tails? Free online coin toss with statistics and history. Perfect for decisions and games. No sign-up needed." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://www.uptools.in/games/coin-flip/" />
+  <meta property="og:title" content="Coin Flip Online - Virtual Coin Toss Free" />
+  <meta property="og:description" content="Flip a virtual coin online. Heads or tails? Free, instant, with statistics." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.uptools.in/games/coin-flip/" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="/style.css?v=1.3.0" />
+  <style>
+    body { --accent: #f59e0b; }
+    .game-wrap { max-width: 560px; margin: 0 auto; }
+    .coin-container { display: flex; justify-content: center; margin: 24px 0; perspective: 600px; }
+    .coin { width: 140px; height: 140px; border-radius: 50%; position: relative; transform-style: preserve-3d; cursor: pointer; transition: transform .6s ease; }
+    .coin.flipping { animation: coinFlip .8s ease; }
+    @keyframes coinFlip {
+      0% { transform: rotateY(0); }
+      50% { transform: rotateY(900deg) scale(1.1); }
+      100% { transform: rotateY(1800deg); }
+    }
+    .coin-face { position: absolute; inset: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; backface-visibility: hidden; border: 4px solid #f59e0b; box-shadow: 0 0 30px rgba(245,158,11,.3); }
+    .coin-heads { background: radial-gradient(circle at 35% 35%, #fbbf24, #d97706); }
+    .coin-tails { background: radial-gradient(circle at 35% 35%, #9ca3af, #6b7280); transform: rotateY(180deg); }
+    #result { font-size: 2rem; font-weight: 900; text-align: center; min-height: 2.5rem; }
+    .stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 12px 0; }
+    .stat-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .5rem; text-align: center; }
+    .stat-val { font-size: 1.4rem; font-weight: 900; color: #f59e0b; }
+    .stat-lbl { font-size: .75rem; color: #9aa4b2; }
+    .history-row { display: flex; gap: 4px; flex-wrap: wrap; max-height: 80px; overflow-y: auto; }
+    .h-chip { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; }
+    .h-chip.H { background: #fbbf2422; border: 1px solid #f59e0b; color: #f59e0b; }
+    .h-chip.T { background: #6b728022; border: 1px solid #9ca3af; color: #9ca3af; }
+    .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/games/">← Games</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="game-wrap">
+      <section class="card hero" aria-labelledby="title">
+        <div>
+          <h1 id="title">🪙 Coin Flip</h1>
+          <p class="note">Can't decide? Let the coin decide! Click the coin or press Space to flip.</p>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:12px;text-align:center">
+        <div class="coin-container">
+          <div class="coin" id="coin" role="button" aria-label="Flip coin" tabindex="0">
+            <div class="coin-face coin-heads">🪙</div>
+            <div class="coin-face coin-tails">🔘</div>
+          </div>
+        </div>
+
+        <div id="result" aria-live="polite">Click to flip!</div>
+        <p id="streak" class="note small" style="margin-top:4px;min-height:1.4em"></p>
+
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+          <button id="flipBtn" class="btn" style="font-size:1.1rem">🪙 Flip Coin</button>
+          <button id="flip10Btn" class="btn secondary">Flip 10x</button>
+          <button id="resetBtn" class="btn secondary">Reset Stats</button>
+        </div>
+
+        <div class="stats-row" style="margin-top:16px">
+          <div class="stat-box"><div class="stat-val" id="headsVal">0</div><div class="stat-lbl">Heads</div></div>
+          <div class="stat-box"><div class="stat-val" id="totalVal">0</div><div class="stat-lbl">Total Flips</div></div>
+          <div class="stat-box"><div class="stat-val" id="tailsVal">0</div><div class="stat-lbl">Tails</div></div>
+        </div>
+
+        <div style="margin-top:8px">
+          <div style="display:flex;gap:4px;align-items:center;margin-bottom:6px">
+            <span style="font-size:.85rem;color:#9aa4b2">Heads %:</span>
+            <div style="flex:1;height:8px;background:#0d1626;border-radius:999px;overflow:hidden">
+              <div id="headsBar" style="height:100%;background:#f59e0b;border-radius:999px;width:50%;transition:width .3s"></div>
+            </div>
+            <span id="headsPct" style="font-size:.85rem;color:#f59e0b;min-width:36px">50%</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h2 style="margin-top:0">Flip History</h2>
+        <div class="history-row" id="historyRow">
+          <span style="color:#4a5568;font-size:.85rem">No flips yet…</span>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h2 style="margin-top:0">🎥 The probability of coin flips</h2>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube-nocookie.com/embed/XST4TNKL0Gg?rel=0&modestbranding=1"
+            title="The probability and statistics of coin flips"
+            loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <p class="note small" style="margin-top:8px">Is a coin flip truly 50/50? The surprising math behind it.</p>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h2 style="margin-top:0">More Games</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <a class="btn secondary" href="/games/dice-roller/">Dice Roller</a>
+          <a class="btn secondary" href="/games/number-guessing/">Number Guessing</a>
+          <a class="btn secondary" href="/games/rock-paper-scissors/">Rock Paper Scissors</a>
+          <a class="btn secondary" href="/games/">All Games</a>
+        </div>
+      </section>
+
+      <footer class="note small site-footer" role="contentinfo" style="margin-top:12px">
+        © <span id="y"></span> UpTools . <a href="/games/">Games</a> . <a href="/">Home</a>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    let heads = 0, tails = 0, total = 0, streak = 0, lastResult = '';
+    const history = [];
+
+    function flip() {
+      const coin = document.getElementById('coin');
+      if (coin.classList.contains('flipping')) return;
+
+      const result = Math.random() < 0.5 ? 'H' : 'T';
+      coin.classList.add('flipping');
+
+      setTimeout(() => {
+        coin.classList.remove('flipping');
+        applyResult(result);
+      }, 800);
+    }
+
+    function applyResult(result) {
+      total++;
+      history.unshift(result);
+      if (history.length > 50) history.pop();
+
+      if (result === 'H') {
+        heads++;
+        document.getElementById('result').textContent = '🪙 HEADS!';
+        document.getElementById('result').style.color = '#f59e0b';
+      } else {
+        tails++;
+        document.getElementById('result').textContent = '🔘 TAILS!';
+        document.getElementById('result').style.color = '#9ca3af';
+      }
+
+      if (result === lastResult) {
+        streak++;
+      } else {
+        streak = 1;
+        lastResult = result;
+      }
+
+      document.getElementById('streak').textContent = streak > 2 ? `🔥 ${streak} in a row!` : '';
+      document.getElementById('headsVal').textContent = heads;
+      document.getElementById('tailsVal').textContent = tails;
+      document.getElementById('totalVal').textContent = total;
+
+      const pct = total > 0 ? Math.round((heads / total) * 100) : 50;
+      document.getElementById('headsBar').style.width = pct + '%';
+      document.getElementById('headsPct').textContent = pct + '%';
+
+      renderHistory();
+    }
+
+    function flip10() {
+      const results = Array.from({ length: 10 }, () => Math.random() < 0.5 ? 'H' : 'T');
+      results.forEach(r => applyResult(r));
+      const h = results.filter(r => r === 'H').length;
+      document.getElementById('result').textContent = `10 flips: ${h} Heads, ${10 - h} Tails`;
+    }
+
+    function renderHistory() {
+      const row = document.getElementById('historyRow');
+      if (!history.length) {
+        row.innerHTML = '<span style="color:#4a5568;font-size:.85rem">No flips yet…</span>';
+        return;
+      }
+      row.innerHTML = history.slice(0, 40).map(r =>
+        `<div class="h-chip ${r}">${r}</div>`
+      ).join('');
+    }
+
+    document.getElementById('coin').addEventListener('click', flip);
+    document.getElementById('flipBtn').addEventListener('click', flip);
+    document.getElementById('flip10Btn').addEventListener('click', flip10);
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      heads = 0; tails = 0; total = 0; streak = 0; lastResult = '';
+      history.length = 0;
+      document.getElementById('result').textContent = 'Click to flip!';
+      document.getElementById('result').style.color = '';
+      document.getElementById('streak').textContent = '';
+      document.getElementById('headsVal').textContent = 0;
+      document.getElementById('tailsVal').textContent = 0;
+      document.getElementById('totalVal').textContent = 0;
+      document.getElementById('headsBar').style.width = '50%';
+      document.getElementById('headsPct').textContent = '50%';
+      renderHistory();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT') {
+        e.preventDefault();
+        flip();
+      }
+    });
+  </script>
+</body>
+</html>

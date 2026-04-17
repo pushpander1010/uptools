@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ping Pong Game Online - Play Pong Free | UpTools Games</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  <meta name="description" content="Play classic Ping Pong (Pong) online for free. Challenge the AI in this retro arcade game. No downloads, no sign-up. Mobile-friendly." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://www.uptools.in/games/ping-pong/" />
+  <meta property="og:title" content="Ping Pong Game Online - Play Pong Free" />
+  <meta property="og:description" content="Play classic Pong online. Challenge the AI. Free, no sign-up, mobile-friendly." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.uptools.in/games/ping-pong/" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="/style.css?v=1.3.0" />
+  <style>
+    body { --accent: #00e5ff; }
+    .game-wrap { max-width: 680px; margin: 0 auto; }
+    canvas { display: block; margin: 0 auto; border-radius: .75rem; border: 1px solid #212a3a; background: #050d1a; max-width: 100%; }
+    .controls-hint { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 8px 0; }
+    .ctrl-chip { background: #182033; border: 1px solid #212a3a; border-radius: .5rem; padding: .3rem .7rem; font-size: .85rem; color: #9aa4b2; }
+    .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    #touchControls { display: none; }
+    @media(max-width:600px){ #touchControls { display: flex; gap: 8px; justify-content: center; margin: 8px 0; } }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/games/">← Games</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="game-wrap">
+      <section class="card hero" aria-labelledby="title">
+        <div>
+          <h1 id="title">🏓 Ping Pong</h1>
+          <p class="note">Classic Pong against AI. First to 7 wins! Use W/S or Arrow keys to move your paddle.</p>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
+          <label style="font-size:.9rem;color:#9aa4b2">Difficulty:</label>
+          <button class="btn secondary" data-diff="easy">Easy</button>
+          <button class="btn" data-diff="medium">Medium</button>
+          <button class="btn secondary" data-diff="hard">Hard</button>
+          <button id="startBtn" class="btn" style="margin-left:auto">▶ Start</button>
+          <button id="pauseBtn" class="btn secondary" style="display:none">⏸ Pause</button>
+        </div>
+
+        <canvas id="pongCanvas" width="600" height="360" aria-label="Ping Pong game"></canvas>
+
+        <div id="touchControls">
+          <button class="btn secondary" id="touchUp" style="width:80px;height:50px;font-size:1.5rem">▲</button>
+          <button class="btn secondary" id="touchDown" style="width:80px;height:50px;font-size:1.5rem">▼</button>
+        </div>
+
+        <div class="controls-hint">
+          <span class="ctrl-chip">W / ↑ — Move Up</span>
+          <span class="ctrl-chip">S / ↓ — Move Down</span>
+          <span class="ctrl-chip">Space — Pause</span>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h2 style="margin-top:0">🎥 History of Pong - the first video game</h2>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube-nocookie.com/embed/it0sf4CMDeM?rel=0&modestbranding=1"
+            title="History of Pong - the first video game"
+            loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <p class="note small" style="margin-top:8px">Pong was one of the first commercially successful video games, released in 1972.</p>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h2 style="margin-top:0">More Games</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <a class="btn secondary" href="/games/breakout/">Breakout</a>
+          <a class="btn secondary" href="/games/snake/">Snake</a>
+          <a class="btn secondary" href="/games/flappy-bird/">Flappy Bird</a>
+          <a class="btn secondary" href="/games/">All Games</a>
+        </div>
+      </section>
+
+      <footer class="note small site-footer" role="contentinfo" style="margin-top:12px">
+        © <span id="y"></span> UpTools . <a href="/games/">Games</a> . <a href="/">Home</a>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    const canvas = document.getElementById('pongCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Scale canvas to fit container
+    function resizeCanvas() {
+      const maxW = Math.min(600, canvas.parentElement.clientWidth - 32);
+      canvas.style.width = maxW + 'px';
+      canvas.style.height = (maxW * 0.6) + 'px';
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const W = canvas.width, H = canvas.height;
+    const PADDLE_W = 12, PADDLE_H = 70, BALL_SIZE = 10;
+    const WIN_SCORE = 7;
+
+    let difficulty = 'medium';
+    let gameRunning = false, gamePaused = false;
+    let animId = null;
+
+    const state = {
+      player: { y: H / 2 - PADDLE_H / 2, score: 0 },
+      ai: { y: H / 2 - PADDLE_H / 2, score: 0 },
+      ball: { x: W / 2, y: H / 2, vx: 4, vy: 3 },
+      keys: {}
+    };
+
+    const AI_SPEED = { easy: 2.5, medium: 4, hard: 6 };
+
+    function resetBall(dir = 1) {
+      state.ball.x = W / 2;
+      state.ball.y = H / 2;
+      state.ball.vx = (4 + Math.random() * 2) * dir;
+      state.ball.vy = (Math.random() * 4 - 2);
+    }
+
+    function update() {
+      if (!gameRunning || gamePaused) return;
+      const b = state.ball, p = state.player, ai = state.ai;
+
+      // Player movement
+      const speed = 6;
+      if ((state.keys['w'] || state.keys['arrowup']) && p.y > 0) p.y -= speed;
+      if ((state.keys['s'] || state.keys['arrowdown']) && p.y < H - PADDLE_H) p.y += speed;
+
+      // AI movement
+      const aiSpeed = AI_SPEED[difficulty] || 4;
+      const aiCenter = ai.y + PADDLE_H / 2;
+      if (aiCenter < b.y - 5) ai.y = Math.min(ai.y + aiSpeed, H - PADDLE_H);
+      else if (aiCenter > b.y + 5) ai.y = Math.max(ai.y - aiSpeed, 0);
+
+      // Ball movement
+      b.x += b.vx;
+      b.y += b.vy;
+
+      // Wall bounce
+      if (b.y <= 0 || b.y >= H - BALL_SIZE) b.vy *= -1;
+
+      // Player paddle collision
+      if (b.x <= PADDLE_W + 20 && b.y + BALL_SIZE >= p.y && b.y <= p.y + PADDLE_H && b.vx < 0) {
+        b.vx = Math.abs(b.vx) * 1.05;
+        b.vy += (b.y - (p.y + PADDLE_H / 2)) * 0.1;
+        b.x = PADDLE_W + 21;
+      }
+
+      // AI paddle collision
+      if (b.x >= W - PADDLE_W - 20 - BALL_SIZE && b.y + BALL_SIZE >= ai.y && b.y <= ai.y + PADDLE_H && b.vx > 0) {
+        b.vx = -Math.abs(b.vx) * 1.05;
+        b.vy += (b.y - (ai.y + PADDLE_H / 2)) * 0.1;
+        b.x = W - PADDLE_W - 21 - BALL_SIZE;
+      }
+
+      // Clamp ball speed
+      b.vx = Math.max(-12, Math.min(12, b.vx));
+      b.vy = Math.max(-8, Math.min(8, b.vy));
+
+      // Scoring
+      if (b.x < 0) {
+        ai.score++;
+        if (ai.score >= WIN_SCORE) { endGame('AI'); return; }
+        resetBall(1);
+      }
+      if (b.x > W) {
+        p.score++;
+        if (p.score >= WIN_SCORE) { endGame('You'); return; }
+        resetBall(-1);
+      }
+    }
+
+    function draw() {
+      ctx.fillStyle = '#050d1a';
+      ctx.fillRect(0, 0, W, H);
+
+      // Center line
+      ctx.setLineDash([10, 10]);
+      ctx.strokeStyle = '#1a2436';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(W / 2, 0);
+      ctx.lineTo(W / 2, H);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Scores
+      ctx.fillStyle = '#e6edf3';
+      ctx.font = 'bold 36px system-ui';
+      ctx.textAlign = 'center';
+      ctx.fillText(state.player.score, W / 4, 50);
+      ctx.fillText(state.ai.score, (W * 3) / 4, 50);
+
+      // Labels
+      ctx.font = '12px system-ui';
+      ctx.fillStyle = '#4a5568';
+      ctx.fillText('YOU', W / 4, 70);
+      ctx.fillText('AI', (W * 3) / 4, 70);
+
+      // Paddles
+      ctx.fillStyle = '#00e5ff';
+      ctx.beginPath();
+      ctx.roundRect(10, state.player.y, PADDLE_W, PADDLE_H, 4);
+      ctx.fill();
+
+      ctx.fillStyle = '#ff6b6b';
+      ctx.beginPath();
+      ctx.roundRect(W - PADDLE_W - 10, state.ai.y, PADDLE_W, PADDLE_H, 4);
+      ctx.fill();
+
+      // Ball
+      ctx.fillStyle = '#ffffff';
+      ctx.shadowColor = '#00e5ff';
+      ctx.shadowBlur = 10;
+      ctx.fillRect(state.ball.x, state.ball.y, BALL_SIZE, BALL_SIZE);
+      ctx.shadowBlur = 0;
+
+      if (!gameRunning) {
+        ctx.fillStyle = 'rgba(5,13,26,.7)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#e6edf3';
+        ctx.font = 'bold 24px system-ui';
+        ctx.textAlign = 'center';
+        ctx.fillText('Press ▶ Start to play', W / 2, H / 2);
+      }
+
+      if (gamePaused) {
+        ctx.fillStyle = 'rgba(5,13,26,.6)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#e6edf3';
+        ctx.font = 'bold 28px system-ui';
+        ctx.textAlign = 'center';
+        ctx.fillText('PAUSED', W / 2, H / 2);
+      }
+    }
+
+    function gameLoop() {
+      update();
+      draw();
+      animId = requestAnimationFrame(gameLoop);
+    }
+
+    function startGame() {
+      state.player.score = 0;
+      state.ai.score = 0;
+      state.player.y = H / 2 - PADDLE_H / 2;
+      state.ai.y = H / 2 - PADDLE_H / 2;
+      resetBall(1);
+      gameRunning = true;
+      gamePaused = false;
+      document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('pauseBtn').style.display = 'inline-flex';
+      if (animId) cancelAnimationFrame(animId);
+      gameLoop();
+    }
+
+    function endGame(winner) {
+      gameRunning = false;
+      draw();
+      ctx.fillStyle = 'rgba(5,13,26,.75)';
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = winner === 'You' ? '#00e5a0' : '#ff6b6b';
+      ctx.font = 'bold 36px system-ui';
+      ctx.textAlign = 'center';
+      ctx.fillText(winner === 'You' ? '🎉 You Win!' : '💀 AI Wins!', W / 2, H / 2 - 20);
+      ctx.fillStyle = '#9aa4b2';
+      ctx.font = '18px system-ui';
+      ctx.fillText(`${state.player.score} - ${state.ai.score}`, W / 2, H / 2 + 20);
+      document.getElementById('startBtn').style.display = 'inline-flex';
+      document.getElementById('pauseBtn').style.display = 'none';
+    }
+
+    document.getElementById('startBtn').addEventListener('click', startGame);
+    document.getElementById('pauseBtn').addEventListener('click', () => {
+      gamePaused = !gamePaused;
+      document.getElementById('pauseBtn').textContent = gamePaused ? '▶ Resume' : '⏸ Pause';
+    });
+
+    document.querySelectorAll('[data-diff]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        difficulty = btn.dataset.diff;
+        document.querySelectorAll('[data-diff]').forEach(b => b.className = 'btn secondary');
+        btn.className = 'btn';
+      });
+    });
+
+    document.addEventListener('keydown', e => {
+      state.keys[e.key.toLowerCase()] = true;
+      if (e.code === 'Space') { e.preventDefault(); if (gameRunning) { gamePaused = !gamePaused; document.getElementById('pauseBtn').textContent = gamePaused ? '▶ Resume' : '⏸ Pause'; } }
+    });
+    document.addEventListener('keyup', e => { state.keys[e.key.toLowerCase()] = false; });
+
+    // Touch controls
+    let touchUp = false, touchDown = false;
+    document.getElementById('touchUp').addEventListener('touchstart', e => { e.preventDefault(); touchUp = true; state.keys['arrowup'] = true; }, { passive: false });
+    document.getElementById('touchUp').addEventListener('touchend', () => { touchUp = false; state.keys['arrowup'] = false; });
+    document.getElementById('touchDown').addEventListener('touchstart', e => { e.preventDefault(); touchDown = true; state.keys['arrowdown'] = true; }, { passive: false });
+    document.getElementById('touchDown').addEventListener('touchend', () => { touchDown = false; state.keys['arrowdown'] = false; });
+
+    // Initial draw
+    draw();
+  </script>
+</body>
+</html>
