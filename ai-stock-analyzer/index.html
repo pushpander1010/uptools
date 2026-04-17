@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google Ads (mounted only if available) -->
@@ -177,19 +177,7 @@
           </label>
           <button id="go" class="btn" type="button">Analyze</button>
         </div>
-        <div class="row-inline" style="gap:8px;flex-wrap:wrap;justify-content:flex-end">
-          <span class="mini nowrap">Provider</span>
-          <select id="provider" class="select">
-            <option value="google">Google (Gemini)</option>
-            <option value="perplexity">Perplexity</option>
-            <option value="groq">Groq</option>
-          </select>
-          <select id="model" class="select">
-            <option value="gemini-2.5-flash">gemini-2.5-flash</option>
-          </select>
-          <button id="saveCfg" class="btn secondary sm" type="button">Remember Defaults</button>
-          <button id="clearCfg" class="btn secondary sm" type="button">Clear Saved</button>
-        </div>
+          <span class="mini nowrap">Model: Mistral Small</span>
       </div>
       <div class="mini" id="analysisStatus" role="status">Ready.</div>
       <p class="mini">Tip: For NSE use plain ticker (e.g., RELIANCE). US tickers are the same (AAPL / TSLA). This page auto-maps market suffixes for Yahoo Finance.</p>
@@ -356,10 +344,8 @@
     const range = $('#range');
     const interval = $('#interval');
     const go = $('#go');
-    const saveCfg = $('#saveCfg');
-    const clearCfg = $('#clearCfg');
-    const providerSel = $('#provider');
-    const modelSel = $('#model');
+
+
     const analysisStatus = $('#analysisStatus');
 
     const price = $('#price');
@@ -453,36 +439,8 @@
       try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch {}
     })();
 
-    const PRESETS = {
-      perplexity: ['sonar','sonar-pro','sonar-reasoning'],
-      google: ['gemini-2.5-flash','gemini-2.5-pro'],
-      groq: ['llama-3.1-8b-instant','llama-3.1-70b-versatile','mixtral-8x7b-32768','gemma2-9b-it']
-    };
-
-    function hydrateModels(selectedModel){
-      if(!modelSel) return;
-      const provider = providerSel?.value || 'google';
-      const models = PRESETS[provider] || [];
-      modelSel.innerHTML = models.map(m => `<option value="${m}">${m}</option>`).join('');
-      const choice = selectedModel || modelSel.dataset.selected || models[0] || '';
-      if(choice && !models.includes(choice)){
-        const opt = document.createElement('option');
-        opt.value = choice;
-        opt.textContent = choice;
-        opt.dataset.extra = 'true';
-        modelSel.appendChild(opt);
-      }
-      if(choice) modelSel.value = choice;
-      modelSel.dataset.selected = '';
-    }
-
-    providerSel?.addEventListener('change', () => {
-      hydrateModels();
-      saveJson(STORAGE_LAST, serializeSettings());
-    });
-
-    modelSel?.addEventListener('change', () => saveJson(STORAGE_LAST, serializeSettings()));
-
+    const PROVIDER = 'together';
+    const MODEL = 'mistralai/Mistral-Small-24B-Instruct-2501';
     const STORAGE_DEFAULTS = 'ai-stock:cfg';
     const STORAGE_LAST = 'ai-stock:last';
 
@@ -491,15 +449,10 @@
       ticker: ticker?.value?.trim() || '',
       range: range?.value || '6mo',
       interval: interval?.value || '1d',
-      provider: providerSel?.value || 'google',
-      model: modelSel?.value || 'gemini-2.5-flash'
     });
 
     function applySettings(settings){
       if(!settings) return false;
-      if(settings.provider && providerSel) providerSel.value = settings.provider;
-      if(settings.model && modelSel) modelSel.dataset.selected = settings.model;
-      hydrateModels(settings?.model);
       if(settings.market && market) market.value = settings.market;
       if(settings.range && range) range.value = settings.range;
       if(settings.interval && interval) interval.value = settings.interval;
@@ -1210,7 +1163,7 @@ User question: ${prompt}` }
       const prompt = def.builder(currentContext);
       addUserMessage(def.label);
       try {
-        await streamChat({ provider: providerSel.value, model: modelSel.value, prompt, context: currentContext });
+        await streamChat({ provider: PROVIDER, model: MODEL, prompt, context: currentContext });
       } catch {}
     });
 
@@ -1222,7 +1175,7 @@ User question: ${prompt}` }
       addUserMessage(question);
       if(chatInput) chatInput.value = '';
       try {
-        await streamChat({ provider: providerSel.value, model: modelSel.value, prompt: question, context: currentContext });
+        await streamChat({ provider: PROVIDER, model: MODEL, prompt: question, context: currentContext });
       } catch {}
     });
 

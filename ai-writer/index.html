@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>AI Writing Assistant - Perplexity, Gemini 2.5 & Groq | UpTools</title>
+  <title>AI Writing Assistant - Powered by Mistral Small | UpTools</title>
 
   <!-- Favicons -->
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
@@ -12,24 +12,24 @@
 
   <!-- SEO -->
   <meta name="description"
-    content="AI Writing Assistant powered by Perplexity Sonar, Google Gemini 2.5 (Flash/Pro), and Groq. Summarize, rewrite, translate, extract keywords, and generate SEO metadata - privacy-first via a server-side proxy." />
+    content="AI Writing Assistant powered by Mistral Small (Together AI). Summarize, rewrite, translate, extract keywords, and generate SEO metadata - privacy-first via a server-side proxy." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <link rel="canonical" href="https://www.uptools.in/ai-writer/" />
   <meta name="theme-color" content="#0b1020" />
 
   <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="AI Writing Assistant - Perplexity, Gemini 2.5 & Groq" />
+  <meta property="og:title" content="AI Writing Assistant - Powered by Mistral Small" />
   <meta property="og:description"
-    content="Summarize, rewrite, translate, outline, and SEO metadata with Perplexity Sonar, Google Gemini 2.5, or Groq - free and mobile-first." />
+    content="Summarize, rewrite, translate, outline, and SEO metadata with Mistral Small (Together AI) - free and mobile-first." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.uptools.in/ai-writer/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/ai-writing-assistant.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AI Writing Assistant - Perplexity, Gemini 2.5 & Groq" />
+  <meta name="twitter:title" content="AI Writing Assistant - Powered by Mistral Small" />
   <meta name="twitter:description"
-    content="Summarize, rewrite, translate, outline, and SEO metadata with Perplexity Sonar, Google Gemini 2.5, or Groq." />
+    content="Summarize, rewrite, translate, outline, and SEO metadata with Mistral Small (Together AI)." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/og/ai-writing-assistant.png" />
 
   <!-- CSS (no version query to keep Vite quiet) -->
@@ -262,10 +262,9 @@
   <main class="ai container" id="top">
     <section class="card hero" aria-labelledby="title">
       <div>
-        <h1 id="title">AI Writing Assistant (Perplexity • Gemini 2.5 • Groq)</h1>
-        <p class="note">Summarize, rewrite tone, translate, extract keywords, make SEO title & meta, or build a blog
-          outline - pick your provider: <b>Perplexity Sonar</b>, <b>Google Gemini 2.5</b>, or <b>Groq</b>. All via a
-          secure server-side proxy.</p>
+        <h1 id="title">AI Writing Assistant</h1>
+        <p class="note">Summarize, rewrite tone, translate, extract keywords, make SEO title &amp; meta, or build a blog
+          outline — powered by <b>Mistral Small</b> via a secure server-side proxy.</p>
         <div class="chips" style="margin-top:8px">
           <span class="pill">⚡ Streams live</span>
           <span class="pill">🔒 No browser API key</span>
@@ -314,24 +313,7 @@
 
           <div class="toolbar">
             <button id="runBtn" class="btn primary" type="button">Run ▶</button>
-
-            <!-- NEW: Provider + Model selectors -->
-            <label class="inline" title="Inference provider">
-              <span class="tiny-note">Provider</span>
-              <select id="provider" class="select" style="width:160px">
-                <option value="perplexity">Perplexity</option>
-                <option value="google">Google (Gemini)</option>
-                <option value="groq">Groq</option>
-              </select>
-            </label>
-
-            <label class="inline" title="Model for selected provider">
-              <span class="tiny-note">Model</span>
-              <select id="modelSel" class="select" style="width:220px"></select>
-            </label>
-            <!-- END: Provider + Model selectors -->
-
-            <button id="saveCfg" class="btn small subtle" type="button" title="Save settings">Save</button>
+            <button id="saveCfg" class="btn small subtle" type="button" title="Save settings" style="display:none"></button>
           </div>
         </div>
       </article>
@@ -439,9 +421,9 @@
     const taskSel = byId('task');
     const taskOptions = byId('taskOptions');
 
-    // NEW: Provider + model
-    const providerSel = byId('provider');
-    const modelSel = byId('modelSel');
+    // NEW: Provider + model (hardcoded to Together AI / Mistral Small)
+    const providerSel = { value: 'together', addEventListener: () => {} };
+    const modelSel = { value: 'mistralai/Mistral-Small-24B-Instruct-2501' };
 
     // Footer year
     byId('y').textContent = new Date().getFullYear();
@@ -541,74 +523,25 @@
       return text;
     }
 
-    // ---- NEW: Provider & model presets ----
-    const PROVIDER_MODELS = {
-      perplexity: [
-        { id: 'sonar', label: 'sonar' },
-        { id: 'sonar-pro', label: 'sonar-pro' },
-        { id: 'sonar-reasoning', label: 'sonar-reasoning' }
-      ],
-      google: [
-        { id: 'gemini-2.5-flash', label: 'gemini-2.5-flash' },
-        { id: 'gemini-2.5-pro', label: 'gemini-2.5-pro' }
-      ],
-      groq: [
-        { id: 'llama-3.1-8b-instant', label: 'llama-3.1-8b-instant' },
-        { id: 'llama-3.1-70b-versatile', label: 'llama-3.1-70b-versatile' },
-        { id: 'mixtral-8x7b-32768', label: 'mixtral-8x7b-32768' },
-        { id: 'gemma2-9b-it', label: 'gemma2-9b-it' }
-      ]
-    };
+    // ---- Provider & model: Together AI / Mistral Small (fixed) ----
+    const PROVIDER = 'together';
+    const MODEL = 'mistralai/Mistral-Small-24B-Instruct-2501';
 
-    function populateModels() {
-      const prov = providerSel.value || 'perplexity';
-      const models = PROVIDER_MODELS[prov] || [];
-      modelSel.innerHTML = '';
-      for (const m of models) {
-        const opt = document.createElement('option');
-        opt.value = m.id;
-        opt.textContent = m.label;
-        modelSel.appendChild(opt);
-      }
-      // Keep previous selection if still valid; else select first
-      const current = cfg.model;
-      const ok = models.some(m => m.id === current);
-      modelSel.value = ok ? current : (models[0]?.id || '');
-    }
-    // ---------------------------------------
-
-    // Config (provider + model; endpoint fixed to /ai)
+    // Config (endpoint fixed to /ai)
     const CFG_KEY = 'ai-writer:cfg';
-    const cfg = Object.assign({ provider: 'perplexity', model: 'sonar' }, store.get(CFG_KEY, {}));
 
-    providerSel.value = cfg.provider || 'perplexity';
-    populateModels();
-    if (cfg.model) modelSel.value = cfg.model;
-
-    saveCfg.addEventListener('click', () => {
-      const next = { provider: providerSel.value, model: modelSel.value };
-      store.set(CFG_KEY, next);
-      toast('Settings saved locally');
-    });
-
-    providerSel.addEventListener('change', () => {
-      cfg.provider = providerSel.value;
-      populateModels();
-    });
-
-    // Streaming via Worker proxy (/ai). We pass provider + model.
+    // Streaming via Worker proxy (/ai)
     let aborter = null;
-    async function streamChat({ provider, model, prompt }) {
-      const url = '/ai';
+    async function streamChat({ prompt }) {
       const body = {
-        provider, model, stream: true, temperature: 0.4,
+        provider: PROVIDER, model: MODEL, stream: true, temperature: 0.4,
         messages: [
           { role: 'system', content: 'You are a helpful, concise writing assistant.' },
           { role: 'user', content: prompt }
         ]
       };
       aborter = new AbortController();
-      const res = await fetch(url, {
+      const res = await fetch('/ai', {
         method: 'POST',
         signal: aborter.signal,
         headers: { 'Content-Type': 'application/json' },
@@ -645,13 +578,10 @@
     });
 
     byId('runBtn').addEventListener('click', async () => {
-      const provider = providerSel.value || 'perplexity';
-      const model = modelSel.value || (PROVIDER_MODELS[provider]?.[0]?.id ?? '');
       const text = input.value.trim();
       const task = taskSel.value;
 
       if (!text) { toast('Enter some text first'); input.focus(); return; }
-      if (!model) { toast('Pick a model'); return; }
 
       output.textContent = '';
       stopBtn.disabled = false;
@@ -659,7 +589,7 @@
 
       try {
         const prompt = buildPrompt(task, text);
-        await streamChat({ provider, model, prompt });
+        await streamChat({ prompt });
         status.textContent = 'Done.';
       } catch (e) {
         status.textContent = 'Error. Check console & settings.';
@@ -683,9 +613,8 @@
       URL.revokeObjectURL(a.href);
     });
 
-    // Permalink now includes task (t), provider (p), and model (m)
     permBtn.addEventListener('click', async () => {
-      const o = { t: taskSel.value, p: providerSel.value, m: modelSel.value };
+      const o = { t: taskSel.value };
       const url = new URL(location.href);
       url.hash = encodeURIComponent(btoa(JSON.stringify(o)));
       try {
@@ -697,23 +626,17 @@
       }
     });
 
-
-    // Small toast using your utils (or a basic fallback)
     function toast(msg) {
       if (typeof Utils?.toast === 'function') return Utils.toast(msg);
       status.textContent = msg;
       setTimeout(() => { if (status.textContent === msg) status.textContent = ''; }, 1800);
     }
 
-    // Restore permalink settings if present
     (function restoreFromHash() {
       if (!location.hash) return;
       try {
         const o = JSON.parse(atob(decodeURIComponent(location.hash.slice(1))));
         if (o?.t) taskSel.value = o.t;
-        if (o?.p) providerSel.value = o.p;
-        populateModels();
-        if (o?.m) modelSel.value = o.m;
         renderTaskOptions();
       } catch { }
     })();

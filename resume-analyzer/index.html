@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Free AI Resume ATS Analyzer (PDF/DOCX/TXT) + JD Match | UpTools</title>
   <meta name="description"
-    content="Upload your resume (PDF, DOCX, TXT) and get a machine readability score, ATS score, missing keywords, and recruiter-ready fixes. Compare against a Job Description. Works with Perplexity, Google Gemini 2.5, and Groq via secure proxy. No login." />
+    content="Upload your resume (PDF, DOCX, TXT) and get a machine readability score, ATS score, missing keywords, and recruiter-ready fixes. Compare against a Job Description. Works with Mistral Small (Together AI) via secure proxy. No login." />
   <meta name="keywords"
     content="resume ats checker,resume analyzer,ats resume score,ats keywords,job description match,free resume checker,docx pdf resume analysis,readability score" />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
@@ -60,7 +60,7 @@
     "@type":"FAQPage",
     "mainEntity":[
      {"@type":"Question","name":"Do you store my resume?",
-     "acceptedAnswer":{"@type":"Answer","text":"No. Files are processed in your browser. If you run AI analysis, text goes via our server-side proxy to your selected provider (Perplexity/Gemini/Groq). We do not store your resume."}},
+     "acceptedAnswer":{"@type":"Answer","text":"No. Files are processed in your browser. If you run AI analysis, text goes via our server-side proxy to Mistral Small (Together AI). We do not store your resume."}},
      {"@type":"Question","name":"Does it work with PDF and DOCX?",
      "acceptedAnswer":{"@type":"Answer","text":"Yes-PDF via PDF.js and DOCX via Mammoth. Some complex layouts may lose formatting; if text is missing, open your file and paste plain text for best results."}}
     ]
@@ -318,7 +318,7 @@
         <p class="note" style="margin:0">
           Get a <b>Machine Readability</b> score, <b>ATS Score</b>, missing keywords, formatting fixes, and
           recruiter-ready suggestions.
-          Compare your resume against a Job Description (JD). Pick Perplexity, Google Gemini 2.5, or Groq.
+          Compare your resume against a Job Description (JD). Pick Mistral Small (Together AI).
         </p>
         <div class="chips" style="margin-top:8px">
           <span class="pill">⚡ Streams live</span>
@@ -371,18 +371,7 @@
             </label>
 
             <div class="inline">
-              <label class="inline"><span class="tiny">Provider</span>
-                <select id="provider" class="select" style="width:160px">
-                  <option value="perplexity" selected>Perplexity</option>
-                  <option value="google">Google (Gemini)</option>
-                  <option value="groq">Groq</option>
-                </select>
-              </label>
-              <label class="inline"><span class="tiny">Model</span>
-                <select id="modelSel" class="select" style="width:230px">
-                </select>
-              </label>
-              <button id="saveCfg" class="btn sm secondary" type="button" title="Save provider & model">Save</button>
+              <span class="tiny" style="color:var(--muted)">Model: Mistral Small</span>
             </div>
           </div>
 
@@ -517,8 +506,8 @@
     const runBtn = byId('runBtn');
     const stopBtn = byId('stopBtn');
     const saveCfg = byId('saveCfg');
-    const providerSel = byId('provider');
-    const modelSel = byId('modelSel');
+    const providerSel = { value: 'together', addEventListener: () => {} };
+    const modelSel = { value: 'mistralai/Mistral-Small-24B-Instruct-2501' };
     const jdWrap = byId('jdWrap');
     const parseNotice = byId('parseNotice');
 
@@ -532,42 +521,10 @@
     // Footer year
     byId('y').textContent = new Date().getFullYear();
 
-    // Provider/Model presets
-    const PROVIDER_MODELS = {
-      perplexity: [
-        { id: 'sonar', label: 'sonar' },
-        { id: 'sonar-pro', label: 'sonar-pro' },
-        { id: 'sonar-reasoning', label: 'sonar-reasoning' }
-      ],
-      google: [
-        { id: 'gemini-2.5-flash', label: 'gemini-2.5-flash' },
-        { id: 'gemini-2.5-pro', label: 'gemini-2.5-pro' }
-      ],
-      groq: [
-        { id: 'llama-3.1-8b-instant', label: 'llama-3.1-8b-instant' },
-        { id: 'llama-3.1-70b-versatile', label: 'llama-3.1-70b-versatile' },
-        { id: 'mixtral-8x7b-32768', label: 'mixtral-8x7b-32768' },
-        { id: 'gemma2-9b-it', label: 'gemma2-9b-it' }
-      ]
-    };
+    // Provider & Model: Together AI / Mistral Small (fixed)
+    const PROVIDER = 'together';
+    const MODEL = 'mistralai/Mistral-Small-24B-Instruct-2501';
     const CFG_KEY = 'ats:cfg';
-    const cfg = Object.assign({ provider: 'perplexity', model: 'sonar' }, read(CFG_KEY, {}));
-    providerSel.value = cfg.provider || 'perplexity';
-    function populateModels() {
-      const prov = providerSel.value || 'perplexity';
-      const models = PROVIDER_MODELS[prov] || [];
-      modelSel.innerHTML = '';
-      for (const m of models) {
-        const opt = document.createElement('option');
-        opt.value = m.id; opt.textContent = m.label;
-        modelSel.appendChild(opt);
-      }
-      const ok = models.some(m => m.id === cfg.model);
-      modelSel.value = ok ? cfg.model : (models[0]?.id || '');
-    }
-    populateModels();
-    saveCfg.addEventListener('click', () => { persist(CFG_KEY, { provider: providerSel.value, model: modelSel.value }); toast('Settings saved'); });
-    providerSel.addEventListener('change', () => { cfg.provider = providerSel.value; populateModels(); });
 
     // Mode switch
     modeSel.addEventListener('change', () => {
@@ -964,9 +921,8 @@
 
       quickKPIs();
 
-      const provider = providerSel.value || 'perplexity';
-      const model = modelSel.value || (PROVIDER_MODELS[provider]?.[0]?.id ?? '');
-      if (!model) { toast('Pick a model'); return; }
+      const provider = PROVIDER;
+      const model = MODEL;
 
       try {
         const prompt = buildPrompt({ resume, jd, mode });
@@ -1012,7 +968,7 @@
 
     copyBtn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(output.textContent || ''); toast('Copied'); } catch { toast('Copy blocked by browser'); } });
     downloadBtn.addEventListener('click', () => { const blob = new Blob([output.textContent || ''], { type: 'text/plain;charset=utf-8' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'resume-ats.txt'; a.click(); URL.revokeObjectURL(a.href); });
-    permBtn.addEventListener('click', async () => { const o = { m: modeSel.value, p: providerSel.value, md: modelSel.value }; const url = new URL(location.href); url.hash = encodeURIComponent(btoa(JSON.stringify(o))); try { await navigator.clipboard.writeText(url.toString()); toast('Permalink copied'); } catch { toast('Permalink ready (check address bar)'); history.replaceState({}, '', url); } });
+    permBtn.addEventListener('click', async () => { const o = { m: modeSel.value }; const url = new URL(location.href); url.hash = encodeURIComponent(btoa(JSON.stringify(o))); try { await navigator.clipboard.writeText(url.toString()); toast('Permalink copied'); } catch { toast('Permalink ready (check address bar)'); history.replaceState({}, '', url); } });
 
     // KPI init
     resetKPIs();
@@ -1039,9 +995,7 @@
       try {
         const o = JSON.parse(atob(decodeURIComponent(location.hash.slice(1))));
         if (o?.m) modeSel.value = o.m;
-        if (o?.p) providerSel.value = o.p;
-        populateModels();
-        if (o?.md) modelSel.value = o.md;
+
         jdWrap.classList.toggle('hidden', modeSel.value !== 'againstJD');
         quickKPIs();
       } catch { }

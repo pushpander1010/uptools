@@ -17,7 +17,7 @@
 
   <title>Free AI Plagiarism Checker &amp; Paraphrasing Tool (Originality %) | UpTools</title>
   <meta name="description"
-    content="Free AI Plagiarism Checker - estimate originality %, flag risky sentences, and fix with instant paraphrasing. Rewriter supports tones &amp; constraints. Works with Perplexity, Google Gemini 2.5, and Groq via secure proxy. No login." />
+    content="Free AI Plagiarism Checker - estimate originality %, flag risky sentences, and fix with instant paraphrasing. Rewriter supports tones &amp; constraints. Powered by Mistral Small via secure proxy. No login." />
   <meta name="keywords"
     content="free plagiarism checker, paraphrasing tool, rewriter, originality checker, check plagiarism online, remove plagiarism, ai rewriter, paraphrase sentences" />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
@@ -33,7 +33,7 @@
   <!-- Social -->
   <meta property="og:title" content="Free AI Plagiarism Checker &amp; Paraphrasing Tool | UpTools" />
   <meta property="og:description"
-    content="Estimate originality %, highlight risky lines, and paraphrase instantly. Powered by Perplexity, Gemini 2.5 &amp; Groq. No sign-ups." />
+    content="Estimate originality %, highlight risky lines, and paraphrase instantly. Powered by Mistral Small. No sign-ups." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.uptools.in/ai-plagiarism/" />
   <meta property="og:site_name" content="UpTools" />
@@ -86,8 +86,7 @@
           },
           {
             "@type": "Question",
-            "name": "Which AI models are available?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Perplexity Sonar (sonar, sonar-pro, sonar-reasoning), Google Gemini 2.5 (Flash/Pro), and Groq models (Llama/Gemma/Mixtral)." }
+            "name": "Which AI models are available?", "acceptedAnswer": { "@type": "Answer", "text": "Mistral Small (mistralai/Mistral-Small-24B-Instruct-2501) via Together AI." }
           }
         ]
       }
@@ -411,7 +410,7 @@
         <h1 id="title">🧠🔎 AI Plagiarism Checker &amp; Paraphraser</h1>
         <p class="note" style="margin:0">
           Check estimated originality %, highlight risky lines, and paraphrase instantly to remove plagiarism.
-          Choose Perplexity, Google Gemini 2.5, or Groq.
+          Powered by Mistral Small via Together AI.
         </p>
         <div class="chips" style="margin-top:8px">
           <span class="pill">⚡ Streams live</span>
@@ -477,26 +476,10 @@
             <button id="runBtn" class="btn" type="button">Run ▶</button>
             <button id="stopBtn" class="btn danger sm" type="button" disabled>Stop</button>
 
-            <label class="inline" title="Inference provider">
-              <span class="tiny">Provider</span>
-              <select id="provider" class="select" style="width:160px" aria-label="Inference provider">
-                <option value="perplexity" selected>Perplexity</option>
-                <option value="google">Google (Gemini)</option>
-                <option value="groq">Groq</option>
-              </select>
-            </label>
-
             <label class="inline" title="Model">
               <span class="tiny">Model</span>
-              <!-- Pre-fill default models to avoid JS-population shift -->
-              <select id="modelSel" class="select" style="width:230px" aria-label="Model">
-                <option value="sonar" selected>sonar</option>
-                <option value="sonar-pro">sonar-pro</option>
-                <option value="sonar-reasoning">sonar-reasoning</option>
-              </select>
+              <span class="select" style="width:230px;display:inline-block;padding:.4rem .6rem;background:#121826;border:1px solid #212a3a;border-radius:.5rem;font-size:.9rem">Mistral Small</span>
             </label>
-
-            <button id="saveCfg" class="btn sm secondary" type="button" title="Save provider &amp; model">Save</button>
           </div>
         </div>
       </article>
@@ -627,75 +610,17 @@
     const kpiVariety = byId('kpiVariety');
     const kpiFlesch = byId('kpiFlesch');
     const kpiNgram = byId('kpiNgram');
-    const providerSel = byId('provider');
-    const modelSel = byId('modelSel');
+    const providerSel = { value: 'together', addEventListener: () => {} };
+    const modelSel = { value: 'mistralai/Mistral-Small-24B-Instruct-2501' };
     const runBtn = byId('runBtn');
     const stopBtn = byId('stopBtn');
 
     // Provider & Models
-    const PROVIDER_MODELS = {
-      perplexity: [
-        { id: 'sonar', label: 'sonar' },
-        { id: 'sonar-pro', label: 'sonar-pro' },
-        { id: 'sonar-reasoning', label: 'sonar-reasoning' }
-      ],
-      google: [
-        { id: 'gemini-2.5-flash', label: 'gemini-2.5-flash' },
-        { id: 'gemini-2.5-pro', label: 'gemini-2.5-pro' }
-      ],
-      groq: [
-        { id: 'llama-3.1-8b-instant', label: 'llama-3.1-8b-instant' },
-        { id: 'llama-3.1-70b-versatile', label: 'llama-3.1-70b-versatile' },
-        { id: 'mixtral-8x7b-32768', label: 'mixtral-8x7b-32768' },
-        { id: 'gemma2-9b-it', label: 'gemma2-9b-it' }
-      ]
-    };
-    const GOOGLE_MODEL_FALLBACKS = {
-      'gemini-2.5-flash': ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-flash-001'],
-      'gemini-2.5-pro': ['gemini-2.0-pro', 'gemini-1.5-pro', 'gemini-1.5-pro-001']
-    };
+    // Provider & Model: Together AI / Mistral Small (fixed)
+    const PROVIDER = 'together';
+    const MODEL = 'mistralai/Mistral-Small-24B-Instruct-2501';
     const CFG_KEY = 'plagiarism:cfg';
-    const cfg = Object.assign({ provider: 'perplexity', model: 'sonar' }, read(CFG_KEY, {}));
 
-    // Initialize provider / model without causing layout changes
-    providerSel.value = cfg.provider || 'perplexity';
-    (function populateModelsInitial() {
-      const prov = providerSel.value;
-      const models = PROVIDER_MODELS[prov] || [];
-      const desired = cfg.model || (models[0]?.id || 'sonar');
-      const needs = ![...modelSel.options].map(o => o.value).every((v, i) => models[i]?.id === v);
-      if (needs) {
-        modelSel.innerHTML = '';
-        for (const m of models) {
-          const opt = document.createElement('option');
-          opt.value = m.id; opt.textContent = m.label;
-          modelSel.appendChild(opt);
-        }
-      }
-      modelSel.value = desired;
-    })();
-
-    function populateModels() {
-      const prov = providerSel.value || 'perplexity';
-      const models = PROVIDER_MODELS[prov] || [];
-      modelSel.innerHTML = '';
-      for (const m of models) {
-        const opt = document.createElement('option');
-        opt.value = m.id; opt.textContent = m.label;
-        modelSel.appendChild(opt);
-      }
-      const ok = models.some(m => m.id === cfg.model);
-      modelSel.value = ok ? cfg.model : (models[0]?.id || '');
-    }
-
-    saveCfg.addEventListener('click', () => {
-      persist(CFG_KEY, { provider: providerSel.value, model: modelSel.value });
-      toast('Settings saved');
-    });
-    providerSel.addEventListener('change', () => {
-      cfg.provider = providerSel.value;
-      populateModels();
-    });
 
     // Counts
     function counts(text) {
@@ -860,20 +785,7 @@
       output.textContent = ''; status.textContent = 'Running…'; stopBtn.disabled = false;
 
       try {
-        try { return await attempt(provider, model); }
-        catch (e) {
-          if (provider === 'google') {
-            for (const alt of (GOOGLE_MODEL_FALLBACKS[model] || [])) {
-              try {
-                status.textContent = `Retrying with ${alt}…`;
-                const result = await attempt('google', alt);
-                persist(CFG_KEY, { provider: 'google', model: alt }); modelSel.value = alt;
-                return result;
-              } catch { }
-            }
-          }
-          throw e;
-        }
+        return await attempt(provider, model);
       } finally { stopBtn.disabled = true; }
     }
 
@@ -886,14 +798,13 @@
       if (!text) { toast('Enter some text first'); input.focus(); return; }
       updateKPIs(text);
 
-      const provider = providerSel.value || 'perplexity';
-      const model = modelSel.value || (PROVIDER_MODELS[provider]?.[0]?.id ?? '');
-      if (!model) { toast('Pick a model'); return; }
+      const provider = PROVIDER;
+      const model = MODEL;
 
       const task = taskSel.value; output.textContent = ''; stopBtn.disabled = false; status.textContent = 'Running…';
       try {
         const prompt = buildPrompt(task, text);
-        await streamChat({ provider, model, prompt });
+        await streamChat({ provider: PROVIDER, model: MODEL, prompt });
         status.textContent = 'Done.';
       } catch (e) {
         status.textContent = (e?.message || 'Error') + ' - check provider/model or quotas.';
@@ -912,7 +823,7 @@
       URL.revokeObjectURL(a.href);
     });
     byId('permBtn').addEventListener('click', async () => {
-      const o = { t: taskSel.value, p: providerSel.value, m: modelSel.value };
+      const o = { t: taskSel.value };
       const url = new URL(location.href); url.hash = encodeURIComponent(btoa(JSON.stringify(o)));
       try { await navigator.clipboard.writeText(url.toString()); toast('Permalink copied'); }
       catch { toast('Permalink ready (check address bar)'); history.replaceState({}, '', url); }

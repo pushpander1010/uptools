@@ -4,26 +4,18 @@ export interface Env {
   ASSETS: Fetcher;
 
   // Secrets
-  PERPLEXITY_API_KEY: string;
-  GROQ_API_KEY: string;
-  GOOGLE_API_KEY: string;
+  TOGETHER_API_KEY: string;
 
   // Vars
   CORS_ORIGINS?: string;
-  PROVIDER_DEFAULT?: "perplexity" | "groq" | "google";
   LOG_LEVEL?: "debug" | "info" | "warn" | "error";
-
-  // Optional bases/models
-  PPLX_BASE?: string;
-  PPLX_MODEL?: string;
-  GROQ_BASE?: string;
-  GROQ_MODEL?: string;
-  GOOGLE_GENAI_BASE?: string;
-  GOOGLE_MODEL?: string;
 
   // Optional: allow-list extra finance hosts for /proxy (comma-separated)
   FINANCE_HOSTS?: string;
 }
+
+const TOGETHER_BASE = "https://api.together.xyz/v1";
+const TOGETHER_MODEL = "mistralai/Mistral-Small-24B-Instruct-2501";
 
 const enc = new TextEncoder();
 
@@ -45,7 +37,7 @@ export default {
       return serveSite(req, env);
     }
 
-    // --- /ai: unified proxy for Perplexity, Groq, Gemini ---
+    // --- /ai: Together AI proxy (mistralai/Mistral-Small-24B-Instruct-2501) ---
     try {
       if (req.method === "OPTIONS") return corsPreflight(req, env);
       const cors = corsHeaders(req, env);
@@ -60,74 +52,38 @@ export default {
         });
       }
 
-      // parse
       let body: any;
       try { body = await req.json(); }
       catch { return json({ error: "Invalid JSON body" }, 400, cors); }
 
-      const provider = (body.provider || env.PROVIDER_DEFAULT || "perplexity") as "perplexity" | "groq" | "google";
-      const model = String(body.model || defaultModelFor(provider, env));
       const messages = Array.isArray(body.messages) ? body.messages : null;
       const temperature = clamp(Number(body.temperature ?? 0.4), 0, 2);
       const stream = body.stream !== false;
 
       if (!messages?.length) return json({ error: "messages[] required" }, 400, cors);
-      if (!model) return json({ error: "model required" }, 400, cors);
+      if (!env.TOGETHER_API_KEY) return json({ error: "TOGETHER_API_KEY missing" }, 500, cors);
 
-      // Perplexity
-      if (provider === "perplexity") {
-        if (!env.PERPLEXITY_API_KEY) return json({ error: "PERPLEXITY_API_KEY missing" }, 500, cors);
-        const endpoint = (env.PPLX_BASE || "https://api.perplexity.ai") + "/chat/completions";
-        const up = { model, messages, temperature, stream };
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Authorization": `Bearer ${env.PERPLEXITY_API_KEY}`, "Content-Type": "application/json" },
-          body: JSON.stringify(up),
-        });
-        if (!res.ok) return relayJsonError(res, cors);
-        if (!stream) return json(await res.json(), 200, cors);
-        return translateOpenAIStyleSSE(res, cors);
-      }
+      const payload = {
+        model: TOGETHER_MODEL,
+        messages,
+        temperature,
+        stream,
+        max_tokens: 4096,
+      };
 
-      // Groq
-      if (provider === "groq") {
-        if (!env.GROQ_API_KEY) return json({ error: "GROQ_API_KEY missing" }, 500, cors);
-        const endpoint = (env.GROQ_BASE || "https://api.groq.com/openai/v1") + "/chat/completions";
-        const up = { model, messages, temperature, stream };
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Authorization": `Bearer ${env.GROQ_API_KEY}`, "Content-Type": "application/json" },
-          body: JSON.stringify(up),
-        });
-        if (!res.ok) return relayJsonError(res, cors);
-        if (!stream) return json(await res.json(), 200, cors);
-        return translateOpenAIStyleSSE(res, cors);
-      }
+      const res = await fetch(`${TOGETHER_BASE}/chat/completions`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${env.TOGETHER_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
-      // Google Gemini 2.5
-      if (provider === "google") {
-        if (!env.GOOGLE_API_KEY) return json({ error: "GOOGLE_API_KEY missing" }, 500, cors);
-        const base = env.GOOGLE_GENAI_BASE || "https://generativelanguage.googleapis.com/v1beta";
-        const endpoint = `${base}/models/${encodeURIComponent(model)}:streamGenerateContent?key=${encodeURIComponent(env.GOOGLE_API_KEY)}`;
-        const { systemInstruction, contents } = openAiToGemini(messages);
-        const up: any = { contents, generationConfig: { temperature } };
-        if (systemInstruction) up.systemInstruction = { parts: [{ text: systemInstruction }] };
+      if (!res.ok) return relayJsonError(res, cors);
+      if (!stream) return json(await res.json(), 200, cors);
+      return translateOpenAIStyleSSE(res, cors);
 
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(up),
-        });
-        if (!res.ok) return relayJsonError(res, cors);
-
-        if (!stream) {
-          const text = await collectGeminiStreamToText(res);
-          return json(openAiStyleOnce(text), 200, cors);
-        }
-        return translateGeminiToOpenAISSE(res, cors);
-      }
-
-      return json({ error: `Unknown provider: ${provider}` }, 400, cors);
     } catch {
       return new Response("Internal Server Error", { status: 500, headers: { "Content-Type": "text/plain" } });
     }
@@ -1310,21 +1266,6 @@ function json(data: any, status = 200, extra: HeadersInit = {}): Response {
   return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json", ...extra } });
 }
 function clamp(n: number, min: number, max: number) { return isFinite(n) ? Math.min(max, Math.max(min, n)) : min; }
-function defaultModelFor(provider: "perplexity" | "groq" | "google", env: Env) {
-  if (provider === "perplexity") return env.PPLX_MODEL || "sonar";
-  if (provider === "groq") return env.GROQ_MODEL || "llama-3.1-70b-versatile";
-  return env.GOOGLE_MODEL || "gemini-2.5-flash";
-}
-function openAiToGemini(messages: Array<{ role: string; content: string }>) {
-  let systemInstruction = "";
-  const contents: any[] = [];
-  for (const m of messages) {
-    if (m.role === "system") { systemInstruction += (systemInstruction ? "\n" : "") + m.content; continue; }
-    const role = m.role === "assistant" ? "model" : "user";
-    contents.push({ role, parts: [{ text: m.content }] });
-  }
-  return { systemInstruction, contents };
-}
 async function relayJsonError(res: Response, cors: HeadersInit): Promise<Response> {
   let payload: any = { error: `${res.status} ${res.statusText}` };
   try { payload = await res.json(); } catch {}
@@ -1364,78 +1305,3 @@ function translateOpenAIStyleSSE(upstream: Response, cors: HeadersInit): Respons
     headers: { ...cors, "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-cache, no-transform", "X-Accel-Buffering": "no" }
   });
 }
-function translateGeminiToOpenAISSE(upstream: Response, cors: HeadersInit): Response {
-  const stream = new ReadableStream<Uint8Array>({
-    async start(controller) {
-      const reader = upstream.body!.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-      const enqueue = (text: string) =>
-        controller.enqueue(enc.encode(`data: ${JSON.stringify({ choices: [{ delta: { content: text } }] })}\n\n`));
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-        let idx;
-        while ((idx = buffer.indexOf("\n")) >= 0) {
-          const line = buffer.slice(0, idx).trim();
-          buffer = buffer.slice(idx + 1);
-          if (!line) continue;
-          let payload = line.startsWith("data:") ? line.slice(5).trim() : line;
-          if (!payload) continue;
-          if (payload === "[DONE]") {
-            controller.enqueue(enc.encode("data: [DONE]\n\n"));
-            controller.close();
-            return;
-          }
-          try {
-            const json = JSON.parse(payload);
-            const parts = json?.candidates?.[0]?.content?.parts;
-            if (Array.isArray(parts)) {
-              let text = "";
-              for (const p of parts) if (typeof p?.text === "string") text += p.text;
-              if (text) enqueue(text);
-            }
-          } catch {}
-        }
-      }
-      controller.enqueue(enc.encode("data: [DONE]\n\n"));
-      controller.close();
-    }
-  });
-  return new Response(stream, {
-    status: 200,
-    headers: { ...cors, "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-cache, no-transform", "X-Accel-Buffering": "no" }
-  });
-}
-async function collectGeminiStreamToText(upstream: Response): Promise<string> {
-  const reader = upstream.body!.getReader();
-  const decoder = new TextDecoder();
-  let buffer = "", out = "";
-  while (true) {
-    const { value, done } = await reader.read();
-    if (done) break;
-    buffer += decoder.decode(value, { stream: true });
-    let idx;
-    while ((idx = buffer.indexOf("\n")) >= 0) {
-      const line = buffer.slice(0, idx).trim();
-      buffer = buffer.slice(idx + 1);
-      if (!line) continue;
-      let payload = line.startsWith("data:") ? line.slice(5).trim() : line;
-      if (!payload || payload === "[DONE]") continue;
-      try {
-        const json = JSON.parse(payload);
-        const parts = json?.candidates?.[0]?.content?.parts;
-        if (Array.isArray(parts)) for (const p of parts) if (typeof p?.text === "string") out += p.text;
-      } catch {}
-    }
-  }
-  return out;
-}
-function openAiStyleOnce(text: string) {
-  return { id: "up-single", choices: [{ index: 0, message: { role: "assistant", content: text } }], usage: {} };
-}
-
-
-
-
