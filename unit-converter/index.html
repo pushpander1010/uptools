@@ -6,25 +6,29 @@
     crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Unit Converter - UpTools</title>
-  <!-- Favicon -->
+  <title>Unit Converter - Length, Weight, Temperature & More | UpTools</title>
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
-  <meta name="description" content="Convert length, weight, and temperature quickly." />
-  <meta name="robots" content="index,follow" />
+  <meta name="description" content="Free online unit converter. Convert length (m, km, ft, mi), weight (kg, lb, oz), and temperature (°C, °F, K) instantly. Fast, private, no signup." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <meta name="theme-color" content="#0b1020" />
   <link rel="canonical" href="https://www.uptools.in/unit-converter/" />
-  <meta property="og:title" content="Unit Converter - UpTools" />
-  <meta property="og:description" content="Convert length, weight, and temperature." />
+  <meta property="og:title" content="Unit Converter - Length, Weight, Temperature & More" />
+  <meta property="og:description" content="Convert length, weight, and temperature instantly. Free, fast, private." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.uptools.in/unit-converter/" />
   <meta property="og:site_name" content="UpTools" />
-  <meta name="twitter:card" content="summary" />
-  <link rel="stylesheet" href="/style.css" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preload" href="/style.css?v=1.2.0" as="style">
+  <link rel="stylesheet" href="/style.css?v=1.2.0" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css?v=1.2.0"></noscript>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Unit Converter","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","url":"https://www.uptools.in/unit-converter/","description":"Convert length, weight, and temperature units instantly.","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}
+  </script>
 </head>
 
 <body style="--accent:#cce5ff;--bg1:#0b1420;--bg2:#0e1e30;--cardBorder:#2a4766">
-  <!-- small fixed -->
   <ins class="adsbygoogle"
        style="display:inline-block;width:500px;height:50px"
        data-ad-client="ca-pub-6216304334889617"
@@ -32,6 +36,20 @@
   <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/currency-converter/">Currency</a>
+        <a href="/bmi-calculator/">BMI</a>
+        <a aria-current="page" href="/unit-converter/">Units</a>
+      </nav>
+    </div>
+  </header>
   <main class="wrap">
     <div class="tool-header">
       <div class="tool-icon">↔</div>
@@ -56,10 +74,26 @@
       <button id="go" class="btn">Convert</button>
       <div id="out" class="result"></div>
     </div>
-    <footer class="note small"><a href="/">UpTools</a></footer>
+
+    <section class="card" style="margin-top:12px">
+      <h2 style="margin-top:0">Quick explainer 🎥</h2>
+      <iframe width="100%" height="100%"
+        src="https://www.youtube-nocookie.com/embed/Yd0hBMQKMFI?rel=0&modestbranding=1&playsinline=1"
+        title="Unit conversion — metric vs imperial explained"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+        style="border:0; aspect-ratio:16/9; border-radius:.75rem; display:block; width:100%"></iframe>
+      <p class="note small" style="margin-top:6px">Video: Metric vs imperial unit conversion explained.</p>
+    </section>
+
+    <footer class="note small site-footer" role="contentinfo" style="margin-top:12px">
+      © <span id="y"></span> UpTools . <a href="/">Home</a> . <a href="/about/">About</a> . <a href="/sitemap.xml">Sitemap</a>
+    </footer>
   </main>
   <script type="module">
     const type = document.getElementById('type'), val = document.getElementById('val'), from = document.getElementById('from'), to = document.getElementById('to'), out = document.getElementById('out');
+    document.getElementById('y').textContent = new Date().getFullYear();
     const units = {
       length: { m: 1, km: 1000, cm: 0.01, mm: 0.001, mi: 1609.344, ft: 0.3048, in: 0.0254 },
       weight: { kg: 1, g: 0.001, lb: 0.45359237, oz: 0.0283495231 },

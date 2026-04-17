@@ -6,25 +6,29 @@
     crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Text Case Converter - UpTools</title>
-  <!-- Favicon -->
+  <title>Text Case Converter - UPPERCASE, lowercase, Title Case, camelCase | UpTools</title>
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
-  <meta name="description" content="Convert text between UPPERCASE, lowercase, Title Case, and camelCase." />
-  <meta name="robots" content="index,follow" />
+  <meta name="description" content="Free online text case converter. Convert text to UPPERCASE, lowercase, Title Case, camelCase, snake_case, and kebab-case instantly. Fast, private, no signup." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <meta name="theme-color" content="#0b1020" />
   <link rel="canonical" href="https://www.uptools.in/text-case-converter/" />
-  <meta property="og:title" content="Text Case Converter - UpTools" />
-  <meta property="og:description" content="Convert text cases instantly." />
+  <meta property="og:title" content="Text Case Converter - UPPERCASE, lowercase, Title Case, camelCase" />
+  <meta property="og:description" content="Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, and kebab-case instantly." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.uptools.in/text-case-converter/" />
   <meta property="og:site_name" content="UpTools" />
-  <meta name="twitter:card" content="summary" />
-  <link rel="stylesheet" href="/style.css" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preload" href="/style.css?v=1.2.0" as="style">
+  <link rel="stylesheet" href="/style.css?v=1.2.0" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css?v=1.2.0"></noscript>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Text Case Converter","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","url":"https://www.uptools.in/text-case-converter/","description":"Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, and kebab-case.","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}
+  </script>
 </head>
 
 <body style="--accent:#bde0fe;--bg1:#0b1420;--bg2:#0e1e30;--cardBorder:#2a4766">
-  <!-- small fixed -->
   <ins class="adsbygoogle"
        style="display:inline-block;width:500px;height:50px"
        data-ad-client="ca-pub-6216304334889617"
@@ -32,13 +36,27 @@
   <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/word-counter/">Word Counter</a>
+        <a href="/json-formatter/">JSON</a>
+        <a aria-current="page" href="/text-case-converter/">Text Case</a>
+      </nav>
+    </div>
+  </header>
   <main class="wrap">
     <div class="tool-header">
       <div class="tool-icon">Aa</div>
       <h1 style="margin:0">Text Case Converter</h1>
     </div>
     <div class="card">
-      <label class="label" for="txt">Text</label>
+      <label class="label" for="txt">Paste or type your text</label>
       <textarea id="txt" class="input" rows="6" placeholder="Paste or type text here..."></textarea>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
         <button class="btn" data-op="upper">UPPERCASE</button>
@@ -50,10 +68,26 @@
       </div>
       <div id="out" class="result" style="white-space:pre-wrap"></div>
     </div>
-    <footer class="note small"><a href="/">UpTools</a></footer>
+
+    <section class="card" style="margin-top:12px">
+      <h2 style="margin-top:0">Quick explainer 🎥</h2>
+      <iframe width="100%" height="100%"
+        src="https://www.youtube-nocookie.com/embed/iiADhChRriM?rel=0&modestbranding=1&playsinline=1"
+        title="Text formatting and naming conventions explained"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+        style="border:0; aspect-ratio:16/9; border-radius:.75rem; display:block; width:100%"></iframe>
+      <p class="note small" style="margin-top:6px">Video: camelCase, snake_case, kebab-case — naming conventions explained.</p>
+    </section>
+
+    <footer class="note small site-footer" role="contentinfo" style="margin-top:12px">
+      © <span id="y"></span> UpTools . <a href="/">Home</a> . <a href="/about/">About</a> . <a href="/sitemap.xml">Sitemap</a>
+    </footer>
   </main>
   <script type="module">
     const T = document.getElementById('txt'), O = document.getElementById('out');
+    document.getElementById('y').textContent = new Date().getFullYear();
     function titleCase(s) { return s.toLowerCase().replace(/\b\w/g, c => c.toUpperCase()); }
     function camelCase(s) { return s.toLowerCase().split(/[^a-z0-9]+/i).filter(Boolean).map((w, i) => i ? w[0].toUpperCase() + w.slice(1) : w).join(''); }
     function snakeCase(s) { return s.trim().replace(/\s+/g, '_').replace(/[^A-Za-z0-9_]/g, '').toLowerCase(); }
