@@ -6,12 +6,12 @@
   <title>AI Grammar Checker - Fix Grammar, Spelling & Punctuation Free | UpTools</title>
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
-  <meta name="description" content="Free AI grammar checker. Fix grammar mistakes, spelling errors, and punctuation instantly. No sign-up, no downloads. Works online." />
+  <meta name="description" content="Free AI grammar checker. Fix grammar mistakes, spelling errors, and punctuation instantly with AI. No sign-up, no downloads. Works online." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <meta name="theme-color" content="#0b1020" />
   <link rel="canonical" href="https://www.uptools.in/ai-grammar-checker/" />
   <meta property="og:title" content="AI Grammar Checker - Fix Grammar & Spelling Free" />
-  <meta property="og:description" content="Fix grammar mistakes, spelling errors, and punctuation instantly. Free AI grammar checker, no sign-up." />
+  <meta property="og:description" content="Fix grammar mistakes, spelling errors, and punctuation instantly with AI. Free, no sign-up." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.uptools.in/ai-grammar-checker/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
@@ -23,16 +23,17 @@
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"AI Grammar Checker","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this grammar checker free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free with no sign-up or download required."}},{"@type":"Question","name":"What does the grammar checker fix?","acceptedAnswer":{"@type":"Answer","text":"It checks for common grammar mistakes, spelling errors, punctuation issues, and suggests improvements."}}]}
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},{"@type":"ListItem","position":2,"name":"AI Grammar Checker","item":"https://www.uptools.in/ai-grammar-checker/"}]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this grammar checker free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free with no sign-up or download required. Powered by AI."}},{"@type":"Question","name":"What does the AI grammar checker fix?","acceptedAnswer":{"@type":"Answer","text":"It fixes grammar mistakes, spelling errors, punctuation issues, awkward phrasing, and suggests clearer rewrites."}}]}
   </script>
   <style>
     .tool-wrap { max-width: 900px; margin: 0 auto; }
     .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     @media(max-width:700px){ .editor-grid { grid-template-columns: 1fr; } }
-    textarea.big { width: 100%; min-height: 220px; resize: vertical; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .75rem; font-size: 1rem; line-height: 1.6; }
-    .output-box { min-height: 220px; background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .75rem; font-size: 1rem; line-height: 1.6; white-space: pre-wrap; }
-    .error-item { background: #1a0a0a; border: 1px solid #661e1e; border-radius: .5rem; padding: .5rem .75rem; margin: 6px 0; font-size: .9rem; }
-    .error-item .fix { color: #7aa2ff; font-weight: 700; }
+    textarea.big { width: 100%; min-height: 220px; resize: vertical; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .75rem; font-size: 1rem; line-height: 1.6; box-sizing: border-box; }
+    .output-box { min-height: 220px; background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .75rem; font-size: 1rem; line-height: 1.6; white-space: pre-wrap; color: #e6edf3; }
     .stats-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
     .stat-chip { background: #182033; border: 1px solid #212a3a; border-radius: .5rem; padding: .3rem .7rem; font-size: .85rem; }
     .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
@@ -65,10 +66,10 @@
       <section class="card hero" aria-labelledby="title">
         <div>
           <h1 id="title">✅ AI Grammar Checker</h1>
-          <p class="note">Paste your text and get instant grammar, spelling, and punctuation corrections. Free, private, no sign-up.</p>
+          <p class="note">Paste your text and get instant AI-powered grammar, spelling, and punctuation corrections with explanations. Free, private, no sign-up.</p>
           <div class="chips" style="margin-top:8px">
-            <span class="pill">⚡ Instant check</span>
-            <span class="pill">🔒 Privacy-first</span>
+            <span class="pill">⚡ Streams live</span>
+            <span class="pill">🔒 No browser API key</span>
             <span class="pill">📝 No sign-up</span>
           </div>
         </div>
@@ -79,15 +80,14 @@
           <div>
             <label style="font-weight:700;display:block;margin-bottom:6px" for="inputText">Your Text</label>
             <textarea id="inputText" class="big" placeholder="Paste or type your text here to check grammar, spelling, and punctuation…" aria-label="Input text for grammar check"></textarea>
-            <div class="stats-row" id="statsRow">
+            <div class="stats-row">
               <span class="stat-chip" id="wordCount">Words: 0</span>
               <span class="stat-chip" id="charCount">Chars: 0</span>
-              <span class="stat-chip" id="errorCount">Issues: 0</span>
             </div>
           </div>
           <div>
             <label style="font-weight:700;display:block;margin-bottom:6px">Corrected Text</label>
-            <div class="output-box" id="outputBox" aria-live="polite">Corrected text will appear here…</div>
+            <div class="output-box" id="outputBox" aria-live="polite">Corrected text will stream here…</div>
             <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
               <button id="copyBtn" class="btn secondary" type="button">Copy Corrected</button>
             </div>
@@ -95,15 +95,11 @@
         </div>
         <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <button id="checkBtn" class="btn" type="button">✅ Check Grammar</button>
+          <button id="stopBtn" class="btn secondary" type="button" disabled>Stop</button>
           <button id="clearBtn" class="btn secondary" type="button">Clear</button>
           <span id="status"></span>
         </div>
       </section>
-
-      <div id="errorsSection" style="display:none">
-        <h2 style="margin:12px 0 6px">Issues Found</h2>
-        <div id="errorsList"></div>
-      </div>
 
       <section class="card" style="margin-top:12px">
         <h2 style="margin-top:0">🎥 How to write better English</h2>
@@ -123,6 +119,7 @@
           <a class="btn secondary" href="/word-counter/">Word Counter</a>
           <a class="btn secondary" href="/text-case-converter/">Text Case Converter</a>
           <a class="btn secondary" href="/ai-plagiarism/">Plagiarism Checker</a>
+          <a class="btn secondary" href="/ai-blog-generator/">Blog Generator</a>
         </div>
       </section>
 
@@ -134,94 +131,79 @@
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Common grammar rules (client-side)
-    const RULES = [
-      { pattern: /\bi\b(?!\s*[''])/g, fix: 'I', desc: 'Capitalize "I"' },
-      { pattern: /\s{2,}/g, fix: ' ', desc: 'Extra spaces' },
-      { pattern: /([.!?])\s*([a-z])/g, fix: (m, p, c) => `${p} ${c.toUpperCase()}`, desc: 'Capitalize after sentence end' },
-      { pattern: /\bteh\b/gi, fix: 'the', desc: 'Spelling: "teh" → "the"' },
-      { pattern: /\brecieve\b/gi, fix: 'receive', desc: 'Spelling: "recieve" → "receive"' },
-      { pattern: /\boccured\b/gi, fix: 'occurred', desc: 'Spelling: "occured" → "occurred"' },
-      { pattern: /\bseperate\b/gi, fix: 'separate', desc: 'Spelling: "seperate" → "separate"' },
-      { pattern: /\bdefinate\b/gi, fix: 'definite', desc: 'Spelling: "definate" → "definite"' },
-      { pattern: /\baccommodate\b/gi, fix: 'accommodate', desc: 'Spelling check: accommodate' },
-      { pattern: /\bneccessary\b/gi, fix: 'necessary', desc: 'Spelling: "neccessary" → "necessary"' },
-      { pattern: /\buntill\b/gi, fix: 'until', desc: 'Spelling: "untill" → "until"' },
-      { pattern: /\bwould of\b/gi, fix: 'would have', desc: 'Grammar: "would of" → "would have"' },
-      { pattern: /\bcould of\b/gi, fix: 'could have', desc: 'Grammar: "could of" → "could have"' },
-      { pattern: /\bshould of\b/gi, fix: 'should have', desc: 'Grammar: "should of" → "should have"' },
-      { pattern: /\byour welcome\b/gi, fix: "you're welcome", desc: 'Grammar: "your welcome" → "you\'re welcome"' },
-      { pattern: /\bits a\b/gi, fix: "it's a", desc: 'Grammar: "its a" → "it\'s a"' },
-      { pattern: /\balot\b/gi, fix: 'a lot', desc: 'Spelling: "alot" → "a lot"' },
-      { pattern: /\bthier\b/gi, fix: 'their', desc: 'Spelling: "thier" → "their"' },
-      { pattern: /\bwierd\b/gi, fix: 'weird', desc: 'Spelling: "wierd" → "weird"' },
-      { pattern: /\bfreind\b/gi, fix: 'friend', desc: 'Spelling: "freind" → "friend"' },
-    ];
+    let aborter = null;
 
     const inputText = document.getElementById('inputText');
     const outputBox = document.getElementById('outputBox');
-    const errorsList = document.getElementById('errorsList');
-    const errorsSection = document.getElementById('errorsSection');
     const status = document.getElementById('status');
 
     function updateStats() {
-      const text = inputText.value;
-      const words = (text.trim().match(/\S+/g) || []).length;
-      document.getElementById('wordCount').textContent = `Words: ${words}`;
-      document.getElementById('charCount').textContent = `Chars: ${text.length}`;
+      const t = inputText.value;
+      document.getElementById('wordCount').textContent = 'Words: ' + (t.trim().match(/\S+/g) || []).length;
+      document.getElementById('charCount').textContent = 'Chars: ' + t.length;
     }
-
     inputText.addEventListener('input', updateStats);
 
-    function checkGrammar() {
-      const text = inputText.value;
-      if (!text.trim()) { status.textContent = 'Please enter some text first.'; return; }
-
+    async function checkGrammar() {
+      const text = inputText.value.trim();
+      if (!text) { status.textContent = 'Please enter some text first.'; return; }
+      outputBox.textContent = '';
       status.textContent = 'Checking…';
-      let corrected = text;
-      const issues = [];
-
-      for (const rule of RULES) {
-        const matches = [...text.matchAll(new RegExp(rule.pattern.source, rule.pattern.flags))];
-        if (matches.length > 0) {
-          issues.push({ desc: rule.desc, count: matches.length, example: matches[0][0] });
-          corrected = corrected.replace(rule.pattern, rule.fix);
+      document.getElementById('checkBtn').disabled = true;
+      document.getElementById('stopBtn').disabled = false;
+      aborter = new AbortController();
+      try {
+        const res = await fetch('/ai', {
+          method: 'POST',
+          signal: aborter.signal,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            provider: 'together',
+            model: 'mistralai/Mistral-Small-24B-Instruct-2501',
+            stream: true,
+            temperature: 0.2,
+            messages: [
+              { role: 'system', content: 'You are an expert English grammar checker and editor. Fix all grammar, spelling, punctuation, and style issues. First output the fully corrected text, then list each change made with a brief explanation.' },
+              { role: 'user', content: 'Check and correct the following text. Output:\n1. CORRECTED TEXT: (the full corrected version)\n2. CHANGES MADE: (numbered list of each correction with explanation)\n\nText to check:\n\n' + text }
+            ]
+          })
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const reader = res.body.getReader();
+        const dec = new TextDecoder();
+        for (;;) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          for (const line of dec.decode(value).split('\n')) {
+            const t = line.trim();
+            if (!t.startsWith('data:')) continue;
+            const p = t.slice(5).trim();
+            if (p === '[DONE]') break;
+            try { const d = JSON.parse(p).choices?.[0]?.delta?.content ?? ''; if (d) outputBox.textContent += d; } catch {}
+          }
         }
-      }
-
-      // Basic sentence capitalization
-      corrected = corrected.replace(/(^\s*\w)/g, c => c.toUpperCase());
-
-      outputBox.textContent = corrected;
-      document.getElementById('errorCount').textContent = `Issues: ${issues.length}`;
-
-      if (issues.length > 0) {
-        errorsSection.style.display = 'block';
-        errorsList.innerHTML = issues.map(i =>
-          `<div class="error-item">⚠️ ${i.desc} <span class="fix">(${i.count} instance${i.count > 1 ? 's' : ''})</span></div>`
-        ).join('');
-        status.textContent = `Found ${issues.length} issue${issues.length > 1 ? 's' : ''}. Corrected text is ready.`;
-      } else {
-        errorsSection.style.display = 'none';
-        status.textContent = '✅ No common issues found! Your text looks good.';
+        status.textContent = 'Done ✓';
+      } catch (e) {
+        status.textContent = e.name === 'AbortError' ? 'Stopped.' : 'Error: ' + e.message;
+      } finally {
+        document.getElementById('checkBtn').disabled = false;
+        document.getElementById('stopBtn').disabled = true;
+        aborter = null;
       }
     }
 
     document.getElementById('checkBtn').addEventListener('click', checkGrammar);
+    document.getElementById('stopBtn').addEventListener('click', () => aborter?.abort());
     document.getElementById('clearBtn').addEventListener('click', () => {
       inputText.value = '';
-      outputBox.textContent = 'Corrected text will appear here…';
-      errorsSection.style.display = 'none';
+      outputBox.textContent = 'Corrected text will stream here…';
       status.textContent = '';
       updateStats();
     });
     document.getElementById('copyBtn').addEventListener('click', () => {
-      const text = outputBox.textContent;
-      if (!text || text === 'Corrected text will appear here…') return;
-      navigator.clipboard.writeText(text).then(() => {
-        status.textContent = 'Corrected text copied!';
-      });
+      const t = outputBox.textContent;
+      if (!t || t === 'Corrected text will stream here…') return;
+      navigator.clipboard.writeText(t).then(() => { status.textContent = 'Corrected text copied!'; });
     });
   </script>
 </body>

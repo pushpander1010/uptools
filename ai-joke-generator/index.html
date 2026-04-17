@@ -6,12 +6,12 @@
   <title>AI Joke Generator - Funny Jokes, Puns & One-Liners | UpTools</title>
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
-  <meta name="description" content="Generate hilarious jokes, puns, one-liners, and dad jokes instantly with AI. Free online joke generator — no sign-up needed." />
+  <meta name="description" content="Generate hilarious jokes, puns, one-liners, and dad jokes instantly with AI. Free online joke generator — no sign-up needed. Fresh jokes every time." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <meta name="theme-color" content="#0b1020" />
   <link rel="canonical" href="https://www.uptools.in/ai-joke-generator/" />
   <meta property="og:title" content="AI Joke Generator - Funny Jokes, Puns & One-Liners" />
-  <meta property="og:description" content="Generate hilarious jokes, puns, one-liners, and dad jokes instantly. Free, no sign-up." />
+  <meta property="og:description" content="Generate hilarious jokes, puns, one-liners, and dad jokes instantly with AI. Free, no sign-up." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.uptools.in/ai-joke-generator/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
@@ -22,18 +22,22 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"AI Joke Generator","applicationCategory":"EntertainmentApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},{"@type":"ListItem","position":2,"name":"AI Joke Generator","item":"https://www.uptools.in/ai-joke-generator/"}]}
+  </script>
   <style>
     .tool-wrap { max-width: 680px; margin: 0 auto; }
-    .joke-box { background: #0d1626; border: 1px solid #2a3a5a; border-radius: .75rem; padding: 1.5rem; margin-top: 12px; min-height: 100px; text-align: center; font-size: 1.15rem; line-height: 1.7; }
-    .punchline { color: #7aa2ff; font-weight: 700; margin-top: .5rem; }
+    .joke-box { background: #0d1626; border: 1px solid #2a3a5a; border-radius: .75rem; padding: 1.5rem; margin-top: 12px; min-height: 100px; text-align: center; font-size: 1.15rem; line-height: 1.7; white-space: pre-wrap; color: #e6edf3; }
     .category-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
     .cat-btn { padding: .4rem .8rem; border-radius: 999px; border: 1px solid #212a3a; background: #121826; color: #e6edf3; cursor: pointer; font-weight: 600; transition: all .15s; }
     .cat-btn.active, .cat-btn:hover { background: #7aa2ff; color: #0b1020; border-color: #7aa2ff; }
     .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    #rateMsg { text-align: center; min-height: 1.4em; }
     #rating { display: flex; gap: 12px; justify-content: center; margin-top: 12px; }
     .rate-btn { background: transparent; border: 1px solid #212a3a; border-radius: .5rem; padding: .4rem .9rem; color: #e6edf3; cursor: pointer; font-size: 1.2rem; transition: transform .1s; }
     .rate-btn:hover { transform: scale(1.2); }
+    #status { color: #9aa4b2; font-size: .9rem; min-height: 1.4em; text-align: center; }
   </style>
 </head>
 <body>
@@ -60,9 +64,10 @@
       <section class="card hero" aria-labelledby="title">
         <div>
           <h1 id="title">😂 AI Joke Generator</h1>
-          <p class="note">Get hilarious jokes, puns, one-liners, and dad jokes instantly. Share with friends!</p>
+          <p class="note">Get fresh, AI-generated jokes, puns, one-liners, and dad jokes every time. Powered by AI — never the same joke twice!</p>
           <div class="chips" style="margin-top:8px">
-            <span class="pill">😂 Instant laughs</span>
+            <span class="pill">⚡ Fresh every time</span>
+            <span class="pill">🤖 AI-powered</span>
             <span class="pill">🎭 Multiple categories</span>
           </div>
         </div>
@@ -71,33 +76,33 @@
       <section class="card" style="margin-top:12px">
         <h2 style="margin-top:0">Pick a category</h2>
         <div class="category-grid" id="catGrid">
-          <button class="cat-btn active" data-cat="all">All</button>
-          <button class="cat-btn" data-cat="dad">Dad Jokes</button>
-          <button class="cat-btn" data-cat="pun">Puns</button>
-          <button class="cat-btn" data-cat="oneliner">One-Liners</button>
-          <button class="cat-btn" data-cat="tech">Tech Jokes</button>
-          <button class="cat-btn" data-cat="school">School</button>
-          <button class="cat-btn" data-cat="animal">Animal</button>
-          <button class="cat-btn" data-cat="food">Food</button>
+          <button class="cat-btn active" data-cat="any category">All</button>
+          <button class="cat-btn" data-cat="dad jokes">Dad Jokes</button>
+          <button class="cat-btn" data-cat="puns">Puns</button>
+          <button class="cat-btn" data-cat="one-liners">One-Liners</button>
+          <button class="cat-btn" data-cat="tech and programming jokes">Tech</button>
+          <button class="cat-btn" data-cat="school and student jokes">School</button>
+          <button class="cat-btn" data-cat="animal jokes">Animal</button>
+          <button class="cat-btn" data-cat="food jokes">Food</button>
+          <button class="cat-btn" data-cat="dark humor (keep it light)">Dark Humor</button>
+          <button class="cat-btn" data-cat="office and work jokes">Office</button>
         </div>
-        <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
+        <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center">
           <button id="genBtn" class="btn" type="button">😂 Get a Joke</button>
           <button id="copyBtn" class="btn secondary" type="button">Copy Joke</button>
           <button id="shareBtn" class="btn secondary" type="button">Share</button>
+          <span id="status"></span>
         </div>
       </section>
 
-      <div class="joke-box" id="jokeBox" aria-live="polite">
-        <p id="setup" style="margin:0">Click "Get a Joke" to start laughing!</p>
-        <p id="punchline" class="punchline" style="display:none"></p>
-      </div>
+      <div class="joke-box" id="jokeBox" aria-live="polite">Click "Get a Joke" to start laughing!</div>
 
       <div id="rating">
         <button class="rate-btn" title="Funny!" onclick="rate('😂')">😂</button>
         <button class="rate-btn" title="Meh" onclick="rate('😐')">😐</button>
         <button class="rate-btn" title="Groan" onclick="rate('🙄')">🙄</button>
       </div>
-      <p id="rateMsg" class="note small" style="text-align:center;min-height:1.4em"></p>
+      <p id="rateMsg" class="note small"></p>
 
       <section class="card" style="margin-top:12px">
         <h2 style="margin-top:0">🎥 The science of humor</h2>
@@ -128,74 +133,9 @@
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
-
-    const JOKES = {
-      dad: [
-        { setup: "Why don't scientists trust atoms?", punchline: "Because they make up everything!" },
-        { setup: "I'm reading a book about anti-gravity.", punchline: "It's impossible to put down!" },
-        { setup: "Did you hear about the mathematician who's afraid of negative numbers?", punchline: "He'll stop at nothing to avoid them." },
-        { setup: "Why did the scarecrow win an award?", punchline: "Because he was outstanding in his field!" },
-        { setup: "I used to hate facial hair...", punchline: "But then it grew on me." },
-        { setup: "What do you call cheese that isn't yours?", punchline: "Nacho cheese!" },
-        { setup: "Why can't you give Elsa a balloon?", punchline: "Because she'll let it go." },
-        { setup: "What do you call a fake noodle?", punchline: "An impasta!" },
-        { setup: "How do you organize a space party?", punchline: "You planet." },
-        { setup: "Why did the bicycle fall over?", punchline: "Because it was two-tired!" }
-      ],
-      pun: [
-        { setup: "I'm on a seafood diet.", punchline: "I see food and I eat it." },
-        { setup: "Time flies like an arrow.", punchline: "Fruit flies like a banana." },
-        { setup: "I used to be a banker...", punchline: "But I lost interest." },
-        { setup: "I'm reading a book about mazes.", punchline: "I got lost in it." },
-        { setup: "I tried to write a joke about paper...", punchline: "But it was tearable." },
-        { setup: "I'm friends with all electricians.", punchline: "We have good current connections." },
-        { setup: "I wanted to be a doctor...", punchline: "But I didn't have the patients." },
-        { setup: "I used to work at a calendar factory...", punchline: "But I got fired for taking a day off." }
-      ],
-      oneliner: [
-        { setup: "I told my wife she was drawing her eyebrows too high.", punchline: "She looked surprised." },
-        { setup: "I asked the librarian if they had books about paranoia.", punchline: "She whispered: 'They're right behind you!'" },
-        { setup: "I have a joke about construction...", punchline: "I'm still working on it." },
-        { setup: "My wife told me I had to stop acting like a flamingo.", punchline: "I had to put my foot down." },
-        { setup: "I used to think I was indecisive...", punchline: "But now I'm not so sure." },
-        { setup: "I'm terrified of elevators.", punchline: "I'm going to start taking steps to avoid them." }
-      ],
-      tech: [
-        { setup: "Why do programmers prefer dark mode?", punchline: "Because light attracts bugs!" },
-        { setup: "A SQL query walks into a bar, walks up to two tables and asks...", punchline: "'Can I join you?'" },
-        { setup: "Why do Java developers wear glasses?", punchline: "Because they don't C#!" },
-        { setup: "How many programmers does it take to change a light bulb?", punchline: "None, that's a hardware problem." },
-        { setup: "Why was the JavaScript developer sad?", punchline: "Because he didn't Node how to Express himself." },
-        { setup: "What's a computer's favorite snack?", punchline: "Microchips!" },
-        { setup: "Why did the developer go broke?", punchline: "Because he used up all his cache." },
-        { setup: "What do you call a programmer from Finland?", punchline: "Nerdic." }
-      ],
-      school: [
-        { setup: "Why did the student eat his homework?", punchline: "Because the teacher told him it was a piece of cake!" },
-        { setup: "Why was the math book sad?", punchline: "Because it had too many problems." },
-        { setup: "What do you call a student who doesn't do homework?", punchline: "A teacher's nightmare." },
-        { setup: "Why did the teacher wear sunglasses?", punchline: "Because her students were so bright!" },
-        { setup: "What's a snake's favorite subject?", punchline: "Hiss-tory!" }
-      ],
-      animal: [
-        { setup: "What do you call a sleeping dinosaur?", punchline: "A dino-snore!" },
-        { setup: "Why don't elephants use computers?", punchline: "Because they're afraid of the mouse!" },
-        { setup: "What do you call a fish without eyes?", punchline: "A fsh!" },
-        { setup: "Why did the cat sit on the computer?", punchline: "To keep an eye on the mouse!" },
-        { setup: "What do you call a dog magician?", punchline: "A labracadabrador!" },
-        { setup: "Why do cows wear bells?", punchline: "Because their horns don't work!" }
-      ],
-      food: [
-        { setup: "Why did the tomato turn red?", punchline: "Because it saw the salad dressing!" },
-        { setup: "What do you call a sad strawberry?", punchline: "A blueberry!" },
-        { setup: "Why did the banana go to the doctor?", punchline: "Because it wasn't peeling well!" },
-        { setup: "What do you call a stolen yam?", punchline: "A hot potato!" },
-        { setup: "Why did the cookie go to the doctor?", punchline: "Because it was feeling crummy!" }
-      ]
-    };
-
-    let activeCat = 'all';
-    let currentJoke = null;
+    let activeCat = 'any category';
+    let currentJoke = '';
+    let aborter = null;
 
     document.querySelectorAll('.cat-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -205,25 +145,56 @@
       });
     });
 
-    function getJoke() {
-      let pool = [];
-      if (activeCat === 'all') {
-        Object.values(JOKES).forEach(arr => pool.push(...arr));
-      } else {
-        pool = JOKES[activeCat] || [];
-      }
-      if (!pool.length) return;
-      currentJoke = pool[Math.floor(Math.random() * pool.length)];
-      document.getElementById('setup').textContent = currentJoke.setup;
-      const pl = document.getElementById('punchline');
-      pl.style.display = 'none';
-      pl.textContent = '';
+    async function getJoke() {
+      const box = document.getElementById('jokeBox');
+      const status = document.getElementById('status');
+      box.textContent = '';
+      status.textContent = 'Generating…';
+      document.getElementById('genBtn').disabled = true;
       document.getElementById('rateMsg').textContent = '';
-      // Reveal punchline after a beat
-      setTimeout(() => {
-        pl.textContent = currentJoke.punchline;
-        pl.style.display = 'block';
-      }, 800);
+      if (aborter) aborter.abort();
+      aborter = new AbortController();
+      currentJoke = '';
+      try {
+        const res = await fetch('/ai', {
+          method: 'POST',
+          signal: aborter.signal,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            provider: 'together',
+            model: 'mistralai/Mistral-Small-24B-Instruct-2501',
+            stream: true,
+            temperature: 1.0,
+            messages: [
+              { role: 'system', content: 'You are a stand-up comedian. Generate a single, original, funny joke. Keep it clean and appropriate for all ages unless specified. Be creative and surprising.' },
+              { role: 'user', content: 'Tell me one original ' + activeCat + ' joke. Format: Setup on first line, then punchline on the next line. Just the joke, no intro or explanation.' }
+            ]
+          })
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const reader = res.body.getReader();
+        const dec = new TextDecoder();
+        for (;;) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          for (const line of dec.decode(value).split('\n')) {
+            const t = line.trim();
+            if (!t.startsWith('data:')) continue;
+            const p = t.slice(5).trim();
+            if (p === '[DONE]') break;
+            try {
+              const d = JSON.parse(p).choices?.[0]?.delta?.content ?? '';
+              if (d) { currentJoke += d; box.textContent += d; }
+            } catch {}
+          }
+        }
+        status.textContent = '';
+      } catch (e) {
+        if (e.name !== 'AbortError') { box.textContent = 'Oops! Could not load a joke. Try again.'; status.textContent = ''; }
+      } finally {
+        document.getElementById('genBtn').disabled = false;
+        aborter = null;
+      }
     }
 
     function rate(emoji) {
@@ -234,18 +205,14 @@
     document.getElementById('genBtn').addEventListener('click', getJoke);
     document.getElementById('copyBtn').addEventListener('click', () => {
       if (!currentJoke) return;
-      const text = `${currentJoke.setup}\n${currentJoke.punchline}`;
-      navigator.clipboard.writeText(text).then(() => {
-        document.getElementById('rateMsg').textContent = 'Joke copied!';
-      });
+      navigator.clipboard.writeText(currentJoke).then(() => { document.getElementById('rateMsg').textContent = 'Joke copied!'; });
     });
     document.getElementById('shareBtn').addEventListener('click', () => {
       if (!currentJoke) return;
-      const text = `${currentJoke.setup} ${currentJoke.punchline}`;
       if (navigator.share) {
-        navigator.share({ title: 'Funny Joke from UpTools', text, url: location.href });
+        navigator.share({ title: 'Funny Joke from UpTools', text: currentJoke, url: location.href });
       } else {
-        navigator.clipboard.writeText(text);
+        navigator.clipboard.writeText(currentJoke);
         document.getElementById('rateMsg').textContent = 'Joke copied for sharing!';
       }
     });

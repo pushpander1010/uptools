@@ -22,14 +22,20 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"AI Cover Letter Generator","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},{"@type":"ListItem","position":2,"name":"AI Cover Letter Generator","item":"https://www.uptools.in/ai-cover-letter/"}]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this cover letter generator free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free with no sign-up or download required. Powered by AI via a secure server-side proxy."}},{"@type":"Question","name":"Can I download the cover letter?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can copy it to clipboard or download as a .txt file instantly."}}]}
+  </script>
   <style>
     .tool-wrap { max-width: 900px; margin: 0 auto; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     @media(max-width:640px){ .form-grid { grid-template-columns: 1fr; } }
     label.lbl { display: block; font-size: .9rem; color: #9aa4b2; margin-bottom: 4px; }
-    input.inp, select.sel, textarea.ta { width: 100%; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .5rem .7rem; font-size: 1rem; }
+    input.inp, select.sel, textarea.ta { width: 100%; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .5rem .7rem; font-size: 1rem; box-sizing: border-box; }
     textarea.ta { min-height: 80px; resize: vertical; }
-    .output-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; min-height: 300px; white-space: pre-wrap; line-height: 1.8; font-size: .97rem; }
+    .output-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; min-height: 300px; white-space: pre-wrap; line-height: 1.8; font-size: .97rem; color: #e6edf3; }
     .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     #status { color: #9aa4b2; font-size: .9rem; min-height: 1.4em; }
@@ -60,10 +66,10 @@
       <section class="card hero" aria-labelledby="title">
         <div>
           <h1 id="title">📄 AI Cover Letter Generator</h1>
-          <p class="note">Fill in your details and get a professional, tailored cover letter in seconds. Free, no sign-up required.</p>
+          <p class="note">Fill in your details and get a professional, tailored cover letter in seconds — powered by AI via a secure server-side proxy. Free, no sign-up.</p>
           <div class="chips" style="margin-top:8px">
-            <span class="pill">⚡ Instant generation</span>
-            <span class="pill">💼 Professional tone</span>
+            <span class="pill">⚡ Streams live</span>
+            <span class="pill">🔒 No browser API key</span>
             <span class="pill">📋 Copy & download</span>
           </div>
         </div>
@@ -74,7 +80,7 @@
         <div class="form-grid">
           <div>
             <label class="lbl" for="yourName">Your Name</label>
-            <input id="yourName" class="inp" type="text" placeholder="[Your Name]" />
+            <input id="yourName" class="inp" type="text" placeholder="e.g. Rahul Sharma" />
           </div>
           <div>
             <label class="lbl" for="jobTitle">Job Title Applying For</label>
@@ -87,11 +93,11 @@
           <div>
             <label class="lbl" for="experience">Years of Experience</label>
             <select id="experience" class="sel">
-              <option value="fresher">Fresher / No experience</option>
-              <option value="1-2">1–2 years</option>
-              <option value="3-5">3–5 years</option>
-              <option value="5-10">5–10 years</option>
-              <option value="10+">10+ years</option>
+              <option value="fresher / no experience">Fresher / No experience</option>
+              <option value="1–2 years">1–2 years</option>
+              <option value="3–5 years">3–5 years</option>
+              <option value="5–10 years">5–10 years</option>
+              <option value="10+ years">10+ years</option>
             </select>
           </div>
           <div>
@@ -118,16 +124,17 @@
         </div>
         <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <button id="genBtn" class="btn" type="button">✨ Generate Cover Letter</button>
+          <button id="stopBtn" class="btn secondary" type="button" disabled>Stop</button>
           <button id="copyBtn" class="btn secondary" type="button">Copy</button>
           <button id="downloadBtn" class="btn secondary" type="button">Download .txt</button>
           <span id="status"></span>
         </div>
       </section>
 
-      <div id="outputSection" style="display:none;margin-top:12px">
-        <h2 style="margin:0 0 8px">Your Cover Letter</h2>
-        <div class="output-box" id="outputBox" aria-live="polite"></div>
-      </div>
+      <section class="card" style="margin-top:12px" aria-label="Generated cover letter">
+        <h2 style="margin-top:0">Your Cover Letter</h2>
+        <div class="output-box" id="outputBox" aria-live="polite">Your cover letter will stream here…</div>
+      </section>
 
       <section class="card" style="margin-top:12px">
         <h2 style="margin-top:0">🎥 How to write a great cover letter</h2>
@@ -146,6 +153,7 @@
           <a class="btn secondary" href="/resume-analyzer/">Resume Analyzer</a>
           <a class="btn secondary" href="/ai-writer/">AI Writer</a>
           <a class="btn secondary" href="/ai-grammar-checker/">Grammar Checker</a>
+          <a class="btn secondary" href="/ai-email-writer/">Email Writer</a>
           <a class="btn secondary" href="/word-counter/">Word Counter</a>
         </div>
       </section>
@@ -158,119 +166,98 @@
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
+    let aborter = null;
 
-    const TEMPLATES = {
-      professional: (d) => `Dear Hiring Manager,
-
-I am writing to express my strong interest in the ${d.jobTitle} position at ${d.company}. With ${d.expText} in ${d.industry || 'the industry'}, I am confident in my ability to contribute meaningfully to your team.
-
-${d.skillsText}
-
-${d.achievementText}
-
-I am particularly drawn to ${d.company} because of its reputation for innovation and excellence. I am eager to bring my expertise and dedication to your organization and help drive continued success.
-
-I would welcome the opportunity to discuss how my background aligns with your needs. Thank you for considering my application.
-
-Sincerely,
-${d.name}`,
-
-      enthusiastic: (d) => `Dear Hiring Team at ${d.company},
-
-I am thrilled to apply for the ${d.jobTitle} role! Having spent ${d.expText} honing my skills in ${d.industry || 'this field'}, I am excited about the opportunity to bring my passion and expertise to ${d.company}.
-
-${d.skillsText}
-
-${d.achievementText}
-
-What excites me most about ${d.company} is the chance to work with a forward-thinking team that values innovation. I am ready to hit the ground running and make an immediate impact.
-
-I would love to connect and discuss how I can contribute to your team's success. Thank you for your time!
-
-Best regards,
-${d.name}`,
-
-      formal: (d) => `Dear Sir/Madam,
-
-I respectfully submit my application for the position of ${d.jobTitle} at ${d.company}. I possess ${d.expText} of professional experience in ${d.industry || 'the relevant field'} and am well-equipped to fulfill the requirements of this role.
-
-${d.skillsText}
-
-${d.achievementText}
-
-I have followed ${d.company}'s work with great interest and believe that my qualifications and professional values align closely with your organizational objectives.
-
-I would be grateful for the opportunity to discuss my application further at your earliest convenience.
-
-Yours faithfully,
-${d.name}`,
-
-      creative: (d) => `Hello ${d.company} Team,
-
-When I saw the ${d.jobTitle} opening, I knew I had to apply — this is exactly the kind of challenge I've been preparing for throughout my ${d.expText} in ${d.industry || 'this space'}.
-
-${d.skillsText}
-
-${d.achievementText}
-
-I don't just want a job — I want to be part of something meaningful. ${d.company}'s work resonates with me, and I believe I can bring a fresh perspective and genuine enthusiasm to your team.
-
-Let's talk! I'd love to show you what I can bring to the table.
-
-Cheers,
-${d.name}`
-    };
-
-    function buildExpText(exp) {
-      const map = { fresher: 'no prior work experience but strong foundational skills', '1-2': '1–2 years of experience', '3-5': '3–5 years of experience', '5-10': '5–10 years of experience', '10+': 'over 10 years of experience' };
-      return map[exp] || exp;
-    }
-
-    function generate() {
-      const name = document.getElementById('yourName').value.trim() || '[Your Name]';
-      const jobTitle = document.getElementById('jobTitle').value.trim() || '[Job Title]';
-      const company = document.getElementById('company').value.trim() || '[Company]';
+    function buildPrompt() {
+      const name = document.getElementById('yourName').value.trim() || 'the applicant';
+      const jobTitle = document.getElementById('jobTitle').value.trim() || 'the position';
+      const company = document.getElementById('company').value.trim() || 'your company';
       const experience = document.getElementById('experience').value;
       const tone = document.getElementById('tone').value;
       const industry = document.getElementById('industry').value.trim();
       const skills = document.getElementById('skills').value.trim();
       const achievement = document.getElementById('achievement').value.trim();
+      return `Write a ${tone} cover letter for a job application.
 
-      const skillsText = skills
-        ? `My core competencies include ${skills}. These skills have been developed through hands-on experience and continuous learning.`
-        : 'I bring a diverse skill set that I have developed through dedicated professional experience.';
+Applicant: ${name}
+Applying for: ${jobTitle} at ${company}
+Experience: ${experience}
+${industry ? 'Industry: ' + industry : ''}
+${skills ? 'Key skills: ' + skills : ''}
+${achievement ? 'Top achievement: ' + achievement : ''}
 
-      const achievementText = achievement
-        ? `One of my key achievements includes: ${achievement}`
-        : '';
+Write a complete, ready-to-send cover letter with:
+- Proper salutation
+- Strong opening paragraph that grabs attention
+- 2 body paragraphs highlighting skills and fit
+- Closing paragraph with a clear call to action
+- Professional sign-off with the applicant's name
 
-      const data = { name, jobTitle, company, expText: buildExpText(experience), industry, skillsText, achievementText };
-      const template = TEMPLATES[tone] || TEMPLATES.professional;
-      const letter = template(data);
+Tone: ${tone}. Do not use placeholder brackets — use the details provided.`;
+    }
 
-      document.getElementById('outputBox').textContent = letter;
-      document.getElementById('outputSection').style.display = 'block';
-      document.getElementById('status').textContent = 'Cover letter generated!';
-      document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    async function generate() {
+      const jobTitle = document.getElementById('jobTitle').value.trim();
+      if (!jobTitle) { document.getElementById('status').textContent = 'Please enter the job title.'; return; }
+      const out = document.getElementById('outputBox');
+      out.textContent = '';
+      document.getElementById('status').textContent = 'Writing…';
+      document.getElementById('genBtn').disabled = true;
+      document.getElementById('stopBtn').disabled = false;
+      aborter = new AbortController();
+      try {
+        const res = await fetch('/ai', {
+          method: 'POST',
+          signal: aborter.signal,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            provider: 'together',
+            model: 'mistralai/Mistral-Small-24B-Instruct-2501',
+            stream: true,
+            temperature: 0.65,
+            messages: [
+              { role: 'system', content: 'You are an expert career coach and professional cover letter writer. Write compelling, personalized cover letters that get interviews.' },
+              { role: 'user', content: buildPrompt() }
+            ]
+          })
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const reader = res.body.getReader();
+        const dec = new TextDecoder();
+        for (;;) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          for (const line of dec.decode(value).split('\n')) {
+            const t = line.trim();
+            if (!t.startsWith('data:')) continue;
+            const p = t.slice(5).trim();
+            if (p === '[DONE]') break;
+            try { const d = JSON.parse(p).choices?.[0]?.delta?.content ?? ''; if (d) out.textContent += d; } catch {}
+          }
+        }
+        document.getElementById('status').textContent = 'Done ✓';
+      } catch (e) {
+        document.getElementById('status').textContent = e.name === 'AbortError' ? 'Stopped.' : 'Error: ' + e.message;
+      } finally {
+        document.getElementById('genBtn').disabled = false;
+        document.getElementById('stopBtn').disabled = true;
+        aborter = null;
+      }
     }
 
     document.getElementById('genBtn').addEventListener('click', generate);
+    document.getElementById('stopBtn').addEventListener('click', () => aborter?.abort());
     document.getElementById('copyBtn').addEventListener('click', () => {
-      const text = document.getElementById('outputBox').textContent;
-      if (!text) return;
-      navigator.clipboard.writeText(text).then(() => {
-        document.getElementById('status').textContent = 'Copied to clipboard!';
-      });
+      const t = document.getElementById('outputBox').textContent;
+      if (!t || t === 'Your cover letter will stream here…') return;
+      navigator.clipboard.writeText(t).then(() => { document.getElementById('status').textContent = 'Copied!'; });
     });
     document.getElementById('downloadBtn').addEventListener('click', () => {
-      const text = document.getElementById('outputBox').textContent;
-      if (!text) return;
-      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const t = document.getElementById('outputBox').textContent;
+      if (!t || t === 'Your cover letter will stream here…') return;
       const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'cover-letter.txt';
-      a.click();
-      URL.revokeObjectURL(a.href);
+      a.href = URL.createObjectURL(new Blob([t], { type: 'text/plain' }));
+      a.download = 'cover-letter.txt'; a.click();
     });
   </script>
 </body>
