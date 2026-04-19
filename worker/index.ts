@@ -221,7 +221,7 @@ async function getYahooAuth(force = false): Promise<YahooAuth> {
   return yahooAuthPromise;
 }
 
-const YAHOO_AUTH_PATH = /\/v\d+\/finance\/(quote|quoteSummary|options|spark|screener|scan|chart)/;
+const YAHOO_AUTH_PATH = /\/v\d+\/finance\/(quote|quoteSummary|options|screener|scan)/;
 
 function needsYahooAuth(target: URL): boolean {
   if (!target.hostname.endsWith("finance.yahoo.com")) return false;
@@ -478,41 +478,14 @@ interface DailyPayload {
 }
 
 const DAILY_MARKETS = ["NSE", "BSE", "NASDAQ", "NYSE", "LSE", "TSX", "TSE", "SSE", "HKEX", "FWB"] as const;
-const DAILY_CANDIDATE_LIMIT = 40;
+const DAILY_CANDIDATE_LIMIT = 20; // Reduced from 40 to stay within Cloudflare's 50 subrequest limit
 const DAILY_REFRESH_INTERVAL_MS = 1000 * 60 * 60 * 24;
 const TOP10_CACHE_KEY = "__uptools_top10_daily__";
-const DAILY_QUOTE_CHUNK = 15;
-const DAILY_SPARK_CHUNK = 8;
+const DAILY_SPARK_CHUNK = 10; // 20 symbols / 10 per chunk = 2 requests per market × 10 markets = 20 total
 const NEWS_FETCH_LIMIT = 1;
 
 let top10Cache: { payload: DailyPayload; expires: number } | null = null;
 let top10Promise: Promise<DailyPayload> | null = null;
-
-const suffixByMarketDaily: Record<string, string> = {
-  NSE: ".NS",
-  BSE: ".BO",
-  NASDAQ: "",
-  NYSE: "",
-  LSE: ".L",
-  TSX: ".TO",
-  TSE: ".T",
-  SSE: ".SS",
-  HKEX: ".HK",
-  FWB: ".F",
-};
-
-const regionByMarketDaily: Record<string, string> = {
-  NSE: "IN",
-  BSE: "IN",
-  NASDAQ: "US",
-  NYSE: "US",
-  LSE: "GB",
-  TSX: "CA",
-  TSE: "JP",
-  SSE: "CN",
-  HKEX: "HK",
-  FWB: "DE",
-};
 
 const POS_WORDS = [
   "beats",
@@ -646,17 +619,22 @@ async function handleTop10Daily(req: Request, env: Env): Promise<Response> {
     });
   }
   try {
-    const payload = await getDailyPayload(env);
+    const url = new URL(req.url);
+    const force = url.searchParams.get("nocache") === "1";
+    // Also bust in-memory cache on new deploy by checking if cached result has 0 picks
+    const payload = await getDailyPayload(env, force);
+    const allEmpty = Object.values(payload.markets).every((m: any) => m.picks?.length === 0);
+    const finalPayload = (allEmpty && !force) ? await getDailyPayload(env, true) : payload;
     const headers: Record<string, string> = {
       "Content-Type": "application/json; charset=utf-8",
       "Cache-Control": "public, max-age=900, s-maxage=3600",
-      "X-Generated-At": payload.generatedAt,
-      "X-Next-Update": payload.nextUpdateAt,
+      "X-Generated-At": finalPayload.generatedAt,
+      "X-Next-Update": finalPayload.nextUpdateAt,
     };
     if (req.method === "HEAD") {
       return new Response(null, { status: 200, headers });
     }
-    return new Response(JSON.stringify(payload), { status: 200, headers });
+    return new Response(JSON.stringify(finalPayload), { status: 200, headers });
   } catch (err) {
     console.error("top10 daily error", err);
     const message = err instanceof Error ? err.message : "Failed to build daily picks";
@@ -832,26 +810,13 @@ async function processMarketDaily(market: string): Promise<MarketDailyResult> {
   let processed = 0;
   let failed = 0;
 
+  // Single spark fetch gives us both quote metadata and chart data — avoids double requests
   let quotesMap: Map<string, any>;
-  try {
-    quotesMap = await fetchQuotesBatch(uppercaseSymbols);
-  } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
-    baseNotes.push(`Quote fetch failed: ${message}`);
-    return {
-      picks: [],
-      scanned: uppercaseSymbols.length,
-      processed: 0,
-      failed: uppercaseSymbols.length,
-      runtimeMs: Date.now() - started,
-      universe: "Yahoo most actives",
-      notes: baseNotes,
-    };
-  }
-
   let sparkMap: Map<string, { closes: Array<number | null>; volumes: Array<number | null>; meta: any }>;
   try {
-    sparkMap = await fetchSparkBatch(uppercaseSymbols);
+    const combined = await fetchSymbolData(uppercaseSymbols);
+    quotesMap = combined.quotes;
+    sparkMap = combined.charts;
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     baseNotes.push(`Chart fetch failed: ${message}`);
@@ -928,95 +893,106 @@ async function processMarketDaily(market: string): Promise<MarketDailyResult> {
 }
 
 
+// Hardcoded symbol universes per market — replaces Yahoo screener (auth-gated since 2025)
+// Symbols are stored WITHOUT exchange suffix; suffix is applied in buildCandidateSymbols
+const MARKET_SYMBOLS: Record<string, string[]> = {
+  NSE: ["RELIANCE","TCS","HDFCBANK","INFY","ICICIBANK","HINDUNILVR","ITC","SBIN","BHARTIARTL","KOTAKBANK","LT","AXISBANK","ASIANPAINT","MARUTI","TITAN","SUNPHARMA","WIPRO","ULTRACEMCO","NESTLEIND","BAJFINANCE","HCLTECH","POWERGRID","NTPC","ONGC","COALINDIA","JSWSTEEL","TATAMOTORS","TATASTEEL","ADANIENT","ADANIPORTS","BAJAJFINSV","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HEROMOTOCO","HINDALCO","INDUSINDBK","M&M","TECHM"],
+  BSE: ["RELIANCE","TCS","HDFCBANK","INFY","ICICIBANK","HINDUNILVR","ITC","SBIN","BHARTIARTL","KOTAKBANK","LT","AXISBANK","ASIANPAINT","MARUTI","TITAN","SUNPHARMA","WIPRO","ULTRACEMCO","NESTLEIND","BAJFINANCE","HCLTECH","POWERGRID","NTPC","ONGC","COALINDIA","JSWSTEEL","TATAMOTORS","TATASTEEL","ADANIENT","ADANIPORTS","BAJAJFINSV","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HEROMOTOCO","HINDALCO","INDUSINDBK","M&M","TECHM"],
+  NASDAQ: ["AAPL","MSFT","NVDA","AMZN","META","TSLA","GOOG","AVGO","COST","NFLX","AMD","INTC","QCOM","AMAT","MU","LRCX","KLAC","MRVL","ADBE","PYPL","CSCO","TXN","SBUX","MDLZ","REGN","VRTX","ISRG","IDXX","ILMN","BIIB","MRNA","BKNG","ABNB","PANW","CRWD","SNPS","CDNS","FTNT","MCHP","NXPI"],
+  NYSE: ["JPM","V","MA","KO","PG","JNJ","WMT","BAC","XOM","CVX","HD","DIS","NKE","MCD","GS","MS","C","WFC","AXP","BLK","SPGI","MMM","CAT","DE","BA","RTX","LMT","GE","HON","UNH","PFE","MRK","ABT","TMO","DHR","BMY","AMGN","GILD","MDT","SYK"],
+  LSE: ["HSBA","BP","AZN","ULVR","RIO","GLEN","BARC","LLOY","DGE","VOD","BT-A","SHEL","GSK","REL","NG","SSE","LGEN","PSON","PRU","STAN","RR","IAG","EZJ","WPP","IHG","EXPN","SGRO","LAND","BLND","CRDA","IMB","BAB","ANTO","AAL","MNDI","SMDS","HLMA","CRH","FERG","BATS"],
+  TSX: ["SHOP","RY","TD","ENB","BNS","BMO","SU","CNQ","BCE","MG","CP","CNR","TRP","ABX","AEM","WPM","K","G","FM","CS","MFC","SLF","GWO","POW","IAG","FFH","BAM","BIP-UN","BEP-UN","AQN","FTS","H","EMA","CU","ALA","PPL","KEY","PBA","IPL","GEI"],
+  TSE: ["7203","6758","9984","9432","7267","8306","9433","6954","4901","4502","6861","7751","6501","6702","6752","7974","4063","4568","8035","6367","9022","9020","8411","8316","8058","8031","8053","8001","5401","5411","3382","2914","4452","4519","4523","4151","4578","4507","4543","4661"],
+  SSE: ["601398","601857","600519","601318","600036","601988","601939","601628","600028","600276","601166","600000","601601","601688","600030","600016","601328","601818","601169","600048","600104","600309","600887","600690","600900","601088","601186","601390","601800","600050","600196","600585","600703","600741","600837","601012","601111","601211","601229"],
+  HKEX: ["0700","09988","0005","0001","0011","1299","0388","0823","2318","0857","0941","2628","1398","3988","0939","1288","0386","0883","0016","0012","0017","0019","0066","0101","0175","0267","0291","0322","0330","0358","0384","0392","0669","0688","0762","0836","0868","0960","1038","1044"],
+  FWB: ["SAP","ADS","BMW","DTE","VOW3","LIN","BAS","SIE","ALV","HNR1","MRK","BAYN","DBK","DPW","FRE","HEI","IFX","MBG","MTX","MUV2","RWE","VNA","ZAL","1COV","AIR","BEI","CON","DB1","DHER","ENR","EVT","FME","G1A","GFJ","HAG","HFG","HOT","LEG","LHA","NDA"],
+};
+
+const MARKET_SUFFIX: Record<string, string> = {
+  NSE: ".NS", BSE: ".BO", NASDAQ: "", NYSE: "", LSE: ".L",
+  TSX: ".TO", TSE: ".T", SSE: ".SS", HKEX: ".HK", FWB: ".DE",
+};
+
 async function buildCandidateSymbols(market: string): Promise<string[]> {
-  const region = regionByMarketDaily[market] || "US";
-  const suffix = suffixByMarketDaily[market] ?? "";
-  const baseUrl = "https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved";
-  const data = await fetchYahooJson(
-    `${baseUrl}?scrIds=most_actives&count=${DAILY_CANDIDATE_LIMIT}&start=0&lang=en-US&region=${region}`
-  );
-  const quotes = (data?.finance?.result?.[0]?.quotes || []) as Array<{ symbol?: string }>;
-  const normalized = quotes
-    .map((q) => (q?.symbol || '').toUpperCase())
-    .filter(Boolean)
-    .map((sym) => {
-      if (!suffix) return sym;
-      return sym.endsWith(suffix) ? sym : `${sym}${suffix}`;
-    });
-  return dedupeSymbols(normalized).slice(0, DAILY_CANDIDATE_LIMIT);
+  const base = MARKET_SYMBOLS[market];
+  if (!base?.length) throw new Error(`No symbol list for market: ${market}`);
+  const suffix = MARKET_SUFFIX[market] ?? "";
+  // Shuffle to vary picks each run, then apply exchange suffix
+  const shuffled = [...base].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, DAILY_CANDIDATE_LIMIT).map(s => s + suffix);
 }
 
-function dedupeSymbols(list: string[]): string[] {
-  const seen = new Set<string>();
-  const out: string[] = [];
-  for (const sym of list) {
-    if (!sym) continue;
-    if (seen.has(sym)) continue;
-    seen.add(sym);
-    out.push(sym);
-  }
-  return out;
-}
+// Single function that fetches spark data and returns both quote metadata and chart data
+// This halves the number of subrequests vs calling fetchQuotesBatch + fetchSparkBatch separately
+async function fetchSymbolData(symbols: string[]): Promise<{
+  quotes: Map<string, any>;
+  charts: Map<string, { closes: Array<number | null>; volumes: Array<number | null>; meta: any }>;
+}> {
+  const quotes = new Map<string, any>();
+  const charts = new Map<string, { closes: Array<number | null>; volumes: Array<number | null>; meta: any }>();
 
-async function fetchQuotesBatch(symbols: string[]): Promise<Map<string, any>> {
-  const map = new Map<string, any>();
-  for (const chunk of chunkSymbols(symbols, DAILY_QUOTE_CHUNK)) {
-    if (!chunk.length) continue;
-    const data = await fetchYahooJson(
-      `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(chunk.join(','))}`
-    );
-    const results = (data?.quoteResponse?.result || []) as Array<any>;
-    for (const quote of results) {
-      const key = (quote?.symbol || '').toUpperCase();
-      if (key) map.set(key, quote);
-    }
-  }
-  return map;
-}
-
-async function fetchSparkBatch(symbols: string[]): Promise<Map<string, { closes: Array<number | null>; volumes: Array<number | null>; meta: any }>> {
-  const map = new Map<string, { closes: Array<number | null>; volumes: Array<number | null>; meta: any }>();
   for (const chunk of chunkSymbols(symbols, DAILY_SPARK_CHUNK)) {
     if (!chunk.length) continue;
-    const data = await fetchYahooJson(
-      `https://query1.finance.yahoo.com/v7/finance/spark?symbols=${encodeURIComponent(chunk.join(','))}&range=6mo&interval=1d`
-    );
-    const results = (data?.spark?.result || []) as Array<any>;
-    for (const entry of results) {
-      const key = (entry?.symbol || '').toUpperCase();
-      const response = entry?.response?.[0];
-      const quote = response?.indicators?.quote?.[0];
-      if (!key || !response || !quote) continue;
-      const closes = Array.isArray(quote?.close) ? quote.close : [];
-      const volumes = Array.isArray(quote?.volume) ? quote.volume : [];
-      map.set(key, { closes, volumes, meta: response?.meta || {} });
-    }
+    try {
+      const data = await fetchYahooJson(
+        `https://query1.finance.yahoo.com/v7/finance/spark?symbols=${encodeURIComponent(chunk.join(','))}&range=6mo&interval=1d`
+      );
+      const results = (data?.spark?.result || []) as Array<any>;
+      for (const entry of results) {
+        const key = (entry?.symbol || '').toUpperCase();
+        const response = entry?.response?.[0];
+        const quote = response?.indicators?.quote?.[0];
+        const meta = response?.meta || {};
+        if (!key || !response) continue;
+
+        // Build quote-compatible object from spark meta
+        const price = meta.regularMarketPrice ?? null;
+        const prevClose = meta.chartPreviousClose ?? meta.previousClose ?? null;
+        const change = (price != null && prevClose != null) ? price - prevClose : null;
+        const changePct = (change != null && prevClose) ? (change / prevClose) * 100 : null;
+        quotes.set(key, {
+          symbol: meta.symbol || key,
+          shortName: meta.shortName || key,
+          longName: meta.longName || meta.shortName || key,
+          currency: meta.currency,
+          fullExchangeName: meta.fullExchangeName || meta.exchangeName,
+          regularMarketPrice: price,
+          regularMarketChange: change,
+          regularMarketChangePercent: changePct,
+          regularMarketVolume: meta.regularMarketVolume ?? null,
+          fiftyTwoWeekHigh: meta.fiftyTwoWeekHigh ?? null,
+          fiftyTwoWeekLow: meta.fiftyTwoWeekLow ?? null,
+          trailingPE: null,
+          trailingAnnualDividendYield: null,
+          marketCap: null,
+        });
+
+        if (quote) {
+          const closes = Array.isArray(quote?.close) ? quote.close : [];
+          const volumes = Array.isArray(quote?.volume) ? quote.volume : [];
+          charts.set(key, { closes, volumes, meta });
+        }
+      }
+    } catch { /* skip chunk on error */ }
   }
-  return map;
+  return { quotes, charts };
 }
 
 async function fetchNewsDaily(name: string): Promise<{ titles: string[]; net: number }> {
-  const url = `https://news.google.com/rss/search?q=${encodeURIComponent(name + ' stock OR shares')}&hl=en-IN&gl=IN&ceid=IN:en`;
+  // Use Yahoo Finance search API — works server-side without auth, unlike Google News RSS (which returns 503 from Cloudflare IPs)
+  const url = `https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(name)}&newsCount=6&enableFuzzyQuery=false`;
   const res = await fetch(url, {
     headers: {
       "User-Agent": PROXY_USER_AGENT,
-      "Accept": "application/rss+xml,text/xml,text/plain",
-      "Accept-Language": "en-IN,en;q=0.9",
+      "Accept": "application/json",
+      "Accept-Language": "en-US,en;q=0.9",
     },
   });
-  if (!res.ok) throw new Error(`Google News HTTP ${res.status}`);
-  const text = await res.text();
-  const titles = [...text.matchAll(/<item>([\s\S]*?)<\/item>/g)]
-    .slice(0, 6)
-    .map((match) => {
-      const block = match[1];
-      const viaCdata = block.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/);
-      if (viaCdata?.[1]) return viaCdata[1];
-      const plain = block.match(/<title>(.*?)<\/title>/);
-      return plain?.[1] || '';
-    })
-    .filter(Boolean);
-  const net = titles.reduce((sum, title) => sum + scoreHeadlineText(title), 0);
+  if (!res.ok) throw new Error(`Yahoo News HTTP ${res.status}`);
+  const data = await res.json() as any;
+  const newsArr = (data?.news || []) as Array<any>;
+  const titles = newsArr.slice(0, 6).map((n: any) => (n.title as string) || "").filter(Boolean);
+  const net = titles.reduce((sum: number, title: string) => sum + scoreHeadlineText(title), 0);
   return { titles, net };
 }
 
