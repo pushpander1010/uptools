@@ -206,6 +206,9 @@
 
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    let aborter = null;
+    const num = id => parseFloat(document.getElementById(id).value) || 0;
 
     function buildPrompt() {
       const currency = document.getElementById('currency').value;

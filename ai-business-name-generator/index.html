@@ -196,6 +196,9 @@
 
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    let aborter = null;
+    const activeStyles = new Set(['catchy & memorable']);
 
     document.querySelectorAll('.style-btn').forEach(btn => {
       btn.addEventListener('click', () => {

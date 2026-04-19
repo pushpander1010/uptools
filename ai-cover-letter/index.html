@@ -191,6 +191,11 @@
 
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    let aborter = null;
+
+    function buildPrompt() {
+      const name = document.getElementById('yourName').value.trim() || 'Applicant';
       const jobTitle = document.getElementById('jobTitle').value.trim() || 'the position';
       const company = document.getElementById('company').value.trim() || 'your company';
       const experience = document.getElementById('experience').value;

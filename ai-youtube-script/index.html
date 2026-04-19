@@ -205,6 +205,10 @@
 
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    let aborter = null;
+
+    document.querySelectorAll('.niche-pill').forEach(pill => {
       pill.addEventListener('click', () => { document.getElementById('niche').value = pill.dataset.niche; });
     });
 

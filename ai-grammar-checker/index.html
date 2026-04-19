@@ -156,6 +156,10 @@
 
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    let aborter = null;
+
+    const inputText = document.getElementById('inputText');
     const outputBox = document.getElementById('outputBox');
     const status = document.getElementById('status');
 

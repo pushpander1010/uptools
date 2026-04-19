@@ -178,6 +178,11 @@
 
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    let aborter = null;
+
+    function buildPrompt() {
+      const topic = document.getElementById('topic').value.trim();
       const tone = document.getElementById('tone').value;
       const length = document.getElementById('length').value;
       const audience = document.getElementById('audience').value.trim();
