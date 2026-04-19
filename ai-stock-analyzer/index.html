@@ -726,31 +726,59 @@
       throw last;
     };
 
-    async function getQuote(symbol){
-      const j = await api(`https://query1.finance.yahoo.com/v7/finance/quote?symbols=${symbol}`);
-      return j?.quoteResponse?.result?.[0] || null;
-    }
-
     async function getChart(symbol, rangeV='6mo', intervalV='1d'){
       const j = await api(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${rangeV}&interval=${intervalV}`);
       const res = j?.chart?.result?.[0];
+      const meta = res?.meta || {};
+      // Build a quote-compatible object from chart meta (v7/quote is now auth-gated)
+      const price = meta.regularMarketPrice ?? null;
+      const prevClose = meta.chartPreviousClose ?? meta.previousClose ?? null;
+      const change = (price != null && prevClose != null) ? price - prevClose : null;
+      const changePct = (change != null && prevClose) ? (change / prevClose) * 100 : null;
+      const quote = {
+        symbol: meta.symbol,
+        shortName: meta.shortName || meta.symbol,
+        longName: meta.longName || meta.shortName || meta.symbol,
+        currency: meta.currency,
+        fullExchangeName: meta.fullExchangeName || meta.exchangeName,
+        exchange: meta.exchangeName,
+        regularMarketPrice: price,
+        regularMarketChange: change,
+        regularMarketChangePercent: changePct,
+        regularMarketVolume: meta.regularMarketVolume ?? null,
+        fiftyTwoWeekHigh: meta.fiftyTwoWeekHigh ?? null,
+        fiftyTwoWeekLow: meta.fiftyTwoWeekLow ?? null,
+        // FA fields not available without auth — will show N/A
+        marketCap: null,
+        trailingPE: null,
+        forwardPE: null,
+        trailingAnnualDividendYield: null,
+        epsTrailingTwelveMonths: null,
+        beta: null,
+        sharesOutstanding: null,
+      };
       return {
         t: (res?.timestamp || []).map(x => x * 1000),
         c: res?.indicators?.quote?.[0]?.close || [],
-        meta: res?.meta || {}
+        meta,
+        quote,
       };
     }
 
-    async function getNews(q){
-      const rss = await api(`https://news.google.com/rss/search?q=${encodeURIComponent(q + ' stock OR shares')}&hl=en-IN&gl=IN&ceid=IN:en`);
-      return [...rss.matchAll(/<item>([\s\S]*?)<\/item>/g)].slice(0,10).map(m => {
-        const block = m[1];
-        const title = (block.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/) || [])[1]
-          || (block.match(/<title>(.*?)<\/title>/) || [])[1] || '';
-        const link = (block.match(/<link>(.*?)<\/link>/) || [])[1] || '';
-        const pub = (block.match(/<pubDate>(.*?)<\/pubDate>/) || [])[1] || '';
-        return { title, link, pub };
-      });
+    async function getNews(q, symbol){
+      // Use the worker's /news endpoint — fetches Yahoo Finance RSS (by symbol) or
+      // Google News RSS (by company name) server-side, avoiding CORS/403 issues
+      const params = new URLSearchParams();
+      if (symbol) params.set('s', symbol);
+      if (q) params.set('q', q);
+      try {
+        const res = await fetch(`/news?${params}`);
+        if (!res.ok) return [];
+        const data = await res.json();
+        return data.items || [];
+      } catch {
+        return [];
+      }
     }
 
     const SMA = (arr, n) => arr.map((_, i) => {
@@ -1270,9 +1298,9 @@ User question: ${prompt}` }
       setChatStatus('');
       go && (go.disabled = true);
       try {
-        const quote = await getQuote(symbol);
-        setSnapshot(quote);
         const chart = await getChart(symbol, range?.value, interval?.value);
+        const quote = chart.quote;
+        setSnapshot(quote);
         const closes = chart.c || [];
         if(!closes.filter(v => v != null).length) throw new Error('No chart data');
         const ta = setTASummary(closes);
@@ -1280,7 +1308,7 @@ User question: ${prompt}` }
         const searchQ = quote?.shortName || quote?.longName || tickerValue;
         let news = [];
         try {
-          news = await getNews(searchQ);
+          news = await getNews(searchQ, symbol);
         } catch (newsErr) {
           console.warn('News fetch failed', newsErr);
         }

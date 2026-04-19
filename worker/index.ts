@@ -32,6 +32,11 @@ export default {
       return handleTop10Daily(req, env);
     }
 
+    // --- News RSS proxy (/news?q=<query>) ---
+    if (url.pathname === "/news") {
+      return handleNewsProxy(req, env);
+    }
+
     // --- Serve your site (everything except /ai) ---
     if (url.pathname !== "/ai") {
       return serveSite(req, env);
@@ -1152,6 +1157,81 @@ function makeScoresDaily(params: {
     why: whyParts,
   };
 }
+/* ---------------- News RSS proxy ---------------- */
+
+async function handleNewsProxy(req: Request, env: Env): Promise<Response> {
+  const cors = corsHeaders(req, env);
+  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
+
+  const url = new URL(req.url);
+  const q = url.searchParams.get("q");       // company name fallback
+  const symbol = url.searchParams.get("s");  // ticker symbol (preferred)
+
+  if (!q && !symbol) {
+    return new Response(JSON.stringify({ error: "Missing ?q= or ?s= param", items: [] }), {
+      status: 400, headers: { ...cors, "Content-Type": "application/json" }
+    });
+  }
+
+  const UA = "Mozilla/5.0 (compatible; UpToolsProxy/1.0; +https://www.uptools.in/)";
+
+  const parseRssItems = (text: string) =>
+    [...text.matchAll(/<item>([\s\S]*?)<\/item>/g)].slice(0, 10).map(m => {
+      const block = m[1];
+      const title = (block.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/) || [])[1]
+        || (block.match(/<title>(.*?)<\/title>/) || [])[1] || "";
+      const link = (block.match(/<link>(.*?)<\/link>/) || [])[1] || "";
+      const pub = (block.match(/<pubDate>(.*?)<\/pubDate>/) || [])[1] || "";
+      return { title, link, pub };
+    }).filter(item => item.title);
+
+  // 1. Yahoo Finance search API — works for all markets, no auth needed
+  const searchTerm = symbol || q || "";
+  try {
+    const searchUrl = `https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(searchTerm)}&newsCount=10&enableFuzzyQuery=false`;
+    const res = await fetch(searchUrl, {
+      headers: { "User-Agent": UA, "Accept": "application/json", "Accept-Language": "en-US,en;q=0.9" }
+    });
+    if (res.ok) {
+      const data = await res.json() as any;
+      const newsArr = data?.news || [];
+      if (newsArr.length > 0) {
+        const items = newsArr.slice(0, 10).map((n: any) => ({
+          title: n.title || "",
+          link: n.link || `https://finance.yahoo.com/news/${n.uuid}`,
+          pub: n.providerPublishTime ? new Date(n.providerPublishTime * 1000).toUTCString() : "",
+        })).filter((i: any) => i.title);
+        return new Response(JSON.stringify({ items, source: "yahoo-search" }), {
+          status: 200,
+          headers: { ...cors, "Content-Type": "application/json", "Cache-Control": "public, max-age=900" }
+        });
+      }
+    }
+  } catch { /* fall through */ }
+
+  // 2. Yahoo Finance RSS by symbol (good for US tickers)
+  if (symbol) {
+    try {
+      const yahooRss = `https://feeds.finance.yahoo.com/rss/2.0/headline?s=${encodeURIComponent(symbol)}&region=US&lang=en-US`;
+      const res = await fetch(yahooRss, { headers: { "User-Agent": UA, "Accept": "application/rss+xml,text/xml,*/*" } });
+      if (res.ok) {
+        const text = await res.text();
+        const items = parseRssItems(text);
+        if (items.length > 0) {
+          return new Response(JSON.stringify({ items, source: "yahoo-rss" }), {
+            status: 200,
+            headers: { ...cors, "Content-Type": "application/json", "Cache-Control": "public, max-age=900" }
+          });
+        }
+      }
+    } catch { /* fall through */ }
+  }
+
+  return new Response(JSON.stringify({ items: [], source: "none" }), {
+    status: 200, headers: { ...cors, "Content-Type": "application/json" }
+  });
+}
+
 async function serveSite(req: Request, env: Env): Promise<Response> {
   const url = new URL(req.url);
 
