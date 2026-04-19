@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>WhatsApp Link Generator - Create wa.me Links Free | UpTools</title>
@@ -56,6 +55,8 @@
   </style>
 </head>
 <body>
+  <a href="#main" class="sr-only">Skip to content</a>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
@@ -74,7 +75,7 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="main" role="main">
     <div style="display:flex;align-items:center;gap:10px;margin:12px 0">
       <div style="font-size:22px">💬</div>
       <h1 style="margin:0">WhatsApp Link Generator</h1>
@@ -200,13 +201,38 @@
       </div>
     </section>
 
+    <nav aria-label="Breadcrumb" style="margin-top:12px">
+      <ol class="breadcrumb" style="display:flex;gap:6px;list-style:none;padding:0;margin:0;font-size:.9rem;color:#9aa4b2">
+        <li><a href="/">Home</a></li>
+        <li aria-hidden="true">›</li>
+        <li aria-current="page">WhatsApp Link Generator</li>
+      </ol>
+    </nav>
+
+    <section class="card" style="margin-top:12px" aria-labelledby="faq-title">
+      <h2 id="faq-title" style="margin-top:0">Frequently Asked Questions</h2>
+      <details style="margin-bottom:10px">
+        <summary style="cursor:pointer;font-weight:600">What is a WhatsApp link?</summary>
+        <p class="muted" style="margin-top:6px">A WhatsApp link (wa.me link) lets anyone open a WhatsApp chat with a specific number directly, without saving the contact. You can also pre-fill a message.</p>
+      </details>
+      <details style="margin-bottom:10px">
+        <summary style="cursor:pointer;font-weight:600">How do I create a WhatsApp link?</summary>
+        <p class="muted" style="margin-top:6px">Enter the phone number with country code and an optional pre-filled message. The tool generates a wa.me link and QR code instantly.</p>
+      </details>
+      <details>
+        <summary style="cursor:pointer;font-weight:600">Does it work without saving the number?</summary>
+        <p class="muted" style="margin-top:6px">Yes, wa.me links open a WhatsApp chat directly without requiring the recipient to be in your contacts.</p>
+      </details>
+    </section>
+
     <footer class="note small site-footer" role="contentinfo" style="margin-top:12px">
       © <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a> . <a href="/about/">About</a>
     </footer>
   </main>
 
   <!-- Minimal QR code generator (pure JS, no library) -->
-  <script>
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
     document.getElementById('y').textContent = new Date().getFullYear();
     const $ = s => document.querySelector(s);
     const HISTORY_KEY = 'wa-link-history';

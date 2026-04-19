@@ -520,6 +520,8 @@
         <label class="chip"><input type="checkbox" value="canada"> Canada</label>
         <label class="chip"><input type="checkbox" value="networking"> Networking</label>
         <label class="chip"><input type="checkbox" value="social"> Social</label>
+        <label class="chip"><input type="checkbox" value="ai"> AI</label>
+        <label class="chip"><input type="checkbox" value="marketing"> Marketing</label>
         <label class="chip"><input type="checkbox" value="fun"> Fun</label>
       </div>
     </section>
@@ -758,6 +760,10 @@
         { slug: "ai-budget-planner", title: "AI Budget Planner", icon: "💰", desc: "Get a personalized budget plan and savings strategy with AI.", href: "/ai-budget-planner/", tags: ["ai","finance","budget"], cats: ["all","finance","ai"] },
         { slug: "ai-business-name-generator", title: "AI Business Name Generator", icon: "💡", desc: "Generate 20 unique brandable business names with taglines.", href: "/ai-business-name-generator/", tags: ["ai","text","branding"], cats: ["all","text","ai"] },
         { slug: "ai-product-description", title: "AI Product Description Generator", icon: "🛒", desc: "Write SEO-optimized product descriptions for Amazon, Shopify & more.", href: "/ai-product-description/", tags: ["ai","text","ecommerce"], cats: ["all","text","ai"] },
+        { slug: "timezone-converter", title: "Time Zone Converter", icon: "🌍", desc: "Convert time zones, compare world clocks and find meeting overlaps.", href: "/timezone-converter/", tags: ["productivity","time","international"], cats: ["all","networking","marketing"] },
+        { slug: "percentage-calculator", title: "Percentage Calculator", icon: "📈", desc: "Calculate discounts, markups, percent change and percentage of a number.", href: "/percentage-calculator/", tags: ["finance","math","shopping"], cats: ["all","finance","text"] },
+        { slug: "ai-linkedin-headline-generator", title: "AI LinkedIn Headline Generator", icon: "💼", desc: "Create keyword-rich LinkedIn headlines for jobs, freelancing and founders.", href: "/ai-linkedin-headline-generator/", tags: ["ai","social","marketing"], cats: ["all","ai","social","marketing"] },
+        { slug: "ai-travel-planner", title: "AI Travel Planner", icon: "🧳", desc: "Generate day-by-day trip itineraries by destination, budget and pace.", href: "/ai-travel-planner/", tags: ["ai","travel","international"], cats: ["all","ai","marketing"] },
         { slug: "contact", title: "Contact UpTools", icon: "✉️", desc: "Share feedback, bugs or feature requests.", href: "/contact/", tags: ["text"], cats: ["all","text"] },
         { slug: "privacy-policy", title: "Privacy Policy", icon: "📜", desc: "Understand how UpTools handles data.", href: "/privacy-policy/", tags: ["security"], cats: ["all","security"] },
       ];
@@ -936,10 +942,11 @@
       // ---- Featured mount ----
       (function mountFeatured() {
         const feat = [
+          { slug: "timezone-converter", title: "Time Zone Converter", icon: "🌍", desc: "Compare cities, convert times and find overlap windows fast.", href: "/timezone-converter/", tags: ["time","international"], cats: ["all","networking"] },
           { slug: "ai-blog-generator", title: "AI Blog Post Generator", icon: "📝", desc: "Full SEO blog posts in seconds — streams live.", href: "/ai-blog-generator/", tags: ["ai","text"], cats: ["all","text","ai"] },
+          { slug: "ai-linkedin-headline-generator", title: "AI LinkedIn Headline Generator", icon: "💼", desc: "Sharper profile headlines for recruiters, clients and founders.", href: "/ai-linkedin-headline-generator/", tags: ["ai","social"], cats: ["all","ai","social"] },
           { slug: "ai-youtube-script", title: "AI YouTube Script Writer", icon: "🎬", desc: "Hook, intro, sections & CTA — retention-optimized.", href: "/ai-youtube-script/", tags: ["ai","text"], cats: ["all","text","ai"] },
-          { slug: "ai-email-writer", title: "AI Email Writer", icon: "📧", desc: "Cold outreach, follow-ups, job applications & more.", href: "/ai-email-writer/", tags: ["ai","text"], cats: ["all","text","ai"] },
-          { slug: "ai-budget-planner", title: "AI Budget Planner", icon: "💰", desc: "Personalized savings plan from your income & expenses.", href: "/ai-budget-planner/", tags: ["ai","finance"], cats: ["all","finance","ai"] },
+          { slug: "ai-travel-planner", title: "AI Travel Planner", icon: "🧳", desc: "Practical itineraries for city breaks, holidays and work trips.", href: "/ai-travel-planner/", tags: ["ai","travel"], cats: ["all","ai"] },
         ];
         const g = $("#featuredGrid");
         const favs = new Set();

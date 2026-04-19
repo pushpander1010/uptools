@@ -42,6 +42,7 @@
   </style>
 </head>
 <body>
+  <a href="#main" class="sr-only">Skip to content</a>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -61,7 +62,7 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main id="main" class="wrap" role="main">
     <div class="tool-wrap">
       <section class="card hero" aria-labelledby="title">
         <div>
@@ -158,18 +159,38 @@
         </div>
       </section>
 
+      <nav aria-label="Breadcrumb" style="margin-top:12px">
+        <ol class="breadcrumb" style="display:flex;gap:6px;list-style:none;padding:0;margin:0;font-size:.9rem;color:#9aa4b2">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page">AI Cover Letter Generator</li>
+        </ol>
+      </nav>
+
+      <section class="card" style="margin-top:12px" aria-labelledby="faq-title">
+        <h2 id="faq-title" style="margin-top:0">Frequently Asked Questions</h2>
+        <details style="margin-bottom:10px">
+          <summary style="cursor:pointer;font-weight:600">Is this cover letter generator free?</summary>
+          <p class="note" style="margin-top:6px">Yes, completely free with no sign-up or download required. Powered by AI via a secure server-side proxy.</p>
+        </details>
+        <details style="margin-bottom:10px">
+          <summary style="cursor:pointer;font-weight:600">Can I download the cover letter?</summary>
+          <p class="note" style="margin-top:6px">Yes, you can copy it to clipboard or download as a .txt file instantly.</p>
+        </details>
+        <details>
+          <summary style="cursor:pointer;font-weight:600">What tones are available?</summary>
+          <p class="note" style="margin-top:6px">Professional, Enthusiastic, Formal, and Creative. Choose the tone that best matches the company culture.</p>
+        </details>
+      </section>
+
       <footer class="note small site-footer" role="contentinfo" style="margin-top:12px">
         © <span id="y"></span> UpTools . <a href="/">Home</a> . <a href="/about/">About</a> . <a href="/sitemap.xml">Sitemap</a>
       </footer>
     </div>
   </main>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-    let aborter = null;
-
-    function buildPrompt() {
-      const name = document.getElementById('yourName').value.trim() || 'the applicant';
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
       const jobTitle = document.getElementById('jobTitle').value.trim() || 'the position';
       const company = document.getElementById('company').value.trim() || 'your company';
       const experience = document.getElementById('experience').value;

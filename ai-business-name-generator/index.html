@@ -42,6 +42,7 @@
   </style>
 </head>
 <body>
+  <a href="#main" class="sr-only">Skip to content</a>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -61,7 +62,7 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main id="main" class="wrap" role="main">
     <div class="tool-wrap">
       <section class="card hero" aria-labelledby="title">
         <div>
@@ -163,16 +164,38 @@
         </div>
       </section>
 
+      <nav aria-label="Breadcrumb" style="margin-top:12px">
+        <ol class="breadcrumb" style="display:flex;gap:6px;list-style:none;padding:0;margin:0;font-size:.9rem;color:#9aa4b2">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page">AI Business Name Generator</li>
+        </ol>
+      </nav>
+
+      <section class="card" style="margin-top:12px" aria-labelledby="faq-title">
+        <h2 id="faq-title" style="margin-top:0">Frequently Asked Questions</h2>
+        <details style="margin-bottom:10px">
+          <summary style="cursor:pointer;font-weight:600">Is the business name generator free?</summary>
+          <p class="note" style="margin-top:6px">Yes, completely free with no sign-up required. Powered by AI via a secure server-side proxy.</p>
+        </details>
+        <details style="margin-bottom:10px">
+          <summary style="cursor:pointer;font-weight:600">How many name ideas does it generate?</summary>
+          <p class="note" style="margin-top:6px">It generates 20 unique business name ideas, each with a tagline and a brief explanation of why it works.</p>
+        </details>
+        <details>
+          <summary style="cursor:pointer;font-weight:600">Can I check if the domain is available?</summary>
+          <p class="note" style="margin-top:6px">Use our <a href="/domain-finder/">Domain Finder</a> tool to check domain availability for any name you like.</p>
+        </details>
+      </section>
+
       <footer class="note small site-footer" role="contentinfo" style="margin-top:12px">
         © <span id="y"></span> UpTools . <a href="/">Home</a> . <a href="/about/">About</a> . <a href="/sitemap.xml">Sitemap</a>
       </footer>
     </div>
   </main>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-    let aborter = null;
-    const activeStyles = new Set(['catchy & memorable']);
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
 
     document.querySelectorAll('.style-btn').forEach(btn => {
       btn.addEventListener('click', () => {

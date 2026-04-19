@@ -42,6 +42,7 @@
   </style>
 </head>
 <body>
+  <a href="#main" class="sr-only">Skip to content</a>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -61,7 +62,7 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main id="main" class="wrap" role="main">
     <div class="tool-wrap">
       <section class="card hero" aria-labelledby="title">
         <div>
@@ -145,18 +146,38 @@
         </div>
       </section>
 
+      <nav aria-label="Breadcrumb" style="margin-top:12px">
+        <ol class="breadcrumb" style="display:flex;gap:6px;list-style:none;padding:0;margin:0;font-size:.9rem;color:#9aa4b2">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page">AI Blog Post Generator</li>
+        </ol>
+      </nav>
+
+      <section class="card" style="margin-top:12px" aria-labelledby="faq-title">
+        <h2 id="faq-title" style="margin-top:0">Frequently Asked Questions</h2>
+        <details style="margin-bottom:10px">
+          <summary style="cursor:pointer;font-weight:600">Is the AI blog generator free?</summary>
+          <p class="note" style="margin-top:6px">Yes, completely free with no sign-up required. Powered by AI via a secure server-side proxy.</p>
+        </details>
+        <details style="margin-bottom:10px">
+          <summary style="cursor:pointer;font-weight:600">Can I use the generated blog posts?</summary>
+          <p class="note" style="margin-top:6px">Yes. The generated content is yours to use, edit, and publish. Always review and personalize before publishing.</p>
+        </details>
+        <details>
+          <summary style="cursor:pointer;font-weight:600">How long does it take to generate a blog post?</summary>
+          <p class="note" style="margin-top:6px">Most blog posts stream in 15–30 seconds depending on length. The text appears live as it's generated.</p>
+        </details>
+      </section>
+
       <footer class="note small site-footer" role="contentinfo" style="margin-top:12px">
         © <span id="y"></span> UpTools . <a href="/">Home</a> . <a href="/about/">About</a> . <a href="/sitemap.xml">Sitemap</a>
       </footer>
     </div>
   </main>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-    let aborter = null;
-
-    function buildPrompt() {
-      const topic = document.getElementById('topic').value.trim();
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
       const tone = document.getElementById('tone').value;
       const length = document.getElementById('length').value;
       const audience = document.getElementById('audience').value.trim();

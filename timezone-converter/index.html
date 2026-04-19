@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Time Zone Converter - World Clock & Meeting Planner | UpTools</title>
+  <meta name="description" content="Convert time zones instantly across New York, London, Dubai, Singapore, Sydney, Tokyo and more. Compare cities, plan meetings, and share world-clock schedules online for free." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="canonical" href="https://www.uptools.in/timezone-converter/" />
+  <meta property="og:title" content="Time Zone Converter - World Clock & Meeting Planner" />
+  <meta property="og:description" content="Compare city times, convert between time zones, and find overlapping meeting windows in seconds." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.uptools.in/timezone-converter/" />
+  <meta property="og:site_name" content="UpTools" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Time Zone Converter - World Clock & Meeting Planner" />
+  <meta name="twitter:description" content="Instant global timezone conversion with city presets and overlap finder." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/default.png" />
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Time Zone Converter","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://www.uptools.in/timezone-converter/","description":"Convert time zones, compare world clocks, and plan overlapping meeting windows online."}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},{"@type":"ListItem","position":2,"name":"Time Zone Converter","item":"https://www.uptools.in/timezone-converter/"}]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the timezone converter work?","acceptedAnswer":{"@type":"Answer","text":"Pick a base date and time, choose the source timezone, then compare converted times across major world cities instantly in your browser."}},{"@type":"Question","name":"Can I find a meeting time overlap?","acceptedAnswer":{"@type":"Answer","text":"Yes. The overlap finder compares working-hour windows across selected cities and highlights the best common meeting slots."}}]}
+  </script>
+  <style>
+    :root { --accent:#7aa2ff; --accent-2:#63f5d2; }
+    .planner-grid { display:grid; gap:16px; grid-template-columns: 1.15fr .85fr; }
+    .city-grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .meeting-grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+    .row-actions, .preset-row { display:flex; gap:8px; flex-wrap:wrap; }
+    .city-card { background:#0d1626; border:1px solid #212a3a; border-radius:12px; padding:14px; }
+    .city-time { font-size:1.35rem; font-weight:800; }
+    .slot-list { display:grid; gap:10px; }
+    .slot { border:1px solid #212a3a; background:#0d1626; border-radius:12px; padding:12px; }
+    .slot.good { border-color:#245f54; box-shadow:0 0 0 1px rgba(99,245,210,.15) inset; }
+    .label { display:block; margin-bottom:6px; color:#9aa4b2; font-size:.92rem; }
+    .input, .select { width:100%; background:#0e1628; border:1px solid #212a3a; border-radius:.75rem; color:#e6edf3; padding:.7rem .8rem; }
+    .small { font-size:.92rem; color:#9aa4b2; }
+    @media (max-width: 900px){ .planner-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <a href="#main" class="sr-only">Skip to content</a>
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/currency-converter/">Currency</a>
+        <a href="/unit-converter/">Unit Converter</a>
+        <a aria-current="page" href="/timezone-converter/">Time Zones</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap" role="main">
+    <nav class="note small" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Time Zone Converter</span></nav>
+    <section class="card hero" aria-labelledby="title">
+      <div>
+        <h1 id="title">Time Zone Converter</h1>
+        <p class="note">Convert dates and times across global cities, compare working hours, and find the best overlap for remote meetings.</p>
+        <div class="chips" style="margin-top:8px">
+          <span class="pill">World clock</span>
+          <span class="pill">Meeting overlap</span>
+          <span class="pill">Shareable schedule</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="planner-grid" style="margin-top:16px">
+      <section class="card neon" aria-labelledby="convert-heading">
+        <h2 id="convert-heading" style="margin-top:0">Convert a time</h2>
+        <div class="meeting-grid">
+          <div>
+            <label class="label" for="baseDate">Date</label>
+            <input id="baseDate" class="input" type="date" />
+          </div>
+          <div>
+            <label class="label" for="baseTime">Time</label>
+            <input id="baseTime" class="input" type="time" value="09:00" />
+          </div>
+          <div>
+            <label class="label" for="baseZone">Source time zone</label>
+            <select id="baseZone" class="select"></select>
+          </div>
+        </div>
+        <div class="preset-row" style="margin-top:12px" aria-label="City presets">
+          <button class="btn secondary" data-preset="Americas">Americas</button>
+          <button class="btn secondary" data-preset="Europe">Europe</button>
+          <button class="btn secondary" data-preset="Asia">Asia</button>
+          <button class="btn secondary" data-preset="Remote Team">Remote Team</button>
+        </div>
+        <div class="row-actions" style="margin-top:12px">
+          <button id="useNow" class="btn">Use current time</button>
+          <button id="shareBtn" class="btn secondary">Copy share link</button>
+        </div>
+        <p id="shareStatus" class="small" aria-live="polite" style="margin-top:8px"></p>
+      </section>
+
+      <aside class="card neon" aria-labelledby="overlap-heading">
+        <h2 id="overlap-heading" style="margin-top:0">Meeting overlap finder</h2>
+        <div class="meeting-grid">
+          <div>
+            <label class="label" for="workStart">Workday starts</label>
+            <input id="workStart" class="input" type="time" value="09:00" />
+          </div>
+          <div>
+            <label class="label" for="workEnd">Workday ends</label>
+            <input id="workEnd" class="input" type="time" value="17:00" />
+          </div>
+        </div>
+        <div id="slotList" class="slot-list" style="margin-top:12px"></div>
+      </aside>
+    </section>
+
+    <section class="card" style="margin-top:16px" aria-labelledby="cities-heading">
+      <h2 id="cities-heading" style="margin-top:0">Selected city times</h2>
+      <div id="cityGrid" class="city-grid"></div>
+    </section>
+
+    <section class="card" style="margin-top:16px" aria-labelledby="faq-heading">
+      <h2 id="faq-heading" style="margin-top:0">How to use this tool</h2>
+      <ol class="note">
+        <li>Set your source date, time, and timezone.</li>
+        <li>Use a preset or compare the default major business hubs.</li>
+        <li>Review converted times and the overlap suggestions for remote meetings.</li>
+      </ol>
+      <p class="note">Related tools: <a href="/currency-converter/">Currency Converter</a>, <a href="/unit-converter/">Unit Converter</a>, <a href="/ai-travel-planner/">AI Travel Planner</a>.</p>
+    </section>
+
+    <footer class="note small site-footer" role="contentinfo">&copy; <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a> . <a href="/privacy-policy/">Privacy</a></footer>
+  </main>
+  <script type="module">
+    import { $, persist, read } from "/scripts/utils.js";
+
+    const ZONES = [
+      { city: "New York", zone: "America/New_York" },
+      { city: "Los Angeles", zone: "America/Los_Angeles" },
+      { city: "Toronto", zone: "America/Toronto" },
+      { city: "London", zone: "Europe/London" },
+      { city: "Berlin", zone: "Europe/Berlin" },
+      { city: "Dubai", zone: "Asia/Dubai" },
+      { city: "Mumbai", zone: "Asia/Kolkata" },
+      { city: "Singapore", zone: "Asia/Singapore" },
+      { city: "Tokyo", zone: "Asia/Tokyo" },
+      { city: "Sydney", zone: "Australia/Sydney" }
+    ];
+    const PRESETS = {
+      "Americas": ["America/New_York", "America/Los_Angeles", "America/Toronto"],
+      "Europe": ["Europe/London", "Europe/Berlin", "Asia/Dubai"],
+      "Asia": ["Asia/Kolkata", "Asia/Singapore", "Asia/Tokyo"],
+      "Remote Team": ["America/New_York", "Europe/London", "Asia/Kolkata", "Asia/Singapore", "Australia/Sydney"]
+    };
+    const STATE_KEY = "uptools-timezone-converter";
+
+    const els = {
+      baseDate: $("#baseDate"),
+      baseTime: $("#baseTime"),
+      baseZone: $("#baseZone"),
+      workStart: $("#workStart"),
+      workEnd: $("#workEnd"),
+      cityGrid: $("#cityGrid"),
+      slotList: $("#slotList"),
+      shareStatus: $("#shareStatus")
+    };
+
+    function populateZones() {
+      const current = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+      const zones = Array.from(new Set([current, ...ZONES.map((item) => item.zone)])).sort();
+      els.baseZone.innerHTML = zones.map((zone) => `<option value="${zone}">${zone.replaceAll("_", " ")}</option>`).join("");
+      els.baseZone.value = current;
+    }
+
+    function localParts(date, zone) {
+      const parts = new Intl.DateTimeFormat("en-GB", {
+        timeZone: zone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        weekday: "short"
+      }).formatToParts(date);
+      const get = (type) => parts.find((part) => part.type === type)?.value || "";
+      return {
+        year: Number(get("year")),
+        month: Number(get("month")),
+        day: Number(get("day")),
+        hour: Number(get("hour")),
+        minute: Number(get("minute"))
+      };
+    }
+
+    function zoneOffsetMinutes(date, zone) {
+      const p = localParts(date, zone);
+      const utcGuess = Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute);
+      return Math.round((utcGuess - date.getTime()) / 60000);
+    }
+
+    function zonedDateTimeToUtc(dateStr, timeStr, zone) {
+      const [year, month, day] = dateStr.split("-").map(Number);
+      const [hour, minute] = timeStr.split(":").map(Number);
+      let utcMs = Date.UTC(year, month - 1, day, hour, minute);
+      for (let i = 0; i < 3; i += 1) {
+        const offset = zoneOffsetMinutes(new Date(utcMs), zone);
+        const next = Date.UTC(year, month - 1, day, hour, minute) - offset * 60000;
+        if (Math.abs(next - utcMs) < 60000) {
+          utcMs = next;
+          break;
+        }
+        utcMs = next;
+      }
+      return new Date(utcMs);
+    }
+
+    function fmtTime(date, zone) {
+      return new Intl.DateTimeFormat("en-US", { timeZone: zone, hour: "numeric", minute: "2-digit", hour12: true }).format(date);
+    }
+
+    function fmtDate(date, zone) {
+      return new Intl.DateTimeFormat("en-US", { timeZone: zone, weekday: "short", month: "short", day: "numeric" }).format(date);
+    }
+
+    function getSelectedZones() {
+      const saved = read(STATE_KEY, null);
+      return saved?.selected?.length ? saved.selected : PRESETS["Remote Team"];
+    }
+
+    function saveState(selected) {
+      persist(STATE_KEY, {
+        baseZone: els.baseZone.value,
+        baseDate: els.baseDate.value,
+        baseTime: els.baseTime.value,
+        workStart: els.workStart.value,
+        workEnd: els.workEnd.value,
+        selected
+      });
+    }
+
+    function renderCities(selected) {
+      const source = zonedDateTimeToUtc(els.baseDate.value, els.baseTime.value, els.baseZone.value);
+      els.cityGrid.innerHTML = selected.map((zone) => {
+        const city = ZONES.find((item) => item.zone === zone)?.city || zone.split("/").pop().replaceAll("_", " ");
+        return `<article class="city-card"><div class="small">${zone}</div><div style="font-weight:700;margin-top:6px">${city}</div><div class="city-time">${fmtTime(source, zone)}</div><div class="small">${fmtDate(source, zone)}</div></article>`;
+      }).join("");
+    }
+
+    function renderOverlap(selected) {
+      const sourceDate = zonedDateTimeToUtc(els.baseDate.value, els.baseTime.value, els.baseZone.value);
+      const startMin = Number(els.workStart.value.slice(0, 2)) * 60 + Number(els.workStart.value.slice(3));
+      const endMin = Number(els.workEnd.value.slice(0, 2)) * 60 + Number(els.workEnd.value.slice(3));
+      const slots = [];
+      for (let hour = 0; hour < 24; hour += 1) {
+        const probe = new Date(sourceDate.getTime() + hour * 3600000);
+        const allInside = selected.every((zone) => {
+          const local = localParts(probe, zone);
+          const current = local.hour * 60 + local.minute;
+          return current >= startMin && current <= endMin;
+        });
+        if (allInside) slots.push(probe);
+      }
+      if (!slots.length) {
+        els.slotList.innerHTML = `<div class="slot">No perfect overlap for the selected workday. Try widening the work window or using fewer cities.</div>`;
+        return;
+      }
+      els.slotList.innerHTML = slots.slice(0, 4).map((slot, index) => `<div class="slot ${index === 0 ? "good" : ""}"><div style="font-weight:700">${index === 0 ? "Best overlap" : "Option " + (index + 1)}</div><div class="small">${selected.map((zone) => {
+        const city = ZONES.find((item) => item.zone === zone)?.city || zone.split("/").pop().replaceAll("_", " ");
+        return `${city}: ${fmtTime(slot, zone)}`;
+      }).join(" | ")}</div></div>`).join("");
+    }
+
+    function applyPreset(name) {
+      const selected = PRESETS[name] || PRESETS["Remote Team"];
+      saveState(selected);
+      renderCities(selected);
+      renderOverlap(selected);
+    }
+
+    function hydrate() {
+      populateZones();
+      const stored = read(STATE_KEY, null);
+      const now = new Date();
+      const params = new URLSearchParams(location.search);
+      els.baseDate.value = params.get("date") || stored?.baseDate || now.toISOString().slice(0, 10);
+      els.baseTime.value = params.get("time") || stored?.baseTime || `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+      els.baseZone.value = params.get("zone") || stored?.baseZone || els.baseZone.value;
+      els.workStart.value = stored?.workStart || "09:00";
+      els.workEnd.value = stored?.workEnd || "17:00";
+      const selected = params.getAll("compare");
+      const zones = selected.length ? selected : getSelectedZones();
+      saveState(zones);
+      renderCities(zones);
+      renderOverlap(zones);
+    }
+
+    function currentSelected() {
+      return read(STATE_KEY, null)?.selected || PRESETS["Remote Team"];
+    }
+
+    function rerender() {
+      const selected = currentSelected();
+      saveState(selected);
+      renderCities(selected);
+      renderOverlap(selected);
+    }
+
+    document.querySelectorAll("[data-preset]").forEach((button) => {
+      button.addEventListener("click", () => applyPreset(button.dataset.preset));
+    });
+    $("#useNow").addEventListener("click", () => {
+      const now = new Date();
+      els.baseDate.value = now.toISOString().slice(0, 10);
+      els.baseTime.value = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+      rerender();
+    });
+    $("#shareBtn").addEventListener("click", async () => {
+      const url = new URL(location.href);
+      url.searchParams.set("date", els.baseDate.value);
+      url.searchParams.set("time", els.baseTime.value);
+      url.searchParams.set("zone", els.baseZone.value);
+      url.searchParams.delete("compare");
+      currentSelected().forEach((zone) => url.searchParams.append("compare", zone));
+      try {
+        await navigator.clipboard.writeText(url.toString());
+        els.shareStatus.textContent = "Share link copied.";
+      } catch {
+        els.shareStatus.textContent = "Unable to copy the share link.";
+      }
+    });
+    [els.baseDate, els.baseTime, els.baseZone, els.workStart, els.workEnd].forEach((input) => input.addEventListener("input", rerender));
+    $("#y").textContent = new Date().getFullYear();
+    hydrate();
+  </script>
+  <script src="/scripts/utils.js" type="module"></script>
+</body>
+</html>

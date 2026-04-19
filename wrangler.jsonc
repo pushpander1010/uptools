@@ -56,6 +56,10 @@
       "games/memory-match",
       "games/love-test",
       "ai-plagiarism",
+      "percentage-calculator",
+      "timezone-converter",
+      "ai-linkedin-headline-generator",
+      "ai-travel-planner",
       "resume-analyzer",
       "scripts",
       "worker"
