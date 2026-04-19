@@ -471,6 +471,9 @@
       catch { /* ignore quota errors */ }
     };
 
+    const saveCfg = $('#saveCfg');
+    const clearCfg = $('#clearCfg');
+
     saveCfg?.addEventListener('click', () => {
       saveJson(STORAGE_DEFAULTS, serializeSettings());
       toast('Defaults saved for this browser.');
