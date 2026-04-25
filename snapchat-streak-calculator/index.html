@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snapchat Streak Calculator - Track Your Snap Streaks | UpTools</title>
+  <meta name="description" content="Calculate and track your Snapchat streaks. See how long you've maintained streaks and get reminders. Never lose a streak again!">
+  <link rel="canonical" href="https://www.uptools.in/snapchat-streak-calculator/">
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  
+  <meta property="og:title" content="Snapchat Streak Calculator - Track Your Snap Streaks">
+  <meta property="og:description" content="Calculate and track your Snapchat streaks. Never lose a streak again!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/snapchat-streak-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/snapchat-streak-calculator.png">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Snapchat Streak Calculator","description":"Calculate and track your Snapchat streaks.","url":"https://www.uptools.in/snapchat-streak-calculator/","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+  
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},{"@type":"ListItem","position":2,"name":"Snapchat Streak Calculator","item":"https://www.uptools.in/snapchat-streak-calculator/"}]}
+  </script>
+  
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do Snapchat streaks work?","acceptedAnswer":{"@type":"Answer","text":"A streak starts when you and a friend send snaps to each other for 3 consecutive days. The 🔥 emoji and number appear next to their name."}},{"@type":"Question","name":"What happens if I lose a Snapchat streak?","acceptedAnswer":{"@type":"Answer","text":"If you don't send a snap within 24 hours, the streak ends. You can contact Snapchat support to restore streaks lost due to technical issues."}},{"@type":"Question","name":"What's the longest Snapchat streak ever?","acceptedAnswer":{"@type":"Answer","text":"The longest verified Snapchat streak is over 2900+ days (8+ years). Maintaining long streaks requires daily commitment from both users."}}]}
+  </script>
+  
+  <style>
+    .calculator-box {
+      background: #121826;
+      border: 1px solid #212a3a;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 0.75rem;
+      background: #0e1628;
+      border: 1px solid #212a3a;
+      border-radius: 0.5rem;
+      color: #e6edf3;
+      font-size: 1rem;
+    }
+    .result-box {
+      background: linear-gradient(135deg, #fffc00, #ffd700);
+      color: #000;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    .streak-number {
+      font-size: 4rem;
+      font-weight: 900;
+      margin: 0;
+    }
+    .streak-label {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+    .milestone-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .milestone-card {
+      background: #121826;
+      border: 1px solid #212a3a;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      text-align: center;
+    }
+    .milestone-card.achieved {
+      border-color: #fffc00;
+      background: #1a1a0f;
+    }
+    .milestone-emoji {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .tip-box {
+      background: #0f1a2a;
+      border-left: 4px solid #fffc00;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/">Tools</a>
+        <a href="/snapchat-username-generator/">Snapchat</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <article class="card">
+      <h1>🔥 Snapchat Streak Calculator</h1>
+      <p class="note">Calculate your Snapchat streak duration and track milestones. Never lose a streak again!</p>
+      
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      
+      <div class="calculator-box">
+        <div class="input-group">
+          <label for="startDate">Streak Start Date</label>
+          <input type="date" id="startDate" />
+        </div>
+        
+        <div class="input-group">
+          <label for="friendName">Friend's Name (Optional)</label>
+          <input type="text" id="friendName" placeholder="Enter friend's name" />
+        </div>
+        
+        <button class="generate-btn" style="width:100%;padding:1rem;background:linear-gradient(135deg,#fffc00,#ffd700);color:#000;border:none;border-radius:0.75rem;font-weight:700;cursor:pointer" onclick="calculateStreak()">🔥 Calculate Streak</button>
+        
+        <div id="result" style="display:none" class="result-box">
+          <div class="streak-number" id="streakDays">0</div>
+          <div class="streak-label">🔥 Day Streak</div>
+          <p id="friendText" style="margin-top:1rem;font-weight:600"></p>
+        </div>
+      </div>
+      
+      <div class="milestone-grid">
+        <div class="milestone-card" data-milestone="7">
+          <div class="milestone-emoji">🎯</div>
+          <div><strong>7 Days</strong></div>
+          <div style="font-size:0.85rem;color:#9aa4b2">First Week</div>
+        </div>
+        <div class="milestone-card" data-milestone="30">
+          <div class="milestone-emoji">🏆</div>
+          <div><strong>30 Days</strong></div>
+          <div style="font-size:0.85rem;color:#9aa4b2">One Month</div>
+        </div>
+        <div class="milestone-card" data-milestone="100">
+          <div class="milestone-emoji">💯</div>
+          <div><strong>100 Days</strong></div>
+          <div style="font-size:0.85rem;color:#9aa4b2">Century</div>
+        </div>
+        <div class="milestone-card" data-milestone="365">
+          <div class="milestone-emoji">🎉</div>
+          <div><strong>365 Days</strong></div>
+          <div style="font-size:0.85rem;color:#9aa4b2">One Year</div>
+        </div>
+        <div class="milestone-card" data-milestone="500">
+          <div class="milestone-emoji">🚀</div>
+          <div><strong>500 Days</strong></div>
+          <div style="font-size:0.85rem;color:#9aa4b2">Epic</div>
+        </div>
+        <div class="milestone-card" data-milestone="1000">
+          <div class="milestone-emoji">👑</div>
+          <div><strong>1000 Days</strong></div>
+          <div style="font-size:0.85rem;color:#9aa4b2">Legendary</div>
+        </div>
+      </div>
+      
+      <ins class="adsbygoogle" style="display:block;margin-top:2rem" data-ad-client="ca-pub-6216304334889617" data-ad-slot="1234567891" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      
+      <div class="tip-box">
+        <h3>💡 Tips to Maintain Streaks</h3>
+        <ul>
+          <li><strong>Set reminders:</strong> Daily alarm to send snaps</li>
+          <li><strong>Send early:</strong> Don't wait until midnight</li>
+          <li><strong>Both must send:</strong> Streaks require snaps from both users</li>
+          <li><strong>Photos/videos only:</strong> Chat messages don't count</li>
+          <li><strong>⏳ Hourglass warning:</strong> Means streak expires in 4 hours</li>
+        </ul>
+      </div>
+      
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="1234567892" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      
+      <section aria-labelledby="faq">
+        <h2 id="faq">❓ FAQ</h2>
+        <details class="faq-item">
+          <summary>How do Snapchat streaks work?</summary>
+          <p>A streak starts when you and a friend send snaps to each other for 3 consecutive days. The 🔥 emoji and number appear next to their name.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if I lose a Snapchat streak?</summary>
+          <p>If you don't send a snap within 24 hours, the streak ends. You can contact Snapchat support to restore streaks lost due to technical issues.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the longest Snapchat streak ever?</summary>
+          <p>The longest verified Snapchat streak is over 2900+ days (8+ years). Maintaining long streaks requires daily commitment from both users.</p>
+        </details>
+      </section>
+      
+      <nav aria-label="Breadcrumb">
+        <ol style="display:flex;gap:0.5rem;list-style:none;padding:0;font-size:0.9rem;color:#9aa4b2">
+          <li><a href="/">Home</a></li>
+          <li>›</li>
+          <li>Snapchat Streak Calculator</li>
+        </ol>
+      </nav>
+    </article>
+  </main>
+  
+  <footer class="note small site-footer" role="contentinfo">
+    © <span id="y"></span> UpTools · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy/">Privacy</a>
+  </footer>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    
+    // Set today as default
+    document.getElementById('startDate').valueAsDate = new Date();
+    
+    window.calculateStreak = () => {
+      const startDate = new Date(document.getElementById('startDate').value);
+      const today = new Date();
+      const friendName = document.getElementById('friendName').value.trim();
+      
+      if (!startDate || isNaN(startDate)) {
+        alert('Please select a valid start date');
+        return;
+      }
+      
+      const diffTime = Math.abs(today - startDate);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      
+      document.getElementById('streakDays').textContent = diffDays;
+      document.getElementById('friendText').textContent = friendName 
+        ? `with ${friendName}` 
+        : '';
+      document.getElementById('result').style.display = 'block';
+      
+      // Update milestones
+      document.querySelectorAll('.milestone-card').forEach(card => {
+        const milestone = parseInt(card.dataset.milestone);
+        if (diffDays >= milestone) {
+          card.classList.add('achieved');
+        } else {
+          card.classList.remove('achieved');
+        }
+      });
+      
+      // Scroll to result
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+  </script>
+</body>
+</html>
