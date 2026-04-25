@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refinance Calculator - Should I Refinance My Mortgage? | UpTools</title>
+  <meta name="description" content="Free mortgage refinance calculator. Calculate if refinancing saves you money. Compare monthly payments, total interest, and break-even point.">
+  <link rel="canonical" href="https://www.uptools.in/refinance-calculator/">
+  
+  <meta property="og:title" content="Refinance Calculator - Should I Refinance? | UpTools">
+  <meta property="og:description" content="Calculate if refinancing your mortgage saves money. See monthly savings and break-even point.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/refinance-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/refinance-calculator.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Refinance Calculator">
+  <meta name="twitter:description" content="Calculate if refinancing your mortgage is worth it.">
+  
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Refinance Calculator",
+    "applicationCategory": "FinanceApplication",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "operatingSystem": "Any",
+    "description": "Calculate if refinancing your mortgage saves money with break-even analysis."
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.uptools.in/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Refinance Calculator",
+      "item": "https://www.uptools.in/refinance-calculator/"
+    }]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "When should I refinance my mortgage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Refinance when you can lower your rate by at least 0.5-1%, plan to stay in your home past the break-even point, or want to switch from ARM to fixed-rate. Also consider refinancing to eliminate PMI or tap home equity."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is the break-even point for refinancing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The break-even point is when your monthly savings equal your refinancing costs. For example, if refinancing costs $3,000 and saves $150/month, you break even in 20 months. Stay in your home longer than this to benefit."
+      }
+    },{
+      "@type": "Question",
+      "name": "How much does it cost to refinance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Refinancing typically costs 2-5% of the loan amount, including appraisal ($300-500), origination fees (0.5-1%), title insurance, and other closing costs. On a $300K loan, expect $6,000-15,000 in costs."
+      }
+    }]
+  }
+  </script>
+  
+  <style>
+    .calc-grid { display: grid; gap: 1.5rem; max-width: 42rem; margin: 0 auto; }
+    .input-group { display: flex; flex-direction: column; gap: .5rem; }
+    .input-group label { font-weight: 500; color: var(--text); }
+    .input-group input { 
+      padding: .75rem; 
+      border: 1px solid rgba(122,162,255,.3); 
+      border-radius: var(--radius); 
+      background: var(--surface); 
+      color: var(--text); 
+      font-size: 1rem;
+    }
+    .btn-calc {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--brand), #5a82df);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .result-card {
+      background: linear-gradient(135deg, rgba(122,162,255,.1), rgba(90,130,223,.1));
+      border: 1px solid rgba(122,162,255,.3);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .result-main { font-size: 3rem; font-weight: 700; color: var(--brand); margin: 1rem 0; }
+    .breakdown { display: grid; gap: 1rem; margin-top: 1.5rem; }
+    .breakdown-item { display: flex; justify-content: space-between; padding: .75rem; background: rgba(122,162,255,.05); border-radius: .5rem; }
+    .recommendation {
+      background: rgba(122,162,255,.05);
+      border-left: 4px solid var(--brand);
+      padding: 1rem;
+      border-radius: .5rem;
+      margin: 1rem 0;
+    }
+    .section-header {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem;
+      color: var(--brand);
+    }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="wrap">
+      <a href="/" class="logo">UpTools</a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <h1>Refinance Calculator</h1>
+    <p class="lead">Calculate if refinancing your mortgage saves you money. See monthly savings and break-even point.</p>
+    
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <div class="calc-grid">
+      <div class="section-header">Current Mortgage</div>
+      
+      <div class="input-group">
+        <label for="current-balance">Current Loan Balance ($)</label>
+        <input type="number" id="current-balance" value="300000" min="0" step="1000">
+      </div>
+      
+      <div class="input-group">
+        <label for="current-rate">Current Interest Rate (%)</label>
+        <input type="number" id="current-rate" value="6.5" min="0" max="20" step="0.1">
+      </div>
+      
+      <div class="input-group">
+        <label for="years-remaining">Years Remaining on Loan</label>
+        <input type="number" id="years-remaining" value="25" min="1" max="30">
+      </div>
+      
+      <div class="section-header">New Mortgage</div>
+      
+      <div class="input-group">
+        <label for="new-rate">New Interest Rate (%)</label>
+        <input type="number" id="new-rate" value="5.5" min="0" max="20" step="0.1">
+      </div>
+      
+      <div class="input-group">
+        <label for="new-term">New Loan Term (Years)</label>
+        <input type="number" id="new-term" value="30" min="10" max="30" step="5">
+      </div>
+      
+      <div class="input-group">
+        <label for="closing-costs">Refinancing Closing Costs ($)</label>
+        <input type="number" id="closing-costs" value="5000" min="0" step="500">
+        <small style="opacity:.7;">Typically 2-5% of loan amount</small>
+      </div>
+      
+      <button class="btn-calc" onclick="calculate()">Calculate Refinance Savings</button>
+      
+      <div id="result" class="result-card" style="display:none;">
+        <h2>Refinance Analysis</h2>
+        <div class="result-main" id="monthly-savings">$0</div>
+        <p style="opacity:.8;">Monthly payment savings</p>
+        
+        <div class="breakdown">
+          <div class="breakdown-item">
+            <span class="breakdown-label">Current Monthly Payment</span>
+            <span class="breakdown-value" id="current-payment">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">New Monthly Payment</span>
+            <span class="breakdown-value" id="new-payment">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Break-Even Point</span>
+            <span class="breakdown-value" id="break-even">0 months</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Total Interest Saved</span>
+            <span class="breakdown-value" id="interest-saved">$0</span>
+          </div>
+        </div>
+        
+        <div class="recommendation">
+          <strong>💡 Recommendation:</strong>
+          <p id="recommendation"></p>
+        </div>
+      </div>
+    </div>
+    
+    <ins class="adsbygoogle"
+         style="display:block; margin: 3rem 0;"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567891"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <section aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      
+      <details>
+        <summary>When should I refinance my mortgage?</summary>
+        <p>Refinance when you can lower your rate by at least 0.5-1%, plan to stay in your home past the break-even point, or want to switch from ARM to fixed-rate. Also consider refinancing to eliminate PMI or tap home equity.</p>
+      </details>
+      
+      <details>
+        <summary>What is the break-even point for refinancing?</summary>
+        <p>The break-even point is when your monthly savings equal your refinancing costs. For example, if refinancing costs $3,000 and saves $150/month, you break even in 20 months. Stay in your home longer than this to benefit.</p>
+      </details>
+      
+      <details>
+        <summary>How much does it cost to refinance?</summary>
+        <p>Refinancing typically costs 2-5% of the loan amount, including appraisal ($300-500), origination fees (0.5-1%), title insurance, and other closing costs. On a $300K loan, expect $6,000-15,000 in costs.</p>
+      </details>
+    </section>
+    
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Home</a> / <span>Refinance Calculator</span>
+    </nav>
+  </main>
+  
+  <footer class="note small site-footer" role="contentinfo">
+    <p>&copy; 2025 UpTools. Free online tools for everyone.</p>
+  </footer>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    function calculate() {
+      const currentBalance = parseFloat(document.getElementById('current-balance').value) || 0;
+      const currentRate = parseFloat(document.getElementById('current-rate').value) / 100 || 0;
+      const yearsRemaining = parseInt(document.getElementById('years-remaining').value) || 25;
+      const newRate = parseFloat(document.getElementById('new-rate').value) / 100 || 0;
+      const newTerm = parseInt(document.getElementById('new-term').value) || 30;
+      const closingCosts = parseFloat(document.getElementById('closing-costs').value) || 0;
+      
+      // Calculate current monthly payment
+      const currentMonthlyRate = currentRate / 12;
+      const currentPayments = yearsRemaining * 12;
+      const currentPayment = currentBalance * (currentMonthlyRate * Math.pow(1 + currentMonthlyRate, currentPayments)) / 
+                             (Math.pow(1 + currentMonthlyRate, currentPayments) - 1);
+      
+      // Calculate new monthly payment
+      const newMonthlyRate = newRate / 12;
+      const newPayments = newTerm * 12;
+      const newPayment = currentBalance * (newMonthlyRate * Math.pow(1 + newMonthlyRate, newPayments)) / 
+                         (Math.pow(1 + newMonthlyRate, newPayments) - 1);
+      
+      // Calculate savings
+      const monthlySavings = currentPayment - newPayment;
+      const breakEvenMonths = monthlySavings > 0 ? Math.ceil(closingCosts / monthlySavings) : 999;
+      
+      // Calculate total interest
+      const currentTotalInterest = (currentPayment * currentPayments) - currentBalance;
+      const newTotalInterest = (newPayment * newPayments) - currentBalance;
+      const interestSaved = currentTotalInterest - newTotalInterest - closingCosts;
+      
+      // Display results
+      document.getElementById('monthly-savings').textContent = monthlySavings > 0 ? 
+        '$' + monthlySavings.toLocaleString('en-US', {maximumFractionDigits: 0}) + ' saved' :
+        '$' + Math.abs(monthlySavings).toLocaleString('en-US', {maximumFractionDigits: 0}) + ' more';
+      
+      document.getElementById('current-payment').textContent = '$' + currentPayment.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('new-payment').textContent = '$' + newPayment.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('break-even').textContent = breakEvenMonths < 999 ? 
+        breakEvenMonths + ' months (' + Math.floor(breakEvenMonths/12) + ' years ' + (breakEvenMonths%12) + ' months)' :
+        'Never';
+      document.getElementById('interest-saved').textContent = interestSaved > 0 ?
+        '$' + interestSaved.toLocaleString('en-US', {maximumFractionDigits: 0}) :
+        '-$' + Math.abs(interestSaved).toLocaleString('en-US', {maximumFractionDigits: 0});
+      
+      // Recommendation
+      let recommendation = '';
+      if (monthlySavings <= 0) {
+        recommendation = 'Refinancing is not recommended. Your monthly payment would increase. Consider waiting for lower rates.';
+      } else if (breakEvenMonths <= 24) {
+        recommendation = `Refinancing looks good! You'll break even in ${breakEvenMonths} months. If you plan to stay in your home for at least ${Math.ceil(breakEvenMonths/12)} years, refinancing will save you money.`;
+      } else if (breakEvenMonths <= 60) {
+        recommendation = `Refinancing could work if you plan to stay long-term. You'll break even in ${Math.floor(breakEvenMonths/12)} years. Consider your plans before refinancing.`;
+      } else {
+        recommendation = `The break-even period is very long (${Math.floor(breakEvenMonths/12)} years). Unless you're certain you'll stay that long, refinancing may not be worth it.`;
+      }
+      
+      document.getElementById('recommendation').textContent = recommendation;
+      
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UK Stamp Duty Calculator - Calculate SDLT on Property Purchase | UpTools</title>
+  <meta name="description" content="Free UK Stamp Duty Land Tax (SDLT) calculator. Calculate stamp duty on residential property purchases with first-time buyer relief.">
+  <link rel="canonical" href="https://www.uptools.in/stamp-duty-calculator/">
+  
+  <meta property="og:title" content="UK Stamp Duty Calculator - SDLT | UpTools">
+  <meta property="og:description" content="Calculate UK Stamp Duty Land Tax on property purchases. Includes first-time buyer relief.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/stamp-duty-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/stamp-duty-calculator.png">
+  
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <script type="application/ld+json">
+  {"@context": "https://schema.org","@type": "SoftwareApplication","name": "UK Stamp Duty Calculator","applicationCategory": "FinanceApplication","offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},"operatingSystem": "Any","description": "Calculate UK Stamp Duty Land Tax (SDLT) on residential property purchases."}
+  </script>
+  
+  <script type="application/ld+json">
+  {"@context": "https://schema.org","@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://www.uptools.in/"},{"@type": "ListItem","position": 2,"name": "Stamp Duty Calculator","item": "https://www.uptools.in/stamp-duty-calculator/"}]}
+  </script>
+  
+  <script type="application/ld+json">
+  {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "What is UK Stamp Duty?","acceptedAnswer": {"@type": "Answer","text": "Stamp Duty Land Tax (SDLT) is a tax paid when buying property in England and Northern Ireland. Rates are tiered: 0% up to £250K, 5% on £250K-£925K, 10% on £925K-£1.5M, 12% above £1.5M."}},{"@type": "Question","name": "Do first-time buyers pay stamp duty?","acceptedAnswer": {"@type": "Answer","text": "First-time buyers get relief: no stamp duty on properties up to £425K, and 5% on the portion from £425K-£625K. Properties over £625K pay standard rates."}},{"@type": "Question","name": "When do I pay stamp duty?","acceptedAnswer": {"@type": "Answer","text": "Stamp duty must be paid within 14 days of completion. Your solicitor typically handles this payment as part of the conveyancing process."}}]}
+  </script>
+  
+  <style>
+    .calc-grid { display: grid; gap: 1.5rem; max-width: 42rem; margin: 0 auto; }
+    .input-group { display: flex; flex-direction: column; gap: .5rem; }
+    .input-group label { font-weight: 500; color: var(--text); }
+    .input-group input, .input-group select { 
+      padding: .75rem; 
+      border: 1px solid rgba(122,162,255,.3); 
+      border-radius: var(--radius); 
+      background: var(--surface); 
+      color: var(--text); 
+      font-size: 1rem;
+    }
+    .btn-calc {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--brand), #5a82df);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .result-card {
+      background: linear-gradient(135deg, rgba(122,162,255,.1), rgba(90,130,223,.1));
+      border: 1px solid rgba(122,162,255,.3);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .result-main { font-size: 3rem; font-weight: 700; color: var(--brand); margin: 1rem 0; }
+    .breakdown { display: grid; gap: 1rem; margin-top: 1.5rem; }
+    .breakdown-item { display: flex; justify-content: space-between; padding: .75rem; background: rgba(122,162,255,.05); border-radius: .5rem; }
+    .checkbox-group { display: flex; align-items: center; gap: .5rem; }
+    .checkbox-group input[type="checkbox"] { width: auto; }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="wrap">
+      <a href="/" class="logo">UpTools</a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <h1>UK Stamp Duty Calculator</h1>
+    <p class="lead">Calculate Stamp Duty Land Tax (SDLT) on residential property purchases in England and Northern Ireland.</p>
+    
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <div class="calc-grid">
+      <div class="input-group">
+        <label for="property-price">Property Purchase Price (£)</label>
+        <input type="number" id="property-price" value="350000" min="0" step="5000">
+      </div>
+      
+      <div class="checkbox-group">
+        <input type="checkbox" id="first-time-buyer">
+        <label for="first-time-buyer">I am a first-time buyer</label>
+      </div>
+      
+      <div class="checkbox-group">
+        <input type="checkbox" id="additional-property">
+        <label for="additional-property">This is an additional property (not my main home)</label>
+      </div>
+      
+      <button class="btn-calc" onclick="calculate()">Calculate Stamp Duty</button>
+      
+      <div id="result" class="result-card" style="display:none;">
+        <h2>Stamp Duty Payable</h2>
+        <div class="result-main" id="stamp-duty">£0</div>
+        <p style="opacity:.8;">Total Stamp Duty Land Tax</p>
+        
+        <div class="breakdown" id="breakdown"></div>
+      </div>
+    </div>
+    
+    <ins class="adsbygoogle"
+         style="display:block; margin: 3rem 0;"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567891"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <section aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      
+      <details>
+        <summary>What is UK Stamp Duty?</summary>
+        <p>Stamp Duty Land Tax (SDLT) is a tax paid when buying property in England and Northern Ireland. Rates are tiered: 0% up to £250K, 5% on £250K-£925K, 10% on £925K-£1.5M, 12% above £1.5M.</p>
+      </details>
+      
+      <details>
+        <summary>Do first-time buyers pay stamp duty?</summary>
+        <p>First-time buyers get relief: no stamp duty on properties up to £425K, and 5% on the portion from £425K-£625K. Properties over £625K pay standard rates.</p>
+      </details>
+      
+      <details>
+        <summary>When do I pay stamp duty?</summary>
+        <p>Stamp duty must be paid within 14 days of completion. Your solicitor typically handles this payment as part of the conveyancing process.</p>
+      </details>
+    </section>
+    
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Home</a> / <span>Stamp Duty Calculator</span>
+    </nav>
+  </main>
+  
+  <footer class="note small site-footer" role="contentinfo">
+    <p>&copy; 2025 UpTools. Free online tools for everyone.</p>
+  </footer>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    function calculate() {
+      const price = parseFloat(document.getElementById('property-price').value) || 0;
+      const isFirstTime = document.getElementById('first-time-buyer').checked;
+      const isAdditional = document.getElementById('additional-property').checked;
+      
+      let stampDuty = 0;
+      let breakdown = [];
+      
+      // Standard rates (2025)
+      const standardBands = [
+        { threshold: 250000, rate: 0 },
+        { threshold: 925000, rate: 0.05 },
+        { threshold: 1500000, rate: 0.10 },
+        { threshold: Infinity, rate: 0.12 }
+      ];
+      
+      // First-time buyer rates
+      const ftbBands = [
+        { threshold: 425000, rate: 0 },
+        { threshold: 625000, rate: 0.05 },
+        { threshold: Infinity, rate: 0 } // Over £625K pays standard rates
+      ];
+      
+      // Additional property surcharge
+      const surcharge = isAdditional ? 0.03 : 0;
+      
+      // Use first-time buyer rates if applicable and property ≤ £625K
+      const bands = (isFirstTime && price <= 625000) ? ftbBands : standardBands;
+      
+      let remaining = price;
+      let previousThreshold = 0;
+      
+      for (let i = 0; i < bands.length; i++) {
+        const band = bands[i];
+        const bandAmount = Math.min(remaining, band.threshold - previousThreshold);
+        
+        if (bandAmount > 0) {
+          const rate = band.rate + surcharge;
+          const tax = bandAmount * rate;
+          stampDuty += tax;
+          
+          if (rate > 0) {
+            breakdown.push({
+              range: `£${previousThreshold.toLocaleString()} - £${Math.min(band.threshold, price).toLocaleString()}`,
+              rate: (rate * 100).toFixed(0) + '%',
+              tax: tax
+            });
+          }
+          
+          remaining -= bandAmount;
+          previousThreshold = band.threshold;
+        }
+        
+        if (remaining <= 0) break;
+      }
+      
+      // Display results
+      document.getElementById('stamp-duty').textContent = '£' + stampDuty.toLocaleString('en-GB', {maximumFractionDigits: 0});
+      
+      let breakdownHTML = '';
+      breakdown.forEach(item => {
+        breakdownHTML += `<div class="breakdown-item">
+          <span class="breakdown-label">${item.range} @ ${item.rate}</span>
+          <span class="breakdown-value">£${item.tax.toLocaleString('en-GB', {maximumFractionDigits: 0})}</span>
+        </div>`;
+      });
+      
+      if (stampDuty === 0) {
+        breakdownHTML = '<div class="breakdown-item"><span>No stamp duty payable</span></div>';
+      }
+      
+      document.getElementById('breakdown').innerHTML = breakdownHTML;
+      
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>

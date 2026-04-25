@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rent vs Buy Calculator - Should I Rent or Buy a Home? | UpTools</title>
+  <meta name="description" content="Free rent vs buy calculator. Compare the true cost of renting vs buying a home. See which option saves you more money over time.">
+  <link rel="canonical" href="https://www.uptools.in/rent-vs-buy-calculator/">
+  
+  <meta property="og:title" content="Rent vs Buy Calculator - Should I Rent or Buy? | UpTools">
+  <meta property="og:description" content="Compare renting vs buying a home. Calculate total costs and see which option is better for your situation.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/rent-vs-buy-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/rent-vs-buy-calculator.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rent vs Buy Calculator">
+  <meta name="twitter:description" content="Compare the true cost of renting vs buying a home.">
+  
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Rent vs Buy Calculator",
+    "applicationCategory": "FinanceApplication",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "operatingSystem": "Any",
+    "description": "Compare the total cost of renting vs buying a home over time."
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.uptools.in/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Rent vs Buy Calculator",
+      "item": "https://www.uptools.in/rent-vs-buy-calculator/"
+    }]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "Is it better to rent or buy a home?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your situation. Buying is better if you plan to stay 5+ years, have stable income, and can afford the down payment. Renting is better if you value flexibility, don't want maintenance costs, or expect to move soon."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is the 5% rule for rent vs buy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The 5% rule states that if annual rent is less than 5% of the home's purchase price, renting is likely cheaper. For example, if a home costs $400K, annual rent under $20K ($1,667/month) favors renting."
+      }
+    },{
+      "@type": "Question",
+      "name": "What costs are included in buying a home?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Buying costs include: down payment, closing costs (2-5%), mortgage interest, property taxes, homeowners insurance, HOA fees, maintenance (1-2% of home value annually), and opportunity cost of down payment."
+      }
+    }]
+  }
+  </script>
+  
+  <style>
+    .calc-grid { display: grid; gap: 1.5rem; max-width: 42rem; margin: 0 auto; }
+    .input-group { display: flex; flex-direction: column; gap: .5rem; }
+    .input-group label { font-weight: 500; color: var(--text); }
+    .input-group input { 
+      padding: .75rem; 
+      border: 1px solid rgba(122,162,255,.3); 
+      border-radius: var(--radius); 
+      background: var(--surface); 
+      color: var(--text); 
+      font-size: 1rem;
+    }
+    .btn-calc {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--brand), #5a82df);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .result-card {
+      background: linear-gradient(135deg, rgba(122,162,255,.1), rgba(90,130,223,.1));
+      border: 1px solid rgba(122,162,255,.3);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .result-main { font-size: 3rem; font-weight: 700; color: var(--brand); margin: 1rem 0; }
+    .breakdown { display: grid; gap: 1rem; margin-top: 1.5rem; }
+    .breakdown-item { display: flex; justify-content: space-between; padding: .75rem; background: rgba(122,162,255,.05); border-radius: .5rem; }
+    .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+    .comparison-col { padding: 1rem; background: rgba(122,162,255,.05); border-radius: var(--radius); }
+    .winner { border: 2px solid var(--brand); background: rgba(122,162,255,.15); }
+    @media (max-width: 640px) {
+      .comparison { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="wrap">
+      <a href="/" class="logo">UpTools</a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <h1>Rent vs Buy Calculator</h1>
+    <p class="lead">Compare the true cost of renting vs buying a home. See which option saves you more money.</p>
+    
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <div class="calc-grid">
+      <h3>Home Purchase Details</h3>
+      
+      <div class="input-group">
+        <label for="home-price">Home Price ($)</label>
+        <input type="number" id="home-price" value="400000" min="0" step="5000">
+      </div>
+      
+      <div class="input-group">
+        <label for="down-payment">Down Payment (%)</label>
+        <input type="number" id="down-payment" value="20" min="0" max="100" step="1">
+      </div>
+      
+      <div class="input-group">
+        <label for="interest-rate">Mortgage Interest Rate (%)</label>
+        <input type="number" id="interest-rate" value="6.5" min="0" max="20" step="0.1">
+      </div>
+      
+      <div class="input-group">
+        <label for="property-tax">Annual Property Tax (%)</label>
+        <input type="number" id="property-tax" value="1.2" min="0" max="5" step="0.1">
+      </div>
+      
+      <div class="input-group">
+        <label for="home-insurance">Annual Home Insurance ($)</label>
+        <input type="number" id="home-insurance" value="1500" min="0" step="100">
+      </div>
+      
+      <div class="input-group">
+        <label for="hoa-fees">Monthly HOA Fees ($)</label>
+        <input type="number" id="hoa-fees" value="200" min="0" step="50">
+      </div>
+      
+      <div class="input-group">
+        <label for="maintenance">Annual Maintenance (% of home value)</label>
+        <input type="number" id="maintenance" value="1" min="0" max="5" step="0.1">
+      </div>
+      
+      <h3>Rental Details</h3>
+      
+      <div class="input-group">
+        <label for="monthly-rent">Monthly Rent ($)</label>
+        <input type="number" id="monthly-rent" value="2000" min="0" step="100">
+      </div>
+      
+      <div class="input-group">
+        <label for="rent-increase">Annual Rent Increase (%)</label>
+        <input type="number" id="rent-increase" value="3" min="0" max="10" step="0.5">
+      </div>
+      
+      <div class="input-group">
+        <label for="renters-insurance">Annual Renters Insurance ($)</label>
+        <input type="number" id="renters-insurance" value="200" min="0" step="50">
+      </div>
+      
+      <h3>Other Factors</h3>
+      
+      <div class="input-group">
+        <label for="years">Years to Compare</label>
+        <input type="number" id="years" value="10" min="1" max="30">
+      </div>
+      
+      <div class="input-group">
+        <label for="home-appreciation">Annual Home Appreciation (%)</label>
+        <input type="number" id="home-appreciation" value="3" min="0" max="10" step="0.5">
+      </div>
+      
+      <div class="input-group">
+        <label for="investment-return">Investment Return on Down Payment (%)</label>
+        <input type="number" id="investment-return" value="7" min="0" max="15" step="0.5">
+      </div>
+      
+      <button class="btn-calc" onclick="calculate()">Compare Rent vs Buy</button>
+      
+      <div id="result" class="result-card" style="display:none;">
+        <h2>Comparison Results</h2>
+        <div class="result-main" id="winner-text">Buying is Better</div>
+        <p style="opacity:.8;" id="savings-text">You save $X by buying</p>
+        
+        <div class="comparison">
+          <div class="comparison-col" id="buy-col">
+            <h3>💰 Buying</h3>
+            <div class="breakdown-item">
+              <span>Total Cost</span>
+              <span id="buy-total">$0</span>
+            </div>
+            <div class="breakdown-item">
+              <span>Home Equity</span>
+              <span id="buy-equity">$0</span>
+            </div>
+            <div class="breakdown-item">
+              <span>Net Position</span>
+              <span id="buy-net">$0</span>
+            </div>
+          </div>
+          
+          <div class="comparison-col" id="rent-col">
+            <h3>🏠 Renting</h3>
+            <div class="breakdown-item">
+              <span>Total Cost</span>
+              <span id="rent-total">$0</span>
+            </div>
+            <div class="breakdown-item">
+              <span>Investments</span>
+              <span id="rent-investments">$0</span>
+            </div>
+            <div class="breakdown-item">
+              <span>Net Position</span>
+              <span id="rent-net">$0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <ins class="adsbygoogle"
+         style="display:block; margin: 3rem 0;"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567891"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <section aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      
+      <details>
+        <summary>Is it better to rent or buy a home?</summary>
+        <p>It depends on your situation. Buying is better if you plan to stay 5+ years, have stable income, and can afford the down payment. Renting is better if you value flexibility, don't want maintenance costs, or expect to move soon.</p>
+      </details>
+      
+      <details>
+        <summary>What is the 5% rule for rent vs buy?</summary>
+        <p>The 5% rule states that if annual rent is less than 5% of the home's purchase price, renting is likely cheaper. For example, if a home costs $400K, annual rent under $20K ($1,667/month) favors renting.</p>
+      </details>
+      
+      <details>
+        <summary>What costs are included in buying a home?</summary>
+        <p>Buying costs include: down payment, closing costs (2-5%), mortgage interest, property taxes, homeowners insurance, HOA fees, maintenance (1-2% of home value annually), and opportunity cost of down payment.</p>
+      </details>
+    </section>
+    
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Home</a> / <span>Rent vs Buy Calculator</span>
+    </nav>
+  </main>
+  
+  <footer class="note small site-footer" role="contentinfo">
+    <p>&copy; 2025 UpTools. Free online tools for everyone.</p>
+  </footer>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    function calculate() {
+      const homePrice = parseFloat(document.getElementById('home-price').value) || 0;
+      const downPaymentPct = parseFloat(document.getElementById('down-payment').value) / 100 || 0.2;
+      const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 || 0.065;
+      const propertyTaxRate = parseFloat(document.getElementById('property-tax').value) / 100 || 0.012;
+      const homeInsurance = parseFloat(document.getElementById('home-insurance').value) || 1500;
+      const hoaFees = parseFloat(document.getElementById('hoa-fees').value) || 200;
+      const maintenanceRate = parseFloat(document.getElementById('maintenance').value) / 100 || 0.01;
+      const monthlyRent = parseFloat(document.getElementById('monthly-rent').value) || 2000;
+      const rentIncrease = parseFloat(document.getElementById('rent-increase').value) / 100 || 0.03;
+      const rentersInsurance = parseFloat(document.getElementById('renters-insurance').value) || 200;
+      const years = parseInt(document.getElementById('years').value) || 10;
+      const homeAppreciation = parseFloat(document.getElementById('home-appreciation').value) / 100 || 0.03;
+      const investmentReturn = parseFloat(document.getElementById('investment-return').value) / 100 || 0.07;
+      
+      // Buying calculations
+      const downPayment = homePrice * downPaymentPct;
+      const loanAmount = homePrice - downPayment;
+      const monthlyRate = interestRate / 12;
+      const numPayments = 30 * 12;
+      const monthlyMortgage = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+      
+      let buyTotalCost = downPayment + (homePrice * 0.03); // closing costs
+      let homeValue = homePrice;
+      let loanBalance = loanAmount;
+      
+      for (let year = 1; year <= years; year++) {
+        const annualMortgage = monthlyMortgage * 12;
+        const annualPropertyTax = homeValue * propertyTaxRate;
+        const annualMaintenance = homeValue * maintenanceRate;
+        const annualHOA = hoaFees * 12;
+        
+        buyTotalCost += annualMortgage + annualPropertyTax + homeInsurance + annualMaintenance + annualHOA;
+        
+        // Update home value and loan balance
+        homeValue *= (1 + homeAppreciation);
+        const interestPaid = loanBalance * interestRate;
+        const principalPaid = annualMortgage - interestPaid;
+        loanBalance = Math.max(0, loanBalance - principalPaid);
+      }
+      
+      const homeEquity = homeValue - loanBalance;
+      const buyNetPosition = homeEquity - buyTotalCost;
+      
+      // Renting calculations
+      let rentTotalCost = 0;
+      let currentRent = monthlyRent;
+      let investments = downPayment; // invest down payment instead
+      
+      for (let year = 1; year <= years; year++) {
+        const annualRent = currentRent * 12;
+        rentTotalCost += annualRent + rentersInsurance;
+        
+        // Invest savings
+        investments *= (1 + investmentReturn);
+        
+        // Increase rent
+        currentRent *= (1 + rentIncrease);
+      }
+      
+      const rentNetPosition = investments - rentTotalCost;
+      
+      // Determine winner
+      const buyingBetter = buyNetPosition > rentNetPosition;
+      const savings = Math.abs(buyNetPosition - rentNetPosition);
+      
+      // Display results
+      document.getElementById('winner-text').textContent = buyingBetter ? '💰 Buying is Better' : '🏠 Renting is Better';
+      document.getElementById('savings-text').textContent = `You save $${savings.toLocaleString('en-US', {maximumFractionDigits: 0})} by ${buyingBetter ? 'buying' : 'renting'}`;
+      
+      document.getElementById('buy-total').textContent = '$' + buyTotalCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('buy-equity').textContent = '$' + homeEquity.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('buy-net').textContent = '$' + buyNetPosition.toLocaleString('en-US', {maximumFractionDigits: 0});
+      
+      document.getElementById('rent-total').textContent = '$' + rentTotalCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('rent-investments').textContent = '$' + investments.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('rent-net').textContent = '$' + rentNetPosition.toLocaleString('en-US', {maximumFractionDigits: 0});
+      
+      // Highlight winner
+      document.getElementById('buy-col').classList.toggle('winner', buyingBetter);
+      document.getElementById('rent-col').classList.toggle('winner', !buyingBetter);
+      
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>

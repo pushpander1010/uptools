@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Net Worth Calculator - Track Your Wealth | UpTools</title>
+  <meta name="description" content="Free net worth calculator. Calculate your total net worth by adding assets and subtracting liabilities. Track your financial progress over time.">
+  <link rel="canonical" href="https://www.uptools.in/net-worth-calculator/">
+  
+  <meta property="og:title" content="Net Worth Calculator - Track Your Wealth | UpTools">
+  <meta property="og:description" content="Calculate your net worth instantly. Add up assets, subtract liabilities, and see your financial position.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/net-worth-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/net-worth-calculator.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Net Worth Calculator">
+  <meta name="twitter:description" content="Calculate your net worth: assets minus liabilities.">
+  
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Net Worth Calculator",
+    "applicationCategory": "FinanceApplication",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "operatingSystem": "Any",
+    "description": "Calculate your net worth by adding assets and subtracting liabilities."
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.uptools.in/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Net Worth Calculator",
+      "item": "https://www.uptools.in/net-worth-calculator/"
+    }]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What is net worth?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Net worth is the total value of your assets (what you own) minus your liabilities (what you owe). It's a snapshot of your financial health at a specific point in time."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is a good net worth by age?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A general rule: your net worth should equal your age times your annual income divided by 10. For example, at age 40 with $75K income, target net worth is $300K. However, this varies widely based on individual circumstances."
+      }
+    },{
+      "@type": "Question",
+      "name": "Should I include my home in net worth?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, include your home's current market value as an asset, and your remaining mortgage balance as a liability. The difference (your home equity) contributes to your net worth."
+      }
+    }]
+  }
+  </script>
+  
+  <style>
+    .calc-grid { display: grid; gap: 1.5rem; max-width: 42rem; margin: 0 auto; }
+    .input-group { display: flex; flex-direction: column; gap: .5rem; }
+    .input-group label { font-weight: 500; color: var(--text); }
+    .input-group input { 
+      padding: .75rem; 
+      border: 1px solid rgba(122,162,255,.3); 
+      border-radius: var(--radius); 
+      background: var(--surface); 
+      color: var(--text); 
+      font-size: 1rem;
+    }
+    .btn-calc {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--brand), #5a82df);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .result-card {
+      background: linear-gradient(135deg, rgba(122,162,255,.1), rgba(90,130,223,.1));
+      border: 1px solid rgba(122,162,255,.3);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .result-main { font-size: 3rem; font-weight: 700; color: var(--brand); margin: 1rem 0; }
+    .breakdown { display: grid; gap: 1rem; margin-top: 1.5rem; }
+    .breakdown-item { display: flex; justify-content: space-between; padding: .75rem; background: rgba(122,162,255,.05); border-radius: .5rem; }
+    .section-header {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem;
+      color: var(--brand);
+    }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="wrap">
+      <a href="/" class="logo">UpTools</a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <h1>Net Worth Calculator</h1>
+    <p class="lead">Calculate your net worth by adding up your assets and subtracting your liabilities.</p>
+    
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <div class="calc-grid">
+      <div class="section-header">💰 Assets (What You Own)</div>
+      
+      <div class="input-group">
+        <label for="cash">Cash & Checking Accounts ($)</label>
+        <input type="number" id="cash" value="5000" min="0" step="100">
+      </div>
+      
+      <div class="input-group">
+        <label for="savings">Savings Accounts ($)</label>
+        <input type="number" id="savings" value="15000" min="0" step="100">
+      </div>
+      
+      <div class="input-group">
+        <label for="investments">Investments (Stocks, Bonds, Mutual Funds) ($)</label>
+        <input type="number" id="investments" value="50000" min="0" step="1000">
+      </div>
+      
+      <div class="input-group">
+        <label for="retirement">Retirement Accounts (401k, IRA) ($)</label>
+        <input type="number" id="retirement" value="100000" min="0" step="1000">
+      </div>
+      
+      <div class="input-group">
+        <label for="home-value">Home Value ($)</label>
+        <input type="number" id="home-value" value="350000" min="0" step="5000">
+      </div>
+      
+      <div class="input-group">
+        <label for="vehicles">Vehicles ($)</label>
+        <input type="number" id="vehicles" value="25000" min="0" step="1000">
+      </div>
+      
+      <div class="input-group">
+        <label for="other-assets">Other Assets ($)</label>
+        <input type="number" id="other-assets" value="10000" min="0" step="1000">
+      </div>
+      
+      <div class="section-header">📉 Liabilities (What You Owe)</div>
+      
+      <div class="input-group">
+        <label for="mortgage">Mortgage Balance ($)</label>
+        <input type="number" id="mortgage" value="250000" min="0" step="5000">
+      </div>
+      
+      <div class="input-group">
+        <label for="car-loans">Car Loans ($)</label>
+        <input type="number" id="car-loans" value="15000" min="0" step="1000">
+      </div>
+      
+      <div class="input-group">
+        <label for="student-loans">Student Loans ($)</label>
+        <input type="number" id="student-loans" value="30000" min="0" step="1000">
+      </div>
+      
+      <div class="input-group">
+        <label for="credit-cards">Credit Card Debt ($)</label>
+        <input type="number" id="credit-cards" value="5000" min="0" step="100">
+      </div>
+      
+      <div class="input-group">
+        <label for="other-debt">Other Debt ($)</label>
+        <input type="number" id="other-debt" value="0" min="0" step="1000">
+      </div>
+      
+      <button class="btn-calc" onclick="calculate()">Calculate Net Worth</button>
+      
+      <div id="result" class="result-card" style="display:none;">
+        <h2>Your Net Worth</h2>
+        <div class="result-main" id="net-worth">$0</div>
+        <p style="opacity:.8;">Total assets minus total liabilities</p>
+        
+        <div class="breakdown">
+          <div class="breakdown-item">
+            <span class="breakdown-label">Total Assets</span>
+            <span class="breakdown-value" id="total-assets">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Total Liabilities</span>
+            <span class="breakdown-value" id="total-liabilities">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Debt-to-Asset Ratio</span>
+            <span class="breakdown-value" id="debt-ratio">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <ins class="adsbygoogle"
+         style="display:block; margin: 3rem 0;"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567891"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <section aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      
+      <details>
+        <summary>What is net worth?</summary>
+        <p>Net worth is the total value of your assets (what you own) minus your liabilities (what you owe). It's a snapshot of your financial health at a specific point in time.</p>
+      </details>
+      
+      <details>
+        <summary>What is a good net worth by age?</summary>
+        <p>A general rule: your net worth should equal your age times your annual income divided by 10. For example, at age 40 with $75K income, target net worth is $300K. However, this varies widely based on individual circumstances.</p>
+      </details>
+      
+      <details>
+        <summary>Should I include my home in net worth?</summary>
+        <p>Yes, include your home's current market value as an asset, and your remaining mortgage balance as a liability. The difference (your home equity) contributes to your net worth.</p>
+      </details>
+    </section>
+    
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Home</a> / <span>Net Worth Calculator</span>
+    </nav>
+  </main>
+  
+  <footer class="note small site-footer" role="contentinfo">
+    <p>&copy; 2025 UpTools. Free online tools for everyone.</p>
+  </footer>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    function calculate() {
+      // Assets
+      const cash = parseFloat(document.getElementById('cash').value) || 0;
+      const savings = parseFloat(document.getElementById('savings').value) || 0;
+      const investments = parseFloat(document.getElementById('investments').value) || 0;
+      const retirement = parseFloat(document.getElementById('retirement').value) || 0;
+      const homeValue = parseFloat(document.getElementById('home-value').value) || 0;
+      const vehicles = parseFloat(document.getElementById('vehicles').value) || 0;
+      const otherAssets = parseFloat(document.getElementById('other-assets').value) || 0;
+      
+      // Liabilities
+      const mortgage = parseFloat(document.getElementById('mortgage').value) || 0;
+      const carLoans = parseFloat(document.getElementById('car-loans').value) || 0;
+      const studentLoans = parseFloat(document.getElementById('student-loans').value) || 0;
+      const creditCards = parseFloat(document.getElementById('credit-cards').value) || 0;
+      const otherDebt = parseFloat(document.getElementById('other-debt').value) || 0;
+      
+      const totalAssets = cash + savings + investments + retirement + homeValue + vehicles + otherAssets;
+      const totalLiabilities = mortgage + carLoans + studentLoans + creditCards + otherDebt;
+      const netWorth = totalAssets - totalLiabilities;
+      const debtRatio = totalAssets > 0 ? (totalLiabilities / totalAssets * 100) : 0;
+      
+      // Display results
+      document.getElementById('net-worth').textContent = '$' + netWorth.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('total-assets').textContent = '$' + totalAssets.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('total-liabilities').textContent = '$' + totalLiabilities.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('debt-ratio').textContent = debtRatio.toFixed(1) + '%';
+      
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Retirement Calculator - When Can I Retire? | UpTools</title>
+<meta name="description" content="Calculate when you can retire based on savings, income needs, and investment returns. Free retirement planning calculator with detailed projections.">
+<link rel="canonical" href="https://www.uptools.in/retirement-calculator/">
+<meta property="og:title" content="Retirement Calculator - When Can I Retire?">
+<meta property="og:url" content="https://www.uptools.in/retirement-calculator/">
+<link rel="preload" href="/style.css" as="style">
+<link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="/style.css"></noscript>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Retirement Calculator","applicationCategory":"UtilityApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"operatingSystem":"Web"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much do I need to retire?","acceptedAnswer":{"@type":"Answer","text":"A common rule is the 4% rule: multiply your annual expenses by 25. If you need $50,000/year, you need $1.25 million saved. Factor in Social Security and pensions to reduce this amount."}},{"@type":"Question","name":"What is the 4% rule for retirement?","acceptedAnswer":{"@type":"Answer","text":"The 4% rule suggests you can withdraw 4% of your retirement savings annually without running out of money for 30 years. This assumes a balanced portfolio and adjusts for inflation."}}]}
+</script>
+<style>
+.calc-grid{display:grid;gap:1.5rem;margin:1.5rem 0}
+.input-group{display:flex;flex-direction:column;gap:0.5rem}
+.input-group label{font-weight:700;color:var(--text)}
+.input-group input{padding:0.75rem;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:1rem}
+.result-card{background:linear-gradient(135deg,#1a2436 0%,#0f1826 100%);border:2px solid var(--brand);border-radius:var(--radius);padding:1.5rem;margin:1.5rem 0}
+.result-row{display:flex;justify-content:space-between;padding:0.75rem 0;border-bottom:1px solid var(--border)}
+.result-row:last-child{border-bottom:none}
+.result-label{color:var(--muted)}
+.result-value{font-size:1.5rem;font-weight:800;color:var(--brand)}
+.result-value.large{font-size:2.5rem}
+</style>
+</head>
+<body>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+<a href="#main" class="sr-only">Skip to content</a>
+<header class="site" role="banner">
+<div class="header-inner">
+<a class="brand" href="/"><img src="/assets/logo/uptools-logo.svg" alt="UpTools" width="28" height="28"><b>UpTools</b></a>
+<nav class="nav-links"><a href="/#tools">Tools</a></nav>
+</div>
+</header>
+<main id="main" class="wrap" role="main">
+<section class="card">
+<h1>🏖️ Retirement Calculator</h1>
+<p class="note">Calculate when you can retire based on your savings, income needs, and investment returns.</p>
+<ins class="adsbygoogle" style="display:block;margin:1rem 0" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<div class="calc-grid">
+<div class="input-group"><label for="age">Current Age</label><input type="number" id="age" value="35"></div>
+<div class="input-group"><label for="savings">Current Savings ($)</label><input type="number" id="savings" value="150000" step="10000"></div>
+<div class="input-group"><label for="monthly">Monthly Contribution ($)</label><input type="number" id="monthly" value="1500" step="100"></div>
+<div class="input-group"><label for="income">Desired Annual Retirement Income ($)</label><input type="number" id="income" value="60000" step="5000"></div>
+<div class="input-group"><label for="return">Expected Annual Return (%)</label><input type="number" id="return" value="7" step="0.5"></div>
+<div class="input-group"><label for="inflation">Inflation Rate (%)</label><input type="number" id="inflation" value="3" step="0.5"></div>
+<div class="input-group"><label for="social">Annual Social Security ($)</label><input type="number" id="social" value="20000" step="1000"></div>
+</div>
+<button id="calc" class="btn" style="margin-top:1rem">Calculate Retirement</button>
+<div class="result-card" id="results" style="display:none">
+<div class="result-row"><span class="result-label">You Can Retire At Age</span><span class="result-value large" id="retireAge">62</span></div>
+<div class="result-row"><span class="result-label">Years Until Retirement</span><span class="result-value" id="years">27</span></div>
+<div class="result-row"><span class="result-label">Retirement Savings Needed</span><span class="result-value" id="needed">$1,000,000</span></div>
+<div class="result-row"><span class="result-label">Projected Savings at Retirement</span><span class="result-value" id="projected">$1,250,000</span></div>
+<div class="result-row"><span class="result-label">Monthly Income in Retirement</span><span class="result-value" id="monthlyIncome">$5,000</span></div>
+</div>
+</section>
+<ins class="adsbygoogle" style="display:block;margin:1rem 0" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<section class="card">
+<h2>❓ Retirement FAQs</h2>
+<details style="margin:1rem 0"><summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">How much do I need to retire?</summary><p class="note" style="margin-top:0.5rem">A common rule is the 4% rule: multiply your annual expenses by 25. If you need $50,000/year, you need $1.25 million saved. Factor in Social Security and pensions to reduce this amount.</p></details>
+<details style="margin:1rem 0"><summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">What is the 4% rule for retirement?</summary><p class="note" style="margin-top:0.5rem">The 4% rule suggests you can withdraw 4% of your retirement savings annually without running out of money for 30 years. This assumes a balanced portfolio and adjusts for inflation.</p></details>
+<details style="margin:1rem 0"><summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">When should I start saving for retirement?</summary><p class="note" style="margin-top:0.5rem">Start as early as possible! Due to compound interest, someone who starts saving at 25 will have significantly more at 65 than someone who starts at 35, even with the same monthly contributions.</p></details>
+</section>
+<nav aria-label="Breadcrumb" style="margin-top:1.5rem"><p class="note small"><a href="/">Home</a> → <span>Retirement Calculator</span></p></nav>
+<footer class="note small site-footer">© <span id="y"></span> UpTools</footer>
+</main>
+<script src="/scripts/utils.js" type="module"></script>
+<script defer>
+document.getElementById('y').textContent=new Date().getFullYear();
+function calculate(){
+const age=parseInt(document.getElementById('age').value)||35;
+const savings=parseFloat(document.getElementById('savings').value)||150000;
+const monthly=parseFloat(document.getElementById('monthly').value)||1500;
+const income=parseFloat(document.getElementById('income').value)||60000;
+const returnRate=parseFloat(document.getElementById('return').value)||7;
+const inflation=parseFloat(document.getElementById('inflation').value)||3;
+const social=parseFloat(document.getElementById('social').value)||20000;
+const neededIncome=income-social;
+const needed=neededIncome*25;
+let balance=savings;
+let years=0;
+const monthlyReturn=returnRate/100/12;
+while(balance<needed&&years<50){
+balance+=monthly;
+balance*=(1+monthlyReturn);
+years++;
+}
+years=Math.ceil(years/12);
+const retireAge=age+years;
+const projected=balance;
+const monthlyIncome=(projected*0.04/12)+social/12;
+document.getElementById('retireAge').textContent=retireAge;
+document.getElementById('years').textContent=years;
+document.getElementById('needed').textContent=`$${needed.toLocaleString('en-US',{maximumFractionDigits:0})}`;
+document.getElementById('projected').textContent=`$${projected.toLocaleString('en-US',{maximumFractionDigits:0})}`;
+document.getElementById('monthlyIncome').textContent=`$${monthlyIncome.toLocaleString('en-US',{maximumFractionDigits:0})}`;
+document.getElementById('results').style.display='block';
+}
+document.getElementById('calc').addEventListener('click',calculate);
+calculate();
+</script>
+</body>
+</html>

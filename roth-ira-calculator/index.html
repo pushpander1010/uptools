@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roth IRA Calculator - Tax-Free Retirement Savings | UpTools</title>
+  <meta name="description" content="Free Roth IRA calculator. Calculate your tax-free retirement savings growth. See how much you'll have at retirement with contribution limits and compound interest.">
+  <link rel="canonical" href="https://www.uptools.in/roth-ira-calculator/">
+  
+  <meta property="og:title" content="Roth IRA Calculator - Tax-Free Retirement Savings | UpTools">
+  <meta property="og:description" content="Calculate your Roth IRA growth with contribution limits and tax-free withdrawals at retirement.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/roth-ira-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/roth-ira-calculator.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Roth IRA Calculator - Tax-Free Retirement">
+  <meta name="twitter:description" content="Calculate your Roth IRA retirement savings with contribution limits.">
+  
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Roth IRA Calculator",
+    "applicationCategory": "FinanceApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "operatingSystem": "Any",
+    "description": "Calculate your Roth IRA retirement savings with contribution limits and tax-free growth projections."
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.uptools.in/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Roth IRA Calculator",
+      "item": "https://www.uptools.in/roth-ira-calculator/"
+    }]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What is a Roth IRA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A Roth IRA is a retirement account where you contribute after-tax dollars, but all withdrawals in retirement are tax-free. Unlike traditional IRAs, you pay taxes now but enjoy tax-free growth and withdrawals later."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is the Roth IRA contribution limit for 2025?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For 2025, the Roth IRA contribution limit is $7,000 per year ($8,000 if you're 50 or older with catch-up contributions). Income limits apply: phase-out begins at $146,000 (single) or $230,000 (married filing jointly)."
+      }
+    },{
+      "@type": "Question",
+      "name": "Can I withdraw from my Roth IRA before retirement?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can withdraw your contributions (not earnings) anytime tax-free and penalty-free. To withdraw earnings tax-free, you must be 59½ and have held the account for at least 5 years."
+      }
+    },{
+      "@type": "Question",
+      "name": "Roth IRA vs Traditional IRA: which is better?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Roth IRA is better if you expect to be in a higher tax bracket in retirement or want tax-free withdrawals. Traditional IRA is better if you want a tax deduction now and expect lower taxes in retirement."
+      }
+    }]
+  }
+  </script>
+  
+  <style>
+    .calc-grid { display: grid; gap: 1.5rem; max-width: 42rem; margin: 0 auto; }
+    .input-group { display: flex; flex-direction: column; gap: .5rem; }
+    .input-group label { font-weight: 500; color: var(--text); }
+    .input-group input, .input-group select { 
+      padding: .75rem; 
+      border: 1px solid rgba(122,162,255,.3); 
+      border-radius: var(--radius); 
+      background: var(--surface); 
+      color: var(--text); 
+      font-size: 1rem;
+    }
+    .input-group input:focus, .input-group select:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(122,162,255,.1);
+    }
+    .btn-calc {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--brand), #5a82df);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-calc:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(122,162,255,.3); }
+    .result-card {
+      background: linear-gradient(135deg, rgba(122,162,255,.1), rgba(90,130,223,.1));
+      border: 1px solid rgba(122,162,255,.3);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .result-main { font-size: 3rem; font-weight: 700; color: var(--brand); margin: 1rem 0; }
+    .breakdown { display: grid; gap: 1rem; margin-top: 1.5rem; }
+    .breakdown-item { display: flex; justify-content: space-between; padding: .75rem; background: rgba(122,162,255,.05); border-radius: .5rem; }
+    .breakdown-label { color: var(--text); opacity: .8; }
+    .breakdown-value { font-weight: 600; color: var(--brand); }
+    .info-box {
+      background: rgba(122,162,255,.05);
+      border-left: 4px solid var(--brand);
+      padding: 1rem;
+      border-radius: .5rem;
+      margin: 1rem 0;
+    }
+    .limit-warning {
+      background: rgba(255,193,7,.1);
+      border-left: 4px solid #ffc107;
+      padding: 1rem;
+      border-radius: .5rem;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="wrap">
+      <a href="/" class="logo">UpTools</a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <h1>Roth IRA Calculator</h1>
+    <p class="lead">Calculate your tax-free retirement savings with a Roth IRA. See how your contributions grow over time.</p>
+    
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <div class="calc-grid">
+      <div class="input-group">
+        <label for="current-age">Current Age</label>
+        <input type="number" id="current-age" value="30" min="18" max="70">
+      </div>
+      
+      <div class="input-group">
+        <label for="retirement-age">Retirement Age</label>
+        <input type="number" id="retirement-age" value="65" min="50" max="75">
+      </div>
+      
+      <div class="input-group">
+        <label for="current-balance">Current Roth IRA Balance ($)</label>
+        <input type="number" id="current-balance" value="0" min="0" step="1000">
+      </div>
+      
+      <div class="input-group">
+        <label for="annual-contribution">Annual Contribution ($)</label>
+        <input type="number" id="annual-contribution" value="7000" min="0" max="8000" step="100">
+        <small style="opacity:.7;">2025 limit: $7,000 ($8,000 if 50+)</small>
+      </div>
+      
+      <div class="input-group">
+        <label for="expected-return">Expected Annual Return (%)</label>
+        <input type="number" id="expected-return" value="8" min="0" max="20" step="0.5">
+      </div>
+      
+      <div class="input-group">
+        <label for="contribution-increase">Annual Contribution Increase (%)</label>
+        <input type="number" id="contribution-increase" value="0" min="0" max="10" step="0.5">
+        <small style="opacity:.7;">Optional: increase contributions with raises</small>
+      </div>
+      
+      <button class="btn-calc" onclick="calculate()">Calculate Roth IRA Growth</button>
+      
+      <div id="result" class="result-card" style="display:none;">
+        <h2>Tax-Free Retirement Savings</h2>
+        <div class="result-main" id="final-balance">$0</div>
+        <p style="opacity:.8;">Roth IRA balance at retirement (100% tax-free)</p>
+        
+        <div class="breakdown">
+          <div class="breakdown-item">
+            <span class="breakdown-label">Total Contributions</span>
+            <span class="breakdown-value" id="total-contributions">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Investment Earnings</span>
+            <span class="breakdown-value" id="total-earnings">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Years to Retirement</span>
+            <span class="breakdown-value" id="years-to-retirement">0</span>
+          </div>
+        </div>
+        
+        <div class="info-box">
+          <strong>💰 Tax Advantage:</strong>
+          <p id="tax-benefit"></p>
+        </div>
+        
+        <div id="limit-warning" class="limit-warning" style="display:none;">
+          <strong>⚠️ Contribution Limit:</strong>
+          <p id="limit-message"></p>
+        </div>
+      </div>
+    </div>
+    
+    <ins class="adsbygoogle"
+         style="display:block; margin: 3rem 0;"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567891"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <section aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      
+      <details>
+        <summary>What is a Roth IRA?</summary>
+        <p>A Roth IRA is a retirement account where you contribute after-tax dollars, but all withdrawals in retirement are tax-free. Unlike traditional IRAs, you pay taxes now but enjoy tax-free growth and withdrawals later.</p>
+      </details>
+      
+      <details>
+        <summary>What is the Roth IRA contribution limit for 2025?</summary>
+        <p>For 2025, the Roth IRA contribution limit is $7,000 per year ($8,000 if you're 50 or older with catch-up contributions). Income limits apply: phase-out begins at $146,000 (single) or $230,000 (married filing jointly).</p>
+      </details>
+      
+      <details>
+        <summary>Can I withdraw from my Roth IRA before retirement?</summary>
+        <p>You can withdraw your contributions (not earnings) anytime tax-free and penalty-free. To withdraw earnings tax-free, you must be 59½ and have held the account for at least 5 years.</p>
+      </details>
+      
+      <details>
+        <summary>Roth IRA vs Traditional IRA: which is better?</summary>
+        <p>Roth IRA is better if you expect to be in a higher tax bracket in retirement or want tax-free withdrawals. Traditional IRA is better if you want a tax deduction now and expect lower taxes in retirement.</p>
+      </details>
+    </section>
+    
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Home</a> / <span>Roth IRA Calculator</span>
+    </nav>
+  </main>
+  
+  <footer class="note small site-footer" role="contentinfo">
+    <p>&copy; 2025 UpTools. Free online tools for everyone.</p>
+  </footer>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    function calculate() {
+      const currentAge = parseInt(document.getElementById('current-age').value) || 30;
+      const retirementAge = parseInt(document.getElementById('retirement-age').value) || 65;
+      const currentBalance = parseFloat(document.getElementById('current-balance').value) || 0;
+      let annualContribution = parseFloat(document.getElementById('annual-contribution').value) || 7000;
+      const expectedReturn = parseFloat(document.getElementById('expected-return').value) / 100 || 0.08;
+      const contributionIncrease = parseFloat(document.getElementById('contribution-increase').value) / 100 || 0;
+      
+      const yearsToRetirement = retirementAge - currentAge;
+      const contributionLimit2025 = currentAge >= 50 ? 8000 : 7000;
+      
+      // Check contribution limit
+      let limitWarning = false;
+      if (annualContribution > contributionLimit2025) {
+        limitWarning = true;
+        annualContribution = contributionLimit2025;
+      }
+      
+      // Calculate growth
+      let balance = currentBalance;
+      let totalContributions = currentBalance;
+      let currentContribution = annualContribution;
+      
+      for (let year = 1; year <= yearsToRetirement; year++) {
+        balance = balance * (1 + expectedReturn) + currentContribution;
+        totalContributions += currentContribution;
+        currentContribution = Math.min(currentContribution * (1 + contributionIncrease), contributionLimit2025);
+      }
+      
+      const totalEarnings = balance - totalContributions;
+      
+      // Estimate tax savings (assuming 24% tax bracket)
+      const taxSavings = totalEarnings * 0.24;
+      
+      // Display results
+      document.getElementById('final-balance').textContent = '$' + balance.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('total-contributions').textContent = '$' + totalContributions.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('total-earnings').textContent = '$' + totalEarnings.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('years-to-retirement').textContent = yearsToRetirement + ' years';
+      
+      document.getElementById('tax-benefit').textContent = 
+        `All $${totalEarnings.toLocaleString('en-US', {maximumFractionDigits: 0})} in earnings will be tax-free at retirement. ` +
+        `If this were a taxable account, you'd pay approximately $${taxSavings.toLocaleString('en-US', {maximumFractionDigits: 0})} in taxes (assuming 24% bracket).`;
+      
+      // Show limit warning if needed
+      if (limitWarning) {
+        document.getElementById('limit-warning').style.display = 'block';
+        document.getElementById('limit-message').textContent = 
+          `Your contribution was adjusted to the 2025 limit of $${contributionLimit2025.toLocaleString('en-US')}. ` +
+          `Contributions above this amount are not allowed.`;
+      } else {
+        document.getElementById('limit-warning').style.display = 'none';
+      }
+      
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    // Initialize ads
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>

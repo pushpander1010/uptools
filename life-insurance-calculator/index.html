@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Insurance Calculator - How Much Coverage Do You Need? | UpTools</title>
+  <meta name="description" content="Free life insurance calculator. Calculate how much life insurance coverage you need based on income, debts, dependents, and future expenses. Get instant results.">
+  <link rel="canonical" href="https://www.uptools.in/life-insurance-calculator/">
+  
+  <meta property="og:title" content="Life Insurance Calculator - Coverage Needs | UpTools">
+  <meta property="og:description" content="Calculate how much life insurance you need. Free calculator considers income, debts, dependents, and future expenses.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/life-insurance-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/life-insurance-calculator.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Life Insurance Calculator - Coverage Needs">
+  <meta name="twitter:description" content="Calculate how much life insurance you need based on your financial situation.">
+  
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Life Insurance Calculator",
+    "applicationCategory": "FinanceApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "operatingSystem": "Any",
+    "description": "Calculate how much life insurance coverage you need based on income, debts, dependents, and future expenses."
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.uptools.in/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Life Insurance Calculator",
+      "item": "https://www.uptools.in/life-insurance-calculator/"
+    }]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How much life insurance do I need?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A common rule of thumb is 10-12 times your annual income. However, the exact amount depends on your debts, dependents, future expenses (college, mortgage), and existing savings. Use our calculator to get a personalized estimate based on your specific situation."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is the DIME method for life insurance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DIME stands for Debt, Income, Mortgage, and Education. Add up all your debts, multiply your annual income by years needed, add your mortgage balance, and add estimated education costs for children. This gives you a comprehensive coverage amount."
+      }
+    },{
+      "@type": "Question",
+      "name": "Should I include my mortgage in life insurance calculation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, including your mortgage ensures your family can stay in their home if something happens to you. Add the remaining mortgage balance to your total coverage needs."
+      }
+    },{
+      "@type": "Question",
+      "name": "How does the number of dependents affect life insurance needs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "More dependents typically require more coverage. Consider living expenses, education costs, and childcare for each dependent. Our calculator factors in the number of dependents and years of support needed."
+      }
+    }]
+  }
+  </script>
+  
+  <style>
+    .calc-grid { display: grid; gap: 1.5rem; max-width: 42rem; margin: 0 auto; }
+    .input-group { display: flex; flex-direction: column; gap: .5rem; }
+    .input-group label { font-weight: 500; color: var(--text); }
+    .input-group input, .input-group select { 
+      padding: .75rem; 
+      border: 1px solid rgba(122,162,255,.3); 
+      border-radius: var(--radius); 
+      background: var(--surface); 
+      color: var(--text); 
+      font-size: 1rem;
+    }
+    .input-group input:focus, .input-group select:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(122,162,255,.1);
+    }
+    .btn-calc {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--brand), #5a82df);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-calc:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(122,162,255,.3); }
+    .result-card {
+      background: linear-gradient(135deg, rgba(122,162,255,.1), rgba(90,130,223,.1));
+      border: 1px solid rgba(122,162,255,.3);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .result-main { font-size: 3rem; font-weight: 700; color: var(--brand); margin: 1rem 0; }
+    .breakdown { display: grid; gap: 1rem; margin-top: 1.5rem; }
+    .breakdown-item { display: flex; justify-content: space-between; padding: .75rem; background: rgba(122,162,255,.05); border-radius: .5rem; }
+    .breakdown-label { color: var(--text); opacity: .8; }
+    .breakdown-value { font-weight: 600; color: var(--brand); }
+    .method-tabs { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .method-tab {
+      padding: .75rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid rgba(122,162,255,.3);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .method-tab.active {
+      background: var(--brand);
+      color: white;
+      border-color: var(--brand);
+    }
+    .info-box {
+      background: rgba(122,162,255,.05);
+      border-left: 4px solid var(--brand);
+      padding: 1rem;
+      border-radius: .5rem;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="wrap">
+      <a href="/" class="logo">UpTools</a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <h1>Life Insurance Calculator</h1>
+    <p class="lead">Calculate how much life insurance coverage you need to protect your family's financial future.</p>
+    
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <div class="calc-grid">
+      <div class="method-tabs">
+        <div class="method-tab active" data-method="dime">DIME Method</div>
+        <div class="method-tab" data-method="income">Income Multiplier</div>
+        <div class="method-tab" data-method="needs">Needs Analysis</div>
+      </div>
+      
+      <div id="dime-inputs">
+        <div class="input-group">
+          <label for="annual-income">Annual Income ($)</label>
+          <input type="number" id="annual-income" value="75000" min="0" step="1000">
+        </div>
+        
+        <div class="input-group">
+          <label for="income-years">Years of Income Replacement</label>
+          <input type="number" id="income-years" value="10" min="1" max="30">
+        </div>
+        
+        <div class="input-group">
+          <label for="total-debt">Total Debt (excluding mortgage) ($)</label>
+          <input type="number" id="total-debt" value="25000" min="0" step="1000">
+        </div>
+        
+        <div class="input-group">
+          <label for="mortgage-balance">Mortgage Balance ($)</label>
+          <input type="number" id="mortgage-balance" value="250000" min="0" step="5000">
+        </div>
+        
+        <div class="input-group">
+          <label for="education-costs">Future Education Costs ($)</label>
+          <input type="number" id="education-costs" value="100000" min="0" step="5000">
+        </div>
+        
+        <div class="input-group">
+          <label for="dependents">Number of Dependents</label>
+          <input type="number" id="dependents" value="2" min="0" max="10">
+        </div>
+        
+        <div class="input-group">
+          <label for="existing-coverage">Existing Life Insurance ($)</label>
+          <input type="number" id="existing-coverage" value="0" min="0" step="10000">
+        </div>
+        
+        <div class="input-group">
+          <label for="savings">Savings & Investments ($)</label>
+          <input type="number" id="savings" value="50000" min="0" step="5000">
+        </div>
+      </div>
+      
+      <button class="btn-calc" onclick="calculate()">Calculate Coverage Needed</button>
+      
+      <div id="result" class="result-card" style="display:none;">
+        <h2>Recommended Coverage</h2>
+        <div class="result-main" id="coverage-amount">$0</div>
+        <p style="opacity:.8;">Total life insurance coverage recommended</p>
+        
+        <div class="breakdown">
+          <div class="breakdown-item">
+            <span class="breakdown-label">Income Replacement</span>
+            <span class="breakdown-value" id="income-replacement">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Debt Coverage</span>
+            <span class="breakdown-value" id="debt-coverage">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Mortgage Payoff</span>
+            <span class="breakdown-value" id="mortgage-payoff">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Education Fund</span>
+            <span class="breakdown-value" id="education-fund">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Less: Existing Assets</span>
+            <span class="breakdown-value" id="existing-assets">-$0</span>
+          </div>
+        </div>
+        
+        <div class="info-box">
+          <strong>💡 Recommendation:</strong>
+          <p id="recommendation"></p>
+        </div>
+      </div>
+    </div>
+    
+    <ins class="adsbygoogle"
+         style="display:block; margin: 3rem 0;"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567891"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <section aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      
+      <details>
+        <summary>How much life insurance do I need?</summary>
+        <p>A common rule of thumb is 10-12 times your annual income. However, the exact amount depends on your debts, dependents, future expenses (college, mortgage), and existing savings. Use our calculator to get a personalized estimate based on your specific situation.</p>
+      </details>
+      
+      <details>
+        <summary>What is the DIME method for life insurance?</summary>
+        <p>DIME stands for Debt, Income, Mortgage, and Education. Add up all your debts, multiply your annual income by years needed, add your mortgage balance, and add estimated education costs for children. This gives you a comprehensive coverage amount.</p>
+      </details>
+      
+      <details>
+        <summary>Should I include my mortgage in life insurance calculation?</summary>
+        <p>Yes, including your mortgage ensures your family can stay in their home if something happens to you. Add the remaining mortgage balance to your total coverage needs.</p>
+      </details>
+      
+      <details>
+        <summary>How does the number of dependents affect life insurance needs?</summary>
+        <p>More dependents typically require more coverage. Consider living expenses, education costs, and childcare for each dependent. Our calculator factors in the number of dependents and years of support needed.</p>
+      </details>
+    </section>
+    
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Home</a> / <span>Life Insurance Calculator</span>
+    </nav>
+  </main>
+  
+  <footer class="note small site-footer" role="contentinfo">
+    <p>&copy; 2025 UpTools. Free online tools for everyone.</p>
+  </footer>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    function calculate() {
+      const income = parseFloat(document.getElementById('annual-income').value) || 0;
+      const years = parseFloat(document.getElementById('income-years').value) || 10;
+      const debt = parseFloat(document.getElementById('total-debt').value) || 0;
+      const mortgage = parseFloat(document.getElementById('mortgage-balance').value) || 0;
+      const education = parseFloat(document.getElementById('education-costs').value) || 0;
+      const dependents = parseInt(document.getElementById('dependents').value) || 0;
+      const existing = parseFloat(document.getElementById('existing-coverage').value) || 0;
+      const savings = parseFloat(document.getElementById('savings').value) || 0;
+      
+      // DIME calculation
+      const incomeReplacement = income * years;
+      const totalNeeds = incomeReplacement + debt + mortgage + education;
+      const existingAssets = existing + savings;
+      const coverageNeeded = Math.max(0, totalNeeds - existingAssets);
+      
+      // Display results
+      document.getElementById('coverage-amount').textContent = '$' + coverageNeeded.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('income-replacement').textContent = '$' + incomeReplacement.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('debt-coverage').textContent = '$' + debt.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('mortgage-payoff').textContent = '$' + mortgage.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('education-fund').textContent = '$' + education.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('existing-assets').textContent = '-$' + existingAssets.toLocaleString('en-US', {maximumFractionDigits: 0});
+      
+      // Recommendation
+      let recommendation = '';
+      const multiplier = coverageNeeded / income;
+      if (multiplier < 5) {
+        recommendation = 'Your coverage needs are relatively modest. Consider term life insurance for cost-effective protection.';
+      } else if (multiplier < 10) {
+        recommendation = 'Your coverage needs are moderate. A 20-30 year term policy would provide solid protection for your family.';
+      } else if (multiplier < 15) {
+        recommendation = 'Your coverage needs are substantial. Consider a combination of term and permanent life insurance.';
+      } else {
+        recommendation = 'Your coverage needs are significant. Consult with a financial advisor to structure the right mix of policies.';
+      }
+      
+      if (dependents > 2) {
+        recommendation += ' With ' + dependents + ' dependents, ensure coverage lasts until the youngest is financially independent.';
+      }
+      
+      document.getElementById('recommendation').textContent = recommendation;
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    // Method tabs (placeholder for future expansion)
+    document.querySelectorAll('.method-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.method-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+    
+    // Initialize ads
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>

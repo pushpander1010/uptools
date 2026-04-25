@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Tax Calculator - Estimate Annual Property Taxes | UpTools</title>
+  <meta name="description" content="Free property tax calculator for US, UK, and Canada. Estimate annual property taxes based on home value and local tax rates.">
+  <link rel="canonical" href="https://www.uptools.in/property-tax-calculator/">
+  
+  <meta property="og:title" content="Property Tax Calculator | UpTools">
+  <meta property="og:description" content="Calculate annual property taxes for your home. Supports US, UK, and Canada.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/property-tax-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/property-tax-calculator.png">
+  
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <script type="application/ld+json">
+  {"@context": "https://schema.org","@type": "SoftwareApplication","name": "Property Tax Calculator","applicationCategory": "FinanceApplication","offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},"operatingSystem": "Any","description": "Calculate annual property taxes based on home value and local tax rates."}
+  </script>
+  
+  <script type="application/ld+json">
+  {"@context": "https://schema.org","@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://www.uptools.in/"},{"@type": "ListItem","position": 2,"name": "Property Tax Calculator","item": "https://www.uptools.in/property-tax-calculator/"}]}
+  </script>
+  
+  <script type="application/ld+json">
+  {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "How is property tax calculated?","acceptedAnswer": {"@type": "Answer","text": "Property tax = Assessed Value × Tax Rate. The assessed value is typically a percentage of market value (50-100%), and the tax rate varies by location (0.3-2.5% in the US)."}},{"@type": "Question","name": "What is the average property tax rate in the US?","acceptedAnswer": {"@type": "Answer","text": "The average US property tax rate is about 1.1% of home value. Rates vary widely: New Jersey (2.5%), Texas (1.8%), Hawaii (0.3%). Check your local rate for accuracy."}},{"@type": "Question","name": "Are property taxes deductible?","acceptedAnswer": {"@type": "Answer","text": "Yes, in the US you can deduct up to $10,000 ($5,000 if married filing separately) in state and local taxes (SALT), including property taxes, on your federal return."}}]}
+  </script>
+  
+  <style>
+    .calc-grid { display: grid; gap: 1.5rem; max-width: 42rem; margin: 0 auto; }
+    .input-group { display: flex; flex-direction: column; gap: .5rem; }
+    .input-group label { font-weight: 500; color: var(--text); }
+    .input-group input, .input-group select { 
+      padding: .75rem; 
+      border: 1px solid rgba(122,162,255,.3); 
+      border-radius: var(--radius); 
+      background: var(--surface); 
+      color: var(--text); 
+      font-size: 1rem;
+    }
+    .btn-calc {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--brand), #5a82df);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .result-card {
+      background: linear-gradient(135deg, rgba(122,162,255,.1), rgba(90,130,223,.1));
+      border: 1px solid rgba(122,162,255,.3);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .result-main { font-size: 3rem; font-weight: 700; color: var(--brand); margin: 1rem 0; }
+    .breakdown { display: grid; gap: 1rem; margin-top: 1.5rem; }
+    .breakdown-item { display: flex; justify-content: space-between; padding: .75rem; background: rgba(122,162,255,.05); border-radius: .5rem; }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="wrap">
+      <a href="/" class="logo">UpTools</a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <h1>Property Tax Calculator</h1>
+    <p class="lead">Calculate annual property taxes based on your home value and local tax rate.</p>
+    
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <div class="calc-grid">
+      <div class="input-group">
+        <label for="home-value">Home Value ($)</label>
+        <input type="number" id="home-value" value="400000" min="0" step="5000">
+      </div>
+      
+      <div class="input-group">
+        <label for="tax-rate">Property Tax Rate (%)</label>
+        <input type="number" id="tax-rate" value="1.2" min="0" max="5" step="0.1">
+        <small style="opacity:.7;">US avg: 1.1%, UK: 0.4-0.8%, Canada: 0.5-1.5%</small>
+      </div>
+      
+      <div class="input-group">
+        <label for="assessment-ratio">Assessment Ratio (%)</label>
+        <input type="number" id="assessment-ratio" value="100" min="0" max="100" step="5">
+        <small style="opacity:.7;">Percentage of market value used for tax (usually 100%)</small>
+      </div>
+      
+      <button class="btn-calc" onclick="calculate()">Calculate Property Tax</button>
+      
+      <div id="result" class="result-card" style="display:none;">
+        <h2>Annual Property Tax</h2>
+        <div class="result-main" id="annual-tax">$0</div>
+        <p style="opacity:.8;">Total property tax per year</p>
+        
+        <div class="breakdown">
+          <div class="breakdown-item">
+            <span class="breakdown-label">Monthly Property Tax</span>
+            <span class="breakdown-value" id="monthly-tax">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Assessed Value</span>
+            <span class="breakdown-value" id="assessed-value">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Effective Tax Rate</span>
+            <span class="breakdown-value" id="effective-rate">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <ins class="adsbygoogle"
+         style="display:block; margin: 3rem 0;"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567891"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <section aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      
+      <details>
+        <summary>How is property tax calculated?</summary>
+        <p>Property tax = Assessed Value × Tax Rate. The assessed value is typically a percentage of market value (50-100%), and the tax rate varies by location (0.3-2.5% in the US).</p>
+      </details>
+      
+      <details>
+        <summary>What is the average property tax rate in the US?</summary>
+        <p>The average US property tax rate is about 1.1% of home value. Rates vary widely: New Jersey (2.5%), Texas (1.8%), Hawaii (0.3%). Check your local rate for accuracy.</p>
+      </details>
+      
+      <details>
+        <summary>Are property taxes deductible?</summary>
+        <p>Yes, in the US you can deduct up to $10,000 ($5,000 if married filing separately) in state and local taxes (SALT), including property taxes, on your federal return.</p>
+      </details>
+    </section>
+    
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Home</a> / <span>Property Tax Calculator</span>
+    </nav>
+  </main>
+  
+  <footer class="note small site-footer" role="contentinfo">
+    <p>&copy; 2025 UpTools. Free online tools for everyone.</p>
+  </footer>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    function calculate() {
+      const homeValue = parseFloat(document.getElementById('home-value').value) || 0;
+      const taxRate = parseFloat(document.getElementById('tax-rate').value) / 100 || 0;
+      const assessmentRatio = parseFloat(document.getElementById('assessment-ratio').value) / 100 || 1;
+      
+      const assessedValue = homeValue * assessmentRatio;
+      const annualTax = assessedValue * taxRate;
+      const monthlyTax = annualTax / 12;
+      const effectiveRate = (annualTax / homeValue) * 100;
+      
+      document.getElementById('annual-tax').textContent = '$' + annualTax.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('monthly-tax').textContent = '$' + monthlyTax.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('assessed-value').textContent = '$' + assessedValue.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('effective-rate').textContent = effectiveRate.toFixed(2) + '%';
+      
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>

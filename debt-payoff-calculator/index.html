@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debt Payoff Calculator - Snowball vs Avalanche Method | UpTools</title>
+  <meta name="description" content="Free debt payoff calculator. Compare snowball vs avalanche methods. Calculate how fast you can become debt-free and save on interest.">
+  <link rel="canonical" href="https://www.uptools.in/debt-payoff-calculator/">
+  
+  <meta property="og:title" content="Debt Payoff Calculator - Snowball vs Avalanche | UpTools">
+  <meta property="og:description" content="Calculate your debt payoff timeline. Compare strategies and see how much interest you'll save.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/debt-payoff-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/debt-payoff-calculator.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Debt Payoff Calculator">
+  <meta name="twitter:description" content="Calculate your path to becoming debt-free with snowball or avalanche method.">
+  
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Debt Payoff Calculator",
+    "applicationCategory": "FinanceApplication",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "operatingSystem": "Any",
+    "description": "Calculate debt payoff timeline using snowball or avalanche method. See how fast you can become debt-free."
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.uptools.in/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Debt Payoff Calculator",
+      "item": "https://www.uptools.in/debt-payoff-calculator/"
+    }]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What is the debt snowball method?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The debt snowball method pays off debts from smallest to largest balance, regardless of interest rate. This provides quick wins and psychological motivation as you eliminate debts one by one."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is the debt avalanche method?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The debt avalanche method pays off debts from highest to lowest interest rate. This saves the most money on interest but may take longer to see the first debt eliminated."
+      }
+    },{
+      "@type": "Question",
+      "name": "Which debt payoff method is better?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Avalanche saves more money on interest, but snowball provides faster psychological wins. Choose avalanche if you're motivated by savings, or snowball if you need quick victories to stay motivated."
+      }
+    }]
+  }
+  </script>
+  
+  <style>
+    .calc-grid { display: grid; gap: 1.5rem; max-width: 42rem; margin: 0 auto; }
+    .input-group { display: flex; flex-direction: column; gap: .5rem; }
+    .input-group label { font-weight: 500; color: var(--text); }
+    .input-group input, .input-group select { 
+      padding: .75rem; 
+      border: 1px solid rgba(122,162,255,.3); 
+      border-radius: var(--radius); 
+      background: var(--surface); 
+      color: var(--text); 
+      font-size: 1rem;
+    }
+    .btn-calc {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--brand), #5a82df);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-calc:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(122,162,255,.3); }
+    .result-card {
+      background: linear-gradient(135deg, rgba(122,162,255,.1), rgba(90,130,223,.1));
+      border: 1px solid rgba(122,162,255,.3);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .result-main { font-size: 3rem; font-weight: 700; color: var(--brand); margin: 1rem 0; }
+    .breakdown { display: grid; gap: 1rem; margin-top: 1.5rem; }
+    .breakdown-item { display: flex; justify-content: space-between; padding: .75rem; background: rgba(122,162,255,.05); border-radius: .5rem; }
+    .debt-item {
+      background: var(--surface);
+      border: 1px solid rgba(122,162,255,.2);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .debt-item input {
+      width: 100%;
+      margin-top: .5rem;
+    }
+    .add-debt-btn {
+      padding: .75rem 1.5rem;
+      background: rgba(122,162,255,.1);
+      border: 1px dashed var(--brand);
+      border-radius: var(--radius);
+      color: var(--brand);
+      cursor: pointer;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="wrap">
+      <a href="/" class="logo">UpTools</a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <h1>Debt Payoff Calculator</h1>
+    <p class="lead">Calculate how fast you can become debt-free. Compare snowball vs avalanche methods.</p>
+    
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <div class="calc-grid">
+      <div class="input-group">
+        <label for="monthly-payment">Total Monthly Payment ($)</label>
+        <input type="number" id="monthly-payment" value="1000" min="0" step="50">
+      </div>
+      
+      <div class="input-group">
+        <label for="method">Payoff Method</label>
+        <select id="method">
+          <option value="avalanche">Avalanche (Highest Interest First)</option>
+          <option value="snowball">Snowball (Smallest Balance First)</option>
+        </select>
+      </div>
+      
+      <div id="debts-container">
+        <h3>Your Debts</h3>
+        <div class="debt-item">
+          <label>Debt Name</label>
+          <input type="text" class="debt-name" value="Credit Card 1" placeholder="e.g., Credit Card">
+          <label>Balance ($)</label>
+          <input type="number" class="debt-balance" value="5000" min="0">
+          <label>Interest Rate (%)</label>
+          <input type="number" class="debt-rate" value="18" min="0" max="50" step="0.1">
+          <label>Minimum Payment ($)</label>
+          <input type="number" class="debt-min" value="100" min="0">
+        </div>
+        <div class="debt-item">
+          <label>Debt Name</label>
+          <input type="text" class="debt-name" value="Credit Card 2" placeholder="e.g., Personal Loan">
+          <label>Balance ($)</label>
+          <input type="number" class="debt-balance" value="3000" min="0">
+          <label>Interest Rate (%)</label>
+          <input type="number" class="debt-rate" value="22" min="0" max="50" step="0.1">
+          <label>Minimum Payment ($)</label>
+          <input type="number" class="debt-min" value="75" min="0">
+        </div>
+      </div>
+      
+      <button class="btn-calc" onclick="calculate()">Calculate Payoff Plan</button>
+      
+      <div id="result" class="result-card" style="display:none;">
+        <h2>Debt-Free Timeline</h2>
+        <div class="result-main" id="months-to-payoff">0 months</div>
+        <p style="opacity:.8;">Time to become debt-free</p>
+        
+        <div class="breakdown">
+          <div class="breakdown-item">
+            <span class="breakdown-label">Total Debt</span>
+            <span class="breakdown-value" id="total-debt">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Total Interest Paid</span>
+            <span class="breakdown-value" id="total-interest">$0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Total Amount Paid</span>
+            <span class="breakdown-value" id="total-paid">$0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <ins class="adsbygoogle"
+         style="display:block; margin: 3rem 0;"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567891"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <section aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      
+      <details>
+        <summary>What is the debt snowball method?</summary>
+        <p>The debt snowball method pays off debts from smallest to largest balance, regardless of interest rate. This provides quick wins and psychological motivation as you eliminate debts one by one.</p>
+      </details>
+      
+      <details>
+        <summary>What is the debt avalanche method?</summary>
+        <p>The debt avalanche method pays off debts from highest to lowest interest rate. This saves the most money on interest but may take longer to see the first debt eliminated.</p>
+      </details>
+      
+      <details>
+        <summary>Which debt payoff method is better?</summary>
+        <p>Avalanche saves more money on interest, but snowball provides faster psychological wins. Choose avalanche if you're motivated by savings, or snowball if you need quick victories to stay motivated.</p>
+      </details>
+    </section>
+    
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Home</a> / <span>Debt Payoff Calculator</span>
+    </nav>
+  </main>
+  
+  <footer class="note small site-footer" role="contentinfo">
+    <p>&copy; 2025 UpTools. Free online tools for everyone.</p>
+  </footer>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    function calculate() {
+      const monthlyPayment = parseFloat(document.getElementById('monthly-payment').value) || 0;
+      const method = document.getElementById('method').value;
+      
+      // Collect all debts
+      const debtItems = document.querySelectorAll('.debt-item');
+      const debts = [];
+      debtItems.forEach(item => {
+        const balance = parseFloat(item.querySelector('.debt-balance').value) || 0;
+        const rate = parseFloat(item.querySelector('.debt-rate').value) / 100 / 12 || 0;
+        const minPayment = parseFloat(item.querySelector('.debt-min').value) || 0;
+        if (balance > 0) {
+          debts.push({ balance, rate, minPayment });
+        }
+      });
+      
+      if (debts.length === 0) return;
+      
+      // Sort debts based on method
+      if (method === 'avalanche') {
+        debts.sort((a, b) => b.rate - a.rate);
+      } else {
+        debts.sort((a, b) => a.balance - b.balance);
+      }
+      
+      // Calculate payoff
+      let totalInterest = 0;
+      let months = 0;
+      let remainingPayment = monthlyPayment;
+      
+      while (debts.some(d => d.balance > 0) && months < 600) {
+        months++;
+        let extraPayment = remainingPayment;
+        
+        // Pay minimums on all debts
+        debts.forEach(debt => {
+          if (debt.balance > 0) {
+            const interest = debt.balance * debt.rate;
+            const principal = Math.min(debt.minPayment - interest, debt.balance);
+            debt.balance -= principal;
+            totalInterest += interest;
+            extraPayment -= debt.minPayment;
+          }
+        });
+        
+        // Apply extra payment to first debt
+        const targetDebt = debts.find(d => d.balance > 0);
+        if (targetDebt && extraPayment > 0) {
+          const payment = Math.min(extraPayment, targetDebt.balance);
+          targetDebt.balance -= payment;
+        }
+      }
+      
+      const totalDebt = debts.reduce((sum, d) => sum + (parseFloat(document.querySelectorAll('.debt-balance')[debts.indexOf(d)].value) || 0), 0);
+      const totalPaid = totalDebt + totalInterest;
+      
+      // Display results
+      document.getElementById('months-to-payoff').textContent = months + ' months (' + Math.floor(months/12) + ' years ' + (months%12) + ' months)';
+      document.getElementById('total-debt').textContent = '$' + totalDebt.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('total-interest').textContent = '$' + totalInterest.toLocaleString('en-US', {maximumFractionDigits: 0});
+      document.getElementById('total-paid').textContent = '$' + totalPaid.toLocaleString('en-US', {maximumFractionDigits: 0});
+      
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>
