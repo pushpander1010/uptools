@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mortgage Calculator - Monthly Payment & Amortization | UpTools</title>
+  <meta name="description" content="Calculate monthly mortgage payments, total interest, and view amortization schedules. Supports fixed and adjustable rates for home loans.">
+  <link rel="canonical" href="https://www.uptools.in/mortgage-calculator/">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mortgage Calculator - Monthly Payment & Amortization">
+  <meta property="og:description" content="Calculate monthly mortgage payments and view detailed amortization schedules.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/mortgage-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/mortgage-calculator.png">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Preload CSS -->
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Mortgage Calculator",
+    "applicationCategory": "UtilityApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "operatingSystem": "Web"
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.uptools.in/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Mortgage Calculator",
+      "item": "https://www.uptools.in/mortgage-calculator/"
+    }]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How is monthly mortgage payment calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Monthly mortgage payment is calculated using the formula: M = P[r(1+r)^n]/[(1+r)^n-1], where P is principal, r is monthly interest rate, and n is number of payments."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is included in a mortgage payment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A mortgage payment typically includes principal, interest, property taxes, homeowners insurance, and possibly PMI (Private Mortgage Insurance) if down payment is less than 20%."
+      }
+    }]
+  }
+  </script>
+  
+  <style>
+    .calc-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .input-group label {
+      font-weight: 700;
+      color: var(--text);
+    }
+    .input-group input {
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .result-card {
+      background: linear-gradient(135deg, #1a2436 0%, #0f1826 100%);
+      border: 2px solid var(--brand);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .result-row:last-child {
+      border-bottom: none;
+    }
+    .result-label {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .result-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--brand);
+    }
+    .result-value.large {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <section class="card">
+      <h1>🏠 Mortgage Calculator</h1>
+      <p class="note">Calculate monthly mortgage payments, total interest, and affordability for home loans.</p>
+      
+      <!-- Ad Slot -->
+      <ins class="adsbygoogle"
+           style="display:block;margin:1rem 0"
+           data-ad-client="ca-pub-6216304334889617"
+           data-ad-slot="9810172647"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      
+      <div class="calc-grid">
+        <div class="input-group">
+          <label for="homePrice">Home Price ($)</label>
+          <input type="number" id="homePrice" placeholder="300000" step="1000" min="0" value="300000">
+        </div>
+        
+        <div class="input-group">
+          <label for="downPayment">Down Payment ($)</label>
+          <input type="number" id="downPayment" placeholder="60000" step="1000" min="0" value="60000">
+        </div>
+        
+        <div class="input-group">
+          <label for="interestRate">Interest Rate (% per year)</label>
+          <input type="number" id="interestRate" placeholder="6.5" step="0.01" min="0" max="20" value="6.5">
+        </div>
+        
+        <div class="input-group">
+          <label for="loanTerm">Loan Term (years)</label>
+          <input type="number" id="loanTerm" placeholder="30" step="1" min="1" max="50" value="30">
+        </div>
+      </div>
+      
+      <div class="result-card">
+        <div class="result-row">
+          <span class="result-label">Loan Amount</span>
+          <span class="result-value" id="loanAmount">$240,000</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Monthly Payment</span>
+          <span class="result-value large" id="monthlyPayment">$1,517</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total Interest</span>
+          <span class="result-value" id="totalInterest">$306,120</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total Amount Paid</span>
+          <span class="result-value" id="totalPaid">$546,120</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="card" style="margin-top:1.5rem">
+      <h2>❓ Frequently Asked Questions</h2>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">How is monthly mortgage payment calculated?</summary>
+        <p class="note" style="margin-top:0.5rem">Monthly mortgage payment is calculated using the formula: M = P[r(1+r)^n]/[(1+r)^n-1], where P is principal, r is monthly interest rate, and n is number of payments.</p>
+      </details>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">What is included in a mortgage payment?</summary>
+        <p class="note" style="margin-top:0.5rem">A mortgage payment typically includes principal, interest, property taxes, homeowners insurance, and possibly PMI (Private Mortgage Insurance) if down payment is less than 20%.</p>
+      </details>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">How much should my down payment be?</summary>
+        <p class="note" style="margin-top:0.5rem">A 20% down payment is ideal to avoid PMI, but many loans allow 3-10% down. FHA loans require as little as 3.5% down, while VA loans can be 0% down for eligible veterans.</p>
+      </details>
+    </section>
+    
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" style="margin-top:1.5rem">
+      <p class="note small">
+        <a href="/">Home</a> → <span>Mortgage Calculator</span>
+      </p>
+    </nav>
+    
+    <footer class="note small site-footer" role="contentinfo">
+      © <span id="y"></span> UpTools · <a href="/about/">About</a> · <a href="/contact/">Contact</a>
+    </footer>
+  </main>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    
+    const homePrice = document.getElementById('homePrice');
+    const downPayment = document.getElementById('downPayment');
+    const interestRate = document.getElementById('interestRate');
+    const loanTerm = document.getElementById('loanTerm');
+    const loanAmountEl = document.getElementById('loanAmount');
+    const monthlyPaymentEl = document.getElementById('monthlyPayment');
+    const totalInterestEl = document.getElementById('totalInterest');
+    const totalPaidEl = document.getElementById('totalPaid');
+    
+    function calculate() {
+      const price = parseFloat(homePrice.value) || 0;
+      const down = parseFloat(downPayment.value) || 0;
+      const rate = parseFloat(interestRate.value) || 0;
+      const years = parseInt(loanTerm.value) || 30;
+      
+      const principal = price - down;
+      const monthlyRate = rate / 100 / 12;
+      const numPayments = years * 12;
+      
+      let monthly = 0;
+      if (monthlyRate > 0) {
+        monthly = principal * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
+                  (Math.pow(1 + monthlyRate, numPayments) - 1);
+      } else {
+        monthly = principal / numPayments;
+      }
+      
+      const totalPaid = monthly * numPayments;
+      const totalInterest = totalPaid - principal;
+      
+      loanAmountEl.textContent = `$${principal.toLocaleString('en-US', {maximumFractionDigits: 0})}`;
+      monthlyPaymentEl.textContent = `$${monthly.toLocaleString('en-US', {maximumFractionDigits: 0})}`;
+      totalInterestEl.textContent = `$${totalInterest.toLocaleString('en-US', {maximumFractionDigits: 0})}`;
+      totalPaidEl.textContent = `$${totalPaid.toLocaleString('en-US', {maximumFractionDigits: 0})}`;
+    }
+    
+    homePrice.addEventListener('input', calculate);
+    downPayment.addEventListener('input', calculate);
+    interestRate.addEventListener('input', calculate);
+    loanTerm.addEventListener('input', calculate);
+    
+    calculate();
+  </script>
+</body>
+</html>

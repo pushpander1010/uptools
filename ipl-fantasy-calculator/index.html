@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IPL Fantasy Points Calculator - Dream11 & Fantasy League | UpTools</title>
+  <meta name="description" content="Calculate IPL fantasy cricket points for Dream11, MyTeam11, and fantasy leagues. Track batting, bowling, fielding points with accurate scoring rules.">
+  <link rel="canonical" href="https://www.uptools.in/ipl-fantasy-calculator/">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="IPL Fantasy Points Calculator - Dream11 & Fantasy League">
+  <meta property="og:description" content="Calculate fantasy cricket points for IPL matches with accurate Dream11 scoring rules.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/ipl-fantasy-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/ipl-fantasy-calculator.png">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Preload CSS -->
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "IPL Fantasy Points Calculator",
+    "applicationCategory": "UtilityApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "operatingSystem": "Web"
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.uptools.in/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "IPL Fantasy Calculator",
+      "item": "https://www.uptools.in/ipl-fantasy-calculator/"
+    }]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How are Dream11 fantasy points calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Points are awarded for runs (1 pt per run), boundaries (1 pt for 4s, 2 pts for 6s), wickets (25 pts each), catches (8 pts), run-outs (6 pts), and strike rate/economy bonuses."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is the bonus for scoring 50 or 100 runs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Scoring 50 runs earns a 8-point bonus, while scoring 100 runs earns a 16-point bonus in most fantasy cricket platforms."
+      }
+    }]
+  }
+  </script>
+  
+  <style>
+    :root {
+      --bg1: #0a0b0f;
+      --bg2: #0b0f1a;
+      --ink: #e9ecf5;
+      --muted: #a6adbb;
+      --purple: #b388ff;
+      --green: #00e676;
+      --orange: #ff9100;
+      --red: #ff5252;
+      --line: rgba(255,255,255,.10);
+      --card: rgba(255,255,255,.04);
+    }
+    body {
+      color: var(--ink);
+      background: radial-gradient(1200px 800px at 10% 5%, rgba(179,136,255,.08), transparent 55%),
+                  radial-gradient(900px 600px at 88% 10%, rgba(255,145,0,.06), transparent 55%),
+                  linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 32px; display: grid; gap: 16px; }
+    .card { border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 1rem; }
+    .tool-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .tool-icon {
+      width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; font-size: 24px;
+      background: linear-gradient(135deg, var(--purple), #7c4dff);
+      box-shadow: 0 8px 24px rgba(179,136,255,.3);
+    }
+    h1 { margin: 0; font-size: 1.75rem; text-shadow: 0 0 10px rgba(179,136,255,.4); }
+    .section-title { font-size: 1.1rem; margin: 0 0 12px; color: var(--purple); }
+    .inputs { display: grid; gap: 12px; }
+    .row { display: flex; flex-direction: column; gap: 6px; }
+    .label { font-weight: 600; color: var(--muted); font-size: .9rem; }
+    .input {
+      padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: rgba(0,0,0,.3);
+      color: var(--ink); font-size: 1rem; font-family: inherit;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .input:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 0 3px rgba(179,136,255,.15); }
+    .btn {
+      padding: 12px 20px; border-radius: 10px; border: 1px solid var(--purple);
+      background: linear-gradient(135deg, rgba(179,136,255,.2), rgba(124,77,255,.15));
+      color: var(--purple); font-weight: 700; cursor: pointer; font-size: 1rem;
+      transition: transform .1s, filter .15s;
+    }
+    .btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+    .btn.secondary { background: #1a2230; border-color: var(--line); color: var(--ink); }
+    .result-card {
+      background: linear-gradient(135deg, #1a2436 0%, #0f1826 100%);
+      border: 2px solid var(--purple);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .result-row:last-child { border-bottom: none; }
+    .result-label { color: var(--muted); font-size: 0.95rem; }
+    .result-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--purple);
+    }
+    .result-value.large { font-size: 2.5rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+    .note { color: var(--muted); font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/cricket-run-rate/">Run Rate</a>
+        <a href="/ipl-points-table/">IPL Table</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <div class="tool-header">
+      <div class="tool-icon" aria-hidden="true">⭐</div>
+      <h1>IPL Fantasy Points Calculator</h1>
+    </div>
+    
+    <section class="card">
+      <p class="note">Calculate fantasy cricket points for Dream11, MyTeam11, and other fantasy leagues using official scoring rules.</p>
+      
+      <!-- Ad Slot -->
+      <ins class="adsbygoogle"
+           style="display:block;margin:1rem 0"
+           data-ad-client="ca-pub-6216304334889617"
+           data-ad-slot="9810172647"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+    
+    <div class="grid-2">
+      <section class="card">
+        <h2 class="section-title">🏏 Batting Stats</h2>
+        <div class="inputs">
+          <div class="row">
+            <label for="runs">Runs Scored</label>
+            <input type="number" id="runs" class="input" placeholder="0" min="0" value="0">
+          </div>
+          <div class="row">
+            <label for="fours">Fours (4s)</label>
+            <input type="number" id="fours" class="input" placeholder="0" min="0" value="0">
+          </div>
+          <div class="row">
+            <label for="sixes">Sixes (6s)</label>
+            <input type="number" id="sixes" class="input" placeholder="0" min="0" value="0">
+          </div>
+          <div class="row">
+            <label for="balls">Balls Faced</label>
+            <input type="number" id="balls" class="input" placeholder="0" min="0" value="0">
+          </div>
+        </div>
+      </section>
+      
+      <section class="card">
+        <h2 class="section-title">🎯 Bowling Stats</h2>
+        <div class="inputs">
+          <div class="row">
+            <label for="wickets">Wickets Taken</label>
+            <input type="number" id="wickets" class="input" placeholder="0" min="0" value="0">
+          </div>
+          <div class="row">
+            <label for="runsConceded">Runs Conceded</label>
+            <input type="number" id="runsConceded" class="input" placeholder="0" min="0" value="0">
+          </div>
+          <div class="row">
+            <label for="oversBowled">Overs Bowled</label>
+            <input type="number" id="oversBowled" class="input" placeholder="0" min="0" step="0.1" value="0">
+          </div>
+          <div class="row">
+            <label for="maidens">Maiden Overs</label>
+            <input type="number" id="maidens" class="input" placeholder="0" min="0" value="0">
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <section class="card">
+      <h2 class="section-title">🧤 Fielding Stats</h2>
+      <div class="inputs">
+        <div class="row">
+          <label for="catches">Catches</label>
+          <input type="number" id="catches" class="input" placeholder="0" min="0" value="0">
+        </div>
+        <div class="row">
+          <label for="runouts">Run Outs (Direct/Assist)</label>
+          <input type="number" id="runouts" class="input" placeholder="0" min="0" value="0">
+        </div>
+        <div class="row">
+          <label for="stumpings">Stumpings</label>
+          <input type="number" id="stumpings" class="input" placeholder="0" min="0" value="0">
+        </div>
+      </div>
+      
+      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+        <button id="calc" class="btn" type="button">Calculate Points</button>
+        <button id="reset" class="btn secondary" type="button">Reset</button>
+      </div>
+    </section>
+    
+    <div class="result-card" id="results" style="display:none">
+      <div class="result-row">
+        <span class="result-label">Batting Points</span>
+        <span class="result-value" id="battingPts">0</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Bowling Points</span>
+        <span class="result-value" id="bowlingPts">0</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Fielding Points</span>
+        <span class="result-value" id="fieldingPts">0</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Bonus Points</span>
+        <span class="result-value" id="bonusPts">0</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Total Fantasy Points</span>
+        <span class="result-value large" id="totalPts">0</span>
+      </div>
+    </div>
+    
+    <!-- FAQ Section -->
+    <section class="card">
+      <h2>❓ Fantasy Points Scoring Rules</h2>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">Batting Points</summary>
+        <p class="note" style="margin-top:0.5rem">
+          • 1 point per run<br>
+          • 1 bonus point per boundary (4)<br>
+          • 2 bonus points per six (6)<br>
+          • 8 points for scoring 50 runs<br>
+          • 16 points for scoring 100 runs<br>
+          • Strike rate bonus: +6 pts (SR 170-200), +4 pts (SR 150-170), +2 pts (SR 130-150)
+        </p>
+      </details>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">Bowling Points</summary>
+        <p class="note" style="margin-top:0.5rem">
+          • 25 points per wicket<br>
+          • 8 bonus points for 3 wickets<br>
+          • 16 bonus points for 4 wickets<br>
+          • 24 bonus points for 5 wickets<br>
+          • 12 points per maiden over<br>
+          • Economy rate bonus: +6 pts (ER 5-6), +4 pts (ER 6-7), +2 pts (ER 7-8)
+        </p>
+      </details>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">Fielding Points</summary>
+        <p class="note" style="margin-top:0.5rem">
+          • 8 points per catch<br>
+          • 12 points per stumping<br>
+          • 6 points per run-out (direct hit or assist)<br>
+          • 4 bonus points for 3 catches
+        </p>
+      </details>
+    </section>
+    
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" style="margin-top:1.5rem">
+      <p class="note small">
+        <a href="/">Home</a> → <span>IPL Fantasy Calculator</span>
+      </p>
+    </nav>
+    
+    <footer class="note small site-footer" role="contentinfo">
+      © <span id="y"></span> UpTools · <a href="/about/">About</a> · <a href="/contact/">Contact</a>
+    </footer>
+  </main>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    
+    const inputs = {
+      runs: document.getElementById('runs'),
+      fours: document.getElementById('fours'),
+      sixes: document.getElementById('sixes'),
+      balls: document.getElementById('balls'),
+      wickets: document.getElementById('wickets'),
+      runsConceded: document.getElementById('runsConceded'),
+      oversBowled: document.getElementById('oversBowled'),
+      maidens: document.getElementById('maidens'),
+      catches: document.getElementById('catches'),
+      runouts: document.getElementById('runouts'),
+      stumpings: document.getElementById('stumpings')
+    };
+    
+    const results = document.getElementById('results');
+    const battingPtsEl = document.getElementById('battingPts');
+    const bowlingPtsEl = document.getElementById('bowlingPts');
+    const fieldingPtsEl = document.getElementById('fieldingPts');
+    const bonusPtsEl = document.getElementById('bonusPts');
+    const totalPtsEl = document.getElementById('totalPts');
+    
+    function calculate() {
+      const runs = parseInt(inputs.runs.value) || 0;
+      const fours = parseInt(inputs.fours.value) || 0;
+      const sixes = parseInt(inputs.sixes.value) || 0;
+      const balls = parseInt(inputs.balls.value) || 0;
+      const wickets = parseInt(inputs.wickets.value) || 0;
+      const runsConceded = parseInt(inputs.runsConceded.value) || 0;
+      const oversBowled = parseFloat(inputs.oversBowled.value) || 0;
+      const maidens = parseInt(inputs.maidens.value) || 0;
+      const catches = parseInt(inputs.catches.value) || 0;
+      const runouts = parseInt(inputs.runouts.value) || 0;
+      const stumpings = parseInt(inputs.stumpings.value) || 0;
+      
+      // Batting points
+      let battingPts = runs + fours + (sixes * 2);
+      let bonusPts = 0;
+      
+      // Batting milestones
+      if (runs >= 100) bonusPts += 16;
+      else if (runs >= 50) bonusPts += 8;
+      
+      // Strike rate bonus (min 10 balls)
+      if (balls >= 10) {
+        const sr = (runs / balls) * 100;
+        if (sr >= 170) bonusPts += 6;
+        else if (sr >= 150) bonusPts += 4;
+        else if (sr >= 130) bonusPts += 2;
+      }
+      
+      // Bowling points
+      let bowlingPts = (wickets * 25) + (maidens * 12);
+      
+      // Bowling milestones
+      if (wickets >= 5) bonusPts += 24;
+      else if (wickets >= 4) bonusPts += 16;
+      else if (wickets >= 3) bonusPts += 8;
+      
+      // Economy rate bonus (min 2 overs)
+      if (oversBowled >= 2) {
+        const er = runsConceded / oversBowled;
+        if (er <= 5) bonusPts += 6;
+        else if (er <= 6) bonusPts += 4;
+        else if (er <= 7) bonusPts += 2;
+      }
+      
+      // Fielding points
+      let fieldingPts = (catches * 8) + (stumpings * 12) + (runouts * 6);
+      
+      // Fielding bonus
+      if (catches >= 3) bonusPts += 4;
+      
+      const totalPts = battingPts + bowlingPts + fieldingPts + bonusPts;
+      
+      battingPtsEl.textContent = battingPts;
+      bowlingPtsEl.textContent = bowlingPts;
+      fieldingPtsEl.textContent = fieldingPts;
+      bonusPtsEl.textContent = bonusPts;
+      totalPtsEl.textContent = totalPts;
+      
+      results.style.display = 'block';
+    }
+    
+    function reset() {
+      Object.values(inputs).forEach(input => input.value = '0');
+      results.style.display = 'none';
+    }
+    
+    document.getElementById('calc').addEventListener('click', calculate);
+    document.getElementById('reset').addEventListener('click', reset);
+  </script>
+</body>
+</html>

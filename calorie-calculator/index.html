@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calorie Calculator - Daily Calorie Needs & TDEE | UpTools</title>
+  <meta name="description" content="Calculate daily calorie needs based on age, weight, height, and activity level. Find your TDEE for weight loss, maintenance, or muscle gain.">
+  <link rel="canonical" href="https://www.uptools.in/calorie-calculator/">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Calorie Calculator - Daily Calorie Needs & TDEE">
+  <meta property="og:description" content="Calculate your daily calorie needs for weight loss, maintenance, or muscle gain.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/calorie-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/calorie-calculator.png">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Preload CSS -->
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Calorie Calculator",
+    "applicationCategory": "UtilityApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "operatingSystem": "Web"
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.uptools.in/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Calorie Calculator",
+      "item": "https://www.uptools.in/calorie-calculator/"
+    }]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How many calories should I eat per day?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Daily calorie needs vary based on age, sex, weight, height, and activity level. Adult women typically need 1,600-2,400 calories, while adult men need 2,000-3,000 calories per day."
+      }
+    },{
+      "@type": "Question",
+      "name": "What is TDEE?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TDEE (Total Daily Energy Expenditure) is the total number of calories you burn per day, including basal metabolic rate (BMR) and physical activity. It's used to determine calorie needs for weight goals."
+      }
+    }]
+  }
+  </script>
+  
+  <style>
+    .calc-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .input-group label {
+      font-weight: 700;
+      color: var(--text);
+    }
+    .input-group input, .input-group select {
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .gender-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    .gender-btn {
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .gender-btn.active {
+      background: var(--brand);
+      color: #0b1020;
+      border-color: var(--brand);
+    }
+    .result-card {
+      background: linear-gradient(135deg, #1a2436 0%, #0f1826 100%);
+      border: 2px solid var(--brand);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .result-row:last-child {
+      border-bottom: none;
+    }
+    .result-label {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .result-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--brand);
+    }
+    .result-value.large {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <section class="card">
+      <h1>🍎 Calorie Calculator</h1>
+      <p class="note">Calculate your daily calorie needs (TDEE) for weight loss, maintenance, or muscle gain.</p>
+      
+      <!-- Ad Slot -->
+      <ins class="adsbygoogle"
+           style="display:block;margin:1rem 0"
+           data-ad-client="ca-pub-6216304334889617"
+           data-ad-slot="9810172647"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      
+      <div class="calc-grid">
+        <div class="input-group">
+          <label>Gender</label>
+          <div class="gender-toggle">
+            <button class="gender-btn active" id="maleBtn">Male</button>
+            <button class="gender-btn" id="femaleBtn">Female</button>
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label for="age">Age (years)</label>
+          <input type="number" id="age" placeholder="30" step="1" min="15" max="100" value="30">
+        </div>
+        
+        <div class="input-group">
+          <label for="weight">Weight (kg)</label>
+          <input type="number" id="weight" placeholder="70" step="0.1" min="30" max="300" value="70">
+        </div>
+        
+        <div class="input-group">
+          <label for="height">Height (cm)</label>
+          <input type="number" id="height" placeholder="170" step="1" min="100" max="250" value="170">
+        </div>
+        
+        <div class="input-group">
+          <label for="activity">Activity Level</label>
+          <select id="activity">
+            <option value="1.2">Sedentary (little or no exercise)</option>
+            <option value="1.375" selected>Lightly active (1-3 days/week)</option>
+            <option value="1.55">Moderately active (3-5 days/week)</option>
+            <option value="1.725">Very active (6-7 days/week)</option>
+            <option value="1.9">Extra active (athlete, 2x/day)</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="result-card">
+        <div class="result-row">
+          <span class="result-label">BMR (Basal Metabolic Rate)</span>
+          <span class="result-value" id="bmr">1,680 cal/day</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">TDEE (Maintenance)</span>
+          <span class="result-value large" id="tdee">2,310 cal/day</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Weight Loss (mild)</span>
+          <span class="result-value" id="weightLoss">1,810 cal/day</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Weight Gain (muscle)</span>
+          <span class="result-value" id="weightGain">2,810 cal/day</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="card" style="margin-top:1.5rem">
+      <h2>❓ Frequently Asked Questions</h2>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">How many calories should I eat per day?</summary>
+        <p class="note" style="margin-top:0.5rem">Daily calorie needs vary based on age, sex, weight, height, and activity level. Adult women typically need 1,600-2,400 calories, while adult men need 2,000-3,000 calories per day.</p>
+      </details>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">What is TDEE?</summary>
+        <p class="note" style="margin-top:0.5rem">TDEE (Total Daily Energy Expenditure) is the total number of calories you burn per day, including basal metabolic rate (BMR) and physical activity. It's used to determine calorie needs for weight goals.</p>
+      </details>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">How many calories to lose 1 pound per week?</summary>
+        <p class="note" style="margin-top:0.5rem">To lose 1 pound (0.45 kg) per week, you need a calorie deficit of 500 calories per day (3,500 calories per week). This is considered a safe and sustainable rate of weight loss.</p>
+      </details>
+    </section>
+    
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" style="margin-top:1.5rem">
+      <p class="note small">
+        <a href="/">Home</a> → <span>Calorie Calculator</span>
+      </p>
+    </nav>
+    
+    <footer class="note small site-footer" role="contentinfo">
+      © <span id="y"></span> UpTools · <a href="/about/">About</a> · <a href="/contact/">Contact</a>
+    </footer>
+  </main>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    
+    const maleBtn = document.getElementById('maleBtn');
+    const femaleBtn = document.getElementById('femaleBtn');
+    const age = document.getElementById('age');
+    const weight = document.getElementById('weight');
+    const height = document.getElementById('height');
+    const activity = document.getElementById('activity');
+    const bmrEl = document.getElementById('bmr');
+    const tdeeEl = document.getElementById('tdee');
+    const weightLossEl = document.getElementById('weightLoss');
+    const weightGainEl = document.getElementById('weightGain');
+    
+    let gender = 'male';
+    
+    function calculate() {
+      const ageVal = parseInt(age.value) || 30;
+      const weightVal = parseFloat(weight.value) || 70;
+      const heightVal = parseFloat(height.value) || 170;
+      const activityVal = parseFloat(activity.value) || 1.375;
+      
+      // Mifflin-St Jeor Equation
+      let bmr;
+      if (gender === 'male') {
+        bmr = 10 * weightVal + 6.25 * heightVal - 5 * ageVal + 5;
+      } else {
+        bmr = 10 * weightVal + 6.25 * heightVal - 5 * ageVal - 161;
+      }
+      
+      const tdee = bmr * activityVal;
+      const weightLoss = tdee - 500; // 500 cal deficit
+      const weightGain = tdee + 500; // 500 cal surplus
+      
+      bmrEl.textContent = `${Math.round(bmr).toLocaleString()} cal/day`;
+      tdeeEl.textContent = `${Math.round(tdee).toLocaleString()} cal/day`;
+      weightLossEl.textContent = `${Math.round(weightLoss).toLocaleString()} cal/day`;
+      weightGainEl.textContent = `${Math.round(weightGain).toLocaleString()} cal/day`;
+    }
+    
+    maleBtn.addEventListener('click', () => {
+      gender = 'male';
+      maleBtn.classList.add('active');
+      femaleBtn.classList.remove('active');
+      calculate();
+    });
+    
+    femaleBtn.addEventListener('click', () => {
+      gender = 'female';
+      femaleBtn.classList.add('active');
+      maleBtn.classList.remove('active');
+      calculate();
+    });
+    
+    age.addEventListener('input', calculate);
+    weight.addEventListener('input', calculate);
+    height.addEventListener('input', calculate);
+    activity.addEventListener('change', calculate);
+    
+    calculate();
+  </script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IPL Team Stats - All-Time Records, Wins & Championships | UpTools</title>
+  <meta name="description" content="Complete IPL team statistics including all-time wins, losses, win percentage, titles won, and head-to-head records for all 10 IPL franchises.">
+  <link rel="canonical" href="https://www.uptools.in/ipl-team-stats/">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="IPL Team Stats - All-Time Records & Championships">
+  <meta property="og:description" content="Complete IPL statistics for all teams including wins, titles, and records.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/ipl-team-stats/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/ipl-team-stats.png">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Preload CSS -->
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "IPL Team Stats",
+    "applicationCategory": "UtilityApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "operatingSystem": "Web"
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.uptools.in/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "IPL Team Stats",
+      "item": "https://www.uptools.in/ipl-team-stats/"
+    }]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "Which IPL team has won the most titles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mumbai Indians and Chennai Super Kings are tied with 5 IPL titles each. Mumbai Indians won in 2013, 2015, 2017, 2019, and 2020. Chennai Super Kings won in 2010, 2011, 2018, 2021, and 2023."
+      }
+    },{
+      "@type": "Question",
+      "name": "Which team has the best win percentage in IPL history?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Chennai Super Kings has the best win percentage in IPL history at approximately 59.6%, followed by Mumbai Indians at around 58.2%."
+      }
+    }]
+  }
+  </script>
+  
+  <style>
+    :root {
+      --bg1: #08090e;
+      --bg2: #0b0f1a;
+      --ink: #e9ecf5;
+      --muted: #a6adbb;
+      --gold: #ffd700;
+      --blue: #4fc3f7;
+      --green: #00e676;
+      --red: #ff5252;
+      --orange: #ff9100;
+      --line: rgba(255,255,255,.09);
+      --card: rgba(255,255,255,.04);
+    }
+    body {
+      color: var(--ink);
+      background: radial-gradient(1200px 700px at 15% 0%, rgba(255,215,0,.06), transparent 55%),
+                  radial-gradient(900px 600px at 85% 5%, rgba(79,195,247,.05), transparent 55%),
+                  linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 20px 16px 40px; display: grid; gap: 16px; }
+    .page-header { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .page-icon {
+      width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 26px;
+      background: linear-gradient(135deg, #ffd700, #ff9100);
+      box-shadow: 0 8px 24px rgba(255,215,0,.3);
+    }
+    h1 { margin: 0; font-size: 1.7rem; text-shadow: 0 0 12px rgba(255,215,0,.35); }
+    .subtitle { color: var(--muted); font-size: .9rem; margin: 2px 0 0; }
+    .card { border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 1rem; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    thead th {
+      padding: 10px 12px; text-align: left; color: var(--muted); font-weight: 600; font-size: .8rem;
+      border-bottom: 1px solid var(--line); white-space: nowrap;
+    }
+    tbody tr { border-bottom: 1px solid var(--line); transition: background .15s; }
+    tbody tr:hover { background: rgba(255,255,255,.04); }
+    td { padding: 11px 12px; white-space: nowrap; }
+    .team-cell { display: flex; align-items: center; gap: 10px; min-width: 200px; }
+    .team-logo {
+      width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+      font-size: 18px; border: 1px solid var(--line);
+    }
+    .team-name { font-weight: 700; }
+    .team-short { color: var(--muted); font-size: .78rem; }
+    .titles { color: var(--gold); font-weight: 800; font-size: 1.1rem; }
+    .win-pct { color: var(--green); font-weight: 700; }
+    .stat-highlight { color: var(--gold); font-weight: 800; }
+    .note { color: var(--muted); font-size: .9rem; }
+    .rel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+    .rel-link {
+      display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 12px;
+      border: 1px solid var(--line); border-radius: 10px; text-decoration: none; color: var(--ink);
+      background: rgba(255,215,0,.06); font-size: .88rem; text-align: center; transition: background .2s;
+    }
+    .rel-link:hover { background: rgba(255,215,0,.14); }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/cricket-run-rate/">Run Rate</a>
+        <a href="/ipl-points-table/">IPL Table</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <nav aria-label="Breadcrumb" style="font-size:.82rem;color:var(--muted)">
+      <a href="/" style="color:var(--muted)">Home</a> › <span aria-current="page">IPL Team Stats</span>
+    </nav>
+    
+    <div class="page-header">
+      <div class="page-icon" aria-hidden="true">📈</div>
+      <div>
+        <h1>IPL Team Statistics</h1>
+        <p class="subtitle">All-time records, wins, titles & performance stats for all IPL franchises</p>
+      </div>
+    </div>
+    
+    <!-- Ad Slot -->
+    <ins class="adsbygoogle"
+         style="display:block;margin:1rem 0"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="9810172647"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    
+    <div class="card">
+      <h2 style="margin:0 0 12px;font-size:1.1rem">All-Time Team Records</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>Titles</th>
+              <th>Matches</th>
+              <th>Wins</th>
+              <th>Losses</th>
+              <th>Win %</th>
+              <th>Finals</th>
+              <th>Playoffs</th>
+            </tr>
+          </thead>
+          <tbody id="statsTable"></tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- Related tools -->
+    <section class="card">
+      <h2 style="margin:0 0 12px;font-size:1.1rem">More Cricket Tools</h2>
+      <div class="rel-grid">
+        <a class="rel-link" href="/ipl-points-table/">🏆 IPL Points Table</a>
+        <a class="rel-link" href="/ipl-fantasy-calculator/">⭐ Fantasy Calculator</a>
+        <a class="rel-link" href="/cricket-run-rate/">🏏 Run Rate</a>
+        <a class="rel-link" href="/cricket-nrr/">🧮 NRR Calculator</a>
+        <a class="rel-link" href="/cricket-score-predictor/">📊 Score Predictor</a>
+      </div>
+    </section>
+    
+    <!-- FAQ -->
+    <section class="card">
+      <h2 style="margin:0 0 14px;font-size:1.1rem">Frequently Asked Questions</h2>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">Which IPL team has won the most titles?</summary>
+        <p class="note" style="margin-top:0.5rem">Mumbai Indians and Chennai Super Kings are tied with 5 IPL titles each. Mumbai Indians won in 2013, 2015, 2017, 2019, and 2020. Chennai Super Kings won in 2010, 2011, 2018, 2021, and 2023.</p>
+      </details>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">Which team has the best win percentage in IPL history?</summary>
+        <p class="note" style="margin-top:0.5rem">Chennai Super Kings has the best win percentage in IPL history at approximately 59.6%, followed by Mumbai Indians at around 58.2%.</p>
+      </details>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">How many teams have never won the IPL?</summary>
+        <p class="note" style="margin-top:0.5rem">Four teams have never won the IPL: Royal Challengers Bengaluru (RCB), Delhi Capitals (DC), Punjab Kings (PBKS), and Lucknow Super Giants (LSG). RCB has reached the finals 3 times but never won.</p>
+      </details>
+    </section>
+    
+    <footer class="note small site-footer" role="contentinfo" style="margin-top:8px;text-align:center;padding:12px">
+      © <span id="yr"></span> <a href="/">UpTools</a> · IPL Team Statistics · Data through 2024 season
+    </footer>
+  </main>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    
+    // IPL All-Time Stats (through 2024 season)
+    const TEAMS = [
+      { name: "Mumbai Indians", short: "MI", logo: "🔵", titles: 5, matches: 257, wins: 149, losses: 106, finals: 6, playoffs: 12 },
+      { name: "Chennai Super Kings", short: "CSK", logo: "🟡", titles: 5, matches: 240, wins: 143, losses: 95, finals: 10, playoffs: 12 },
+      { name: "Kolkata Knight Riders", short: "KKR", logo: "🟣", titles: 3, matches: 257, wins: 133, losses: 122, finals: 4, playoffs: 10 },
+      { name: "Rajasthan Royals", short: "RR", logo: "🩷", titles: 1, matches: 213, wins: 108, losses: 103, finals: 2, playoffs: 6 },
+      { name: "Sunrisers Hyderabad", short: "SRH", logo: "🟠", titles: 1, matches: 165, wins: 87, losses: 77, finals: 2, playoffs: 6 },
+      { name: "Gujarat Titans", short: "GT", logo: "🔵", titles: 1, matches: 42, wins: 26, losses: 16, finals: 2, playoffs: 2 },
+      { name: "Royal Challengers Bengaluru", short: "RCB", logo: "🔴", titles: 0, matches: 257, wins: 121, losses: 134, finals: 3, playoffs: 8 },
+      { name: "Delhi Capitals", short: "DC", logo: "🔷", titles: 0, matches: 257, wins: 124, losses: 131, finals: 1, playoffs: 6 },
+      { name: "Punjab Kings", short: "PBKS", logo: "🦁", titles: 0, matches: 257, wins: 119, losses: 136, finals: 1, playoffs: 4 },
+      { name: "Lucknow Super Giants", short: "LSG", logo: "🩵", titles: 0, matches: 42, wins: 20, losses: 22, finals: 0, playoffs: 1 }
+    ];
+    
+    function renderTable() {
+      const sorted = [...TEAMS].sort((a, b) => {
+        if (b.titles !== a.titles) return b.titles - a.titles;
+        const aWinPct = (a.wins / a.matches) * 100;
+        const bWinPct = (b.wins / b.matches) * 100;
+        return bWinPct - aWinPct;
+      });
+      
+      const tbody = document.getElementById('statsTable');
+      tbody.innerHTML = sorted.map(t => {
+        const winPct = ((t.wins / t.matches) * 100).toFixed(1);
+        return `<tr>
+          <td><div class="team-cell">
+            <div class="team-logo">${t.logo}</div>
+            <div>
+              <div class="team-name">${t.name}</div>
+              <div class="team-short">${t.short}</div>
+            </div>
+          </div></td>
+          <td class="titles">${t.titles > 0 ? `🏆 ${t.titles}` : '-'}</td>
+          <td>${t.matches}</td>
+          <td class="stat-highlight">${t.wins}</td>
+          <td>${t.losses}</td>
+          <td class="win-pct">${winPct}%</td>
+          <td>${t.finals}</td>
+          <td>${t.playoffs}</td>
+        </tr>`;
+      }).join('');
+    }
+    
+    renderTable();
+  </script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tip Calculator - Split Bills & Calculate Tips | UpTools</title>
+  <meta name="description" content="Free tip calculator with bill splitting. Calculate tips for restaurants, bars, delivery services. Supports custom tip percentages and multiple people.">
+  <link rel="canonical" href="https://www.uptools.in/tip-calculator/">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Tip Calculator - Split Bills & Calculate Tips">
+  <meta property="og:description" content="Calculate tips and split bills easily. Perfect for restaurants, bars, and delivery services.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/tip-calculator/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/tip-calculator.png">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Preload CSS -->
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Tip Calculator",
+    "applicationCategory": "UtilityApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "operatingSystem": "Web"
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.uptools.in/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tip Calculator",
+      "item": "https://www.uptools.in/tip-calculator/"
+    }]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What is a standard tip percentage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the US and Canada, standard tip percentages are 15% for adequate service, 18-20% for good service, and 20%+ for excellent service. In Europe, tipping customs vary by country, typically ranging from 5-10%."
+      }
+    },{
+      "@type": "Question",
+      "name": "How do you split a bill with different tip amounts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enter the total bill amount, select your tip percentage, and enter the number of people. The calculator will divide the total (bill + tip) equally among all people."
+      }
+    }]
+  }
+  </script>
+  
+  <style>
+    .calc-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .input-group label {
+      font-weight: 700;
+      color: var(--text);
+    }
+    .input-group input, .input-group select {
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .tip-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 0.5rem;
+    }
+    .tip-btn {
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tip-btn:hover {
+      background: var(--brand);
+      color: #0b1020;
+    }
+    .tip-btn.active {
+      background: var(--brand);
+      color: #0b1020;
+      border-color: var(--brand);
+    }
+    .result-card {
+      background: linear-gradient(135deg, #1a2436 0%, #0f1826 100%);
+      border: 2px solid var(--brand);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .result-row:last-child {
+      border-bottom: none;
+    }
+    .result-label {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .result-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--brand);
+    }
+    .result-value.large {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <section class="card">
+      <h1>💵 Tip Calculator</h1>
+      <p class="note">Calculate tips and split bills easily for restaurants, bars, and delivery services.</p>
+      
+      <!-- Ad Slot -->
+      <ins class="adsbygoogle"
+           style="display:block;margin:1rem 0"
+           data-ad-client="ca-pub-6216304334889617"
+           data-ad-slot="9810172647"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      
+      <div class="calc-grid">
+        <div class="input-group">
+          <label for="billAmount">Bill Amount</label>
+          <input type="number" id="billAmount" placeholder="0.00" step="0.01" min="0" value="100">
+        </div>
+        
+        <div class="input-group">
+          <label>Tip Percentage</label>
+          <div class="tip-buttons">
+            <button class="tip-btn" data-tip="10">10%</button>
+            <button class="tip-btn" data-tip="15">15%</button>
+            <button class="tip-btn active" data-tip="18">18%</button>
+            <button class="tip-btn" data-tip="20">20%</button>
+            <button class="tip-btn" data-tip="25">25%</button>
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label for="customTip">Custom Tip %</label>
+          <input type="number" id="customTip" placeholder="18" step="0.1" min="0" max="100" value="18">
+        </div>
+        
+        <div class="input-group">
+          <label for="numPeople">Number of People</label>
+          <input type="number" id="numPeople" placeholder="1" step="1" min="1" value="1">
+        </div>
+      </div>
+      
+      <div class="result-card">
+        <div class="result-row">
+          <span class="result-label">Tip Amount</span>
+          <span class="result-value" id="tipAmount">$18.00</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total Amount</span>
+          <span class="result-value" id="totalAmount">$118.00</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Per Person</span>
+          <span class="result-value large" id="perPerson">$118.00</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="card" style="margin-top:1.5rem">
+      <h2>❓ Frequently Asked Questions</h2>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">What is a standard tip percentage?</summary>
+        <p class="note" style="margin-top:0.5rem">In the US and Canada, standard tip percentages are 15% for adequate service, 18-20% for good service, and 20%+ for excellent service. In Europe, tipping customs vary by country, typically ranging from 5-10%.</p>
+      </details>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">How do you split a bill with different tip amounts?</summary>
+        <p class="note" style="margin-top:0.5rem">Enter the total bill amount, select your tip percentage, and enter the number of people. The calculator will divide the total (bill + tip) equally among all people.</p>
+      </details>
+      
+      <details style="margin:1rem 0">
+        <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">Should I tip on the pre-tax or post-tax amount?</summary>
+        <p class="note" style="margin-top:0.5rem">It's generally recommended to tip on the pre-tax amount, though many people tip on the total including tax. This calculator works with whatever amount you enter.</p>
+      </details>
+    </section>
+    
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" style="margin-top:1.5rem">
+      <p class="note small">
+        <a href="/">Home</a> → <span>Tip Calculator</span>
+      </p>
+    </nav>
+    
+    <footer class="note small site-footer" role="contentinfo">
+      © <span id="y"></span> UpTools · <a href="/about/">About</a> · <a href="/contact/">Contact</a>
+    </footer>
+  </main>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    
+    const billAmount = document.getElementById('billAmount');
+    const customTip = document.getElementById('customTip');
+    const numPeople = document.getElementById('numPeople');
+    const tipButtons = document.querySelectorAll('.tip-btn');
+    const tipAmountEl = document.getElementById('tipAmount');
+    const totalAmountEl = document.getElementById('totalAmount');
+    const perPersonEl = document.getElementById('perPerson');
+    
+    function calculate() {
+      const bill = parseFloat(billAmount.value) || 0;
+      const tip = parseFloat(customTip.value) || 0;
+      const people = parseInt(numPeople.value) || 1;
+      
+      const tipAmount = bill * (tip / 100);
+      const total = bill + tipAmount;
+      const perPerson = total / people;
+      
+      tipAmountEl.textContent = `$${tipAmount.toFixed(2)}`;
+      totalAmountEl.textContent = `$${total.toFixed(2)}`;
+      perPersonEl.textContent = `$${perPerson.toFixed(2)}`;
+    }
+    
+    tipButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tipButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        customTip.value = btn.dataset.tip;
+        calculate();
+      });
+    });
+    
+    billAmount.addEventListener('input', calculate);
+    customTip.addEventListener('input', () => {
+      tipButtons.forEach(b => b.classList.remove('active'));
+      calculate();
+    });
+    numPeople.addEventListener('input', calculate);
+    
+    calculate();
+  </script>
+</body>
+</html>

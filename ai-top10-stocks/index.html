@@ -1,9 +1,6 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Ads (only renders if available) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>AI Top 10 Stocks for Tomorrow — Entry, Targets, Stop, Reasons | UpTools</title>
@@ -69,30 +66,144 @@
   </script>
 
   <style>
-    /* Tiny local tweaks; most styling inherits from your shared style.css */
-    .hero { align-items:center; gap:12px }
-    .grid-2 { display:grid; grid-template-columns:1.1fr .9fr; gap:12px }
-    @media (max-width: 980px){ .grid-2 { grid-template-columns:1fr; } }
-    .panel { display:grid; gap:10px }
-    .mini { font-size:12px; color:var(--muted) }
-    .badge { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft); font-size:12px }
-    .ad-slot { display:none }
-    .table { width:100%; border-collapse:collapse; }
-    .table th, .table td { border:1px solid var(--border); padding:8px; text-align:left; }
-    .table th { background:#0c1430; position:sticky; top:0; z-index:1 }
-    .pill-buy { color:#22c55e } .pill-sell { color:#ef4444 } .pill-neu { color:#a8b3cf }
-    .level { font-variant-numeric: tabular-nums }
-    .cards { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px }
-    @media (max-width: 880px){ .cards { grid-template-columns:1fr; } }
-    .cardpick { border:1px solid var(--border); border-radius:12px; padding:10px; background:#0b1326 }
-    .reason { font-size:12px; color:#cdd7e5; margin-top:6px; line-height:1.45 }
-    .chip-sm { display:inline-block; padding:4px 8px; border:1px solid var(--border); border-radius:999px; font-size:12px; margin-right:6px }
-    .row-inline{ display:flex; gap:8px; flex-wrap:wrap; align-items:center }
+    /* ── Layout ── */
+    .t10-wrap { max-width: 1200px; margin: 0 auto; }
+    .row-inline { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+
+    /* ── Market tabs ── */
+    .market-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px; }
+    .mtab { cursor:pointer; padding:6px 14px; border-radius:999px; border:1px solid #1e2d45;
+            background:#0d1626; color:#9aa4b2; font-size:.82rem; font-weight:600;
+            transition:all .15s; white-space:nowrap; }
+    .mtab:hover { border-color:#3b5278; color:#e6edf3; }
+    .mtab.active { background:linear-gradient(135deg,#1a3a6a,#0f2a50);
+                   border-color:#7aa2ff; color:#7aa2ff; }
+
+    /* ── Meta bar ── */
+    .meta-bar { display:flex; gap:16px; flex-wrap:wrap; align-items:center;
+                padding:8px 12px; background:#0d1626; border:1px solid #1e2d45;
+                border-radius:.6rem; font-size:.82rem; color:#9aa4b2; }
+    .meta-bar b { color:#e6edf3; }
+    .meta-dot { width:8px; height:8px; border-radius:50%; background:#22c55e;
+                display:inline-block; margin-right:4px;
+                box-shadow:0 0 6px #22c55e; animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    @media (prefers-reduced-motion:reduce) { .meta-dot { animation:none; } }
+
+    /* ── Skeleton loader ── */
+    .skel { background:linear-gradient(90deg,#0d1626 25%,#162035 50%,#0d1626 75%);
+            background-size:200% 100%; animation:shimmer 1.4s infinite;
+            border-radius:6px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    @media (prefers-reduced-motion:reduce) { .skel { animation:none; background:#0d1626; } }
+
+    /* ── Score badges ── */
+    .score-badge { display:inline-flex; align-items:center; justify-content:center;
+                   width:28px; height:28px; border-radius:50%; font-size:.75rem;
+                   font-weight:800; border:1px solid; }
+    .score-pos { background:#0a2a1a; border-color:#1e6641; color:#22c55e; }
+    .score-neg { background:#2a0a0a; border-color:#661e1e; color:#ef4444; }
+    .score-neu { background:#1a1a2a; border-color:#2a2a4a; color:#9aa4b2; }
+
+    /* ── Verdict badge ── */
+    .verdict { display:inline-flex; align-items:center; gap:5px; padding:3px 10px;
+               border-radius:999px; font-size:.78rem; font-weight:700; }
+    .verdict-buy  { background:#0a2a1a; border:1px solid #1e6641; color:#22c55e; }
+    .verdict-sell { background:#2a0a0a; border:1px solid #661e1e; color:#ef4444; }
+    .verdict-hold { background:#1a1a0a; border:1px solid #3a3a1e; color:#f59e0b; }
+
+    /* ── Pick cards ── */
+    .picks-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:12px; }
+    @media (max-width:600px) { .picks-grid { grid-template-columns:1fr; } }
+
+    .pick-card { background:#0b1326; border:1px solid #1e2d45; border-radius:.9rem;
+                 padding:14px; transition:border-color .2s, box-shadow .2s; }
+    .pick-card:hover { border-color:#3b5278; box-shadow:0 0 16px rgba(122,162,255,.08); }
+    .pick-card.rank-1 { border-color:#f59e0b44; }
+    .pick-card.rank-2 { border-color:#9aa4b244; }
+    .pick-card.rank-3 { border-color:#cd7f3244; }
+
+    .pick-header { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
+    .pick-rank { font-size:1.1rem; font-weight:900; color:#9aa4b2; min-width:24px; }
+    .pick-rank.r1 { color:#f59e0b; }
+    .pick-rank.r2 { color:#9aa4b2; }
+    .pick-rank.r3 { color:#cd7f32; }
+    .pick-symbol { font-size:1rem; font-weight:800; color:#e6edf3; }
+    .pick-name { font-size:.78rem; color:#9aa4b2; margin-top:1px; }
+    .pick-price { font-size:1.1rem; font-weight:700; color:#7aa2ff; font-variant-numeric:tabular-nums; }
+    .pick-chg { font-size:.78rem; font-weight:600; }
+    .chg-up { color:#22c55e; } .chg-dn { color:#ef4444; }
+
+    .pick-scores { display:flex; gap:6px; flex-wrap:wrap; margin:10px 0 8px; }
+
+    .plan-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin:8px 0; }
+    .plan-cell { background:#0d1a2e; border:1px solid #1e2d45; border-radius:.5rem;
+                 padding:6px 8px; text-align:center; }
+    .plan-label { font-size:.68rem; color:#9aa4b2; text-transform:uppercase; letter-spacing:.04em; }
+    .plan-value { font-size:.88rem; font-weight:700; color:#e6edf3; font-variant-numeric:tabular-nums; margin-top:2px; }
+    .plan-value.entry { color:#7aa2ff; }
+    .plan-value.target { color:#22c55e; }
+    .plan-value.stop { color:#ef4444; }
+
+    .pick-why { font-size:.78rem; color:#9aa4b2; line-height:1.5; margin-top:8px;
+                padding-top:8px; border-top:1px solid #1e2d45; }
+    .pick-news { margin-top:6px; }
+    .pick-news li { font-size:.75rem; color:#7aa2ff; list-style:none; padding:2px 0;
+                    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .pick-news li::before { content:"📰 "; }
+
+    /* ── Volume bar ── */
+    .vol-bar-wrap { margin-top:8px; }
+    .vol-bar-label { display:flex; justify-content:space-between; font-size:.72rem; color:#9aa4b2; margin-bottom:3px; }
+    .vol-bar-track { height:4px; background:#1e2d45; border-radius:2px; overflow:hidden; }
+    .vol-bar-fill { height:100%; border-radius:2px; transition:width .4s; }
+    .vol-high { background:linear-gradient(90deg,#22c55e,#16a34a); }
+    .vol-med  { background:linear-gradient(90deg,#f59e0b,#d97706); }
+    .vol-low  { background:linear-gradient(90deg,#ef4444,#dc2626); }
+
+    /* ── Summary stats ── */
+    .summary-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+    @media (max-width:640px) { .summary-grid { grid-template-columns:repeat(2,1fr); } }
+    .stat-box { background:#0d1626; border:1px solid #1e2d45; border-radius:.75rem;
+                padding:12px; text-align:center; }
+    .stat-val { font-size:1.4rem; font-weight:900; }
+    .stat-lbl { font-size:.72rem; color:#9aa4b2; margin-top:2px; }
+
+    /* ── Table ── */
+    .tbl-wrap { overflow-x:auto; }
+    .picks-table { width:100%; border-collapse:separate; border-spacing:0; font-size:.82rem; }
+    .picks-table th { background:#0c1430; color:#9aa4b2; font-weight:700; padding:8px 10px;
+                      text-align:left; border-bottom:2px solid #1e2d45; white-space:nowrap;
+                      position:sticky; top:0; z-index:1; }
+    .picks-table td { padding:8px 10px; border-bottom:1px solid #1a2540; vertical-align:middle; }
+    .picks-table tr:hover td { background:#0d1a2e; }
+    .picks-table .num { font-variant-numeric:tabular-nums; }
+    .picks-table .sym { font-weight:700; color:#e6edf3; }
+
+    /* ── Tabs (table/cards) ── */
+    .view-tabs { display:flex; gap:4px; }
+    .vtab { padding:5px 14px; border-radius:.5rem; border:1px solid #1e2d45;
+            background:transparent; color:#9aa4b2; font-size:.82rem; cursor:pointer; }
+    .vtab.active { background:#1a2840; color:#e6edf3; border-color:#3b5278; }
+
+    /* ── Empty / error state ── */
+    .empty-state { text-align:center; padding:40px 20px; color:#9aa4b2; }
+    .empty-state .icon { font-size:2.5rem; margin-bottom:8px; }
+
+    /* ── Misc ── */
+    .mini { font-size:.78rem; color:#9aa4b2; }
+    .video-wrap { position:relative; width:100%; aspect-ratio:16/9; border-radius:.75rem;
+                  overflow:hidden; border:1px solid #1e2d45; }
+    .video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
   </style>
 </head>
 
-<body style="--accent:#22D3EE;--bg1:#0b0f1a;--bg2:#121a2f">
-  <!-- Header -->
+<body>
+  <a href="#main" class="sr-only">Skip to content</a>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
   <header class="site" role="banner">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="UpTools Home">
@@ -109,386 +220,424 @@
     </div>
   </header>
 
-  <main class="container" id="top">
-    <!-- HERO -->
-    <section class="card hero" aria-labelledby="title">
-      <div class="tool-icon" aria-hidden="true">📈</div>
-      <div>
-        <h1 id="title">AI Top 10 Stocks for Tomorrow</h1>
-        <p class="note">Multi-market screener combining <b>technical</b> + <b>fundamental</b> + <b>news sentiment</b>. Get <u>entry</u>, <u>targets</u> & <u>stop-loss</u> with clear “why”. <span class="mini">Free • Fast • No sign-ups</span></p>
-        <div class="chips" style="margin-top:8px">
-          <span class="pill">NSE • BSE • NASDAQ • NYSE • LSE • TSX • TSE • SSE • HKEX • XETRA</span>
-          <a class="chip" href="/sitemap.xml">Sitemap</a>
+  <main id="main" class="wrap" role="main">
+    <div class="t10-wrap">
+
+    <section class="card" aria-labelledby="title" style="margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <div style="font-size:2.2rem;line-height:1" aria-hidden="true">&#x1F4C8;</div>
+        <div style="flex:1;min-width:200px">
+          <h1 id="title" style="margin:0;font-size:1.4rem">AI Top 10 Stocks for Tomorrow</h1>
+          <p class="mini" style="margin-top:4px">Multi-market screener combining <b style="color:#e6edf3">technical</b> + <b style="color:#e6edf3">fundamental</b> + <b style="color:#e6edf3">news sentiment</b>. Get entry, targets &amp; stop-loss with clear reasoning. Free &middot; No sign-up.</p>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button id="refreshBtn" class="btn" type="button">&#x21BB; Refresh</button>
+          <button id="exportCsvBtn" class="btn secondary" type="button">&#x2193; CSV</button>
+          <button id="copySummaryBtn" class="btn secondary" type="button">&#x2398; Copy</button>
         </div>
       </div>
     </section>
 
-    <!-- Ad -->
-    <div id="ad-mount" aria-hidden="true"></div>
-
-    <!-- Controls -->
-    <section class="card" aria-label="Controls">
-      <div class="row-inline" style="flex-wrap:wrap;gap:12px;align-items:flex-end">
-        <div class="row-inline" style="flex:1;flex-wrap:wrap;gap:10px">
-          <label class="inline">
-            <span class="mini">Market</span>
-            <select id="market" class="select">
-              <option value="NSE" selected>NSE (India)</option>
-              <option value="BSE">BSE (India)</option>
-              <option value="NASDAQ">NASDAQ (US)</option>
-              <option value="NYSE">NYSE (US)</option>
-              <option value="LSE">LSE (UK)</option>
-              <option value="TSX">TSX (Canada)</option>
-              <option value="TSE">TSE (Tokyo)</option>
-              <option value="SSE">SSE (Shanghai)</option>
-              <option value="HKEX">HKEX (Hong Kong)</option>
-              <option value="FWB">XETRA/Frankfurt (DE)</option>
-            </select>
-          </label>
-          <label class="inline">
-            <span class="mini">Show</span>
-            <select id="count" class="select">
-              <option value="5">5</option>
-              <option value="10" selected>10</option>
-              <option value="15">15</option>
-              <option value="ALL">All</option>
-            </select>
-          </label>
-          <button id="refresh" class="btn" type="button">Refresh Snapshot</button>
+    <section class="card" aria-label="Market selector" style="margin-bottom:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px">
+        <div class="market-tabs" id="marketTabs" role="tablist" aria-label="Select market">
+          <button class="mtab active" role="tab" aria-selected="true"  data-market="NSE">&#x1F1EE;&#x1F1F3; NSE</button>
+          <button class="mtab" role="tab" aria-selected="false" data-market="BSE">&#x1F1EE;&#x1F1F3; BSE</button>
+          <button class="mtab" role="tab" aria-selected="false" data-market="NASDAQ">&#x1F1FA;&#x1F1F8; NASDAQ</button>
+          <button class="mtab" role="tab" aria-selected="false" data-market="NYSE">&#x1F1FA;&#x1F1F8; NYSE</button>
+          <button class="mtab" role="tab" aria-selected="false" data-market="LSE">&#x1F1EC;&#x1F1E7; LSE</button>
+          <button class="mtab" role="tab" aria-selected="false" data-market="TSX">&#x1F1E8;&#x1F1E6; TSX</button>
+          <button class="mtab" role="tab" aria-selected="false" data-market="TSE">&#x1F1EF;&#x1F1F5; TSE</button>
+          <button class="mtab" role="tab" aria-selected="false" data-market="SSE">&#x1F1E8;&#x1F1F3; SSE</button>
+          <button class="mtab" role="tab" aria-selected="false" data-market="HKEX">&#x1F1ED;&#x1F1F0; HKEX</button>
+          <button class="mtab" role="tab" aria-selected="false" data-market="FWB">&#x1F1E9;&#x1F1EA; XETRA</button>
         </div>
-        <div class="row-inline" style="gap:8px">
-          <button id="exportCsv" class="btn secondary sm" type="button">Export CSV</button>
-          <button id="copySummary" class="btn secondary sm" type="button">Copy Summary</button>
+        <div style="display:flex;gap:8px;align-items:center">
+          <label class="mini" for="countSel">Show</label>
+          <select id="countSel" class="select" style="width:80px">
+            <option value="5">Top 5</option>
+            <option value="10" selected>Top 10</option>
+            <option value="20">Top 20</option>
+            <option value="ALL">All</option>
+          </select>
+          <div class="view-tabs">
+            <button class="vtab active" id="viewCards" type="button">Cards</button>
+            <button class="vtab" id="viewTable" type="button">Table</button>
+          </div>
         </div>
       </div>
-      <div class="mini" id="status" role="status" aria-live="polite">Loading daily picks�</div>
-      <div class="mini">Last generated <span id="lastGenerated">--</span> � Next update <span id="nextUpdate">--</span></div>
-      <p class="mini">This list refreshes automatically once per day using the same scoring recipe as the live AI Stock Analyzer.</p>
+      <div class="meta-bar" id="metaBar" aria-live="polite">
+        <span><span class="meta-dot" id="statusDot"></span><span id="statusText">Loading picks&hellip;</span></span>
+        <span>Generated: <b id="lastGenerated">--</b></span>
+        <span>Next update: <b id="nextUpdate">--</b></span>
+        <span id="scanMeta"></span>
+      </div>
     </section>
-    <!-- Results -->
-    <section class="grid-2" aria-label="Results">
-      <article class="panel">
-        <section class="card" aria-labelledby="topListTitle">
-          <h2 id="topListTitle" class="h5">Top 10 — Table</h2>
-          <div class="mini">Decision is computed from price trend (SMA50/200, RSI), pattern (support/resistance), basic valuation (PE, dividend) and net news tone.</div>
-          <div style="overflow:auto; max-height:520px; margin-top:8px">
-            <table class="table" id="tbl">
+
+    <div class="summary-grid" id="summaryGrid" style="margin-bottom:12px">
+      <div class="stat-box"><div class="stat-val skel" style="height:28px;width:60px;margin:0 auto"></div><div class="stat-lbl">Picks</div></div>
+      <div class="stat-box"><div class="stat-val skel" style="height:28px;width:60px;margin:0 auto"></div><div class="stat-lbl">Avg Score</div></div>
+      <div class="stat-box"><div class="stat-val skel" style="height:28px;width:60px;margin:0 auto"></div><div class="stat-lbl">Bullish</div></div>
+      <div class="stat-box"><div class="stat-val skel" style="height:28px;width:60px;margin:0 auto"></div><div class="stat-lbl">Scanned</div></div>
+    </div>
+
+    <div id="picksArea">
+      <div id="cardsView">
+        <div class="picks-grid" id="picksGrid">
+          <div class="pick-card" style="min-height:180px"><div class="skel" style="height:20px;width:60%;margin-bottom:10px"></div><div class="skel" style="height:14px;width:40%;margin-bottom:8px"></div><div class="skel" style="height:60px;margin-bottom:8px"></div><div class="skel" style="height:14px;width:80%"></div></div>
+          <div class="pick-card" style="min-height:180px"><div class="skel" style="height:20px;width:60%;margin-bottom:10px"></div><div class="skel" style="height:14px;width:40%;margin-bottom:8px"></div><div class="skel" style="height:60px;margin-bottom:8px"></div><div class="skel" style="height:14px;width:80%"></div></div>
+          <div class="pick-card" style="min-height:180px"><div class="skel" style="height:20px;width:60%;margin-bottom:10px"></div><div class="skel" style="height:14px;width:40%;margin-bottom:8px"></div><div class="skel" style="height:60px;margin-bottom:8px"></div><div class="skel" style="height:14px;width:80%"></div></div>
+        </div>
+      </div>
+      <div id="tableView" style="display:none">
+        <div class="card">
+          <div class="tbl-wrap">
+            <table class="picks-table" id="picksTable">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Symbol</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Entry</th>
-                  <th>Targets</th>
-                  <th>Stop</th>
-                  <th>TA</th>
-                  <th>FA</th>
-                  <th>News</th>
-                  <th>Score</th>
+                  <th>#</th><th>Symbol</th><th>Name</th><th>Price</th>
+                  <th>Entry</th><th>T1</th><th>T2</th><th>Stop</th>
+                  <th>TA</th><th>FA</th><th>News</th><th>Vol</th><th>Score</th><th>Plan</th>
                 </tr>
               </thead>
-              <tbody id="tbody"></tbody>
+              <tbody id="picksTableBody"></tbody>
             </table>
           </div>
-        </section>
+        </div>
+      </div>
+    </div>
 
-        <section class="card" aria-labelledby="sourcesTitle">
-          <h2 id="sourcesTitle" class="h5">Data Sources</h2>
-          <ul class="list compact">
-            <li><a href="https://finance.yahoo.com/" rel="noopener nofollow">Yahoo Finance (quotes, charts)</a></li>
-            <li><a href="https://news.google.com/" rel="noopener nofollow">Google News (RSS for headlines)</a></li>
-            <li><a href="https://www.investopedia.com/terms/s/support.asp" rel="noopener">Support & Resistance — Investopedia</a></li>
-            <li><a href="/ai-stock-analyzer/">Related tool: AI Stock Analyzer</a></li>
-          </ul>
-        </section>
-      </article>
+    <section class="card" style="margin-top:12px" aria-labelledby="methodTitle">
+      <h2 id="methodTitle" style="margin-top:0;font-size:1rem">How Scores Work</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:8px">
+        <div style="background:#0d1626;border:1px solid #1e2d45;border-radius:.6rem;padding:10px">
+          <div style="font-weight:700;color:#7aa2ff;margin-bottom:4px">&#x1F4CA; TA Score</div>
+          <div class="mini">+1 price &gt; SMA50 &middot; +1 SMA50 &gt; SMA200 &middot; +1 RSI 45&ndash;65 &middot; +1 breakout &middot; &minus;1 RSI &gt; 70 &middot; &minus;1 below support</div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e2d45;border-radius:.6rem;padding:10px">
+          <div style="font-weight:700;color:#22c55e;margin-bottom:4px">&#x1F4B0; FA Score</div>
+          <div class="mini">+1 PE 8&ndash;25 &middot; &minus;1 PE &gt; 35 &middot; +1 dividend &ge; 1%</div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e2d45;border-radius:.6rem;padding:10px">
+          <div style="font-weight:700;color:#f59e0b;margin-bottom:4px">&#x1F4F0; News Score</div>
+          <div class="mini">Headline keyword sentiment from Yahoo Finance news (&plusmn;2 cap)</div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e2d45;border-radius:.6rem;padding:10px">
+          <div style="font-weight:700;color:#a78bfa;margin-bottom:4px">&#x1F4E6; Volume Score</div>
+          <div class="mini">+1 last volume &ge; 1.5&times; 10-day avg &middot; &minus;1 if &le; 0.7&times;</div>
+        </div>
+      </div>
+      <p class="mini" style="margin-top:10px;padding:8px;background:#0d1626;border-radius:.5rem;border:1px solid #1e2d45">
+        &#x26A0;&#xFE0F; <b style="color:#f59e0b">Not investment advice.</b> This is an educational screener. Always do your own research and consider your risk tolerance before trading.
+      </p>
+    </section>
 
-      <article class="panel">
-        <section class="card" aria-labelledby="cardsTitle">
-          <h2 id="cardsTitle" class="h5">Picks — Cards (Why & How)</h2>
-          <div id="cards" class="cards"></div>
-        </section>
-
-        <section class="card" aria-labelledby="methodTitle">
-          <h2 id="methodTitle" class="h5">Method (Transparent)</h2>
-          <p class="mini">
-            TA score: +1 price&gt;SMA50, +1 SMA50&gt;SMA200, +1 RSI in 45–65, +1 breakout above resistance, −1 RSI&gt;70, −1 price&lt;support.<br/>
-            FA score: +1 PE 8–25, −1 PE&gt;35, +1 dividend ≥1%. News score: headline tone from Google News keywords (±2 cap).<br/>
-            Entry: <i>breakout retest</i> (near old resistance) or <i>support bounce</i>. Stop: 1.5–2.5% below support. Targets: 1.5× and 2.5× R:R or next resistance.
-          </p>
-          <p class="mini">This tool is educational and not investment advice. Daily snapshot refreshes automatically after the batch run (usually post-market). Markets carry risk.</p>
-        </section>
-      </article>
+    <section class="card" style="margin-top:12px" aria-labelledby="faqTitle">
+      <h2 id="faqTitle" style="margin-top:0;font-size:1rem">Frequently Asked Questions</h2>
+      <details style="margin-bottom:8px">
+        <summary style="cursor:pointer;font-weight:600;padding:4px 0">How are picks chosen?</summary>
+        <p class="mini" style="margin-top:6px">Candidates are ranked using technical trend (SMA50/200, RSI), pattern context (near support/breakout), basic valuation (PE, dividend), and news sentiment from Yahoo Finance. The combined score determines the top picks.</p>
+      </details>
+      <details style="margin-bottom:8px">
+        <summary style="cursor:pointer;font-weight:600;padding:4px 0">Which markets are supported?</summary>
+        <p class="mini" style="margin-top:6px">NSE, BSE, NASDAQ, NYSE, LSE (London), TSX (Toronto), TSE (Tokyo), SSE (Shanghai), HKEX (Hong Kong), and XETRA/Frankfurt &mdash; all via Yahoo Finance symbol suffix mapping.</p>
+      </details>
+      <details>
+        <summary style="cursor:pointer;font-weight:600;padding:4px 0">How often does it update?</summary>
+        <p class="mini" style="margin-top:6px">The daily snapshot refreshes once every 24 hours automatically. Use the Refresh button to force a fresh compute.</p>
+      </details>
     </section>
 
     <section class="card" style="margin-top:12px">
-      <h2 style="margin-top:0">Quick explainer 🎥</h2>
-      <iframe width="100%" height="100%"
-        src="https://www.youtube-nocookie.com/embed/ecTGpw6dfYQ?rel=0&modestbranding=1&playsinline=1"
-        title="India Stock Market Analysis 2026"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
-        style="border:0; aspect-ratio:16/9; border-radius:.75rem; display:block; width:100%"></iframe>
-      <p class="note small" style="margin-top:6px">Video: How to pick top stocks for your portfolio.</p>
+      <h2 style="margin-top:0;font-size:1rem">&#x1F3A5; How to pick top stocks for your portfolio</h2>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube-nocookie.com/embed/ecTGpw6dfYQ?rel=0&modestbranding=1&playsinline=1"
+          title="India Stock Market Analysis 2026" loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
     </section>
 
-    <footer class="site-footer">
-      <nav class="nav-links" aria-label="Footer">
-        <a href="/about/"><span class="card-badge">ABT</span> About</a>
-        <a href="/contact/"><span class="card-badge">CT</span> Contact</a>
-        <a href="/sitemap.xml"><span class="card-badge">MAP</span> Sitemap</a>
-        <a href="/privacy/"><span class="card-badge">PP</span> Privacy</a>
-      </nav>
-      <p class="tiny-note">© <span id="y"></span> UpTools. Educational — not investment advice.</p>
+    <section class="card" style="margin-top:12px">
+      <h2 style="margin-top:0;font-size:1rem">Related Tools</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <a class="btn secondary" href="/ai-stock-analyzer/">AI Stock Analyzer</a>
+        <a class="btn secondary" href="/pnl-calculator/">P&amp;L Calculator</a>
+        <a class="btn secondary" href="/sip-calculator/">SIP Calculator</a>
+        <a class="btn secondary" href="/emi-calculator/">EMI Calculator</a>
+        <a class="btn secondary" href="/income-tax-tool/">Income Tax Tool</a>
+      </div>
+    </section>
+
+    <nav aria-label="Breadcrumb" style="margin-top:12px">
+      <ol style="display:flex;gap:6px;list-style:none;padding:0;margin:0;font-size:.82rem;color:#9aa4b2">
+        <li><a href="/">Home</a></li><li aria-hidden="true">&rsaquo;</li>
+        <li aria-current="page">AI Top 10 Stocks</li>
+      </ol>
+    </nav>
+
+    <footer class="note small site-footer" role="contentinfo" style="margin-top:12px">
+      &copy; <span id="y"></span> UpTools &middot; <a href="/">Home</a> &middot; <a href="/about/">About</a> &middot; <a href="/sitemap.xml">Sitemap</a>
     </footer>
+
+    </div>
   </main>
 
-  <!-- Page Script -->
+  <script src="/scripts/utils.js" type="module"></script>
   <script type="module">
-  const $ = (selector, root = document) => root.querySelector(selector);
-  const fmt = (value, options = {}) => new Intl.NumberFormat('en-IN', { maximumFractionDigits: 2, ...options }).format(value ?? 0);
-  const cur = (value, currency = 'INR') => new Intl.NumberFormat('en-IN', { style: 'currency', currency, maximumFractionDigits: 2 }).format(value ?? 0);
+  const $ = (s, r = document) => r.querySelector(s);
+  const fmt = (v, o = {}) => new Intl.NumberFormat('en-IN', { maximumFractionDigits: 2, ...o }).format(v ?? 0);
+  const fmtCur = (v, c) => new Intl.NumberFormat('en-IN', { style:'currency', currency:c||'INR', maximumFractionDigits:2 }).format(v ?? 0);
+  const fmtCompact = new Intl.NumberFormat('en-IN', { notation:'compact', maximumFractionDigits:1 });
+  const fmtVol = v => (v == null || !Number.isFinite(v)) ? '--' : fmtCompact.format(v);
+  const fmtShock = v => (v == null || !Number.isFinite(v)) ? '--' : fmt(v, { maximumFractionDigits:2 }) + 'x';
+  const fmtPrice = (v, c) => v == null ? '--' : (c ? fmtCur(v, c) : fmt(v));
+  const fmtScore = s => s == null ? '0' : (s >= 0 ? '+' + s : '' + s);
+  const fmtDt = iso => { if (!iso) return '--'; const d = new Date(iso); return isNaN(d) ? '--' : d.toLocaleString(undefined, { dateStyle:'medium', timeStyle:'short' }); };
+  const scoreClass = s => s > 0 ? 'score-pos' : s < 0 ? 'score-neg' : 'score-neu';
+  const verdictInfo = total => {
+    if (total >= 2) return { cls:'verdict-buy',  label:'BUY',  icon:'&#x1F7E2;' };
+    if (total <= -2) return { cls:'verdict-sell', label:'SELL', icon:'&#x1F534;' };
+    return { cls:'verdict-hold', label:'HOLD', icon:'&#x1F7E1;' };
+  };
+  const rankClass = i => i === 0 ? 'r1' : i === 1 ? 'r2' : i === 2 ? 'r3' : '';
+  const cardClass = i => i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : '';
+  const volBarClass = s => s >= 1.5 ? 'vol-high' : s >= 1.0 ? 'vol-med' : 'vol-low';
+  const volBarWidth = s => Math.min(100, Math.round((s / 3) * 100));
 
-  const marketSel = $('#market');
-  const countSel = $('#count');
-  const refreshBtn = $('#refresh');
-  const statusEl = $('#status');
-  const tblBody = $('#tbody');
-  const cardsEl = $('#cards');
-  const exportCsvBtn = $('#exportCsv');
-  const copySummaryBtn = $('#copySummary');
-  const lastGeneratedEl = $('#lastGenerated');
-  const nextUpdateEl = $('#nextUpdate');
-
-  const DATA_ENDPOINT = '/top10/daily.json';
-  const numberCompact = new Intl.NumberFormat('en-IN', { notation: 'compact', maximumFractionDigits: 1 });
-
-  let dailyPayload = null;
-
-  window.__lastPicks = [];
-
-  const yearEl = $('#y');
+  // DOM refs
+  const marketTabs   = $('#marketTabs');
+  const countSel     = $('#countSel');
+  const refreshBtn   = $('#refreshBtn');
+  const exportCsvBtn = $('#exportCsvBtn');
+  const copySummaryBtn = $('#copySummaryBtn');
+  const viewCardsBtn = $('#viewCards');
+  const viewTableBtn = $('#viewTable');
+  const cardsView    = $('#cardsView');
+  const tableView    = $('#tableView');
+  const picksGrid    = $('#picksGrid');
+  const picksTableBody = $('#picksTableBody');
+  const summaryGrid  = $('#summaryGrid');
+  const statusText   = $('#statusText');
+  const statusDot    = $('#statusDot');
+  const lastGenEl    = $('#lastGenerated');
+  const nextUpdEl    = $('#nextUpdate');
+  const scanMetaEl   = $('#scanMeta');
+  const yearEl       = $('#y');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const setStatus = (message) => { if (statusEl) statusEl.textContent = message; };
+  let dailyPayload = null;
+  let currentMarket = 'NSE';
+  window.__lastPicks = [];
 
-  const formatDateTime = (iso) => {
-    if (!iso) return '--';
-    const date = new Date(iso);
-    if (Number.isNaN(date.getTime())) return '--';
-    return date.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
-  };
+  // ── All functions declared first (hoisted, no TDZ) ──
 
-  const formatVolume = (value) => {
-    if (value == null || !Number.isFinite(value)) return '--';
-    return numberCompact.format(value);
-  };
+  function setStatus(msg, ok) {
+    if (ok === undefined) ok = true;
+    if (statusText) statusText.textContent = msg;
+    if (statusDot) statusDot.style.background = ok ? '#22c55e' : '#ef4444';
+  }
 
-  const formatShock = (value) => {
-    if (value == null || !Number.isFinite(value)) return '--';
-    return `${fmt(value, { maximumFractionDigits: 2 })}x`;
-  };
+  function renderSummary(picks) {
+    if (!summaryGrid) return;
+    const scanned = dailyPayload && dailyPayload.markets && dailyPayload.markets[currentMarket] ? dailyPayload.markets[currentMarket].scanned || 0 : 0;
+    const avgScore = picks.length ? (picks.reduce(function(s, p) { return s + ((p.scores && p.scores.total) || 0); }, 0) / picks.length).toFixed(1) : '--';
+    const bullish = picks.filter(function(p) { return ((p.scores && p.scores.total) || 0) >= 2; }).length;
+    summaryGrid.innerHTML =
+      '<div class="stat-box"><div class="stat-val" style="color:#7aa2ff">' + picks.length + '</div><div class="stat-lbl">Picks</div></div>' +
+      '<div class="stat-box"><div class="stat-val" style="color:#22c55e">' + avgScore + '</div><div class="stat-lbl">Avg Score</div></div>' +
+      '<div class="stat-box"><div class="stat-val" style="color:#f59e0b">' + bullish + '</div><div class="stat-lbl">Bullish (&ge;+2)</div></div>' +
+      '<div class="stat-box"><div class="stat-val" style="color:#9aa4b2">' + scanned + '</div><div class="stat-lbl">Scanned</div></div>';
+  }
 
-  const getMarketKey = () => marketSel?.value || 'NSE';
-
-  const getMarketData = () => {
-    if (!dailyPayload) return null;
-    return dailyPayload.markets?.[getMarketKey()] || null;
-  };
-
-  const render = () => {
-    if (!dailyPayload) return;
-    const marketData = getMarketData();
-    if (!marketData || !Array.isArray(marketData.picks) || !marketData.picks.length) {
-      if (tblBody) tblBody.innerHTML = '';
-      if (cardsEl) cardsEl.innerHTML = '';
-      window.__lastPicks = [];
-      setStatus(`No picks available for ${getMarketKey()} yet. Check back after the daily run.`);
+  function renderCards(picks) {
+    if (!picksGrid) return;
+    if (!picks.length) {
+      picksGrid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="icon">&#x1F4CA;</div><div>No picks for ' + currentMarket + ' yet.</div><div class="mini" style="margin-top:4px">Check back after the daily run or click Refresh.</div></div>';
       return;
     }
+    picksGrid.innerHTML = picks.map(function(p, i) {
+      var plan = p.plan || {};
+      var scores = p.scores || {};
+      var metrics = p.metrics || {};
+      var v = verdictInfo(scores.total || 0);
+      var shock = metrics.volumeShock || 0;
+      var newsItems = (p.news || []).slice(0, 2).map(function(t) { return '<li title="' + t + '">' + t + '</li>'; }).join('');
+      var name = (p.name || '--');
+      var nameShort = name.length > 28 ? name.substring(0, 28) + '&hellip;' : name;
+      return '<div class="pick-card ' + cardClass(i) + '" role="article" aria-label="' + p.symbol + ' pick">' +
+        '<div class="pick-header">' +
+          '<div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0">' +
+            '<span class="pick-rank ' + rankClass(i) + '">#' + (i+1) + '</span>' +
+            '<div style="min-width:0"><div class="pick-symbol">' + p.symbol + '</div><div class="pick-name" title="' + name + '">' + nameShort + '</div></div>' +
+          '</div>' +
+          '<div style="text-align:right">' +
+            '<div class="pick-price">' + fmtPrice(p.price, p.currency) + '</div>' +
+            '<span class="verdict ' + v.cls + '">' + v.icon + ' ' + v.label + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="pick-scores">' +
+          '<span class="score-badge ' + scoreClass(scores.ta) + '" title="TA">TA ' + fmtScore(scores.ta) + '</span>' +
+          '<span class="score-badge ' + scoreClass(scores.fa) + '" title="FA">FA ' + fmtScore(scores.fa) + '</span>' +
+          '<span class="score-badge ' + scoreClass(scores.news) + '" title="News">N ' + fmtScore(scores.news) + '</span>' +
+          '<span class="score-badge ' + scoreClass(scores.volume) + '" title="Vol">V ' + fmtScore(scores.volume) + '</span>' +
+          '<span class="score-badge ' + scoreClass(scores.total) + '" style="font-size:.8rem;width:auto;padding:0 8px;border-radius:999px">&sum; ' + fmtScore(scores.total) + '</span>' +
+        '</div>' +
+        '<div class="plan-grid">' +
+          '<div class="plan-cell"><div class="plan-label">Entry</div><div class="plan-value entry">' + (plan.entry != null ? fmt(plan.entry) : '--') + '</div></div>' +
+          '<div class="plan-cell"><div class="plan-label">T1 / T2</div><div class="plan-value target" style="font-size:.78rem">' + (plan.t1 != null ? fmt(plan.t1) : '--') + ' / ' + (plan.t2 != null ? fmt(plan.t2) : '--') + '</div></div>' +
+          '<div class="plan-cell"><div class="plan-label">Stop</div><div class="plan-value stop">' + (plan.stop != null ? fmt(plan.stop) : '--') + '</div></div>' +
+        '</div>' +
+        (shock > 0 ? '<div class="vol-bar-wrap"><div class="vol-bar-label"><span>Vol ' + fmtShock(shock) + '</span><span>' + fmtVol(metrics.lastVolume) + ' / avg ' + fmtVol(metrics.averageVolume) + '</span></div><div class="vol-bar-track"><div class="vol-bar-fill ' + volBarClass(shock) + '" style="width:' + volBarWidth(shock) + '%"></div></div></div>' : '') +
+        (newsItems ? '<ul class="pick-news">' + newsItems + '</ul>' : '') +
+        '<div class="pick-why">' + (p.why || 'Score summary unavailable.') + '</div>' +
+      '</div>';
+    }).join('');
+  }
 
-    const countValue = countSel?.value || '10';
-    const limit = countValue === 'ALL' ? marketData.picks.length : Number(countValue) || marketData.picks.length;
-    const picks = marketData.picks.slice(0, limit);
-    window.__lastPicks = picks;
+  function renderTable(picks) {
+    if (!picksTableBody) return;
+    if (!picks.length) { picksTableBody.innerHTML = '<tr><td colspan="14" style="text-align:center;padding:24px;color:#9aa4b2">No picks for ' + currentMarket + '</td></tr>'; return; }
+    picksTableBody.innerHTML = picks.map(function(p, i) {
+      var plan = p.plan || {};
+      var scores = p.scores || {};
+      var metrics = p.metrics || {};
+      var v = verdictInfo(scores.total || 0);
+      return '<tr>' +
+        '<td>' + (i+1) + '</td><td class="sym">' + p.symbol + '</td>' +
+        '<td class="mini" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + (p.name||'') + '">' + (p.name||'--') + '</td>' +
+        '<td class="num">' + fmtPrice(p.price, p.currency) + '</td>' +
+        '<td class="num" style="color:#7aa2ff">' + (plan.entry != null ? fmt(plan.entry) : '--') + '</td>' +
+        '<td class="num" style="color:#22c55e">' + (plan.t1 != null ? fmt(plan.t1) : '--') + '</td>' +
+        '<td class="num" style="color:#22c55e">' + (plan.t2 != null ? fmt(plan.t2) : '--') + '</td>' +
+        '<td class="num" style="color:#ef4444">' + (plan.stop != null ? fmt(plan.stop) : '--') + '</td>' +
+        '<td><span class="score-badge ' + scoreClass(scores.ta) + '" style="width:auto;padding:2px 6px;border-radius:4px">' + fmtScore(scores.ta) + '</span></td>' +
+        '<td><span class="score-badge ' + scoreClass(scores.fa) + '" style="width:auto;padding:2px 6px;border-radius:4px">' + fmtScore(scores.fa) + '</span></td>' +
+        '<td><span class="score-badge ' + scoreClass(scores.news) + '" style="width:auto;padding:2px 6px;border-radius:4px">' + fmtScore(scores.news) + '</span></td>' +
+        '<td class="num">' + fmtShock(metrics.volumeShock) + '</td>' +
+        '<td><span class="verdict ' + v.cls + '">' + v.icon + ' ' + fmtScore(scores.total) + '</span></td>' +
+        '<td class="mini">' + (plan.note || '--') + '</td>' +
+      '</tr>';
+    }).join('');
+  }
 
-    if (tblBody) {
-      const rows = picks.map((p, idx) => {
-        const plan = p.plan || {};
-        const scores = p.scores || {};
-        const metrics = p.metrics || {};
-        const entry = plan.entry != null ? fmt(plan.entry) : '--';
-        const targets = (plan.t1 != null && plan.t2 != null) ? `${fmt(plan.t1)} / ${fmt(plan.t2)}` : '--';
-        const stop = plan.stop != null ? fmt(plan.stop) : '--';
-        const price = p.price != null ? (p.currency ? cur(p.price, p.currency) : fmt(p.price)) : '--';
-        const volumeShock = formatShock(metrics.volumeShock ?? null);
-        return `<tr>
-          <td>${idx + 1}</td>
-          <td><b>${p.symbol}</b></td>
-          <td>${p.name || '--'}</td>
-          <td class="level">${price}</td>
-          <td class="level">${entry}</td>
-          <td class="level">${targets}</td>
-          <td class="level">${stop}</td>
-          <td>${scores.ta >= 0 ? `+${scores.ta}` : (scores.ta ?? 0)}</td>
-          <td>${scores.fa >= 0 ? `+${scores.fa}` : (scores.fa ?? 0)}</td>
-          <td>${scores.news >= 0 ? `+${scores.news}` : (scores.news ?? 0)}</td>
-          <td>${volumeShock}</td>
-          <td><b>${scores.total >= 0 ? `+${scores.total}` : (scores.total ?? 0)}</b></td>
-        </tr>`;
-      }).join('');
-      tblBody.innerHTML = rows;
-    }
-
-    if (cardsEl) {
-      cardsEl.innerHTML = picks.map((p) => {
-        const plan = p.plan || {};
-        const scores = p.scores || {};
-        const metrics = p.metrics || {};
-        const entry = plan.entry != null ? fmt(plan.entry) : '--';
-        const t1 = plan.t1 != null ? fmt(plan.t1) : '--';
-        const t2 = plan.t2 != null ? fmt(plan.t2) : '--';
-        const stop = plan.stop != null ? fmt(plan.stop) : '--';
-        const price = p.price != null ? (p.currency ? cur(p.price, p.currency) : fmt(p.price)) : '--';
-        const avgVol = formatVolume(metrics.averageVolume ?? null);
-        const lastVol = formatVolume(metrics.lastVolume ?? null);
-        const volumeShock = formatShock(metrics.volumeShock ?? null);
-        const newsLines = (p.news || []).slice(0, 2).map((t) => `<li>${t}</li>`).join('');
-        return `<div class="cardpick">
-          <div class="row-inline" style="justify-content:space-between">
-            <div>
-              <div class="h6"><b>${p.symbol}</b> � <span class="mini">${p.name || '--'}</span></div>
-              <div class="mini">Price: <b>${price}</b></div>
-            </div>
-            <div>
-              <span class="chip-sm">TA ${scores.ta >= 0 ? `+${scores.ta}` : (scores.ta ?? 0)}</span>
-              <span class="chip-sm">FA ${scores.fa >= 0 ? `+${scores.fa}` : (scores.fa ?? 0)}</span>
-              <span class="chip-sm">News ${scores.news >= 0 ? `+${scores.news}` : (scores.news ?? 0)}</span>
-              <span class="chip-sm">Vol ${volumeShock}</span>
-              <span class="chip-sm"><b>Total ${scores.total >= 0 ? `+${scores.total}` : (scores.total ?? 0)}</b></span>
-            </div>
-          </div>
-          <div class="row-inline" style="margin-top:8px;flex-wrap:wrap;gap:6px">
-            <div class="chip-sm">Entry <b class="level">${entry}</b></div>
-            <div class="chip-sm">Targets <b class="level">${t1}</b> / <b class="level">${t2}</b></div>
-            <div class="chip-sm">Stop <b class="level">${stop}</b></div>
-            <div class="chip-sm">${plan.note || 'Plan unavailable'}</div>
-          </div>
-          <div class="mini" style="margin-top:6px">Volume: ${volumeShock} � Last ${lastVol} � Avg ${avgVol}</div>
-          ${newsLines ? `<ul class="mini" style="margin:6px 0 0 16px">${newsLines}</ul>` : ''}
-          <div class="reason" style="margin-top:6px">Why: ${p.why || 'Score summary unavailable.'}</div>
-        </div>`;
-      }).join('');
-    }
-
-    const metaMsg = `${picks.length} / ${marketData.picks.length} picks � scanned ${marketData.scanned} symbols`;
-    setStatus(metaMsg);
-  };
-
-  const updateMeta = () => {
+  function render() {
     if (!dailyPayload) return;
-    if (lastGeneratedEl) lastGeneratedEl.textContent = formatDateTime(dailyPayload.generatedAt);
-    if (nextUpdateEl) nextUpdateEl.textContent = formatDateTime(dailyPayload.nextUpdateAt);
-  };
+    var marketData = dailyPayload.markets && dailyPayload.markets[currentMarket];
+    if (!marketData || !marketData.picks || !marketData.picks.length) {
+      renderSummary([]);
+      renderCards([]);
+      renderTable([]);
+      var notes = (marketData && marketData.notes || []).filter(function(n) { return !n.match(/Scores combine|News deep/); });
+      setStatus(notes.length ? notes[0] : 'No picks for ' + currentMarket + ' yet.', false);
+      return;
+    }
+    var countVal = (countSel && countSel.value) || '10';
+    var limit = countVal === 'ALL' ? marketData.picks.length : (parseInt(countVal) || 10);
+    var picks = marketData.picks.slice(0, limit);
+    window.__lastPicks = picks;
+    renderSummary(picks);
+    renderCards(picks);
+    renderTable(picks);
+    if (scanMetaEl) scanMetaEl.textContent = picks.length + ' / ' + marketData.picks.length + ' picks shown';
+    setStatus(currentMarket + ' picks ready', true);
+  }
 
-  const loadDaily = async (force = false) => {
-    try {
-      setStatus('Loading daily picks�');
-      const url = force ? `${DATA_ENDPOINT}?ts=${Date.now()}` : DATA_ENDPOINT;
-      const res = await fetch(url, { headers: { Accept: 'application/json' } });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      dailyPayload = await res.json();
-      updateMeta();
+  function loadDaily(force) {
+    setStatus('Loading picks\u2026', true);
+    if (statusDot) statusDot.style.background = '#f59e0b';
+    var url = force ? '/top10/daily.json?ts=' + Date.now() : '/top10/daily.json';
+    fetch(url, { headers: { Accept: 'application/json' } })
+      .then(function(res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function(data) {
+        dailyPayload = data;
+        if (lastGenEl) lastGenEl.textContent = fmtDt(data.generatedAt);
+        if (nextUpdEl) nextUpdEl.textContent = fmtDt(data.nextUpdateAt);
+        render();
+      })
+      .catch(function(err) {
+        console.error(err);
+        setStatus('Failed to load picks. Try Refresh.', false);
+        if (summaryGrid) summaryGrid.innerHTML = '';
+        if (picksGrid) picksGrid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="icon">&#x26A0;&#xFE0F;</div><div>Could not load picks.</div><button class="btn" onclick="location.reload()" style="margin-top:12px">Retry</button></div>';
+      });
+  }
+
+  // ── Wire up events ──
+  if (marketTabs) {
+    marketTabs.addEventListener('click', function(e) {
+      var btn = e.target.closest('.mtab');
+      if (!btn) return;
+      marketTabs.querySelectorAll('.mtab').forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      currentMarket = btn.dataset.market;
       render();
-      setStatus('Daily picks ready.');
-    } catch (err) {
-      console.error('daily picks', err);
-      if (tblBody) tblBody.innerHTML = '';
-      if (cardsEl) cardsEl.innerHTML = '';
-      window.__lastPicks = [];
-      setStatus('Failed to load daily picks. Try again later.');
-    }
-  };
+    });
+  }
+  if (viewCardsBtn) {
+    viewCardsBtn.addEventListener('click', function() {
+      viewCardsBtn.classList.add('active'); viewTableBtn.classList.remove('active');
+      if (cardsView) cardsView.style.display = ''; if (tableView) tableView.style.display = 'none';
+    });
+  }
+  if (viewTableBtn) {
+    viewTableBtn.addEventListener('click', function() {
+      viewTableBtn.classList.add('active'); viewCardsBtn.classList.remove('active');
+      if (tableView) tableView.style.display = ''; if (cardsView) cardsView.style.display = 'none';
+    });
+  }
+  if (countSel) countSel.addEventListener('change', render);
+  if (refreshBtn) refreshBtn.addEventListener('click', function() { loadDaily(true); });
 
-  refreshBtn?.addEventListener('click', () => loadDaily(true));
-  marketSel?.addEventListener('change', render);
-  countSel?.addEventListener('change', render);
+  if (exportCsvBtn) {
+    exportCsvBtn.addEventListener('click', function() {
+      var picks = window.__lastPicks || [];
+      if (!picks.length) { setStatus('Nothing to export.'); return; }
+      var headers = ['rank','symbol','name','price','currency','entry','t1','t2','stop','ta','fa','news','volume','total','volumeShock','avgVolume','lastVolume','plan','why'];
+      var rows = picks.map(function(p, i) {
+        return [i+1, p.symbol, p.name||'', p.price||'', p.currency||'',
+          (p.plan&&p.plan.entry)||'', (p.plan&&p.plan.t1)||'', (p.plan&&p.plan.t2)||'', (p.plan&&p.plan.stop)||'',
+          (p.scores&&p.scores.ta)||'', (p.scores&&p.scores.fa)||'', (p.scores&&p.scores.news)||'', (p.scores&&p.scores.volume)||'', (p.scores&&p.scores.total)||'',
+          (p.metrics&&p.metrics.volumeShock)||'', (p.metrics&&p.metrics.averageVolume)||'', (p.metrics&&p.metrics.lastVolume)||'',
+          (p.plan&&p.plan.note)||'', (p.why||'').replace(/,/g,' ')];
+      });
+      var csv = [headers].concat(rows).map(function(r) {
+        return r.map(function(v) { var s = (v||'').toString().replace(/"/g,'""'); return /[",\n]/.test(s) ? '"'+s+'"' : s; }).join(',');
+      }).join('\n');
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([csv], { type:'text/csv;charset=utf-8' }));
+      a.download = 'top10-' + currentMarket + '-' + new Date().toISOString().slice(0,10) + '.csv';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+  }
 
-  exportCsvBtn?.addEventListener('click', () => {
-    const picks = window.__lastPicks || [];
-    if (!picks.length) { setStatus('Nothing to export.'); return; }
-    const rows = picks.map((p, idx) => ({
-      rank: idx + 1,
-      symbol: p.symbol,
-      name: p.name,
-      price: p.price ?? '',
-      currency: p.currency || '',
-      entry: p.plan?.entry ?? '',
-      target1: p.plan?.t1 ?? '',
-      target2: p.plan?.t2 ?? '',
-      stop: p.plan?.stop ?? '',
-      ta: p.scores?.ta ?? '',
-      fa: p.scores?.fa ?? '',
-      news: p.scores?.news ?? '',
-      volumeScore: p.scores?.volume ?? '',
-      total: p.scores?.total ?? '',
-      volumeShock: p.metrics?.volumeShock ?? '',
-      volumeAverage: p.metrics?.averageVolume ?? '',
-      volumeLast: p.metrics?.lastVolume ?? '',
-      newsNet: p.metrics?.newsNet ?? '',
-      why: p.why || '',
-    }));
-    const headers = Object.keys(rows[0]);
-    const csv = [headers.join(','), ...rows.map((row) => headers.map((h) => {
-      const v = row[h];
-      const s = `${v ?? ''}`.replace(/"/g, '""');
-      return /[",\n]/.test(s) ? `"${s}"` : s;
-    }).join(','))].join('\n');
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'ai-top10-stocks.csv';
-    link.click();
-    URL.revokeObjectURL(link.href);
-  });
+  if (copySummaryBtn) {
+    copySummaryBtn.addEventListener('click', function() {
+      var picks = window.__lastPicks || [];
+      if (!picks.length) { setStatus('Nothing to copy.'); return; }
+      var lines = picks.map(function(p, i) {
+        var plan = p.plan || {};
+        var scores = p.scores || {};
+        var metrics = p.metrics || {};
+        return (i+1) + '. ' + p.symbol + ' - ' + (p.name||'--') + '\n' +
+          'Price: ' + fmtPrice(p.price, p.currency) + ' | Entry: ' + (plan.entry!=null?fmt(plan.entry):'--') + ' | T1: ' + (plan.t1!=null?fmt(plan.t1):'--') + ' | T2: ' + (plan.t2!=null?fmt(plan.t2):'--') + ' | Stop: ' + (plan.stop!=null?fmt(plan.stop):'--') + '\n' +
+          'Scores: TA ' + fmtScore(scores.ta) + ', FA ' + fmtScore(scores.fa) + ', News ' + fmtScore(scores.news) + ', Vol ' + fmtScore(scores.volume) + ' => Total ' + fmtScore(scores.total) + '\n' +
+          'Volume: ' + fmtShock(metrics.volumeShock) + ' (last ' + fmtVol(metrics.lastVolume) + ', avg ' + fmtVol(metrics.averageVolume) + ')\n' +
+          'Why: ' + (p.why||'--');
+      }).join('\n\n');
+      navigator.clipboard.writeText(lines)
+        .then(function() { setStatus('Summary copied!'); })
+        .catch(function() { setStatus('Copy blocked by browser.'); });
+    });
+  }
 
-  copySummaryBtn?.addEventListener('click', async () => {
-    const picks = window.__lastPicks || [];
-    if (!picks.length) { setStatus('Nothing to copy.'); return; }
-    const lines = picks.map((p, idx) => {
-      const plan = p.plan || {};
-      const metrics = p.metrics || {};
-      const scores = p.scores || {};
-      const price = p.price != null ? (p.currency ? cur(p.price, p.currency) : fmt(p.price)) : '--';
-      const entry = plan.entry != null ? fmt(plan.entry) : '--';
-      const t1 = plan.t1 != null ? fmt(plan.t1) : '--';
-      const t2 = plan.t2 != null ? fmt(plan.t2) : '--';
-      const stop = plan.stop != null ? fmt(plan.stop) : '--';
-      const volumeShock = formatShock(metrics.volumeShock ?? null);
-      const avgVol = formatVolume(metrics.averageVolume ?? null);
-      const lastVol = formatVolume(metrics.lastVolume ?? null);
-      return `${idx + 1}. ${p.symbol} � ${p.name || '--'}
-Price: ${price}
-Entry: ${entry} | T1: ${t1} | T2: ${t2} | Stop: ${stop}
-Scores: TA ${scores.ta ?? 0}, FA ${scores.fa ?? 0}, News ${scores.news ?? 0}, Vol ${scores.volume ?? 0} ? Total ${scores.total ?? 0}
-Volume: ${volumeShock} (last ${lastVol}, avg ${avgVol})
-Why: ${p.why || 'Summary unavailable.'}
-`;
-    }).join('\n');
-    try {
-      await navigator.clipboard.writeText(lines);
-      setStatus('Summary copied to clipboard.');
-    } catch (err) {
-      console.error('copy summary', err);
-      setStatus('Copy blocked by browser.');
-    }
-  });
-
+  // ── Init ──
   loadDaily();
 </script>
 </body>
 </html>
-
-

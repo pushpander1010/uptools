@@ -521,8 +521,9 @@
         <label class="chip"><input type="checkbox" value="networking"> Networking</label>
         <label class="chip"><input type="checkbox" value="social"> Social</label>
         <label class="chip"><input type="checkbox" value="ai"> AI</label>
-        <label class="chip"><input type="checkbox" value="marketing"> Marketing</label>
+<label class="chip"><input type="checkbox" value="marketing"> Marketing</label>
         <label class="chip"><input type="checkbox" value="fun"> Fun</label>
+        <label class="chip"><input type="checkbox" value="cricket"> Cricket</label>
       </div>
     </section>
 
@@ -666,6 +667,7 @@
         wifi: { label: "WiFi", icon: "📡", desc: "WiFi tools" },
         ai: { label: "AI", icon: "🤖", desc: "AI-powered tools" },
         marketing: { label: "Marketing", icon: "📈", desc: "SEO & marketing tools" },
+        cricket: { label: "Cricket", icon: "🏏", desc: "Cricket calculators & stats" },
       };
 
       // ---- Tools (assign categories with `cats`) ----
@@ -761,9 +763,20 @@
         { slug: "ai-business-name-generator", title: "AI Business Name Generator", icon: "💡", desc: "Generate 20 unique brandable business names with taglines.", href: "/ai-business-name-generator/", tags: ["ai","text","branding"], cats: ["all","text","ai"] },
         { slug: "ai-product-description", title: "AI Product Description Generator", icon: "🛒", desc: "Write SEO-optimized product descriptions for Amazon, Shopify & more.", href: "/ai-product-description/", tags: ["ai","text","ecommerce"], cats: ["all","text","ai"] },
         { slug: "timezone-converter", title: "Time Zone Converter", icon: "🌍", desc: "Convert time zones, compare world clocks and find meeting overlaps.", href: "/timezone-converter/", tags: ["productivity","time","international"], cats: ["all","networking","marketing"] },
-        { slug: "percentage-calculator", title: "Percentage Calculator", icon: "📈", desc: "Calculate discounts, markups, percent change and percentage of a number.", href: "/percentage-calculator/", tags: ["finance","math","shopping"], cats: ["all","finance","text"] },
+{ slug: "percentage-calculator", title: "Percentage Calculator", icon: "📈", desc: "Calculate discounts, markups, percent change and percentage of a number.", href: "/percentage-calculator/", tags: ["finance","math","shopping"], cats: ["all","finance","text"] },
+        { slug: "cricket-run-rate", title: "Cricket Run Rate Calculator", icon: "🏏", desc: "Calculate required run rate, target and projected score for T20, ODI & Test matches.", href: "/cricket-run-rate/", tags: ["cricket","sports"], cats: ["all","cricket"] },
+        { slug: "cricket-score-predictor", title: "Cricket Score Predictor", icon: "📊", desc: "Predict match outcome and winning probability based on current score and overs.", href: "/cricket-score-predictor/", tags: ["cricket","sports"], cats: ["all","cricket"] },
+        { slug: "cricket-nrr", title: "Cricket Net Run Rate (NRR)", icon: "🧮", desc: "Calculate net run rate for tournament standings and league matches.", href: "/cricket-nrr/", tags: ["cricket","sports"], cats: ["all","cricket"] },
+        { slug: "ipl-points-table", title: "IPL 2025 Points Table", icon: "🏆", desc: "Live IPL standings with NRR, wins, losses and playoff tracker.", href: "/ipl-points-table/", tags: ["cricket","ipl","sports"], cats: ["all","cricket"] },
+        { slug: "ipl-fantasy-calculator", title: "IPL Fantasy Points Calculator", icon: "⭐", desc: "Calculate Dream11 fantasy points for batting, bowling and fielding.", href: "/ipl-fantasy-calculator/", tags: ["cricket","ipl","fantasy"], cats: ["all","cricket"] },
+        { slug: "ipl-team-stats", title: "IPL Team Statistics", icon: "📈", desc: "All-time IPL records, wins, titles and performance stats.", href: "/ipl-team-stats/", tags: ["cricket","ipl","stats"], cats: ["all","cricket"] },
         { slug: "ai-linkedin-headline-generator", title: "AI LinkedIn Headline Generator", icon: "💼", desc: "Create keyword-rich LinkedIn headlines for jobs, freelancing and founders.", href: "/ai-linkedin-headline-generator/", tags: ["ai","social","marketing"], cats: ["all","ai","social","marketing"] },
         { slug: "ai-travel-planner", title: "AI Travel Planner", icon: "🧳", desc: "Generate day-by-day trip itineraries by destination, budget and pace.", href: "/ai-travel-planner/", tags: ["ai","travel","international"], cats: ["all","ai","marketing"] },
+        { slug: "tip-calculator", title: "Tip Calculator", icon: "💵", desc: "Calculate tips and split bills for restaurants and services.", href: "/tip-calculator/", tags: ["finance","calculator"], cats: ["all","finance"] },
+        { slug: "sales-tax-calculator", title: "US Sales Tax Calculator", icon: "🧾", desc: "Calculate sales tax for all 50 US states with accurate rates.", href: "/sales-tax-calculator/", tags: ["tax","finance","usa"], cats: ["all","tax","finance"] },
+        { slug: "vat-calculator", title: "VAT Calculator", icon: "🇪🇺", desc: "Calculate European VAT for all EU countries and rates.", href: "/vat-calculator/", tags: ["tax","finance","europe"], cats: ["all","tax","finance"] },
+        { slug: "mortgage-calculator", title: "Mortgage Calculator", icon: "🏠", desc: "Calculate monthly mortgage payments and total interest.", href: "/mortgage-calculator/", tags: ["finance","calculator","housing"], cats: ["all","finance"] },
+        { slug: "calorie-calculator", title: "Calorie Calculator", icon: "🍎", desc: "Calculate daily calorie needs (TDEE) for weight goals.", href: "/calorie-calculator/", tags: ["health","fitness","calculator"], cats: ["all","health"] },
         { slug: "contact", title: "Contact UpTools", icon: "✉️", desc: "Share feedback, bugs or feature requests.", href: "/contact/", tags: ["text"], cats: ["all","text"] },
         { slug: "privacy-policy", title: "Privacy Policy", icon: "📜", desc: "Understand how UpTools handles data.", href: "/privacy-policy/", tags: ["security"], cats: ["all","security"] },
       ];
