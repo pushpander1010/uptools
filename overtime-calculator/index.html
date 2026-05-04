@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Overtime Calculator - Regular Pay, Overtime Pay & Total Earnings | UpTools</title>
+  <meta name="description" content="Calculate overtime pay from hourly wages and extra hours. Free overtime calculator for shift workers, contractors and international payroll comparisons." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="canonical" href="https://www.uptools.in/overtime-calculator/" />
+  <meta property="og:title" content="Overtime Calculator - Regular Pay, Overtime Pay & Total Earnings" />
+  <meta property="og:description" content="Estimate overtime earnings with custom multipliers and weekly hours." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.uptools.in/overtime-calculator/" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Overtime Calculator - Regular Pay, Overtime Pay & Total Earnings" />
+  <meta name="twitter:description" content="Calculate overtime with 1.5x, 2x or your own multiplier." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/default.png" />
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Overtime Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://www.uptools.in/overtime-calculator/","description":"Calculate regular pay, overtime pay and total earnings from hourly wages and worked hours."}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},{"@type":"ListItem","position":2,"name":"Overtime Calculator","item":"https://www.uptools.in/overtime-calculator/"}]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is overtime pay calculated?","acceptedAnswer":{"@type":"Answer","text":"Overtime pay is usually calculated by multiplying the base hourly wage by an overtime multiplier such as 1.5x or 2x for hours worked beyond a regular threshold."}},{"@type":"Question","name":"Can I use a custom overtime multiplier?","acceptedAnswer":{"@type":"Answer","text":"Yes. This calculator supports custom overtime multipliers because overtime rules vary by employer and country."}}]}
+  </script>
+  <style>
+    .grid { display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .panel { border:1px solid #212a3a; background:#0d1626; border-radius:14px; padding:16px; }
+    .field { margin-bottom:12px; }
+    .label { display:block; margin-bottom:6px; color:#9aa4b2; font-size:.92rem; }
+    .input, .select { width:100%; background:#0e1628; border:1px solid #212a3a; border-radius:.75rem; color:#e6edf3; padding:.72rem .85rem; }
+    .result { margin-top:12px; padding:14px; background:#101b30; border-radius:12px; border:1px solid #273551; min-height:130px; }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <a href="#main" class="sr-only">Skip to content</a>
+  <header class="site" role="banner"><div class="header-inner"><a class="brand" href="/" aria-label="UpTools Home"><img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager"><b>UpTools</b></a><nav class="nav-links" aria-label="Primary"><a href="/#tools">Tools</a><a href="/salary-converter/">Salary</a><a aria-current="page" href="/overtime-calculator/">Overtime</a></nav></div></header>
+  <main id="main" class="wrap" role="main">
+    <nav class="note small" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Overtime Calculator</span></nav>
+    <section class="card hero" aria-labelledby="title"><div><h1 id="title">Overtime Calculator</h1><p class="note">Estimate regular pay, overtime pay and total weekly earnings using your own overtime rules. Useful for hourly work, shift planning and payroll checks.</p></div></section>
+    <section class="grid" style="margin-top:16px">
+      <section class="panel">
+        <h2 style="margin-top:0">Inputs</h2>
+        <div class="field"><label class="label" for="hourlyRate">Hourly rate</label><input id="hourlyRate" class="input" type="number" value="20" min="0" step="0.01" /></div>
+        <div class="field"><label class="label" for="regularHours">Regular hours worked</label><input id="regularHours" class="input" type="number" value="40" min="0" step="0.1" /></div>
+        <div class="field"><label class="label" for="overtimeHours">Overtime hours worked</label><input id="overtimeHours" class="input" type="number" value="8" min="0" step="0.1" /></div>
+        <div class="field"><label class="label" for="multiplier">Overtime multiplier</label><select id="multiplier" class="select"><option value="1.25">1.25x</option><option value="1.5" selected>1.5x</option><option value="1.75">1.75x</option><option value="2">2x</option></select></div>
+      </section>
+      <section class="panel">
+        <h2 style="margin-top:0">Results</h2>
+        <div class="result" id="result" aria-live="polite"></div>
+        <p class="note" style="margin-top:12px">Related tools: <a href="/salary-converter/">Salary Converter</a>, <a href="/tip-calculator/">Tip Calculator</a>.</p>
+      </section>
+    </section>
+    <section class="card" style="margin-top:16px"><h2 style="margin-top:0">FAQ</h2><details><summary>How is overtime calculated?</summary><p class="note">Overtime hours are paid above the base rate using a multiplier such as 1.5x.</p></details><details><summary>Can I use this outside the US?</summary><p class="note">Yes. Enter your local hourly rate and overtime multiplier to match your contract or country rules.</p></details></section>
+    <footer class="note small site-footer" role="contentinfo">&copy; <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a> . <a href="/privacy-policy/">Privacy</a></footer>
+  </main>
+  <script type="module">
+    import { $, $$ } from "/scripts/utils.js";
+    const fmt = (v) => new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(v);
+    function calc() {
+      const rate = Number($("#hourlyRate").value || 0);
+      const regular = Number($("#regularHours").value || 0);
+      const overtime = Number($("#overtimeHours").value || 0);
+      const multiplier = Number($("#multiplier").value || 1.5);
+      const regularPay = rate * regular;
+      const overtimePay = rate * multiplier * overtime;
+      const total = regularPay + overtimePay;
+      $("#result").innerHTML = `<div><strong>Regular pay:</strong> ${fmt(regularPay)}</div><div class="note small" style="margin-top:6px"><strong>Overtime pay:</strong> ${fmt(overtimePay)}</div><div class="note small" style="margin-top:6px"><strong>Total earnings:</strong> ${fmt(total)}</div><div class="note small" style="margin-top:6px"><strong>Effective hourly average:</strong> ${fmt(total / Math.max(regular + overtime, 1))}</div>`;
+    }
+    $$("input, select").forEach((el) => el.addEventListener("input", calc));
+    $("#y").textContent = new Date().getFullYear();
+    calc();
+  </script>
+  <script src="/scripts/utils.js" type="module"></script>
+</body>
+</html>

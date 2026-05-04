@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Invoice Calculator - Subtotal, Tax, Discount & Total | UpTools</title>
+  <meta name="description" content="Calculate invoice totals with quantity, rate, discount and tax. Free invoice calculator for freelancers, agencies, consultants and online sellers worldwide." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="canonical" href="https://www.uptools.in/invoice-calculator/" />
+  <meta property="og:title" content="Invoice Calculator - Subtotal, Tax, Discount & Total" />
+  <meta property="og:description" content="Calculate invoice totals for freelance, agency and product work with tax and discount." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.uptools.in/invoice-calculator/" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Invoice Calculator - Subtotal, Tax, Discount & Total" />
+  <meta name="twitter:description" content="Simple invoice total calculator for services, retainers and product orders." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/default.png" />
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Invoice Calculator","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://www.uptools.in/invoice-calculator/","description":"Calculate invoice subtotal, discount, tax and final total."}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},{"@type":"ListItem","position":2,"name":"Invoice Calculator","item":"https://www.uptools.in/invoice-calculator/"}]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does an invoice calculator do?","acceptedAnswer":{"@type":"Answer","text":"An invoice calculator totals line items and applies discounts and taxes to show the amount due."}},{"@type":"Question","name":"Can I use this for VAT, GST or sales tax?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the tax percentage that applies to your invoice, whether it is VAT, GST, sales tax or another local rate."}}]}
+  </script>
+  <style>
+    .grid { display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .panel { border:1px solid #212a3a; background:#0d1626; border-radius:14px; padding:16px; }
+    .field { margin-bottom:12px; }
+    .label { display:block; margin-bottom:6px; color:#9aa4b2; font-size:.92rem; }
+    .input { width:100%; background:#0e1628; border:1px solid #212a3a; border-radius:.75rem; color:#e6edf3; padding:.72rem .85rem; }
+    .result { margin-top:12px; padding:14px; background:#101b30; border-radius:12px; border:1px solid #273551; min-height:145px; }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <a href="#main" class="sr-only">Skip to content</a>
+  <header class="site" role="banner"><div class="header-inner"><a class="brand" href="/" aria-label="UpTools Home"><img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager"><b>UpTools</b></a><nav class="nav-links" aria-label="Primary"><a href="/#tools">Tools</a><a href="/vat-calculator/">Tax</a><a aria-current="page" href="/invoice-calculator/">Invoice</a></nav></div></header>
+  <main id="main" class="wrap" role="main">
+    <nav class="note small" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Invoice Calculator</span></nav>
+    <section class="card hero" aria-labelledby="title"><div><h1 id="title">Invoice Calculator</h1><p class="note">Calculate invoice totals for client work, consulting, subscriptions or product orders. Add quantity, rate, discount and any tax percentage used in your country.</p></div></section>
+    <section class="grid" style="margin-top:16px">
+      <section class="panel">
+        <h2 style="margin-top:0">Inputs</h2>
+        <div class="field"><label class="label" for="qty">Quantity</label><input id="qty" class="input" type="number" value="10" min="0" step="0.01" /></div>
+        <div class="field"><label class="label" for="rate">Rate per unit</label><input id="rate" class="input" type="number" value="75" min="0" step="0.01" /></div>
+        <div class="field"><label class="label" for="discount">Discount %</label><input id="discount" class="input" type="number" value="10" min="0" max="100" step="0.01" /></div>
+        <div class="field"><label class="label" for="tax">Tax %</label><input id="tax" class="input" type="number" value="20" min="0" step="0.01" /></div>
+      </section>
+      <section class="panel">
+        <h2 style="margin-top:0">Results</h2>
+        <div class="result" id="result" aria-live="polite"></div>
+        <p class="note" style="margin-top:12px">Related tools: <a href="/vat-calculator/">VAT Calculator</a>, <a href="/sales-tax-calculator/">US Sales Tax Calculator</a>, <a href="/markup-margin-calculator/">Markup vs Margin Calculator</a>.</p>
+      </section>
+    </section>
+    <section class="card" style="margin-top:16px"><h2 style="margin-top:0">FAQ</h2><details><summary>Can I use this for VAT, GST or sales tax?</summary><p class="note">Yes. The tax field works with any percentage-based tax system.</p></details><details><summary>Does this work for services and products?</summary><p class="note">Yes. It works for consulting hours, retainers, digital products and physical goods.</p></details></section>
+    <footer class="note small site-footer" role="contentinfo">&copy; <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a> . <a href="/privacy-policy/">Privacy</a></footer>
+  </main>
+  <script type="module">
+    import { $, $$ } from "/scripts/utils.js";
+    const fmt = (v) => new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(v);
+    function calc() {
+      const qty = Number($("#qty").value || 0);
+      const rate = Number($("#rate").value || 0);
+      const discount = Number($("#discount").value || 0);
+      const tax = Number($("#tax").value || 0);
+      const subtotal = qty * rate;
+      const discountAmount = subtotal * (discount / 100);
+      const afterDiscount = subtotal - discountAmount;
+      const taxAmount = afterDiscount * (tax / 100);
+      const total = afterDiscount + taxAmount;
+      $("#result").innerHTML = `<div><strong>Subtotal:</strong> ${fmt(subtotal)}</div><div class="note small" style="margin-top:6px"><strong>Discount:</strong> ${fmt(discountAmount)}</div><div class="note small" style="margin-top:6px"><strong>Tax:</strong> ${fmt(taxAmount)}</div><div class="note small" style="margin-top:6px"><strong>Total due:</strong> ${fmt(total)}</div>`;
+    }
+    $$("input").forEach((el) => el.addEventListener("input", calc));
+    $("#y").textContent = new Date().getFullYear();
+    calc();
+  </script>
+  <script src="/scripts/utils.js" type="module"></script>
+</body>
+</html>
