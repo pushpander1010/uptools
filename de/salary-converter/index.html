@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gehaltsrechner - Stundenlohn, Tageslohn, Monatslohn, Jahresgehalt | UpTools</title>
+  <meta name="description" content="Gehalt zwischen Stundenlohn, Tageslohn, Wochenlohn, Monatslohn und Jahresgehalt umrechnen. Kostenloser Gehaltsrechner für Remote-Jobs, Freelancer und internationale Angebote." />
+  <link rel="canonical" href="https://www.uptools.in/de/salary-converter/" />
+  <link rel="alternate" hreflang="en" href="https://www.uptools.in/salary-converter/" />
+  <link rel="alternate" hreflang="de" href="https://www.uptools.in/de/salary-converter/" />
+  <link rel="alternate" hreflang="fr" href="https://www.uptools.in/fr/salary-converter/" />
+  <link rel="alternate" hreflang="es" href="https://www.uptools.in/es/salary-converter/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.uptools.in/salary-converter/" />
+  <meta property="og:title" content="Gehaltsrechner - Stundenlohn, Tageslohn, Monatslohn, Jahresgehalt" />
+  <meta property="og:description" content="Löhne und Gehälter schnell zwischen verschiedenen Zeiträumen umrechnen." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.uptools.in/de/salary-converter/" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  <style>.tool-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}.card-panel{border:1px solid #212a3a;background:#0d1626;border-radius:14px;padding:16px}.field{margin-bottom:12px}.label{display:block;margin-bottom:6px;color:#9aa4b2;font-size:.92rem}.input,.select{width:100%;background:#0e1628;border:1px solid #212a3a;border-radius:.75rem;color:#e6edf3;padding:.72rem .85rem}.result-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:12px}.result-box{background:#101b30;border-radius:12px;border:1px solid #273551;padding:12px;min-height:88px}</style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <a href="#main" class="sr-only">Skip to content</a>
+  <header class="site" role="banner"><div class="header-inner"><a class="brand" href="/" aria-label="UpTools Home"><img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager"><b>UpTools</b></a><nav class="nav-links" aria-label="Primary"><a href="/#tools">Tools</a><a href="/salary-converter/">English</a><a aria-current="page" href="/de/salary-converter/">Deutsch</a></nav></div></header>
+  <main id="main" class="wrap" role="main">
+    <nav class="note small" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Gehaltsrechner</span></nav>
+    <section class="card hero" aria-labelledby="title"><div><h1 id="title">Gehaltsrechner</h1><p class="note">Rechne Lohn und Gehalt zwischen Stunde, Tag, Woche, Monat und Jahr um. Praktisch für Jobangebote, Remote-Arbeit und Freelancer-Vergleiche.</p><p class="note small" style="margin-top:10px">Sprachen: <a href="/salary-converter/">English</a> . <a href="/fr/salary-converter/">Français</a> . <a href="/es/salary-converter/">Español</a></p></div></section>
+    <section class="tool-grid" style="margin-top:16px"><section class="card-panel"><h2 style="margin-top:0">Eingaben</h2><div class="field"><label class="label" for="amount">Betrag</label><input id="amount" class="input" type="number" value="25" min="0" step="0.01" /></div><div class="field"><label class="label" for="period">Zeitraum</label><select id="period" class="select"><option value="hourly" selected>Stunde</option><option value="daily">Tag</option><option value="weekly">Woche</option><option value="monthly">Monat</option><option value="annual">Jahr</option></select></div><div class="field"><label class="label" for="hoursPerDay">Stunden pro Tag</label><input id="hoursPerDay" class="input" type="number" value="8" min="0.1" step="0.1" /></div><div class="field"><label class="label" for="daysPerWeek">Tage pro Woche</label><input id="daysPerWeek" class="input" type="number" value="5" min="0.1" step="0.1" /></div><div class="field"><label class="label" for="weeksPerYear">Wochen pro Jahr</label><input id="weeksPerYear" class="input" type="number" value="52" min="1" step="0.1" /></div></section><section class="card-panel"><h2 style="margin-top:0">Umgerechneter Lohn</h2><div class="result-grid" id="results" aria-live="polite"></div></section></section>
+    <footer class="note small site-footer" role="contentinfo">&copy; <span id="y"></span> UpTools</footer>
+  </main>
+  <script type="module">import { $, $$ } from "/scripts/utils.js"; const fmt=(v)=>new Intl.NumberFormat("de-DE",{maximumFractionDigits:2}).format(v); function calculate(){const amount=Number($("#amount").value||0);const period=$("#period").value;const hoursPerDay=Number($("#hoursPerDay").value||0);const daysPerWeek=Number($("#daysPerWeek").value||0);const weeksPerYear=Number($("#weeksPerYear").value||0);if(amount<0||hoursPerDay<=0||daysPerWeek<=0||weeksPerYear<=0){$("#results").innerHTML='<div class="result-box">Bitte positive Arbeitswerte eingeben.</div>';return;}const hoursPerWeek=hoursPerDay*daysPerWeek;const annualHours=hoursPerWeek*weeksPerYear;const annual=period==="hourly"?amount*annualHours:period==="daily"?amount*daysPerWeek*weeksPerYear:period==="weekly"?amount*weeksPerYear:period==="monthly"?amount*12:amount;const hourly=annualHours>0?annual/annualHours:0;const daily=hourly*hoursPerDay;const weekly=daily*daysPerWeek;const monthly=annual/12;const rows=[["Stunde",hourly],["Tag",daily],["Woche",weekly],["Monat",monthly],["Jahr",annual]];$("#results").innerHTML=rows.map(([l,v])=>`<div class="result-box"><strong>${l}</strong><div style="margin-top:8px;font-size:1.2rem">${fmt(v)}</div></div>`).join("");} $$("input, select").forEach((el)=>el.addEventListener("input",calculate)); $("#y").textContent=new Date().getFullYear(); calculate();</script>
+  <script src="/scripts/utils.js" type="module"></script>
+</body>
+</html>
