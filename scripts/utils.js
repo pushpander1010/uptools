@@ -10,3 +10,84 @@ export const persist = (k, v) => localStorage.setItem(k, JSON.stringify(v));
 export const read = (k, d=null) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
 export const clamp = (x, min, max) => Math.min(max, Math.max(min, x));
 export const num = (v) => (v===''||v==null ? 0 : +v);
+
+/**
+ * Create and inject a breadcrumb navigation component
+ * @param {Array} items - Array of {label, href} objects. Last item is current page (no link)
+ * @param {string} insertSelector - CSS selector where to insert breadcrumb (default: 'main')
+ * @example
+ * createBreadcrumb([
+ *   { label: 'Home', href: '/' },
+ *   { label: 'Tools', href: '/tools/' },
+ *   { label: 'BMI Calculator' }
+ * ]);
+ */
+export function createBreadcrumb(items = [], insertSelector = 'main') {
+  if (!items.length) return;
+  
+  const nav = document.createElement('nav');
+  nav.className = 'breadcrumb';
+  nav.setAttribute('aria-label', 'Breadcrumb');
+  
+  const ol = document.createElement('ol');
+  ol.className = 'breadcrumb-list';
+  
+  items.forEach((item, idx) => {
+    const li = document.createElement('li');
+    li.className = 'breadcrumb-item';
+    
+    if (idx === items.length - 1) {
+      // Current page (no link)
+      li.setAttribute('aria-current', 'page');
+      li.textContent = item.label;
+    } else {
+      // Link to previous page
+      const a = document.createElement('a');
+      a.href = item.href;
+      a.textContent = item.label;
+      li.appendChild(a);
+    }
+    
+    ol.appendChild(li);
+  });
+  
+  nav.appendChild(ol);
+  
+  // Insert at the top of main content
+  const target = document.querySelector(insertSelector);
+  if (target) {
+    target.insertBefore(nav, target.firstChild);
+  }
+}
+
+/**
+ * Initialize mobile menu toggle
+ * Adds click handler to .mobile-menu-toggle button to toggle .nav-links visibility
+ */
+export function initMobileMenu() {
+  const toggle = document.querySelector('.mobile-menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  if (!toggle || !navLinks) return;
+  
+  toggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    toggle.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+  });
+  
+  // Close menu when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!toggle.contains(e.target) && !navLinks.contains(e.target)) {
+      navLinks.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}

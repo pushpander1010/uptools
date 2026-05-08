@@ -835,7 +835,7 @@
 
   <!-- Logic -->
   <script type="module">
-    import { $, $$, fmtNum, debounce, serializeForm, setText, persist, read, clamp, num } from '/scripts/utils.js';
+    import { $, $$, fmtNum, debounce, serializeForm, setText, persist, read, clamp, num, createBreadcrumb, initMobileMenu } from '/scripts/utils.js';
 
     // Grab nodes (IDs are shared across the page and sheet)
     const E = {
@@ -1168,6 +1168,14 @@
     window.addEventListener('resize', () => {
       // Keep it simple: do nothing; drawer adapts automatically.
     });
+
+    // Initialize breadcrumb navigation and mobile menu
+    createBreadcrumb([
+      { label: 'Home', href: '/' },
+      { label: 'Health', href: '/#health' },
+      { label: 'BMI Calculator' }
+    ]);
+    initMobileMenu();
   </script>
 </body>
 
