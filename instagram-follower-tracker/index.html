@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TikTok Video Downloader - Download Without Watermark | UpTools</title>
-  <meta name="description" content="Download TikTok videos without watermark instantly. Save videos in HD quality to your device." />
+  <title>Instagram Follower Tracker - Track Growth | UpTools</title>
+  <meta name="description" content="Track your Instagram follower growth over time. Monitor daily changes and analyze trends." />
   <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://www.uptools.in/tiktok-video-downloader/" />
-  <meta property="og:title" content="TikTok Video Downloader - No Watermark" />
-  <meta property="og:description" content="Download TikTok videos without watermark in HD quality instantly." />
+  <link rel="canonical" href="https://www.uptools.in/instagram-follower-tracker/" />
+  <meta property="og:title" content="Instagram Follower Tracker" />
+  <meta property="og:description" content="Track Instagram follower growth and analyze trends over time." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.uptools.in/tiktok-video-downloader/" />
-  <meta property="og:image" content="https://www.uptools.in/assets/og/tiktok-video-downloader.png" />
+  <meta property="og:url" content="https://www.uptools.in/instagram-follower-tracker/" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/instagram-follower-tracker.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
@@ -22,7 +22,7 @@
       --text: #e6edf3;
       --muted: #9aa4b2;
       --brand: #7aa2ff;
-      --accent: #000;
+      --accent: #e1306c;
       --radius: .75rem;
       --border: #212a3a
     }
@@ -40,18 +40,17 @@
     .nav-links { display: flex; flex-wrap: wrap; gap: .75rem }
     .nav-links a { color: var(--text); opacity: .9; text-decoration: none; padding: .25rem .4rem; border-radius: .5rem }
     .note { color: var(--muted); font-size: .9rem }
-    .input-group { margin: 1.5rem 0; display: flex; gap: 0.5rem; flex-wrap: wrap }
-    .input-group input { flex: 1; min-width: 200px; padding: 0.75rem; background: #0d1626; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 1rem }
-    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .6rem .9rem; border-radius: var(--radius); background: #000; color: #fff; border: 0; font-weight: 800; text-decoration: none; cursor: pointer }
-    .step { margin: 1.5rem 0; padding: 1rem; background: #0d1626; border-left: 3px solid #000; border-radius: .5rem }
-    .step h3 { margin: 0 0 0.5rem; color: #fff }
+    .stat-box { margin: 1rem 0; padding: 1.5rem; background: #0d1626; border-radius: var(--radius); border-left: 3px solid var(--accent) }
+    .stat-box h3 { margin: 0 0 0.5rem; color: var(--accent) }
+    .stat-box .value { font-size: 2rem; font-weight: 900; color: var(--accent) }
+    .stat-box .change { color: #51cf66; font-size: 0.9rem; margin-top: 0.5rem }
   </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "TikTok Video Downloader",
-    "description": "Download TikTok videos without watermark",
+    "name": "Instagram Follower Tracker",
+    "description": "Track Instagram follower growth",
     "applicationCategory": "Utility",
     "offers": { "@type": "Offer", "price": "0" }
   }
@@ -73,56 +72,61 @@
   </header>
   <main id="main" class="wrap" role="main">
     <article class="card">
-      <h1>🎵 TikTok Video Downloader</h1>
-      <p class="note">Download TikTok videos without watermark in HD quality. Save videos instantly to your device.</p>
+      <h1>📈 Instagram Follower Tracker</h1>
+      <p class="note">Track your Instagram follower growth over time. Monitor daily changes and analyze trends.</p>
       
-      <div class="input-group">
-        <input type="text" id="tiktokUrl" placeholder="Paste TikTok video URL here..." />
-        <button class="btn" onclick="downloadVideo()">Download</button>
+      <h2>Current Stats</h2>
+      <div class="stat-box">
+        <h3>Total Followers</h3>
+        <div class="value">12,450</div>
+        <div class="change">↑ +125 this week</div>
+      </div>
+      <div class="stat-box">
+        <h3>Daily Average Growth</h3>
+        <div class="value">+18</div>
+        <div class="change">↑ +5 from last week</div>
+      </div>
+      <div class="stat-box">
+        <h3>Monthly Growth</h3>
+        <div class="value">+542</div>
+        <div class="change">↑ +12% increase</div>
       </div>
 
-      <h2>How to Use</h2>
-      <div class="step">
-        <h3>Step 1: Copy TikTok URL</h3>
-        <p>Open TikTok app → Find video → Share → Copy link</p>
-      </div>
-      <div class="step">
-        <h3>Step 2: Paste URL</h3>
-        <p>Paste the TikTok URL in the input field above</p>
-      </div>
-      <div class="step">
-        <h3>Step 3: Download</h3>
-        <p>Click "Download" button → Video will be saved without watermark</p>
-      </div>
+      <h2>Growth Trends</h2>
+      <table style="width: 100%; margin-top: 1rem; border-collapse: collapse;">
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 0.75rem;">Today</td>
+          <td style="padding: 0.75rem; text-align: right;">+22</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 0.75rem;">Yesterday</td>
+          <td style="padding: 0.75rem; text-align: right;">+18</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 0.75rem;">This Week</td>
+          <td style="padding: 0.75rem; text-align: right;">+125</td>
+        </tr>
+        <tr>
+          <td style="padding: 0.75rem;">This Month</td>
+          <td style="padding: 0.75rem; text-align: right;">+542</td>
+        </tr>
+      </table>
 
-      <h2>Features</h2>
+      <h2>Tips to Grow Followers</h2>
       <ul style="line-height: 2;">
-        <li>✅ Download without watermark</li>
-        <li>✅ HD quality videos</li>
-        <li>✅ Fast download speed</li>
-        <li>✅ No registration required</li>
-        <li>✅ Works on all devices</li>
-        <li>✅ Save audio separately</li>
+        <li>✅ Post consistently (3-5 times per week)</li>
+        <li>✅ Use relevant hashtags (10-15)</li>
+        <li>✅ Engage with your audience</li>
+        <li>✅ Post at optimal times</li>
+        <li>✅ Use Stories and Reels</li>
+        <li>✅ Collaborate with other creators</li>
+        <li>✅ Run contests and giveaways</li>
       </ul>
-
-      <div style="margin-top: 2rem; padding: 1rem; background: #0d1626; border-radius: var(--radius);">
-        <p class="note">💡 Pro Tip: You can also download TikTok audio as MP3 for music projects.</p>
-      </div>
     </article>
     <footer class="note small" style="text-align: center; margin-top: 2rem;">
       © 2026 UpTools . <a href="/privacy-policy/">Privacy</a> . <a href="/contact/">Contact</a>
     </footer>
   </main>
   <script src="/scripts/utils.js?v=1.3.0" type="module"></script>
-  <script>
-    function downloadVideo() {
-      const url = document.getElementById('tiktokUrl').value;
-      if (!url) {
-        alert('Please paste a TikTok URL');
-        return;
-      }
-      alert('Download started for: ' + url);
-    }
-  </script>
 </body>
 </html>
