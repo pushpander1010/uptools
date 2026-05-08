@@ -3,36 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Twitter/X Video Downloader - Download X Videos | UpTools</title>
-  <meta name="description" content="Free Twitter/X video downloader. Download videos, GIFs, and media from X (formerly Twitter) in HD quality without watermark.">
-  <link rel="canonical" href="https://www.uptools.in/twitter-video-downloader/">
+  <title>TikTok Audio Downloader - Download TikTok Music & Sounds | UpTools</title>
+  <meta name="description" content="Free TikTok audio downloader. Download TikTok music, sounds, and background audio as MP3. Extract audio from TikTok videos.">
+  <link rel="canonical" href="https://www.uptools.in/tiktok-audio-downloader/">
   
-  <meta property="og:title" content="Twitter/X Video Downloader | UpTools">
-  <meta property="og:description" content="Download videos and media from X (Twitter) in HD quality easily.">
+  <meta property="og:title" content="TikTok Audio Downloader | UpTools">
+  <meta property="og:description" content="Download TikTok music and sounds as MP3 easily.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.uptools.in/twitter-video-downloader/">
-  <meta property="og:image" content="https://www.uptools.in/assets/og/twitter-video-downloader.png">
+  <meta property="og:url" content="https://www.uptools.in/tiktok-audio-downloader/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/tiktok-audio-downloader.png">
   
   <link rel="preload" href="/style.css" as="style">
   <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/style.css"></noscript>
   
   <script type="application/ld+json">
-  {"@context": "https://schema.org","@type": "SoftwareApplication","name": "Twitter/X Video Downloader","applicationCategory": "UtilityApplication","offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},"operatingSystem": "Any","description": "Download videos, GIFs, and media from X (formerly Twitter) in HD quality."}
+  {"@context": "https://schema.org","@type": "SoftwareApplication","name": "TikTok Audio Downloader","applicationCategory": "UtilityApplication","offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},"operatingSystem": "Any","description": "Download TikTok music, sounds, and background audio as MP3. Extract audio from TikTok videos."}
   </script>
   
   <script type="application/ld+json">
-  {"@context": "https://schema.org","@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://www.uptools.in/"},{"@type": "ListItem","position": 2,"name": "Twitter/X Video Downloader","item": "https://www.uptools.in/twitter-video-downloader/"}]}
+  {"@context": "https://schema.org","@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://www.uptools.in/"},{"@type": "ListItem","position": 2,"name": "TikTok Audio Downloader","item": "https://www.uptools.in/tiktok-audio-downloader/"}]}
   </script>
   
   <script type="application/ld+json">
-  {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "How do I download a Twitter/X video?","acceptedAnswer": {"@type": "Answer","text": "Copy the tweet URL, paste it into our downloader, select quality, and click download. The video will be saved to your device."}},{"@type": "Question","name": "Can I download GIFs from X?","acceptedAnswer": {"@type": "Answer","text": "Yes! Our downloader supports GIFs, videos, and all media types from X posts."}},{"@type": "Question","name": "What's the maximum video length?","acceptedAnswer": {"@type": "Answer","text": "X allows videos up to 2 hours long. We support downloading videos of any length available on X."}}]}
+  {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "How do I download TikTok audio?","acceptedAnswer": {"@type": "Answer","text": "Copy the TikTok video URL, paste it into our downloader, select quality, and click download. The audio will be saved as MP3."}},{"@type": "Question","name": "Can I download TikTok sounds?","acceptedAnswer": {"@type": "Answer","text": "Yes! You can download any audio or sound used in TikTok videos."}},{"@type": "Question","name": "What audio quality is available?","acceptedAnswer": {"@type": "Answer","text": "We support multiple quality options: 320 kbps (highest), 256 kbps, 192 kbps, and 128 kbps."}}]}
   </script>
   
   <style>
     :root {
-      --accent: #1DA1F2;
-      --accent-2: #1a8cd8;
+      --accent: #000000;
+      --accent-2: #1a1a1a;
     }
     
     .tool-container { max-width: 800px; margin: 2rem auto; }
@@ -43,7 +43,7 @@
     
     .quality-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin: 2rem 0; }
     .quality-option { padding: 1rem; border: 2px solid var(--border); border-radius: var(--radius); text-align: center; cursor: pointer; transition: all 0.2s; }
-    .quality-option:hover { border-color: var(--accent); background: rgba(29, 161, 242, 0.1); }
+    .quality-option:hover { border-color: var(--accent); background: rgba(0, 0, 0, 0.1); }
     .quality-option.selected { border-color: var(--accent); background: var(--accent); color: white; }
     
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0; }
@@ -54,7 +54,7 @@
     .guide-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; }
     .guide-section h3 { color: var(--accent); margin-top: 0; }
     .step-list { list-style: none; padding: 0; counter-reset: step; }
-    .step-list li { counter-increment: step; padding: 1rem; margin: 1rem 0; background: rgba(29, 161, 242, 0.05); border-radius: 0.5rem; position: relative; padding-left: 3.5rem; }
+    .step-list li { counter-increment: step; padding: 1rem; margin: 1rem 0; background: rgba(0, 0, 0, 0.05); border-radius: 0.5rem; position: relative; padding-left: 3.5rem; }
     .step-list li::before { content: counter(step); position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 2rem; height: 2rem; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
     
     .warning-box { background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; }
@@ -81,11 +81,11 @@
   
   <main id="main" class="wrap" role="main">
     <nav aria-label="Breadcrumb">
-      <a href="/">Home</a> / <span>Twitter/X Video Downloader</span>
+      <a href="/">Home</a> / <span>TikTok Audio Downloader</span>
     </nav>
     
-    <h1>Twitter/X Video Downloader</h1>
-    <p class="lead">Download videos, GIFs, and media from X (formerly Twitter) in HD quality. Fast, easy, and free.</p>
+    <h1>TikTok Audio Downloader</h1>
+    <p class="lead">Download TikTok music, sounds, and background audio as MP3. Extract audio from any TikTok video.</p>
     
     <ins class="adsbygoogle"
          style="display:block"
@@ -97,30 +97,30 @@
     <div class="tool-container">
       <div class="warning-box">
         <strong>⚠️ Privacy & Legal Notice:</strong>
-        <p>Only download content you have permission to download. Respect copyright and creators' rights. Don't redistribute copyrighted content.</p>
+        <p>Only download audio you have permission to download. Respect copyright and creators' rights. Don't redistribute copyrighted music.</p>
       </div>
       
       <div class="input-group">
-        <input type="text" id="videoUrl" placeholder="Paste X/Twitter video URL here..." aria-label="X/Twitter video URL">
-        <button onclick="downloadVideo()">Download</button>
+        <input type="text" id="videoUrl" placeholder="Paste TikTok video URL here..." aria-label="TikTok video URL">
+        <button onclick="downloadAudio()">Download Audio</button>
       </div>
       
       <div class="quality-selector">
-        <div class="quality-option selected" data-quality="1080p">
-          <div style="font-size: 1.5rem;">🎬</div>
-          <div>1080p</div>
+        <div class="quality-option selected" data-quality="320">
+          <div style="font-size: 1.5rem;">🎵</div>
+          <div>320 kbps</div>
         </div>
-        <div class="quality-option" data-quality="720p">
-          <div style="font-size: 1.5rem;">📹</div>
-          <div>720p</div>
+        <div class="quality-option" data-quality="256">
+          <div style="font-size: 1.5rem;">🎶</div>
+          <div>256 kbps</div>
         </div>
-        <div class="quality-option" data-quality="480p">
-          <div style="font-size: 1.5rem;">📱</div>
-          <div>480p</div>
-        </div>
-        <div class="quality-option" data-quality="audio">
+        <div class="quality-option" data-quality="192">
           <div style="font-size: 1.5rem;">🔊</div>
-          <div>Audio Only</div>
+          <div>192 kbps</div>
+        </div>
+        <div class="quality-option" data-quality="128">
+          <div style="font-size: 1.5rem;">📻</div>
+          <div>128 kbps</div>
         </div>
       </div>
       
@@ -130,12 +130,12 @@
           <p>Fast Download</p>
         </div>
         <div class="feature-card">
-          <div class="icon">🎬</div>
-          <p>1080p HD</p>
+          <div class="icon">🎵</div>
+          <p>High Quality</p>
         </div>
         <div class="feature-card">
-          <div class="icon">🎞️</div>
-          <p>GIF Support</p>
+          <div class="icon">🎶</div>
+          <p>MP3 Format</p>
         </div>
         <div class="feature-card">
           <div class="icon">📱</div>
@@ -160,38 +160,37 @@
          data-full-width-responsive="true"></ins>
     
     <section class="guide-section">
-      <h2>How to Download X/Twitter Videos</h2>
+      <h2>How to Download TikTok Audio</h2>
       <ol class="step-list">
-        <li>Find the tweet with the video you want to download</li>
-        <li>Click on the tweet to open it</li>
-        <li>Copy the URL from the address bar</li>
+        <li>Find the TikTok video with the audio you want to download</li>
+        <li>Copy the video URL from the address bar</li>
         <li>Paste the URL into the input field above</li>
-        <li>Select your preferred quality (1080p, 720p, 480p, or audio)</li>
-        <li>Click "Download" to save the video</li>
+        <li>Select your preferred audio quality (320, 256, 192, or 128 kbps)</li>
+        <li>Click "Download Audio" to save as MP3</li>
+        <li>The audio file will be saved to your device</li>
       </ol>
     </section>
     
     <section class="guide-section">
-      <h2>Supported Content Types</h2>
+      <h2>Audio Quality Guide</h2>
       <ul>
-        <li><strong>Videos:</strong> Regular tweets with video content</li>
-        <li><strong>GIFs:</strong> Animated GIFs from tweets</li>
-        <li><strong>Retweets:</strong> Videos shared via retweets</li>
-        <li><strong>Quoted Tweets:</strong> Videos in quoted tweets</li>
-        <li><strong>Threads:</strong> Videos in tweet threads</li>
+        <li><strong>320 kbps:</strong> Highest quality, best for music production</li>
+        <li><strong>256 kbps:</strong> High quality, good for most uses</li>
+        <li><strong>192 kbps:</strong> Medium quality, smaller file size</li>
+        <li><strong>128 kbps:</strong> Lower quality, smallest file size</li>
       </ul>
     </section>
     
     <section class="guide-section">
       <h2>Frequently Asked Questions</h2>
-      <h3>Q: Why can't I download a video?</h3>
-      <p>Some videos may be private or restricted. Make sure the tweet is public and the video is accessible.</p>
+      <h3>Q: Can I download copyrighted music?</h3>
+      <p>You can download for personal use, but don't redistribute copyrighted music without permission.</p>
       
-      <h3>Q: Can I download GIFs?</h3>
-      <p>Yes! Our downloader supports GIFs and will save them as MP4 video files for better compatibility.</p>
+      <h3>Q: What format is the audio in?</h3>
+      <p>All audio is downloaded as MP3 format, compatible with all devices and media players.</p>
       
-      <h3>Q: What's the maximum file size?</h3>
-      <p>X allows videos up to 2 hours long. We support downloading videos of any length.</p>
+      <h3>Q: Can I download audio from private videos?</h3>
+      <p>No, only public TikTok videos are supported.</p>
       
       <h3>Q: Is this tool free?</h3>
       <p>Yes, completely free! No registration or payment required.</p>
@@ -211,10 +210,10 @@
   
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
-    function downloadVideo() {
+    function downloadAudio() {
       const url = document.getElementById('videoUrl').value;
       if (!url) {
-        alert('Please paste an X/Twitter video URL');
+        alert('Please paste a TikTok video URL');
         return;
       }
       alert('Download feature coming soon! For now, you can use the URL directly with a video downloader service.');

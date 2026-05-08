@@ -3,48 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Twitter/X Video Downloader - Download X Videos | UpTools</title>
-  <meta name="description" content="Free Twitter/X video downloader. Download videos, GIFs, and media from X (formerly Twitter) in HD quality without watermark.">
-  <link rel="canonical" href="https://www.uptools.in/twitter-video-downloader/">
+  <title>Snapchat Video Downloader - Download Snaps & Stories | UpTools</title>
+  <meta name="description" content="Free Snapchat video downloader. Download snaps, stories, and memories before they expire. Save Snapchat videos in HD quality.">
+  <link rel="canonical" href="https://www.uptools.in/snapchat-video-downloader/">
   
-  <meta property="og:title" content="Twitter/X Video Downloader | UpTools">
-  <meta property="og:description" content="Download videos and media from X (Twitter) in HD quality easily.">
+  <meta property="og:title" content="Snapchat Video Downloader | UpTools">
+  <meta property="og:description" content="Download Snapchat videos, snaps, and stories easily before they disappear.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.uptools.in/twitter-video-downloader/">
-  <meta property="og:image" content="https://www.uptools.in/assets/og/twitter-video-downloader.png">
+  <meta property="og:url" content="https://www.uptools.in/snapchat-video-downloader/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/snapchat-video-downloader.png">
   
   <link rel="preload" href="/style.css" as="style">
   <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/style.css"></noscript>
   
   <script type="application/ld+json">
-  {"@context": "https://schema.org","@type": "SoftwareApplication","name": "Twitter/X Video Downloader","applicationCategory": "UtilityApplication","offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},"operatingSystem": "Any","description": "Download videos, GIFs, and media from X (formerly Twitter) in HD quality."}
+  {"@context": "https://schema.org","@type": "SoftwareApplication","name": "Snapchat Video Downloader","applicationCategory": "UtilityApplication","offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},"operatingSystem": "Any","description": "Download Snapchat videos, snaps, stories, and memories before they expire."}
   </script>
   
   <script type="application/ld+json">
-  {"@context": "https://schema.org","@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://www.uptools.in/"},{"@type": "ListItem","position": 2,"name": "Twitter/X Video Downloader","item": "https://www.uptools.in/twitter-video-downloader/"}]}
+  {"@context": "https://schema.org","@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://www.uptools.in/"},{"@type": "ListItem","position": 2,"name": "Snapchat Video Downloader","item": "https://www.uptools.in/snapchat-video-downloader/"}]}
   </script>
   
   <script type="application/ld+json">
-  {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "How do I download a Twitter/X video?","acceptedAnswer": {"@type": "Answer","text": "Copy the tweet URL, paste it into our downloader, select quality, and click download. The video will be saved to your device."}},{"@type": "Question","name": "Can I download GIFs from X?","acceptedAnswer": {"@type": "Answer","text": "Yes! Our downloader supports GIFs, videos, and all media types from X posts."}},{"@type": "Question","name": "What's the maximum video length?","acceptedAnswer": {"@type": "Answer","text": "X allows videos up to 2 hours long. We support downloading videos of any length available on X."}}]}
+  {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "How do I download a Snapchat video?","acceptedAnswer": {"@type": "Answer","text": "Copy the snap or story link, paste it into our downloader, select quality, and click download. The video will be saved before it expires."}},{"@type": "Question","name": "Can I download Snapchat stories?","acceptedAnswer": {"@type": "Answer","text": "Yes! You can download public stories, friend stories, and memories. Private snaps require the sender's permission."}},{"@type": "Question","name": "Will the sender know I downloaded their snap?","acceptedAnswer": {"@type": "Answer","text": "Snapchat notifies users when screenshots are taken, but downloading through our tool doesn't trigger notifications."}}]}
   </script>
   
   <style>
     :root {
-      --accent: #1DA1F2;
-      --accent-2: #1a8cd8;
+      --accent: #FFFC00;
+      --accent-2: #e6e600;
+      --text-dark: #000;
     }
     
     .tool-container { max-width: 800px; margin: 2rem auto; }
     .input-group { display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap; }
     .input-group input { flex: 1; min-width: 200px; padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); }
-    .input-group button { padding: 0.75rem 2rem; background: var(--accent); color: white; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 700; }
+    .input-group button { padding: 0.75rem 2rem; background: var(--accent); color: var(--text-dark); border: none; border-radius: var(--radius); cursor: pointer; font-weight: 700; }
     .input-group button:hover { background: var(--accent-2); }
     
     .quality-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin: 2rem 0; }
     .quality-option { padding: 1rem; border: 2px solid var(--border); border-radius: var(--radius); text-align: center; cursor: pointer; transition: all 0.2s; }
-    .quality-option:hover { border-color: var(--accent); background: rgba(29, 161, 242, 0.1); }
-    .quality-option.selected { border-color: var(--accent); background: var(--accent); color: white; }
+    .quality-option:hover { border-color: var(--accent); background: rgba(255, 252, 0, 0.1); }
+    .quality-option.selected { border-color: var(--accent); background: var(--accent); color: var(--text-dark); }
     
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0; }
     .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: center; }
@@ -54,8 +55,8 @@
     .guide-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; }
     .guide-section h3 { color: var(--accent); margin-top: 0; }
     .step-list { list-style: none; padding: 0; counter-reset: step; }
-    .step-list li { counter-increment: step; padding: 1rem; margin: 1rem 0; background: rgba(29, 161, 242, 0.05); border-radius: 0.5rem; position: relative; padding-left: 3.5rem; }
-    .step-list li::before { content: counter(step); position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 2rem; height: 2rem; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    .step-list li { counter-increment: step; padding: 1rem; margin: 1rem 0; background: rgba(255, 252, 0, 0.05); border-radius: 0.5rem; position: relative; padding-left: 3.5rem; }
+    .step-list li::before { content: counter(step); position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 2rem; height: 2rem; background: var(--accent); color: var(--text-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
     
     .warning-box { background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; }
     
@@ -81,11 +82,11 @@
   
   <main id="main" class="wrap" role="main">
     <nav aria-label="Breadcrumb">
-      <a href="/">Home</a> / <span>Twitter/X Video Downloader</span>
+      <a href="/">Home</a> / <span>Snapchat Video Downloader</span>
     </nav>
     
-    <h1>Twitter/X Video Downloader</h1>
-    <p class="lead">Download videos, GIFs, and media from X (formerly Twitter) in HD quality. Fast, easy, and free.</p>
+    <h1>Snapchat Video Downloader</h1>
+    <p class="lead">Download Snapchat videos, snaps, stories, and memories before they expire. Save in HD quality.</p>
     
     <ins class="adsbygoogle"
          style="display:block"
@@ -97,26 +98,22 @@
     <div class="tool-container">
       <div class="warning-box">
         <strong>⚠️ Privacy & Legal Notice:</strong>
-        <p>Only download content you have permission to download. Respect copyright and creators' rights. Don't redistribute copyrighted content.</p>
+        <p>Only download content you have permission to download. Respect others' privacy and don't share downloaded content without consent.</p>
       </div>
       
       <div class="input-group">
-        <input type="text" id="videoUrl" placeholder="Paste X/Twitter video URL here..." aria-label="X/Twitter video URL">
+        <input type="text" id="videoUrl" placeholder="Paste Snapchat snap or story link..." aria-label="Snapchat video URL">
         <button onclick="downloadVideo()">Download</button>
       </div>
       
       <div class="quality-selector">
-        <div class="quality-option selected" data-quality="1080p">
+        <div class="quality-option selected" data-quality="hd">
           <div style="font-size: 1.5rem;">🎬</div>
-          <div>1080p</div>
+          <div>HD Quality</div>
         </div>
-        <div class="quality-option" data-quality="720p">
+        <div class="quality-option" data-quality="sd">
           <div style="font-size: 1.5rem;">📹</div>
-          <div>720p</div>
-        </div>
-        <div class="quality-option" data-quality="480p">
-          <div style="font-size: 1.5rem;">📱</div>
-          <div>480p</div>
+          <div>SD Quality</div>
         </div>
         <div class="quality-option" data-quality="audio">
           <div style="font-size: 1.5rem;">🔊</div>
@@ -127,15 +124,15 @@
       <div class="features-grid">
         <div class="feature-card">
           <div class="icon">⚡</div>
-          <p>Fast Download</p>
+          <p>Instant Download</p>
         </div>
         <div class="feature-card">
           <div class="icon">🎬</div>
-          <p>1080p HD</p>
+          <p>HD Quality</p>
         </div>
         <div class="feature-card">
-          <div class="icon">🎞️</div>
-          <p>GIF Support</p>
+          <div class="icon">⏰</div>
+          <p>Before Expiry</p>
         </div>
         <div class="feature-card">
           <div class="icon">📱</div>
@@ -160,41 +157,41 @@
          data-full-width-responsive="true"></ins>
     
     <section class="guide-section">
-      <h2>How to Download X/Twitter Videos</h2>
+      <h2>How to Download Snapchat Videos</h2>
       <ol class="step-list">
-        <li>Find the tweet with the video you want to download</li>
-        <li>Click on the tweet to open it</li>
-        <li>Copy the URL from the address bar</li>
+        <li>Open Snapchat and find the snap or story you want to download</li>
+        <li>Long-press on the snap to get the share menu</li>
+        <li>Copy the link or share it to get the URL</li>
         <li>Paste the URL into the input field above</li>
-        <li>Select your preferred quality (1080p, 720p, 480p, or audio)</li>
+        <li>Select your preferred quality</li>
         <li>Click "Download" to save the video</li>
       </ol>
     </section>
     
     <section class="guide-section">
-      <h2>Supported Content Types</h2>
+      <h2>What You Can Download</h2>
       <ul>
-        <li><strong>Videos:</strong> Regular tweets with video content</li>
-        <li><strong>GIFs:</strong> Animated GIFs from tweets</li>
-        <li><strong>Retweets:</strong> Videos shared via retweets</li>
-        <li><strong>Quoted Tweets:</strong> Videos in quoted tweets</li>
-        <li><strong>Threads:</strong> Videos in tweet threads</li>
+        <li><strong>Personal Snaps:</strong> Videos sent to you by friends</li>
+        <li><strong>Stories:</strong> Public and friend stories</li>
+        <li><strong>Memories:</strong> Videos saved in your memories</li>
+        <li><strong>Public Stories:</strong> Stories from public accounts</li>
+        <li><strong>Discover Content:</strong> Videos from Snapchat Discover</li>
       </ul>
     </section>
     
     <section class="guide-section">
       <h2>Frequently Asked Questions</h2>
-      <h3>Q: Why can't I download a video?</h3>
-      <p>Some videos may be private or restricted. Make sure the tweet is public and the video is accessible.</p>
+      <h3>Q: Will Snapchat notify the sender?</h3>
+      <p>Our downloader doesn't trigger Snapchat's screenshot notification system. However, always respect others' privacy.</p>
       
-      <h3>Q: Can I download GIFs?</h3>
-      <p>Yes! Our downloader supports GIFs and will save them as MP4 video files for better compatibility.</p>
+      <h3>Q: Can I download expired snaps?</h3>
+      <p>No, once a snap expires, it's deleted from Snapchat's servers and cannot be recovered.</p>
       
-      <h3>Q: What's the maximum file size?</h3>
-      <p>X allows videos up to 2 hours long. We support downloading videos of any length.</p>
+      <h3>Q: What formats are supported?</h3>
+      <p>We support MP4 video format and MP3 audio format for maximum compatibility.</p>
       
       <h3>Q: Is this tool free?</h3>
-      <p>Yes, completely free! No registration or payment required.</p>
+      <p>Yes, completely free! No registration, no hidden fees.</p>
     </section>
     
     <ins class="adsbygoogle"
@@ -214,7 +211,7 @@
     function downloadVideo() {
       const url = document.getElementById('videoUrl').value;
       if (!url) {
-        alert('Please paste an X/Twitter video URL');
+        alert('Please paste a Snapchat video URL');
         return;
       }
       alert('Download feature coming soon! For now, you can use the URL directly with a video downloader service.');

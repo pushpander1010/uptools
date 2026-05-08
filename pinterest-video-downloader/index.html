@@ -3,36 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Twitter/X Video Downloader - Download X Videos | UpTools</title>
-  <meta name="description" content="Free Twitter/X video downloader. Download videos, GIFs, and media from X (formerly Twitter) in HD quality without watermark.">
-  <link rel="canonical" href="https://www.uptools.in/twitter-video-downloader/">
+  <title>Pinterest Video Downloader - Download Pins & Videos | UpTools</title>
+  <meta name="description" content="Free Pinterest video downloader. Download Pinterest pins, videos, and images in HD quality. Save pins for offline viewing.">
+  <link rel="canonical" href="https://www.uptools.in/pinterest-video-downloader/">
   
-  <meta property="og:title" content="Twitter/X Video Downloader | UpTools">
-  <meta property="og:description" content="Download videos and media from X (Twitter) in HD quality easily.">
+  <meta property="og:title" content="Pinterest Video Downloader | UpTools">
+  <meta property="og:description" content="Download Pinterest videos and pins in HD quality easily.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.uptools.in/twitter-video-downloader/">
-  <meta property="og:image" content="https://www.uptools.in/assets/og/twitter-video-downloader.png">
+  <meta property="og:url" content="https://www.uptools.in/pinterest-video-downloader/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/pinterest-video-downloader.png">
   
   <link rel="preload" href="/style.css" as="style">
   <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/style.css"></noscript>
   
   <script type="application/ld+json">
-  {"@context": "https://schema.org","@type": "SoftwareApplication","name": "Twitter/X Video Downloader","applicationCategory": "UtilityApplication","offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},"operatingSystem": "Any","description": "Download videos, GIFs, and media from X (formerly Twitter) in HD quality."}
+  {"@context": "https://schema.org","@type": "SoftwareApplication","name": "Pinterest Video Downloader","applicationCategory": "UtilityApplication","offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},"operatingSystem": "Any","description": "Download Pinterest videos, pins, and images in HD quality."}
   </script>
   
   <script type="application/ld+json">
-  {"@context": "https://schema.org","@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://www.uptools.in/"},{"@type": "ListItem","position": 2,"name": "Twitter/X Video Downloader","item": "https://www.uptools.in/twitter-video-downloader/"}]}
+  {"@context": "https://schema.org","@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://www.uptools.in/"},{"@type": "ListItem","position": 2,"name": "Pinterest Video Downloader","item": "https://www.uptools.in/pinterest-video-downloader/"}]}
   </script>
   
   <script type="application/ld+json">
-  {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "How do I download a Twitter/X video?","acceptedAnswer": {"@type": "Answer","text": "Copy the tweet URL, paste it into our downloader, select quality, and click download. The video will be saved to your device."}},{"@type": "Question","name": "Can I download GIFs from X?","acceptedAnswer": {"@type": "Answer","text": "Yes! Our downloader supports GIFs, videos, and all media types from X posts."}},{"@type": "Question","name": "What's the maximum video length?","acceptedAnswer": {"@type": "Answer","text": "X allows videos up to 2 hours long. We support downloading videos of any length available on X."}}]}
+  {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "How do I download a Pinterest video?","acceptedAnswer": {"@type": "Answer","text": "Copy the pin URL, paste it into our downloader, select quality, and click download. The video or image will be saved to your device."}},{"@type": "Question","name": "Can I download Pinterest images?","acceptedAnswer": {"@type": "Answer","text": "Yes! Our downloader supports both videos and images from Pinterest pins."}},{"@type": "Question","name": "What's the maximum resolution?","acceptedAnswer": {"@type": "Answer","text": "We support downloading pins in their original resolution, up to 4K quality depending on the source."}}]}
   </script>
   
   <style>
     :root {
-      --accent: #1DA1F2;
-      --accent-2: #1a8cd8;
+      --accent: #E60023;
+      --accent-2: #c40020;
     }
     
     .tool-container { max-width: 800px; margin: 2rem auto; }
@@ -43,7 +43,7 @@
     
     .quality-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin: 2rem 0; }
     .quality-option { padding: 1rem; border: 2px solid var(--border); border-radius: var(--radius); text-align: center; cursor: pointer; transition: all 0.2s; }
-    .quality-option:hover { border-color: var(--accent); background: rgba(29, 161, 242, 0.1); }
+    .quality-option:hover { border-color: var(--accent); background: rgba(230, 0, 35, 0.1); }
     .quality-option.selected { border-color: var(--accent); background: var(--accent); color: white; }
     
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0; }
@@ -54,7 +54,7 @@
     .guide-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; }
     .guide-section h3 { color: var(--accent); margin-top: 0; }
     .step-list { list-style: none; padding: 0; counter-reset: step; }
-    .step-list li { counter-increment: step; padding: 1rem; margin: 1rem 0; background: rgba(29, 161, 242, 0.05); border-radius: 0.5rem; position: relative; padding-left: 3.5rem; }
+    .step-list li { counter-increment: step; padding: 1rem; margin: 1rem 0; background: rgba(230, 0, 35, 0.05); border-radius: 0.5rem; position: relative; padding-left: 3.5rem; }
     .step-list li::before { content: counter(step); position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 2rem; height: 2rem; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
     
     .warning-box { background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; }
@@ -81,11 +81,11 @@
   
   <main id="main" class="wrap" role="main">
     <nav aria-label="Breadcrumb">
-      <a href="/">Home</a> / <span>Twitter/X Video Downloader</span>
+      <a href="/">Home</a> / <span>Pinterest Video Downloader</span>
     </nav>
     
-    <h1>Twitter/X Video Downloader</h1>
-    <p class="lead">Download videos, GIFs, and media from X (formerly Twitter) in HD quality. Fast, easy, and free.</p>
+    <h1>Pinterest Video Downloader</h1>
+    <p class="lead">Download Pinterest videos, pins, and images in HD quality. Save your favorite pins for offline viewing.</p>
     
     <ins class="adsbygoogle"
          style="display:block"
@@ -101,26 +101,26 @@
       </div>
       
       <div class="input-group">
-        <input type="text" id="videoUrl" placeholder="Paste X/Twitter video URL here..." aria-label="X/Twitter video URL">
+        <input type="text" id="videoUrl" placeholder="Paste Pinterest pin URL here..." aria-label="Pinterest pin URL">
         <button onclick="downloadVideo()">Download</button>
       </div>
       
       <div class="quality-selector">
-        <div class="quality-option selected" data-quality="1080p">
+        <div class="quality-option selected" data-quality="original">
           <div style="font-size: 1.5rem;">🎬</div>
+          <div>Original</div>
+        </div>
+        <div class="quality-option" data-quality="1080p">
+          <div style="font-size: 1.5rem;">📹</div>
           <div>1080p</div>
         </div>
         <div class="quality-option" data-quality="720p">
-          <div style="font-size: 1.5rem;">📹</div>
+          <div style="font-size: 1.5rem;">📱</div>
           <div>720p</div>
         </div>
-        <div class="quality-option" data-quality="480p">
-          <div style="font-size: 1.5rem;">📱</div>
-          <div>480p</div>
-        </div>
-        <div class="quality-option" data-quality="audio">
-          <div style="font-size: 1.5rem;">🔊</div>
-          <div>Audio Only</div>
+        <div class="quality-option" data-quality="thumbnail">
+          <div style="font-size: 1.5rem;">🖼️</div>
+          <div>Thumbnail</div>
         </div>
       </div>
       
@@ -131,11 +131,11 @@
         </div>
         <div class="feature-card">
           <div class="icon">🎬</div>
-          <p>1080p HD</p>
+          <p>HD Quality</p>
         </div>
         <div class="feature-card">
-          <div class="icon">🎞️</div>
-          <p>GIF Support</p>
+          <div class="icon">🖼️</div>
+          <p>Image Support</p>
         </div>
         <div class="feature-card">
           <div class="icon">📱</div>
@@ -160,38 +160,38 @@
          data-full-width-responsive="true"></ins>
     
     <section class="guide-section">
-      <h2>How to Download X/Twitter Videos</h2>
+      <h2>How to Download Pinterest Videos & Pins</h2>
       <ol class="step-list">
-        <li>Find the tweet with the video you want to download</li>
-        <li>Click on the tweet to open it</li>
+        <li>Find the pin or video you want to download on Pinterest</li>
+        <li>Click on the pin to open it in full view</li>
         <li>Copy the URL from the address bar</li>
         <li>Paste the URL into the input field above</li>
-        <li>Select your preferred quality (1080p, 720p, 480p, or audio)</li>
-        <li>Click "Download" to save the video</li>
+        <li>Select your preferred quality (Original, 1080p, 720p, or Thumbnail)</li>
+        <li>Click "Download" to save the pin or video</li>
       </ol>
     </section>
     
     <section class="guide-section">
-      <h2>Supported Content Types</h2>
+      <h2>What You Can Download</h2>
       <ul>
-        <li><strong>Videos:</strong> Regular tweets with video content</li>
-        <li><strong>GIFs:</strong> Animated GIFs from tweets</li>
-        <li><strong>Retweets:</strong> Videos shared via retweets</li>
-        <li><strong>Quoted Tweets:</strong> Videos in quoted tweets</li>
-        <li><strong>Threads:</strong> Videos in tweet threads</li>
+        <li><strong>Video Pins:</strong> Animated pins with video content</li>
+        <li><strong>Image Pins:</strong> Static image pins</li>
+        <li><strong>Carousel Pins:</strong> Multi-image pins (downloads first image)</li>
+        <li><strong>Story Pins:</strong> Multi-page story content</li>
+        <li><strong>Idea Pins:</strong> Pinterest's native video format</li>
       </ul>
     </section>
     
     <section class="guide-section">
       <h2>Frequently Asked Questions</h2>
-      <h3>Q: Why can't I download a video?</h3>
-      <p>Some videos may be private or restricted. Make sure the tweet is public and the video is accessible.</p>
+      <h3>Q: Can I download private pins?</h3>
+      <p>No, only public pins can be downloaded. Private pins are restricted by Pinterest's privacy settings.</p>
       
-      <h3>Q: Can I download GIFs?</h3>
-      <p>Yes! Our downloader supports GIFs and will save them as MP4 video files for better compatibility.</p>
+      <h3>Q: What's the maximum resolution?</h3>
+      <p>We support downloading pins in their original resolution. Most pins are available in 1080p or higher.</p>
       
-      <h3>Q: What's the maximum file size?</h3>
-      <p>X allows videos up to 2 hours long. We support downloading videos of any length.</p>
+      <h3>Q: Can I download carousel pins?</h3>
+      <p>Yes, we download the first image from carousel pins. For all images, you'll need to download each pin individually.</p>
       
       <h3>Q: Is this tool free?</h3>
       <p>Yes, completely free! No registration or payment required.</p>
@@ -214,7 +214,7 @@
     function downloadVideo() {
       const url = document.getElementById('videoUrl').value;
       if (!url) {
-        alert('Please paste an X/Twitter video URL');
+        alert('Please paste a Pinterest pin URL');
         return;
       }
       alert('Download feature coming soon! For now, you can use the URL directly with a video downloader service.');

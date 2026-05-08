@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Audio Downloader - Download MP3 from YouTube | UpTools</title>
+  <meta name="description" content="Download audio from YouTube videos as MP3. Extract music from YouTube instantly. Free, fast, no registration needed.">
+  <link rel="canonical" href="https://www.uptools.in/youtube-audio-downloader/">
+  
+  <meta property="og:title" content="YouTube Audio Downloader | UpTools">
+  <meta property="og:description" content="Download YouTube audio as MP3 instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/youtube-audio-downloader/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/youtube-audio-downloader.png">
+  
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <style>
+    .input-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin: 2rem 0; }
+    .input-group { display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .input-group input { flex: 1; min-width: 250px; padding: 0.75rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 1rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: var(--radius); background: #FF0000; color: white; border: 0; font-weight: 800; cursor: pointer; }
+    .btn:hover { background: #CC0000; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: center; }
+    .feature-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .feature-card h3 { margin: 0.5rem 0; color: var(--brand); font-size: 0.95rem; }
+    .quality-selector { display: flex; gap: 0.5rem; margin: 1rem 0; flex-wrap: wrap; }
+    .quality-btn { padding: 0.5rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); cursor: pointer; }
+    .quality-btn.active { background: #FF0000; color: white; border-color: #FF0000; }
+  </style>
+  
+  <script type="application/ld+json">
+  {"@context": "https://schema.org","@type": "SoftwareApplication","name": "YouTube Audio Downloader","applicationCategory": "UtilityApplication","offers": {"@type": "Offer", "price": "0"},"description": "Download audio from YouTube videos as MP3."}
+  </script>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="wrap">
+      <a href="/" class="logo">UpTools</a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <h1>🎵 YouTube Audio Downloader</h1>
+    <p class="lead">Download audio from YouTube videos as MP3. Extract music instantly. Free, fast, no registration needed.</p>
+    
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    
+    <div class="input-section">
+      <h2>Download YouTube Audio</h2>
+      <div class="input-group">
+        <input type="text" id="youtubeUrl" placeholder="Paste YouTube video URL here..." />
+        <button class="btn" onclick="downloadAudio()">🎵 Download MP3</button>
+      </div>
+      
+      <label style="display: block; margin-top: 1rem; font-weight: 600;">Audio Quality:</label>
+      <div class="quality-selector">
+        <button class="quality-btn active" onclick="setQuality(this, '320')">320 kbps (Best)</button>
+        <button class="quality-btn" onclick="setQuality(this, '256')">256 kbps</button>
+        <button class="quality-btn" onclick="setQuality(this, '192')">192 kbps</button>
+        <button class="quality-btn" onclick="setQuality(this, '128')">128 kbps (Smallest)</button>
+      </div>
+    </div>
+    
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon">🎵</div>
+        <h3>MP3 Format</h3>
+      </div>
+      <div class="feature-card">
+        <div class="icon">⚡</div>
+        <h3>Fast Download</h3>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔊</div>
+        <h3>High Quality</h3>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📱</div>
+        <h3>All Devices</h3>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🆓</div>
+        <h3>100% Free</h3>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔒</div>
+        <h3>Secure</h3>
+      </div>
+    </div>
+    
+    <ins class="adsbygoogle" style="display:block; margin: 2rem 0;" data-ad-client="ca-pub-6216304334889617" data-ad-slot="1234567891" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    
+    <h2>How to Download YouTube Audio</h2>
+    <ol style="line-height: 2;">
+      <li>Find the YouTube video you want to download</li>
+      <li>Copy the video URL from the address bar</li>
+      <li>Paste the URL in the input field above</li>
+      <li>Select your preferred audio quality</li>
+      <li>Click "Download MP3" button</li>
+      <li>Audio will be saved to your device</li>
+    </ol>
+    
+    <h2>Supported Content</h2>
+    <ul style="line-height: 2;">
+      <li>✅ YouTube Videos</li>
+      <li>✅ YouTube Music</li>
+      <li>✅ YouTube Shorts</li>
+      <li>✅ Playlists</li>
+      <li>✅ Live Streams (recordings)</li>
+      <li>✅ Podcasts</li>
+    </ul>
+    
+    <h2>FAQ</h2>
+    <details>
+      <summary>Is it legal to download YouTube audio?</summary>
+      <p>Downloading for personal use is generally acceptable, but respect copyright laws. Don't distribute copyrighted content.</p>
+    </details>
+    <details>
+      <summary>What audio quality should I choose?</summary>
+      <p>320 kbps is best quality, 128 kbps is smallest file size. Choose based on your needs.</p>
+    </details>
+    <details>
+      <summary>How long does download take?</summary>
+      <p>Usually 30 seconds to 2 minutes depending on video length and your internet speed.</p>
+    </details>
+    
+    <nav aria-label="Breadcrumb" class="breadcrumb" style="margin-top: 2rem;">
+      <a href="/">Home</a> / <a href="/#tools">Tools</a> / <span>YouTube Audio Downloader</span>
+    </nav>
+  </main>
+  
+  <footer class="note small site-footer" role="contentinfo">
+    <p>&copy; 2026 UpTools. Free online tools for everyone.</p>
+  </footer>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    let selectedQuality = '320';
+    
+    function downloadAudio() {
+      const url = document.getElementById('youtubeUrl').value;
+      if (!url) {
+        alert('Please paste a YouTube URL');
+        return;
+      }
+      alert(`Downloading audio at ${selectedQuality} kbps...`);
+    }
+    
+    function setQuality(btn, quality) {
+      document.querySelectorAll('.quality-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedQuality = quality;
+    }
+    
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>

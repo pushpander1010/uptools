@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Branch Finder - Find Bank Branches & ATMs | UpTools</title>
+  <meta name="description" content="Free bank branch finder. Search for bank branches, ATMs, and contact details. Find nearest bank locations in your city.">
+  <link rel="canonical" href="https://www.uptools.in/bank-branch-finder/">
+  
+  <meta property="og:title" content="Bank Branch Finder | UpTools">
+  <meta property="og:description" content="Find bank branches, ATMs, and contact details easily.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uptools.in/bank-branch-finder/">
+  <meta property="og:image" content="https://www.uptools.in/assets/og/bank-branch-finder.png">
+  
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <script type="application/ld+json">
+  {"@context": "https://schema.org","@type": "SoftwareApplication","name": "Bank Branch Finder","applicationCategory": "UtilityApplication","offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},"operatingSystem": "Any","description": "Find bank branches, ATMs, and contact details. Search for nearest bank locations."}
+  </script>
+  
+  <script type="application/ld+json">
+  {"@context": "https://schema.org","@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://www.uptools.in/"},{"@type": "ListItem","position": 2,"name": "Bank Branch Finder","item": "https://www.uptools.in/bank-branch-finder/"}]}
+  </script>
+  
+  <script type="application/ld+json">
+  {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "How do I find a bank branch?","acceptedAnswer": {"@type": "Answer","text": "Enter the bank name and city, then click search. You'll get a list of all branches with addresses and contact details."}},{"@type": "Question","name": "Can I find ATMs?","acceptedAnswer": {"@type": "Answer","text": "Yes! Our tool helps you find both bank branches and ATM locations."}},{"@type": "Question","name": "What information is provided?","acceptedAnswer": {"@type": "Answer","text": "We provide branch address, phone number, email, working hours, and services offered."}}]}
+  </script>
+  
+  <style>
+    :root {
+      --accent: #0066cc;
+      --accent-2: #0052a3;
+    }
+    
+    .tool-container { max-width: 800px; margin: 2rem auto; }
+    .search-group { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+    .search-group input { padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); }
+    .search-group button { padding: 0.75rem 2rem; background: var(--accent); color: white; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 700; grid-column: 1 / -1; }
+    .search-group button:hover { background: var(--accent-2); }
+    
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: center; }
+    .feature-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .feature-card p { margin: 0; font-size: 0.9rem; }
+    
+    .results-container { margin: 2rem 0; }
+    .branch-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1rem 0; }
+    .branch-card h3 { margin-top: 0; color: var(--accent); }
+    .branch-info { display: grid; gap: 0.5rem; font-size: 0.95rem; }
+    .branch-info strong { color: var(--text); }
+    
+    .guide-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; }
+    .guide-section h3 { color: var(--accent); margin-top: 0; }
+    .step-list { list-style: none; padding: 0; counter-reset: step; }
+    .step-list li { counter-increment: step; padding: 1rem; margin: 1rem 0; background: rgba(0, 102, 204, 0.05); border-radius: 0.5rem; position: relative; padding-left: 3.5rem; }
+    .step-list li::before { content: counter(step); position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 2rem; height: 2rem; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    
+    @media (max-width: 600px) {
+      .search-group { grid-template-columns: 1fr; }
+      .search-group button { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only">Skip to content</a>
+  
+  <header class="site" role="banner">
+    <div class="wrap">
+      <a href="/" class="logo">UpTools</a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <nav aria-label="Breadcrumb">
+      <a href="/">Home</a> / <span>Bank Branch Finder</span>
+    </nav>
+    
+    <h1>Bank Branch Finder</h1>
+    <p class="lead">Find bank branches, ATMs, and contact details. Search for nearest bank locations in your city.</p>
+    
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <div class="tool-container">
+      <div class="search-group">
+        <input type="text" id="bankName" placeholder="Enter bank name (e.g., HDFC, ICICI, SBI)..." aria-label="Bank name">
+        <input type="text" id="city" placeholder="Enter city name..." aria-label="City">
+        <button onclick="searchBranches()">Search Branches</button>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="icon">🏦</div>
+          <p>Branch Locator</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🏧</div>
+          <p>ATM Finder</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">📞</div>
+          <p>Contact Info</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🕐</div>
+          <p>Working Hours</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">📍</div>
+          <p>Location Map</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">✨</div>
+          <p>Easy to Use</p>
+        </div>
+      </div>
+    </div>
+    
+    <ins class="adsbygoogle"
+         style="display:block; margin: 3rem 0;"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567891"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <section class="guide-section">
+      <h2>How to Find Bank Branches</h2>
+      <ol class="step-list">
+        <li>Enter the name of the bank you're looking for</li>
+        <li>Enter the city where you want to find branches</li>
+        <li>Click "Search Branches" to see results</li>
+        <li>View branch details including address and phone number</li>
+        <li>Click on a branch to see more information and location map</li>
+        <li>Save your favorite branches for quick access</li>
+      </ol>
+    </section>
+    
+    <section class="guide-section">
+      <h2>Information Available</h2>
+      <ul>
+        <li><strong>Branch Address:</strong> Complete address with postal code</li>
+        <li><strong>Phone Number:</strong> Direct contact number</li>
+        <li><strong>Email:</strong> Branch email address</li>
+        <li><strong>Working Hours:</strong> Opening and closing times</li>
+        <li><strong>Services:</strong> Services offered at the branch</li>
+        <li><strong>ATM Locations:</strong> Nearby ATM locations</li>
+      </ul>
+    </section>
+    
+    <section class="guide-section">
+      <h2>Frequently Asked Questions</h2>
+      <h3>Q: Can I find ATMs?</h3>
+      <p>Yes! Our tool helps you find both bank branches and ATM locations near you.</p>
+      
+      <h3>Q: How accurate is the information?</h3>
+      <p>We update our database regularly with the latest branch information from banks.</p>
+      
+      <h3>Q: Can I search by location?</h3>
+      <p>Yes, you can search by city, area, or postal code to find nearby branches.</p>
+      
+      <h3>Q: Is this tool free?</h3>
+      <p>Yes, completely free! No registration or payment required.</p>
+    </section>
+    
+    <ins class="adsbygoogle"
+         style="display:block; margin: 3rem 0;"
+         data-ad-client="ca-pub-6216304334889617"
+         data-ad-slot="1234567892"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <footer class="note small site-footer" role="contentinfo">
+      © 2026 UpTools . <a href="/about/">About</a> . <a href="/contact/">Contact</a> . <a href="/privacy-policy/">Privacy Policy</a>
+    </footer>
+  </main>
+  
+  <script src="/scripts/utils.js" type="module"></script>
+  <script defer>
+    function searchBranches() {
+      const bankName = document.getElementById('bankName').value;
+      const city = document.getElementById('city').value;
+      
+      if (!bankName || !city) {
+        alert('Please enter both bank name and city');
+        return;
+      }
+      
+      alert(`Searching for ${bankName} branches in ${city}...`);
+    }
+    
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>
