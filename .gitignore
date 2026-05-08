@@ -10,6 +10,7 @@ graphify-out
 
 # Production build output
 dist/
+*.md
 
 # Logs
 npm-debug.log*
