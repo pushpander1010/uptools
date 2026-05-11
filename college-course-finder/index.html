@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <title>College Course Finder After 12th | UpTools</title>
+  <meta name="description" content="Find suitable college courses after Class 12 based on stream, interest area, and score band." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://www.uptools.in/college-course-finder/" />
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
+  <style>
+    :root{--bg:#0f1419;--surface:#121826;--text:#e6edf3;--muted:#9aa4b2;--brand:#7aa2ff;--border:#212a3a;--radius:.75rem}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 system-ui,sans-serif} a{color:var(--brand)}
+    .container{width:min(100% - 24px,1024px);margin:auto;padding:20px 0 32px}.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem}
+    .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.input{width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:#0b1224;color:var(--text)} .btn{padding:.65rem .95rem;border-radius:var(--radius);border:0;background:var(--brand);color:#0b1020;font-weight:700;cursor:pointer}
+    .result-card{background:linear-gradient(135deg,#1a2332 0%,#0f1419 100%);border:1px solid var(--border);border-radius:var(--radius);padding:1rem}.muted{color:var(--muted)} .site-footer{margin-top:24px;padding-top:12px;border-top:1px solid var(--border);text-align:center}
+  </style>
+  <link rel="preload" href="/style.css?v=1.2.0" as="style" />
+  <link rel="stylesheet" href="/style.css?v=1.2.0" media="print" onload="this.media='all'" />
+</head>
+<body>
+  <main class="container">
+    <nav class="muted" style="margin-bottom:8px"><a href="/">Home</a> &rsaquo; <span>College Course Finder</span></nav>
+    <section class="card">
+      <h1 style="margin-top:0">College Course Finder After 12th</h1>
+      <div class="grid">
+        <div><label for="stream">Stream</label><select id="stream" class="input"><option value="pcm">PCM</option><option value="pcb">PCB</option><option value="commerce">Commerce</option><option value="arts">Arts/Humanities</option><option value="any">Any stream</option></select></div>
+        <div><label for="interest">Interest</label><select id="interest" class="input"><option value="tech">Technology</option><option value="health">Health</option><option value="business">Business</option><option value="law">Law</option><option value="design">Design</option><option value="public">Public service</option></select></div>
+        <div><label for="score">Score band</label><select id="score" class="input"><option value="90">90%+</option><option value="75">75% to 89%</option><option value="60">60% to 74%</option><option value="0">Below 60%</option></select></div>
+      </div>
+      <button id="findBtn" class="btn" type="button" style="margin-top:12px">Find Courses</button>
+    </section>
+    <section id="result" class="grid" style="margin-top:12px"></section>
+    <section class="card" style="margin-top:12px">
+      <h2 style="margin-top:0">Related Tools</h2>
+      <ul>
+        <li><a href="/cbse-class-12-result/">CBSE Class 12 Result Checker</a></li>
+        <li><a href="/india-college-rankings/">India College Rankings</a></li>
+        <li><a href="/career-after-12/">Career Path After 12</a></li>
+        <li><a href="/exams-after-12/">Entrance Exams After 12</a></li>
+      </ul>
+    </section>
+    <footer class="muted site-footer">&copy; <span id="y"></span> UpTools</footer>
+  </main>
+  <script type="module">
+    import { $, setText } from '/scripts/utils.js';
+    setText($('#y'), new Date().getFullYear());
+    const courses=[{stream:'pcm',interest:'tech',name:'B.Tech / B.E.',path:'Engineering',exam:'JEE Main, state CETs, private entrances',fit:'Best for students targeting core engineering, CS, electronics, and related programs.'},{stream:'pcm',interest:'design',name:'B.Des / B.Arch / UX pathways',path:'Design and built environment',exam:'NID, UCEED, NATA, JEE Paper 2',fit:'Useful when you like problem-solving but want creative output.'},{stream:'pcb',interest:'health',name:'MBBS / BDS / BSc Nursing / Allied Health',path:'Medical and health sciences',exam:'NEET UG and institute-specific routes',fit:'Good for clinical, health-care, and biological science tracks.'},{stream:'commerce',interest:'business',name:'B.Com / BBA / CA Foundation',path:'Business and finance',exam:'CUET UG, CA Foundation, college-level admission',fit:'Fits accounting, finance, operations, and entrepreneurship goals.'},{stream:'arts',interest:'law',name:'BA LLB / BBA LLB',path:'Law',exam:'CLAT, AILET, SLAT and similar exams',fit:'Works for legal reasoning, policy, and advocacy ambitions.'},{stream:'any',interest:'public',name:'BA / BSc / BCom plus UPSC-oriented foundation',path:'Public service',exam:'CUET UG and university admissions',fit:'Use college years to build writing, analysis, and GK depth.'},{stream:'any',interest:'design',name:'Animation / Visual Communication / Fashion Design',path:'Creative programs',exam:'NIFT, NID, UCEED, portfolio rounds',fit:'Useful for students with strong creative interest and portfolio potential.'}];
+    $('#findBtn').addEventListener('click',()=>{const stream=$('#stream').value, interest=$('#interest').value, score=$('#score').value; const results=courses.filter(c=>(c.stream===stream||c.stream==='any')&&c.interest===interest); $('#result').innerHTML=(results.length?results:[{name:'Broader search needed',path:'Mixed pathways',exam:'Check stream-specific and university criteria',fit:'No exact preset match. Use Career Path After 12 and Entrance Exams After 12 to widen options.'}]).map(c=>`<div class="result-card"><h3 style="margin-top:0">${c.name}</h3><p class="muted">${c.path}</p><p><strong>Typical entry route:</strong> ${c.exam}</p><p><strong>Why it fits:</strong> ${c.fit}</p><p><strong>Score note:</strong> ${score==='90'?'You can keep more merit-heavy options open.':score==='75'?'Keep a balanced shortlist of competitive and safe options.':score==='60'?'Prefer a broader mix of colleges and entrance-based routes.':'Prioritize eligibility, course fit, and wide applications.'}</p></div>`).join('')})
+  </script>
+</body>
+</html>

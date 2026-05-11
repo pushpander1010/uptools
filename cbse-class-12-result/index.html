@@ -6,510 +6,125 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="color-scheme" content="dark light" />
-
-  <title>CBSE Class 12 Result Checker - Check Results Online | UpTools</title>
-  <meta name="description"
-    content="Check your CBSE Class 12 board exam results online instantly. Enter your roll number and school code to view marks, grades, and performance analysis. Fast, secure, and privacy-first." />
+  <title>CBSE Class 12 Result Checker and Analyzer | UpTools</title>
+  <meta name="description" content="Use the official CBSE result links, verify your details, and analyze your Class 12 marks with percentage, grade summary, and next-step guidance." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <meta name="theme-color" content="#0b1020" />
   <link rel="canonical" href="https://www.uptools.in/cbse-class-12-result/" />
-  <meta name="keywords"
-    content="CBSE class 12 result, board exam results, check results online, roll number, school code, marks, grades" />
-
-  <!-- Favicons -->
+  <meta name="keywords" content="CBSE Class 12 result, CBSE result checker, Class 12 marks analyzer, board result percentage, CBSE result guide" />
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg" />
-
-  <!-- OG/Twitter -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="CBSE Class 12 Result Checker - Check Results Online" />
-  <meta property="og:description"
-    content="Check your CBSE Class 12 board exam results instantly with roll number and school code." />
+  <meta property="og:title" content="CBSE Class 12 Result Checker and Analyzer" />
+  <meta property="og:description" content="Check the official CBSE result links and analyze your marks with percentage, pass status, and next-step suggestions." />
   <meta property="og:url" content="https://www.uptools.in/cbse-class-12-result/" />
   <meta property="og:site_name" content="UpTools" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/cbse-result.png" />
   <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Preconnects -->
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-
-  <!-- Critical CSS -->
   <style>
-    :root {
-      --bg: #0f1419;
-      --surface: #121826;
-      --text: #e6edf3;
-      --muted: #9aa4b2;
-      --brand: #7aa2ff;
-      --radius: .75rem;
-      --border: #212a3a;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --error: #ef4444
-    }
-
-    * {
-      box-sizing: border-box
-    }
-
-    html {
-      color-scheme: dark light;
-      -webkit-text-size-adjust: 100%
-    }
-
-    body {
-      margin: 0;
-      font: 400 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Noto Sans", sans-serif;
-      background: var(--bg);
-      color: var(--text)
-    }
-
-    .container {
-      width: min(100% - 24px, 1120px);
-      margin-inline: auto
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem;
-      overflow: auto
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: .65rem .9rem;
-      border-radius: var(--radius);
-      background: var(--brand);
-      color: #0b1020;
-      border: 0;
-      font-weight: 700;
-      cursor: pointer
-    }
-
-    .btn.secondary {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border)
-    }
-
-    .grid {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))
-    }
-
-    .muted {
-      color: var(--muted);
-      font-size: 12px
-    }
-
-    .input {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: #0b1224;
-      color: var(--text);
-      font-size: 16px
-    }
-
-    .label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      font-size: 14px
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #0b1224;
-      font-size: 12px
-    }
-
-    .result-card {
-      background: linear-gradient(135deg, #1a2332 0%, #0f1419 100%);
-      border: 2px solid var(--success);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      margin-top: 1rem
-    }
-
-    .result-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, .06)
-    }
-
-    .result-row:last-child {
-      border-bottom: 0
-    }
-
-    .result-label {
-      color: var(--muted);
-      font-weight: 500
-    }
-
-    .result-value {
-      font-weight: 700;
-      color: var(--success)
-    }
-
-    .site {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100
-    }
-
-    .header-inner {
-      width: min(100% - 24px, 1120px);
-      margin-inline: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 700
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text);
-      font-size: 14px
-    }
-
-    .site-footer {
-      margin-top: 24px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-      text-align: center
-    }
-
-    .hero {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 16px
-    }
-
-    .hero-logo {
-      width: 120px;
-      height: 120px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border)
-    }
-
-    .hero h1 {
-      margin: 0 0 8px;
-      font-size: 28px
-    }
-
-    .hero p {
-      margin: 0;
-      color: var(--muted)
-    }
-
-    .row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      border: 0;
-      padding: 0;
-      margin-top: 12px
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0
-    }
-
-    @media (max-width: 640px) {
-      .hero {
-        flex-direction: column;
-        text-align: center
-      }
-
-      .hero-logo {
-        margin: 0 auto
-      }
-
-      .nav-links {
-        display: none
-      }
-    }
+    :root { --bg:#0f1419; --surface:#121826; --surface-2:#182133; --text:#e6edf3; --muted:#9aa4b2; --brand:#7aa2ff; --success:#10b981; --warn:#f59e0b; --danger:#ef4444; --border:#212a3a; --radius:.75rem }
+    * { box-sizing:border-box } html { color-scheme:dark light; -webkit-text-size-adjust:100% }
+    body { margin:0; font:400 16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Noto Sans",sans-serif; background:var(--bg); color:var(--text) }
+    a { color:var(--brand) } .container { width:min(100% - 24px,1120px); margin-inline:auto } .wrap { padding:20px 0 32px }
+    .site { background:var(--surface); border-bottom:1px solid var(--border); padding:12px 0; position:sticky; top:0; z-index:100 }
+    .header-inner { width:min(100% - 24px,1120px); margin-inline:auto; display:flex; align-items:center; justify-content:space-between; gap:12px }
+    .brand { display:flex; align-items:center; gap:8px; text-decoration:none; color:var(--text); font-weight:700 }
+    .nav-links { display:flex; gap:16px; flex-wrap:wrap } .nav-links a { text-decoration:none; color:var(--text); font-size:14px }
+    .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; overflow:hidden }
+    .hero { background:linear-gradient(135deg,#182133 0%,#0f1419 100%) } .hero h1, h2, h3, p { margin-top:0 }
+    .note, .muted { color:var(--muted) }
+    .pill { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; border:1px solid var(--border); background:#0b1224; font-size:12px; margin-right:6px }
+    .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)) }
+    .input, .select { width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--border); background:#0b1224; color:var(--text); font-size:16px }
+    .label { display:block; margin-bottom:6px; font-weight:600; font-size:14px }
+    .row { display:flex; gap:12px; flex-wrap:wrap; margin-top:12px }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:.65rem .95rem; border-radius:var(--radius); background:var(--brand); color:#0b1020; border:0; font-weight:700; cursor:pointer; text-decoration:none }
+    .btn.secondary { background:transparent; color:var(--text); border:1px solid var(--border) }
+    .notice { border-left:4px solid var(--warn); background:rgba(245,158,11,.08) } .ok { border-left:4px solid var(--success); background:rgba(16,185,129,.08) } .danger { border-left:4px solid var(--danger); background:rgba(239,68,68,.08) }
+    .subject-row, .summary-row { display:grid; grid-template-columns:1.4fr .8fr .8fr; gap:10px; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08) }
+    .subject-row:last-child, .summary-row:last-child { border-bottom:0 } .summary-row strong:last-child, .summary-row span:last-child { text-align:right }
+    .badge { display:inline-flex; align-items:center; padding:4px 8px; border-radius:999px; font-size:12px; font-weight:700 } .badge.pass { background:rgba(16,185,129,.14); color:#7ef0b7 } .badge.review { background:rgba(245,158,11,.14); color:#ffd27c }
+    .list-tight { margin:0; padding-left:18px } .site-footer { margin-top:24px; padding-top:12px; border-top:1px solid var(--border); text-align:center }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border-width:0 }
+    @media (max-width:640px) { .nav-links { display:none } .subject-row, .summary-row { grid-template-columns:1fr } }
   </style>
-
-  <!-- Common CSS -->
   <link rel="preload" href="/style.css?v=1.2.0" as="style" />
   <link rel="stylesheet" href="/style.css?v=1.2.0" media="print" onload="this.media='all'" />
-  <noscript>
-    <link rel="stylesheet" href="/style.css?v=1.2.0" />
-  </noscript>
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"CBSE Class 12 Result Checker",
-    "applicationCategory":"UtilityApplication",
-    "operatingSystem":"Any",
-    "url":"https://www.uptools.in/cbse-class-12-result/",
-    "image":"https://www.uptools.in/assets/og/cbse-result.png",
-    "description":"Check your CBSE Class 12 board exam results online instantly with roll number and school code.",
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},
-    "publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}
-  }
-  </script>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"How do I check my CBSE Class 12 result?","acceptedAnswer":{"@type":"Answer","text":"Enter your roll number and school code, then click 'Check Result'. Your marks and grades will be displayed instantly."}},
-    {"@type":"Question","name":"Where do I find my roll number?","acceptedAnswer":{"@type":"Answer","text":"Your roll number is printed on your admit card and hall ticket provided during the exam."}},
-    {"@type":"Question","name":"What is the school code?","acceptedAnswer":{"@type":"Answer","text":"The school code is a unique identifier for your school, available from your school office or on the admit card."}},
-    {"@type":"Question","name":"Is my data secure?","acceptedAnswer":{"@type":"Answer","text":"Yes, all data is processed locally in your browser. We do not store or transmit any personal information."}}
-  ]}
-  </script>
+  <noscript><link rel="stylesheet" href="/style.css?v=1.2.0" /></noscript>
 </head>
 
 <body>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"
-     crossorigin="anonymous"></script>
-  <ins class="adsbygoogle"
-     style="display:inline-block;width:500px;height:50px"
-     data-ad-client="ca-pub-6216304334889617"
-     data-ad-slot="9810172647"></ins>
-  <script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   <a href="#main" class="sr-only">Skip to content</a>
-
-  <!-- Header -->
   <header class="site" role="banner">
     <div class="header-inner">
-      <a class="brand" href="/" aria-label="UpTools Home">
-        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
-        <b>UpTools</b>
-      </a>
+      <a class="brand" href="/" aria-label="UpTools Home"><img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager"><b>UpTools</b></a>
       <nav class="nav-links" aria-label="Primary">
         <a href="/#tools">Tools</a>
-        <a href="/india-college-rankings/">College Rankings</a>
-        <a href="/career-after-12/">Career Path</a>
-        <a href="/exams-after-12/">Exams After 12</a>
+        <a href="/cbse-percentage-calculator/">Percentage</a>
+        <a href="/best-of-five-calculator/">Best of Five</a>
+        <a href="/college-course-finder/">Courses</a>
         <a href="/about/">About</a>
       </nav>
     </div>
   </header>
-
   <main class="wrap container" id="main">
-    <!-- Breadcrumb -->
-    <nav aria-label="Breadcrumb" class="note small" style="margin-bottom:8px">
-      <a href="/">Home</a> › <span aria-current="page">CBSE Class 12 Result</span>
-    </nav>
-
-    <!-- Hero -->
+    <nav aria-label="Breadcrumb" class="note" style="margin-bottom:8px"><a href="/">Home</a> &rsaquo; <span aria-current="page">CBSE Class 12 Result Checker</span></nav>
     <section class="card hero">
-      <div>
-        <h1>CBSE Class 12 Result Checker</h1>
-        <p class="note">
-          Check your board exam results instantly. Enter your roll number and school code.
-          <span class="pill">🔒 Secure</span>
-          <span class="pill">⚡ Instant</span>
-          <span class="pill">📱 Mobile-first</span>
-        </p>
-      </div>
+      <h1>CBSE Class 12 Result Checker and Analyzer</h1>
+      <p class="note">Use the official result portals, then review your marks locally for percentage, pass status, and next-step planning.</p>
+      <div><span class="pill">Official link guide</span><span class="pill">Privacy-first analysis</span><span class="pill">Works on mobile</span></div>
     </section>
-
-    <!-- Input Section -->
-    <section class="card">
-      <h2 style="margin-top:0">Enter Your Details</h2>
-      <div class="grid">
-        <div>
-          <label class="label" for="rollNumber">Roll Number</label>
-          <input id="rollNumber" class="input" type="text" placeholder="e.g., 123456" />
-          <div class="muted">Found on your admit card</div>
-        </div>
-        <div>
-          <label class="label" for="schoolCode">School Code</label>
-          <input id="schoolCode" class="input" type="text" placeholder="e.g., 1234567" />
-          <div class="muted">Unique identifier for your school</div>
-        </div>
-      </div>
-
-      <div class="row">
-        <button id="checkBtn" class="btn" type="button">Check Result</button>
-        <button id="resetBtn" class="btn secondary" type="button">Reset</button>
-      </div>
+    <section class="card notice" style="margin-top:12px">
+      <h2>Before You Start</h2>
+      <p>This page does not fetch live result data from CBSE servers. It helps you use the official result links and analyze your marks after you receive them.</p>
+      <div class="row"><a class="btn" href="https://cbseresults.nic.in/" target="_blank" rel="noopener">Open Official CBSE Results</a><a class="btn secondary" href="https://www.cbse.gov.in/" target="_blank" rel="noopener">Open CBSE Website</a></div>
     </section>
-
-    <!-- Result Display -->
-    <section id="resultSection" class="card" style="display:none" aria-live="polite">
-      <h2 style="margin-top:0">Your Results</h2>
-      <div id="resultContent"></div>
+    <section class="grid" style="margin-top:12px">
+      <section class="card"><h2>Result Access Checklist</h2><ul class="list-tight"><li>Keep your roll number, school number, admit card ID, and date of birth ready.</li><li>Cross-check every subject mark before sharing or applying anywhere.</li><li>Download the provisional scorecard and save a screenshot.</li><li>Use the original marksheet from school for final admissions when required.</li></ul></section>
+      <section class="card ok"><h2>What To Do Right After Results</h2><ul class="list-tight"><li>Calculate your overall percentage and best-of-five percentage.</li><li>Shortlist courses and colleges based on stream and score band.</li><li>Check entrance exam eligibility instead of relying only on marks.</li><li>Keep migration, caste, domicile, and transfer certificates ready if needed.</li></ul></section>
     </section>
-
-    <!-- Information Section -->
-    <section class="card">
-      <h2 style="margin-top:0">About CBSE Class 12 Results</h2>
-      <p>The Central Board of Secondary Education (CBSE) conducts the Class 12 board examinations twice a year. Results are typically declared within 4-6 weeks after the exams conclude.</p>
-      
-      <h3>What You'll See in Your Result:</h3>
-      <ul>
-        <li><strong>Subject-wise Marks:</strong> Marks obtained in each subject out of the total</li>
-        <li><strong>Grades:</strong> Letter grades (A1, A2, B1, B2, C1, C2, D, E) based on marks</li>
-        <li><strong>Total Marks:</strong> Aggregate marks across all subjects</li>
-        <li><strong>Percentage:</strong> Overall percentage scored</li>
-        <li><strong>Status:</strong> Pass/Fail status</li>
-      </ul>
-
-      <h3>Important Links:</h3>
-      <ul>
-        <li><a href="https://cbseresults.nic.in/" target="_blank" rel="noopener">Official CBSE Results Portal</a></li>
-        <li><a href="https://www.cbse.gov.in/" target="_blank" rel="noopener">CBSE Official Website</a></li>
-        <li><a href="/india-college-rankings/">Explore College Rankings</a></li>
-        <li><a href="/career-after-12/">Plan Your Career Path</a></li>
-      </ul>
+    <section class="card" style="margin-top:12px">
+      <h2>Analyze Your Marks</h2>
+      <p class="note">Enter up to six subjects exactly as shown in your marksheet. Empty rows are ignored.</p>
+      <div id="subjectsForm"></div>
+      <div class="row"><button id="analyzeBtn" class="btn" type="button">Analyze Result</button><button id="demoBtn" class="btn secondary" type="button">Load Demo Marks</button><button id="resetBtn" class="btn secondary" type="button">Reset</button></div>
     </section>
-
-    <!-- Related Tools -->
-    <section class="card">
-      <h2 style="margin-top:0">Related Tools</h2>
-      <ul>
-        <li><a href="/india-college-rankings/">📚 India College Rankings</a></li>
-        <li><a href="/career-after-12/">🎯 Career Path After 12</a></li>
-        <li><a href="/exams-after-12/">📝 Exams After 12</a></li>
-        <li><a href="/percentage-calculator/">🧮 Percentage Calculator</a></li>
-      </ul>
+    <section id="resultSection" class="card" style="display:none; margin-top:12px" aria-live="polite"><h2>Analysis Summary</h2><div id="resultContent"></div></section>
+    <section class="grid" style="margin-top:12px">
+      <section class="card"><h2>Interpret Your Percentage</h2><div class="summary-row"><strong>90% and above</strong><span>Strong for merit-heavy shortlists and selective options.</span></div><div class="summary-row"><strong>75% to 89.99%</strong><span>Competitive for many colleges, plus entrance-based programs.</span></div><div class="summary-row"><strong>60% to 74.99%</strong><span>Good range for broad college and course options.</span></div><div class="summary-row"><strong>Below 60%</strong><span>Focus on course fit, private admissions, skills, and entrance routes.</span></div></section>
+      <section class="card"><h2>Related Tools</h2><ul class="list-tight"><li><a href="/cbse-percentage-calculator/">CBSE Percentage Calculator</a></li><li><a href="/best-of-five-calculator/">Best of Five Calculator</a></li><li><a href="/college-course-finder/">College Course Finder</a></li><li><a href="/india-college-rankings/">India College Rankings</a></li><li><a href="/career-after-12/">Career Path After 12</a></li><li><a href="/exams-after-12/">Entrance Exams After 12</a></li></ul></section>
     </section>
-
-    <footer class="note small site-footer" role="contentinfo" style="margin-top:16px">
-      © <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a> . <a href="/about/">About</a> . <a
-        href="/contact/">Contact</a>
-    </footer>
+    <footer class="note site-footer" role="contentinfo">&copy; <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a> . <a href="/about/">About</a> . <a href="/contact/">Contact</a></footer>
   </main>
-
   <script type="module">
     import { $, setText } from '/scripts/utils.js';
-
     setText($('#y'), new Date().getFullYear());
-
-    const mockResults = {
-      '123456': {
-        '1234567': {
-          name: 'Sample Student',
-          rollNumber: '123456',
-          schoolCode: '1234567',
-          subjects: [
-            { name: 'English', marks: 85, grade: 'A1' },
-            { name: 'Mathematics', marks: 92, grade: 'A1' },
-            { name: 'Physics', marks: 88, grade: 'A1' },
-            { name: 'Chemistry', marks: 90, grade: 'A1' },
-            { name: 'Biology', marks: 87, grade: 'A1' }
-          ],
-          totalMarks: 442,
-          maxMarks: 500,
-          percentage: 88.4,
-          status: 'PASS'
-        }
-      }
-    };
-
-    function displayResult(data) {
-      const subjects = data.subjects.map(s => 
-        `<div class="result-row">
-          <span class="result-label">${s.name}</span>
-          <span class="result-value">${s.marks}/${100} (${s.grade})</span>
-        </div>`
-      ).join('');
-
-      const html = `
-        <div class="result-card">
-          <div class="result-row">
-            <span class="result-label">Name</span>
-            <span class="result-value">${data.name}</span>
-          </div>
-          <div class="result-row">
-            <span class="result-label">Roll Number</span>
-            <span class="result-value">${data.rollNumber}</span>
-          </div>
-          <div class="result-row">
-            <span class="result-label">Status</span>
-            <span class="result-value" style="color: ${data.status === 'PASS' ? 'var(--success)' : 'var(--error)'}">${data.status}</span>
-          </div>
-          <hr style="border: 0; border-top: 1px solid rgba(255, 255, 255, .1); margin: 12px 0">
-          <h3 style="margin: 12px 0 8px; font-size: 16px">Subject-wise Marks</h3>
-          ${subjects}
-          <hr style="border: 0; border-top: 1px solid rgba(255, 255, 255, .1); margin: 12px 0">
-          <div class="result-row">
-            <span class="result-label">Total Marks</span>
-            <span class="result-value">${data.totalMarks}/${data.maxMarks}</span>
-          </div>
-          <div class="result-row">
-            <span class="result-label">Percentage</span>
-            <span class="result-value">${data.percentage.toFixed(2)}%</span>
-          </div>
-        </div>
-      `;
-
-      $('#resultContent').innerHTML = html;
+    const defaultRows = [['English', '', 100], ['Subject 2', '', 100], ['Subject 3', '', 100], ['Subject 4', '', 100], ['Subject 5', '', 100], ['Subject 6', '', 100]];
+    const gradeFor = (percent) => percent >= 91 ? 'A1' : percent >= 81 ? 'A2' : percent >= 71 ? 'B1' : percent >= 61 ? 'B2' : percent >= 51 ? 'C1' : percent >= 41 ? 'C2' : percent >= 33 ? 'D' : 'E';
+    function buildRows(rows = defaultRows) { $('#subjectsForm').innerHTML = rows.map((row, idx) => `<div class="subject-row"><div><label class="label" for="subject-${idx}">Subject</label><input id="subject-${idx}" class="input subject-name" type="text" value="${row[0]}"></div><div><label class="label" for="marks-${idx}">Marks</label><input id="marks-${idx}" class="input subject-marks" type="number" min="0" max="${row[2]}" value="${row[1]}"></div><div><label class="label" for="max-${idx}">Max Marks</label><input id="max-${idx}" class="input subject-max" type="number" min="1" value="${row[2]}"></div></div>`).join(''); }
+    function readRows() { const names = [...document.querySelectorAll('.subject-name')]; const marks = [...document.querySelectorAll('.subject-marks')]; const maxes = [...document.querySelectorAll('.subject-max')]; return names.map((input, idx) => ({ name: input.value.trim(), marks: Number(marks[idx].value), max: Number(maxes[idx].value) })).filter(row => row.name || Number.isFinite(row.marks)); }
+    function renderAnalysis(rows) {
+      const validRows = rows.filter(row => row.name && Number.isFinite(row.marks) && Number.isFinite(row.max) && row.max > 0 && row.marks >= 0 && row.marks <= row.max);
+      if (validRows.length < 5) { alert('Enter at least five valid subjects to analyze the result.'); return; }
+      const total = validRows.reduce((sum, row) => sum + row.marks, 0);
+      const maxTotal = validRows.reduce((sum, row) => sum + row.max, 0);
+      const percentage = (total / maxTotal) * 100;
+      const failed = validRows.filter(row => ((row.marks / row.max) * 100) < 33);
+      const bestFive = [...validRows].sort((a, b) => (b.marks / b.max) - (a.marks / a.max)).slice(0, 5);
+      const bestFivePercent = (bestFive.reduce((sum, row) => sum + row.marks, 0) / bestFive.reduce((sum, row) => sum + row.max, 0)) * 100;
+      const subjectRows = validRows.map(row => { const pct = (row.marks / row.max) * 100; return `<div class="summary-row"><strong>${row.name}</strong><span>${row.marks}/${row.max} (${pct.toFixed(1)}%)</span><strong>${gradeFor(pct)}</strong></div>`; }).join('');
+      const recommendations = [percentage >= 85 ? 'Keep merit-based college shortlists active, but still check course-specific cutoffs.' : 'Shortlist a wider college mix instead of relying on only top cutoffs.', bestFivePercent !== percentage ? `Your best-of-five percentage is ${bestFivePercent.toFixed(2)}%. Some admissions use this figure.` : 'Your overall and best-of-five percentages are the same because five valid subjects were entered.', failed.length ? 'Review compartment, re-evaluation, or supplementary options for the weak subjects before final decisions.' : 'No subject is below the basic pass threshold in this local analysis.', 'Use official admission criteria for every college. Different universities may calculate eligibility differently.'];
+      $('#resultContent').innerHTML = `<div class="card ok" style="padding:12px"><div class="summary-row"><strong>Overall Percentage</strong><span>${percentage.toFixed(2)}%</span><span class="badge ${failed.length ? 'review' : 'pass'}">${failed.length ? 'Needs review' : 'Pass range'}</span></div><div class="summary-row"><strong>Best of Five</strong><span>${bestFivePercent.toFixed(2)}%</span><strong>${bestFive.map(row => row.name).join(', ')}</strong></div><div class="summary-row"><strong>Total Marks</strong><span>${total}/${maxTotal}</span><strong>${gradeFor(percentage)}</strong></div></div><div class="card" style="margin-top:12px"><h3>Subject Summary</h3>${subjectRows}</div><div class="card ${failed.length ? 'danger' : 'ok'}" style="margin-top:12px"><h3>Next-Step Guidance</h3><ul class="list-tight">${recommendations.map(item => `<li>${item}</li>`).join('')}</ul></div>`;
       $('#resultSection').style.display = 'block';
     }
-
-    $('#checkBtn').addEventListener('click', () => {
-      const roll = $('#rollNumber').value.trim();
-      const school = $('#schoolCode').value.trim();
-
-      if (!roll || !school) {
-        alert('Please enter both roll number and school code');
-        return;
-      }
-
-      // Mock lookup
-      if (mockResults[roll] && mockResults[roll][school]) {
-        displayResult(mockResults[roll][school]);
-      } else {
-        alert('Result not found. Please check your roll number and school code.');
-        $('#resultSection').style.display = 'none';
-      }
-    });
-
-    $('#resetBtn').addEventListener('click', () => {
-      $('#rollNumber').value = '';
-      $('#schoolCode').value = '';
-      $('#resultSection').style.display = 'none';
-    });
+    $('#analyzeBtn').addEventListener('click', () => renderAnalysis(readRows()));
+    $('#demoBtn').addEventListener('click', () => { buildRows([['English Core', 88, 100], ['Physics', 84, 100], ['Chemistry', 79, 100], ['Mathematics', 91, 100], ['Computer Science', 95, 100], ['Physical Education', 93, 100]]); $('#resultSection').style.display = 'none'; });
+    $('#resetBtn').addEventListener('click', () => { buildRows(); $('#resultSection').style.display = 'none'; });
+    buildRows();
   </script>
 </body>
 

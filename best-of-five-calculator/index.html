@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <title>Best of Five Calculator | UpTools</title>
+  <meta name="description" content="Calculate best-of-five percentage from board exam marks and see which subjects are included." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://www.uptools.in/best-of-five-calculator/" />
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
+  <style>
+    :root{--bg:#0f1419;--surface:#121826;--text:#e6edf3;--muted:#9aa4b2;--brand:#7aa2ff;--border:#212a3a;--radius:.75rem}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 system-ui,sans-serif} a{color:var(--brand)}
+    .container{width:min(100% - 24px,980px);margin:auto;padding:20px 0 32px}.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem}
+    .subject{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)} .subject:last-child{border-bottom:0}
+    .input{width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:#0b1224;color:var(--text)} .row{display:flex;gap:12px;flex-wrap:wrap}.btn{padding:.65rem .95rem;border-radius:var(--radius);border:0;background:var(--brand);color:#0b1020;font-weight:700;cursor:pointer}.btn.secondary{background:transparent;color:var(--text);border:1px solid var(--border)} .muted{color:var(--muted)} .site-footer{margin-top:24px;padding-top:12px;border-top:1px solid var(--border);text-align:center}
+    @media (max-width:640px){.subject{grid-template-columns:1fr}}
+  </style>
+  <link rel="preload" href="/style.css?v=1.2.0" as="style" />
+  <link rel="stylesheet" href="/style.css?v=1.2.0" media="print" onload="this.media='all'" />
+</head>
+<body>
+  <main class="container">
+    <nav class="muted" style="margin-bottom:8px"><a href="/">Home</a> &rsaquo; <span>Best of Five Calculator</span></nav>
+    <section class="card">
+      <h1 style="margin-top:0">Best of Five Calculator</h1>
+      <p class="muted">This tool automatically picks the five strongest subjects from the marks you enter. Admission rules can vary by college, so verify their formula.</p>
+      <div id="form"></div>
+      <div class="row" style="margin-top:12px">
+        <button id="calcBtn" class="btn" type="button">Calculate Best of Five</button>
+        <button id="demoBtn" class="btn secondary" type="button">Demo</button>
+        <button id="resetBtn" class="btn secondary" type="button">Reset</button>
+      </div>
+    </section>
+    <section id="result" class="card" style="display:none;margin-top:12px"></section>
+    <footer class="muted site-footer">&copy; <span id="y"></span> UpTools</footer>
+  </main>
+  <script type="module">
+    import { $, setText } from '/scripts/utils.js';
+    setText($('#y'), new Date().getFullYear());
+    const seed=[['English','',100],['Physics','',100],['Chemistry','',100],['Mathematics','',100],['Computer Science','',100],['Physical Education','',100],['Economics','',100]];
+    function render(rows=seed){$('#form').innerHTML=rows.map(r=>`<div class="subject"><input class="input sname" value="${r[0]}"><input class="input smarks" type="number" min="0" value="${r[1]}"><input class="input smax" type="number" min="1" value="${r[2]}"></div>`).join('')}
+    function read(){return [...document.querySelectorAll('.subject')].map((_,i)=>({name:[...document.querySelectorAll('.sname')][i].value.trim(),marks:Number([...document.querySelectorAll('.smarks')][i].value),max:Number([...document.querySelectorAll('.smax')][i].value)})).filter(r=>r.name&&Number.isFinite(r.marks)&&Number.isFinite(r.max)&&r.max>0&&r.marks>=0&&r.marks<=r.max)}
+    $('#calcBtn').addEventListener('click',()=>{const rows=read(); if(rows.length<5){alert('Enter at least five valid subjects.');return} const sorted=[...rows].sort((a,b)=>(b.marks/b.max)-(a.marks/a.max)); const chosen=sorted.slice(0,5); const total=chosen.reduce((a,b)=>a+b.marks,0); const max=chosen.reduce((a,b)=>a+b.max,0); const pct=(total/max)*100; $('#result').style.display='block'; $('#result').innerHTML=`<h2 style="margin-top:0">Best of Five</h2><p><strong>Included subjects:</strong> ${chosen.map(s=>s.name).join(', ')}</p><p><strong>Total:</strong> ${total}/${max}</p><p><strong>Best-of-five percentage:</strong> ${pct.toFixed(2)}%</p><p class="muted">Remaining subjects entered but not counted: ${sorted.slice(5).map(s=>s.name).join(', ') || 'None'}</p>`})
+    $('#demoBtn').addEventListener('click',()=>render([['English Core',88,100],['Physics',84,100],['Chemistry',79,100],['Mathematics',91,100],['Computer Science',95,100],['Physical Education',93,100],['Economics',82,100]]))
+    $('#resetBtn').addEventListener('click',()=>{$('#result').style.display='none';render()})
+    render();
+  </script>
+</body>
+</html>
