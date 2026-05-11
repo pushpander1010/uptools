@@ -1211,6 +1211,13 @@ async function handleNewsProxy(req: Request, env: Env): Promise<Response> {
 async function serveSite(req: Request, env: Env): Promise<Response> {
   const url = new URL(req.url);
 
+  // 0) Enforce www redirect: uptools.in → www.uptools.in (301 permanent)
+  if (url.hostname === "uptools.in") {
+    url.hostname = "www.uptools.in";
+    return Response.redirect(url.toString(), 301);
+  }
+
+
   // 1) Fix `/www` â†’ `/`
   if (url.pathname === "/www" || url.pathname === "/www/") {
     url.pathname = "/";
