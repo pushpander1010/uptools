@@ -1112,17 +1112,25 @@
       }, { once: true });
 
       // Keyboard + search
-      q.addEventListener("input", debounce((e) => {
-        applyFilters();
-        // Jump to search results if user has typed something
-        if (q.value.trim()) {
+      q.addEventListener("input", debounce(applyFilters, 200), { passive: true });
+      
+      // Scroll to results only on explicit search (Enter key or Clear button)
+      q.addEventListener("keydown", (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
           const toolsSection = $("#tools");
           if (toolsSection) {
             toolsSection.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         }
-      }, 200), { passive: true });
-      $("#clearBtn").addEventListener("click", () => { q.value = ""; applyFilters(); q.focus(); });
+      }, { passive: false });
+      
+      $("#clearBtn").addEventListener("click", () => { 
+        q.value = ""; 
+        applyFilters(); 
+        q.focus(); 
+      });
+      
       window.addEventListener("keydown", (e) => {
         if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
         if (e.key === 'Escape') { q.blur(); }

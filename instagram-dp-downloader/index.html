@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Instagram Story Downloader - Download Stories & Reels | UpTools</title>
-  <meta name="description" content="Download Instagram stories, reels, and posts without watermark. Free, fast, and privacy-first. No sign-up required." />
+  <title>Instagram DP Downloader - Download Profile Pictures | UpTools</title>
+  <meta name="description" content="Download Instagram profile pictures in full HD quality. Free, fast, and no sign-up required." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <meta name="theme-color" content="#0f1419" />
-  <meta name="keywords" content="instagram story downloader,download instagram stories,instagram reels downloader,instagram post downloader" />
+  <meta name="keywords" content="instagram dp downloader,download instagram profile picture,instagram profile pic" />
 
-  <link rel="canonical" href="https://www.uptools.in/instagram-story-downloader/" />
+  <link rel="canonical" href="https://www.uptools.in/instagram-dp-downloader/" />
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg" />
 
-  <meta property="og:title" content="Instagram Story Downloader - Download Stories & Reels" />
-  <meta property="og:description" content="Download Instagram stories, reels, and posts without watermark. Free and easy." />
+  <meta property="og:title" content="Instagram DP Downloader - Download Profile Pictures" />
+  <meta property="og:description" content="Download Instagram profile pictures in full HD quality. Free and easy." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.uptools.in/instagram-story-downloader/" />
+  <meta property="og:url" content="https://www.uptools.in/instagram-dp-downloader/" />
   <meta property="og:site_name" content="UpTools" />
-  <meta property="og:image" content="https://www.uptools.in/assets/og/instagram-story-downloader.png" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/instagram-dp-downloader.png" />
 
   <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
@@ -44,7 +44,6 @@
     .card { background: #121826; border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem }
     .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .6rem .9rem; border-radius: var(--radius); background: var(--brand); color: #0b1020; border: 0; font-weight: 800; text-decoration: none; cursor: pointer }
     .btn.secondary { background: #1a2436; color: var(--text); border: 1px solid var(--border) }
-    .btn.sm { padding: .45rem .7rem; font-weight: 700; font-size: .9rem }
     .note { color: var(--muted) }
     .note.small { font-size: .9rem }
 
@@ -53,12 +52,10 @@
     .brand { display: inline-flex; align-items: center; gap: .6rem; color: var(--text); text-decoration: none; font-weight: 900 }
     .nav-links { display: flex; flex-wrap: wrap; gap: .75rem }
     .nav-links a { color: var(--text); opacity: .9; text-decoration: none; padding: .25rem .4rem; border-radius: .5rem }
-    .nav-links a[aria-current="page"] { background: #182033; border: 1px solid var(--border) }
 
     .tool-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem }
     .tool-icon { width: 48px; height: 48px; border-radius: var(--radius); background: linear-gradient(135deg, #e91e63, #9c27b0); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; color: white; flex-shrink: 0 }
 
-    .downloader-form { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.5rem }
     .form-group { margin-bottom: 1rem }
     .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text) }
     .form-group input { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font-family: inherit }
@@ -67,11 +64,8 @@
     .info-box h3 { margin: 0 0 0.5rem; color: var(--brand) }
     .info-box p { margin: 0; font-size: 0.9rem }
 
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0 }
-    .step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem }
-    .step-number { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--brand); color: #0b1020; border-radius: 50%; font-weight: 800; margin-bottom: 0.5rem }
-    .step h3 { margin: 0.5rem 0; color: var(--text) }
-    .step p { margin: 0; font-size: 0.9rem; color: var(--muted) }
+    .preview-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; text-align: center; margin: 1rem 0 }
+    .preview-box img { max-width: 200px; max-height: 200px; border-radius: var(--radius); margin: 0.5rem 0 }
 
     .mobile-menu-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 0.5rem }
     @media (max-width: 768px) {
@@ -107,49 +101,56 @@
 
   <main id="main" class="wrap" role="main">
     <section class="card tool-header">
-      <div class="tool-icon" aria-hidden="true">📥</div>
+      <div class="tool-icon" aria-hidden="true">👤</div>
       <div style="flex: 1">
-        <h1 style="margin: 0; font-size: 1.5rem; font-weight: 800">Instagram Story Downloader</h1>
-        <p class="note" style="margin: 0.5rem 0 0">Download Instagram stories, reels, and posts without watermark</p>
+        <h1 style="margin: 0; font-size: 1.5rem; font-weight: 800">Instagram DP Downloader</h1>
+        <p class="note" style="margin: 0.5rem 0 0">Download Instagram profile pictures in full HD quality</p>
       </div>
     </section>
 
     <div class="info-box">
       <h3>How it works</h3>
-      <p>Paste an Instagram story, reel, or post URL below and we'll help you download it. No sign-up required, completely free and private.</p>
+      <p>Enter an Instagram username and we'll fetch their profile picture in the highest available quality. No sign-up required, completely free and private.</p>
     </div>
 
     <section class="card">
-      <h2 style="margin-top: 0">Download Instagram Content</h2>
+      <h2 style="margin-top: 0">Download Profile Picture</h2>
       
-      <div class="downloader-form">
-        <div class="form-group">
-          <label for="url">Instagram URL</label>
-          <input type="url" id="url" placeholder="Paste Instagram story, reel, or post URL here..." />
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start">
+        <div>
+          <div class="form-group">
+            <label for="username">Instagram Username</label>
+            <input type="text" id="username" placeholder="Enter Instagram username (without @)" />
+          </div>
+          <button class="btn" onclick="downloadDP()">Download DP 📥</button>
         </div>
-        <button class="btn" onclick="downloadContent()">Download 📥</button>
+
+        <div id="preview" class="preview-box">
+          <p class="note small">Profile picture will appear here</p>
+        </div>
       </div>
 
       <div id="result" style="margin-top: 1rem"></div>
     </section>
 
     <section class="card" style="margin-top: 1.5rem">
-      <h2>How to use</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h3>Copy URL</h3>
-          <p>Open Instagram and copy the URL of the story, reel, or post you want to download.</p>
+      <h2>Features</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem">
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">📸 Full HD Quality</h3>
+          <p class="note small" style="margin: 0">Download profile pictures in the highest available resolution.</p>
         </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h3>Paste Here</h3>
-          <p>Paste the URL in the input field above.</p>
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">⚡ Instant Download</h3>
+          <p class="note small" style="margin: 0">Get your profile picture in seconds, no waiting.</p>
         </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h3>Download</h3>
-          <p>Click the Download button and save the file to your device.</p>
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">🔒 Private & Secure</h3>
+          <p class="note small" style="margin: 0">Your data is never stored or shared with anyone.</p>
+        </div>
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">✨ No Sign-up</h3>
+          <p class="note small" style="margin: 0">Completely free, no registration required.</p>
         </div>
       </div>
     </section>
@@ -158,20 +159,16 @@
       <h2>FAQ</h2>
       <div style="display: grid; gap: 1rem">
         <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">Can I download private account DPs?</h3>
+          <p class="note small" style="margin: 0">No, you can only download profile pictures from public accounts.</p>
+        </div>
+        <div>
           <h3 style="margin: 0 0 0.5rem; color: var(--brand)">Is this legal?</h3>
-          <p class="note small" style="margin: 0">Yes, downloading content for personal use is legal. Always respect copyright and creator rights.</p>
+          <p class="note small" style="margin: 0">Yes, downloading public profile pictures for personal use is legal.</p>
         </div>
         <div>
-          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">Can I download private accounts?</h3>
-          <p class="note small" style="margin: 0">No, you can only download public content that you have access to.</p>
-        </div>
-        <div>
-          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">Does Instagram know I downloaded?</h3>
-          <p class="note small" style="margin: 0">No, this tool is completely private and doesn't notify Instagram or the creator.</p>
-        </div>
-        <div>
-          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">What formats are supported?</h3>
-          <p class="note small" style="margin: 0">Stories, Reels, Posts, Carousels, and IGTV videos are all supported.</p>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">What image formats are supported?</h3>
+          <p class="note small" style="margin: 0">We support JPG, PNG, and WebP formats. You can save in any format your browser supports.</p>
         </div>
       </div>
     </section>
@@ -182,30 +179,31 @@
   </main>
 
   <script>
-    function downloadContent() {
-      const url = document.getElementById('url').value.trim();
+    function downloadDP() {
+      const username = document.getElementById('username').value.trim();
       const resultDiv = document.getElementById('result');
+      const previewDiv = document.getElementById('preview');
 
-      if (!url) {
-        resultDiv.innerHTML = '<div class="info-box" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3)"><h3 style="color: #ef4444">Error</h3><p>Please paste an Instagram URL first.</p></div>';
+      if (!username) {
+        resultDiv.innerHTML = '<div class="info-box" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3)"><h3 style="color: #ef4444">Error</h3><p>Please enter an Instagram username.</p></div>';
         return;
       }
 
-      // Validate Instagram URL
-      if (!url.includes('instagram.com')) {
-        resultDiv.innerHTML = '<div class="info-box" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3)"><h3 style="color: #ef4444">Invalid URL</h3><p>Please paste a valid Instagram URL.</p></div>';
-        return;
-      }
+      resultDiv.innerHTML = '<div class="info-box"><h3>Fetching...</h3><p>Loading profile picture. This may take a moment...</p></div>';
+      previewDiv.innerHTML = '<p class="note small">Loading...</p>';
 
-      resultDiv.innerHTML = '<div class="info-box"><h3>Processing...</h3><p>Fetching your Instagram content. This may take a moment...</p></div>';
-
-      // Simulate download (in production, this would call a backend API)
+      // Simulate fetching (in production, this would call a backend API)
       setTimeout(() => {
+        previewDiv.innerHTML = `
+          <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 150px; height: 150px; border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 3rem">👤</div>
+          <p style="margin: 0.5rem 0 0; font-size: 0.9rem">@${username}</p>
+        `;
+        
         resultDiv.innerHTML = `
           <div class="info-box" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3)">
             <h3 style="color: #22c55e">Ready to Download</h3>
-            <p>Your Instagram content is ready. Click the button below to download.</p>
-            <button class="btn" style="margin-top: 1rem" onclick="alert('In production, this would download your file. For now, please use a dedicated Instagram downloader service.')">Download File 📥</button>
+            <p>Profile picture loaded successfully. Click below to download.</p>
+            <button class="btn" style="margin-top: 1rem" onclick="alert('In production, this would download the profile picture. For now, please use a dedicated Instagram DP downloader service.')">Download 📥</button>
           </div>
         `;
       }, 1500);

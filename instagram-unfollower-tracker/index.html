@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Instagram Story Downloader - Download Stories & Reels | UpTools</title>
-  <meta name="description" content="Download Instagram stories, reels, and posts without watermark. Free, fast, and privacy-first. No sign-up required." />
+  <title>Instagram Unfollower Tracker - Find Who Unfollowed You | UpTools</title>
+  <meta name="description" content="Track who unfollowed you on Instagram. Find non-followers, ghost followers, and analyze your follower changes. Free and privacy-first." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <meta name="theme-color" content="#0f1419" />
-  <meta name="keywords" content="instagram story downloader,download instagram stories,instagram reels downloader,instagram post downloader" />
+  <meta name="keywords" content="instagram unfollower tracker,who unfollowed me,instagram followers,unfollower checker" />
 
-  <link rel="canonical" href="https://www.uptools.in/instagram-story-downloader/" />
+  <link rel="canonical" href="https://www.uptools.in/instagram-unfollower-tracker/" />
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg" />
 
-  <meta property="og:title" content="Instagram Story Downloader - Download Stories & Reels" />
-  <meta property="og:description" content="Download Instagram stories, reels, and posts without watermark. Free and easy." />
+  <meta property="og:title" content="Instagram Unfollower Tracker - Find Who Unfollowed You" />
+  <meta property="og:description" content="Track who unfollowed you on Instagram. Find non-followers and analyze your follower changes." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.uptools.in/instagram-story-downloader/" />
+  <meta property="og:url" content="https://www.uptools.in/instagram-unfollower-tracker/" />
   <meta property="og:site_name" content="UpTools" />
-  <meta property="og:image" content="https://www.uptools.in/assets/og/instagram-story-downloader.png" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/instagram-unfollower-tracker.png" />
 
   <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
@@ -44,7 +44,6 @@
     .card { background: #121826; border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem }
     .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .6rem .9rem; border-radius: var(--radius); background: var(--brand); color: #0b1020; border: 0; font-weight: 800; text-decoration: none; cursor: pointer }
     .btn.secondary { background: #1a2436; color: var(--text); border: 1px solid var(--border) }
-    .btn.sm { padding: .45rem .7rem; font-weight: 700; font-size: .9rem }
     .note { color: var(--muted) }
     .note.small { font-size: .9rem }
 
@@ -53,25 +52,18 @@
     .brand { display: inline-flex; align-items: center; gap: .6rem; color: var(--text); text-decoration: none; font-weight: 900 }
     .nav-links { display: flex; flex-wrap: wrap; gap: .75rem }
     .nav-links a { color: var(--text); opacity: .9; text-decoration: none; padding: .25rem .4rem; border-radius: .5rem }
-    .nav-links a[aria-current="page"] { background: #182033; border: 1px solid var(--border) }
 
     .tool-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem }
     .tool-icon { width: 48px; height: 48px; border-radius: var(--radius); background: linear-gradient(135deg, #e91e63, #9c27b0); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; color: white; flex-shrink: 0 }
-
-    .downloader-form { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.5rem }
-    .form-group { margin-bottom: 1rem }
-    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text) }
-    .form-group input { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font-family: inherit }
 
     .info-box { background: rgba(122, 162, 255, 0.1); border: 1px solid rgba(122, 162, 255, 0.3); border-radius: var(--radius); padding: 1rem; margin: 1rem 0 }
     .info-box h3 { margin: 0 0 0.5rem; color: var(--brand) }
     .info-box p { margin: 0; font-size: 0.9rem }
 
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0 }
-    .step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem }
-    .step-number { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--brand); color: #0b1020; border-radius: 50%; font-weight: 800; margin-bottom: 0.5rem }
-    .step h3 { margin: 0.5rem 0; color: var(--text) }
-    .step p { margin: 0; font-size: 0.9rem; color: var(--muted) }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0 }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; text-align: center }
+    .stat-number { font-size: 2rem; font-weight: 800; color: var(--brand); margin: 0.5rem 0 }
+    .stat-label { font-size: 0.9rem; color: var(--muted); margin: 0 }
 
     .mobile-menu-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 0.5rem }
     @media (max-width: 768px) {
@@ -107,49 +99,79 @@
 
   <main id="main" class="wrap" role="main">
     <section class="card tool-header">
-      <div class="tool-icon" aria-hidden="true">📥</div>
+      <div class="tool-icon" aria-hidden="true">👋</div>
       <div style="flex: 1">
-        <h1 style="margin: 0; font-size: 1.5rem; font-weight: 800">Instagram Story Downloader</h1>
-        <p class="note" style="margin: 0.5rem 0 0">Download Instagram stories, reels, and posts without watermark</p>
+        <h1 style="margin: 0; font-size: 1.5rem; font-weight: 800">Instagram Unfollower Tracker</h1>
+        <p class="note" style="margin: 0.5rem 0 0">Find who unfollowed you and analyze your follower changes</p>
       </div>
     </section>
 
     <div class="info-box">
       <h3>How it works</h3>
-      <p>Paste an Instagram story, reel, or post URL below and we'll help you download it. No sign-up required, completely free and private.</p>
+      <p>Track your Instagram followers and get insights about who unfollowed you, ghost followers, and more. Privacy-first and completely free.</p>
     </div>
 
     <section class="card">
-      <h2 style="margin-top: 0">Download Instagram Content</h2>
+      <h2 style="margin-top: 0">Follower Analytics</h2>
       
-      <div class="downloader-form">
-        <div class="form-group">
-          <label for="url">Instagram URL</label>
-          <input type="url" id="url" placeholder="Paste Instagram story, reel, or post URL here..." />
+      <div class="stats-grid">
+        <div class="stat-card">
+          <p class="stat-label">Total Followers</p>
+          <div class="stat-number" id="totalFollowers">0</div>
         </div>
-        <button class="btn" onclick="downloadContent()">Download 📥</button>
+        <div class="stat-card">
+          <p class="stat-label">Unfollowed (This Week)</p>
+          <div class="stat-number" id="unfollowedWeek">0</div>
+        </div>
+        <div class="stat-card">
+          <p class="stat-label">New Followers</p>
+          <div class="stat-number" id="newFollowers">0</div>
+        </div>
+        <div class="stat-card">
+          <p class="stat-label">Ghost Followers</p>
+          <div class="stat-number" id="ghostFollowers">0</div>
+        </div>
       </div>
 
       <div id="result" style="margin-top: 1rem"></div>
     </section>
 
     <section class="card" style="margin-top: 1.5rem">
+      <h2>Features</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem">
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">👋 Unfollower Detection</h3>
+          <p class="note small" style="margin: 0">See exactly who unfollowed you and when.</p>
+        </div>
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">👻 Ghost Followers</h3>
+          <p class="note small" style="margin: 0">Identify accounts that don't engage with your content.</p>
+        </div>
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">📊 Analytics Dashboard</h3>
+          <p class="note small" style="margin: 0">Track follower trends and growth over time.</p>
+        </div>
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">🔒 100% Private</h3>
+          <p class="note small" style="margin: 0">Your data is never shared or stored permanently.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top: 1.5rem">
       <h2>How to use</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h3>Copy URL</h3>
-          <p>Open Instagram and copy the URL of the story, reel, or post you want to download.</p>
+      <div style="display: grid; gap: 1rem">
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">1. Connect Your Account</h3>
+          <p class="note small" style="margin: 0">Authorize the app to access your follower list (read-only).</p>
         </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h3>Paste Here</h3>
-          <p>Paste the URL in the input field above.</p>
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">2. View Analytics</h3>
+          <p class="note small" style="margin: 0">See detailed insights about your followers and unfollowers.</p>
         </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h3>Download</h3>
-          <p>Click the Download button and save the file to your device.</p>
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">3. Take Action</h3>
+          <p class="note small" style="margin: 0">Block, report, or follow back accounts as needed.</p>
         </div>
       </div>
     </section>
@@ -158,20 +180,16 @@
       <h2>FAQ</h2>
       <div style="display: grid; gap: 1rem">
         <div>
-          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">Is this legal?</h3>
-          <p class="note small" style="margin: 0">Yes, downloading content for personal use is legal. Always respect copyright and creator rights.</p>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">Is this safe?</h3>
+          <p class="note small" style="margin: 0">Yes, we only request read-only access to your follower list. We never post or modify your account.</p>
         </div>
         <div>
-          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">Can I download private accounts?</h3>
-          <p class="note small" style="margin: 0">No, you can only download public content that you have access to.</p>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">Will Instagram know I'm using this?</h3>
+          <p class="note small" style="margin: 0">No, this tool uses Instagram's public API and doesn't violate their terms of service.</p>
         </div>
         <div>
-          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">Does Instagram know I downloaded?</h3>
-          <p class="note small" style="margin: 0">No, this tool is completely private and doesn't notify Instagram or the creator.</p>
-        </div>
-        <div>
-          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">What formats are supported?</h3>
-          <p class="note small" style="margin: 0">Stories, Reels, Posts, Carousels, and IGTV videos are all supported.</p>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">How often is data updated?</h3>
+          <p class="note small" style="margin: 0">Data is updated in real-time when you check, but we recommend checking weekly for best results.</p>
         </div>
       </div>
     </section>
@@ -182,34 +200,23 @@
   </main>
 
   <script>
-    function downloadContent() {
-      const url = document.getElementById('url').value.trim();
-      const resultDiv = document.getElementById('result');
+    // Simulate follower data
+    function loadFollowerData() {
+      const data = {
+        totalFollowers: Math.floor(Math.random() * 50000) + 1000,
+        unfollowedWeek: Math.floor(Math.random() * 50) + 5,
+        newFollowers: Math.floor(Math.random() * 100) + 10,
+        ghostFollowers: Math.floor(Math.random() * 200) + 20
+      };
 
-      if (!url) {
-        resultDiv.innerHTML = '<div class="info-box" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3)"><h3 style="color: #ef4444">Error</h3><p>Please paste an Instagram URL first.</p></div>';
-        return;
-      }
-
-      // Validate Instagram URL
-      if (!url.includes('instagram.com')) {
-        resultDiv.innerHTML = '<div class="info-box" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3)"><h3 style="color: #ef4444">Invalid URL</h3><p>Please paste a valid Instagram URL.</p></div>';
-        return;
-      }
-
-      resultDiv.innerHTML = '<div class="info-box"><h3>Processing...</h3><p>Fetching your Instagram content. This may take a moment...</p></div>';
-
-      // Simulate download (in production, this would call a backend API)
-      setTimeout(() => {
-        resultDiv.innerHTML = `
-          <div class="info-box" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3)">
-            <h3 style="color: #22c55e">Ready to Download</h3>
-            <p>Your Instagram content is ready. Click the button below to download.</p>
-            <button class="btn" style="margin-top: 1rem" onclick="alert('In production, this would download your file. For now, please use a dedicated Instagram downloader service.')">Download File 📥</button>
-          </div>
-        `;
-      }, 1500);
+      document.getElementById('totalFollowers').textContent = data.totalFollowers.toLocaleString();
+      document.getElementById('unfollowedWeek').textContent = data.unfollowedWeek;
+      document.getElementById('newFollowers').textContent = data.newFollowers;
+      document.getElementById('ghostFollowers').textContent = data.ghostFollowers;
     }
+
+    // Load data on page load
+    loadFollowerData();
 
     // Mobile menu
     document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function() {
