@@ -738,6 +738,25 @@
         { slug: "instagram-hashtag-generator", title: "Instagram Hashtag Generator", icon: "#️⃣", desc: "Find trending hashtags to boost your reach.", href: "/instagram-hashtag-generator/", tags: ["social","marketing"], cats: ["all","social","text"] },
         { slug: "instagram-username-generator", title: "Instagram Username Generator", icon: "👤", desc: "Generate unique and catchy Instagram usernames.", href: "/instagram-username-generator/", tags: ["social","creative"], cats: ["all","social","text"] },
         { slug: "instagram-story-templates", title: "Instagram Story Templates", icon: "📱", desc: "Beautiful templates for Instagram Stories.", href: "/instagram-story-templates/", tags: ["social","design","templates"], cats: ["all","social","images"] },
+        { slug: "instagram-story-downloader", title: "Instagram Story Downloader", icon: "📥", desc: "Download Instagram stories, reels and posts without watermark.", href: "/instagram-story-downloader/", tags: ["social","download"], cats: ["all","social","images"] },
+        { slug: "instagram-dp-downloader", title: "Instagram DP Downloader", icon: "👤", desc: "Download Instagram profile pictures in full HD quality.", href: "/instagram-dp-downloader/", tags: ["social","download"], cats: ["all","social","images"] },
+        { slug: "instagram-reels-downloader", title: "Instagram Reels Downloader", icon: "🎬", desc: "Download Instagram Reels videos without watermark.", href: "/instagram-reels-downloader/", tags: ["social","download","video"], cats: ["all","social","images"] },
+        { slug: "instagram-post-downloader", title: "Instagram Post Downloader", icon: "📸", desc: "Download Instagram photos and carousel posts easily.", href: "/instagram-post-downloader/", tags: ["social","download"], cats: ["all","social","images"] },
+        { slug: "instagram-video-downloader", title: "Instagram Video Downloader", icon: "🎥", desc: "Download Instagram videos in HD quality.", href: "/instagram-video-downloader/", tags: ["social","download","video"], cats: ["all","social","images"] },
+        { slug: "instagram-igtv-downloader", title: "Instagram IGTV Downloader", icon: "📺", desc: "Download IGTV videos from Instagram.", href: "/instagram-igtv-downloader/", tags: ["social","download","video"], cats: ["all","social","images"] },
+        { slug: "instagram-carousel-downloader", title: "Instagram Carousel Downloader", icon: "🖼️", desc: "Download all photos from Instagram carousel posts.", href: "/instagram-carousel-downloader/", tags: ["social","download"], cats: ["all","social","images"] },
+        { slug: "instagram-highlight-downloader", title: "Instagram Highlight Downloader", icon: "⭐", desc: "Download Instagram story highlights from any profile.", href: "/instagram-highlight-downloader/", tags: ["social","download"], cats: ["all","social","images"] },
+        { slug: "instagram-follower-list-exporter", title: "Instagram Follower List Exporter", icon: "📋", desc: "Export your Instagram followers list to CSV.", href: "/instagram-follower-list-exporter/", tags: ["social","analytics","export"], cats: ["all","social","marketing"] },
+        { slug: "instagram-following-list-exporter", title: "Instagram Following List Exporter", icon: "📋", desc: "Export your Instagram following list to CSV.", href: "/instagram-following-list-exporter/", tags: ["social","analytics","export"], cats: ["all","social","marketing"] },
+        { slug: "instagram-unfollower-tracker", title: "Instagram Unfollower Tracker", icon: "👋", desc: "Find who unfollowed you on Instagram.", href: "/instagram-unfollower-tracker/", tags: ["social","analytics"], cats: ["all","social","marketing"] },
+        { slug: "instagram-fake-follower-checker", title: "Instagram Fake Follower Checker", icon: "🤖", desc: "Detect fake followers and bot accounts on Instagram.", href: "/instagram-fake-follower-checker/", tags: ["social","analytics","security"], cats: ["all","social","security"] },
+        { slug: "instagram-bio-link-generator", title: "Instagram Bio Link Generator", icon: "🔗", desc: "Create clickable link trees for your Instagram bio.", href: "/instagram-bio-link-generator/", tags: ["social","marketing","links"], cats: ["all","social","marketing"] },
+        { slug: "instagram-story-viewer", title: "Instagram Story Viewer", icon: "👁️", desc: "View Instagram stories anonymously without being seen.", href: "/instagram-story-viewer/", tags: ["social","privacy"], cats: ["all","social","security"] },
+        { slug: "instagram-post-scheduler", title: "Instagram Post Scheduler", icon: "⏰", desc: "Schedule Instagram posts for optimal posting times.", href: "/instagram-post-scheduler/", tags: ["social","marketing","scheduling"], cats: ["all","social","marketing"] },
+        { slug: "instagram-content-calendar", title: "Instagram Content Calendar", icon: "📅", desc: "Plan and organize your Instagram content strategy.", href: "/instagram-content-calendar/", tags: ["social","planning","marketing"], cats: ["all","social","marketing"] },
+        { slug: "instagram-growth-calculator", title: "Instagram Growth Calculator", icon: "📈", desc: "Project your Instagram growth based on engagement rate.", href: "/instagram-growth-calculator/", tags: ["social","analytics"], cats: ["all","social","marketing"] },
+        { slug: "instagram-reach-calculator", title: "Instagram Reach Calculator", icon: "🎯", desc: "Calculate potential reach for your Instagram posts.", href: "/instagram-reach-calculator/", tags: ["social","analytics"], cats: ["all","social","marketing"] },
+        { slug: "instagram-story-ideas-generator", title: "Instagram Story Ideas Generator", icon: "💡", desc: "Generate creative Instagram story ideas with AI.", href: "/instagram-story-ideas-generator/", tags: ["social","ai","content"], cats: ["all","social","ai"] },
         { slug: "tiktok-hashtag-generator", title: "TikTok Hashtag Generator", icon: "🎵", desc: "Find viral hashtags for your TikTok videos.", href: "/tiktok-hashtag-generator/", tags: ["social","tiktok","marketing"], cats: ["all","social","text"] },
         { slug: "games", title: "Free Mini Games", icon: "🎮", desc: "Play fast, sign-up free browser games.", href: "/games/", tags: ["fun"], cats: ["all","fun"] },
         { slug: "games-love-test", title: "Love Compatibility Test", icon: "💘", desc: "Fun love quiz for couples.", href: "/games/love-test/", tags: ["fun","romantic"], cats: ["all","fun","romantic"] },
@@ -1093,7 +1112,16 @@
       }, { once: true });
 
       // Keyboard + search
-      q.addEventListener("input", debounce(applyFilters, 200), { passive: true });
+      q.addEventListener("input", debounce((e) => {
+        applyFilters();
+        // Jump to search results if user has typed something
+        if (q.value.trim()) {
+          const toolsSection = $("#tools");
+          if (toolsSection) {
+            toolsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }
+      }, 200), { passive: true });
       $("#clearBtn").addEventListener("click", () => { q.value = ""; applyFilters(); q.focus(); });
       window.addEventListener("keydown", (e) => {
         if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
