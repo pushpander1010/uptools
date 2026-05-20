@@ -1,41 +1,36 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <!-- Google Ads (mounted only if available) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>AI Stock Analyzer - Real-Time Charts, News Sentiment, Support/Resistance, Verdict | UpTools</title>
-
-  <!-- Canonical & Favicons -->
-  <link rel="canonical" href="https://www.uptools.in/ai-stock-analyzer/" />
-  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
-
-  <!-- SEO -->
-  <meta name="description" content="Free AI stock analysis tool for NSE, BSE, NASDAQ, NYSE, LSE, TSX, TSE, SSE and more. Pulls live quotes & charts (Yahoo Finance), scans patterns, draws support & resistance, reads news (Google News RSS) for sentiment, and gives Buy/Hold/Sell verdicts. Includes an AI chatbox (RAG) grounded in the fetched data." />
-  <meta name="keywords" content="stock analysis,AI stock analyzer,live stock chart,NSE stocks,BSE stocks,NASDAQ stocks,NYSE stocks,TSX,LSE,technical analysis,news sentiment,support resistance,free tool" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta name="theme-color" content="#0b1020" />
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="AI Stock Analyzer - Live Charts, News Sentiment & Verdict" />
-  <meta property="og:description" content="Analyze any ticker across major markets. Real quotes & charts, support/resistance, technical + fundamental snapshot, news sentiment, and Buy/Hold/Sell verdict. Free." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.uptools.in/ai-stock-analyzer/" />
-  <meta property="og:image" content="https://www.uptools.in/assets/og/ai-stock-analyzer.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- CSS (shared) -->
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
+<!-- Google Ads (mounted only if available) -->
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>AI Stock Analyzer - Real-Time Charts, News Sentiment, Support/Resistance, Verdict | UpTools</title>
+<!-- Canonical & Favicons -->
+<link href="https://www.uptools.in/ai-stock-analyzer/" rel="canonical"/>
+<link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
+<link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
+<!-- SEO -->
+<meta content="Free AI stock analysis tool for NSE, BSE, NASDAQ, NYSE, LSE, TSX, TSE, SSE and more. Pulls live quotes &amp; charts (Yahoo Finance), scans patterns, draws support &amp; resistance, reads news (Google News RSS) for sentiment, and gives Buy/Hold/Sell verdicts. Includes an AI chatbox (RAG) grounded in the fetched data." name="description"/>
+<meta content="stock analysis,AI stock analyzer,live stock chart,NSE stocks,BSE stocks,NASDAQ stocks,NYSE stocks,TSX,LSE,technical analysis,news sentiment,support resistance,free tool" name="keywords"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
+<meta content="#0b1020" name="theme-color"/>
+<!-- Open Graph / Twitter -->
+<meta content="AI Stock Analyzer - Live Charts, News Sentiment &amp; Verdict" property="og:title"/>
+<meta content="Analyze any ticker across major markets. Real quotes &amp; charts, support/resistance, technical + fundamental snapshot, news sentiment, and Buy/Hold/Sell verdict. Free." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.uptools.in/ai-stock-analyzer/" property="og:url"/>
+<meta content="https://www.uptools.in/assets/og/ai-stock-analyzer.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<!-- CSS (shared) -->
+<link as="style" href="/style.css" rel="preload"/>
+<link href="/style.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="/style.css" rel="stylesheet"/></noscript>
+<!-- Structured Data -->
+<script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"SoftwareApplication",
@@ -47,7 +42,7 @@
     "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","ratingCount":"127"}
   }
   </script>
-  <script type="application/ld+json">
+<script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"BreadcrumbList",
@@ -57,7 +52,7 @@
     ]
   }
   </script>
-  <script type="application/ld+json">
+<script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"FAQPage",
@@ -75,8 +70,7 @@
     ]
   }
   </script>
-
-  <style>
+<style>
     /* Page-local tweaks (kept tiny for performance) */
     .hero { align-items:center; gap:12px }
     .grid-2 { display:grid; grid-template-columns:1.1fr .9fr; gap:12px }
@@ -99,233 +93,211 @@
     .nowrap{ white-space:nowrap }
   </style>
 </head>
-
 <body style="--accent:#22D3EE;--bg1:#0b0f1a;--bg2:#121a2f">
-  <!-- Header -->
-    <!-- Header -->
-  <header class="site" role="banner">
-    <div class="header-inner">
-      <a class="brand" href="/" aria-label="UpTools Home">
-        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
-        <b>UpTools</b>
-      </a>
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="/#tools">Tools</a>
-        <a href="/income-tax-tool/">Income Tax</a>
-        <a href="/emi-calculator/">EMI</a>
-        <a href="/gst-calculator/">GST</a>
-        <a href="/games/">Games</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="wrap" id="main" role="main">
-    <!-- HERO -->
-    <section class="card hero" aria-labelledby="title">
-      <div class="tool-icon">STK</div>
-      <div>
-        <h1 id="title">AI Stock Analyzer - Multi-Market</h1>
-        <p class="note">Live quotes & charts (Yahoo Finance), support/resistance, TA/FA snapshot, Google News sentiment, and an AI chatbox grounded in retrieved data. <span class="mini">Free - No sign-ups - Privacy-first</span></p>
-        <div class="chips" style="margin-top:8px">
-          <span class="pill">NSE - BSE - NASDAQ - NYSE - LSE - TSX - TSE - SSE - HKEX</span>
-          <a class="chip" href="/sitemap.xml">Sitemap</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- (Conditional) Ad space -->
-    <div id="ad-mount"></div>
-
-    <!-- CONTROLS -->
-    <section class="card" aria-label="Controls">
-      <div class="row-inline" style="justify-content:space-between;gap:12px">
-        <div class="row-inline" style="flex:1;flex-wrap:wrap;gap:10px">
-          <label class="inline">
-            <span class="mini">Market</span>
-            <select id="market" class="select">
-              <option value="NSE" selected>NSE (India)</option>
-              <option value="BSE">BSE (India)</option>
-              <option value="NASDAQ">NASDAQ (US)</option>
-              <option value="NYSE">NYSE (US)</option>
-              <option value="LSE">LSE (UK)</option>
-              <option value="TSX">TSX (Canada)</option>
-              <option value="TSE">TSE (Tokyo)</option>
-              <option value="SSE">SSE (Shanghai)</option>
-              <option value="HKEX">HKEX (Hong Kong)</option>
-              <option value="FWB">XETRA/Frankfurt (DE)</option>
-            </select>
-          </label>
-          <label class="inline">
-            <span class="mini">Ticker</span>
-            <input id="ticker" class="input" placeholder="e.g., RELIANCE or AAPL" style="width:220px" list="tickerSuggestions" autocomplete="off">
-          </label>
-          <label class="inline">
-            <span class="mini">Range</span>
-            <select id="range" class="select">
-              <option value="1mo">1M</option>
-              <option value="3mo">3M</option>
-              <option value="6mo" selected>6M</option>
-              <option value="1y">1Y</option>
-              <option value="2y">2Y</option>
-            </select>
-          </label>
-          <label class="inline">
-            <span class="mini">Interval</span>
-            <select id="interval" class="select">
-              <option value="1d" selected>1d</option>
-              <option value="1h">1h</option>
-              <option value="5m">5m</option>
-            </select>
-          </label>
-          <button id="go" class="btn" type="button">Analyze</button>
-        </div>
-          <span class="mini nowrap">Model: Mistral Small</span>
-      </div>
-      <div class="mini" id="analysisStatus" role="status">Ready.</div>
-      <p class="mini">Tip: For NSE use plain ticker (e.g., RELIANCE). US tickers are the same (AAPL / TSLA). This page auto-maps market suffixes for Yahoo Finance.</p>
-    </section>
-
-    <datalist id="tickerSuggestions"></datalist>
-
-    <!-- MAIN GRID -->
-    <!-- MAIN GRID -->
-    <section class="grid-2" aria-label="Analysis">
-      <!-- LEFT: Chart + TA + News -->
-      <article class="panel">
-        <section class="card" aria-labelledby="snapTitle">
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <h2 id="snapTitle" class="h5">Snapshot</h2>
-            <div class="badge" id="badgeXchg">N/A</div>
-          </div>
-          <div class="kvi">
-            <div><div class="mini">Price</div><div class="amount" id="price">N/A</div></div>
-            <div><div class="mini">Change</div><div id="chg">N/A</div></div>
-            <div><div class="mini">Market Cap</div><div id="mcap">N/A</div></div>
-          </div>
-          <div class="kvi">
-            <div><div class="mini">PE (TTM)</div><div id="pe">N/A</div></div>
-            <div><div class="mini">Dividend Yield</div><div id="divy">N/A</div></div>
-            <div><div class="mini">Currency</div><div id="ccy">N/A</div></div>
-          </div>
-        </section>
-
-        <section class="card" aria-labelledby="chartTitle">
-          <h2 id="chartTitle" class="h5">Price Chart (with S/R & SMAs)</h2>
-          <canvas id="chart" width="1200" height="360" aria-label="Stock price chart"></canvas>
-          <div class="mini">Lines: <b>cyan</b> price, <b>violet</b> SMA50, <b>emerald</b> SMA200, <b>orange</b> resistance, <b>green</b> support.</div>
-        </section>
-
-        <section class="card" aria-labelledby="taTitle">
-          <h2 id="taTitle" class="h5">Technical Analysis</h2>
-          <div class="kvi">
-            <div><div class="mini">RSI(14)</div><div id="rsi">N/A</div></div>
-            <div><div class="mini">SMA50 vs Price</div><div id="sma50p">N/A</div></div>
-            <div><div class="mini">SMA200 vs Price</div><div id="sma200p">N/A</div></div>
-          </div>
-          <div class="result" id="taSummary">Run an analysis to see signals...</div>
-        </section>
-
-        <section class="card" aria-labelledby="newsTitle">
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <h2 id="newsTitle" class="h5">Recent News & Sentiment</h2>
-            <span class="badge" id="newsSent">N/A</span>
-          </div>
-          <div id="newsList" aria-live="polite"></div>
-          <p class="mini">Sources: Google News RSS (various publishers). Headlines are summarized locally for speed.</p>
-        </section>
-      </article>
-
-      <!-- RIGHT: FA + Verdict + Chat -->
-      <article class="panel">
-        <section class="card" aria-labelledby="faTitle">
-          <h2 id="faTitle" class="h5">Fundamental Snapshot</h2>
-          <ul class="list compact" id="faList" style="margin:0;padding-left:16px">
-            <li>52W High / Low: <span id="hiLo">N/A</span></li>
-            <li>EPS (TTM): <span id="eps">N/A</span></li>
-            <li>Forward PE: <span id="fpe">N/A</span></li>
-            <li>Beta: <span id="beta">N/A</span></li>
-            <li>Shares Outstanding: <span id="shout">N/A</span></li>
-          </ul>
-        </section>
-
-        <section class="card" aria-labelledby="verdictTitle">
-          <h2 id="verdictTitle" class="h5">AI Verdict</h2>
-          <div class="verdict">
-            <span class="tool-icon" id="vEmoji">HOLD</span>
-            <div>
-              <div><b id="vText">Awaiting Analysis</b></div>
-              <div class="mini" id="vWhy">Run an analysis to get Buy / Hold / Sell with reasoning.</div>
-            </div>
-          </div>
-          <div class="divider"></div>
-          <div class="kvi">
-            <div><div class="mini">TA Score</div><div id="scoreTA">N/A</div></div>
-            <div><div class="mini">FA Score</div><div id="scoreFA">N/A</div></div>
-            <div><div class="mini">News Score</div><div id="scoreNews">N/A</div></div>
-          </div>
-        </section>
-
-        <section class="card chatbox" aria-labelledby="chatTitle">
-          <h2 id="chatTitle" class="h5">Chat about this Stock (RAG)</h2>
-          <div class="row-inline wrap" id="quickPrompts" aria-label="Quick prompts"></div>
-          <div id="chatlog" class="chatlog" aria-live="polite"></div>
-          <form id="chatForm" class="row-inline" style="margin-top:8px">
-            <input id="chatInput" class="input" placeholder="Ask anything about this stock" autocomplete="off">
-            <button class="btn" type="submit">Send</button>
-            <button class="btn secondary" id="stop" type="button" disabled>Stop</button>
-          </form>
-          <div class="row-inline" style="justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:8px">
-            <span class="mini" id="chatStatus" role="status">Run an analysis and then ask a question.</span>
-            <div class="row-inline" style="gap:6px;flex-wrap:wrap">
-              <button class="btn secondary sm" type="button" id="copyChat">Copy</button>
-              <button class="btn secondary sm" type="button" id="downloadChat">Download</button>
-              <button class="btn secondary sm" type="button" id="clearChat">Clear</button>
-              <button class="btn secondary sm" type="button" id="permalinkBtn">Permalink</button>
-            </div>
-          </div>
-          <p class="mini">Grounded on: current quote, chart stats, computed indicators and latest headlines fetched above.</p>
-        </section>
-
-        <section class="card">
-          <h2 class="h5">Learn & Sources</h2>
-          <ul class="list compact">
-            <li><a href="https://finance.yahoo.com/" rel="noopener nofollow">Yahoo Finance (quotes & charts)</a></li>
-            <li><a href="https://news.google.com/" rel="noopener nofollow">Google News (RSS)</a></li>
-            <li><a href="https://www.investopedia.com/terms/s/support.asp" rel="noopener">Investopedia: Support & Resistance</a></li>
-            <li><a href="https://www.nseindia.com/" rel="noopener">NSE India</a> - <a href="https://www.bseindia.com/" rel="noopener">BSE India</a></li>
-          </ul>
-        </section>
-      </article>
-    </section>
-
-    <section class="card" style="margin-top:12px">
-      <h2 style="margin-top:0">Quick explainer ??</h2>
-      <iframe width="100%" height="100%"
-        src="https://www.youtube-nocookie.com/embed/vmGhZqQc9eY?rel=0&modestbranding=1&playsinline=1"
-        title="5 Best Ways to Use AI in Trading"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
-        style="border:0; aspect-ratio:16/9; border-radius:.75rem; display:block; width:100%"></iframe>
-      <p class="note small" style="margin-top:6px">Video: How to analyze stocks using fundamental analysis.</p>
-    </section>
-
-    <footer class="site-footer">
-      <nav class="nav-links" aria-label="Footer">
-        <a href="/about/"><span class="card-badge">ABT</span> About</a>
-        <a href="/contact/"><span class="card-badge">CT</span> Contact</a>
-        <a href="/sitemap.xml"><span class="card-badge">MAP</span> Sitemap</a>
-        <a href="/privacy/"><span class="card-badge">PP</span> Privacy</a>
-      </nav>
-      <p class="tiny-note">&copy; <span id="y"></span> UpTools. Not investment advice.</p>
-    </footer>
-  </main>
-
-  <!-- Page Script -->
-  <script type="module">
+<!-- Header -->
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="/assets/logo/uptools-logo.svg" width="28"/>
+<b>UpTools</b>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
+<nav aria-label="Primary" class="nav-links">
+<a href="/#tools">Tools</a>
+<a href="/income-tax-tool/">Income Tax</a>
+<a href="/emi-calculator/">EMI</a>
+<a href="/gst-calculator/">GST</a>
+<a href="/games/">Games</a>
+<a href="/about/">About</a>
+<a href="/contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main class="wrap" id="main" role="main">
+<!-- HERO -->
+<section aria-labelledby="title" class="card hero">
+<div class="tool-icon">STK</div>
+<div>
+<h1 id="title">AI Stock Analyzer - Multi-Market</h1>
+<p class="note">Live quotes &amp; charts (Yahoo Finance), support/resistance, TA/FA snapshot, Google News sentiment, and an AI chatbox grounded in retrieved data. <span class="mini">Free - No sign-ups - Privacy-first</span></p>
+<div class="chips" style="margin-top:8px">
+<span class="pill">NSE - BSE - NASDAQ - NYSE - LSE - TSX - TSE - SSE - HKEX</span>
+<a class="chip" href="/sitemap.xml">Sitemap</a>
+</div>
+</div>
+</section>
+<!-- (Conditional) Ad space -->
+<div id="ad-mount"></div>
+<!-- CONTROLS -->
+<section aria-label="Controls" class="card">
+<div class="row-inline" style="justify-content:space-between;gap:12px">
+<div class="row-inline" style="flex:1;flex-wrap:wrap;gap:10px">
+<label class="inline">
+<span class="mini">Market</span>
+<select class="select" id="market">
+<option selected="" value="NSE">NSE (India)</option>
+<option value="BSE">BSE (India)</option>
+<option value="NASDAQ">NASDAQ (US)</option>
+<option value="NYSE">NYSE (US)</option>
+<option value="LSE">LSE (UK)</option>
+<option value="TSX">TSX (Canada)</option>
+<option value="TSE">TSE (Tokyo)</option>
+<option value="SSE">SSE (Shanghai)</option>
+<option value="HKEX">HKEX (Hong Kong)</option>
+<option value="FWB">XETRA/Frankfurt (DE)</option>
+</select>
+</label>
+<label class="inline">
+<span class="mini">Ticker</span>
+<input autocomplete="off" class="input" id="ticker" list="tickerSuggestions" placeholder="e.g., RELIANCE or AAPL" style="width:220px"/>
+</label>
+<label class="inline">
+<span class="mini">Range</span>
+<select class="select" id="range">
+<option value="1mo">1M</option>
+<option value="3mo">3M</option>
+<option selected="" value="6mo">6M</option>
+<option value="1y">1Y</option>
+<option value="2y">2Y</option>
+</select>
+</label>
+<label class="inline">
+<span class="mini">Interval</span>
+<select class="select" id="interval">
+<option selected="" value="1d">1d</option>
+<option value="1h">1h</option>
+<option value="5m">5m</option>
+</select>
+</label>
+<button class="btn" id="go" type="button">Analyze</button>
+</div>
+<span class="mini nowrap">Model: Mistral Small</span>
+</div>
+<div class="mini" id="analysisStatus" role="status">Ready.</div>
+<p class="mini">Tip: For NSE use plain ticker (e.g., RELIANCE). US tickers are the same (AAPL / TSLA). This page auto-maps market suffixes for Yahoo Finance.</p>
+</section>
+<datalist id="tickerSuggestions"></datalist>
+<!-- MAIN GRID -->
+<!-- MAIN GRID -->
+<section aria-label="Analysis" class="grid-2">
+<!-- LEFT: Chart + TA + News -->
+<article class="panel">
+<section aria-labelledby="snapTitle" class="card">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<h2 class="h5" id="snapTitle">Snapshot</h2>
+<div class="badge" id="badgeXchg">N/A</div>
+</div>
+<div class="kvi">
+<div><div class="mini">Price</div><div class="amount" id="price">N/A</div></div>
+<div><div class="mini">Change</div><div id="chg">N/A</div></div>
+<div><div class="mini">Market Cap</div><div id="mcap">N/A</div></div>
+</div>
+<div class="kvi">
+<div><div class="mini">PE (TTM)</div><div id="pe">N/A</div></div>
+<div><div class="mini">Dividend Yield</div><div id="divy">N/A</div></div>
+<div><div class="mini">Currency</div><div id="ccy">N/A</div></div>
+</div>
+</section>
+<section aria-labelledby="chartTitle" class="card">
+<h2 class="h5" id="chartTitle">Price Chart (with S/R &amp; SMAs)</h2>
+<canvas aria-label="Stock price chart" height="360" id="chart" width="1200"></canvas>
+<div class="mini">Lines: <b>cyan</b> price, <b>violet</b> SMA50, <b>emerald</b> SMA200, <b>orange</b> resistance, <b>green</b> support.</div>
+</section>
+<section aria-labelledby="taTitle" class="card">
+<h2 class="h5" id="taTitle">Technical Analysis</h2>
+<div class="kvi">
+<div><div class="mini">RSI(14)</div><div id="rsi">N/A</div></div>
+<div><div class="mini">SMA50 vs Price</div><div id="sma50p">N/A</div></div>
+<div><div class="mini">SMA200 vs Price</div><div id="sma200p">N/A</div></div>
+</div>
+<div class="result" id="taSummary">Run an analysis to see signals...</div>
+</section>
+<section aria-labelledby="newsTitle" class="card">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<h2 class="h5" id="newsTitle">Recent News &amp; Sentiment</h2>
+<span class="badge" id="newsSent">N/A</span>
+</div>
+<div aria-live="polite" id="newsList"></div>
+<p class="mini">Sources: Google News RSS (various publishers). Headlines are summarized locally for speed.</p>
+</section>
+</article>
+<!-- RIGHT: FA + Verdict + Chat -->
+<article class="panel">
+<section aria-labelledby="faTitle" class="card">
+<h2 class="h5" id="faTitle">Fundamental Snapshot</h2>
+<ul class="list compact" id="faList" style="margin:0;padding-left:16px">
+<li>52W High / Low: <span id="hiLo">N/A</span></li>
+<li>EPS (TTM): <span id="eps">N/A</span></li>
+<li>Forward PE: <span id="fpe">N/A</span></li>
+<li>Beta: <span id="beta">N/A</span></li>
+<li>Shares Outstanding: <span id="shout">N/A</span></li>
+</ul>
+</section>
+<section aria-labelledby="verdictTitle" class="card">
+<h2 class="h5" id="verdictTitle">AI Verdict</h2>
+<div class="verdict">
+<span class="tool-icon" id="vEmoji">HOLD</span>
+<div>
+<div><b id="vText">Awaiting Analysis</b></div>
+<div class="mini" id="vWhy">Run an analysis to get Buy / Hold / Sell with reasoning.</div>
+</div>
+</div>
+<div class="divider"></div>
+<div class="kvi">
+<div><div class="mini">TA Score</div><div id="scoreTA">N/A</div></div>
+<div><div class="mini">FA Score</div><div id="scoreFA">N/A</div></div>
+<div><div class="mini">News Score</div><div id="scoreNews">N/A</div></div>
+</div>
+</section>
+<section aria-labelledby="chatTitle" class="card chatbox">
+<h2 class="h5" id="chatTitle">Chat about this Stock (RAG)</h2>
+<div aria-label="Quick prompts" class="row-inline wrap" id="quickPrompts"></div>
+<div aria-live="polite" class="chatlog" id="chatlog"></div>
+<form class="row-inline" id="chatForm" style="margin-top:8px">
+<input autocomplete="off" class="input" id="chatInput" placeholder="Ask anything about this stock"/>
+<button class="btn" type="submit">Send</button>
+<button class="btn secondary" disabled="" id="stop" type="button">Stop</button>
+</form>
+<div class="row-inline" style="justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:8px">
+<span class="mini" id="chatStatus" role="status">Run an analysis and then ask a question.</span>
+<div class="row-inline" style="gap:6px;flex-wrap:wrap">
+<button class="btn secondary sm" id="copyChat" type="button">Copy</button>
+<button class="btn secondary sm" id="downloadChat" type="button">Download</button>
+<button class="btn secondary sm" id="clearChat" type="button">Clear</button>
+<button class="btn secondary sm" id="permalinkBtn" type="button">Permalink</button>
+</div>
+</div>
+<p class="mini">Grounded on: current quote, chart stats, computed indicators and latest headlines fetched above.</p>
+</section>
+<section class="card">
+<h2 class="h5">Learn &amp; Sources</h2>
+<ul class="list compact">
+<li><a href="https://finance.yahoo.com/" rel="noopener nofollow">Yahoo Finance (quotes &amp; charts)</a></li>
+<li><a href="https://news.google.com/" rel="noopener nofollow">Google News (RSS)</a></li>
+<li><a href="https://www.investopedia.com/terms/s/support.asp" rel="noopener">Investopedia: Support &amp; Resistance</a></li>
+<li><a href="https://www.nseindia.com/" rel="noopener">NSE India</a> - <a href="https://www.bseindia.com/" rel="noopener">BSE India</a></li>
+</ul>
+</section>
+</article>
+</section>
+<section class="card" style="margin-top:12px">
+<h2 style="margin-top:0">Quick explainer ??</h2>
+<div class="video-wrap"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/vmGhZqQc9eY?rel=0&amp;modestbranding=1&amp;playsinline=1" title="5 Best Ways to Use AI in Trading"></iframe></div>
+<p class="note small" style="margin-top:6px">Video: How to analyze stocks using fundamental analysis.</p>
+</section>
+<footer class="site-footer">
+<nav aria-label="Footer" class="nav-links">
+<a href="/about/"><span class="card-badge">ABT</span> About</a>
+<a href="/contact/"><span class="card-badge">CT</span> Contact</a>
+<a href="/sitemap.xml"><span class="card-badge">MAP</span> Sitemap</a>
+<a href="/privacy/"><span class="card-badge">PP</span> Privacy</a>
+</nav>
+<p class="tiny-note">© <span id="y"></span> UpTools. Not investment advice.</p>
+</footer>
+</main>
+<!-- Page Script -->
+<script type="module">
     let Utils = {};
     try {
       Utils = (await import('/scripts/utils.js'))?.default || (await import('/scripts/utils.js')) || {};

@@ -1,48 +1,39 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-  <!-- Performance-first, production-safe -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="x-ua-compatible" content="IE=edge" />
-  <meta name="color-scheme" content="dark light" />
-
-  <title>Age Calculator (Pro) - Exact Age, Next Birthday, Working Days & Eligibility (India) | UpTools</title>
-  <meta name="description"
-    content="Free Age Calculator (Pro) by UpTools: calculate exact age in years, months, and days; show your next birthday & days left; totals in days/weeks/hours/minutes; half-birthday; Indian eligibility (voter, driving, senior/super senior); key milestones (18/21/30/60/80); retirement countdown; and working days between dates with weekend/holiday exclusions. How to use: enter date of birth, optionally set an 'As of' date, click Calculate. One-click summary copy, share link, and .ics calendar file for next birthday. Fast, privacy-first, mobile-friendly." />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
-  <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://www.uptools.in/age-calculator/" />
-  <link rel="alternate" href="https://www.uptools.in/age-calculator/" hreflang="en-IN" />
-  <meta name="keywords"
-    content="Age calculator, exact age, next birthday, working days between dates, India eligibility age, retirement countdown, half birthday calculator, age in days" />
-
-  <!-- Favicons -->
-  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg" />
-  <link rel="mask-icon" href="/assets/logo/uptools-logo.svg" color="#22d3ee" />
-
-  <!-- OG/Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Age Calculator (Pro) - Exact Age & Next Birthday" />
-  <meta property="og:description"
-    content="Exact age, next birthday countdown, totals, eligibility (India), milestones, retirement & working days." />
-  <meta property="og:url" content="https://www.uptools.in/age-calculator/" />
-  <meta property="og:site_name" content="UpTools" />
-  <meta property="og:image" content="https://www.uptools.in/assets/og/age.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Age Calculator (Pro) - Exact Age & Next Birthday" />
-  <meta name="twitter:description"
-    content="Exact age, next birthday, milestones, retirement & working days. Fast and privacy-first." />
-  <meta name="twitter:image" content="https://www.uptools.in/assets/og/age.png" />
-
-  <!-- Hints (keep under 4) -->
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
-
-  <!-- Tiny critical CSS to avoid FOUC -->
-  <style>
+<!-- Performance-first, production-safe -->
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="IE=edge" http-equiv="x-ua-compatible"/>
+<meta content="dark light" name="color-scheme"/>
+<title>Age Calculator (Pro) - Exact Age, Next Birthday, Working Days &amp; Eligibility (India) | UpTools</title>
+<meta content="Free Age Calculator (Pro) by UpTools: calculate exact age in years, months, and days; show your next birthday &amp; days left; totals in days/weeks/hours/minutes; half-birthday; Indian eligibility (voter, driving, senior/super senior); key milestones (18/21/30/60/80); retirement countdown; and working days between dates with weekend/holiday exclusions. How to use: enter date of birth, optionally set an 'As of' date, click Calculate. One-click summary copy, share link, and .ics calendar file for next birthday. Fast, privacy-first, mobile-friendly." name="description"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta content="#0b1020" name="theme-color"/>
+<link href="https://www.uptools.in/age-calculator/" rel="canonical"/>
+<link href="https://www.uptools.in/age-calculator/" hreflang="en-IN" rel="alternate"/>
+<meta content="Age calculator, exact age, next birthday, working days between dates, India eligibility age, retirement countdown, half birthday calculator, age in days" name="keywords"/>
+<!-- Favicons -->
+<link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
+<link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
+<link color="#22d3ee" href="/assets/logo/uptools-logo.svg" rel="mask-icon"/>
+<!-- OG/Twitter -->
+<meta content="website" property="og:type"/>
+<meta content="Age Calculator (Pro) - Exact Age &amp; Next Birthday" property="og:title"/>
+<meta content="Exact age, next birthday countdown, totals, eligibility (India), milestones, retirement &amp; working days." property="og:description"/>
+<meta content="https://www.uptools.in/age-calculator/" property="og:url"/>
+<meta content="UpTools" property="og:site_name"/>
+<meta content="https://www.uptools.in/assets/og/age.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Age Calculator (Pro) - Exact Age &amp; Next Birthday" name="twitter:title"/>
+<meta content="Exact age, next birthday, milestones, retirement &amp; working days. Fast and privacy-first." name="twitter:description"/>
+<meta content="https://www.uptools.in/assets/og/age.png" name="twitter:image"/>
+<!-- Hints (keep under 4) -->
+<link crossorigin="" href="https://pagead2.googlesyndication.com" rel="preconnect"/>
+<link href="//pagead2.googlesyndication.com" rel="dns-prefetch"/>
+<!-- Tiny critical CSS to avoid FOUC -->
+<style>
     :root {
       --bg: #0f1419;
       --surface: #121826;
@@ -149,16 +140,14 @@
       place-items: center
     }
   </style>
-
-  <!-- Common CSS (non-blocking) -->
-  <link rel="preload" href="/style.css?v=1.2.0" as="style" />
-  <link rel="stylesheet" href="/style.css?v=1.2.0" media="print" onload="this.media='all'" />
-  <noscript>
-    <link rel="stylesheet" href="/style.css?v=1.2.0" />
-  </noscript>
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
+<!-- Common CSS (non-blocking) -->
+<link as="style" href="/style.css?v=1.2.0" rel="preload">
+<link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet">
+<noscript>
+<link href="/style.css?v=1.2.0" rel="stylesheet"/>
+</noscript>
+<!-- Structured Data -->
+<script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"SoftwareApplication",
@@ -172,7 +161,7 @@
     "publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/","logo":{"@type":"ImageObject","url":"https://www.uptools.in/assets/logo/uptools-logo.svg"}}
   }
   </script>
-  <script type="application/ld+json">
+<script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"How do I calculate my exact age?","acceptedAnswer":{"@type":"Answer","text":"Enter your date of birth and optionally an 'As of' date. The calculator shows years, months and days, plus totals in days/weeks/hours/minutes."}},
     {"@type":"Question","name":"Can I see the next birthday countdown?","acceptedAnswer":{"@type":"Answer","text":"Yes. You'll see the date, days left and the age you will turn. You can also download a .ics file to add it to your calendar."}},
@@ -180,8 +169,8 @@
     {"@type":"Question","name":"How do I count working days between dates?","acceptedAnswer":{"@type":"Answer","text":"Use the Working Days section. Select start/end dates, tick 'Exclude weekends', and optionally paste holidays (YYYY-MM-DD)."}}
   ]}
   </script>
-  <!-- Mark the embedded video for SEO -->
-  <script type="application/ld+json">
+<!-- Mark the embedded video for SEO -->
+<script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"VideoObject",
@@ -193,171 +182,146 @@
     "embedUrl":"https://www.youtube.com/embed/2S0eD6CkI0Q"
   }
   </script>
-</head>
-
+</link></link></head>
 <body>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"
-     crossorigin="anonymous"></script>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <!-- small fixed -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:500px;height:50px"
-     data-ad-client="ca-pub-6216304334889617"
-     data-ad-slot="9810172647"></ins>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-  <!-- Header -->
-    <!-- Header -->
-  <header class="site" role="banner">
-    <div class="header-inner">
-      <a class="brand" href="/" aria-label="UpTools Home">
-        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
-        <b>UpTools</b>
-      </a>
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="/#tools">Tools</a>
-        <a href="/income-tax-tool/">Income Tax</a>
-        <a href="/emi-calculator/">EMI</a>
-        <a href="/gst-calculator/">GST</a>
-        <a href="/games/">Games</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="wrap container" id="main">
-    <!-- Breadcrumb -->
-    <nav aria-label="Breadcrumb" class="note small" style="margin-bottom:8px">
-      <a href="/">Home</a> › <span aria-current="page">Age Calculator</span>
-    </nav>
-
-    <!-- Hero (compact) -->
-    <section class="card hero">
-      <img class="hero-logo" src="/assets/tools/age.png" alt="Birthday cake icon" width="180" height="180"
-        loading="eager">
-      <div>
-        <h1>Age Calculator (Pro)</h1>
-        <p class="note">
-          Exact age, next birthday, half-birthday, milestones, eligibility (India) & working days.
+<!-- Header -->
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="/assets/logo/uptools-logo.svg" width="28"/>
+<b>UpTools</b>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
+<nav aria-label="Primary" class="nav-links">
+<a href="/#tools">Tools</a>
+<a href="/income-tax-tool/">Income Tax</a>
+<a href="/emi-calculator/">EMI</a>
+<a href="/gst-calculator/">GST</a>
+<a href="/games/">Games</a>
+<a href="/about/">About</a>
+<a href="/contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main class="wrap container" id="main">
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="note small" style="margin-bottom:8px">
+<a href="/">Home</a> › <span aria-current="page">Age Calculator</span>
+</nav>
+<!-- Hero (compact) -->
+<section class="card hero">
+<img alt="Birthday cake icon" class="hero-logo" height="180" loading="eager" src="/assets/tools/age.png" width="180"/>
+<div>
+<h1>Age Calculator (Pro)</h1>
+<p class="note">
+          Exact age, next birthday, half-birthday, milestones, eligibility (India) &amp; working days.
           <span class="pill">🔒 No logins</span>
-          <span class="pill">⚡ Instant</span>
-          <span class="pill">📱 Mobile-first</span>
-        </p>
-      </div>
-      <!-- SEO supporting artwork (fixed size for CLS) -->
-      <img src="/assets/ui/age-illustration.png" alt="Illustration: calendar and birthday reminder" width="96"
-        height="96" loading="lazy" style="margin-left:auto;border-radius:12px;border:1px solid var(--border)">
-    </section>
-
-    <!-- Inputs -->
-    <section class="card">
-      <div class="grid">
-        <div>
-          <label class="label" for="dob">Date of Birth</label>
-          <input id="dob" class="input" type="date" />
-        </div>
-        <div>
-          <label class="label" for="asof">As of Date</label>
-          <input id="asof" class="input" type="date" />
-          <div class="muted">Defaults to today if empty.</div>
-        </div>
-        <div>
-          <label class="label" for="retAge">Retirement Age</label>
-          <input id="retAge" class="input" type="number" min="40" max="80" step="1" value="60" />
-          <div class="muted">Used for retirement countdown.</div>
-        </div>
-      </div>
-
-      <div class="row" style="border:0;padding:0;margin-top:12px;gap:12px;flex-wrap:wrap">
-        <button id="calcBtn" class="btn" type="button">Calculate</button>
-        <button id="copyBtn" class="btn secondary" type="button">Copy Summary</button>
-        <button id="shareBtn" class="btn secondary" type="button">Share</button>
-        <button id="printBtn" class="btn secondary" type="button">Print</button>
-        <button id="icsBtn" class="btn secondary" type="button">Add Next Birthday (.ics)</button>
-        <button id="resetBtn" class="btn secondary" type="button">Reset</button>
-      </div>
-      <p class="muted" style="margin-top:6px">Tip: Set "As of" to any past/future date to see age on that date (useful
+<span class="pill">⚡ Instant</span>
+<span class="pill">📱 Mobile-first</span>
+</p>
+</div>
+<!-- SEO supporting artwork (fixed size for CLS) -->
+<img alt="Illustration: calendar and birthday reminder" height="96" loading="lazy" src="/assets/ui/age-illustration.png" style="margin-left:auto;border-radius:12px;border:1px solid var(--border)" width="96"/>
+</section>
+<!-- Inputs -->
+<section class="card">
+<div class="grid">
+<div>
+<label class="label" for="dob">Date of Birth</label>
+<input class="input" id="dob" type="date"/>
+</div>
+<div>
+<label class="label" for="asof">As of Date</label>
+<input class="input" id="asof" type="date"/>
+<div class="muted">Defaults to today if empty.</div>
+</div>
+<div>
+<label class="label" for="retAge">Retirement Age</label>
+<input class="input" id="retAge" max="80" min="40" step="1" type="number" value="60"/>
+<div class="muted">Used for retirement countdown.</div>
+</div>
+</div>
+<div class="row" style="border:0;padding:0;margin-top:12px;gap:12px;flex-wrap:wrap">
+<button class="btn" id="calcBtn" type="button">Calculate</button>
+<button class="btn secondary" id="copyBtn" type="button">Copy Summary</button>
+<button class="btn secondary" id="shareBtn" type="button">Share</button>
+<button class="btn secondary" id="printBtn" type="button">Print</button>
+<button class="btn secondary" id="icsBtn" type="button">Add Next Birthday (.ics)</button>
+<button class="btn secondary" id="resetBtn" type="button">Reset</button>
+</div>
+<p class="muted" style="margin-top:6px">Tip: Set "As of" to any past/future date to see age on that date (useful
         for forms).</p>
-    </section>
-
-    <!-- Output -->
-    <section id="summary" class="card" aria-live="polite"></section>
-
-    <!-- Milestones + Half-birthday -->
-    <section id="milestones" class="card" aria-live="polite"></section>
-
-    <!-- Working days -->
-    <section class="card" style="margin-top:16px">
-      <h2 style="margin:0 0 8px">Working Days Between Dates</h2>
-      <div class="grid">
-        <div>
-          <label class="label" for="wdStart">Start Date</label>
-          <input id="wdStart" class="input" type="date" />
-        </div>
-        <div>
-          <label class="label" for="wdEnd">End Date</label>
-          <input id="wdEnd" class="input" type="date" />
-        </div>
-        <div>
-          <label class="check"><input id="wdWeekends" type="checkbox" checked /> <span>Exclude weekends</span></label>
-        </div>
-      </div>
-      <label class="label" for="wdHolidays" style="margin-top:12px">Optional Holidays (YYYY-MM-DD, comma
+</section>
+<!-- Output -->
+<section aria-live="polite" class="card" id="summary"></section>
+<!-- Milestones + Half-birthday -->
+<section aria-live="polite" class="card" id="milestones"></section>
+<!-- Working days -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin:0 0 8px">Working Days Between Dates</h2>
+<div class="grid">
+<div>
+<label class="label" for="wdStart">Start Date</label>
+<input class="input" id="wdStart" type="date"/>
+</div>
+<div>
+<label class="label" for="wdEnd">End Date</label>
+<input class="input" id="wdEnd" type="date"/>
+</div>
+<div>
+<label class="check"><input checked="" id="wdWeekends" type="checkbox"/> <span>Exclude weekends</span></label>
+</div>
+</div>
+<label class="label" for="wdHolidays" style="margin-top:12px">Optional Holidays (YYYY-MM-DD, comma
         separated)</label>
-      <textarea id="wdHolidays" class="textarea" placeholder="2025-01-26, 2025-08-15"></textarea>
-      <div class="row" style="border:0;padding:0;margin-top:12px;gap:12px;flex-wrap:wrap">
-        <button id="wdCalcBtn" class="btn" type="button">Count Working Days</button>
-        <span id="wdOut" class="note"></span>
-      </div>
-      <p class="note" style="margin-top:8px">Also try:
+<textarea class="textarea" id="wdHolidays" placeholder="2025-01-26, 2025-08-15"></textarea>
+<div class="row" style="border:0;padding:0;margin-top:12px;gap:12px;flex-wrap:wrap">
+<button class="btn" id="wdCalcBtn" type="button">Count Working Days</button>
+<span class="note" id="wdOut"></span>
+</div>
+<p class="note" style="margin-top:8px">Also try:
         <a href="/date-difference/">Date Difference</a> .
         <a href="/bmi-calculator/">BMI</a> .
         <a href="/emi-calculator/">EMI</a> .
         <a href="/gst-calculator/">GST</a>
-      </p>
-    </section>
-
-    <!-- Learn (video) -->
-    <section class="card yt-wrap" aria-label="How to calculate your age">
-      <!-- Fixed width & height to stabilize layout -->
-      <!-- Working YouTube embed (fixed size to avoid CLS) -->
-      <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/MCcOSLfEizc"
-        title="Timezone Converter World Clock" loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
-
-      <p class="note" style="margin:8px 0 0">Resource: See <a href="https://en.wikipedia.org/wiki/Age"
-          rel="nofollow noopener" target="_blank">what "age" means</a> and <a
-          href="https://en.wikipedia.org/wiki/Legal_driving_age" rel="nofollow noopener" target="_blank">legal driving
+</p>
+</section>
+<!-- Learn (video) -->
+<section aria-label="How to calculate your age" class="card yt-wrap">
+<!-- Fixed width & height to stabilize layout -->
+<!-- Working YouTube embed (fixed size to avoid CLS) -->
+<div class="video-wrap"><iframe allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/MCcOSLfEizc" title="Timezone Converter World Clock"></iframe></div>
+<p class="note" style="margin:8px 0 0">Resource: See <a href="https://en.wikipedia.org/wiki/Age" rel="nofollow noopener" target="_blank">what "age" means</a> and <a href="https://en.wikipedia.org/wiki/Legal_driving_age" rel="nofollow noopener" target="_blank">legal driving
           ages</a>.</p>
-    </section>
-
-    <!-- Related tools / Internal links (with textual subpage logos) -->
-    <section class="card">
-      <h2 style="margin-top:0">Related at UpTools</h2>
-      <ul>
-        <li><a class="tool-link accent-indigo" href="/date-difference/"><span class="ico">DD</span> Date Difference
+</section>
+<!-- Related tools / Internal links (with textual subpage logos) -->
+<section class="card">
+<h2 style="margin-top:0">Related at UpTools</h2>
+<ul>
+<li><a class="tool-link accent-indigo" href="/date-difference/"><span class="ico">DD</span> Date Difference
             Calculator</a></li>
-        <li><a class="tool-link accent-teal" href="/emi-calculator/"><span class="ico">EMI</span> EMI Calculator</a>
-        </li>
-        <li><a class="tool-link accent-violet" href="/gst-calculator/"><span class="ico">GST</span> GST Calculator</a>
-        </li>
-        <li><a class="tool-link accent-slate" href="/about/"><span class="ico">ABT</span> About UpTools</a></li>
-        <li><a class="tool-link accent-sky" href="/contact/"><span class="ico">CT</span> Contact</a></li>
-      </ul>
-    </section>
-
-    <footer class="note small site-footer" role="contentinfo" style="margin-top:16px">
-      © <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a> . <a href="/about/">About</a> . <a
-        href="/contact/">Contact</a>
-      <button id="toTop" class="btn sm secondary" style="float:right">↑ Top</button>
-    </footer>
-  </main>
-
-  <!-- Year + Main JS (uses common /scripts/utils.js) -->
-  <script type="module">
+<li><a class="tool-link accent-teal" href="/emi-calculator/"><span class="ico">EMI</span> EMI Calculator</a>
+</li>
+<li><a class="tool-link accent-violet" href="/gst-calculator/"><span class="ico">GST</span> GST Calculator</a>
+</li>
+<li><a class="tool-link accent-slate" href="/about/"><span class="ico">ABT</span> About UpTools</a></li>
+<li><a class="tool-link accent-sky" href="/contact/"><span class="ico">CT</span> Contact</a></li>
+</ul>
+</section>
+<footer class="note small site-footer" role="contentinfo" style="margin-top:16px">
+      © <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a> . <a href="/about/">About</a> . <a href="/contact/">Contact</a>
+<button class="btn sm secondary" id="toTop" style="float:right">↑ Top</button>
+</footer>
+</main>
+<!-- Year + Main JS (uses common /scripts/utils.js) -->
+<script type="module">
     import { $, setText, debounce } from '/scripts/utils.js';
 
     // Footer year + nav
@@ -642,5 +606,4 @@
     });
   </script>
 </body>
-
 </html>

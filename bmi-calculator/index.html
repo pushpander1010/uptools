@@ -1,49 +1,39 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="x-ua-compatible" content="IE=edge" />
-  <meta name="color-scheme" content="dark light" />
-  <!-- Favicon -->
-  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
-
-
-  <title>BMI Calculator (Metric & US) - Healthy Range, Body Fat %, WHtR, BMR/TDEE | UpTools</title>
-  <meta name="description"
-    content="Free BMI Calculator with instant results. Works for Metric (cm/kg) and US (ft/in, lb). Shows category (WHO/Asian), healthy weight range, BMI Prime, estimated body fat %, WHtR, BMR & TDEE for calorie planning. Fast, private, offline-friendly." />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
-  <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://www.uptools.in/bmi-calculator/" />
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="BMI Calculator - Healthy Range, Body Fat %, WHtR, BMR/TDEE" />
-  <meta property="og:description"
-    content="Instant BMI with WHO/Asian categories, healthy weight range, BMI Prime, body fat %, WHtR, and calorie targets (BMR/TDEE). Metric & US." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.uptools.in/bmi-calculator/" />
-  <meta property="og:site_name" content="UpTools" />
-  <meta property="og:image" content="https://www.uptools.in/assets/og/bmi.png" />
-  <meta name="twitter:card" content="summary" />
-
-  <!-- Common stylesheet (non-blocking) -->
-  <link rel="preload" href="/style.css?v=1.2.1" as="style">
-  <link rel="stylesheet" href="/style.css?v=1.2.1" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="/style.css?v=1.2.1">
-  </noscript>
-
-  <!-- Preload shared utils used on every page -->
-  <link rel="modulepreload" href="/scripts/utils.js">
-
-  <!-- Small per-page critical CSS -->
-  <style>
+<link crossorigin="" href="https://pagead2.googlesyndication.com" rel="preconnect"/>
+<link href="//pagead2.googlesyndication.com" rel="dns-prefetch"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="IE=edge" http-equiv="x-ua-compatible"/>
+<meta content="dark light" name="color-scheme"/>
+<!-- Favicon -->
+<link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
+<link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
+<title>BMI Calculator (Metric &amp; US) - Healthy Range, Body Fat %, WHtR, BMR/TDEE | UpTools</title>
+<meta content="Free BMI Calculator with instant results. Works for Metric (cm/kg) and US (ft/in, lb). Shows category (WHO/Asian), healthy weight range, BMI Prime, estimated body fat %, WHtR, BMR &amp; TDEE for calorie planning. Fast, private, offline-friendly." name="description"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta content="#0b1020" name="theme-color"/>
+<link href="https://www.uptools.in/bmi-calculator/" rel="canonical">
+<!-- Open Graph / Twitter -->
+<meta content="BMI Calculator - Healthy Range, Body Fat %, WHtR, BMR/TDEE" property="og:title"/>
+<meta content="Instant BMI with WHO/Asian categories, healthy weight range, BMI Prime, body fat %, WHtR, and calorie targets (BMR/TDEE). Metric &amp; US." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.uptools.in/bmi-calculator/" property="og:url"/>
+<meta content="UpTools" property="og:site_name"/>
+<meta content="https://www.uptools.in/assets/og/bmi.png" property="og:image"/>
+<meta content="summary" name="twitter:card"/>
+<!-- Common stylesheet (non-blocking) -->
+<link as="style" href="/style.css?v=1.2.1" rel="preload"/>
+<link href="/style.css?v=1.2.1" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript>
+<link href="/style.css?v=1.2.1" rel="stylesheet"/>
+</noscript>
+<!-- Preload shared utils used on every page -->
+<link href="/scripts/utils.js" rel="modulepreload"/>
+<!-- Small per-page critical CSS -->
+<style>
     :root {
       --accent: #ff8a65;
       --bg: #0f1419;
@@ -523,323 +513,264 @@
       overflow: hidden
     }
   </style>
-
-  <!-- Structured data -->
-  <script type="application/ld+json">
+<!-- Structured data -->
+<script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
     {"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},
     {"@type":"ListItem","position":2,"name":"Health Tools","item":"https://www.uptools.in/#tools"},
     {"@type":"ListItem","position":3,"name":"BMI Calculator","item":"https://www.uptools.in/bmi-calculator/"}]}
   </script>
-  <script type="application/ld+json">
+<script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"What is a healthy BMI?","acceptedAnswer":{"@type":"Answer","text":"Using WHO adult cut-offs: 18.5-24.9 is considered normal. For many Asian populations, 18.5-22.9 is used as the normal range."}},
     {"@type":"Question","name":"Is BMI accurate?","acceptedAnswer":{"@type":"Answer","text":"BMI is a screening tool and does not distinguish fat from muscle. Waist-to-height ratio and body fat % add context."}},
     {"@type":"Question","name":"Does this work for children?","acceptedAnswer":{"@type":"Answer","text":"No. Children require age- and sex-specific percentiles, which this adult calculator does not provide."}}]}
   </script>
-  <script type="application/ld+json">
+<script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"BMI Calculator","operatingSystem":"Any","applicationCategory":"HealthApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"url":"https://www.uptools.in/bmi-calculator/","publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}  
   </script>
-  <script type="application/ld+json">
+<script type="application/ld+json">
   {"@context":"https://schema.org","@type":"VideoObject","name":"BMI Calculation Formula Explained","description":"Quick video explaining BMI, categories, and context.","uploadDate":"2023-01-01","thumbnailUrl":"https://i.ytimg.com/vi/t9e46CV_pyM/hqdefault.jpg","embedUrl":"https://www.youtube-nocookie.com/embed/t9e46CV_pyM","publisher":{"@type":"Organization","name":"YouTube"}}
   </script>
-</head>
-
+</link></head>
 <body>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"
-    crossorigin="anonymous"></script>
-  <!-- small fixed -->
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617"
-    data-ad-slot="9810172647"></ins>
-  <script>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
+<!-- small fixed -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<script>
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
-  <a class="sr-only" href="#main">Skip to content</a>
-
-  <!-- Header -->
-    <!-- Header -->
-  <header class="site" role="banner">
-    <div class="header-inner">
-      <a class="brand" href="/" aria-label="UpTools Home">
-        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
-        <b>UpTools</b>
-      </a>
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="/#tools">Tools</a>
-        <a href="/income-tax-tool/">Income Tax</a>
-        <a href="/emi-calculator/">EMI</a>
-        <a href="/gst-calculator/">GST</a>
-        <a href="/games/">Games</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main" class="wrap" role="main">
-    <div class="container">
-      <section class="tool-header" aria-labelledby="title">
-        <div class="tool-icon" aria-hidden="true" title="BMI">BMI</div>
-        <div>
-          <h1 id="title">BMI Calculator</h1>
-          <div class="chips" aria-label="Highlights">
-            <span class="pill">⚡ Instant</span>
-            <span class="pill">📏 Metric & US</span>
-            <span class="pill">🌍 WHO / 🌏 Asian</span>
-            <span class="pill">🧮 Body fat % & WHtR</span>
-            <span class="pill">🔥 BMR & TDEE</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Content column only; results open in overlay -->
-      <section class="layout" style="margin-top:12px">
-        <div style="display:grid;gap:12px;min-width:0">
-          <article class="card" aria-labelledby="form-head">
-            <h2 id="form-head">Enter your details</h2>
-
-            <form id="bmiForm" class="form-grid" autocomplete="off">
-              <div>
-                <label class="label" for="unit">Units</label>
-                <select id="unit" class="input" aria-label="Select unit system">
-                  <option value="metric">Metric (cm, kg)</option>
-                  <option value="us">US/UK (ft/in, lb)</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="label" for="std">Cut-offs</label>
-                <select id="std" class="input" aria-label="Select BMI boundaries">
-                  <option value="who">WHO (Global)</option>
-                  <option value="asian">Asian (SEAR/WPR)</option>
-                </select>
-              </div>
-
-              <!-- Metric height -->
-              <div id="gHeightMetric">
-                <label class="label" for="heightCm">Height (cm)</label>
-                <input id="heightCm" class="input" type="number" inputmode="decimal" min="0" step="0.1"
-                  placeholder="e.g., 170" />
-              </div>
-
-              <!-- US height -->
-              <div id="gHeightUS" class="hidden">
-                <label class="label" for="heightFt">Height (ft &amp; in)</label>
-                <div style="display:flex;gap:8px;">
-                  <input id="heightFt" class="input" type="number" inputmode="numeric" min="0" step="1" placeholder="ft"
-                    aria-label="Height feet" />
-                  <input id="heightIn" class="input" type="number" inputmode="decimal" min="0" step="0.1"
-                    placeholder="in" aria-label="Height inches" />
-                </div>
-              </div>
-
-              <!-- Metric weight -->
-              <div id="gWeightMetric">
-                <label class="label" for="weightKg">Weight (kg)</label>
-                <input id="weightKg" class="input" type="number" inputmode="decimal" min="0" step="0.1"
-                  placeholder="e.g., 70" />
-              </div>
-
-              <!-- US weight -->
-              <div id="gWeightUS" class="hidden">
-                <label class="label" for="weightLb">Weight (lb)</label>
-                <input id="weightLb" class="input" type="number" inputmode="decimal" min="0" step="0.1"
-                  placeholder="e.g., 154" />
-              </div>
-
-              <div>
-                <label class="label" for="age">Age (years, optional)</label>
-                <input id="age" class="input" type="number" inputmode="numeric" min="0" step="1"
-                  placeholder="e.g., 30" />
-              </div>
-
-              <div>
-                <label class="label" for="sex">Sex (for body fat %, optional)</label>
-                <select id="sex" class="input">
-                  <option value="none">Prefer not to say</option>
-                  <option value="female">Female</option>
-                  <option value="male">Male</option>
-                </select>
-              </div>
-
-              <div class="full">
-                <label class="label" for="waist">Waist circumference (cm, optional)</label>
-                <input id="waist" class="input" type="number" inputmode="decimal" min="0" step="0.1"
-                  placeholder="Measure at navel level" />
-              </div>
-
-              <div class="full toolbar" style="margin-top:4px;">
-                <button type="submit" class="btn" id="btnCalc">Calculate</button>
-                <button type="button" class="btn secondary" id="btnClear">Clear</button>
-
-                <div class="menu" id="moreMenu">
-                  <button type="button" class="btn ghost menu-btn" aria-haspopup="true" aria-expanded="false"
-                    aria-controls="moreList">More ▾</button>
-                  <div class="menu-list card" id="moreList" role="menu" aria-label="More actions">
-                    <button type="button" role="menuitem" id="btnCopy">Copy result</button>
-                    <button type="button" role="menuitem" id="btnPermalink">Copy permalink</button>
-                    <button type="button" role="menuitem" id="btnExample">Example values</button>
-                    <button type="button" role="menuitem" id="btnPrint">Print summary</button>
-                  </div>
-                </div>
-              </div>
-            </form>
-
-            <div id="tips" class="note" style="margin-top:8px;" aria-live="polite"></div>
-          </article>
-
-          <!-- Education -->
-          <section class="card" aria-labelledby="learn">
-            <h2 id="learn">Understanding your BMI</h2>
-            <p style="overflow-wrap:anywhere">BMI (Body Mass Index) = weight (kg) ÷ height (m)<sup>2</sup>. It's a quick
+<a class="sr-only" href="#main">Skip to content</a>
+<!-- Header -->
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="/assets/logo/uptools-logo.svg" width="28"/>
+<b>UpTools</b>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
+<nav aria-label="Primary" class="nav-links">
+<a href="/#tools">Tools</a>
+<a href="/income-tax-tool/">Income Tax</a>
+<a href="/emi-calculator/">EMI</a>
+<a href="/gst-calculator/">GST</a>
+<a href="/games/">Games</a>
+<a href="/about/">About</a>
+<a href="/contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main class="wrap" id="main" role="main">
+<div class="container">
+<section aria-labelledby="title" class="tool-header">
+<div aria-hidden="true" class="tool-icon" title="BMI">BMI</div>
+<div>
+<h1 id="title">BMI Calculator</h1>
+<div aria-label="Highlights" class="chips">
+<span class="pill">⚡ Instant</span>
+<span class="pill">📏 Metric &amp; US</span>
+<span class="pill">🌍 WHO / 🌏 Asian</span>
+<span class="pill">🧮 Body fat % &amp; WHtR</span>
+<span class="pill">🔥 BMR &amp; TDEE</span>
+</div>
+</div>
+</section>
+<!-- Content column only; results open in overlay -->
+<section class="layout" style="margin-top:12px">
+<div style="display:grid;gap:12px;min-width:0">
+<article aria-labelledby="form-head" class="card">
+<h2 id="form-head">Enter your details</h2>
+<form autocomplete="off" class="form-grid" id="bmiForm">
+<div>
+<label class="label" for="unit">Units</label>
+<select aria-label="Select unit system" class="input" id="unit">
+<option value="metric">Metric (cm, kg)</option>
+<option value="us">US/UK (ft/in, lb)</option>
+</select>
+</div>
+<div>
+<label class="label" for="std">Cut-offs</label>
+<select aria-label="Select BMI boundaries" class="input" id="std">
+<option value="who">WHO (Global)</option>
+<option value="asian">Asian (SEAR/WPR)</option>
+</select>
+</div>
+<!-- Metric height -->
+<div id="gHeightMetric">
+<label class="label" for="heightCm">Height (cm)</label>
+<input class="input" id="heightCm" inputmode="decimal" min="0" placeholder="e.g., 170" step="0.1" type="number"/>
+</div>
+<!-- US height -->
+<div class="hidden" id="gHeightUS">
+<label class="label" for="heightFt">Height (ft &amp; in)</label>
+<div style="display:flex;gap:8px;">
+<input aria-label="Height feet" class="input" id="heightFt" inputmode="numeric" min="0" placeholder="ft" step="1" type="number"/>
+<input aria-label="Height inches" class="input" id="heightIn" inputmode="decimal" min="0" placeholder="in" step="0.1" type="number"/>
+</div>
+</div>
+<!-- Metric weight -->
+<div id="gWeightMetric">
+<label class="label" for="weightKg">Weight (kg)</label>
+<input class="input" id="weightKg" inputmode="decimal" min="0" placeholder="e.g., 70" step="0.1" type="number"/>
+</div>
+<!-- US weight -->
+<div class="hidden" id="gWeightUS">
+<label class="label" for="weightLb">Weight (lb)</label>
+<input class="input" id="weightLb" inputmode="decimal" min="0" placeholder="e.g., 154" step="0.1" type="number"/>
+</div>
+<div>
+<label class="label" for="age">Age (years, optional)</label>
+<input class="input" id="age" inputmode="numeric" min="0" placeholder="e.g., 30" step="1" type="number"/>
+</div>
+<div>
+<label class="label" for="sex">Sex (for body fat %, optional)</label>
+<select class="input" id="sex">
+<option value="none">Prefer not to say</option>
+<option value="female">Female</option>
+<option value="male">Male</option>
+</select>
+</div>
+<div class="full">
+<label class="label" for="waist">Waist circumference (cm, optional)</label>
+<input class="input" id="waist" inputmode="decimal" min="0" placeholder="Measure at navel level" step="0.1" type="number"/>
+</div>
+<div class="full toolbar" style="margin-top:4px;">
+<button class="btn" id="btnCalc" type="submit">Calculate</button>
+<button class="btn secondary" id="btnClear" type="button">Clear</button>
+<div class="menu" id="moreMenu">
+<button aria-controls="moreList" aria-expanded="false" aria-haspopup="true" class="btn ghost menu-btn" type="button">More ▾</button>
+<div aria-label="More actions" class="menu-list card" id="moreList" role="menu">
+<button id="btnCopy" role="menuitem" type="button">Copy result</button>
+<button id="btnPermalink" role="menuitem" type="button">Copy permalink</button>
+<button id="btnExample" role="menuitem" type="button">Example values</button>
+<button id="btnPrint" role="menuitem" type="button">Print summary</button>
+</div>
+</div>
+</div>
+</form>
+<div aria-live="polite" class="note" id="tips" style="margin-top:8px;"></div>
+</article>
+<!-- Education -->
+<section aria-labelledby="learn" class="card">
+<h2 id="learn">Understanding your BMI</h2>
+<p style="overflow-wrap:anywhere">BMI (Body Mass Index) = weight (kg) ÷ height (m)<sup>2</sup>. It's a quick
               screen-not a diagnosis. Muscular people may read "high" despite low body fat, while some with "normal" BMI
               may still have central obesity.</p>
-
-            <!-- Mini scale -->
-            <div id="chart" class="scale" style="margin:12px 0;">
-              <div id="pin" class="pin" style="left:0%"></div>
-            </div>
-            <div class="note small">Your BMI position on the scale above adjusts in real time.</div>
-
-            <div class="chips legend" style="margin-top:8px" aria-label="Legend">
-              <span><span class="seg seg-u" style="width:16px;height:10px;border-radius:3px"></span>Under</span>
-              <span><span class="seg seg-n" style="width:16px;height:10px;border-radius:3px"></span>Normal</span>
-              <span><span class="seg seg-o" style="width:16px;height:10px;border-radius:3px"></span>Over</span>
-              <span><span class="seg seg-ob" style="width:16px;height:10px;border-radius:3px"></span>Obese</span>
-            </div>
-
-            <p class="note">References: <a
-                href="https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight" rel="nofollow noopener"
-                target="_blank">WHO</a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4890841/"
-                rel="nofollow noopener" target="_blank">Asian BMI cut-offs</a>.</p>
-
-            <!-- SEO image (fixed size to avoid CLS) -->
-            <figure style="margin:8px 0">
-              <img src="/assets/ui/bmi-explainer.png" alt="BMI categories and healthy weight range explainer"
-                width="960" height="540" loading="lazy">
-              <figcaption class="note small">Visual explainer: BMI categories & healthy weight range.</figcaption>
-            </figure>
-          </section>
-
-          <!-- Related tools (textual logos for subpages) -->
-          <aside class="card" aria-labelledby="related">
-            <h2 id="related">Related tools</h2>
-            <ul class="tool-list">
-              <li><a class="tool-link accent-amber" href="/age-calculator/"><span class="tlogo"
-                    aria-hidden="true">AC</span><span>Age Calculator</span></a></li>
-              <li><a class="tool-link accent-green" href="/bmr-calculator/"><span class="tlogo"
-                    aria-hidden="true">BMR</span><span>BMR Calculator</span></a></li>
-              <li><a class="tool-link accent-indigo" href="/emi-calculator/"><span class="tlogo"
-                    aria-hidden="true">EMI</span><span>EMI Calculator</span></a></li>
-              <li><a class="tool-link accent-purple" href="/gst-calculator/"><span class="tlogo"
-                    aria-hidden="true">GST</span><span>GST Calculator</span></a></li>
-              <li><a class="tool-link accent-cyan" href="/currency-converter/"><span class="tlogo"
-                    aria-hidden="true">FX</span><span>Currency Converter</span></a></li>
-            </ul>
-          </aside>
-
-          <!-- FAQs -->
-          <section class="card" aria-labelledby="faq">
-            <h2 id="faq">FAQs</h2>
-            <details>
-              <summary>What are Asian BMI cut-offs?</summary>
-              <div class="note">Under &lt;18.5, Normal 18.5-22.9, Overweight 23-24.9, Obese ≥25. Choose "Asian" from the
+<!-- Mini scale -->
+<div class="scale" id="chart" style="margin:12px 0;">
+<div class="pin" id="pin" style="left:0%"></div>
+</div>
+<div class="note small">Your BMI position on the scale above adjusts in real time.</div>
+<div aria-label="Legend" class="chips legend" style="margin-top:8px">
+<span><span class="seg seg-u" style="width:16px;height:10px;border-radius:3px"></span>Under</span>
+<span><span class="seg seg-n" style="width:16px;height:10px;border-radius:3px"></span>Normal</span>
+<span><span class="seg seg-o" style="width:16px;height:10px;border-radius:3px"></span>Over</span>
+<span><span class="seg seg-ob" style="width:16px;height:10px;border-radius:3px"></span>Obese</span>
+</div>
+<p class="note">References: <a href="https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight" rel="nofollow noopener" target="_blank">WHO</a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4890841/" rel="nofollow noopener" target="_blank">Asian BMI cut-offs</a>.</p>
+<!-- SEO image (fixed size to avoid CLS) -->
+<figure style="margin:8px 0">
+<img alt="BMI categories and healthy weight range explainer" height="540" loading="lazy" src="/assets/ui/bmi-explainer.png" width="960"/>
+<figcaption class="note small">Visual explainer: BMI categories &amp; healthy weight range.</figcaption>
+</figure>
+</section>
+<!-- Related tools (textual logos for subpages) -->
+<aside aria-labelledby="related" class="card">
+<h2 id="related">Related tools</h2>
+<ul class="tool-list">
+<li><a class="tool-link accent-amber" href="/age-calculator/"><span aria-hidden="true" class="tlogo">AC</span><span>Age Calculator</span></a></li>
+<li><a class="tool-link accent-green" href="/bmr-calculator/"><span aria-hidden="true" class="tlogo">BMR</span><span>BMR Calculator</span></a></li>
+<li><a class="tool-link accent-indigo" href="/emi-calculator/"><span aria-hidden="true" class="tlogo">EMI</span><span>EMI Calculator</span></a></li>
+<li><a class="tool-link accent-purple" href="/gst-calculator/"><span aria-hidden="true" class="tlogo">GST</span><span>GST Calculator</span></a></li>
+<li><a class="tool-link accent-cyan" href="/currency-converter/"><span aria-hidden="true" class="tlogo">FX</span><span>Currency Converter</span></a></li>
+</ul>
+</aside>
+<!-- FAQs -->
+<section aria-labelledby="faq" class="card">
+<h2 id="faq">FAQs</h2>
+<details>
+<summary>What are Asian BMI cut-offs?</summary>
+<div class="note">Under &lt;18.5, Normal 18.5-22.9, Overweight 23-24.9, Obese ≥25. Choose "Asian" from the
                 Cut-offs menu.</div>
-            </details>
-            <details>
-              <summary>What is BMI Prime?</summary>
-              <div class="note">BMI Prime = BMI ÷ 25. Values &lt;1.0 are below the global overweight threshold; &gt;1.0
+</details>
+<details>
+<summary>What is BMI Prime?</summary>
+<div class="note">BMI Prime = BMI ÷ 25. Values &lt;1.0 are below the global overweight threshold; &gt;1.0
                 above.</div>
-            </details>
-            <details>
-              <summary>What is WHtR?</summary>
-              <div class="note">Waist-to-height ratio (waist/height). Aim for &lt;0.5; 0.50-0.59 increased risk; ≥0.60
+</details>
+<details>
+<summary>What is WHtR?</summary>
+<div class="note">Waist-to-height ratio (waist/height). Aim for &lt;0.5; 0.50-0.59 increased risk; ≥0.60
                 high risk.</div>
-            </details>
-          </section>
-
-          <!-- Video with fixed size to avoid layout shift -->
-          <section class="card" aria-labelledby="vid">
-            <h2 id="vid">Quick explainer 🎥</h2>
-            <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/t9e46CV_pyM?rel=0&modestbranding=1"
-              title="BMI Calculation Formula Explained" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </section>
-        </div>
-      </section>
-
-      <footer class="note small site-footer" role="contentinfo" style="margin:18px 0">
+</details>
+</section>
+<!-- Video with fixed size to avoid layout shift -->
+<section aria-labelledby="vid" class="card">
+<h2 id="vid">Quick explainer 🎥</h2>
+<div class="video-wrap"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/t9e46CV_pyM?rel=0&amp;modestbranding=1" title="BMI Calculation Formula Explained"></iframe></div>
+</section>
+</div>
+</section>
+<footer class="note small site-footer" role="contentinfo" style="margin:18px 0">
         © <span id="y"></span> UpTools . <a href="/about/">About</a> . <a href="/contact/">Contact</a> .
         <a href="/sitemap.xml">Sitemap</a> . <a href="/robots.txt">Robots</a>
-      </footer>
-    </div>
-  </main>
-
-  <!-- UNIVERSAL RESULTS SHEET (works on all screens) -->
-  <section id="resultsSheet" class="sheet" aria-label="Results and planner panel" aria-hidden="true">
-    <div class="card" style="display:grid;gap:8px">
-      <div class="sheet-head">
-        <h2 style="margin:0">Your results</h2>
-        <button type="button" class="close-x" id="closeSheet" aria-label="Close results">✕</button>
-      </div>
-      <div id="status" class="badge">-</div>
-
-      <div class="kvi"><span>BMI</span><span id="outBMI" class="amount">-</span></div>
-      <div class="kvi"><span>Category</span><span id="outCat" class="amount">-</span></div>
-      <div class="kvi"><span>Healthy weight range</span><span id="outRange" class="amount">-</span></div>
-      <div class="kvi"><span>BMI Prime</span><span id="outPrime" class="amount">-</span></div>
-      <div class="kvi"><span>Body fat % (est.)</span><span id="outBF" class="amount">-</span></div>
-      <div class="kvi"><span>Waist-to-height (WHtR)</span><span id="outWHtR" class="amount">-</span></div>
-
-      <div class="divider"></div>
-      <div class="btn-group" style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn secondary" id="m_btnCopyOut">Copy</button>
-        <button class="btn secondary" id="m_btnReset">Reset</button>
-      </div>
-
-      <div class="divider"></div>
-      <h3 id="cal-head-m" style="margin:0">Calorie Planner</h3>
-      <p class="note small" id="cal-note-m">Get BMR &amp; TDEE based on Mifflin-St Jeor. Add age &amp; sex above for
+</footer>
+</div>
+</main>
+<!-- UNIVERSAL RESULTS SHEET (works on all screens) -->
+<section aria-hidden="true" aria-label="Results and planner panel" class="sheet" id="resultsSheet">
+<div class="card" style="display:grid;gap:8px">
+<div class="sheet-head">
+<h2 style="margin:0">Your results</h2>
+<button aria-label="Close results" class="close-x" id="closeSheet" type="button">✕</button>
+</div>
+<div class="badge" id="status">-</div>
+<div class="kvi"><span>BMI</span><span class="amount" id="outBMI">-</span></div>
+<div class="kvi"><span>Category</span><span class="amount" id="outCat">-</span></div>
+<div class="kvi"><span>Healthy weight range</span><span class="amount" id="outRange">-</span></div>
+<div class="kvi"><span>BMI Prime</span><span class="amount" id="outPrime">-</span></div>
+<div class="kvi"><span>Body fat % (est.)</span><span class="amount" id="outBF">-</span></div>
+<div class="kvi"><span>Waist-to-height (WHtR)</span><span class="amount" id="outWHtR">-</span></div>
+<div class="divider"></div>
+<div class="btn-group" style="display:flex;gap:8px;flex-wrap:wrap">
+<button class="btn secondary" id="m_btnCopyOut">Copy</button>
+<button class="btn secondary" id="m_btnReset">Reset</button>
+</div>
+<div class="divider"></div>
+<h3 id="cal-head-m" style="margin:0">Calorie Planner</h3>
+<p class="note small" id="cal-note-m">Get BMR &amp; TDEE based on Mifflin-St Jeor. Add age &amp; sex above for
         accuracy.</p>
-
-      <label class="label" for="activity">Activity level</label>
-      <select id="activity" class="input">
-        <option value="1.2">Sedentary (little/no exercise)</option>
-        <option value="1.375">Light (1-3 days/week)</option>
-        <option value="1.55">Moderate (3-5 days/week)</option>
-        <option value="1.725">Active (6-7 days/week)</option>
-        <option value="1.9">Very active (physical job)</option>
-      </select>
-
-      <div class="kvi"><span>BMR</span><span id="outBMR" class="amount">-</span></div>
-      <div class="kvi"><span>TDEE</span><span id="outTDEE" class="amount">-</span></div>
-
-      <label class="label" for="goalRate">Goal pace</label>
-      <select id="goalRate" class="input" title="Weekly change">
-        <option value="0">Maintain</option>
-        <option value="-250">Lose ~0.25 kg/wk</option>
-        <option value="-500">Lose ~0.5 kg/wk</option>
-        <option value="250">Gain ~0.25 kg/wk</option>
-        <option value="500">Gain ~0.5 kg/wk</option>
-      </select>
-
-      <div class="kvi"><span>Suggested calories</span><span id="outCals" class="amount">-</span></div>
-
-      <div class="divider"></div>
-      <label class="label" for="targetBMI">Target BMI</label>
-      <input id="targetBMI" class="input" type="number" step="0.1" min="16" max="30" placeholder="e.g., 22.5" />
-      <div class="kvi"><span>Target weight</span><span id="outTargetW" class="amount">-</span></div>
-      <div class="kvi"><span>Δ from current</span><span id="outDeltaW" class="amount">-</span></div>
-    </div>
-  </section>
-
-  <!-- Floating toggle button (ALL screens) -->
-  <button id="toggleResults" class="sheet-toggle" aria-controls="resultsSheet" aria-expanded="false">Results</button>
-
-  <!-- Logic -->
-  <script type="module">
+<label class="label" for="activity">Activity level</label>
+<select class="input" id="activity">
+<option value="1.2">Sedentary (little/no exercise)</option>
+<option value="1.375">Light (1-3 days/week)</option>
+<option value="1.55">Moderate (3-5 days/week)</option>
+<option value="1.725">Active (6-7 days/week)</option>
+<option value="1.9">Very active (physical job)</option>
+</select>
+<div class="kvi"><span>BMR</span><span class="amount" id="outBMR">-</span></div>
+<div class="kvi"><span>TDEE</span><span class="amount" id="outTDEE">-</span></div>
+<label class="label" for="goalRate">Goal pace</label>
+<select class="input" id="goalRate" title="Weekly change">
+<option value="0">Maintain</option>
+<option value="-250">Lose ~0.25 kg/wk</option>
+<option value="-500">Lose ~0.5 kg/wk</option>
+<option value="250">Gain ~0.25 kg/wk</option>
+<option value="500">Gain ~0.5 kg/wk</option>
+</select>
+<div class="kvi"><span>Suggested calories</span><span class="amount" id="outCals">-</span></div>
+<div class="divider"></div>
+<label class="label" for="targetBMI">Target BMI</label>
+<input class="input" id="targetBMI" max="30" min="16" placeholder="e.g., 22.5" step="0.1" type="number"/>
+<div class="kvi"><span>Target weight</span><span class="amount" id="outTargetW">-</span></div>
+<div class="kvi"><span>Δ from current</span><span class="amount" id="outDeltaW">-</span></div>
+</div>
+</section>
+<!-- Floating toggle button (ALL screens) -->
+<button aria-controls="resultsSheet" aria-expanded="false" class="sheet-toggle" id="toggleResults">Results</button>
+<!-- Logic -->
+<script type="module">
     import { $, $$, fmtNum, debounce, serializeForm, setText, persist, read, clamp, num, createBreadcrumb, initMobileMenu } from '/scripts/utils.js';
 
     // Grab nodes (IDs are shared across the page and sheet)
@@ -1183,5 +1114,4 @@
     initMobileMenu();
   </script>
 </body>
-
 </html>

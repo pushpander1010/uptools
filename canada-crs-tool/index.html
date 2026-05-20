@@ -1,31 +1,25 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Canada CRS Score Calculator (Express Entry) - 2025 Rules | UpTools</title>
-  <meta name="description"
-    content="Accurate 2025 Canada CRS calculator. Uses official IRCC age grid, CLB points (incl. CLB 4-6), IELTS→CLB conversion, second official language, proper skill-transferability caps, Canadian study, and no job-offer points (removed Mar 25, 2025). Shareable permalink, privacy-first." />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
-  <meta name="theme-color" content="#0f1419" />
-
-  <link rel="canonical" href="https://www.uptools.in/canada-crs-tool/" />
-  <meta property="og:title" content="Canada CRS Score Calculator (Express Entry) - 2025 Rules" />
-  <meta property="og:description"
-    content="Official tables: age, CLB (incl. CLB 4-6), IELTS→CLB, skill-transferability, Canadian study. No job-offer points per 2025 change." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.uptools.in/canada-crs-tool/" />
-  <meta property="og:site_name" content="UpTools" />
-  <meta property="og:image" content="https://www.uptools.in/assets/logo/uptools-logo.svg" />
-  <meta name="twitter:card" content="summary" />
-
-  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg" />
-  <!-- 1) Inline ONLY tiny critical rules (below) -->
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Canada CRS Score Calculator (Express Entry) - 2025 Rules | UpTools</title>
+<meta content="Accurate 2025 Canada CRS calculator. Uses official IRCC age grid, CLB points (incl. CLB 4-6), IELTS→CLB conversion, second official language, proper skill-transferability caps, Canadian study, and no job-offer points (removed Mar 25, 2025). Shareable permalink, privacy-first." name="description"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta content="#0f1419" name="theme-color"/>
+<link href="https://www.uptools.in/canada-crs-tool/" rel="canonical"/>
+<meta content="Canada CRS Score Calculator (Express Entry) - 2025 Rules" property="og:title"/>
+<meta content="Official tables: age, CLB (incl. CLB 4-6), IELTS→CLB, skill-transferability, Canadian study. No job-offer points per 2025 change." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.uptools.in/canada-crs-tool/" property="og:url"/>
+<meta content="UpTools" property="og:site_name"/>
+<meta content="https://www.uptools.in/assets/logo/uptools-logo.svg" property="og:image"/>
+<meta content="summary" name="twitter:card"/>
+<link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
+<link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
+<!-- 1) Inline ONLY tiny critical rules (below) -->
+<style>
     :root {
       --bg: #0f1419;
       --surface: #121826;
@@ -86,17 +80,14 @@
       font-weight: 600
     }
   </style>
-
-  <!-- 2) Load full stylesheet without blocking first paint -->
-  <link rel="preload" href="/style.css?v=1.2.0" as="style">
-  <link rel="stylesheet" href="/style.css?v=1.2.0" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="/style.css?v=1.2.0">
-  </noscript>
-
-
-  <!-- Per-tool accent -->
-  <style>
+<!-- 2) Load full stylesheet without blocking first paint -->
+<link as="style" href="/style.css?v=1.2.0" rel="preload"/>
+<link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript>
+<link href="/style.css?v=1.2.0" rel="stylesheet"/>
+</noscript>
+<!-- Per-tool accent -->
+<style>
     :root {
       --accent: #A78BFA;
     }
@@ -181,15 +172,14 @@
       grid-column: 1/-1;
     }
   </style>
-
-  <!-- Structured data (breadcrumbs + howto + faq) -->
-  <script type="application/ld+json">
+<!-- Structured data (breadcrumbs + howto + faq) -->
+<script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
     {"@type":"ListItem","position":1,"name":"UpTools","item":"https://www.uptools.in/"},
     {"@type":"ListItem","position":2,"name":"Calculators","item":"https://www.uptools.in/#tools"},
     {"@type":"ListItem","position":3,"name":"Canada CRS Calculator","item":"https://www.uptools.in/canada-crs-tool/"}
   ]}</script>
-  <script type="application/ld+json">
+<script type="application/ld+json">
   {"@context":"https://schema.org","@type":"HowTo","name":"How to estimate your Canada CRS score (2025 rules)",
    "description":"Uses IRCC age grid, CLB (incl. CLB 4-6), IELTS→CLB mapping, second language, proper skill-transferability caps, Canadian study; excludes job-offer points.",
    "step":[
@@ -198,316 +188,278 @@
      {"@type":"HowToStep","name":"Add age, education, and optional factors","text":"Include age, highest education, second language (if any), Canadian study, PNP, sibling, certificate of qualification (trades)."},
      {"@type":"HowToStep","name":"Calculate & share","text":"Click Calculate to see your breakdown; copy the permalink."}
    ]}</script>
-  <script type="application/ld+json">
+<script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Are job-offer points included?","acceptedAnswer":{"@type":"Answer","text":"No. IRCC removed job-offer CRS points on March 25, 2025. This tool follows the new rules."}},
     {"@type":"Question","name":"Do CLB 4-6 get language points?","acceptedAnswer":{"@type":"Answer","text":"Yes. First official language gives points from CLB 4 upward (per ability)."}},
     {"@type":"Question","name":"Can I enter IELTS with decimals (e.g., 7.5)?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select IELTS mode and enter decimal band scores. We convert to CLB using IRCC thresholds."}}
   ]}</script>
 </head>
-
 <body>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"
-    crossorigin="anonymous"></script>
-  <!-- small fixed -->
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617"
-    data-ad-slot="9810172647"></ins>
-  <script>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
+<!-- small fixed -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<script>
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
-  <a href="#main" class="sr-only">Skip to content</a>
-
-    <!-- Header -->
-  <header class="site" role="banner">
-    <div class="header-inner">
-      <a class="brand" href="/" aria-label="UpTools Home">
-        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
-        <b>UpTools</b>
-      </a>
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="/#tools">Tools</a>
-        <a href="/income-tax-tool/">Income Tax</a>
-        <a href="/emi-calculator/">EMI</a>
-        <a href="/gst-calculator/">GST</a>
-        <a href="/games/">Games</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main" class="wrap" role="main">
-    <div class="tool-header" role="doc-introduction" style="padding:12px 16px; gap:12px;">
-      <span class="tool-icon" aria-hidden="true">🍁</span>
-      <div>
-        <h1 style="margin:0 0 4px;">Canada CRS Score Calculator (Express Entry)</h1>
-        <p class="note" style="margin:0;">Aligned with IRCC's latest CRS criteria (age grid, CLB tables, caps). <b>No
-            job-offer points</b> (changed Mar 25, 2025). Supports IELTS decimals & fractional experience.</p>
-      </div>
-      <a class="back-btn" href="/" aria-label="Back to home" title="Back to UpTools">←</a>
-    </div>
-
-    <section class="grid" aria-label="Calculator and info">
-      <!-- LEFT: CALCULATOR -->
-      <article class="card compact" aria-labelledby="calc-title">
-        <div class="toolbar" style="margin-bottom:6px; display:flex; gap:8px; align-items:center;">
-          <h2 id="calc-title" style="margin:0;">Enter your details</h2>
-          <span class="spacer"></span>
-          <button type="submit" form="tool-form" class="btn sm" id="btn-calc-top">🧮 Calculate</button>
-          <button type="button" class="btn sm secondary" id="btn-clear-top">🧹 Clear</button>
-          <details class="more">
-            <summary class="btn sm ghost" aria-haspopup="menu" aria-expanded="false">More ▾</summary>
-            <div class="menu" role="menu">
-              <button type="button" class="btn secondary" id="btn-copy">🔗 Copy link</button>
-              <button type="button" class="btn secondary" id="btn-print">🖨️ Print</button>
-              <button type="button" class="btn secondary" id="btn-json">📦 Export JSON</button>
-              <button type="button" class="btn secondary" id="btn-csv">🗂️ Export CSV</button>
-            </div>
-          </details>
-        </div>
-
-        <form id="tool-form" autocomplete="on">
-          <div class="grid-2">
-            <div>
-              <label class="label" for="marital">Marital status</label>
-              <select class="input" id="marital" name="marital" required>
-                <option value="single">Single (no accompanying spouse)</option>
-                <option value="married">Married / With spouse</option>
-              </select>
-            </div>
-            <div>
-              <label class="label" for="age">Age (years)</label>
-              <input class="input" id="age" name="age" type="number" inputmode="numeric" min="17" max="99" step="1"
-                placeholder="e.g., 29" />
-            </div>
-
-            <div>
-              <label class="label" for="edu">Highest education (ECA-equivalent)</label>
-              <select class="input" id="edu" name="edu">
-                <option value="lessHS">Less than high school</option>
-                <option value="hs">High school</option>
-                <option value="1yr">One-year post-secondary</option>
-                <option value="2yr">Two-year post-secondary</option>
-                <option value="bachelor">Bachelor's (3+ years)</option>
-                <option value="twoPlus">Two or more credentials (one 3+ years)</option>
-                <option value="master">Master's / professional degree</option>
-                <option value="phd">Doctoral (PhD)</option>
-              </select>
-            </div>
-            <div class="muted" style="align-self:end;">Tip: <b>Ctrl/⌘+Enter</b> to calculate</div>
-          </div>
-
-          <div class="divider"></div>
-          <h3 style="margin:6px 0 8px;">First official language</h3>
-
-          <!-- Language input mode -->
-          <div class="grid-2">
-            <div>
-              <label class="label" for="langMode">Input type</label>
-              <select class="input" id="langMode" name="langMode">
-                <option value="clb">CLB (0-12)</option>
-                <option value="ielts">IELTS (General Training)</option>
-              </select>
-            </div>
-            <div class="muted-small" style="align-self:end;">IELTS→CLB uses IRCC thresholds (per skill).</div>
-          </div>
-
-          <!-- CLB inputs -->
-          <div id="groupCLB" class="grid-2" style="margin-top:8px;">
-            <div>
-              <label class="label" for="clbL">CLB Listening (0-12)</label>
-              <input class="input" id="clbL" name="clbL" type="number" inputmode="decimal" min="0" max="12" step="1"
-                placeholder="e.g., 9" />
-            </div>
-            <div>
-              <label class="label" for="clbR">CLB Reading (0-12)</label>
-              <input class="input" id="clbR" name="clbR" type="number" inputmode="decimal" min="0" max="12" step="1"
-                placeholder="e.g., 9" />
-            </div>
-            <div>
-              <label class="label" for="clbW">CLB Writing (0-12)</label>
-              <input class="input" id="clbW" name="clbW" type="number" inputmode="decimal" min="0" max="12" step="1"
-                placeholder="e.g., 9" />
-            </div>
-            <div>
-              <label class="label" for="clbS">CLB Speaking (0-12)</label>
-              <input class="input" id="clbS" name="clbS" type="number" inputmode="decimal" min="0" max="12" step="1"
-                placeholder="e.g., 9" />
-            </div>
-          </div>
-
-          <!-- IELTS inputs -->
-          <div id="groupIELTS" class="grid-2 hidden" style="margin-top:8px;">
-            <div>
-              <label class="label" for="ieltsL">IELTS Listening (0-9)</label>
-              <input class="input" id="ieltsL" name="ieltsL" type="number" inputmode="decimal" min="0" max="9"
-                step="0.5" placeholder="e.g., 8.5" />
-            </div>
-            <div>
-              <label class="label" for="ieltsR">IELTS Reading (0-9)</label>
-              <input class="input" id="ieltsR" name="ieltsR" type="number" inputmode="decimal" min="0" max="9"
-                step="0.5" placeholder="e.g., 7.0" />
-            </div>
-            <div>
-              <label class="label" for="ieltsW">IELTS Writing (0-9)</label>
-              <input class="input" id="ieltsW" name="ieltsW" type="number" inputmode="decimal" min="0" max="9"
-                step="0.5" placeholder="e.g., 7.0" />
-            </div>
-            <div>
-              <label class="label" for="ieltsS">IELTS Speaking (0-9)</label>
-              <input class="input" id="ieltsS" name="ieltsS" type="number" inputmode="decimal" min="0" max="9"
-                step="0.5" placeholder="e.g., 7.5" />
-            </div>
-            <div class="full chip-inline" id="ieltsClbEcho" aria-live="polite"></div>
-          </div>
-
-          <!-- Second official language (optional, CLB only) -->
-          <details style="margin-top:10px;">
-            <summary class="pill" style="cursor:pointer;">➕ Second official language (optional)</summary>
-            <div class="grid-2" style="margin-top:10px;">
-              <div>
-                <label class="label" for="slbL">Second language CLB Listening</label>
-                <input class="input" id="slbL" name="slbL" type="number" min="0" max="12" step="1" />
-              </div>
-              <div>
-                <label class="label" for="slbR">Second language CLB Reading</label>
-                <input class="input" id="slbR" name="slbR" type="number" min="0" max="12" step="1" />
-              </div>
-              <div>
-                <label class="label" for="slbW">Second language CLB Writing</label>
-                <input class="input" id="slbW" name="slbW" type="number" min="0" max="12" step="1" />
-              </div>
-              <div>
-                <label class="label" for="slbS">Second language CLB Speaking</label>
-                <input class="input" id="slbS" name="slbS" type="number" min="0" max="12" step="1" />
-              </div>
-            </div>
-          </details>
-
-          <div class="divider"></div>
-          <h3 style="margin:6px 0 8px;">Work experience</h3>
-          <div class="grid-2">
-            <div>
-              <label class="label" for="caExp">Canadian experience (years, decimals OK)</label>
-              <input class="input" id="caExp" name="caExp" type="number" inputmode="decimal" min="0" max="50" step="0.1"
-                placeholder="e.g., 2.5" />
-            </div>
-            <div>
-              <label class="label" for="forExp">Foreign experience (years, decimals OK)</label>
-              <input class="input" id="forExp" name="forExp" type="number" inputmode="decimal" min="0" max="50"
-                step="0.1" placeholder="e.g., 3.6" />
-            </div>
-          </div>
-
-          <div class="divider"></div>
-          <details>
-            <summary class="pill" style="cursor:pointer;">➕ Additional & special (optional)</summary>
-            <div class="grid-2" style="margin-top:10px;">
-              <div>
-                <label class="label" for="pnp">PNP nomination</label>
-                <select class="input" id="pnp" name="pnp">
-                  <option value="0">No</option>
-                  <option value="600">Yes (600 points)</option>
-                </select>
-              </div>
-              <div>
-                <label class="label" for="study">Canadian post-secondary study</label>
-                <select class="input" id="study" name="study">
-                  <option value="0">None</option>
-                  <option value="15">Credential 1-2 years (15)</option>
-                  <option value="30">Credential 3+ years / Master's / Prof. degree / PhD (30)</option>
-                </select>
-              </div>
-              <div>
-                <label class="label" for="sibling">Sibling in Canada</label>
-                <select class="input" id="sibling" name="sibling">
-                  <option value="0">No</option>
-                  <option value="15">Yes (15)</option>
-                </select>
-              </div>
-              <div>
-                <label class="label" for="french">French bonus (IRCC rule)</label>
-                <select class="input" id="french" name="french">
-                  <option value="0">None</option>
-                  <option value="25">NCLC7+ in French & English ≤ CLB4 (25)</option>
-                  <option value="50">NCLC7+ in French & English ≥ CLB5 (50)</option>
-                </select>
-              </div>
-              <div class="full">
-                <label class="label" for="cert">Certificate of qualification (trades)</label>
-                <select class="input" id="cert" name="cert">
-                  <option value="none">No</option>
-                  <option value="yes">Yes (Canadian province/territory)</option>
-                </select>
-                <div class="note small">Points depend on your <b>first official language</b> CLB: all ≥7 → 50; all ≥5
+<a class="sr-only" href="#main">Skip to content</a>
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="/assets/logo/uptools-logo.svg" width="28"/>
+<b>UpTools</b>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
+<nav aria-label="Primary" class="nav-links">
+<a href="/#tools">Tools</a>
+<a href="/income-tax-tool/">Income Tax</a>
+<a href="/emi-calculator/">EMI</a>
+<a href="/gst-calculator/">GST</a>
+<a href="/games/">Games</a>
+<a href="/about/">About</a>
+<a href="/contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main class="wrap" id="main" role="main">
+<div class="tool-header" role="doc-introduction" style="padding:12px 16px; gap:12px;">
+<span aria-hidden="true" class="tool-icon">🍁</span>
+<div>
+<h1 style="margin:0 0 4px;">Canada CRS Score Calculator (Express Entry)</h1>
+<p class="note" style="margin:0;">Aligned with IRCC's latest CRS criteria (age grid, CLB tables, caps). <b>No
+            job-offer points</b> (changed Mar 25, 2025). Supports IELTS decimals &amp; fractional experience.</p>
+</div>
+<a aria-label="Back to home" class="back-btn" href="/" title="Back to UpTools">←</a>
+</div>
+<section aria-label="Calculator and info" class="grid">
+<!-- LEFT: CALCULATOR -->
+<article aria-labelledby="calc-title" class="card compact">
+<div class="toolbar" style="margin-bottom:6px; display:flex; gap:8px; align-items:center;">
+<h2 id="calc-title" style="margin:0;">Enter your details</h2>
+<span class="spacer"></span>
+<button class="btn sm" form="tool-form" id="btn-calc-top" type="submit">🧮 Calculate</button>
+<button class="btn sm secondary" id="btn-clear-top" type="button">🧹 Clear</button>
+<details class="more">
+<summary aria-expanded="false" aria-haspopup="menu" class="btn sm ghost">More ▾</summary>
+<div class="menu" role="menu">
+<button class="btn secondary" id="btn-copy" type="button">🔗 Copy link</button>
+<button class="btn secondary" id="btn-print" type="button">🖨️ Print</button>
+<button class="btn secondary" id="btn-json" type="button">📦 Export JSON</button>
+<button class="btn secondary" id="btn-csv" type="button">🗂️ Export CSV</button>
+</div>
+</details>
+</div>
+<form autocomplete="on" id="tool-form">
+<div class="grid-2">
+<div>
+<label class="label" for="marital">Marital status</label>
+<select class="input" id="marital" name="marital" required="">
+<option value="single">Single (no accompanying spouse)</option>
+<option value="married">Married / With spouse</option>
+</select>
+</div>
+<div>
+<label class="label" for="age">Age (years)</label>
+<input class="input" id="age" inputmode="numeric" max="99" min="17" name="age" placeholder="e.g., 29" step="1" type="number"/>
+</div>
+<div>
+<label class="label" for="edu">Highest education (ECA-equivalent)</label>
+<select class="input" id="edu" name="edu">
+<option value="lessHS">Less than high school</option>
+<option value="hs">High school</option>
+<option value="1yr">One-year post-secondary</option>
+<option value="2yr">Two-year post-secondary</option>
+<option value="bachelor">Bachelor's (3+ years)</option>
+<option value="twoPlus">Two or more credentials (one 3+ years)</option>
+<option value="master">Master's / professional degree</option>
+<option value="phd">Doctoral (PhD)</option>
+</select>
+</div>
+<div class="muted" style="align-self:end;">Tip: <b>Ctrl/⌘+Enter</b> to calculate</div>
+</div>
+<div class="divider"></div>
+<h3 style="margin:6px 0 8px;">First official language</h3>
+<!-- Language input mode -->
+<div class="grid-2">
+<div>
+<label class="label" for="langMode">Input type</label>
+<select class="input" id="langMode" name="langMode">
+<option value="clb">CLB (0-12)</option>
+<option value="ielts">IELTS (General Training)</option>
+</select>
+</div>
+<div class="muted-small" style="align-self:end;">IELTS→CLB uses IRCC thresholds (per skill).</div>
+</div>
+<!-- CLB inputs -->
+<div class="grid-2" id="groupCLB" style="margin-top:8px;">
+<div>
+<label class="label" for="clbL">CLB Listening (0-12)</label>
+<input class="input" id="clbL" inputmode="decimal" max="12" min="0" name="clbL" placeholder="e.g., 9" step="1" type="number"/>
+</div>
+<div>
+<label class="label" for="clbR">CLB Reading (0-12)</label>
+<input class="input" id="clbR" inputmode="decimal" max="12" min="0" name="clbR" placeholder="e.g., 9" step="1" type="number"/>
+</div>
+<div>
+<label class="label" for="clbW">CLB Writing (0-12)</label>
+<input class="input" id="clbW" inputmode="decimal" max="12" min="0" name="clbW" placeholder="e.g., 9" step="1" type="number"/>
+</div>
+<div>
+<label class="label" for="clbS">CLB Speaking (0-12)</label>
+<input class="input" id="clbS" inputmode="decimal" max="12" min="0" name="clbS" placeholder="e.g., 9" step="1" type="number"/>
+</div>
+</div>
+<!-- IELTS inputs -->
+<div class="grid-2 hidden" id="groupIELTS" style="margin-top:8px;">
+<div>
+<label class="label" for="ieltsL">IELTS Listening (0-9)</label>
+<input class="input" id="ieltsL" inputmode="decimal" max="9" min="0" name="ieltsL" placeholder="e.g., 8.5" step="0.5" type="number"/>
+</div>
+<div>
+<label class="label" for="ieltsR">IELTS Reading (0-9)</label>
+<input class="input" id="ieltsR" inputmode="decimal" max="9" min="0" name="ieltsR" placeholder="e.g., 7.0" step="0.5" type="number"/>
+</div>
+<div>
+<label class="label" for="ieltsW">IELTS Writing (0-9)</label>
+<input class="input" id="ieltsW" inputmode="decimal" max="9" min="0" name="ieltsW" placeholder="e.g., 7.0" step="0.5" type="number"/>
+</div>
+<div>
+<label class="label" for="ieltsS">IELTS Speaking (0-9)</label>
+<input class="input" id="ieltsS" inputmode="decimal" max="9" min="0" name="ieltsS" placeholder="e.g., 7.5" step="0.5" type="number"/>
+</div>
+<div aria-live="polite" class="full chip-inline" id="ieltsClbEcho"></div>
+</div>
+<!-- Second official language (optional, CLB only) -->
+<details style="margin-top:10px;">
+<summary class="pill" style="cursor:pointer;">➕ Second official language (optional)</summary>
+<div class="grid-2" style="margin-top:10px;">
+<div>
+<label class="label" for="slbL">Second language CLB Listening</label>
+<input class="input" id="slbL" max="12" min="0" name="slbL" step="1" type="number"/>
+</div>
+<div>
+<label class="label" for="slbR">Second language CLB Reading</label>
+<input class="input" id="slbR" max="12" min="0" name="slbR" step="1" type="number"/>
+</div>
+<div>
+<label class="label" for="slbW">Second language CLB Writing</label>
+<input class="input" id="slbW" max="12" min="0" name="slbW" step="1" type="number"/>
+</div>
+<div>
+<label class="label" for="slbS">Second language CLB Speaking</label>
+<input class="input" id="slbS" max="12" min="0" name="slbS" step="1" type="number"/>
+</div>
+</div>
+</details>
+<div class="divider"></div>
+<h3 style="margin:6px 0 8px;">Work experience</h3>
+<div class="grid-2">
+<div>
+<label class="label" for="caExp">Canadian experience (years, decimals OK)</label>
+<input class="input" id="caExp" inputmode="decimal" max="50" min="0" name="caExp" placeholder="e.g., 2.5" step="0.1" type="number"/>
+</div>
+<div>
+<label class="label" for="forExp">Foreign experience (years, decimals OK)</label>
+<input class="input" id="forExp" inputmode="decimal" max="50" min="0" name="forExp" placeholder="e.g., 3.6" step="0.1" type="number"/>
+</div>
+</div>
+<div class="divider"></div>
+<details>
+<summary class="pill" style="cursor:pointer;">➕ Additional &amp; special (optional)</summary>
+<div class="grid-2" style="margin-top:10px;">
+<div>
+<label class="label" for="pnp">PNP nomination</label>
+<select class="input" id="pnp" name="pnp">
+<option value="0">No</option>
+<option value="600">Yes (600 points)</option>
+</select>
+</div>
+<div>
+<label class="label" for="study">Canadian post-secondary study</label>
+<select class="input" id="study" name="study">
+<option value="0">None</option>
+<option value="15">Credential 1-2 years (15)</option>
+<option value="30">Credential 3+ years / Master's / Prof. degree / PhD (30)</option>
+</select>
+</div>
+<div>
+<label class="label" for="sibling">Sibling in Canada</label>
+<select class="input" id="sibling" name="sibling">
+<option value="0">No</option>
+<option value="15">Yes (15)</option>
+</select>
+</div>
+<div>
+<label class="label" for="french">French bonus (IRCC rule)</label>
+<select class="input" id="french" name="french">
+<option value="0">None</option>
+<option value="25">NCLC7+ in French &amp; English ≤ CLB4 (25)</option>
+<option value="50">NCLC7+ in French &amp; English ≥ CLB5 (50)</option>
+</select>
+</div>
+<div class="full">
+<label class="label" for="cert">Certificate of qualification (trades)</label>
+<select class="input" id="cert" name="cert">
+<option value="none">No</option>
+<option value="yes">Yes (Canadian province/territory)</option>
+</select>
+<div class="note small">Points depend on your <b>first official language</b> CLB: all ≥7 → 50; all ≥5
                   with at least one &lt;7 → 25.</div>
-              </div>
-            </div>
-            <div class="note small warn" style="margin-top:6px;">ℹ️ IRCC removed job-offer CRS points (50/200) on <b>Mar
+</div>
+</div>
+<div class="note small warn" style="margin-top:6px;">ℹ️ IRCC removed job-offer CRS points (50/200) on <b>Mar
                 25, 2025</b>. This tool excludes them.</div>
-          </details>
-
-          <div class="toolbar" style="margin-top:12px; display:flex; gap:8px; align-items:center;">
-            <button type="submit" class="btn sm" id="btn-calc">🧮 Calculate</button>
-            <button type="button" class="btn sm secondary" id="btn-clear">🧹 Clear</button>
-            <span class="spacer"></span>
-            <details class="more">
-              <summary class="btn sm ghost">More ▾</summary>
-              <div class="menu">
-                <button type="button" class="btn secondary" id="btn-copy-2">🔗 Copy link</button>
-                <button type="button" class="btn secondary" id="btn-print-2">🖨️ Print</button>
-                <button type="button" class="btn secondary" id="btn-json-2">📦 Export JSON</button>
-                <button type="button" class="btn secondary" id="btn-csv-2">🗂️ Export CSV</button>
-              </div>
-            </details>
-          </div>
-        </form>
-
-        <div id="tips" class="note" style="margin-top:8px;" aria-live="polite"></div>
-        <div class="muted-small">Sources: IRCC CRS criteria & tables (updated May/Jul 2025).</div>
-      </article>
-
-      <!-- RIGHT: Sticky results -->
-      <aside class="card compact sticky-side" aria-labelledby="res-head">
-        <h2 id="res-head" style="margin:0 0 6px;">Your CRS summary</h2>
-        <div id="result" class="result" aria-live="polite" aria-atomic="true" style="margin-top:8px;">
-          <div class="row">
-            <div>Total CRS</div>
-            <div class="amount" id="total">0</div>
-          </div>
-          <div class="kvi"><span>Core / Human capital</span><span id="core">0</span></div>
-          <div class="kvi"><span>Skill transferability</span><span id="trans">0</span></div>
-          <div class="kvi"><span>Additional</span><span id="bonus">0</span></div>
-          <div class="note small" id="explain" style="margin-top:8px;">Enter details and click Calculate.</div>
-        </div>
-
-        <h3 style="margin-top:14px;">Related tools</h3>
-        <ul>
-          <li><a href="https://www.uptools.in/age-calculator/">🎂 Age Calculator</a></li>
-          <li><a href="https://www.uptools.in/currency-converter/">💱 Currency Converter</a></li>
-          <li><a href="https://www.uptools.in/emi-calculator/">💳 EMI Calculator</a></li>
-        </ul>
-      </aside>
-    </section>
-
-    <section class="card" style="margin-top:12px">
-      <h2 style="margin-top:0">Quick explainer 🎥</h2>
-      <iframe width="100%" height="100%"
-        src="https://www.youtube-nocookie.com/embed/JaTEJvIAM7k?rel=0&modestbranding=1&playsinline=1"
-        title="How to Calculate CRS Points for Canada PR"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
-        style="border:0; aspect-ratio:16/9; border-radius:.75rem; display:block; width:100%"></iframe>
-      <p class="note small" style="margin-top:6px">Video: How Canada Express Entry CRS points are calculated.</p>
-    </section>
-    <footer class="note small site-footer" role="contentinfo">
+</details>
+<div class="toolbar" style="margin-top:12px; display:flex; gap:8px; align-items:center;">
+<button class="btn sm" id="btn-calc" type="submit">🧮 Calculate</button>
+<button class="btn sm secondary" id="btn-clear" type="button">🧹 Clear</button>
+<span class="spacer"></span>
+<details class="more">
+<summary class="btn sm ghost">More ▾</summary>
+<div class="menu">
+<button class="btn secondary" id="btn-copy-2" type="button">🔗 Copy link</button>
+<button class="btn secondary" id="btn-print-2" type="button">🖨️ Print</button>
+<button class="btn secondary" id="btn-json-2" type="button">📦 Export JSON</button>
+<button class="btn secondary" id="btn-csv-2" type="button">🗂️ Export CSV</button>
+</div>
+</details>
+</div>
+</form>
+<div aria-live="polite" class="note" id="tips" style="margin-top:8px;"></div>
+<div class="muted-small">Sources: IRCC CRS criteria &amp; tables (updated May/Jul 2025).</div>
+</article>
+<!-- RIGHT: Sticky results -->
+<aside aria-labelledby="res-head" class="card compact sticky-side">
+<h2 id="res-head" style="margin:0 0 6px;">Your CRS summary</h2>
+<div aria-atomic="true" aria-live="polite" class="result" id="result" style="margin-top:8px;">
+<div class="row">
+<div>Total CRS</div>
+<div class="amount" id="total">0</div>
+</div>
+<div class="kvi"><span>Core / Human capital</span><span id="core">0</span></div>
+<div class="kvi"><span>Skill transferability</span><span id="trans">0</span></div>
+<div class="kvi"><span>Additional</span><span id="bonus">0</span></div>
+<div class="note small" id="explain" style="margin-top:8px;">Enter details and click Calculate.</div>
+</div>
+<h3 style="margin-top:14px;">Related tools</h3>
+<ul>
+<li><a href="https://www.uptools.in/age-calculator/">🎂 Age Calculator</a></li>
+<li><a href="https://www.uptools.in/currency-converter/">💱 Currency Converter</a></li>
+<li><a href="https://www.uptools.in/emi-calculator/">💳 EMI Calculator</a></li>
+</ul>
+</aside>
+</section>
+<section class="card" style="margin-top:12px">
+<h2 style="margin-top:0">Quick explainer 🎥</h2>
+<div class="video-wrap"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/JaTEJvIAM7k?rel=0&amp;modestbranding=1&amp;playsinline=1" title="How to Calculate CRS Points for Canada PR"></iframe></div>
+<p class="note small" style="margin-top:6px">Video: How Canada Express Entry CRS points are calculated.</p>
+</section>
+<footer class="note small site-footer" role="contentinfo">
       © <span id="y"></span> UpTools . <a href="/about/">About</a> . <a href="/contact/">Contact</a> . <a href="/sitemap.xml">Sitemap</a> . <a href="/robots.txt">Robots</a>
-    </footer>
-  </main>
-
-  <script type="module">
+</footer>
+</main>
+<script type="module">
     import { $, $$, fmtNum, debounce, serializeForm, setText, persist, read, num } from "/scripts/utils.js";
 
     const FORM_KEY = "uptools:crs:form";
@@ -845,5 +797,4 @@
     })();
   </script>
 </body>
-
 </html>

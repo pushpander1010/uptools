@@ -1,33 +1,29 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="x-ua-compatible" content="IE=edge" />
-  <meta name="color-scheme" content="dark light" />
-
-  <title>Profit & Loss Calculator (Average Cost, Break‑Even, Targets) | UpTools</title>
-  <meta name="description" content="Track PnL across multiple buys/sells with fees (average cost). Shows realized and unrealized PnL, break‑even price, and target price. Works offline for stocks or crypto." />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
-  <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://www.uptools.in/pnl-calculator/" />
-
-  <meta property="og:title" content="Profit & Loss Calculator (Average Cost, Break‑Even, Targets)" />
-  <meta property="og:description" content="Multiple trades with fees, realized/unrealized PnL, break‑even and target price. Offline." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.uptools.in/pnl-calculator/" />
-  <meta property="og:site_name" content="UpTools" />
-  <meta property="og:image" content="https://www.uptools.in/assets/og/home.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
-
-  <link rel="preload" href="/style.css?v=1.2.0" as="style" />
-  <link rel="stylesheet" href="/style.css?v=1.2.0" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css?v=1.2.0"></noscript>
-
-  <style>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="IE=edge" http-equiv="x-ua-compatible"/>
+<meta content="dark light" name="color-scheme"/>
+<title>Profit &amp; Loss Calculator (Average Cost, Break‑Even, Targets) | UpTools</title>
+<meta content="Track PnL across multiple buys/sells with fees (average cost). Shows realized and unrealized PnL, break‑even price, and target price. Works offline for stocks or crypto." name="description"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta content="#0b1020" name="theme-color"/>
+<link href="https://www.uptools.in/pnl-calculator/" rel="canonical"/>
+<meta content="Profit &amp; Loss Calculator (Average Cost, Break‑Even, Targets)" property="og:title"/>
+<meta content="Multiple trades with fees, realized/unrealized PnL, break‑even and target price. Offline." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.uptools.in/pnl-calculator/" property="og:url"/>
+<meta content="UpTools" property="og:site_name"/>
+<meta content="https://www.uptools.in/assets/og/home.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
+<link as="style" href="/style.css?v=1.2.0" rel="preload"/>
+<link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="/style.css?v=1.2.0" rel="stylesheet"/></noscript>
+<style>
     .grid{ display:grid; gap:12px; grid-template-columns:1fr }
     @media(min-width:980px){ .grid{ grid-template-columns:1.2fr .8fr } }
     table{ width:100%; border-collapse:collapse }
@@ -44,128 +40,113 @@
   </style>
 </head>
 <body>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    <!-- Header -->
-  <header class="site" role="banner">
-    <div class="header-inner">
-      <a class="brand" href="/" aria-label="UpTools Home">
-        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
-        <b>UpTools</b>
-      </a>
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="/#tools">Tools</a>
-        <a href="/income-tax-tool/">Income Tax</a>
-        <a href="/emi-calculator/">EMI</a>
-        <a href="/gst-calculator/">GST</a>
-        <a href="/games/">Games</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <div class="tool-header">
-      <div class="tool-icon" aria-hidden="true">📈</div>
-      <h1 style="margin:0">Profit & Loss Calculator</h1>
-    </div>
-
-    <section class="grid">
-      <div class="card neon">
-        <div class="row">
-          <label class="label" for="sym" style="margin:0">Symbol</label>
-          <input id="sym" class="input" style="max-width:200px" placeholder="e.g., BTC or AAPL" />
-          <label class="label" for="cur" style="margin:0">Currency</label>
-          <input id="cur" class="input" style="max-width:120px" placeholder="e.g., USD" />
-        </div>
-
-        <div class="row" style="margin-top:8px">
-          <select id="side" class="input" style="max-width:120px">
-            <option value="buy">Buy</option>
-            <option value="sell">Sell</option>
-          </select>
-          <input id="qty" class="input mono" style="max-width:160px" inputmode="decimal" placeholder="Qty" />
-          <input id="price" class="input mono" style="max-width:180px" inputmode="decimal" placeholder="Price" />
-          <input id="fee" class="input mono" style="max-width:120px" inputmode="decimal" placeholder="Fee %" />
-          <input id="feeFixed" class="input mono" style="max-width:120px" inputmode="decimal" placeholder="Fee (flat)" />
-          <button id="add" class="btn sm">Add trade</button>
-          <button id="reset" class="btn secondary sm">Reset</button>
-          <div class="row" style="margin-left:auto">
-            <select id="mode" class="input" style="max-width:160px" title="Cost basis method">
-              <option value="avco" selected>Average Cost (AVCO)</option>
-              <option value="fifo">FIFO</option>
-            </select>
-            <button id="exportCsv" class="btn secondary sm">Export CSV</button>
-            <label class="btn secondary sm" for="importCsv" style="cursor:pointer">Import CSV</label>
-            <input id="importCsv" type="file" accept=".csv,text/csv" style="display:none" />
-            <button id="sample" class="btn ghost sm">Sample</button>
-          </div>
-        </div>
-
-        <div style="overflow:auto; margin-top:10px">
-          <table aria-label="Trades">
-            <thead><tr><th>Date</th><th>Side</th><th class="right">Qty</th><th class="right">Price</th><th class="right">Fee %</th><th class="right">Fee (flat)</th><th class="right">Notional</th><th></th></tr></thead>
-            <tbody id="rows"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <aside class="card neon">
-        <h2 style="margin-top:0">Overview</h2>
-        <label class="label" for="cp">Current Price</label>
-        <input id="cp" class="input mono" inputmode="decimal" placeholder="Enter current price" />
-        <div class="kpi" style="margin-top:8px">
-          <div class="row"><span>Position</span><span id="posQty" class="amount">-</span></div>
-          <div class="row"><span>Avg cost</span><span id="avg" class="amount">-</span></div>
-          <div class="row"><span>Invested</span><span id="invested" class="amount">-</span></div>
-          <div class="row"><span>Realized PnL</span><span id="realized" class="amount">-</span></div>
-          <div class="row"><span>Unrealized PnL</span><span id="unrealized" class="amount">-</span></div>
-          <div class="row"><span>Total PnL</span><span id="total" class="amount">-</span></div>
-          <div class="row"><span>Break‑even</span><span id="breakeven" class="amount">-</span></div>
-          <div class="row"><span>ROI</span><span id="roi" class="amount">-</span></div>
-          <div class="row"><span>Stop‑loss @</span>
-            <span>
-              <input id="stop" class="input mono" style="max-width:110px" inputmode="decimal" placeholder="Stop" />
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="/assets/logo/uptools-logo.svg" width="28"/>
+<b>UpTools</b>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
+<nav aria-label="Primary" class="nav-links">
+<a href="/#tools">Tools</a>
+<a href="/income-tax-tool/">Income Tax</a>
+<a href="/emi-calculator/">EMI</a>
+<a href="/gst-calculator/">GST</a>
+<a href="/games/">Games</a>
+<a href="/about/">About</a>
+<a href="/contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main class="wrap">
+<div class="tool-header">
+<div aria-hidden="true" class="tool-icon">📈</div>
+<h1 style="margin:0">Profit &amp; Loss Calculator</h1>
+</div>
+<section class="grid">
+<div class="card neon">
+<div class="row">
+<label class="label" for="sym" style="margin:0">Symbol</label>
+<input class="input" id="sym" placeholder="e.g., BTC or AAPL" style="max-width:200px"/>
+<label class="label" for="cur" style="margin:0">Currency</label>
+<input class="input" id="cur" placeholder="e.g., USD" style="max-width:120px"/>
+</div>
+<div class="row" style="margin-top:8px">
+<select class="input" id="side" style="max-width:120px">
+<option value="buy">Buy</option>
+<option value="sell">Sell</option>
+</select>
+<input class="input mono" id="qty" inputmode="decimal" placeholder="Qty" style="max-width:160px"/>
+<input class="input mono" id="price" inputmode="decimal" placeholder="Price" style="max-width:180px"/>
+<input class="input mono" id="fee" inputmode="decimal" placeholder="Fee %" style="max-width:120px"/>
+<input class="input mono" id="feeFixed" inputmode="decimal" placeholder="Fee (flat)" style="max-width:120px"/>
+<button class="btn sm" id="add">Add trade</button>
+<button class="btn secondary sm" id="reset">Reset</button>
+<div class="row" style="margin-left:auto">
+<select class="input" id="mode" style="max-width:160px" title="Cost basis method">
+<option selected="" value="avco">Average Cost (AVCO)</option>
+<option value="fifo">FIFO</option>
+</select>
+<button class="btn secondary sm" id="exportCsv">Export CSV</button>
+<label class="btn secondary sm" for="importCsv" style="cursor:pointer">Import CSV</label>
+<input accept=".csv,text/csv" id="importCsv" style="display:none" type="file"/>
+<button class="btn ghost sm" id="sample">Sample</button>
+</div>
+</div>
+<div style="overflow:auto; margin-top:10px">
+<table aria-label="Trades">
+<thead><tr><th>Date</th><th>Side</th><th class="right">Qty</th><th class="right">Price</th><th class="right">Fee %</th><th class="right">Fee (flat)</th><th class="right">Notional</th><th></th></tr></thead>
+<tbody id="rows"></tbody>
+</table>
+</div>
+</div>
+<aside class="card neon">
+<h2 style="margin-top:0">Overview</h2>
+<label class="label" for="cp">Current Price</label>
+<input class="input mono" id="cp" inputmode="decimal" placeholder="Enter current price"/>
+<div class="kpi" style="margin-top:8px">
+<div class="row"><span>Position</span><span class="amount" id="posQty">-</span></div>
+<div class="row"><span>Avg cost</span><span class="amount" id="avg">-</span></div>
+<div class="row"><span>Invested</span><span class="amount" id="invested">-</span></div>
+<div class="row"><span>Realized PnL</span><span class="amount" id="realized">-</span></div>
+<div class="row"><span>Unrealized PnL</span><span class="amount" id="unrealized">-</span></div>
+<div class="row"><span>Total PnL</span><span class="amount" id="total">-</span></div>
+<div class="row"><span>Break‑even</span><span class="amount" id="breakeven">-</span></div>
+<div class="row"><span>ROI</span><span class="amount" id="roi">-</span></div>
+<div class="row"><span>Stop‑loss @</span>
+<span>
+<input class="input mono" id="stop" inputmode="decimal" placeholder="Stop" style="max-width:110px"/>
               → Risk: <b id="riskAbs">-</b> (<b id="riskPct">-</b>)
             </span>
-          </div>
-          <div class="row"><span>Target @</span>
-            <span>
-              <input id="targetPct" class="input mono" style="max-width:90px" inputmode="decimal" value="10" />%
+</div>
+<div class="row"><span>Target @</span>
+<span>
+<input class="input mono" id="targetPct" inputmode="decimal" style="max-width:90px" value="10"/>%
               → <b id="targetPrice">-</b>
-            </span>
-          </div>
-        </div>
-        <div class="card" id="lotsCard" style="margin-top:10px; display:none">
-          <div class="note small" style="margin-bottom:6px">Open lots (FIFO)</div>
-          <table style="width:100%"><thead><tr><th>Qty</th><th>Cost/Unit</th></tr></thead><tbody id="lots"></tbody></table>
-        </div>
-      </aside>
-    </section>
-
-    <section class="card neon" aria-labelledby="help">
-      <h2 id="help" style="margin-top:0">Notes</h2>
-      <p class="note small">Method: Average cost (AVCO). For each sell, realized PnL = (proceeds − fee) − (qty × avg cost at the moment of sale). Position and cost basis update accordingly.</p>
-    </section>
-
-    <section class="card neon" style="margin-top:12px">
-      <h2 style="margin-top:0">Quick explainer 🎥</h2>
-      <iframe width="100%" height="100%"
-        src="https://www.youtube-nocookie.com/embed/02hkI7RcFeM?rel=0&modestbranding=1&playsinline=1"
-        title="Understanding Profit and Loss Statement"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
-        style="border:0; aspect-ratio:16/9; border-radius:.75rem; display:block; width:100%"></iframe>
-      <p class="note small" style="margin-top:6px">Video: How to calculate PnL, average cost, and break-even on trades.</p>
-    </section>
-
-    <footer class="note small site-footer">© <span id="y"></span> UpTools · <a href="/sitemap.xml">Sitemap</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/about/">About</a></footer>
-  </main>
-
-  <script type="module">
+</span>
+</div>
+</div>
+<div class="card" id="lotsCard" style="margin-top:10px; display:none">
+<div class="note small" style="margin-bottom:6px">Open lots (FIFO)</div>
+<table style="width:100%"><thead><tr><th>Qty</th><th>Cost/Unit</th></tr></thead><tbody id="lots"></tbody></table>
+</div>
+</aside>
+</section>
+<section aria-labelledby="help" class="card neon">
+<h2 id="help" style="margin-top:0">Notes</h2>
+<p class="note small">Method: Average cost (AVCO). For each sell, realized PnL = (proceeds − fee) − (qty × avg cost at the moment of sale). Position and cost basis update accordingly.</p>
+</section>
+<section class="card neon" style="margin-top:12px">
+<h2 style="margin-top:0">Quick explainer 🎥</h2>
+<div class="video-wrap"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/02hkI7RcFeM?rel=0&amp;modestbranding=1&amp;playsinline=1" title="Understanding Profit and Loss Statement"></iframe></div>
+<p class="note small" style="margin-top:6px">Video: How to calculate PnL, average cost, and break-even on trades.</p>
+</section>
+<footer class="note small site-footer">© <span id="y"></span> UpTools · <a href="/sitemap.xml">Sitemap</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/about/">About</a></footer>
+</main>
+<script type="module">
     const $ = (s, r = document) => r.querySelector(s);
     const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
     const money = (c) => new Intl.NumberFormat(undefined, { style:'currency', currency: c || 'USD', maximumFractionDigits: 2 });

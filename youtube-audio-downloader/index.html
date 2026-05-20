@@ -64,6 +64,8 @@
     </div>
   </header>
   
+  </header>
+  
   <main id="main" class="wrap" role="main">
     <h1>🎵 YouTube Audio Downloader</h1>
     <p class="lead">Download audio from YouTube videos as MP3. Extract music instantly. Free, fast, no registration needed.</p>
@@ -83,6 +85,13 @@
         <button class="quality-btn" onclick="setQuality(this, '256')">256 kbps</button>
         <button class="quality-btn" onclick="setQuality(this, '192')">192 kbps</button>
         <button class="quality-btn" onclick="setQuality(this, '128')">128 kbps (Smallest)</button>
+      </div>
+
+      <!-- Conversion Widget Container -->
+      <div id="downloaderWidget" style="display: none; margin-top: 2rem; padding: 1.5rem; background: #0d1626; border: 1px solid var(--border); border-radius: var(--radius); text-align: center;">
+        <h3 style="margin-top: 0; color: #FF0000;">🔄 Conversion in Progress...</h3>
+        <p class="note" style="margin-bottom: 1.5rem; color: var(--muted);">Your audio is being processed. The download button will appear below shortly.</p>
+        <div id="widgetIframeContainer" style="min-height: 100px; display: flex; justify-content: center; align-items: center;"></div>
       </div>
     </div>
     
@@ -163,12 +172,40 @@
     let selectedQuality = '320';
     
     function downloadAudio() {
-      const url = document.getElementById('youtubeUrl').value;
-      if (!url) {
+      const urlInput = document.getElementById('youtubeUrl').value.trim();
+      if (!urlInput) {
         alert('Please paste a YouTube URL');
         return;
       }
-      alert(`Downloading audio at ${selectedQuality} kbps...`);
+
+      // Validate YouTube URL
+      const ytReg = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+      const match = urlInput.match(ytReg);
+      if (!match) {
+        alert('Please enter a valid YouTube URL (e.g., https://www.youtube.com/watch?v=...)');
+        return;
+      }
+
+      const widgetContainer = document.getElementById('downloaderWidget');
+      const iframeContainer = document.getElementById('widgetIframeContainer');
+
+      // Clear previous iframe
+      iframeContainer.innerHTML = '';
+      widgetContainer.style.display = 'block';
+
+      // Build loader.to iframe
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://loader.to/api/button/?url=${encodeURIComponent(urlInput)}&f=mp3&color=ff0000`;
+      iframe.style.width = '100%';
+      iframe.style.height = '90px';
+      iframe.style.border = 'none';
+      iframe.style.overflow = 'hidden';
+      iframe.setAttribute('scrolling', 'no');
+      
+      iframeContainer.appendChild(iframe);
+      
+      // Scroll to widget
+      widgetContainer.scrollIntoView({ behavior: 'smooth' });
     }
     
     function setQuality(btn, quality) {

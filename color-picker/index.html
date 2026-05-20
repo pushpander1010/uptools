@@ -1,35 +1,31 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <!-- Ads (single async include) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="x-ua-compatible" content="IE=edge" />
-  <meta name="color-scheme" content="dark light" />
-
-  <title>Color Picker (HEX/RGB/HSL, WCAG Contrast, Shades & Saved Swatches) - UpTools</title>
-  <meta name="description" content="Free online color picker. Get HEX/RGB/HSL instantly, check WCAG contrast against light/dark backgrounds, generate shades & tints, copy CSS snippets, use Eyedropper (if supported), save swatches, and share via URL. Fast and privacy-first." />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
-  <meta name="theme-color" content="#0f1419" />
-  <link rel="canonical" href="https://www.uptools.in/color-picker/" />
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Color Picker - HEX/RGB/HSL, Contrast, Shades" />
-  <meta property="og:description" content="Pick a color, get HEX/RGB/HSL, check WCAG contrast, generate shades/tints, copy CSS, and save swatches." />
-  <meta property="og:url" content="https://www.uptools.in/color-picker/" />
-  <meta property="og:site_name" content="UpTools" />
-  <meta property="og:image" content="https://www.uptools.in/og/color-picker.png" />
-  <meta name="twitter:card" content="summary" />
-
-  <!-- Icons -->
-  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg" />
-
-  <!-- Tiny critical (keep minimal) -->
-  <style>
+<!-- Ads (single async include) -->
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="IE=edge" http-equiv="x-ua-compatible"/>
+<meta content="dark light" name="color-scheme"/>
+<title>Color Picker (HEX/RGB/HSL, WCAG Contrast, Shades &amp; Saved Swatches) - UpTools</title>
+<meta content="Free online color picker. Get HEX/RGB/HSL instantly, check WCAG contrast against light/dark backgrounds, generate shades &amp; tints, copy CSS snippets, use Eyedropper (if supported), save swatches, and share via URL. Fast and privacy-first." name="description"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta content="#0f1419" name="theme-color"/>
+<link href="https://www.uptools.in/color-picker/" rel="canonical"/>
+<!-- Open Graph / Twitter -->
+<meta content="website" property="og:type"/>
+<meta content="Color Picker - HEX/RGB/HSL, Contrast, Shades" property="og:title"/>
+<meta content="Pick a color, get HEX/RGB/HSL, check WCAG contrast, generate shades/tints, copy CSS, and save swatches." property="og:description"/>
+<meta content="https://www.uptools.in/color-picker/" property="og:url"/>
+<meta content="UpTools" property="og:site_name"/>
+<meta content="https://www.uptools.in/og/color-picker.png" property="og:image"/>
+<meta content="summary" name="twitter:card"/>
+<!-- Icons -->
+<link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
+<link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
+<!-- Tiny critical (keep minimal) -->
+<style>
     :root{ --accent:#7dd3fc; }
     body{ background: radial-gradient(1100px 700px at 5% -6%, #0b142a 0%, transparent 40%),
                 radial-gradient(900px 600px at 105% 12%, #0b142a 0%, transparent 45%),
@@ -44,14 +40,12 @@
     .preview-box{ height:64px; border-radius:10px; border:1px solid var(--border); display:grid; place-items:center; box-shadow: var(--glow-soft); }
     .codebox{ background:#0a1224; border:1px solid var(--border); border-radius:10px; padding:10px; box-shadow: var(--glow-soft); }
   </style>
-
-  <!-- Common CSS (non-blocking) -->
-  <link rel="preload" href="/style.css?v=1.2.0" as="style">
-  <link rel="stylesheet" href="/style.css?v=1.2.0" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css?v=1.2.0"></noscript>
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
+<!-- Common CSS (non-blocking) -->
+<link as="style" href="/style.css?v=1.2.0" rel="preload"/>
+<link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="/style.css?v=1.2.0" rel="stylesheet"/></noscript>
+<!-- Structured Data -->
+<script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"SoftwareApplication",
@@ -64,155 +58,130 @@
   }
   </script>
 </head>
-
 <body style="--accent:#7dd3fc;">
-  <!-- Header -->
-    <!-- Header -->
-  <header class="site" role="banner">
-    <div class="header-inner">
-      <a class="brand" href="/" aria-label="UpTools Home">
-        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
-        <b>UpTools</b>
-      </a>
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="/#tools">Tools</a>
-        <a href="/income-tax-tool/">Income Tax</a>
-        <a href="/emi-calculator/">EMI</a>
-        <a href="/gst-calculator/">GST</a>
-        <a href="/games/">Games</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="wrap container" id="main">
-    <!-- Breadcrumb -->
-    <nav aria-label="Breadcrumb" class="note small" style="margin-bottom:8px">
-      <a href="/">Home</a> › <span aria-current="page">Color Picker</span>
-    </nav>
-
-    <!-- Hero -->
-    <section class="tool-header">
-      <a href="/" class="back-btn" aria-label="Back to home">←</a>
-      <div class="tool-icon" aria-hidden="true">🎨</div>
-      <h1 style="margin:0">Color Picker</h1>
-      <span class="pill" style="margin-left:auto">HEX/RGB/HSL</span>
-      <span class="pill">WCAG</span>
-      <span class="pill">Shades</span>
-    </section>
-
-    <!-- Ad (reserved height for CLS safety) -->
-    <section class="card" aria-label="Sponsored" style="min-height:140px">
-      <ins class="adsbygoogle" style="display:block;min-height:140px"
-           data-ad-client="ca-pub-6216304334889617"
-           data-ad-slot="9651757525"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-    </section>
-
-    <!-- Picker + Readouts -->
-    <section class="card">
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));align-items:start">
-        <div>
-          <label for="colorInput" class="label">Choose a color</label>
-          <input id="colorInput" class="input" type="color" value="#8ab4f8" aria-describedby="colorHelp" style="height: 40px;">
-          <div id="colorHelp" class="note small">Tip: Press <kbd>/</kbd> to focus quick search on many pages. Here, try Eyedropper or Random.</div>
-
-          <div class="row" style="border:0; padding:0; margin-top:10px; gap:8px">
-            <button id="eyeBtn" class="btn secondary" type="button">🧪 Eyedropper</button>
-            <button id="randBtn" class="btn secondary" type="button">🎲 Random</button>
-            <button id="saveBtn" class="btn" type="button" title="Save to swatches">⭐ Save</button>
-            <button id="shareBtn" class="btn" type="button">🔗 Share</button>
-          </div>
-
-          <div class="result" id="readouts" style="margin-top:12px"></div>
-        </div>
-
-        <div>
-          <h2>WCAG Contrast</h2>
-          <p class="note small">Checks your color as <b>Text</b> on Light (#ffffff) and Dark (#0b1020) backgrounds.</p>
-
-          <div class="grid-tiles">
-            <div class="card">
-              <div class="note small">On Light</div>
-              <div id="prevLight" class="preview-box" style="background:#ffffff;color:#000">Aa</div>
-              <div class="row"><span>Ratio</span><span id="ratioLight" class="amount">-</span></div>
-              <div class="row"><span>Normal (4.5)</span><span id="aaLight" class="badge">-</span></div>
-              <div class="row"><span>Large (3.0)</span><span id="laaLight" class="badge">-</span></div>
-              <div class="row"><span>AAA (7.0)</span><span id="aaaLight" class="badge">-</span></div>
-            </div>
-
-            <div class="card">
-              <div class="note small">On Dark</div>
-              <div id="prevDark" class="preview-box" style="background:#0b1020;color:#fff">Aa</div>
-              <div class="row"><span>Ratio</span><span id="ratioDark" class="amount">-</span></div>
-              <div class="row"><span>Normal (4.5)</span><span id="aaDark" class="badge">-</span></div>
-              <div class="row"><span>Large (3.0)</span><span id="laaDark" class="badge">-</span></div>
-              <div class="row"><span>AAA (7.0)</span><span id="aaaDark" class="badge">-</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Shades & Tints -->
-    <section class="card">
-      <h2>Shades & Tints</h2>
-      <p class="note small">Auto-generated from your color (lighter → darker). Click any swatch to copy HEX.</p>
-      <div id="palette" class="grid" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr))"></div>
-      <div class="row" style="border:0; padding:0; margin-top:8px; gap:8px">
-        <button id="copyCssVars" class="btn secondary" type="button">📋 Copy CSS Variables</button>
-        <button id="copyHSLA" class="btn secondary" type="button">📋 Copy HSLA() Scale</button>
-      </div>
-    </section>
-
-    <!-- Saved Swatches -->
-    <section class="card">
-      <h2>Saved Swatches</h2>
-      <p class="note small">Your starred colors (stored locally on this device). Click to copy. </p>
-      <div id="saved" class="grid-tiles"></div>
-      <div class="row" style="border:0; padding:0; margin-top:8px; gap:8px">
-        <button id="clearSaved" class="btn ghost" type="button">🗑️ Clear</button>
-      </div>
-    </section>
-
-    <!-- Snippets -->
-    <section class="card">
-      <h2>CSS & Utility Snippets</h2>
-      <div class="grid">
-        <div>
-          <div class="note small">CSS background & text example</div>
-          <pre id="cssSnippet" class="codebox mono" style="white-space:pre-wrap"></pre>
-          <button id="copyCSS" class="btn secondary" type="button" style="margin-top:8px">📋 Copy CSS</button>
-        </div>
-        <div>
-          <div class="note small">Tailwind style utilities (approx)</div>
-          <pre id="twSnippet" class="codebox mono" style="white-space:pre-wrap"></pre>
-          <button id="copyTW" class="btn secondary" type="button" style="margin-top:8px">📋 Copy Utilities</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <section class="card neon" style="margin-top:12px">
-      <h2 style="margin-top:0">Quick explainer 🎥</h2>
-      <iframe width="100%" height="100%"
-        src="https://www.youtube-nocookie.com/embed/UV9haKwv5OU?rel=0&modestbranding=1&playsinline=1"
-        title="How to Use Color Picker in Design Tools"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
-        style="border:0; aspect-ratio:16/9; border-radius:.75rem; display:block; width:100%"></iframe>
-      <p class="note small" style="margin-top:6px">Video: Color theory — HEX, RGB, HSL and WCAG contrast explained.</p>
-    </section>
-    <footer class="note small site-footer">
+<!-- Header -->
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="/assets/logo/uptools-logo.svg" width="28"/>
+<b>UpTools</b>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
+<nav aria-label="Primary" class="nav-links">
+<a href="/#tools">Tools</a>
+<a href="/income-tax-tool/">Income Tax</a>
+<a href="/emi-calculator/">EMI</a>
+<a href="/gst-calculator/">GST</a>
+<a href="/games/">Games</a>
+<a href="/about/">About</a>
+<a href="/contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main class="wrap container" id="main">
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="note small" style="margin-bottom:8px">
+<a href="/">Home</a> › <span aria-current="page">Color Picker</span>
+</nav>
+<!-- Hero -->
+<section class="tool-header">
+<a aria-label="Back to home" class="back-btn" href="/">←</a>
+<div aria-hidden="true" class="tool-icon">🎨</div>
+<h1 style="margin:0">Color Picker</h1>
+<span class="pill" style="margin-left:auto">HEX/RGB/HSL</span>
+<span class="pill">WCAG</span>
+<span class="pill">Shades</span>
+</section>
+<!-- Ad (reserved height for CLS safety) -->
+<section aria-label="Sponsored" class="card" style="min-height:140px">
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-format="auto" data-ad-slot="9651757525" data-full-width-responsive="true" style="display:block;min-height:140px"></ins>
+</section>
+<!-- Picker + Readouts -->
+<section class="card">
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));align-items:start">
+<div>
+<label class="label" for="colorInput">Choose a color</label>
+<input aria-describedby="colorHelp" class="input" id="colorInput" style="height: 40px;" type="color" value="#8ab4f8"/>
+<div class="note small" id="colorHelp">Tip: Press <kbd>/</kbd> to focus quick search on many pages. Here, try Eyedropper or Random.</div>
+<div class="row" style="border:0; padding:0; margin-top:10px; gap:8px">
+<button class="btn secondary" id="eyeBtn" type="button">🧪 Eyedropper</button>
+<button class="btn secondary" id="randBtn" type="button">🎲 Random</button>
+<button class="btn" id="saveBtn" title="Save to swatches" type="button">⭐ Save</button>
+<button class="btn" id="shareBtn" type="button">🔗 Share</button>
+</div>
+<div class="result" id="readouts" style="margin-top:12px"></div>
+</div>
+<div>
+<h2>WCAG Contrast</h2>
+<p class="note small">Checks your color as <b>Text</b> on Light (#ffffff) and Dark (#0b1020) backgrounds.</p>
+<div class="grid-tiles">
+<div class="card">
+<div class="note small">On Light</div>
+<div class="preview-box" id="prevLight" style="background:#ffffff;color:#000">Aa</div>
+<div class="row"><span>Ratio</span><span class="amount" id="ratioLight">-</span></div>
+<div class="row"><span>Normal (4.5)</span><span class="badge" id="aaLight">-</span></div>
+<div class="row"><span>Large (3.0)</span><span class="badge" id="laaLight">-</span></div>
+<div class="row"><span>AAA (7.0)</span><span class="badge" id="aaaLight">-</span></div>
+</div>
+<div class="card">
+<div class="note small">On Dark</div>
+<div class="preview-box" id="prevDark" style="background:#0b1020;color:#fff">Aa</div>
+<div class="row"><span>Ratio</span><span class="amount" id="ratioDark">-</span></div>
+<div class="row"><span>Normal (4.5)</span><span class="badge" id="aaDark">-</span></div>
+<div class="row"><span>Large (3.0)</span><span class="badge" id="laaDark">-</span></div>
+<div class="row"><span>AAA (7.0)</span><span class="badge" id="aaaDark">-</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Shades & Tints -->
+<section class="card">
+<h2>Shades &amp; Tints</h2>
+<p class="note small">Auto-generated from your color (lighter → darker). Click any swatch to copy HEX.</p>
+<div class="grid" id="palette" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr))"></div>
+<div class="row" style="border:0; padding:0; margin-top:8px; gap:8px">
+<button class="btn secondary" id="copyCssVars" type="button">📋 Copy CSS Variables</button>
+<button class="btn secondary" id="copyHSLA" type="button">📋 Copy HSLA() Scale</button>
+</div>
+</section>
+<!-- Saved Swatches -->
+<section class="card">
+<h2>Saved Swatches</h2>
+<p class="note small">Your starred colors (stored locally on this device). Click to copy. </p>
+<div class="grid-tiles" id="saved"></div>
+<div class="row" style="border:0; padding:0; margin-top:8px; gap:8px">
+<button class="btn ghost" id="clearSaved" type="button">🗑️ Clear</button>
+</div>
+</section>
+<!-- Snippets -->
+<section class="card">
+<h2>CSS &amp; Utility Snippets</h2>
+<div class="grid">
+<div>
+<div class="note small">CSS background &amp; text example</div>
+<pre class="codebox mono" id="cssSnippet" style="white-space:pre-wrap"></pre>
+<button class="btn secondary" id="copyCSS" style="margin-top:8px" type="button">📋 Copy CSS</button>
+</div>
+<div>
+<div class="note small">Tailwind style utilities (approx)</div>
+<pre class="codebox mono" id="twSnippet" style="white-space:pre-wrap"></pre>
+<button class="btn secondary" id="copyTW" style="margin-top:8px" type="button">📋 Copy Utilities</button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<section class="card neon" style="margin-top:12px">
+<h2 style="margin-top:0">Quick explainer 🎥</h2>
+<div class="video-wrap"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/UV9haKwv5OU?rel=0&amp;modestbranding=1&amp;playsinline=1" title="How to Use Color Picker in Design Tools"></iframe></div>
+<p class="note small" style="margin-top:6px">Video: Color theory — HEX, RGB, HSL and WCAG contrast explained.</p>
+</section>
+<footer class="note small site-footer">
       © <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a> . <a href="/about/">About</a> . <a href="/contact/">Contact</a>
-    </footer>
-  </main>
-
-  <script type="module">
+</footer>
+</main>
+<script type="module">
     import { $, $$, debounce, setText, persist, read } from '/scripts/utils.js';
 
     // Year

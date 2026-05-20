@@ -1,50 +1,37 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
 
 <html lang="en">
-
 <head>
-  <!-- Google Ads (async to avoid CLS) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>UUID / GUID Generator & Validator (v1, v4, v5) – UpTools</title>
-  <meta name="description" content="Generate and validate UUIDs (v1, v4, v5). Batch create, copy, download CSV/TXT, toggle hyphens/uppercase/braces, and format as URN. Privacy-friendly: everything runs in your browser." />
-  <meta name="keywords" content="UUID generator, GUID generator, UUID v4, UUID v1, UUID v5, name-based UUID, RFC 4122, validate UUID, URN uuid, bulk uuid, download CSV, UpTools" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://www.uptools.in/uuid-generator/" />
-
-  <!-- Favicons -->
-
-  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
-
-  <!-- Open Graph / Twitter -->
-
-  <meta property="og:title" content="UUID / GUID Generator & Validator (v1, v4, v5) – UpTools" />
-  <meta property="og:description" content="Generate v1, v4, v5 UUIDs, validate, and export. Batch mode, copy, URN/braces/uppercase options. 100% client-side." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.uptools.in/uuid-generator/" />
-  <meta property="og:site_name" content="UpTools" />
-  <meta property="og:image" content="/assets/og/uuid-generator.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Performance hints -->
-
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
-
-  <!-- Common CSS -->
-
-  <link rel="preload" href="/style.css?v=1.2.1" as="style">
-  <link rel="stylesheet" href="/style.css?v=1.2.1" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css?v=1.2.1"></noscript>
-
-  <!-- Page-scoped styles (kept small; complements common CSS) -->
-
-  <style>
+<!-- Google Ads (async to avoid CLS) -->
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>UUID / GUID Generator &amp; Validator (v1, v4, v5) – UpTools</title>
+<meta content="Generate and validate UUIDs (v1, v4, v5). Batch create, copy, download CSV/TXT, toggle hyphens/uppercase/braces, and format as URN. Privacy-friendly: everything runs in your browser." name="description"/>
+<meta content="UUID generator, GUID generator, UUID v4, UUID v1, UUID v5, name-based UUID, RFC 4122, validate UUID, URN uuid, bulk uuid, download CSV, UpTools" name="keywords"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
+<meta content="#0b1020" name="theme-color"/>
+<link href="https://www.uptools.in/uuid-generator/" rel="canonical"/>
+<!-- Favicons -->
+<link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
+<link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
+<!-- Open Graph / Twitter -->
+<meta content="UUID / GUID Generator &amp; Validator (v1, v4, v5) – UpTools" property="og:title"/>
+<meta content="Generate v1, v4, v5 UUIDs, validate, and export. Batch mode, copy, URN/braces/uppercase options. 100% client-side." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.uptools.in/uuid-generator/" property="og:url"/>
+<meta content="UpTools" property="og:site_name"/>
+<meta content="/assets/og/uuid-generator.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<!-- Performance hints -->
+<link crossorigin="" href="https://pagead2.googlesyndication.com" rel="preconnect"/>
+<link href="//pagead2.googlesyndication.com" rel="dns-prefetch"/>
+<!-- Common CSS -->
+<link as="style" href="/style.css?v=1.2.1" rel="preload"/>
+<link href="/style.css?v=1.2.1" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="/style.css?v=1.2.1" rel="stylesheet"/></noscript>
+<!-- Page-scoped styles (kept small; complements common CSS) -->
+<style>
     .two-col{display:grid;gap:12px;grid-template-columns:1fr}
     @media (min-width: 920px){.two-col{grid-template-columns:1.15fr .85fr}}
     .stack{display:grid;gap:10px}
@@ -60,10 +47,8 @@
     .pill.sec{background:#0b1326;border:1px solid var(--border)}
     .list-tight li{margin:.25rem 0}
   </style>
-
-  <!-- Structured Data: WebApplication + FAQ -->
-
-  <script type="application/ld+json">
+<!-- Structured Data: WebApplication + FAQ -->
+<script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"WebApplication",
@@ -76,8 +61,7 @@
     "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
   }
   </script>
-
-  <script type="application/ld+json">
+<script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"FAQPage",
@@ -88,166 +72,140 @@
     ]
   }
   </script>
-
 </head>
-
 <body>
-  <!-- Site header (shared pattern) -->
-    <!-- Header -->
-  <header class="site" role="banner">
-    <div class="header-inner">
-      <a class="brand" href="/" aria-label="UpTools Home">
-        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
-        <b>UpTools</b>
-      </a>
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="/#tools">Tools</a>
-        <a href="/income-tax-tool/">Income Tax</a>
-        <a href="/emi-calculator/">EMI</a>
-        <a href="/gst-calculator/">GST</a>
-        <a href="/games/">Games</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="wrap" id="main">
-    <!-- Hero -->
-    <section class="card hero" aria-labelledby="pg-title">
-      <div class="two-col">
-        <div>
-          <h1 id="pg-title">UUID / GUID Generator & Validator</h1>
-          <p class="note">Generate <b>v1</b> (time-based), <b>v4</b> (random), and <b>v5</b> (name-based) UUIDs. Batch mode, copy, export, and a built-in validator. 100% client-side.</p>
-          <div class="chips" style="margin-top:8px">
-            <span class="pill">⚡ v1 . v4 . v5</span>
-            <span class="pill">📦 Batch + Export</span>
-            <span class="pill">🧪 Validate</span>
-            <a class="chip" href="/password-generator/">Password</a>
-            <a class="chip" href="/hash-generator/">Hash</a>
-            <a class="chip" href="/random-string/">Random String</a>
-          </div>
-        </div>
-        <div class="yt-wrap" aria-label="UUIDs explained (video)">
-          <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/cezbjYLsACc?rel=0"
-            title="UUID Universally Unique Identifiers Explained" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allowfullscreen></iframe>
-        </div>
-      </div>
-    </section>
-
-<!-- Generator + Validator -->
-<section class="two-col" aria-label="UUID tools">
-  <!-- Generator -->
-  <div class="card" id="gen-card">
-    <h2 class="h3">Generator</h2>
-    <div class="stack">
-      <div class="row">
-        <label class="label" for="version">Version</label>
-        <select id="version" class="input">
-          <option value="v4" selected>v4 – Random</option>
-          <option value="v1">v1 – Time-based</option>
-          <option value="v5">v5 – Name-based (SHA-1)</option>
-        </select>
-
-        <label class="label" for="count">Count</label>
-        <input id="count" class="input" type="number" min="1" max="1000" value="1" style="max-width:110px">
-        <button id="gen" class="btn">Generate</button>
-        <button id="copyOne" class="btn ghost">Copy</button>
-      </div>
-
-      <!-- v5 extra inputs -->
-      <div id="v5opts" class="row" hidden>
-        <label class="label" for="ns">Namespace UUID</label>
-        <input id="ns" class="input grow" placeholder="e.g., 6ba7b811-9dad-11d1-80b4-00c04fd430c8 (DNS)" />
-        <label class="label" for="name">Name</label>
-        <input id="name" class="input grow" placeholder="e.g., example.com" />
-        <button id="presetDNS" class="btn sm ghost" type="button">DNS</button>
-        <button id="presetURL" class="btn sm ghost" type="button">URL</button>
-      </div>
-
-      <!-- Format options -->
-      <div class="opt-grid">
-        <label class="check"><input id="optHyphen" type="checkbox" checked> <span>Hyphens</span></label>
-        <label class="check"><input id="optUpper" type="checkbox"> <span>Uppercase</span></label>
-        <label class="check"><input id="optBraces" type="checkbox"> <span>Braces { }</span></label>
-        <label class="check"><input id="optURN" type="checkbox"> <span>URN (urn:uuid:)</span></label>
-      </div>
-
-      <!-- Output -->
-      <div class="row">
-        <button id="copyAll" class="btn">Copy All</button>
-        <button id="dlTxt" class="btn ghost">Download .txt</button>
-        <button id="dlCsv" class="btn ghost">Download .csv</button>
-        <span class="pill sec mini">Generated: <b id="genCount">0</b></span>
-      </div>
-      <textarea id="out" class="input mono" rows="6" readonly placeholder="Your UUIDs will appear here…"></textarea>
-
-      <details>
-        <summary class="mini">Tips</summary>
-        <ul class="list-tight mini">
-          <li><span class="kbd">v4</span> is best for most apps (random).</li>
-          <li><span class="kbd">v1</span> encodes time (& clock sequence).</li>
-          <li><span class="kbd">v5</span> = stable ID from Name + Namespace.</li>
-        </ul>
-      </details>
-    </div>
-  </div>
-
-  <!-- Validator -->
-  <div class="card" id="val-card">
-    <h2 class="h3">Validator</h2>
-    <div class="stack">
-      <input id="valInput" class="input mono" placeholder="Paste a UUID here to validate…">
-      <div class="row">
-        <button id="valBtn" class="btn">Validate</button>
-        <button id="valClear" class="btn ghost">Clear</button>
-      </div>
-      <div id="valResult" class="note">Format, version & variant will appear here.</div>
-
-      <div class="hr" style="height:1px;background:color-mix(in oklab,var(--accent) 25%, #243);"></div>
-
-      <h3 class="h4" style="margin:0">Quick Links</h3>
-      <div class="chips" style="margin-top:8px">
-        <a class="chip" href="/password-generator/">Password</a>
-        <a class="chip" href="/hash-generator/">Hash</a>
-        <a class="chip" href="/json-formatter/">JSON Formatter</a>
-        <a class="chip" href="/qr-code-generator/">QR Code</a>
-      </div>
-    </div>
-  </div>
+<!-- Site header (shared pattern) -->
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="/assets/logo/uptools-logo.svg" width="28"/>
+<b>UpTools</b>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
+<nav aria-label="Primary" class="nav-links">
+<a href="/#tools">Tools</a>
+<a href="/income-tax-tool/">Income Tax</a>
+<a href="/emi-calculator/">EMI</a>
+<a href="/gst-calculator/">GST</a>
+<a href="/games/">Games</a>
+<a href="/about/">About</a>
+<a href="/contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main class="wrap" id="main">
+<!-- Hero -->
+<section aria-labelledby="pg-title" class="card hero">
+<div class="two-col">
+<div>
+<h1 id="pg-title">UUID / GUID Generator &amp; Validator</h1>
+<p class="note">Generate <b>v1</b> (time-based), <b>v4</b> (random), and <b>v5</b> (name-based) UUIDs. Batch mode, copy, export, and a built-in validator. 100% client-side.</p>
+<div class="chips" style="margin-top:8px">
+<span class="pill">⚡ v1 . v4 . v5</span>
+<span class="pill">📦 Batch + Export</span>
+<span class="pill">🧪 Validate</span>
+<a class="chip" href="/password-generator/">Password</a>
+<a class="chip" href="/hash-generator/">Hash</a>
+<a class="chip" href="/random-string/">Random String</a>
+</div>
+</div>
+<div aria-label="UUIDs explained (video)" class="yt-wrap">
+<div class="video-wrap"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/cezbjYLsACc?rel=0" title="UUID Universally Unique Identifiers Explained"></iframe></div>
+</div>
+</div>
 </section>
-
+<!-- Generator + Validator -->
+<section aria-label="UUID tools" class="two-col">
+<!-- Generator -->
+<div class="card" id="gen-card">
+<h2 class="h3">Generator</h2>
+<div class="stack">
+<div class="row">
+<label class="label" for="version">Version</label>
+<select class="input" id="version">
+<option selected="" value="v4">v4 – Random</option>
+<option value="v1">v1 – Time-based</option>
+<option value="v5">v5 – Name-based (SHA-1)</option>
+</select>
+<label class="label" for="count">Count</label>
+<input class="input" id="count" max="1000" min="1" style="max-width:110px" type="number" value="1"/>
+<button class="btn" id="gen">Generate</button>
+<button class="btn ghost" id="copyOne">Copy</button>
+</div>
+<!-- v5 extra inputs -->
+<div class="row" hidden="" id="v5opts">
+<label class="label" for="ns">Namespace UUID</label>
+<input class="input grow" id="ns" placeholder="e.g., 6ba7b811-9dad-11d1-80b4-00c04fd430c8 (DNS)">
+<label class="label" for="name">Name</label>
+<input class="input grow" id="name" placeholder="e.g., example.com"/>
+<button class="btn sm ghost" id="presetDNS" type="button">DNS</button>
+<button class="btn sm ghost" id="presetURL" type="button">URL</button>
+</input></div>
+<!-- Format options -->
+<div class="opt-grid">
+<label class="check"><input checked="" id="optHyphen" type="checkbox"/> <span>Hyphens</span></label>
+<label class="check"><input id="optUpper" type="checkbox"/> <span>Uppercase</span></label>
+<label class="check"><input id="optBraces" type="checkbox"/> <span>Braces { }</span></label>
+<label class="check"><input id="optURN" type="checkbox"/> <span>URN (urn:uuid:)</span></label>
+</div>
+<!-- Output -->
+<div class="row">
+<button class="btn" id="copyAll">Copy All</button>
+<button class="btn ghost" id="dlTxt">Download .txt</button>
+<button class="btn ghost" id="dlCsv">Download .csv</button>
+<span class="pill sec mini">Generated: <b id="genCount">0</b></span>
+</div>
+<textarea class="input mono" id="out" placeholder="Your UUIDs will appear here…" readonly="" rows="6"></textarea>
+<details>
+<summary class="mini">Tips</summary>
+<ul class="list-tight mini">
+<li><span class="kbd">v4</span> is best for most apps (random).</li>
+<li><span class="kbd">v1</span> encodes time (&amp; clock sequence).</li>
+<li><span class="kbd">v5</span> = stable ID from Name + Namespace.</li>
+</ul>
+</details>
+</div>
+</div>
+<!-- Validator -->
+<div class="card" id="val-card">
+<h2 class="h3">Validator</h2>
+<div class="stack">
+<input class="input mono" id="valInput" placeholder="Paste a UUID here to validate…"/>
+<div class="row">
+<button class="btn" id="valBtn">Validate</button>
+<button class="btn ghost" id="valClear">Clear</button>
+</div>
+<div class="note" id="valResult">Format, version &amp; variant will appear here.</div>
+<div class="hr" style="height:1px;background:color-mix(in oklab,var(--accent) 25%, #243);"></div>
+<h3 class="h4" style="margin:0">Quick Links</h3>
+<div class="chips" style="margin-top:8px">
+<a class="chip" href="/password-generator/">Password</a>
+<a class="chip" href="/hash-generator/">Hash</a>
+<a class="chip" href="/json-formatter/">JSON Formatter</a>
+<a class="chip" href="/qr-code-generator/">QR Code</a>
+</div>
+</div>
+</div>
+</section>
 <!-- Google Ad slot (stable height to avoid CLS) -->
 <section class="card">
-  <ins class="adsbygoogle"
-       style="display:block;min-height:120px"
-       data-ad-client="ca-pub-6216304334889617"
-       data-ad-slot="9651757525"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-format="auto" data-ad-slot="9651757525" data-full-width-responsive="true" style="display:block;min-height:120px"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 </section>
-
 <footer class="site-foot">
-  <nav class="nav-links small">
-    <a href="/">UpTools</a> .
+<nav class="nav-links small">
+<a href="/">UpTools</a> .
     <a href="/sitemap.xml">Sitemap</a> .
     <a href="/about/">ABT</a> .
     <a href="/contact/">CT</a>
-  </nav>
-  <div class="note small">Made with care. Privacy-first, no sign-ups.</div>
+</nav>
+<div class="note small">Made with care. Privacy-first, no sign-ups.</div>
 </footer>
-
-  </main>
-
-  <!-- Shared helpers (if present) + page script -->
-
-  <script type="module" src="/scripts/utils.js"></script>
-
-  <script type="module">
+</main>
+<!-- Shared helpers (if present) + page script -->
+<script src="/scripts/utils.js" type="module"></script>
+<script type="module">
     // ===== Utilities (fallbacks if utils.js not present) =====
     const U = {
       copy: async (text) => { try { await navigator.clipboard.writeText(text); toast('Copied'); } catch { fallbackCopy(text); toast('Copied'); } },
@@ -430,6 +388,5 @@
     // First paint
     generate(); // 1 UUID on load
   </script>
-
 </body>
 </html>

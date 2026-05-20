@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -330,22 +330,30 @@
 
         <div class="game-container" style="position: relative">
             <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
-            <div class="difficulty-selector">
-                <span style="color: var(--muted); margin-right: 1rem;">Difficulty:</span>
-                <button class="difficulty-btn active" data-difficulty="easy">Easy</button>
-                <button class="difficulty-btn" data-difficulty="medium">Medium</button>
-                <button class="difficulty-btn" data-difficulty="hard">Hard</button>
+            
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+                <div>
+                    <span style="color: var(--muted); margin-right: 0.5rem;">Mode:</span>
+                    <button class="difficulty-btn active" id="mode-ai" data-mode="ai">vs AI</button>
+                    <button class="difficulty-btn" id="mode-local" data-mode="local">2 Players (Local)</button>
+                </div>
+                <div id="difficulty-wrapper">
+                    <span style="color: var(--muted); margin-right: 0.5rem;">Difficulty:</span>
+                    <button class="difficulty-btn active" data-difficulty="easy">Easy</button>
+                    <button class="difficulty-btn" data-difficulty="medium">Medium</button>
+                    <button class="difficulty-btn" data-difficulty="hard">Hard</button>
+                </div>
             </div>
 
             <div class="game-info">
                 <div class="score">
                     <div class="score-item">
                         <div class="score-value" id="player-score">0</div>
-                        <div class="score-label">You (X)</div>
+                        <div class="score-label" id="player-label">You (X)</div>
                     </div>
                     <div class="score-item">
                         <div class="score-value" id="ai-score">0</div>
-                        <div class="score-label">AI (O)</div>
+                        <div class="score-label" id="ai-label">AI (O)</div>
                     </div>
                 </div>
                 <div class="game-status" id="game-status">Your turn!</div>
@@ -377,6 +385,7 @@
                 this.currentPlayer = 'X';
                 this.gameActive = true;
                 this.difficulty = 'easy';
+                this.gameMode = 'ai'; // 'ai' or 'local'
                 this.playerScore = 0;
                 this.aiScore = 0;
                 this.winningCombos = [
@@ -410,19 +419,43 @@
                     this.resetScores();
                 });
 
-                document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                document.querySelectorAll('.difficulty-btn[data-difficulty]').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         this.setDifficulty(e.target.dataset.difficulty);
                     });
+                });
+
+                document.getElementById('mode-ai').addEventListener('click', () => {
+                    this.setGameMode('ai');
+                });
+                document.getElementById('mode-local').addEventListener('click', () => {
+                    this.setGameMode('local');
                 });
             }
 
             setDifficulty(level) {
                 this.difficulty = level;
-                document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                document.querySelectorAll('.difficulty-btn[data-difficulty]').forEach(btn => {
                     btn.classList.remove('active');
                 });
                 event.target.classList.add('active');
+                this.resetGame();
+            }
+
+            setGameMode(mode) {
+                this.gameMode = mode;
+                document.getElementById('mode-ai').classList.toggle('active', mode === 'ai');
+                document.getElementById('mode-local').classList.toggle('active', mode === 'local');
+                
+                const diffWrapper = document.getElementById('difficulty-wrapper');
+                if (diffWrapper) {
+                    diffWrapper.style.display = mode === 'ai' ? 'inline-block' : 'none';
+                }
+
+                document.getElementById('player-label').textContent = mode === 'ai' ? 'You (X)' : 'Player 1 (X)';
+                document.getElementById('ai-label').textContent = mode === 'ai' ? 'AI (O)' : 'Player 2 (O)';
+
+                this.resetScores();
                 this.resetGame();
             }
 
@@ -445,7 +478,7 @@
                 this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
                 this.updateDisplay();
 
-                if (this.currentPlayer === 'O') {
+                if (this.gameMode === 'ai' && this.currentPlayer === 'O') {
                     setTimeout(() => this.makeAIMove(), 500);
                 }
             }
@@ -555,10 +588,10 @@
                 } else {
                     if (this.currentPlayer === 'X') {
                         this.playerScore++;
-                        document.getElementById('game-status').textContent = 'You win! 🎉';
+                        document.getElementById('game-status').textContent = this.gameMode === 'ai' ? 'You win! 🎉' : 'Player 1 wins! 🎉';
                     } else {
                         this.aiScore++;
-                        document.getElementById('game-status').textContent = 'AI wins! 🤖';
+                        document.getElementById('game-status').textContent = this.gameMode === 'ai' ? 'AI wins! 🤖' : 'Player 2 wins! 🎉';
                     }
                     this.updateScores();
                 }
@@ -574,7 +607,11 @@
                     cell.classList.remove('x', 'o', 'winning');
                 });
 
-                document.getElementById('game-status').textContent = 'Your turn!';
+                if (this.gameMode === 'ai') {
+                    document.getElementById('game-status').textContent = 'Your turn!';
+                } else {
+                    document.getElementById('game-status').textContent = 'Player 1\'s turn (X)';
+                }
             }
 
             updateCell(index) {
@@ -584,8 +621,13 @@
             }
 
             updateDisplay() {
-                document.getElementById('game-status').textContent =
-                    this.currentPlayer === 'X' ? 'Your turn!' : 'AI is thinking...';
+                if (this.gameMode === 'ai') {
+                    document.getElementById('game-status').textContent =
+                        this.currentPlayer === 'X' ? 'Your turn!' : 'AI is thinking...';
+                } else {
+                    document.getElementById('game-status').textContent =
+                        this.currentPlayer === 'X' ? 'Player 1\'s turn (X)' : 'Player 2\'s turn (O)';
+                }
             }
 
             updateScores() {
@@ -601,18 +643,21 @@
             }
 
             saveScores() {
-                localStorage.setItem('tictactoe-scores', JSON.stringify({
+                localStorage.setItem(`tictactoe-scores-${this.gameMode}`, JSON.stringify({
                     player: this.playerScore,
                     ai: this.aiScore
                 }));
             }
 
             loadScores() {
-                const saved = localStorage.getItem('tictactoe-scores');
+                const saved = localStorage.getItem(`tictactoe-scores-${this.gameMode}`);
                 if (saved) {
                     const scores = JSON.parse(saved);
                     this.playerScore = scores.player || 0;
                     this.aiScore = scores.ai || 0;
+                } else {
+                    this.playerScore = 0;
+                    this.aiScore = 0;
                 }
             }
         }

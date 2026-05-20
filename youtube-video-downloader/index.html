@@ -87,6 +87,13 @@
         <li><a href="/">Home</a></li>
         <li style="color: var(--muted);">/</li>
         <li><a href="/#tools">Tools</a></li>
+  </header>
+  <main id="main" class="wrap" role="main">
+    <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem;">
+      <ol style="display: flex; gap: 0.5rem; list-style: none; padding: 0; margin: 0; font-size: 0.9rem;">
+        <li><a href="/">Home</a></li>
+        <li style="color: var(--muted);">/</li>
+        <li><a href="/#tools">Tools</a></li>
         <li style="color: var(--muted);">/</li>
         <li><a href="/#social">Social Media</a></li>
         <li style="color: var(--muted);">/</li>
@@ -100,6 +107,24 @@
       <div class="input-group">
         <input type="text" id="youtubeUrl" placeholder="Paste YouTube video URL here..." />
         <button class="btn" onclick="downloadVideo()">Download</button>
+      </div>
+
+      <div style="margin: 1.5rem 0;">
+        <label for="videoQuality" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Resolution / Format:</label>
+        <select id="videoQuality" style="width: 100%; max-width: 400px; padding: 0.5rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text);">
+          <option value="1080">MP4 - 1080p (Full HD)</option>
+          <option value="720" selected>MP4 - 720p (HD)</option>
+          <option value="480">MP4 - 480p (SD)</option>
+          <option value="360">MP4 - 360p (SD)</option>
+          <option value="mp3">MP3 - Audio Only (320kbps)</option>
+        </select>
+      </div>
+
+      <!-- Conversion Widget Container -->
+      <div id="downloaderWidget" style="display: none; margin: 2rem 0; padding: 1.5rem; background: #0d1626; border: 1px solid var(--border); border-radius: var(--radius); text-align: center;">
+        <h3 style="margin-top: 0; color: var(--accent);">🔄 Conversion in Progress...</h3>
+        <p class="note" style="margin-bottom: 1.5rem;">Your video is being processed. The download button will appear below shortly.</p>
+        <div id="widgetIframeContainer" style="min-height: 100px; display: flex; justify-content: center; align-items: center;"></div>
       </div>
 
       <h2>How to Use</h2>
@@ -145,12 +170,41 @@
   <script src="/scripts/utils.js?v=1.3.0" type="module"></script>
   <script>
     function downloadVideo() {
-      const url = document.getElementById('youtubeUrl').value;
-      if (!url) {
+      const urlInput = document.getElementById('youtubeUrl').value.trim();
+      if (!urlInput) {
         alert('Please paste a YouTube URL');
         return;
       }
-      alert('Download started for: ' + url);
+
+      // Validate YouTube URL
+      const ytReg = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+      const match = urlInput.match(ytReg);
+      if (!match) {
+        alert('Please enter a valid YouTube URL (e.g., https://www.youtube.com/watch?v=...)');
+        return;
+      }
+
+      const quality = document.getElementById('videoQuality').value;
+      const widgetContainer = document.getElementById('downloaderWidget');
+      const iframeContainer = document.getElementById('widgetIframeContainer');
+
+      // Clear previous iframe
+      iframeContainer.innerHTML = '';
+      widgetContainer.style.display = 'block';
+
+      // Build loader.to iframe
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://loader.to/api/button/?url=${encodeURIComponent(urlInput)}&f=${quality}&color=ff0000`;
+      iframe.style.width = '100%';
+      iframe.style.height = '90px';
+      iframe.style.border = 'none';
+      iframe.style.overflow = 'hidden';
+      iframe.setAttribute('scrolling', 'no');
+      
+      iframeContainer.appendChild(iframe);
+      
+      // Scroll to widget
+      widgetContainer.scrollIntoView({ behavior: 'smooth' });
     }
   </script>
 </body>

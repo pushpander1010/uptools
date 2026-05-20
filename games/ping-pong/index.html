@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ping Pong Game Online - Play Pong Free | UpTools Games</title>
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
-  <meta name="description" content="Play classic Ping Pong (Pong) online for free. Challenge the AI in this retro arcade game. No downloads, no sign-up. Mobile-friendly." />
+  <meta name="description" content="Play classic Ping Pong (Pong) online for free. Challenge the AI or a friend in this retro arcade game. No downloads, no sign-up. Mobile-friendly." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <link rel="canonical" href="https://www.uptools.in/games/ping-pong/" />
   <meta property="og:title" content="Ping Pong Game Online - Play Pong Free" />
-  <meta property="og:description" content="Play classic Pong online. Challenge the AI. Free, no sign-up, mobile-friendly." />
+  <meta property="og:description" content="Play classic Pong online. Challenge the AI or a friend. Free, no sign-up, mobile-friendly." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.uptools.in/games/ping-pong/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
@@ -24,7 +24,9 @@
     .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     #touchControls { display: none; }
-    @media(max-width:600px){ #touchControls { display: flex; gap: 8px; justify-content: center; margin: 8px 0; } }
+    @media(max-width:768px){ 
+      #touchControls { display: flex; justify-content: space-between; align-items: center; margin: 8px auto; width: 95%; max-width: 600px; }
+    }
   </style>
 </head>
 <body>
@@ -63,10 +65,17 @@
 
       <section class="card" style="margin-top:12px">
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
-          <label style="font-size:.9rem;color:#9aa4b2">Difficulty:</label>
-          <button class="btn secondary" data-diff="easy">Easy</button>
-          <button class="btn" data-diff="medium">Medium</button>
-          <button class="btn secondary" data-diff="hard">Hard</button>
+          <label style="font-size:.9rem;color:#9aa4b2">Mode:</label>
+          <button class="btn" id="mode-ai">vs AI</button>
+          <button class="btn secondary" id="mode-local">2 Players (Local)</button>
+
+          <span id="diff-section" style="display:flex;gap:8px;align-items:center;">
+            <label style="font-size:.9rem;color:#9aa4b2;margin-left:8px">Difficulty:</label>
+            <button class="btn secondary" data-diff="easy">Easy</button>
+            <button class="btn" data-diff="medium">Medium</button>
+            <button class="btn secondary" data-diff="hard">Hard</button>
+          </span>
+
           <button id="startBtn" class="btn" style="margin-left:auto">▶ Start</button>
           <button id="pauseBtn" class="btn secondary" style="display:none">⏸ Pause</button>
         </div>
@@ -74,13 +83,26 @@
         <canvas id="pongCanvas" width="600" height="360" aria-label="Ping Pong game"></canvas>
 
         <div id="touchControls">
-          <button class="btn secondary" id="touchUp" style="width:80px;height:50px;font-size:1.5rem">▲</button>
-          <button class="btn secondary" id="touchDown" style="width:80px;height:50px;font-size:1.5rem">▼</button>
+          <!-- Player 1 Touch (Left) -->
+          <div id="p1Touch" style="display: flex; gap: 8px;">
+            <button class="btn secondary" id="touchUp1" style="width:70px;height:50px;font-size:1.5rem;user-select:none;">▲</button>
+            <button class="btn secondary" id="touchDown1" style="width:70px;height:50px;font-size:1.5rem;user-select:none;">▼</button>
+          </div>
+          <!-- Player 2 Touch (Right) -->
+          <div id="p2Touch" style="display: flex; gap: 8px; display: none;">
+            <button class="btn secondary" id="touchUp2" style="width:70px;height:50px;font-size:1.5rem;user-select:none;">▲</button>
+            <button class="btn secondary" id="touchDown2" style="width:70px;height:50px;font-size:1.5rem;user-select:none;">▼</button>
+          </div>
         </div>
 
-        <div class="controls-hint">
-          <span class="ctrl-chip">W / ↑ — Move Up</span>
-          <span class="ctrl-chip">S / ↓ — Move Down</span>
+        <div class="controls-hint" id="controls-hint-ai">
+          <span class="ctrl-chip">W / ▲ — Move Up</span>
+          <span class="ctrl-chip">S / ▼ — Move Down</span>
+          <span class="ctrl-chip">Space — Pause</span>
+        </div>
+        <div class="controls-hint" id="controls-hint-local" style="display:none">
+          <span class="ctrl-chip">Player 1 (Left): W / S</span>
+          <span class="ctrl-chip">Player 2 (Right): ▲ / ▼ (Arrow Keys)</span>
           <span class="ctrl-chip">Space — Pause</span>
         </div>
       </section>
@@ -125,13 +147,17 @@
       canvas.style.height = (maxW * 0.6) + 'px';
     }
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      updateTouchControlsDisplay();
+    });
 
     const W = canvas.width, H = canvas.height;
     const PADDLE_W = 12, PADDLE_H = 70, BALL_SIZE = 10;
     const WIN_SCORE = 7;
 
     let difficulty = 'medium';
+    let gameMode = 'ai'; // 'ai' or 'local'
     let gameRunning = false, gamePaused = false;
     let animId = null;
 
@@ -151,20 +177,47 @@
       state.ball.vy = (Math.random() * 4 - 2);
     }
 
+    function updateTouchControlsDisplay() {
+      const isMobile = window.innerWidth <= 768;
+      const touchArea = document.getElementById('touchControls');
+      if (!touchArea) return;
+      if (isMobile) {
+        touchArea.style.display = 'flex';
+        const p2Touch = document.getElementById('p2Touch');
+        if (p2Touch) {
+          p2Touch.style.display = (gameMode === 'local') ? 'flex' : 'none';
+        }
+      } else {
+        touchArea.style.display = 'none';
+      }
+    }
+
     function update() {
       if (!gameRunning || gamePaused) return;
       const b = state.ball, p = state.player, ai = state.ai;
 
-      // Player movement
+      // Player 1 (Left Paddle) movement
       const speed = 6;
-      if ((state.keys['w'] || state.keys['arrowup']) && p.y > 0) p.y -= speed;
-      if ((state.keys['s'] || state.keys['arrowdown']) && p.y < H - PADDLE_H) p.y += speed;
+      if (gameMode === 'ai') {
+        if ((state.keys['w'] || state.keys['arrowup']) && p.y > 0) p.y -= speed;
+        if ((state.keys['s'] || state.keys['arrowdown']) && p.y < H - PADDLE_H) p.y += speed;
+      } else {
+        // Player 1 (Left) - W/S keys
+        if (state.keys['w'] && p.y > 0) p.y -= speed;
+        if (state.keys['s'] && p.y < H - PADDLE_H) p.y += speed;
+        
+        // Player 2 (Right) - ArrowUp / ArrowDown keys
+        if (state.keys['arrowup'] && ai.y > 0) ai.y -= speed;
+        if (state.keys['arrowdown'] && ai.y < H - PADDLE_H) ai.y += speed;
+      }
 
-      // AI movement
-      const aiSpeed = AI_SPEED[difficulty] || 4;
-      const aiCenter = ai.y + PADDLE_H / 2;
-      if (aiCenter < b.y - 5) ai.y = Math.min(ai.y + aiSpeed, H - PADDLE_H);
-      else if (aiCenter > b.y + 5) ai.y = Math.max(ai.y - aiSpeed, 0);
+      // AI/Player 2 movement
+      if (gameMode === 'ai') {
+        const aiSpeed = AI_SPEED[difficulty] || 4;
+        const aiCenter = ai.y + PADDLE_H / 2;
+        if (aiCenter < b.y - 5) ai.y = Math.min(ai.y + aiSpeed, H - PADDLE_H);
+        else if (aiCenter > b.y + 5) ai.y = Math.max(ai.y - aiSpeed, 0);
+      }
 
       // Ball movement
       b.x += b.vx;
@@ -194,12 +247,12 @@
       // Scoring
       if (b.x < 0) {
         ai.score++;
-        if (ai.score >= WIN_SCORE) { endGame('AI'); return; }
+        if (ai.score >= WIN_SCORE) { endGame('Player 2'); return; }
         resetBall(1);
       }
       if (b.x > W) {
         p.score++;
-        if (p.score >= WIN_SCORE) { endGame('You'); return; }
+        if (p.score >= WIN_SCORE) { endGame('Player 1'); return; }
         resetBall(-1);
       }
     }
@@ -228,8 +281,8 @@
       // Labels
       ctx.font = '12px system-ui';
       ctx.fillStyle = '#4a5568';
-      ctx.fillText('YOU', W / 4, 70);
-      ctx.fillText('AI', (W * 3) / 4, 70);
+      ctx.fillText(gameMode === 'ai' ? 'YOU' : 'PLAYER 1', W / 4, 70);
+      ctx.fillText(gameMode === 'ai' ? 'AI' : 'PLAYER 2', (W * 3) / 4, 70);
 
       // Paddles
       ctx.fillStyle = '#00e5ff';
@@ -293,16 +346,66 @@
       draw();
       ctx.fillStyle = 'rgba(5,13,26,.75)';
       ctx.fillRect(0, 0, W, H);
-      ctx.fillStyle = winner === 'You' ? '#00e5a0' : '#ff6b6b';
+      
+      let winnerText = '';
+      let winnerColor = '#ff6b6b';
+      
+      if (gameMode === 'ai') {
+        winnerText = winner === 'Player 1' ? '🎉 You Win!' : '💀 AI Wins!';
+        winnerColor = winner === 'Player 1' ? '#00e5a0' : '#ff6b6b';
+      } else {
+        winnerText = winner === 'Player 1' ? '🎉 Player 1 Wins!' : '🎉 Player 2 Wins!';
+        winnerColor = winner === 'Player 1' ? '#00e5ff' : '#ff6b6b';
+      }
+      
+      ctx.fillStyle = winnerColor;
       ctx.font = 'bold 36px system-ui';
       ctx.textAlign = 'center';
-      ctx.fillText(winner === 'You' ? '🎉 You Win!' : '💀 AI Wins!', W / 2, H / 2 - 20);
+      ctx.fillText(winnerText, W / 2, H / 2 - 20);
       ctx.fillStyle = '#9aa4b2';
       ctx.font = '18px system-ui';
       ctx.fillText(`${state.player.score} - ${state.ai.score}`, W / 2, H / 2 + 20);
       document.getElementById('startBtn').style.display = 'inline-flex';
       document.getElementById('pauseBtn').style.display = 'none';
     }
+
+    function setGameMode(mode) {
+      gameMode = mode;
+      document.getElementById('mode-ai').className = mode === 'ai' ? 'btn' : 'btn secondary';
+      document.getElementById('mode-local').className = mode === 'local' ? 'btn' : 'btn secondary';
+      
+      document.getElementById('diff-section').style.display = mode === 'ai' ? 'flex' : 'none';
+      document.getElementById('controls-hint-ai').style.display = mode === 'ai' ? 'flex' : 'none';
+      document.getElementById('controls-hint-local').style.display = mode === 'local' ? 'flex' : 'none';
+      
+      updateTouchControlsDisplay();
+      
+      // Update instructions
+      const note = document.querySelector('.note');
+      if (note) {
+        if (mode === 'ai') {
+          note.textContent = 'Classic Pong against AI. First to 7 wins! Use W/S or Arrow keys to move your paddle.';
+        } else {
+          note.textContent = '2 Players local Pong. First to 7 wins! Player 1 uses W/S. Player 2 uses Arrow keys.';
+        }
+      }
+      
+      if (gameRunning) {
+        endGame('Player 1'); // force reset
+      }
+      resetGame();
+    }
+
+    function resetGame() {
+      state.player.score = 0;
+      state.ai.score = 0;
+      state.player.y = H / 2 - PADDLE_H / 2;
+      state.ai.y = H / 2 - PADDLE_H / 2;
+      draw();
+    }
+
+    document.getElementById('mode-ai').addEventListener('click', () => setGameMode('ai'));
+    document.getElementById('mode-local').addEventListener('click', () => setGameMode('local'));
 
     document.getElementById('startBtn').addEventListener('click', startGame);
     document.getElementById('pauseBtn').addEventListener('click', () => {
@@ -320,18 +423,62 @@
 
     document.addEventListener('keydown', e => {
       state.keys[e.key.toLowerCase()] = true;
-      if (e.code === 'Space') { e.preventDefault(); if (gameRunning) { gamePaused = !gamePaused; document.getElementById('pauseBtn').textContent = gamePaused ? '▶ Resume' : '⏸ Pause'; } }
+      if (e.code === 'Space') { 
+        e.preventDefault(); 
+        if (gameRunning) { 
+          gamePaused = !gamePaused; 
+          document.getElementById('pauseBtn').textContent = gamePaused ? '▶ Resume' : '⏸ Pause'; 
+        } 
+      }
     });
     document.addEventListener('keyup', e => { state.keys[e.key.toLowerCase()] = false; });
 
-    // Touch controls
-    let touchUp = false, touchDown = false;
-    document.getElementById('touchUp').addEventListener('touchstart', e => { e.preventDefault(); touchUp = true; state.keys['arrowup'] = true; }, { passive: false });
-    document.getElementById('touchUp').addEventListener('touchend', () => { touchUp = false; state.keys['arrowup'] = false; });
-    document.getElementById('touchDown').addEventListener('touchstart', e => { e.preventDefault(); touchDown = true; state.keys['arrowdown'] = true; }, { passive: false });
-    document.getElementById('touchDown').addEventListener('touchend', () => { touchDown = false; state.keys['arrowdown'] = false; });
+    // Touch controls setup
+    let touchUp1 = false, touchDown1 = false;
+    let touchUp2 = false, touchDown2 = false;
 
-    // Initial draw
+    document.getElementById('touchUp1').addEventListener('touchstart', e => { 
+      e.preventDefault(); 
+      touchUp1 = true; 
+      state.keys['w'] = true; 
+    }, { passive: false });
+    document.getElementById('touchUp1').addEventListener('touchend', () => { 
+      touchUp1 = false; 
+      state.keys['w'] = false; 
+    });
+    
+    document.getElementById('touchDown1').addEventListener('touchstart', e => { 
+      e.preventDefault(); 
+      touchDown1 = true; 
+      state.keys['s'] = true; 
+    }, { passive: false });
+    document.getElementById('touchDown1').addEventListener('touchend', () => { 
+      touchDown1 = false; 
+      state.keys['s'] = false; 
+    });
+
+    document.getElementById('touchUp2').addEventListener('touchstart', e => { 
+      e.preventDefault(); 
+      touchUp2 = true; 
+      state.keys['arrowup'] = true; 
+    }, { passive: false });
+    document.getElementById('touchUp2').addEventListener('touchend', () => { 
+      touchUp2 = false; 
+      state.keys['arrowup'] = false; 
+    });
+    
+    document.getElementById('touchDown2').addEventListener('touchstart', e => { 
+      e.preventDefault(); 
+      touchDown2 = true; 
+      state.keys['arrowdown'] = true; 
+    }, { passive: false });
+    document.getElementById('touchDown2').addEventListener('touchend', () => { 
+      touchDown2 = false; 
+      state.keys['arrowdown'] = false; 
+    });
+
+    // Initialize display and touch controls
+    updateTouchControlsDisplay();
     draw();
   </script>
 </body>
