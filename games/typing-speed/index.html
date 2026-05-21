@@ -15,37 +15,105 @@
   <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="/style.css?v=1.3.0" />
+  <script src="/games/fullscreen-utils.js" defer></script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"VideoGame","name":"Typing Speed Test","url":"https://www.uptools.in/games/typing-speed/","applicationCategory":"Game","genre":["Educational","Quick Play"],"description":"Test your typing speed in WPM with accuracy tracking."}
   </script>
   <style>
-    body { --accent: #00e5ff; }
-    .game-wrap { max-width: 760px; margin: 0 auto; }
-    .text-display { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; font-size: 1.2rem; line-height: 2; letter-spacing: .02em; min-height: 100px; }
-    .char.correct { color: #00e5ff; }
-    .char.wrong { color: #ff6b6b; background: #3a0a0a; border-radius: 2px; }
-    .char.current { border-bottom: 2px solid #7aa2ff; }
-    .char.pending { color: #4a5568; }
-    #typingInput { width: 100%; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .75rem; font-size: 1.1rem; margin-top: 12px; }
-    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
-    @media(max-width:500px){ .stats-row { grid-template-columns: repeat(2,1fr); } }
-    .stat-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .75rem; text-align: center; }
-    .stat-val { font-size: 1.8rem; font-weight: 900; color: #00e5ff; }
-    .stat-lbl { font-size: .8rem; color: #9aa4b2; }
-    .progress-bar { height: 6px; background: #0d1626; border-radius: 999px; margin-top: 8px; overflow: hidden; }
-    .progress-fill { height: 100%; background: #00e5ff; border-radius: 999px; transition: width .1s; }
-    .result-box { background: #0d1626; border: 1px solid #2a3a5a; border-radius: .75rem; padding: 1.5rem; text-align: center; display: none; }
-    .result-wpm { font-size: 3rem; font-weight: 900; color: #00e5ff; }
-    .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
+    body { --accent: #00e5ff; background: radial-gradient(1200px 600px at 10% -10%, #182033 0%, var(--bg) 45%) fixed; }
+    .game-container { max-width: 700px; margin: 2rem auto; padding: 2rem; background: var(--card); border: 1px solid var(--cardBorder); border-radius: var(--radius); position: relative; }
+    .fullscreen-btn { position: absolute; top: 1rem; right: 1rem; background: var(--accent); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-size: 1rem; z-index: 100; transition: all 0.2s ease; font-weight: 600; }
+    .fullscreen-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3); }
+    .exit-fullscreen-btn { position: fixed; top: 1rem; right: 1rem; background: #f44336; color: white; border: none; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 700; z-index: 10000; transition: all 0.2s ease; }
+    .exit-fullscreen-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3); }
+    .fullscreen-mode { position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: var(--bg) !important; z-index: 9999 !important; margin: 0 !important; padding: 1rem !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; overflow: auto !important; }
+    .fullscreen-mode .game-container { max-width: min(90vw, 800px) !important; width: 100% !important; margin: 0 !important; padding: 2rem !important; }
+    .fullscreen-mode .text-display { font-size: min(3vmin, 1.3rem) !important; }
+    .fullscreen-mode #typingInput { font-size: min(3vmin, 1.1rem) !important; }
+    .fullscreen-mode .stat-val { font-size: min(5vmin, 2rem) !important; }
+    .fullscreen-mode .result-wpm { font-size: min(10vmin, 3.5rem) !important; }
+
+    .duration-selector { display: flex; gap: 0.75rem; justify-content: center; margin: 1.5rem 0; flex-wrap: wrap; }
+    .duration-btn { background: rgba(255, 255, 255, 0.05); color: var(--text); border: 2px solid var(--cardBorder); padding: 0.75rem 1.5rem; border-radius: var(--radius); cursor: pointer; transition: all 0.3s ease; font-weight: 600; font-size: 1rem; }
+    .duration-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+    .duration-btn:hover:not(.active) { border-color: var(--accent); background: rgba(0, 229, 255, 0.1); }
+
+    .text-display { background: rgba(255, 255, 255, 0.02); border: 2px solid var(--cardBorder); border-radius: var(--radius); padding: 1.5rem; font-size: 1.3rem; line-height: 1.8; letter-spacing: 0.02em; min-height: 120px; margin: 1.5rem 0; font-family: 'Courier New', monospace; }
+    .char { transition: all 0.05s ease; }
+    .char.correct { color: #4CAF50; font-weight: 600; }
+    .char.wrong { color: #ff6b6b; background: rgba(255, 107, 107, 0.2); border-radius: 2px; padding: 0 2px; }
+    .char.current { border-bottom: 3px solid var(--accent); animation: cursor-blink 1s infinite; }
+    .char.pending { color: var(--muted); }
+    @keyframes cursor-blink { 0%, 49%, 100% { border-bottom-color: var(--accent); } 50%, 99% { border-bottom-color: transparent; } }
+
+    #typingInput { width: 100%; background: rgba(255, 255, 255, 0.02); border: 2px solid var(--cardBorder); border-radius: var(--radius); color: var(--text); padding: 1rem; font-size: 1.1rem; font-family: 'Courier New', monospace; transition: all 0.3s ease; }
+    #typingInput:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.1); }
+    #typingInput::placeholder { color: var(--muted); }
+
+    .progress-bar { height: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 999px; margin: 1.5rem 0; overflow: hidden; border: 1px solid var(--cardBorder); }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #00b8d4); border-radius: 999px; transition: width 0.1s linear; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.5rem 0; }
+    .stat-box { background: rgba(255, 255, 255, 0.02); border: 2px solid var(--cardBorder); border-radius: var(--radius); padding: 1.25rem; text-align: center; transition: all 0.3s ease; }
+    .stat-box:hover { border-color: var(--accent); background: rgba(0, 229, 255, 0.05); }
+    .stat-val { font-size: 2rem; font-weight: 900; color: var(--accent); display: block; }
+    .stat-lbl { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .result-box { background: rgba(255, 255, 255, 0.02); border: 2px solid var(--cardBorder); border-radius: var(--radius); padding: 2rem; text-align: center; display: none; margin: 1.5rem 0; animation: result-slide-in 0.5s ease; }
+    @keyframes result-slide-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .result-wpm { font-size: 3.5rem; font-weight: 900; color: var(--accent); margin: 0; }
+    .result-label { color: var(--muted); font-size: 0.95rem; margin: 0.5rem 0 1.5rem 0; text-transform: uppercase; letter-spacing: 0.05em; }
+    .result-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+    .result-stat { background: rgba(255, 255, 255, 0.02); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--cardBorder); }
+    .result-stat-val { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .result-stat-lbl { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+
+    .controls { display: flex; gap: 0.75rem; justify-content: center; margin: 1.5rem 0; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: white; border: none; padding: 0.875rem 1.75rem; border-radius: var(--radius); cursor: pointer; font-weight: 700; font-size: 1rem; transition: all 0.3s ease; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0, 229, 255, 0.3); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text); border: 2px solid var(--cardBorder); padding: 0.75rem 1.5rem; border-radius: var(--radius); cursor: pointer; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; }
+    .btn-secondary:hover { border-color: var(--accent); background: rgba(0, 229, 255, 0.1); }
+
+    .info-section { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--cardBorder); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; }
+    .info-section h3 { color: var(--accent); margin: 0 0 1rem 0; font-size: 1.1rem; }
+    .info-section p { color: var(--muted); line-height: 1.6; margin: 0; }
+
+    .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--cardBorder); margin: 1.5rem 0; }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+    @media (max-width: 768px) {
+      .game-container { margin: 1rem; padding: 1.5rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+      .stat-box { padding: 1rem; }
+      .stat-val { font-size: 1.5rem; }
+      .stat-lbl { font-size: 0.75rem; }
+      .result-stats { grid-template-columns: 1fr; }
+      .text-display { font-size: 1.1rem; padding: 1rem; min-height: 100px; }
+      .duration-selector { gap: 0.5rem; }
+      .duration-btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+      .fullscreen-mode .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .game-container { margin: 0.5rem; padding: 1rem; }
+      .stats-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+      .stat-box { padding: 0.75rem; }
+      .stat-val { font-size: 1.25rem; }
+      .stat-lbl { font-size: 0.7rem; }
+      .text-display { font-size: 1rem; padding: 0.75rem; min-height: 80px; line-height: 1.6; }
+      #typingInput { font-size: 1rem; padding: 0.75rem; }
+      .duration-selector { gap: 0.4rem; }
+      .duration-btn { padding: 0.5rem 1rem; font-size: 0.85rem; }
+      .result-wpm { font-size: 2.5rem; }
+      .result-box { padding: 1.5rem; }
+      .controls { gap: 0.5rem; }
+      .btn-primary, .btn-secondary { padding: 0.7rem 1.2rem; font-size: 0.9rem; }
+    }
   </style>
 </head>
 <body>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-    <!-- Header -->
+  <a href="#main" class="sr-only">Skip to content</a>
   <header class="site" role="banner">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="UpTools Home">
@@ -65,66 +133,106 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="game-wrap">
-      <section class="card hero" aria-labelledby="title">
-        <div>
-          <h1 id="title">⌨️ Typing Speed Test</h1>
-          <p class="note">How fast can you type? Test your WPM and accuracy. Click the input below to start!</p>
-        </div>
-      </section>
+  <main id="main" class="wrap" role="main">
+    <div class="game-container">
+      <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶ Fullscreen</button>
+      <h1>⌨️ Typing Speed Test</h1>
+      <p style="color: var(--muted); margin: 0.5rem 0 0 0;">Test your typing speed and accuracy. How fast can you type?</p>
 
-      <section class="card" style="margin-top:12px">
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
-          <label style="font-size:.9rem;color:#9aa4b2">Duration:</label>
-          <button class="btn secondary" data-time="30" id="t30">30s</button>
-          <button class="btn" data-time="60" id="t60">60s</button>
-          <button class="btn secondary" data-time="120" id="t120">2min</button>
-          <button id="restartBtn" class="btn secondary" style="margin-left:auto">↺ Restart</button>
-        </div>
-
-        <div class="text-display" id="textDisplay" aria-label="Text to type"></div>
-        <input id="typingInput" type="text" placeholder="Click here and start typing…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Type here" />
-
-        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-
-        <div class="stats-row">
-          <div class="stat-box"><div class="stat-val" id="wpmVal">0</div><div class="stat-lbl">WPM</div></div>
-          <div class="stat-box"><div class="stat-val" id="accVal">100%</div><div class="stat-lbl">Accuracy</div></div>
-          <div class="stat-box"><div class="stat-val" id="timeVal">60</div><div class="stat-lbl">Seconds</div></div>
-          <div class="stat-box"><div class="stat-val" id="errVal">0</div><div class="stat-lbl">Errors</div></div>
-        </div>
-      </section>
-
-      <div class="result-box card" id="resultBox" style="margin-top:12px">
-        <div class="result-wpm" id="finalWpm">0</div>
-        <p style="color:#9aa4b2;margin:4px 0">Words Per Minute</p>
-        <p id="finalStats" style="margin:8px 0"></p>
-        <button id="tryAgainBtn" class="btn" style="margin-top:12px">Try Again</button>
+      <div class="duration-selector">
+        <button class="duration-btn active" data-duration="30">30 seconds</button>
+        <button class="duration-btn" data-duration="60">1 minute</button>
+        <button class="duration-btn" data-duration="120">2 minutes</button>
       </div>
 
-      <section class="card" style="margin-top:12px">
-        <h2 style="margin-top:0">🎥 How to type faster</h2>
+      <div class="text-display" id="textDisplay" role="region" aria-live="polite" aria-label="Text to type"></div>
+
+      <input 
+        id="typingInput" 
+        type="text" 
+        placeholder="Click here and start typing…" 
+        autocomplete="off" 
+        autocorrect="off" 
+        autocapitalize="off" 
+        spellcheck="false" 
+        aria-label="Type the text here"
+      />
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-val" id="wpmVal">0</span>
+          <span class="stat-lbl">WPM</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val" id="accVal">100%</span>
+          <span class="stat-lbl">Accuracy</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val" id="timeVal">60</span>
+          <span class="stat-lbl">Time Left</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val" id="errVal">0</span>
+          <span class="stat-lbl">Errors</span>
+        </div>
+      </div>
+
+      <div class="result-box" id="resultBox">
+        <div class="result-wpm" id="finalWpm">0</div>
+        <p class="result-label">Words Per Minute</p>
+        <div class="result-stats">
+          <div class="result-stat">
+            <div class="result-stat-val" id="finalAcc">100%</div>
+            <div class="result-stat-lbl">Accuracy</div>
+          </div>
+          <div class="result-stat">
+            <div class="result-stat-val" id="finalErr">0</div>
+            <div class="result-stat-lbl">Errors</div>
+          </div>
+          <div class="result-stat">
+            <div class="result-stat-val" id="finalChars">0</div>
+            <div class="result-stat-lbl">Characters</div>
+          </div>
+        </div>
+        <div class="controls">
+          <button id="tryAgainBtn" class="btn-primary">Try Again</button>
+          <button id="changeTimeBtn" class="btn-secondary">Change Duration</button>
+        </div>
+      </div>
+
+      <div class="controls" id="mainControls">
+        <button id="restartBtn" class="btn-secondary">↺ Restart</button>
+      </div>
+
+      <div class="info-section">
+        <h3>💡 Tips for Better Typing</h3>
+        <p>Focus on accuracy first, speed will follow naturally. Keep your fingers on the home row (ASDF JKL;) and use all your fingers. Take breaks to avoid fatigue and maintain consistency.</p>
+      </div>
+
+      <div class="info-section">
+        <h3>🎯 How It Works</h3>
+        <p>Select your preferred duration, click the input field, and start typing. The test measures your Words Per Minute (WPM), accuracy percentage, and error count. Your results are calculated in real-time as you type.</p>
+      </div>
+
+      <section class="info-section">
+        <h3>🎥 Learn Touch Typing</h3>
         <div class="video-wrap">
-          <iframe src="https://www.youtube-nocookie.com/embed/QAb3ATOpBpE?rel=0&modestbranding=1"
+          <iframe 
+            src="https://www.youtube-nocookie.com/embed/QAb3ATOpBpE?rel=0&modestbranding=1"
             title="How to Type Faster — Tips for Every Stage"
-            loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-        <p class="note small" style="margin-top:8px">Learn touch typing to dramatically improve your WPM.</p>
-      </section>
-
-      <section class="card" style="margin-top:12px">
-        <h2 style="margin-top:0">More Games</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px">
-          <a class="btn secondary" href="/games/word-scramble/">Word Scramble</a>
-          <a class="btn secondary" href="/games/hangman/">Hangman</a>
-          <a class="btn secondary" href="/games/memory-match/">Memory Match</a>
-          <a class="btn secondary" href="/games/">All Games</a>
+            loading="lazy" 
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; web-share" 
+            allowfullscreen>
+          </iframe>
         </div>
       </section>
 
-      <footer class="note small site-footer" role="contentinfo" style="margin-top:12px">
+      <footer class="note small site-footer" role="contentinfo" style="margin-top: 2rem; text-align: center;">
         © <span id="y"></span> UpTools . <a href="/games/">Games</a> . <a href="/">Home</a>
       </footer>
     </div>
@@ -132,6 +240,17 @@
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Initialize fullscreen manager
+    let fullscreenManager = null;
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof FullscreenManager !== 'undefined') {
+        fullscreenManager = new FullscreenManager(
+          document.querySelector('.game-container'),
+          document.getElementById('fullscreenBtn')
+        );
+      }
+    });
 
     const TEXTS = [
       "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.",
@@ -141,15 +260,20 @@
       "In the middle of every difficulty lies opportunity. Life is what happens when you are busy making other plans. The future belongs to those who believe in the beauty of their dreams.",
       "To be or not to be that is the question. All that glitters is not gold. The lady doth protest too much methinks. What a piece of work is a man.",
       "Science is not only a disciple of reason but also one of romance and passion. The universe is under no obligation to make sense to you. Look up at the stars and not down at your feet.",
+      "The only true wisdom is in knowing you know nothing. It is during our darkest moments that we must focus to see the light. The way to get started is to quit talking and begin doing.",
+      "Do not go where the path may lead, go instead where there is no path and leave a trail. The future is already here, it is just not evenly distributed.",
+      "Every moment is a fresh beginning. Act as if what you do makes a difference. It does. The only impossible journey is the one you never begin."
     ];
 
     let duration = 60;
-    let timer = null;
     let timeLeft = 60;
-    let started = false;
+    let timerInterval = null;
+    let testStarted = false;
+    let testFinished = false;
     let currentText = '';
     let errors = 0;
     let totalTyped = 0;
+    let startTime = null;
 
     const textDisplay = document.getElementById('textDisplay');
     const typingInput = document.getElementById('typingInput');
@@ -159,6 +283,7 @@
     const errVal = document.getElementById('errVal');
     const progressFill = document.getElementById('progressFill');
     const resultBox = document.getElementById('resultBox');
+    const mainControls = document.getElementById('mainControls');
 
     function pickText() {
       return TEXTS[Math.floor(Math.random() * TEXTS.length)];
@@ -168,26 +293,75 @@
       const chars = currentText.split('');
       textDisplay.innerHTML = chars.map((c, i) => {
         let cls = 'char pending';
-        if (i < typed.length) cls = typed[i] === c ? 'char correct' : 'char wrong';
-        else if (i === typed.length) cls = 'char current';
+        if (i < typed.length) {
+          cls = typed[i] === c ? 'char correct' : 'char wrong';
+        } else if (i === typed.length) {
+          cls = 'char current';
+        }
         return `<span class="${cls}">${c === ' ' ? '&nbsp;' : c}</span>`;
       }).join('');
     }
 
-    function calcWPM(typed, elapsed) {
+    function calcWPM(typed, elapsedSeconds) {
       const words = typed.trim().split(/\s+/).filter(Boolean).length;
-      return elapsed > 0 ? Math.round((words / elapsed) * 60) : 0;
+      return elapsedSeconds > 0 ? Math.round((words / elapsedSeconds) * 60) : 0;
     }
 
-    function init() {
-      clearInterval(timer);
-      started = false;
+    function calcAccuracy(typed) {
+      if (totalTyped === 0) return 100;
+      return Math.round(((totalTyped - errors) / totalTyped) * 100);
+    }
+
+    function startTest() {
+      testStarted = true;
+      testFinished = false;
+      startTime = Date.now();
+      typingInput.disabled = false;
+      typingInput.focus();
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timeVal.textContent = timeLeft;
+        progressFill.style.width = `${((duration - timeLeft) / duration) * 100}%`;
+
+        if (timeLeft <= 0) {
+          endTest();
+        }
+      }, 1000);
+    }
+
+    function endTest() {
+      clearInterval(timerInterval);
+      testFinished = true;
+      typingInput.disabled = true;
+
+      const elapsedSeconds = (Date.now() - startTime) / 1000;
+      const wpm = calcWPM(typingInput.value, elapsedSeconds);
+      const acc = calcAccuracy(typingInput.value);
+
+      document.getElementById('finalWpm').textContent = wpm;
+      document.getElementById('finalAcc').textContent = acc + '%';
+      document.getElementById('finalErr').textContent = errors;
+      document.getElementById('finalChars').textContent = totalTyped;
+
+      resultBox.style.display = 'block';
+      mainControls.style.display = 'none';
+    }
+
+    function resetTest() {
+      clearInterval(timerInterval);
+      testStarted = false;
+      testFinished = false;
       timeLeft = duration;
       errors = 0;
       totalTyped = 0;
+      startTime = null;
+
       currentText = pickText();
       typingInput.value = '';
       typingInput.disabled = false;
+      typingInput.focus();
+
       renderText('');
       wpmVal.textContent = '0';
       accVal.textContent = '100%';
@@ -195,25 +369,16 @@
       errVal.textContent = '0';
       progressFill.style.width = '0%';
       resultBox.style.display = 'none';
+      mainControls.style.display = 'flex';
     }
 
     typingInput.addEventListener('input', () => {
+      if (testFinished) return;
+
       const typed = typingInput.value;
-      if (!started && typed.length > 0) {
-        started = true;
-        const startTime = Date.now();
-        timer = setInterval(() => {
-          timeLeft--;
-          timeVal.textContent = timeLeft;
-          progressFill.style.width = `${((duration - timeLeft) / duration) * 100}%`;
-          const elapsed = (Date.now() - startTime) / 1000;
-          wpmVal.textContent = calcWPM(typed, elapsed);
-          if (timeLeft <= 0) {
-            clearInterval(timer);
-            typingInput.disabled = true;
-            showResult(typed, elapsed);
-          }
-        }, 1000);
+
+      if (!testStarted && typed.length > 0) {
+        startTest();
       }
 
       renderText(typed);
@@ -226,8 +391,16 @@
       }
       errors = e;
       errVal.textContent = errors;
-      const acc = totalTyped > 0 ? Math.round(((totalTyped - errors) / totalTyped) * 100) : 100;
+
+      const acc = calcAccuracy(typed);
       accVal.textContent = acc + '%';
+
+      // Calculate WPM in real-time
+      if (testStarted && startTime) {
+        const elapsedSeconds = (Date.now() - startTime) / 1000;
+        const wpm = calcWPM(typed, elapsedSeconds);
+        wpmVal.textContent = wpm;
+      }
 
       // Auto-advance if text complete
       if (typed.length >= currentText.length) {
@@ -237,27 +410,27 @@
       }
     });
 
-    function showResult(typed, elapsed) {
-      const wpm = calcWPM(typed, elapsed);
-      const acc = totalTyped > 0 ? Math.round(((totalTyped - errors) / totalTyped) * 100) : 100;
-      document.getElementById('finalWpm').textContent = wpm;
-      document.getElementById('finalStats').textContent = `Accuracy: ${acc}% | Errors: ${errors} | Characters typed: ${totalTyped}`;
-      resultBox.style.display = 'block';
-    }
-
-    document.querySelectorAll('[data-time]').forEach(btn => {
+    // Duration selector
+    document.querySelectorAll('[data-duration]').forEach(btn => {
       btn.addEventListener('click', () => {
-        duration = parseInt(btn.dataset.time);
-        document.querySelectorAll('[data-time]').forEach(b => b.className = 'btn secondary');
-        btn.className = 'btn';
-        init();
+        duration = parseInt(btn.dataset.duration);
+        document.querySelectorAll('[data-duration]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        resetTest();
       });
     });
 
-    document.getElementById('restartBtn').addEventListener('click', init);
-    document.getElementById('tryAgainBtn').addEventListener('click', init);
+    // Control buttons
+    document.getElementById('restartBtn').addEventListener('click', resetTest);
+    document.getElementById('tryAgainBtn').addEventListener('click', resetTest);
+    document.getElementById('changeTimeBtn').addEventListener('click', () => {
+      resultBox.style.display = 'none';
+      mainControls.style.display = 'flex';
+      resetTest();
+    });
 
-    init();
+    // Initialize
+    resetTest();
   </script>
 </body>
 </html>

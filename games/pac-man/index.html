@@ -1,218 +1,97 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pac-Man - Free Online Game | UpTools</title>
-  <!-- Favicon -->
+  <meta name="description" content="Play Pac-Man online! Eat dots and avoid ghosts in this classic arcade game. Free browser game, no downloads required.">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <link rel="canonical" href="https://www.uptools.in/games/pac-man/" />
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
-  <meta name="description" content="Play Pac-Man online! Eat dots and avoid ghosts in this classic arcade game. Free browser game, no downloads required." />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/style.css?v=1.2.0">
+  <script src="/games/fullscreen-utils.js" defer></script>
   <style>
-    body { 
-      background: #000; 
-      color: #ffff00; 
-      font-family: Arial, sans-serif; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      min-height: 100vh; 
-      margin: 0; 
-      touch-action: manipulation;
-    }
-    .game-container { 
-      text-align: center; 
-      max-width: 600px; 
-      padding: 20px; 
-    }
-    .game-board { 
-      display: grid; 
-      grid-template-columns: repeat(19, 20px); 
-      gap: 1px; 
-      background: #0000ff; 
-      padding: 10px; 
-      border: 3px solid #0000ff; 
-      margin: 20px auto; 
-      max-width: fit-content; 
-      touch-action: none;
-    }
-    .cell { 
-      width: 20px; 
-      height: 20px; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      font-size: 12px; 
-    }
-    .wall { background: #0000ff; }
-    .dot { background: #000; }
-    .dot::after { content: '·'; color: #ffff00; font-size: 16px; }
-    .pacman { background: #000; }
-    .pacman::after { content: '●'; color: #ffff00; font-size: 16px; }
-    .ghost { background: #000; color: #ff0000; font-size: 14px; }
-    .empty { background: #000; }
-    .score { 
-      font-size: 24px; 
-      margin: 10px 0; 
-      color: #ffff00; 
-    }
-    .controls { 
-      margin: 20px 0; 
-    }
-    .mobile-controls {
-      display: none;
-      grid-template-columns: repeat(3, 48px);
-      grid-template-rows: repeat(3, 48px);
-      gap: 8px;
-      justify-content: center;
-      margin: 16px 0;
-    }
-    .mobile-controls .btn {
-      padding: 0;
-      width: 48px;
-      height: 48px;
-      font-size: 18px;
-      line-height: 1;
-    }
-    .mobile-controls .spacer {
-      visibility: hidden;
-    }
-    .btn { 
-      background: #ffff00; 
-      color: #000; 
-      border: none; 
-      padding: 10px 20px; 
-      border-radius: 5px; 
-      cursor: pointer; 
-      margin: 5px; 
-      font-weight: bold; 
-    }
-    .btn:hover { 
-      background: #ffff99; 
-    }
-    .instructions { 
-      margin: 20px 0; 
-      font-size: 14px; 
-      color: #ffff00; 
-    }
+    body { --accent: #ffff00; background: radial-gradient(1200px 600px at 10% -10%, #182033 0%, var(--bg) 45%) fixed; }
+    .game-container { max-width: 700px; margin: 2rem auto; padding: 2rem; background: var(--card); border: 1px solid var(--cardBorder); border-radius: var(--radius); position: relative; }
+    .fullscreen-btn { position: absolute; top: 1rem; right: 1rem; background: var(--accent); color: #000; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-size: 1rem; z-index: 100; transition: all 0.2s ease; font-weight: 600; }
+    .fullscreen-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(255, 255, 0, 0.3); }
+    .exit-fullscreen-btn { position: fixed; top: 1rem; right: 1rem; background: #f44336; color: white; border: none; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 700; z-index: 10000; transition: all 0.2s ease; }
+    .exit-fullscreen-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3); }
+    .fullscreen-mode { position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: var(--bg) !important; z-index: 9999 !important; margin: 0 !important; padding: 1rem !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; overflow: auto !important; }
+    .fullscreen-mode .game-container { max-width: min(90vw, 900px) !important; width: 100% !important; margin: 0 !important; padding: 2rem !important; }
+    .fullscreen-mode .game-board { max-width: min(80vw, 600px) !important; }
+    .fullscreen-mode .stat-val { font-size: min(5vmin, 2rem) !important; }
 
-    /* Fullscreen Styles */
-    .fullscreen-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #ffff00;
-      color: #000;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 100;
-      transition: all 0.2s ease;
-    }
-    .fullscreen-btn:hover {
-      background: #ffff99;
-      transform: scale(1.1);
-    }
+    .game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+    .game-title { margin: 0; font-size: 2rem; }
+    .game-subtitle { color: var(--muted); margin: 0.5rem 0 0 0; font-size: 0.95rem; }
 
-    /* Fullscreen mode styles */
-    .fullscreen-mode {
-      position: fixed !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      background: #000 !important;
-      z-index: 9999 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-    }
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+    .stat-box { background: rgba(255, 255, 255, 0.02); border: 2px solid var(--cardBorder); border-radius: var(--radius); padding: 1rem; text-align: center; transition: all 0.3s ease; }
+    .stat-box:hover { border-color: var(--accent); background: rgba(255, 255, 0, 0.05); }
+    .stat-val { font-size: 1.8rem; font-weight: 900; color: var(--accent); display: block; }
+    .stat-lbl { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
-    .fullscreen-mode .game-container {
-      max-width: none !important;
-      width: 100% !important;
-      height: 100% !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: center !important;
-      padding: 20px !important;
-    }
+    .game-board { background: #0a0a0a; border: 3px solid var(--accent); border-radius: var(--radius); padding: 1rem; margin: 1.5rem 0; display: grid; grid-template-columns: repeat(19, 1fr); gap: 2px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border-radius: 2px; transition: all 0.1s ease; }
+    .cell.wall { background: #0066ff; }
+    .cell.dot { background: #0a0a0a; }
+    .cell.dot::after { content: '·'; color: var(--accent); font-size: 1.5rem; }
+    .cell.pacman { background: #0a0a0a; }
+    .cell.pacman::after { content: '●'; color: var(--accent); font-size: 1.3rem; }
+    .cell.ghost { background: #0a0a0a; font-size: 1.2rem; font-weight: bold; }
+    .cell.empty { background: #0a0a0a; }
 
-    .fullscreen-mode .game-board {
-      grid-template-columns: repeat(19, min(3vmin, 30px)) !important;
-      gap: 1px !important;
-      padding: 20px !important;
-      margin: 20px auto !important;
-    }
+    .controls { display: flex; gap: 0.75rem; justify-content: center; margin: 1.5rem 0; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: #000; border: none; padding: 0.875rem 1.75rem; border-radius: var(--radius); cursor: pointer; font-weight: 700; font-size: 1rem; transition: all 0.3s ease; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(255, 255, 0, 0.3); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text); border: 2px solid var(--cardBorder); padding: 0.75rem 1.5rem; border-radius: var(--radius); cursor: pointer; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; }
+    .btn-secondary:hover { border-color: var(--accent); background: rgba(255, 255, 0, 0.1); }
 
-    .fullscreen-mode .cell {
-      width: min(3vmin, 30px) !important;
-      height: min(3vmin, 30px) !important;
-      font-size: min(2vmin, 16px) !important;
-    }
+    .mobile-controls { display: none; grid-template-columns: repeat(3, 60px); grid-template-rows: repeat(3, 60px); gap: 0.5rem; justify-content: center; margin: 1.5rem 0; }
+    .mobile-controls .btn-control { background: rgba(255, 255, 0, 0.1); border: 2px solid var(--accent); color: var(--accent); padding: 0; width: 60px; height: 60px; border-radius: 0.5rem; cursor: pointer; font-size: 1.5rem; font-weight: bold; transition: all 0.2s ease; }
+    .mobile-controls .btn-control:active { background: rgba(255, 255, 0, 0.3); transform: scale(0.95); }
+    .mobile-controls .spacer { visibility: hidden; }
 
-    /* Exit fullscreen button */
-    .exit-fullscreen-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #ff0000;
-      color: white;
-      border: none;
-      padding: 12px 16px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 10000;
-      transition: all 0.2s ease;
-    }
-    .exit-fullscreen-btn:hover {
-      background: #ff3333;
-      transform: scale(1.05);
-    }
+    .info-section { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--cardBorder); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; }
+    .info-section h3 { color: var(--accent); margin: 0 0 1rem 0; font-size: 1.1rem; }
+    .info-section p { color: var(--muted); line-height: 1.6; margin: 0; }
+    .info-section ul { color: var(--muted); line-height: 1.8; margin: 0; padding-left: 1.5rem; }
 
     @media (max-width: 768px) {
+      .game-container { margin: 1rem; padding: 1.5rem; }
+      .game-board { padding: 0.75rem; gap: 1px; }
+      .cell { font-size: 1rem; }
+      .stats-row { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+      .stat-box { padding: 0.75rem; }
+      .stat-val { font-size: 1.3rem; }
+      .stat-lbl { font-size: 0.7rem; }
       .mobile-controls { display: grid; }
-      .fullscreen-mode .game-board {
-        grid-template-columns: repeat(19, min(4vmin, 25px)) !important;
-        padding: 10px !important;
-      }
-      
-      .fullscreen-mode .cell {
-        width: min(4vmin, 25px) !important;
-        height: min(4vmin, 25px) !important;
-        font-size: min(3vmin, 14px) !important;
-      }
-      
-      .fullscreen-mode .score {
-        font-size: 20px !important;
-      }
-      
-      .fullscreen-mode .controls {
-        margin: 15px 0 !important;
-      }
-      
-      .fullscreen-mode .btn {
-        padding: 12px 16px !important;
-        margin: 3px !important;
-      }
+      .fullscreen-mode .game-board { padding: 1rem !important; }
+    }
+
+    @media (max-width: 480px) {
+      .game-container { margin: 0.5rem; padding: 1rem; }
+      .game-title { font-size: 1.5rem; }
+      .game-board { padding: 0.5rem; gap: 1px; }
+      .cell { font-size: 0.9rem; }
+      .stats-row { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+      .stat-box { padding: 0.5rem; }
+      .stat-val { font-size: 1.1rem; }
+      .stat-lbl { font-size: 0.65rem; }
+      .mobile-controls .btn-control { width: 50px; height: 50px; font-size: 1.2rem; }
+      .controls { gap: 0.5rem; }
+      .btn-primary, .btn-secondary { padding: 0.7rem 1.2rem; font-size: 0.9rem; }
     }
   </style>
-  <link rel="canonical" href="https://www.uptools.in/games/pac-man/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta property="og:title" content="Pac-Man - Free Online Game | UpTools" />
   <meta property="og:description" content="Play Pac-Man online! Eat dots and avoid ghosts in this classic arcade game. Free browser game, no downloads required." />
   <meta property="og:url" content="https://www.uptools.in/games/pac-man/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
-  <!-- Header -->
+  <a href="#main" class="sr-only">Skip to content</a>
   <header class="site" role="banner">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="UpTools Home">
@@ -232,42 +111,86 @@
     </div>
   </header>
 
+  <main id="main" class="wrap" role="main">
+    <div class="game-container">
+      <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶ Fullscreen</button>
+      
+      <div class="game-header">
+        <div>
+          <h1 class="game-title">👻 Pac-Man</h1>
+          <p class="game-subtitle">Eat all dots and avoid the ghosts!</p>
+        </div>
+      </div>
 
-  <div class="game-container" style="position: relative">
-    <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
-    <h1>👻 Pac-Man</h1>
-    <div class="score">Score: <span id="score">0</span></div>
-    
-    <div id="gameBoard" class="game-board"></div>
-    
-    <div class="controls">
-      <button class="btn" id="startBtn">Start Game</button>
-      <button class="btn" id="resetBtn">Reset</button>
-    </div>
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="stat-val" id="scoreVal">0</span>
+          <span class="stat-lbl">Score</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val" id="levelVal">1</span>
+          <span class="stat-lbl">Level</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val" id="dotsVal">0</span>
+          <span class="stat-lbl">Dots Left</span>
+        </div>
+      </div>
 
-    <div class="mobile-controls" aria-label="Mobile controls">
-      <button class="btn spacer" aria-hidden="true"> </button>
-      <button class="btn" data-move="up">↑</button>
-      <button class="btn spacer" aria-hidden="true"> </button>
-      <button class="btn" data-move="left">←</button>
-      <button class="btn spacer" aria-hidden="true"> </button>
-      <button class="btn" data-move="right">→</button>
-      <button class="btn spacer" aria-hidden="true"> </button>
-      <button class="btn" data-move="down">↓</button>
-      <button class="btn spacer" aria-hidden="true"> </button>
+      <div class="game-board" id="gameBoard" role="region" aria-label="Game board"></div>
+
+      <div class="mobile-controls" aria-label="Mobile controls">
+        <button class="btn-control spacer" aria-hidden="true"></button>
+        <button class="btn-control" data-move="up" title="Move up">↑</button>
+        <button class="btn-control spacer" aria-hidden="true"></button>
+        <button class="btn-control" data-move="left" title="Move left">←</button>
+        <button class="btn-control spacer" aria-hidden="true"></button>
+        <button class="btn-control" data-move="right" title="Move right">→</button>
+        <button class="btn-control spacer" aria-hidden="true"></button>
+        <button class="btn-control" data-move="down" title="Move down">↓</button>
+        <button class="btn-control spacer" aria-hidden="true"></button>
+      </div>
+
+      <div class="controls">
+        <button id="startBtn" class="btn-primary">▶ Start Game</button>
+        <button id="resetBtn" class="btn-secondary">↺ Reset</button>
+      </div>
+
+      <div class="info-section">
+        <h3>🎮 How to Play</h3>
+        <ul>
+          <li><strong>Desktop:</strong> Use WASD or Arrow Keys to move Pac-Man</li>
+          <li><strong>Mobile:</strong> Use the arrow buttons or swipe to move</li>
+          <li><strong>Goal:</strong> Eat all the dots while avoiding ghosts</li>
+          <li><strong>Scoring:</strong> Each dot is worth 10 points</li>
+        </ul>
+      </div>
+
+      <div class="info-section">
+        <h3>💡 Tips</h3>
+        <p>Plan your route carefully to avoid getting trapped by ghosts. The ghosts become smarter as you progress through levels. Try to clear all dots quickly to advance to the next level!</p>
+      </div>
+
+      <footer class="note small site-footer" role="contentinfo" style="margin-top: 2rem; text-align: center;">
+        © <span id="y"></span> UpTools . <a href="/games/">Games</a> . <a href="/">Home</a>
+      </footer>
     </div>
-    
-    <div class="instructions">
-      Use WASD or Arrow Keys to move Pac-Man<br>
-      Eat all dots while avoiding ghosts!
-    </div>
-    
-    <div style="margin-top: 20px;">
-      <a href="/games/" class="btn">← Back to Games</a>
-    </div>
-  </div>
+  </main>
 
   <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Initialize fullscreen manager
+    let fullscreenManager = null;
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof FullscreenManager !== 'undefined') {
+        fullscreenManager = new FullscreenManager(
+          document.querySelector('.game-container'),
+          document.getElementById('fullscreenBtn')
+        );
+      }
+    });
+
     class PacManGame {
       constructor() {
         this.board = [
@@ -294,20 +217,29 @@
           [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
         ];
         
+        this.originalBoard = JSON.parse(JSON.stringify(this.board));
         this.pacman = { x: 9, y: 15 };
         this.ghosts = [
-          { x: 9, y: 9, symbol: 'G' }
+          { x: 9, y: 9, symbol: '👻', color: '#ff0000' },
+          { x: 8, y: 10, symbol: '👻', color: '#ff69b4' },
+          { x: 10, y: 10, symbol: '👻', color: '#00ffff' }
         ];
         this.score = 0;
+        this.level = 1;
         this.gameRunning = false;
+        this.gamePaused = false;
         this.ghostInterval = null;
+        this.ghostSpeed = 220;
         
         this.gameBoard = document.getElementById('gameBoard');
-        this.scoreElement = document.getElementById('score');
+        this.scoreVal = document.getElementById('scoreVal');
+        this.levelVal = document.getElementById('levelVal');
+        this.dotsVal = document.getElementById('dotsVal');
         this.startBtn = document.getElementById('startBtn');
         this.resetBtn = document.getElementById('resetBtn');
         
         this.bindEvents();
+        this.updateStats();
         this.renderBoard();
       }
       
@@ -321,18 +253,22 @@
           switch(e.key.toLowerCase()) {
             case 'w':
             case 'arrowup':
+              e.preventDefault();
               this.movePacman(0, -1);
               break;
             case 's':
             case 'arrowdown':
+              e.preventDefault();
               this.movePacman(0, 1);
               break;
             case 'a':
             case 'arrowleft':
+              e.preventDefault();
               this.movePacman(-1, 0);
               break;
             case 'd':
             case 'arrowright':
+              e.preventDefault();
               this.movePacman(1, 0);
               break;
           }
@@ -368,6 +304,7 @@
           const touch = e.changedTouches[0];
           touchStart = { x: touch.clientX, y: touch.clientY };
         }, { passive: true });
+        
         this.gameBoard.addEventListener('touchend', (e) => {
           if (!this.gameRunning || !touchStart) return;
           const touch = e.changedTouches[0];
@@ -388,34 +325,52 @@
       
       startGame() {
         this.gameRunning = true;
-        this.startBtn.textContent = 'Game Running...';
-        this.startBtn.disabled = true;
-        if (this.ghostInterval) {
+        this.startBtn.textContent = '⏸ Pause';
+        this.startBtn.onclick = () => this.togglePause();
+        
+        if (this.ghostInterval) clearInterval(this.ghostInterval);
+        this.ghostInterval = setInterval(() => this.moveGhosts(), this.ghostSpeed);
+      }
+
+      togglePause() {
+        this.gamePaused = !this.gamePaused;
+        this.startBtn.textContent = this.gamePaused ? '▶ Resume' : '⏸ Pause';
+        if (!this.gamePaused && this.ghostInterval === null) {
+          this.ghostInterval = setInterval(() => this.moveGhosts(), this.ghostSpeed);
+        } else if (this.gamePaused && this.ghostInterval) {
           clearInterval(this.ghostInterval);
+          this.ghostInterval = null;
         }
-        this.ghostInterval = setInterval(() => {
-          this.moveGhosts();
-        }, 220);
       }
       
       resetGame() {
         this.gameRunning = false;
+        this.gamePaused = false;
         this.score = 0;
+        this.level = 1;
+        this.ghostSpeed = 220;
         this.pacman = { x: 9, y: 15 };
         this.ghosts = [
-          { x: 9, y: 9, symbol: 'G' }
+          { x: 9, y: 9, symbol: '👻', color: '#ff0000' },
+          { x: 8, y: 10, symbol: '👻', color: '#ff69b4' },
+          { x: 10, y: 10, symbol: '👻', color: '#00ffff' }
         ];
+        this.board = JSON.parse(JSON.stringify(this.originalBoard));
+        
         if (this.ghostInterval) {
           clearInterval(this.ghostInterval);
           this.ghostInterval = null;
         }
-        this.updateScore();
+        
+        this.startBtn.textContent = '▶ Start Game';
+        this.startBtn.onclick = () => this.startGame();
+        this.updateStats();
         this.renderBoard();
-        this.startBtn.textContent = 'Start Game';
-        this.startBtn.disabled = false;
       }
       
       movePacman(dx, dy) {
+        if (this.gamePaused) return;
+        
         const newX = this.pacman.x + dx;
         const newY = this.pacman.y + dy;
         
@@ -426,7 +381,7 @@
           if (this.board[newY][newX] === 2) {
             this.board[newY][newX] = 0;
             this.score += 10;
-            this.updateScore();
+            this.updateStats();
           }
           
           this.renderBoard();
@@ -442,6 +397,8 @@
       }
       
       moveGhosts() {
+        if (this.gamePaused) return;
+        
         this.ghosts = this.ghosts.map((ghost) => {
           const moves = [
             { dx: 0, dy: -1 },
@@ -451,8 +408,10 @@
           ].filter(move => this.isValidMove(ghost.x + move.dx, ghost.y + move.dy));
 
           if (!moves.length) return ghost;
-          const chase = Math.random() < 0.7;
+          
+          const chase = Math.random() < (0.5 + this.level * 0.1);
           let move = moves[Math.floor(Math.random() * moves.length)];
+          
           if (chase) {
             move = moves.reduce((best, current) => {
               const bestDist = Math.abs((ghost.x + best.dx) - this.pacman.x) +
@@ -462,6 +421,7 @@
               return currentDist < bestDist ? current : best;
             }, move);
           }
+          
           return { ...ghost, x: ghost.x + move.dx, y: ghost.y + move.dy };
         });
 
@@ -482,7 +442,8 @@
             } else if (this.ghosts.some(ghost => ghost.x === x && ghost.y === y)) {
               cell.className += ' ghost';
               const ghost = this.ghosts.find(g => g.x === x && g.y === y);
-              cell.innerHTML = ghost.symbol;
+              cell.textContent = ghost.symbol;
+              cell.style.color = ghost.color;
             } else {
               switch(this.board[y][x]) {
                 case 1:
@@ -504,68 +465,45 @@
       checkWin() {
         const dotsRemaining = this.board.flat().filter(cell => cell === 2).length;
         if (dotsRemaining === 0) {
-          alert('You Win! All dots collected!');
-          this.resetGame();
+          this.gameRunning = false;
+          this.level++;
+          this.ghostSpeed = Math.max(100, this.ghostSpeed - 20);
+          alert(`🎉 Level ${this.level - 1} Complete! Starting Level ${this.level}...`);
+          this.board = JSON.parse(JSON.stringify(this.originalBoard));
+          this.pacman = { x: 9, y: 15 };
+          this.ghosts = [
+            { x: 9, y: 9, symbol: '👻', color: '#ff0000' },
+            { x: 8, y: 10, symbol: '👻', color: '#ff69b4' },
+            { x: 10, y: 10, symbol: '👻', color: '#00ffff' }
+          ];
+          this.updateStats();
+          this.renderBoard();
+          this.startBtn.textContent = '▶ Start Game';
+          this.startBtn.onclick = () => this.startGame();
         }
       }
 
       checkLoss() {
         const hitGhost = this.ghosts.some(ghost => ghost.x === this.pacman.x && ghost.y === this.pacman.y);
         if (hitGhost) {
-          alert('Game Over! A ghost caught you!');
+          this.gameRunning = false;
+          alert('💀 Game Over! A ghost caught you!');
           this.resetGame();
         }
       }
       
-      updateScore() {
-        this.scoreElement.textContent = this.score;
+      updateStats() {
+        this.scoreVal.textContent = this.score;
+        this.levelVal.textContent = this.level;
+        const dotsRemaining = this.board.flat().filter(cell => cell === 2).length;
+        this.dotsVal.textContent = dotsRemaining;
       }
     }
     
-    // Initialize game when page loads
+    // Initialize game
+    let game = null;
     document.addEventListener('DOMContentLoaded', () => {
-      new PacManGame();
-      
-      // Fullscreen functionality
-      const fullscreenBtn = document.getElementById('fullscreenBtn');
-      let isFullscreen = false;
-      let exitFullscreenBtn = null;
-
-      function enterFullscreen() {
-        isFullscreen = true;
-        document.body.classList.add('fullscreen-mode');
-        
-        // Create exit button
-        exitFullscreenBtn = document.createElement('button');
-        exitFullscreenBtn.className = 'exit-fullscreen-btn';
-        exitFullscreenBtn.innerHTML = '✕ Exit Fullscreen';
-        exitFullscreenBtn.onclick = exitFullscreen;
-        document.body.appendChild(exitFullscreenBtn);
-        
-        fullscreenBtn.style.display = 'none';
-      }
-
-      function exitFullscreen() {
-        isFullscreen = false;
-        document.body.classList.remove('fullscreen-mode');
-        
-        // Remove exit button
-        if (exitFullscreenBtn) {
-          exitFullscreenBtn.remove();
-          exitFullscreenBtn = null;
-        }
-        
-        fullscreenBtn.style.display = 'block';
-      }
-
-      fullscreenBtn.addEventListener('click', enterFullscreen);
-
-      // Exit fullscreen on Escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isFullscreen) {
-          exitFullscreen();
-        }
-      });
+      game = new PacManGame();
     });
   </script>
 </body>
