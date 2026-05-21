@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
@@ -124,101 +124,85 @@
     .toggle{ display:inline-flex; align-items:center; gap:.5rem; cursor:pointer; user-select:none }
     .toggle input{ accent-color:var(--accent) }
 
-    /* D-Pad (mobile) */
-    .dpad{ display:grid; grid-template-columns:repeat(3,64px); gap:.5rem; place-content:center; margin-top:.75rem }
-    .dpad .cbtn{
-      width:64px; height:64px; border-radius:.75rem; border:2px solid var(--cardBorder);
-      background:#0f151f; display:grid; place-items:center; font-size:1.25rem; color:var(--text);
-      transition:transform .1s ease, background .1s ease, border-color .1s ease;
+    /* D-Pad (mobile) - Responsive and touch-friendly */
+    .dpad{ 
+      display:none; 
+      grid-template-columns:repeat(3, 1fr); 
+      gap:.75rem; 
+      place-content:center; 
+      margin-top:.75rem;
+      max-width: 240px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .cbtn:active{ transform: scale(.96); background:var(--accent); color:white; border-color:var(--accent) }
+    .dpad .cbtn{
+      aspect-ratio: 1;
+      min-width: 60px;
+      border-radius:.75rem; 
+      border:2px solid var(--cardBorder);
+      background:#0f151f; 
+      display:grid; 
+      place-items:center; 
+      font-size:1.5rem; 
+      color:var(--text);
+      transition:transform .1s ease, background .1s ease, border-color .1s ease;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+    .cbtn:active, .cbtn:focus { 
+      transform: scale(.92); 
+      background:var(--accent); 
+      color:white; 
+      border-color:var(--accent);
+      outline: none;
+    }
+    .cbtn:hover {
+      border-color: var(--accent);
+      background: rgba(76, 175, 80, 0.1);
+    }
     .up{ grid-column:2 }
     .left{ grid-column:1; grid-row:2 }
     .right{ grid-column:3; grid-row:2 }
     .down{ grid-column:2; grid-row:3 }
 
-    @media(min-width:768px){ .dpad{ display:none } }
+    @media(max-width:767px){ 
+      .dpad{ display:grid } 
+      .hud {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
     .help ul{ margin:.25rem 0 0; padding-left:1.25rem; color:var(--muted) }
     .help li{ margin:.25rem 0 }
 
-    /* Fullscreen Styles */
+    /* Fullscreen button */
     .fullscreen-btn {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
+      top: 0.75rem;
+      right: 0.75rem;
       background: var(--accent);
       color: white;
       border: none;
-      padding: 0.5rem;
+      padding: 0.5rem 0.75rem;
       border-radius: 0.5rem;
       cursor: pointer;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       z-index: 100;
       transition: all 0.2s ease;
+      font-weight: 600;
     }
     .fullscreen-btn:hover {
-      transform: scale(1.1);
+      transform: scale(1.08);
       box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
     }
-
-    /* Fullscreen mode styles */
-    .fullscreen-mode {
-      position: fixed !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      background: var(--bg) !important;
-      z-index: 9999 !important;
-      margin: 0 !important;
-      padding: 1rem !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: center !important;
-    }
-
-    .fullscreen-mode .container {
-      display: none !important;
-    }
-
-    .fullscreen-mode .game-wrap {
-      max-width: none !important;
-      width: 100% !important;
-      height: 100% !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: center !important;
-      gap: 1rem !important;
-    }
-
-    .fullscreen-mode .panel {
-      width: 100% !important;
-      max-width: min(90vmin, 800px) !important;
-      margin: 0 !important;
-    }
-
-    .fullscreen-mode .board-outer {
-      padding: 0.5rem !important;
-    }
-
-    .fullscreen-mode .board-inner {
-      max-width: min(85vmin, 700px) !important;
-    }
-
-    .fullscreen-mode .hud {
-      margin-bottom: 1rem !important;
-    }
-
-    .fullscreen-mode .dpad {
-      display: grid !important;
-      margin-top: 1rem !important;
+    .fullscreen-btn:active {
+      transform: scale(0.96);
     }
 
     /* Exit fullscreen button */
-    .exit-fullscreen-btn {
+    #exitFullscreenBtn {
       position: fixed;
       top: 1rem;
       right: 1rem;
@@ -231,28 +215,176 @@
       font-weight: 700;
       z-index: 10000;
       transition: all 0.2s ease;
+      font-size: 0.95rem;
     }
-    .exit-fullscreen-btn:hover {
+    #exitFullscreenBtn:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
     }
 
-    @media (max-width: 768px) {
-      .fullscreen-mode .panel {
-        padding: 0.5rem !important;
-      }
-      
-      .fullscreen-mode .hud {
+    /* Fullscreen mode styles */
+    .fullscreen-active {
+      overflow: hidden !important;
+    }
+
+    .game-container.fullscreen-mode,
+    .game-container.css-fullscreen-mode {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      background: var(--bg) !important;
+      z-index: 9999 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      border-radius: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    .game-container.fullscreen-mode .board-outer,
+    .game-container.css-fullscreen-mode .board-outer {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: min(95vmin, 95vh) !important;
+      max-height: min(95vmin, 95vh) !important;
+      padding: 0 !important;
+      border: none !important;
+      background: transparent !important;
+    }
+
+    .game-container.fullscreen-mode .board-inner,
+    .game-container.css-fullscreen-mode .board-inner {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: none !important;
+      max-height: none !important;
+    }
+
+    .game-container.fullscreen-mode canvas,
+    .game-container.css-fullscreen-mode canvas {
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .game-container.fullscreen-mode .hud,
+    .game-container.css-fullscreen-mode .hud {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      max-width: 400px;
+      background: rgba(30, 38, 52, 0.9);
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--cardBorder);
+      backdrop-filter: blur(4px);
+    }
+
+    .game-container.fullscreen-mode .hud .kpi,
+    .game-container.css-fullscreen-mode .hud .kpi {
+      padding: 0.4rem 0.5rem !important;
+    }
+
+    .game-container.fullscreen-mode .hud .kpi .value,
+    .game-container.css-fullscreen-mode .hud .kpi .value {
+      font-size: 1rem !important;
+    }
+
+    .game-container.fullscreen-mode .hud .kpi .label,
+    .game-container.css-fullscreen-mode .hud .kpi .label {
+      font-size: 0.7rem !important;
+    }
+
+    .game-container.fullscreen-mode .dpad,
+    .game-container.css-fullscreen-mode .dpad {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: grid !important;
+      grid-template-columns: repeat(3, 70px);
+      gap: 0.5rem;
+      max-width: 240px;
+    }
+
+    .game-container.fullscreen-mode .dpad .cbtn,
+    .game-container.css-fullscreen-mode .dpad .cbtn {
+      width: 70px !important;
+      height: 70px !important;
+      font-size: 1.8rem !important;
+    }
+
+    @media (max-width: 600px) {
+      .game-container.fullscreen-mode .hud,
+      .game-container.css-fullscreen-mode .hud {
         grid-template-columns: repeat(2, 1fr) !important;
+        top: 0.5rem !important;
+        left: 0.5rem !important;
+        right: 0.5rem !important;
+        max-width: none !important;
+      }
+
+      .game-container.fullscreen-mode .dpad,
+      .game-container.css-fullscreen-mode .dpad {
+        grid-template-columns: repeat(3, 60px) !important;
+        bottom: 0.5rem !important;
+      }
+
+      .game-container.fullscreen-mode .dpad .cbtn,
+      .game-container.css-fullscreen-mode .dpad .cbtn {
+        width: 60px !important;
+        height: 60px !important;
+        font-size: 1.5rem !important;
+      }
+    }
+
+    @media (orientation: landscape) and (max-height: 500px) {
+      .game-container.fullscreen-mode .hud,
+      .game-container.css-fullscreen-mode .hud {
+        grid-template-columns: repeat(4, 1fr) !important;
+        top: 0.5rem !important;
+        max-width: 100% !important;
+        width: auto !important;
+      }
+
+      .game-container.fullscreen-mode .dpad,
+      .game-container.css-fullscreen-mode .dpad {
+        grid-template-columns: repeat(3, 50px) !important;
+        bottom: 0.5rem !important;
+      }
+
+      .game-container.fullscreen-mode .dpad .cbtn,
+      .game-container.css-fullscreen-mode .dpad .cbtn {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 1.2rem !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hud {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .dpad {
+        grid-template-columns: repeat(3, 50px) !important;
         gap: 0.5rem !important;
       }
-      
-      .fullscreen-mode .hud .kpi {
-        padding: 0.4rem 0.5rem !important;
-      }
-      
-      .fullscreen-mode .kpi .value {
-        font-size: 1.1rem !important;
+
+      .dpad .cbtn {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 1.2rem !important;
       }
     }
   </style>
@@ -265,7 +397,7 @@
         <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
         <b>UpTools</b>
       </a>
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">?</button>
       <nav class="nav-links" aria-label="Primary">
         <a href="/#tools">Tools</a>
         <a href="/income-tax-tool/">Income Tax</a>
@@ -289,14 +421,14 @@
   </script>
   <div class="container">
     <div class="tool-header">
-      <button id="backSmart" class="back-btn" type="button" aria-label="Back to games">← Back</button>
-      <h1>🐍 Snake <span class="badge">No ads interrupting gameplay</span></h1>
+      <button id="backSmart" class="back-btn" type="button" aria-label="Back to games">? Back</button>
+      <h1>?? Snake <span class="badge">No ads interrupting gameplay</span></h1>
       <p>Fast, responsive, and privacy-first. Arrow keys / swipe to play.</p>
     </div>
 
     <div class="game-wrap">
       <!-- Left: Game -->
-      <section class="panel">
+      <section class="panel game-container">
         <div class="hud" aria-live="polite">
           <div class="kpi"><div class="value" id="score">0</div><div class="label">Score</div></div>
           <div class="kpi"><div class="value" id="length">1</div><div class="label">Length</div></div>
@@ -305,7 +437,7 @@
         </div>
 
         <div class="board-outer" id="boardWrap">
-          <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
+          <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">?</button>
           <div class="board-inner">
             <canvas id="game"></canvas>
 
@@ -347,10 +479,10 @@
 
         <!-- Mobile D-Pad -->
         <div class="dpad" aria-label="Directional controls">
-          <button class="cbtn up" data-dir="up" aria-label="Up">⬆️</button>
-          <button class="cbtn left" data-dir="left" aria-label="Left">⬅️</button>
-          <button class="cbtn right" data-dir="right" aria-label="Right">➡️</button>
-          <button class="cbtn down" data-dir="down" aria-label="Down">⬇️</button>
+          <button class="cbtn up" data-dir="up" aria-label="Up">??</button>
+          <button class="cbtn left" data-dir="left" aria-label="Left">??</button>
+          <button class="cbtn right" data-dir="right" aria-label="Right">??</button>
+          <button class="cbtn down" data-dir="down" aria-label="Down">??</button>
         </div>
       </section>
 
@@ -363,16 +495,16 @@
               <option value="easy">Easy (slow)</option>
               <option value="normal" selected>Normal</option>
               <option value="hard">Hard (fast)</option>
-              <option value="extreme">Extreme ⚡</option>
+              <option value="extreme">Extreme ?</option>
             </select>
           </div>
           <div class="field">
             <label for="gridSize">Board Size (tiles)</label>
             <select id="gridSize">
-              <option value="16">Small (16×16)</option>
-              <option value="20" selected>Classic (20×20)</option>
-              <option value="24">Large (24×24)</option>
-              <option value="32">XL (32×32)</option>
+              <option value="16">Small (16�16)</option>
+              <option value="20" selected>Classic (20�20)</option>
+              <option value="24">Large (24�24)</option>
+              <option value="32">XL (32�32)</option>
             </select>
           </div>
           <div class="row">
@@ -388,7 +520,7 @@
         </div>
 
         <div class="panel help" style="margin-top:1rem">
-          <h3 style="color:var(--accent); margin:0 0 .25rem">🎮 How to Play</h3>
+          <h3 style="color:var(--accent); margin:0 0 .25rem">?? How to Play</h3>
           <ul>
             <li><b>Desktop:</b> Arrow keys to steer, <b>Space</b> to pause/resume.</li>
             <li><b>Mobile:</b> Swipe or use the D-pad.</li>
@@ -400,6 +532,7 @@
     </div>
   </div>
 
+  <script src="/games/fullscreen-utils.js"></script>
   <script>
     (() => {
       // ----- Utilities
@@ -709,7 +842,7 @@
       $("#resumeBtn").addEventListener("click", resume);
       $("#againBtn").addEventListener("click", start);
       $("#shareBtn").addEventListener("click", async () => {
-        const txt = `I scored ${score} on 🐍 Snake at UpTools! https://www.uptools.in/games/snake`;
+        const txt = `I scored ${score} on ?? Snake at UpTools! https://www.uptools.in/games/snake`;
         try {
           await navigator.clipboard.writeText(txt);
           alert("Copied score to clipboard!");
@@ -719,7 +852,7 @@
       $("#resetBtn").addEventListener("click", () => {
         reset(); draw(); show(startOverlay);
       });
-      $("#saveSettingsBtn").addEventListener("click", () => { saveSettings(); alert("Saved as default ✅"); });
+      $("#saveSettingsBtn").addEventListener("click", () => { saveSettings(); alert("Saved as default ?"); });
 
       // Settings live effects
       selDifficulty.addEventListener("change", () => { setDifficulty(selDifficulty.value) });
@@ -743,7 +876,7 @@
         }
       });
 
-      // D-pad
+      // D-pad - Touch-friendly with better event handling
       document.querySelectorAll(".cbtn").forEach(btn=>{
         btn.addEventListener("click", ()=>{
           const d = btn.dataset.dir;
@@ -753,6 +886,17 @@
           if (d==="left") setDir(-1,0);
           if (d==="right") setDir(1,0);
         });
+        
+        // Add touch feedback for better mobile UX
+        btn.addEventListener("touchstart", (e) => {
+          e.preventDefault();
+          btn.style.transform = "scale(0.92)";
+        }, { passive: false });
+        
+        btn.addEventListener("touchend", (e) => {
+          e.preventDefault();
+          btn.style.transform = "";
+        }, { passive: false });
       });
 
       // Swipe gestures
@@ -797,7 +941,7 @@
         // Create exit button
         exitFullscreenBtn = document.createElement('button');
         exitFullscreenBtn.className = 'exit-fullscreen-btn';
-        exitFullscreenBtn.innerHTML = '✕ Exit Fullscreen';
+        exitFullscreenBtn.innerHTML = '? Exit Fullscreen';
         exitFullscreenBtn.onclick = exitFullscreen;
         document.body.appendChild(exitFullscreenBtn);
         
@@ -854,3 +998,5 @@
   </script>
 </body>
 </html>
+
+

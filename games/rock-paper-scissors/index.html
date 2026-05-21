@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,397 +7,61 @@
   <meta name="description" content="Play Rock Paper Scissors online! Classic game with AI opponent, score tracking, and fun animations. No downloads required.">
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <link rel="canonical" href="https://www.uptools.in/games/rock-paper-scissors/" />
-  
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="stylesheet" href="/style.css?v=1.2.0">
-  
+  <script src="/games/fullscreen-utils.js" defer></script>
+  <script src="/games/multiplayer-utils.js" defer></script>
   <style>
-    body {
-      --accent: #ff6b6b;
-      background: radial-gradient(1200px 600px at 10% -10%, #182033 0%, var(--bg) 45%) fixed;
-    }
-
-    .game-container {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: var(--card);
-      border: 1px solid var(--cardBorder);
-      border-radius: var(--radius);
-      text-align: center;
-    }
-
-    .score-board {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 1rem;
-      margin: 2rem 0;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.02);
-      border-radius: var(--radius);
-    }
-
-    .score {
-      font-size: 2rem;
-      font-weight: bold;
-      color: var(--accent);
-    }
-
-    .vs {
-      display: flex;
-      align-items: center;
-      font-size: 1.2rem;
-      color: var(--muted);
-    }
-
-    .choices {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-
-    .choice-btn {
-      background: var(--card);
-      border: 2px solid var(--cardBorder);
-      border-radius: var(--radius);
-      padding: 2rem 1rem;
-      font-size: 3rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .choice-btn:hover {
-      border-color: var(--accent);
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
-    }
-
-    .choice-btn:active {
-      transform: translateY(-2px);
-    }
-
-    .choice-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    .choice-btn:hover::before {
-      left: 100%;
-    }
-
-    .choice-label {
-      display: block;
-      font-size: 1rem;
-      margin-top: 0.5rem;
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .battle-area {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 2rem;
-      align-items: center;
-      margin: 2rem 0;
-      min-height: 150px;
-    }
-
-    .player-choice, .computer-choice {
-      font-size: 4rem;
-      padding: 1rem;
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid var(--cardBorder);
-      transition: all 0.5s ease;
-    }
-
-    .player-choice.winner, .computer-choice.winner {
-      border-color: #4CAF50;
-      box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
-      animation: winner-glow 1s ease-in-out;
-    }
-
-    .player-choice.loser, .computer-choice.loser {
-      border-color: #f44336;
-      opacity: 0.6;
-    }
-
-    @keyframes winner-glow {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
-    .vs-text {
-      font-size: 1.5rem;
-      color: var(--muted);
-      font-weight: bold;
-    }
-
-    .result {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin: 1rem 0;
-      min-height: 2rem;
-      transition: all 0.3s ease;
-    }
-
-    .result.win {
-      color: #4CAF50;
-      animation: result-bounce 0.5s ease;
-    }
-
-    .result.lose {
-      color: #f44336;
-      animation: result-shake 0.5s ease;
-    }
-
-    .result.tie {
-      color: #ff9800;
-    }
-
-    @keyframes result-bounce {
-      0%, 20%, 60%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-10px); }
-      80% { transform: translateY(-5px); }
-    }
-
-    @keyframes result-shake {
-      0%, 100% { transform: translateX(0); }
-      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-      20%, 40%, 60%, 80% { transform: translateX(5px); }
-    }
-
-    .reset-btn {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 1rem 2rem;
-      border-radius: var(--radius);
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 1rem;
-    }
-
-    .reset-btn:hover {
-      background: color-mix(in srgb, var(--accent) 80%, white);
-      transform: translateY(-2px);
-    }
-
-    .game-rules {
-      margin-top: 2rem;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.02);
-      border-radius: var(--radius);
-      text-align: left;
-    }
-
-    .game-rules h3 {
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-
-    .game-rules ul {
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* Multiplayer Styles */
-    .game-mode-selector {
-      display: flex;
-      gap: 0.5rem;
-      justify-content: center;
-      margin: 1rem 0;
-    }
-
-    .mode-btn {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text);
-      border: 1px solid var(--cardBorder);
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 600;
-    }
-
-    .mode-btn.active {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-    }
-
-    .mode-btn:hover:not(.active) {
-      border-color: var(--accent);
-      background: rgba(255, 107, 107, 0.1);
-    }
-
-    .multiplayer-choice {
-      opacity: 0.5;
-      pointer-events: none;
-    }
-
-    .multiplayer-choice.enabled {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .waiting-indicator {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      text-align: center;
-    }
-
-    .player-turn {
-      border: 2px solid var(--accent);
-      box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
-    }
-
+    body { --accent: #ff6b6b; background: radial-gradient(1200px 600px at 10% -10%, #182033 0%, var(--bg) 45%) fixed; }
+    .game-container { max-width: 600px; margin: 2rem auto; padding: 2rem; background: var(--card); border: 1px solid var(--cardBorder); border-radius: var(--radius); text-align: center; position: relative; }
+    .score-board { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; margin: 2rem 0; padding: 1rem; background: rgba(255, 255, 255, 0.02); border-radius: var(--radius); }
+    .score { font-size: 2rem; font-weight: bold; color: var(--accent); }
+    .vs { display: flex; align-items: center; font-size: 1.2rem; color: var(--muted); }
+    .choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+    .choice-btn { background: var(--card); border: 2px solid var(--cardBorder); border-radius: var(--radius); padding: 2rem 1rem; font-size: 3rem; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .choice-btn:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3); }
+    .choice-btn:active { transform: translateY(-2px); }
+    .choice-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.2), transparent); transition: left 0.5s; }
+    .choice-btn:hover::before { left: 100%; }
+    .choice-label { display: block; font-size: 1rem; margin-top: 0.5rem; color: var(--text); font-weight: 600; }
+    .battle-area { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: center; margin: 2rem 0; min-height: 150px; }
+    .player-choice, .computer-choice { font-size: 4rem; padding: 1rem; border-radius: var(--radius); background: rgba(255, 255, 255, 0.05); border: 2px solid var(--cardBorder); transition: all 0.5s ease; }
+    .player-choice.winner, .computer-choice.winner { border-color: #4CAF50; box-shadow: 0 0 20px rgba(76, 175, 80, 0.5); animation: winner-glow 1s ease-in-out; }
+    .player-choice.loser, .computer-choice.loser { border-color: #f44336; opacity: 0.6; }
+    @keyframes winner-glow { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    .vs-text { font-size: 1.5rem; color: var(--muted); font-weight: bold; }
+    .result { font-size: 1.5rem; font-weight: bold; margin: 1rem 0; min-height: 2rem; transition: all 0.3s ease; }
+    .result.win { color: #4CAF50; animation: result-bounce 0.5s ease; }
+    .result.lose { color: #f44336; animation: result-shake 0.5s ease; }
+    .result.tie { color: #ff9800; }
+    @keyframes result-bounce { 0%, 20%, 60%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 80% { transform: translateY(-5px); } }
+    @keyframes result-shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); } 20%, 40%, 60%, 80% { transform: translateX(5px); } }
+    .reset-btn { background: var(--accent); color: white; border: none; padding: 1rem 2rem; border-radius: var(--radius); font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; margin-top: 1rem; }
+    .reset-btn:hover { background: color-mix(in srgb, var(--accent) 80%, white); transform: translateY(-2px); }
+    .game-rules { margin-top: 2rem; padding: 1rem; background: rgba(255, 255, 255, 0.02); border-radius: var(--radius); text-align: left; }
+    .game-rules h3 { color: var(--accent); margin-bottom: 1rem; }
+    .game-rules ul { color: var(--muted); line-height: 1.6; }
+    .game-mode-selector { display: flex; gap: 0.5rem; justify-content: center; margin: 1rem 0; }
+    .mode-btn { background: rgba(255, 255, 255, 0.05); color: var(--text); border: 1px solid var(--cardBorder); padding: 0.75rem 1.5rem; border-radius: var(--radius); cursor: pointer; transition: all 0.3s ease; font-weight: 600; }
+    .mode-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+    .mode-btn:hover:not(.active) { border-color: var(--accent); background: rgba(255, 107, 107, 0.1); }
+    .fullscreen-btn { position: absolute; top: 1rem; right: 1rem; background: var(--accent); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-size: 1rem; z-index: 100; transition: all 0.2s ease; font-weight: 600; }
+    .fullscreen-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3); }
+    .exit-fullscreen-btn { position: fixed; top: 1rem; right: 1rem; background: #f44336; color: white; border: none; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 700; z-index: 10000; transition: all 0.2s ease; }
+    .exit-fullscreen-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3); }
+    .fullscreen-mode { position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: var(--bg) !important; z-index: 9999 !important; margin: 0 !important; padding: 1rem !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; }
+    .fullscreen-mode .game-container { max-width: min(90vmin, 800px) !important; width: 100% !important; margin: 0 !important; padding: 2rem !important; }
+    .fullscreen-mode .choice-btn { font-size: min(8vmin, 4rem) !important; padding: min(4vmin, 2rem) min(2vmin, 1rem) !important; }
+    .fullscreen-mode .player-choice, .fullscreen-mode .computer-choice { font-size: min(10vmin, 5rem) !important; }
     @media (max-width: 768px) {
-      .game-container {
-        margin: 1rem;
-        padding: 1rem;
-      }
-      
-      .choices {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-      }
-      
-      .choice-btn {
-        padding: 1rem;
-        font-size: 2rem;
-      }
-      
-      .battle-area {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        text-align: center;
-      }
-      
-      .player-choice, .computer-choice {
-        font-size: 3rem;
-      }
-    }
-
-    /* Fullscreen Styles */
-    .fullscreen-btn {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      font-size: 1.2rem;
-      z-index: 100;
-      transition: all 0.2s ease;
-    }
-    .fullscreen-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-    }
-
-    /* Fullscreen mode styles */
-    .fullscreen-mode {
-      position: fixed !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      background: var(--bg) !important;
-      z-index: 9999 !important;
-      margin: 0 !important;
-      padding: 1rem !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: center !important;
-    }
-
-    .fullscreen-mode header {
-      display: none !important;
-    }
-
-    .fullscreen-mode .container {
-      width: 100% !important;
-      height: 100% !important;
-      margin: 0 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: center !important;
-    }
-
-    .fullscreen-mode .game-container {
-      max-width: min(90vmin, 800px) !important;
-      width: 100% !important;
-      margin: 0 !important;
-      padding: 2rem !important;
-    }
-
-    .fullscreen-mode .choice-btn {
-      font-size: min(8vmin, 4rem) !important;
-      padding: min(4vmin, 2rem) min(2vmin, 1rem) !important;
-    }
-
-    .fullscreen-mode .player-choice, 
-    .fullscreen-mode .computer-choice {
-      font-size: min(10vmin, 5rem) !important;
-    }
-
-    /* Exit fullscreen button */
-    .exit-fullscreen-btn {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: #f44336;
-      color: white;
-      border: none;
-      padding: 0.75rem 1rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      font-weight: 700;
-      z-index: 10000;
-      transition: all 0.2s ease;
-    }
-    .exit-fullscreen-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
-    }
-
-    @media (max-width: 768px) {
-      .fullscreen-mode .game-container {
-        padding: 1rem !important;
-      }
-      
-      .fullscreen-mode .choice-btn {
-        font-size: min(12vmin, 3rem) !important;
-        padding: min(3vmin, 1.5rem) min(2vmin, 1rem) !important;
-      }
-      
-      .fullscreen-mode .player-choice, 
-      .fullscreen-mode .computer-choice {
-        font-size: min(15vmin, 4rem) !important;
-      }
+      .game-container { margin: 1rem; padding: 1rem; }
+      .choices { grid-template-columns: 1fr; gap: 0.5rem; }
+      .choice-btn { padding: 1rem; font-size: 2rem; }
+      .battle-area { grid-template-columns: 1fr; gap: 1rem; text-align: center; }
+      .player-choice, .computer-choice { font-size: 3rem; }
+      .fullscreen-mode .game-container { padding: 1rem !important; }
+      .fullscreen-mode .choice-btn { font-size: min(12vmin, 3rem) !important; padding: min(3vmin, 1.5rem) min(2vmin, 1rem) !important; }
+      .fullscreen-mode .player-choice, .fullscreen-mode .computer-choice { font-size: min(15vmin, 4rem) !important; }
     }
   </style>
   <meta property="og:title" content="Rock Paper Scissors - Free Online Game | UpTools" />
@@ -406,7 +70,7 @@
   <meta property="og:type" content="website" />
 </head>
 <body>
-    <!-- Header -->
+  <a href="#main" class="sr-only">Skip to content</a>
   <header class="site" role="banner">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="UpTools Home">
@@ -425,20 +89,15 @@
       </nav>
     </div>
   </header>
-
-  <main class="wrap">
-    <div class="game-container" style="position: relative">
-      <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
+  <main id="main" class="wrap" role="main">
+    <div class="game-container">
+      <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶ Fullscreen</button>
       <h1>🪨📄✂️ Rock Paper Scissors</h1>
       <p id="gameDescription">Choose your weapon and battle the computer!</p>
-
-      <!-- Game Mode Selector -->
-      <div class="game-mode-selector" style="margin: 1rem 0; text-align: center;">
+      <div class="game-mode-selector">
         <button class="mode-btn active" data-mode="computer">🤖 vs Computer</button>
         <button class="mode-btn" data-mode="multiplayer">👥 Multiplayer</button>
       </div>
-
-      <!-- Multiplayer Setup -->
       <div id="multiplayerSetup" style="display: none; margin: 1rem 0; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: var(--radius);">
         <div id="createGame" style="text-align: center;">
           <h3>Create Multiplayer Game</h3>
@@ -446,7 +105,6 @@
           <br>
           <button class="reset-btn" onclick="createMultiplayerGame()">Create Game & Get Link</button>
         </div>
-        
         <div id="joinGame" style="text-align: center; margin-top: 1rem;">
           <h3>Join Game</h3>
           <input type="text" id="gameCode" placeholder="Enter game code" style="padding: 0.5rem; margin: 0.5rem; border-radius: 0.5rem; border: 1px solid var(--cardBorder); background: var(--card); color: var(--text);">
@@ -454,7 +112,6 @@
           <br>
           <button class="reset-btn" onclick="joinMultiplayerGame()">Join Game</button>
         </div>
-
         <div id="gameLink" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(76, 175, 80, 0.1); border-radius: 0.5rem;">
           <h4>Share this link with your friend:</h4>
           <div style="display: flex; gap: 0.5rem; align-items: center;">
@@ -462,18 +119,15 @@
             <button class="reset-btn" onclick="copyGameLink(this)">Copy Link</button>
           </div>
         </div>
-
         <div id="waitingForPlayer" style="display: none; text-align: center; margin-top: 1rem;">
           <h3>⏳ Waiting for opponent...</h3>
           <p>Share the link above with your friend to start playing!</p>
         </div>
-
         <div id="multiplayerStatus" style="display: none; text-align: center; margin-top: 1rem;">
           <h3 id="statusMessage">Connected!</h3>
           <p id="playersInfo"></p>
         </div>
       </div>
-
       <div class="score-board">
         <div>
           <div id="player1Label">You</div>
@@ -485,7 +139,6 @@
           <div class="score" id="computerScore">0</div>
         </div>
       </div>
-
       <div class="choices">
         <button class="choice-btn" data-choice="rock">
           🪨
@@ -500,17 +153,13 @@
           <span class="choice-label">Scissors</span>
         </button>
       </div>
-
       <div class="battle-area">
         <div class="player-choice" id="playerChoice">❓</div>
         <div class="vs-text">VS</div>
         <div class="computer-choice" id="computerChoice">❓</div>
       </div>
-
       <div class="result" id="result">Choose your move!</div>
-
       <button class="reset-btn" id="resetBtn">Reset Game</button>
-
       <div class="game-rules">
         <h3>How to Play</h3>
         <ul>
@@ -523,68 +172,52 @@
       </div>
     </div>
   </main>
-
+  <footer class="note small site-footer" role="contentinfo">
+    <p>&copy; 2024 UpTools. All rights reserved.</p>
+  </footer>
+  <script src="/scripts/utils.js" type="module"></script>
   <script>
-    class RockPaperScissors {
+    class RockPaperScissorsGame {
       constructor() {
+        this.gameMode = 'computer';
         this.playerScore = 0;
         this.computerScore = 0;
         this.choices = ['rock', 'paper', 'scissors'];
-        this.emojis = {
-          rock: '🪨',
-          paper: '📄',
-          scissors: '✂️'
-        };
-        
-        // Multiplayer properties
-        this.gameMode = 'computer';
-        this.isMultiplayer = false;
-        this.gameId = null;
-        this.playerId = null;
-        this.playerName = '';
-        this.opponentName = '';
-        this.isMyTurn = true;
-        this.gameState = {};
-        this.storageKey = null;
-        this.storageListener = (e) => this.handleStorageEvent(e);
-        
+        this.emojis = { rock: '🪨', paper: '📄', scissors: '✂️' };
+        this.multiplayerManager = null;
+        this.isWaitingForOpponent = false;
         this.init();
       }
 
       init() {
         this.bindEvents();
-        this.updateDisplay();
         this.checkUrlForGameCode();
       }
 
       bindEvents() {
         document.querySelectorAll('.choice-btn').forEach(btn => {
-          btn.addEventListener('click', (e) => {
+          btn.addEventListener('click', () => {
             const choice = btn.dataset.choice;
-            if (this.isMultiplayer) {
-              this.makeMultiplayerChoice(choice);
-            } else {
-              this.playRound(choice);
-            }
+            this.handleChoice(choice);
           });
         });
-
-        document.getElementById('resetBtn').addEventListener('click', () => {
-          this.resetGame();
-        });
-
-        // Mode buttons
+        document.getElementById('resetBtn').addEventListener('click', () => this.resetGame());
         document.querySelectorAll('.mode-btn').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            this.switchGameMode(e.target.dataset.mode);
-          });
+          btn.addEventListener('click', (e) => this.switchGameMode(e.target.dataset.mode));
         });
+      }
+
+      handleChoice(choice) {
+        if (this.gameMode === 'computer') {
+          this.playRound(choice);
+        } else if (this.gameMode === 'multiplayer') {
+          this.makeMultiplayerMove(choice);
+        }
       }
 
       playRound(playerChoice) {
         const computerChoice = this.getComputerChoice();
         const result = this.determineWinner(playerChoice, computerChoice);
-        
         this.updateChoiceDisplay(playerChoice, computerChoice, result);
         this.updateScore(result);
         this.showResult(result);
@@ -596,29 +229,17 @@
 
       determineWinner(player, computer) {
         if (player === computer) return 'tie';
-        
-        const winConditions = {
-          rock: 'scissors',
-          paper: 'rock',
-          scissors: 'paper'
-        };
-        
+        const winConditions = { rock: 'scissors', paper: 'rock', scissors: 'paper' };
         return winConditions[player] === computer ? 'win' : 'lose';
       }
 
       updateChoiceDisplay(playerChoice, computerChoice, result) {
         const playerElement = document.getElementById('playerChoice');
         const computerElement = document.getElementById('computerChoice');
-        
-        // Clear previous classes
         playerElement.className = 'player-choice';
         computerElement.className = 'computer-choice';
-        
-        // Show choices
         playerElement.textContent = this.emojis[playerChoice];
         computerElement.textContent = this.emojis[computerChoice];
-        
-        // Add result classes after a short delay for animation
         setTimeout(() => {
           if (result === 'win') {
             playerElement.classList.add('winner');
@@ -631,12 +252,8 @@
       }
 
       updateScore(result) {
-        if (result === 'win') {
-          this.playerScore++;
-        } else if (result === 'lose') {
-          this.computerScore++;
-        }
-        
+        if (result === 'win') this.playerScore++;
+        else if (result === 'lose') this.computerScore++;
         document.getElementById('playerScore').textContent = this.playerScore;
         document.getElementById('computerScore').textContent = this.computerScore;
       }
@@ -644,39 +261,30 @@
       showResult(result) {
         const resultElement = document.getElementById('result');
         resultElement.className = 'result';
-        
         let message = '';
         switch (result) {
-          case 'win':
-            message = '🎉 You Win!';
-            resultElement.classList.add('win');
-            break;
-          case 'lose':
-            message = '😔 You Lose!';
-            resultElement.classList.add('lose');
-            break;
-          case 'tie':
-            message = '🤝 It\'s a Tie!';
-            resultElement.classList.add('tie');
-            break;
+          case 'win': message = '🎉 You Win!'; resultElement.classList.add('win'); break;
+          case 'lose': message = '😔 You Lose!'; resultElement.classList.add('lose'); break;
+          case 'tie': message = '🤝 It\'s a Tie!'; resultElement.classList.add('tie'); break;
         }
-        
         resultElement.textContent = message;
       }
 
       resetGame() {
-        this.playerScore = 0;
-        this.computerScore = 0;
-        this.updateDisplay();
-        
-        document.getElementById('playerChoice').textContent = '❓';
-        document.getElementById('computerChoice').textContent = '❓';
-        document.getElementById('result').textContent = 'Choose your move!';
-        
-        // Clear classes
-        document.getElementById('playerChoice').className = 'player-choice';
-        document.getElementById('computerChoice').className = 'computer-choice';
-        document.getElementById('result').className = 'result';
+        if (this.gameMode === 'computer') {
+          this.playerScore = 0;
+          this.computerScore = 0;
+          this.updateDisplay();
+          document.getElementById('playerChoice').textContent = '❓';
+          document.getElementById('computerChoice').textContent = '❓';
+          document.getElementById('result').textContent = 'Choose your move!';
+          document.getElementById('playerChoice').className = 'player-choice';
+          document.getElementById('computerChoice').className = 'computer-choice';
+          document.getElementById('result').className = 'result';
+        } else if (this.gameMode === 'multiplayer' && this.multiplayerManager) {
+          this.multiplayerManager.resetGame();
+          this.resetMultiplayerUI();
+        }
       }
 
       updateDisplay() {
@@ -684,7 +292,22 @@
         document.getElementById('computerScore').textContent = this.computerScore;
       }
 
-      // Multiplayer methods
+      switchGameMode(mode) {
+        this.gameMode = mode;
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.mode === mode);
+        });
+        document.getElementById('multiplayerSetup').style.display = mode === 'multiplayer' ? 'block' : 'none';
+        if (mode === 'computer') {
+          document.getElementById('gameDescription').textContent = 'Choose your weapon and battle the computer!';
+          document.getElementById('player1Label').textContent = 'You';
+          document.getElementById('player2Label').textContent = 'Computer';
+          this.resetGame();
+        } else {
+          document.getElementById('gameDescription').textContent = 'Create a game or join with a friend!';
+        }
+      }
+
       checkUrlForGameCode() {
         const urlParams = new URLSearchParams(window.location.search);
         const gameCode = urlParams.get('game');
@@ -694,260 +317,133 @@
         }
       }
 
-      switchGameMode(mode) {
-        this.gameMode = mode;
-        this.isMultiplayer = mode === 'multiplayer';
-        
-        // Update UI
-        document.querySelectorAll('.mode-btn').forEach(btn => {
-          btn.classList.toggle('active', btn.dataset.mode === mode);
-        });
-        
-        document.getElementById('multiplayerSetup').style.display = 
-          this.isMultiplayer ? 'block' : 'none';
-        
-        if (mode === 'computer') {
-          document.getElementById('gameDescription').textContent = 
-            'Choose your weapon and battle the computer!';
-          document.getElementById('player1Label').textContent = 'You';
-          document.getElementById('player2Label').textContent = 'Computer';
-          this.resetGame();
-        } else {
-          document.getElementById('gameDescription').textContent = 
-            'Create a game or join with a friend!';
-        }
-      }
-
-      makeMultiplayerChoice(choice) {
-        if (!this.isMyTurn) {
-          document.getElementById('result').textContent = 'Wait for your opponent!';
-          return;
-        }
-
-        const state = this.loadMultiplayerState();
-        if (!state) {
+      makeMultiplayerMove(choice) {
+        if (!this.multiplayerManager || !this.multiplayerManager.isGameReady()) {
           document.getElementById('result').textContent = 'Game not ready. Create or join first.';
           return;
         }
-
-        const nextState = { ...state };
-        if (this.playerId === 1) {
-          nextState.player1Choice = choice;
-        } else {
-          nextState.player2Choice = choice;
-        }
-
-        this.isMyTurn = false;
-        this.saveMultiplayerState(nextState);
-        this.updateWaitingUI(choice);
-        this.maybeResolveRound(nextState);
-      }
-
-      updateWaitingUI(choice) {
-        document.getElementById('playerChoice').textContent = this.emojis[choice];
-        document.getElementById('computerChoice').textContent = '??3';
-        document.getElementById('result').textContent = 'Waiting for opponent...';
-      }
-
-      maybeResolveRound(state) {
-        if (!state.player1Choice || !state.player2Choice) return;
-        if (this.playerId !== 1) return;
-
-        const result = this.determineWinner(state.player1Choice, state.player2Choice);
-        const scores = {
-          player1: state.scores.player1,
-          player2: state.scores.player2
-        };
-
-        if (result === 'win') {
-          scores.player1 += 1;
-        } else if (result === 'lose') {
-          scores.player2 += 1;
-        }
-
-        const resolvedState = {
-          ...state,
-          scores,
-          result: {
-            round: state.round,
-            outcome: result,
-            player1Choice: state.player1Choice,
-            player2Choice: state.player2Choice
-          },
-          player1Choice: null,
-          player2Choice: null,
-          round: state.round + 1
-        };
-
-        this.saveMultiplayerState(resolvedState);
-        this.applyMultiplayerState(resolvedState);
-      }
-
-      showMultiplayerResult(resultData) {
-        const playerChoice = resultData.player1Choice;
-        const opponentChoice = resultData.player2Choice;
-        const result = resultData.outcome;
-
-        document.getElementById('playerChoice').textContent = this.emojis[
-          this.playerId === 1 ? playerChoice : opponentChoice
-        ];
-        document.getElementById('computerChoice').textContent = this.emojis[
-          this.playerId === 1 ? opponentChoice : playerChoice
-        ];
-
-        let message = '';
-        if (this.playerId === 1) {
-          message = result === 'win'
-            ? `dYZ% You Win! ${this.emojis[playerChoice]} beats ${this.emojis[opponentChoice]}`
-            : result === 'lose'
-              ? `dY~" ${this.opponentName || 'Opponent'} Wins! ${this.emojis[opponentChoice]} beats ${this.emojis[playerChoice]}`
-              : `It's a Tie! Both chose ${this.emojis[playerChoice]}`;
-        } else {
-          message = result === 'lose'
-            ? `dYZ% You Win! ${this.emojis[opponentChoice]} beats ${this.emojis[playerChoice]}`
-            : result === 'win'
-              ? `dY~" ${this.opponentName || 'Opponent'} Wins! ${this.emojis[playerChoice]} beats ${this.emojis[opponentChoice]}`
-              : `It's a Tie! Both chose ${this.emojis[playerChoice]}`;
-        }
-
-        document.getElementById('result').textContent = message;
-        setTimeout(() => {
-          this.isMyTurn = true;
-          document.getElementById('result').textContent = 'Your turn! Choose your move.';
-        }, 3000);
-      }
-
-      loadMultiplayerState() {
-        if (!this.storageKey) return null;
-        const raw = localStorage.getItem(this.storageKey);
-        if (!raw) return null;
-        try {
-          return JSON.parse(raw);
-        } catch (err) {
-          return null;
-        }
-      }
-
-      saveMultiplayerState(state) {
-        if (!this.storageKey) return;
-        localStorage.setItem(this.storageKey, JSON.stringify(state));
-      }
-
-      handleStorageEvent(event) {
-        if (!this.isMultiplayer || !this.storageKey) return;
-        if (event.key !== this.storageKey || !event.newValue) return;
-
-        let state;
-        try {
-          state = JSON.parse(event.newValue);
-        } catch (err) {
+        if (this.isWaitingForOpponent) {
+          document.getElementById('result').textContent = 'Waiting for opponent...';
           return;
         }
-
-        this.applyMultiplayerState(state);
-      }
-
-      applyMultiplayerState(state) {
-        if (this.playerId === 1 && state.player2Name) {
-          this.opponentName = state.player2Name;
-          document.getElementById('player2Label').textContent = state.player2Name;
-          document.getElementById('waitingForPlayer').style.display = 'none';
-          document.getElementById('multiplayerStatus').style.display = 'block';
-          document.getElementById('statusMessage').textContent = 'Game Started!';
-          document.getElementById('playersInfo').textContent =
-            `${state.player1Name} vs ${state.player2Name}`;
-        }
-
-        if (this.playerId === 2 && state.player1Name) {
-          this.opponentName = state.player1Name;
-          document.getElementById('player2Label').textContent = state.player1Name;
-        }
-
-        this.playerScore = this.playerId === 1 ? state.scores.player1 : state.scores.player2;
-        this.computerScore = this.playerId === 1 ? state.scores.player2 : state.scores.player1;
-        this.updateDisplay();
-
-        if (state.result && state.result.round === state.round - 1) {
-          this.showMultiplayerResult(state.result);
+        try {
+          this.multiplayerManager.makeMove(choice);
+          this.isWaitingForOpponent = true;
+          document.getElementById('playerChoice').textContent = this.emojis[choice];
+          document.getElementById('computerChoice').textContent = '❓';
+          document.getElementById('result').textContent = 'Waiting for opponent...';
+        } catch (err) {
+          document.getElementById('result').textContent = 'Error: ' + err.message;
         }
       }
 
+      resetMultiplayerUI() {
+        document.getElementById('multiplayerSetup').style.display = 'block';
+        document.getElementById('gameLink').style.display = 'none';
+        document.getElementById('waitingForPlayer').style.display = 'none';
+        document.getElementById('multiplayerStatus').style.display = 'none';
+        document.getElementById('createGame').style.display = 'block';
+        document.getElementById('joinGame').style.display = 'block';
+        document.getElementById('playerName').value = '';
+        document.getElementById('gameCode').value = '';
+        document.getElementById('joinPlayerName').value = '';
+        document.getElementById('playerChoice').textContent = '❓';
+        document.getElementById('computerChoice').textContent = '❓';
+        document.getElementById('result').textContent = 'Choose your move!';
+        this.isWaitingForOpponent = false;
+      }
+
+      updateMultiplayerDisplay(state) {
+        const myScore = this.multiplayerManager.playerId === 1 ? state.player1.score : state.player2.score;
+        const opponentScore = this.multiplayerManager.playerId === 1 ? state.player2.score : state.player1.score;
+        document.getElementById('playerScore').textContent = myScore;
+        document.getElementById('computerScore').textContent = opponentScore;
+      }
+
+      showMultiplayerRoundResult(roundData) {
+        const { result, p1Choice, p2Choice } = roundData;
+        const isPlayer1 = this.multiplayerManager.playerId === 1;
+        const myChoice = isPlayer1 ? p1Choice : p2Choice;
+        const opponentChoice = isPlayer1 ? p2Choice : p1Choice;
+        document.getElementById('playerChoice').textContent = this.emojis[myChoice];
+        document.getElementById('computerChoice').textContent = this.emojis[opponentChoice];
+        let message = '';
+        if (result === 'player1' && isPlayer1) {
+          message = `🎉 You Win! ${this.emojis[myChoice]} beats ${this.emojis[opponentChoice]}`;
+        } else if (result === 'player2' && !isPlayer1) {
+          message = `🎉 You Win! ${this.emojis[myChoice]} beats ${this.emojis[opponentChoice]}`;
+        } else if (result === 'tie') {
+          message = `🤝 It's a Tie! Both chose ${this.emojis[myChoice]}`;
+        } else {
+          const opponentName = isPlayer1 ? this.multiplayerManager.gameState.player2.name : this.multiplayerManager.gameState.player1.name;
+          message = `😔 ${opponentName} Wins! ${this.emojis[opponentChoice]} beats ${this.emojis[myChoice]}`;
+        }
+        document.getElementById('result').textContent = message;
+        setTimeout(() => {
+          this.isWaitingForOpponent = false;
+          document.getElementById('result').textContent = 'Your turn! Choose your move.';
+        }, 2500);
+      }
     }
 
-    // Global functions for multiplayer
+    let game;
+
     function createMultiplayerGame() {
       const playerName = document.getElementById('playerName').value.trim();
-      if (!playerName) {
-        alert('Please enter your name!');
-        return;
+      if (!playerName) { alert('Please enter your name!'); return; }
+      try {
+        const manager = new RockPaperScissorsMultiplayer({
+          onStateChange: (state) => {
+            game.updateMultiplayerDisplay(state);
+            if (state.player2.name && document.getElementById('waitingForPlayer').style.display !== 'none') {
+              document.getElementById('waitingForPlayer').style.display = 'none';
+              document.getElementById('multiplayerStatus').style.display = 'block';
+              document.getElementById('statusMessage').textContent = 'Game Started!';
+              document.getElementById('playersInfo').textContent = `${state.player1.name} vs ${state.player2.name}`;
+            }
+          },
+          onRoundComplete: (roundData) => {
+            game.showMultiplayerRoundResult(roundData);
+            game.updateMultiplayerDisplay(game.multiplayerManager.gameState);
+          }
+        });
+        const { gameId, gameUrl } = manager.createGame(playerName);
+        game.multiplayerManager = manager;
+        document.getElementById('sharableLink').value = gameUrl;
+        document.getElementById('gameLink').style.display = 'block';
+        document.getElementById('waitingForPlayer').style.display = 'block';
+        document.getElementById('createGame').style.display = 'none';
+        document.getElementById('joinGame').style.display = 'none';
+        document.getElementById('player1Label').textContent = playerName;
+        document.getElementById('player2Label').textContent = 'Waiting...';
+        document.getElementById('result').textContent = 'Waiting for opponent to join...';
+      } catch (err) {
+        alert('Error creating game: ' + err.message);
       }
-
-      // Generate game code
-      const gameCode = Math.random().toString(36).substring(2, 8).toUpperCase();
-      const gameUrl = `${window.location.origin}${window.location.pathname}?game=${gameCode}`;
-
-      // Update UI
-      document.getElementById('sharableLink').value = gameUrl;
-      document.getElementById('gameLink').style.display = 'block';
-      document.getElementById('waitingForPlayer').style.display = 'block';
-      document.getElementById('createGame').style.display = 'none';
-      document.getElementById('joinGame').style.display = 'none';
-
-      // Update game state
-      game.gameId = gameCode;
-      game.playerName = playerName;
-      game.playerId = 1;
-      game.storageKey = `rps-mp-${gameCode}`;
-      window.removeEventListener('storage', game.storageListener);
-      window.addEventListener('storage', game.storageListener);
-
-      const initialState = {
-        gameId: gameCode,
-        player1Name: playerName,
-        player2Name: '',
-        player1Choice: null,
-        player2Choice: null,
-        round: 1,
-        scores: { player1: 0, player2: 0 },
-        result: null
-      };
-      game.saveMultiplayerState(initialState);
-
-      document.getElementById('player1Label').textContent = playerName;
-      document.getElementById('player2Label').textContent = 'Waiting...';
-      document.getElementById('result').textContent = 'Waiting for opponent to join.';
     }
 
     function joinMultiplayerGame() {
       const gameCode = document.getElementById('gameCode').value.trim();
       const playerName = document.getElementById('joinPlayerName').value.trim();
-
-      if (!gameCode || !playerName) {
-        alert('Please enter both game code and your name!');
-        return;
+      if (!gameCode || !playerName) { alert('Please enter both game code and your name!'); return; }
+      try {
+        const manager = new RockPaperScissorsMultiplayer({
+          onStateChange: (state) => { game.updateMultiplayerDisplay(state); },
+          onRoundComplete: (roundData) => {
+            game.showMultiplayerRoundResult(roundData);
+            game.updateMultiplayerDisplay(game.multiplayerManager.gameState);
+          }
+        });
+        manager.joinGame(gameCode, playerName);
+        game.multiplayerManager = manager;
+        document.getElementById('multiplayerSetup').style.display = 'none';
+        document.getElementById('player1Label').textContent = manager.gameState.player1.name;
+        document.getElementById('player2Label').textContent = playerName;
+        document.getElementById('result').textContent = 'Connected! Your turn! Choose your move.';
+        game.updateMultiplayerDisplay(manager.gameState);
+      } catch (err) {
+        alert('Error joining game: ' + err.message);
       }
-
-      game.gameId = gameCode;
-      game.playerName = playerName;
-      game.playerId = 2;
-      game.storageKey = `rps-mp-${gameCode}`;
-      window.removeEventListener('storage', game.storageListener);
-      window.addEventListener('storage', game.storageListener);
-
-      const state = game.loadMultiplayerState();
-      if (!state) {
-        alert('Game not found. Ask the host to create a game first.');
-        return;
-      }
-
-      const nextState = { ...state, player2Name: playerName };
-      game.saveMultiplayerState(nextState);
-      game.opponentName = state.player1Name || 'Host';
-
-      document.getElementById('multiplayerSetup').style.display = 'none';
-      document.getElementById('player1Label').textContent = playerName;
-      document.getElementById('player2Label').textContent = state.player1Name || 'Host';
-      document.getElementById('result').textContent = 'Connected! Your turn! Choose your move.';
     }
 
     function copyGameLink(buttonEl) {
@@ -955,7 +451,6 @@
       const linkValue = linkInput.value;
       const button = buttonEl || document.querySelector('#gameLink .reset-btn');
       const originalText = button ? button.textContent : '';
-
       const markCopied = () => {
         if (!button) return;
         button.textContent = 'Copied!';
@@ -965,87 +460,29 @@
           button.style.background = '';
         }, 2000);
       };
-
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(linkValue)
-          .then(markCopied)
-          .catch(() => {
-            linkInput.select();
-            linkInput.setSelectionRange(0, 99999);
-            try {
-              document.execCommand('copy');
-              markCopied();
-            } catch (err) {
-              alert('Failed to copy link. Please copy manually.');
-            }
-          });
+        navigator.clipboard.writeText(linkValue).then(markCopied).catch(() => {
+          linkInput.select();
+          linkInput.setSelectionRange(0, 99999);
+          try { document.execCommand('copy'); markCopied(); } catch (err) { alert('Failed to copy link. Please copy manually.'); }
+        });
         return;
       }
-
       linkInput.select();
       linkInput.setSelectionRange(0, 99999);
-      try {
-        document.execCommand('copy');
-        markCopied();
-      } catch (err) {
-        alert('Failed to copy link. Please copy manually.');
+      try { document.execCommand('copy'); markCopied(); } catch (err) { alert('Failed to copy link. Please copy manually.'); }
+    }
+
+    class RockPaperScissorsMultiplayer extends MultiplayerGameManager {
+      determineWinner(choice1, choice2) {
+        if (choice1 === choice2) return 'tie';
+        const winConditions = { rock: 'scissors', paper: 'rock', scissors: 'paper' };
+        return winConditions[choice1] === choice2 ? 'player1' : 'player2';
       }
     }
 
-    // Global game instance
-    let game;
-
-    // Initialize game when page loads
     document.addEventListener('DOMContentLoaded', () => {
-      game = new RockPaperScissors();
-      
-      // Fullscreen functionality
-      const fullscreenBtn = document.getElementById('fullscreenBtn');
-      let isFullscreen = false;
-      let exitFullscreenBtn = null;
-
-      function enterFullscreen() {
-        isFullscreen = true;
-        document.body.classList.add('fullscreen-mode');
-        
-        // Create exit button
-        exitFullscreenBtn = document.createElement('button');
-        exitFullscreenBtn.className = 'exit-fullscreen-btn';
-        exitFullscreenBtn.innerHTML = '✕ Exit Fullscreen';
-        exitFullscreenBtn.onclick = exitFullscreen;
-        document.body.appendChild(exitFullscreenBtn);
-        
-        fullscreenBtn.style.display = 'none';
-      }
-
-      function exitFullscreen() {
-        isFullscreen = false;
-        document.body.classList.remove('fullscreen-mode');
-        
-        // Remove exit button
-        if (exitFullscreenBtn) {
-          exitFullscreenBtn.remove();
-          exitFullscreenBtn = null;
-        }
-        
-        fullscreenBtn.style.display = 'block';
-      }
-
-      fullscreenBtn.addEventListener('click', enterFullscreen);
-
-      // Exit fullscreen on Escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isFullscreen) {
-          exitFullscreen();
-        }
-      });
-    });
-
-    // Add to recent games when leaving
-    window.addEventListener('beforeunload', () => {
-      const url = new URL('/games/', location.origin);
-      url.searchParams.set('played', 'rock-paper-scissors');
-      // This would redirect but we'll just track it
+      game = new RockPaperScissorsGame();
     });
   </script>
 </body>

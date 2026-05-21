@@ -900,3 +900,344 @@ footer a:hover{ text-shadow: 0 0 6px color-mix(in oklab, var(--accent) 65%, tran
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* ========== FULLSCREEN GAME STYLES ========== */
+
+/* Fullscreen button (appears in game containers) */
+.fullscreen-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  z-index: 100;
+  transition: all 0.2s ease;
+  font-weight: 700;
+  box-shadow: var(--glow-soft);
+}
+
+.fullscreen-btn:hover {
+  transform: scale(1.05);
+  box-shadow: var(--glow);
+}
+
+.fullscreen-btn:active {
+  transform: scale(0.98);
+}
+
+/* Exit fullscreen button */
+.exit-fullscreen-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 700;
+  z-index: 10000;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+  font-size: 0.9rem;
+}
+
+.exit-fullscreen-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(244, 67, 54, 0.4);
+}
+
+.exit-fullscreen-btn:active {
+  transform: scale(0.98);
+}
+
+/* Fullscreen mode styles */
+.fullscreen-mode {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: var(--bg) !important;
+  z-index: 9999 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
+}
+
+.fullscreen-mode > * {
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* CSS-only fullscreen fallback */
+.css-fullscreen-mode {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: var(--bg) !important;
+  z-index: 9999 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Hide elements in fullscreen */
+.fullscreen-active header,
+.fullscreen-active footer,
+.fullscreen-active .site-footer {
+  display: none !important;
+}
+
+/* Fullscreen game container adjustments */
+.fullscreen-mode .game-container,
+.fullscreen-mode .board-outer,
+.fullscreen-mode canvas,
+.fullscreen-mode .game-wrap {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Fullscreen canvas scaling */
+.fullscreen-mode canvas {
+  display: block !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  object-fit: contain !important;
+}
+
+/* Fullscreen board adjustments */
+.fullscreen-mode .board-inner {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  aspect-ratio: auto !important;
+}
+
+/* Fullscreen choice buttons (for games like RPS) */
+.fullscreen-mode .choices {
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1rem !important;
+  width: 100% !important;
+  max-width: 90vmin !important;
+  padding: 1rem !important;
+}
+
+.fullscreen-mode .choice-btn {
+  font-size: min(12vmin, 4rem) !important;
+  padding: min(4vmin, 2rem) min(2vmin, 1rem) !important;
+  min-height: min(15vmin, 120px) !important;
+}
+
+/* Fullscreen battle area */
+.fullscreen-mode .battle-area {
+  grid-template-columns: 1fr auto 1fr !important;
+  gap: 2rem !important;
+  width: 100% !important;
+  max-width: 90vmin !important;
+  padding: 1rem !important;
+}
+
+.fullscreen-mode .player-choice,
+.fullscreen-mode .computer-choice {
+  font-size: min(15vmin, 5rem) !important;
+  min-height: min(15vmin, 120px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Fullscreen score board */
+.fullscreen-mode .score-board {
+  grid-template-columns: 1fr auto 1fr !important;
+  gap: 1rem !important;
+  width: 100% !important;
+  max-width: 90vmin !important;
+  padding: 1rem !important;
+  margin: 0 !important;
+}
+
+.fullscreen-mode .score {
+  font-size: min(8vmin, 3rem) !important;
+}
+
+/* Fullscreen buttons */
+.fullscreen-mode .btn,
+.fullscreen-mode .reset-btn {
+  min-height: min(8vmin, 50px) !important;
+  padding: min(2vmin, 1rem) min(4vmin, 1.5rem) !important;
+  font-size: min(4vmin, 1.2rem) !important;
+}
+
+/* Fullscreen HUD (for games like Snake) */
+.fullscreen-mode .hud {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  max-width: 90vmin !important;
+  padding: 1rem !important;
+}
+
+.fullscreen-mode .kpi {
+  padding: 0.75rem !important;
+  font-size: 0.9rem !important;
+}
+
+.fullscreen-mode .kpi .value {
+  font-size: min(6vmin, 2rem) !important;
+}
+
+/* Fullscreen D-Pad (mobile controls) */
+.fullscreen-mode .dpad {
+  grid-template-columns: repeat(3, min(15vmin, 80px)) !important;
+  gap: 0.75rem !important;
+  margin-top: 1rem !important;
+}
+
+.fullscreen-mode .dpad .cbtn {
+  width: min(15vmin, 80px) !important;
+  height: min(15vmin, 80px) !important;
+  font-size: min(6vmin, 1.5rem) !important;
+}
+
+/* Fullscreen overlay */
+.fullscreen-mode .overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 10001 !important;
+  max-width: 90vmin !important;
+  max-height: 90vh !important;
+  margin: auto !important;
+}
+
+/* Fullscreen responsive adjustments */
+@media (max-width: 768px) {
+  .fullscreen-mode .choices {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  .fullscreen-mode .choice-btn {
+    font-size: min(10vmin, 3rem) !important;
+    padding: min(3vmin, 1.5rem) min(2vmin, 1rem) !important;
+  }
+
+  .fullscreen-mode .battle-area {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .fullscreen-mode .hud {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .fullscreen-mode .dpad {
+    grid-template-columns: repeat(3, min(12vmin, 70px)) !important;
+  }
+
+  .fullscreen-mode .dpad .cbtn {
+    width: min(12vmin, 70px) !important;
+    height: min(12vmin, 70px) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .fullscreen-mode .choices {
+    gap: 0.5rem !important;
+  }
+
+  .fullscreen-mode .choice-btn {
+    font-size: min(8vmin, 2.5rem) !important;
+    padding: min(2vmin, 1rem) !important;
+  }
+
+  .fullscreen-mode .hud {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  .fullscreen-mode .kpi {
+    padding: 0.5rem !important;
+  }
+
+  .fullscreen-mode .kpi .value {
+    font-size: min(5vmin, 1.5rem) !important;
+  }
+
+  .fullscreen-mode .dpad {
+    grid-template-columns: repeat(3, min(10vmin, 60px)) !important;
+    gap: 0.5rem !important;
+  }
+
+  .fullscreen-mode .dpad .cbtn {
+    width: min(10vmin, 60px) !important;
+    height: min(10vmin, 60px) !important;
+    font-size: min(5vmin, 1.2rem) !important;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  .fullscreen-mode .hud {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.5rem !important;
+    padding: 0.5rem !important;
+  }
+
+  .fullscreen-mode .kpi {
+    padding: 0.25rem !important;
+  }
+
+  .fullscreen-mode .kpi .value {
+    font-size: min(4vmin, 1.2rem) !important;
+  }
+
+  .fullscreen-mode .kpi .label {
+    font-size: 0.7rem !important;
+  }
+}
+
+/* Prevent scrolling in fullscreen */
+.fullscreen-active {
+  overflow: hidden !important;
+}
+
+/* Ensure fullscreen button is visible */
+.fullscreen-btn {
+  pointer-events: auto;
+}
+
+/* Ensure exit button is clickable */
+.exit-fullscreen-btn {
+  pointer-events: auto;
+}
