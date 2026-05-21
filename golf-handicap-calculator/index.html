@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Golf Handicap Calculator - Calculate Your Golf Handicap | UpTools</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
+  <meta name="description" content="Free Golf Handicap Calculator by UpTools. Calculate your golf handicap index, course handicap, and net score." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta name="theme-color" content="#0a0b0f" />
+  <meta name="keywords" content="golf handicap calculator, handicap index, course handicap, net score, golf scoring" />
+  <link rel="canonical" href="https://www.uptools.in/golf-handicap-calculator/" />
+  <meta property="og:title" content="Golf Handicap Calculator - Calculate Your Golf Handicap | UpTools" />
+  <meta property="og:description" content="Free Golf Handicap Calculator by UpTools. Calculate your golf handicap index and course handicap." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.uptools.in/golf-handicap-calculator/" />
+  <meta property="og:site_name" content="UpTools" />
+  <meta property="og:image" content="/assets/og/golf-handicap-calculator.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+  <style>
+    :root{
+      --bg1:#0a0b0f;
+      --bg2:#0b0f1a;
+      --ink:#e9ecf5;
+      --muted:#a6adbb;
+      --accent:#ffd700;
+      --accent-2:#ffed4e;
+      --line:rgba(255,255,255,.10);
+      --card:rgba(255,255,255,.04);
+    }
+    html,body{height:100%}
+    body{
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 800px at 10% 5%, rgba(255,215,0,.08), transparent 55%),
+        radial-gradient(900px 600px at 88% 10%, rgba(255,237,78,.06), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+    .wrap{ max-width:1100px; margin:0 auto; padding:24px 16px 32px; display:grid; gap:16px; }
+    .grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:16px; align-items:start; }
+    @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
+    .card{ border:1px solid var(--line); border-radius:14px; background:var(--card); padding:1rem; }
+    .tool-header{ display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+    .tool-icon{
+      width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:24px;
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:0 8px 24px rgba(255,215,0,.3);
+    }
+    h1{margin:0;font-size:1.75rem;text-shadow:0 0 10px rgba(255,215,0,.4);}
+    .inputs{ display:grid; gap:12px; }
+    .row{display:flex;flex-direction:column;gap:6px;}
+    .label{font-weight:600;color:var(--muted);font-size:.9rem;}
+    .input{
+      padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.3);
+      color:var(--ink);font-size:1rem;font-family:inherit;
+      transition:border-color .2s,box-shadow .2s;
+    }
+    .input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,215,0,.15);}
+    .btn{
+      padding:12px 20px;border-radius:10px;border:1px solid var(--accent);
+      background:linear-gradient(135deg, rgba(255,215,0,.2), rgba(255,237,78,.15));
+      color:var(--accent);font-weight:700;cursor:pointer;font-size:1rem;
+      transition:transform .1s,filter .15s;
+    }
+    .btn:hover{filter:brightness(1.15);transform:translateY(-1px);}
+    .result{ display:grid; gap:10px; }
+    .result .row{
+      display:flex;align-items:center;justify-content:space-between;padding:12px 14px;
+      border:1px solid var(--line);border-radius:10px;background:rgba(0,0,0,.25);
+    }
+    .amount{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.2rem;color:var(--accent);}
+    .note{color:var(--muted);font-size:.9rem;margin-top:8px;}
+  </style>
+</head>
+<body>
+  <a href="#main" class="sr-only">Skip to content</a>
+  <main class="wrap" id="main" role="main">
+    <div class="grid">
+      <div>
+        <div class="card">
+          <div class="tool-header">
+            <div class="tool-icon">⛳</div>
+            <div>
+              <h1>Golf Handicap Calculator</h1>
+              <p class="note" style="margin:0">Calculate your handicap index</p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="inputs">
+            <div class="row">
+              <label class="label">Gross Score</label>
+              <input class="input" type="number" id="gross" placeholder="0" min="0" />
+            </div>
+            <div class="row">
+              <label class="label">Course Par</label>
+              <input class="input" type="number" id="par" placeholder="72" min="0" value="72" />
+            </div>
+            <div class="row">
+              <label class="label">Course Rating</label>
+              <input class="input" type="number" id="rating" placeholder="72.0" min="0" step="0.1" value="72.0" />
+            </div>
+            <div class="row">
+              <label class="label">Slope Rating</label>
+              <input class="input" type="number" id="slope" placeholder="113" min="0" value="113" />
+            </div>
+            <button class="btn" onclick="calculateHandicap()">Calculate</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="result" id="result" style="display:none;">
+          <h3 style="margin:0 0 12px 0;color:var(--accent);">Handicap Results</h3>
+          <div id="resultContent"></div>
+        </div>
+        <div id="noResult" style="color:var(--muted);text-align:center;padding:20px;">
+          Enter your score to calculate
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="/scripts/utils.js?v=1.3.0" type="module"></script>
+  <script defer>
+    function calculateHandicap() {
+      const gross = parseInt(document.getElementById('gross').value) || 0;
+      const par = parseInt(document.getElementById('par').value) || 72;
+      const rating = parseFloat(document.getElementById('rating').value) || 72.0;
+      const slope = parseInt(document.getElementById('slope').value) || 113;
+
+      if (gross === 0) {
+        alert('Please enter your gross score');
+        return;
+      }
+
+      const netScore = gross - par;
+      const handicapDifferential = (gross - rating) * (113 / slope);
+      const courseHandicap = Math.round(handicapDifferential * (slope / 113));
+
+      const resultContent = document.getElementById('resultContent');
+      resultContent.innerHTML = `
+        <div class="row"><span>Gross Score</span><span class="amount">${gross}</span></div>
+        <div class="row"><span>Net Score</span><span class="amount">${netScore > 0 ? '+' : ''}${netScore}</span></div>
+        <div class="row"><span>Handicap Differential</span><span class="amount">${handicapDifferential.toFixed(1)}</span></div>
+        <div class="row"><span>Course Handicap</span><span class="amount">${courseHandicap}</span></div>
+      `;
+
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('noResult').style.display = 'none';
+    }
+
+    document.getElementById('gross').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') calculateHandicap();
+    });
+  </script>
+</body>
+</html>

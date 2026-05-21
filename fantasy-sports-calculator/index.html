@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fantasy Sports Calculator - Dream11 & Fantasy Points | UpTools</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
+  <meta name="description" content="Free Fantasy Sports Calculator by UpTools. Calculate fantasy points for cricket, football, basketball and more. Dream11 points calculator." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta name="theme-color" content="#0a0b0f" />
+  <meta name="keywords" content="fantasy sports calculator, dream11 points, fantasy points, fantasy cricket, fantasy football, fantasy basketball" />
+  <link rel="canonical" href="https://www.uptools.in/fantasy-sports-calculator/" />
+  <meta property="og:title" content="Fantasy Sports Calculator - Dream11 & Fantasy Points | UpTools" />
+  <meta property="og:description" content="Free Fantasy Sports Calculator by UpTools. Calculate fantasy points for all sports." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.uptools.in/fantasy-sports-calculator/" />
+  <meta property="og:site_name" content="UpTools" />
+  <meta property="og:image" content="/assets/og/fantasy-sports-calculator.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+  <style>
+    :root{
+      --bg1:#0a0b0f;
+      --bg2:#0b0f1a;
+      --ink:#e9ecf5;
+      --muted:#a6adbb;
+      --accent:#a78bfa;
+      --accent-2:#c4b5fd;
+      --line:rgba(255,255,255,.10);
+      --card:rgba(255,255,255,.04);
+    }
+    html,body{height:100%}
+    body{
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 800px at 10% 5%, rgba(167,139,250,.08), transparent 55%),
+        radial-gradient(900px 600px at 88% 10%, rgba(196,181,253,.06), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+    .wrap{ max-width:1100px; margin:0 auto; padding:24px 16px 32px; display:grid; gap:16px; }
+    .grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:16px; align-items:start; }
+    @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
+    .card{ border:1px solid var(--line); border-radius:14px; background:var(--card); padding:1rem; }
+    .tool-header{ display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+    .tool-icon{
+      width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:24px;
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:0 8px 24px rgba(167,139,250,.3);
+    }
+    h1{margin:0;font-size:1.75rem;text-shadow:0 0 10px rgba(167,139,250,.4);}
+    .inputs{ display:grid; gap:12px; }
+    .row{display:flex;flex-direction:column;gap:6px;}
+    .label{font-weight:600;color:var(--muted);font-size:.9rem;}
+    .input, .select{
+      padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.3);
+      color:var(--ink);font-size:1rem;font-family:inherit;
+      transition:border-color .2s,box-shadow .2s;
+    }
+    .input:focus, .select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(167,139,250,.15);}
+    .select{cursor:pointer;}
+    .btn{
+      padding:12px 20px;border-radius:10px;border:1px solid var(--accent);
+      background:linear-gradient(135deg, rgba(167,139,250,.2), rgba(196,181,253,.15));
+      color:var(--accent);font-weight:700;cursor:pointer;font-size:1rem;
+      transition:transform .1s,filter .15s;
+    }
+    .btn:hover{filter:brightness(1.15);transform:translateY(-1px);}
+    .result{ display:grid; gap:10px; }
+    .result .row{
+      display:flex;align-items:center;justify-content:space-between;padding:12px 14px;
+      border:1px solid var(--line);border-radius:10px;background:rgba(0,0,0,.25);
+    }
+    .amount{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.2rem;color:var(--accent);}
+    .note{color:var(--muted);font-size:.9rem;margin-top:8px;}
+  </style>
+</head>
+<body>
+  <a href="#main" class="sr-only">Skip to content</a>
+  <main class="wrap" id="main" role="main">
+    <div class="grid">
+      <div>
+        <div class="card">
+          <div class="tool-header">
+            <div class="tool-icon">⭐</div>
+            <div>
+              <h1>Fantasy Sports Calculator</h1>
+              <p class="note" style="margin:0">Calculate fantasy points</p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="inputs">
+            <div class="row">
+              <label class="label">Sport</label>
+              <select class="select" id="sport" onchange="updateFields()">
+                <option value="cricket">Cricket (Batting)</option>
+                <option value="cricket-bowling">Cricket (Bowling)</option>
+                <option value="football">Football</option>
+                <option value="basketball">Basketball</option>
+              </select>
+            </div>
+            <div id="fields"></div>
+            <button class="btn" onclick="calculatePoints()">Calculate Points</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="result" id="result" style="display:none;">
+          <h3 style="margin:0 0 12px 0;color:var(--accent);">Fantasy Points</h3>
+          <div id="resultContent"></div>
+        </div>
+        <div id="noResult" style="color:var(--muted);text-align:center;padding:20px;">
+          Select sport and enter stats
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="/scripts/utils.js?v=1.3.0" type="module"></script>
+  <script defer>
+    const sportFields = {
+      'cricket': [
+        { name: 'runs', label: 'Runs Scored', min: 0 },
+        { name: 'fours', label: 'Fours', min: 0 },
+        { name: 'sixes', label: 'Sixes', min: 0 },
+        { name: 'dismissal', label: 'Dismissal (0=no, 1=yes)', min: 0, max: 1 }
+      ],
+      'cricket-bowling': [
+        { name: 'wickets', label: 'Wickets', min: 0 },
+        { name: 'runs', label: 'Runs Conceded', min: 0 },
+        { name: 'maidens', label: 'Maiden Overs', min: 0 }
+      ],
+      'football': [
+        { name: 'goals', label: 'Goals', min: 0 },
+        { name: 'assists', label: 'Assists', min: 0 },
+        { name: 'cleansheet', label: 'Clean Sheet (0=no, 1=yes)', min: 0, max: 1 }
+      ],
+      'basketball': [
+        { name: 'points', label: 'Points', min: 0 },
+        { name: 'rebounds', label: 'Rebounds', min: 0 },
+        { name: 'assists', label: 'Assists', min: 0 }
+      ]
+    };
+
+    function updateFields() {
+      const sport = document.getElementById('sport').value;
+      const fields = sportFields[sport];
+      let html = '';
+      fields.forEach(field => {
+        html += `<div class="row">
+          <label class="label">${field.label}</label>
+          <input class="input" type="number" id="${field.name}" placeholder="0" min="${field.min}" ${field.max ? `max="${field.max}"` : ''} />
+        </div>`;
+      });
+      document.getElementById('fields').innerHTML = html;
+    }
+
+    function calculatePoints() {
+      const sport = document.getElementById('sport').value;
+      let points = 0;
+
+      if (sport === 'cricket') {
+        const runs = parseInt(document.getElementById('runs').value) || 0;
+        const fours = parseInt(document.getElementById('fours').value) || 0;
+        const sixes = parseInt(document.getElementById('sixes').value) || 0;
+        const dismissal = parseInt(document.getElementById('dismissal').value) || 0;
+
+        points = runs + (fours * 1) + (sixes * 2);
+        if (runs >= 50) points += 4;
+        if (runs >= 100) points += 16;
+        if (dismissal === 1) points -= 2;
+      } else if (sport === 'cricket-bowling') {
+        const wickets = parseInt(document.getElementById('wickets').value) || 0;
+        const runs = parseInt(document.getElementById('runs').value) || 0;
+        const maidens = parseInt(document.getElementById('maidens').value) || 0;
+
+        points = (wickets * 25) + (maidens * 4) - runs;
+        if (wickets >= 3) points += 4;
+      } else if (sport === 'football') {
+        const goals = parseInt(document.getElementById('goals').value) || 0;
+        const assists = parseInt(document.getElementById('assists').value) || 0;
+        const cleansheet = parseInt(document.getElementById('cleansheet').value) || 0;
+
+        points = (goals * 10) + (assists * 5) + (cleansheet * 4);
+      } else if (sport === 'basketball') {
+        const pts = parseInt(document.getElementById('points').value) || 0;
+        const reb = parseInt(document.getElementById('rebounds').value) || 0;
+        const ast = parseInt(document.getElementById('assists').value) || 0;
+
+        points = pts + (reb * 1.2) + (ast * 1.5);
+      }
+
+      const resultContent = document.getElementById('resultContent');
+      resultContent.innerHTML = `<div class="row"><span>Total Fantasy Points</span><span class="amount">${Math.round(points)}</span></div>`;
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('noResult').style.display = 'none';
+    }
+
+    updateFields();
+  </script>
+</body>
+</html>

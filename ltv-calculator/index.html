@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LTV Calculator - Loan to Value Ratio | UpTools</title>
+  <meta name="description" content="Free LTV Calculator — instantly compute your Loan-to-Value ratio, Combined LTV (CLTV), equity, down payment percentage, and PMI requirement for any property. Essential for mortgage planning.">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta property="og:title" content="LTV Calculator - Loan to Value Ratio | UpTools" />
+  <meta property="og:description" content="Free LTV Calculator — instantly compute your Loan-to-Value ratio, Combined LTV (CLTV), equity, down payment percentage, and PMI requirement for any property. Essential for mortgage planning." />
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://www.uptools.in/ltv-calculator/" />
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
+
+  <style>
+    /* ── Design tokens ── */
+    :root {
+      --bg:        #0b0f1a;
+      --surface:   #121a2c;
+      --surface2:  #16213a;
+      --border:    #1e2d4a;
+      --accent:    #22d3ee;
+      --accent2:   #818cf8;
+      --accent3:   #f472b6;
+      --muted:     #64748b;
+      --text:      #e2e8f0;
+      --text2:     #94a3b8;
+      --green:     #10b981;
+      --yellow:    #f59e0b;
+      --red:       #ef4444;
+      --radius:    14px;
+      --radius-sm: 8px;
+      --shadow:    0 4px 32px rgba(0,0,0,.55);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── Page wrapper ── */
+    .page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    /* ── Hero heading ── */
+    .hero {
+      text-align: center;
+      margin: 1.5rem 0 2rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.6rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: .5rem;
+    }
+    .hero p {
+      color: var(--text2);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── Calculator card ── */
+    .calc-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Form grid ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+    .field-group { display: flex; flex-direction: column; gap: .45rem; }
+    .field-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text2);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+    .input-wrap .prefix {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 1rem;
+      padding: .7rem .9rem .7rem 2rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type="number"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(34,211,238,.15);
+    }
+
+    /* ── Radio toggle ── */
+    .radio-toggle {
+      display: flex;
+      gap: .5rem;
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 4px;
+    }
+    .radio-toggle label {
+      flex: 1;
+      text-align: center;
+      padding: .55rem .5rem;
+      border-radius: calc(var(--radius-sm) - 2px);
+      cursor: pointer;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text2);
+      text-transform: none;
+      letter-spacing: 0;
+      transition: background .2s, color .2s;
+      user-select: none;
+    }
+    .radio-toggle input[type="radio"] { display: none; }
+    .radio-toggle input[type="radio"]:checked + label {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #0b0f1a;
+    }
+
+    /* ── Optional section ── */
+    .optional-section {
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      margin-top: .25rem;
+    }
+    .optional-section legend {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* ── Calculate button ── */
+    .btn-calc {
+      width: 100%;
+      margin-top: 1.5rem;
+      padding: .9rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      border-radius: var(--radius-sm);
+      color: #0b0f1a;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      letter-spacing: .03em;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-calc:hover { opacity: .9; transform: translateY(-1px); }
+    .btn-calc:active { transform: translateY(0); }
+
+    /* ── Results section ── */
+    .results-section {
+      display: none;
+      animation: fadeSlide .35s ease;
+    }
+    .results-section.visible { display: block; }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Gauge card ── */
+    .gauge-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 2rem 1.5rem;
+      text-align: center;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .gauge-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%; transform: translateX(-50%);
+      width: 320px; height: 160px;
+      background: radial-gradient(ellipse, rgba(34,211,238,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .gauge-title {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text2);
+      margin-bottom: 1rem;
+    }
+
+    /* ── SVG Gauge ── */
+    .gauge-svg-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: .5rem;
+    }
+    .gauge-svg {
+      overflow: visible;
+    }
+
+    /* ── LTV big number ── */
+    .ltv-display {
+      font-size: clamp(2.8rem, 8vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: .25rem;
+    }
+    .ltv-label {
+      font-size: .85rem;
+      color: var(--text2);
+      margin-bottom: .25rem;
+    }
+    .ltv-status {
+      display: inline-block;
+      font-size: .8rem;
+      font-weight: 700;
+      padding: .25rem .85rem;
+      border-radius: 99px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-top: .4rem;
+    }
+    .ltv-status.green  { background: rgba(16,185,129,.18); color: var(--green); border: 1px solid rgba(16,185,129,.35); }
+    .ltv-status.yellow { background: rgba(245,158,11,.18);  color: var(--yellow); border: 1px solid rgba(245,158,11,.35); }
+    .ltv-status.red    { background: rgba(239,68,68,.18);   color: var(--red);    border: 1px solid rgba(239,68,68,.35); }
+
+    /* ── PMI Banner ── */
+    .pmi-banner {
+      background: linear-gradient(135deg, rgba(239,68,68,.15), rgba(245,158,11,.12));
+      border: 1px solid rgba(239,68,68,.35);
+      border-radius: var(--radius-sm);
+      padding: .85rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      margin-bottom: 1.25rem;
+    }
+    .pmi-banner.hidden { display: none; }
+    .pmi-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .pmi-text strong { color: var(--red); display: block; font-size: .9rem; margin-bottom: .1rem; }
+    .pmi-text span { font-size: .82rem; color: var(--text2); }
+
+    .pmi-banner.good {
+      background: linear-gradient(135deg, rgba(16,185,129,.12), rgba(34,211,238,.08));
+      border-color: rgba(16,185,129,.35);
+    }
+    .pmi-banner.good .pmi-text strong { color: var(--green); }
+
+    /* ── Metrics grid ── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    @media (max-width: 560px) { .metrics-grid { grid-template-columns: 1fr 1fr; } }
+
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      text-align: center;
+      transition: border-color .25s, transform .25s;
+    }
+    .metric-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .metric-card .m-label {
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-bottom: .35rem;
+    }
+    .metric-card .m-value {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .metric-card .m-sub {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: .15rem;
+    }
+
+    .metric-card.cltv-card { border-color: rgba(129,140,248,.4); }
+    .metric-card.cltv-card .m-value { color: var(--accent2); }
+
+    /* ── Info cards ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 700px) { .info-grid { grid-template-columns: 1fr; } }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s, transform .25s;
+    }
+    .info-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+    }
+    .info-card:nth-child(1)::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .info-card:nth-child(2)::before { background: linear-gradient(90deg, var(--green), var(--accent)); }
+    .info-card:nth-child(3)::before { background: linear-gradient(90deg, var(--accent2), var(--accent3)); }
+
+    .info-card .ic-icon {
+      font-size: 1.6rem;
+      margin-bottom: .75rem;
+      display: block;
+    }
+    .info-card h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .5rem;
+    }
+    .info-card p, .info-card li {
+      font-size: .84rem;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .info-card ul { padding-left: 1rem; }
+    .info-card li { margin-bottom: .3rem; }
+
+    /* ── Gauge color band legend ── */
+    .gauge-legend {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-top: .75rem;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .75rem;
+      color: var(--text2);
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .legend-dot.green  { background: var(--green); }
+    .legend-dot.yellow { background: var(--yellow); }
+    .legend-dot.red    { background: var(--red); }
+
+    /* ── Section divider ── */
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Breadcrumb (override) ── */
+    .breadcrumb { padding: .6rem 0; }
+    .breadcrumb-list { display: flex; gap: .4rem; list-style: none; flex-wrap: wrap; font-size: .82rem; }
+    .breadcrumb-item + .breadcrumb-item::before { content: '›'; color: var(--muted); margin-right: .4rem; }
+    .breadcrumb-item a { color: var(--accent); text-decoration: none; }
+    .breadcrumb-item a:hover { text-decoration: underline; }
+    .breadcrumb-item[aria-current] span { color: var(--text2); }
+  </style>
+  <meta property="og:url" content="https://www.uptools.in/ltv-calculator/" />
+</head>
+<body>
+
+<!-- ═══════════════════ HEADER ═══════════════════ -->
+<header class="site" role="banner">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="UpTools Home">
+      <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+      <b>UpTools</b>
+    </a>
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/#tools">Tools</a>
+      <a href="/games/">Games</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-wrap">
+
+  <!-- ═══════════════════ BREADCRUMB ═══════════════════ -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+        <meta itemprop="position" content="1" />
+      </li>
+      <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+        <span itemprop="name">LTV Calculator</span>
+        <meta itemprop="position" content="2" />
+      </li>
+    </ol>
+  </nav>
+
+  <!-- ═══════════════════ ADSENSE ═══════════════════ -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <div class="hero">
+    <h1>LTV Calculator</h1>
+    <p>Instantly compute your Loan-to-Value ratio, equity, and PMI requirement — all in one place.</p>
+  </div>
+
+  <!-- ═══════════════════ CALCULATOR CARD ═══════════════════ -->
+  <div class="calc-card">
+    <form id="ltv-form" autocomplete="off" novalidate>
+      <div class="form-grid">
+
+        <!-- Property Value -->
+        <div class="field-group">
+          <label for="prop-value">Property Value</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="prop-value" placeholder="350,000" min="1" step="1000" aria-label="Property value in dollars">
+          </div>
+        </div>
+
+        <!-- Input mode toggle -->
+        <div class="field-group">
+          <label>Enter By</label>
+          <div class="radio-toggle" role="group" aria-label="Input mode">
+            <input type="radio" name="input-mode" id="mode-down" value="down" checked>
+            <label for="mode-down">Down Payment</label>
+            <input type="radio" name="input-mode" id="mode-loan" value="loan">
+            <label for="mode-loan">Loan Amount</label>
+          </div>
+        </div>
+
+        <!-- Dynamic input -->
+        <div class="field-group" id="dynamic-field">
+          <label for="dynamic-input" id="dynamic-label">Down Payment</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="dynamic-input" placeholder="70,000" min="0" step="1000" aria-label="Down payment or loan amount">
+          </div>
+        </div>
+
+        <!-- Spacer / placeholder -->
+        <div class="field-group" aria-hidden="true"></div>
+
+      </div>
+
+      <!-- Optional: CLTV fields -->
+      <div class="optional-section">
+        <legend>Optional — Combined LTV (CLTV)</legend>
+        <div class="form-grid">
+          <div class="field-group">
+            <label for="second-mortgage">Existing Mortgage Balance</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="second-mortgage" placeholder="0" min="0" step="1000" aria-label="Existing mortgage balance">
+            </div>
+          </div>
+          <div class="field-group">
+            <label for="second-lien">Second Lien Amount</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="second-lien" placeholder="0" min="0" step="1000" aria-label="Second lien amount">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-calc" id="calc-btn">Calculate LTV</button>
+    </form>
+  </div>
+
+  <!-- ═══════════════════ RESULTS ═══════════════════ -->
+  <div class="results-section" id="results" aria-live="polite">
+
+    <!-- Gauge card -->
+    <div class="gauge-card">
+      <div class="gauge-title">Loan-to-Value Ratio</div>
+
+      <div class="gauge-svg-wrap">
+        <svg class="gauge-svg" width="260" height="145" viewBox="0 0 260 145" aria-hidden="true">
+          <defs>
+            <linearGradient id="g-green" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#10b981"/>
+              <stop offset="100%" stop-color="#34d399"/>
+            </linearGradient>
+            <linearGradient id="g-yellow" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#fbbf24"/>
+            </linearGradient>
+            <linearGradient id="g-red" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ef4444"/>
+              <stop offset="100%" stop-color="#f87171"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- Track (background arcs) -->
+          <!-- Green zone: 0–80% = 0–144° of 180° arc -->
+          <path id="track-green"  d="" stroke="url(#g-green)"  stroke-width="14" fill="none" stroke-linecap="round" opacity=".25"/>
+          <path id="track-yellow" d="" stroke="url(#g-yellow)" stroke-width="14" fill="none" stroke-linecap="round" opacity=".25"/>
+          <path id="track-red"    d="" stroke="url(#g-red)"    stroke-width="14" fill="none" stroke-linecap="round" opacity=".25"/>
+
+          <!-- Active fill arc -->
+          <path id="arc-fill" d="" stroke="#22d3ee" stroke-width="14" fill="none" stroke-linecap="round" filter="url(#glow)" style="transition: all .55s cubic-bezier(.4,0,.2,1)"/>
+
+          <!-- Needle -->
+          <g id="needle-group" style="transform-origin:130px 130px; transition: transform .55s cubic-bezier(.4,0,.2,1)">
+            <line x1="130" y1="130" x2="130" y2="52" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity=".9"/>
+          </g>
+          <circle cx="130" cy="130" r="7" fill="#1e2d4a" stroke="#22d3ee" stroke-width="2.5"/>
+
+          <!-- Tick labels -->
+          <text x="18"  y="138" fill="#64748b" font-size="10" text-anchor="middle">0%</text>
+          <text x="130" y="26"  fill="#64748b" font-size="10" text-anchor="middle">50%</text>
+          <text x="242" y="138" fill="#64748b" font-size="10" text-anchor="middle">100%</text>
+          <!-- zone markers -->
+          <text x="76"  y="38"  fill="#10b981" font-size="9" text-anchor="middle" opacity=".7">80%</text>
+          <text x="200" y="62"  fill="#f59e0b" font-size="9" text-anchor="middle" opacity=".7">90%</text>
+        </svg>
+      </div>
+
+      <div class="ltv-display" id="ltv-big">—</div>
+      <div class="ltv-label">Loan-to-Value Ratio</div>
+      <span class="ltv-status" id="ltv-status">–</span>
+
+      <div class="gauge-legend">
+        <div class="legend-item"><div class="legend-dot green"></div><span>&lt;80% Excellent</span></div>
+        <div class="legend-item"><div class="legend-dot yellow"></div><span>80–90% Fair</span></div>
+        <div class="legend-item"><div class="legend-dot red"></div><span>&gt;90% High Risk</span></div>
+      </div>
+    </div>
+
+    <!-- PMI Banner -->
+    <div class="pmi-banner hidden" id="pmi-banner">
+      <span class="pmi-icon" id="pmi-icon">⚠️</span>
+      <div class="pmi-text">
+        <strong id="pmi-title">PMI Required</strong>
+        <span id="pmi-desc">Your LTV exceeds 80%, so lenders typically require Private Mortgage Insurance (PMI). Estimated cost: <b>0.5%–1.5%</b> of loan annually.</span>
+      </div>
+    </div>
+
+    <!-- Metrics -->
+    <div class="metrics-grid" id="metrics-grid">
+      <div class="metric-card">
+        <div class="m-label">Loan Amount</div>
+        <div class="m-value" id="m-loan">—</div>
+        <div class="m-sub" id="m-loan-sub"></div>
+      </div>
+      <div class="metric-card">
+        <div class="m-label">Down Payment</div>
+        <div class="m-value" id="m-down">—</div>
+        <div class="m-sub" id="m-down-pct"></div>
+      </div>
+      <div class="metric-card">
+        <div class="m-label">Equity</div>
+        <div class="m-value" id="m-equity">—</div>
+        <div class="m-sub" id="m-equity-pct"></div>
+      </div>
+      <div class="metric-card cltv-card" id="cltv-card" style="display:none">
+        <div class="m-label">Combined LTV (CLTV)</div>
+        <div class="m-value" id="m-cltv">—</div>
+        <div class="m-sub" id="m-cltv-sub"></div>
+      </div>
+      <div class="metric-card">
+        <div class="m-label">Property Value</div>
+        <div class="m-value" id="m-prop">—</div>
+        <div class="m-sub">Appraised value</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-label">PMI Status</div>
+        <div class="m-value" id="m-pmi">—</div>
+        <div class="m-sub" id="m-pmi-sub"></div>
+      </div>
+    </div>
+
+  </div><!-- /results -->
+
+  <!-- ═══════════════════ INFO CARDS ═══════════════════ -->
+  <h2 class="section-title">📚 Learn About LTV</h2>
+  <div class="info-grid">
+    <div class="info-card">
+      <span class="ic-icon">🏦</span>
+      <h3>What is LTV?</h3>
+      <p>Loan-to-Value (LTV) is the ratio of your mortgage loan to the appraised value of the property. It tells lenders how much financial risk they're taking.</p>
+      <br>
+      <p><strong style="color:var(--accent)">Formula:</strong><br>LTV = (Loan Amount ÷ Property Value) × 100</p>
+    </div>
+    <div class="info-card">
+      <span class="ic-icon">🎯</span>
+      <h3>Why 80% Matters</h3>
+      <ul>
+        <li>LTV below 80% = no PMI required</li>
+        <li>Better interest rates from lenders</li>
+        <li>More equity means financial security</li>
+        <li>Easier refinancing options</li>
+        <li>Lower monthly payment burden</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <span class="ic-icon">📈</span>
+      <h3>How to Improve LTV</h3>
+      <ul>
+        <li>Increase your down payment</li>
+        <li>Wait for property appreciation</li>
+        <li>Make extra principal payments</li>
+        <li>Request a new home appraisal</li>
+        <li>Home improvements that add value</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer style="text-align:center; padding: 2rem 1rem; color: var(--muted); font-size: 0.85rem">
+  <nav style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:0.5rem">
+    <a href="/" style="color:var(--accent); text-decoration:none">UpTools</a>
+    <a href="/#tools" style="color:var(--accent); text-decoration:none">All Tools</a>
+    <a href="/games/" style="color:var(--accent); text-decoration:none">Games</a>
+    <a href="/about/" style="color:var(--accent); text-decoration:none">About</a>
+    <a href="/contact/" style="color:var(--accent); text-decoration:none">Contact</a>
+  </nav>
+  <div>© 2025 UpTools. Free tools for everyone.</div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Constants ── */
+  const CX = 130, CY = 130, R = 100; // gauge arc centre + radius
+  const DEG_START = 180, DEG_END = 0; // arc from left to right
+
+  /* ── Helpers ── */
+  const $ = id => document.getElementById(id);
+  const fmt = n => '$' + Math.round(n).toLocaleString();
+  const pct = n => n.toFixed(2) + '%';
+
+  /** Convert degrees (0=left, 180=right, 90=top) to SVG path point */
+  function polarToXY(angleDeg) {
+    const rad = (angleDeg * Math.PI) / 180;
+    return {
+      x: CX + R * Math.cos(Math.PI - rad),
+      y: CY - R * Math.sin(rad)
+    };
+  }
+
+  /** Build an SVG arc path string */
+  function arcPath(startDeg, endDeg) {
+    if (Math.abs(endDeg - startDeg) < 0.01) return '';
+    const s = polarToXY(startDeg);
+    const e = polarToXY(endDeg);
+    const large = (endDeg - startDeg) > 90 ? 1 : 0;
+    return `M ${s.x} ${s.y} A ${R} ${R} 0 ${large} 1 ${e.x} ${e.y}`;
+  }
+
+  /* Build static track paths once */
+  function buildTracks() {
+    // Arc spans 180°: 0% LTV = leftmost (180°), 100% LTV = rightmost (0°)
+    // Green  0–80%  → 180°–36°
+    // Yellow 80–90% → 36°–18°
+    // Red    90–100%→ 18°–0°
+    $('track-green').setAttribute('d',  arcPath(180, 36));
+    $('track-yellow').setAttribute('d', arcPath(36, 18));
+    $('track-red').setAttribute('d',    arcPath(18, 0));
+  }
+
+  /** Map LTV (0-100) to an angle in degrees (180→0) */
+  function ltvToAngle(ltv) {
+    const clamped = Math.min(Math.max(ltv, 0), 100);
+    return 180 - (clamped / 100) * 180;
+  }
+
+  /** Update animated gauge */
+  function updateGauge(ltv) {
+    const fillAngle = ltvToAngle(ltv);
+    // Fill arc from 180° down to fillAngle
+    $('arc-fill').setAttribute('d', arcPath(180, fillAngle));
+
+    // Color the fill
+    let color;
+    if (ltv < 80)       color = '#10b981';
+    else if (ltv <= 90) color = '#f59e0b';
+    else                color = '#ef4444';
+    $('arc-fill').setAttribute('stroke', color);
+
+    // Needle rotation: 0% → -90deg, 50% → 0deg, 100% → 90deg
+    const needleRot = (ltv / 100) * 180 - 90;
+    $('needle-group').style.transform = `rotate(${needleRot}deg)`;
+  }
+
+  /* ── Radio toggle behaviour ── */
+  const radios = document.querySelectorAll('input[name="input-mode"]');
+  const dynamicLabel = $('dynamic-label');
+  const dynamicInput = $('dynamic-input');
+
+  radios.forEach(r => r.addEventListener('change', () => {
+    if (r.value === 'down') {
+      dynamicLabel.textContent = 'Down Payment';
+      dynamicInput.placeholder = '70,000';
+    } else {
+      dynamicLabel.textContent = 'Loan Amount';
+      dynamicInput.placeholder = '280,000';
+    }
+    tryLiveCalc();
+  }));
+
+  /* ── Live calculation on input ── */
+  ['prop-value','dynamic-input','second-mortgage','second-lien'].forEach(id => {
+    $(id).addEventListener('input', tryLiveCalc);
+  });
+
+  function tryLiveCalc() {
+    const pv = parseFloat($('prop-value').value);
+    const dyn = parseFloat($('dynamic-input').value);
+    if (isNaN(pv) || pv <= 0 || isNaN(dyn) || dyn < 0) return;
+    calculate(pv, dyn);
+  }
+
+  /* ── Form submit ── */
+  $('ltv-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const pv  = parseFloat($('prop-value').value);
+    const dyn = parseFloat($('dynamic-input').value);
+    if (isNaN(pv) || pv <= 0) { alert('Please enter a valid property value.'); return; }
+    if (isNaN(dyn) || dyn < 0) { alert('Please enter a valid amount.'); return; }
+    calculate(pv, dyn);
+  });
+
+  /* ── Core calculation ── */
+  function calculate(propValue, dynVal) {
+    const mode = document.querySelector('input[name="input-mode"]:checked').value;
+    let loan, down;
+
+    if (mode === 'down') {
+      down = dynVal;
+      loan = propValue - down;
+    } else {
+      loan = dynVal;
+      down = propValue - loan;
+    }
+
+    if (loan < 0) loan = 0;
+    if (down < 0) down = 0;
+
+    const ltv       = (loan / propValue) * 100;
+    const downPct   = (down / propValue) * 100;
+    const equity    = propValue - loan;
+    const equityPct = (equity / propValue) * 100;
+
+    // CLTV
+    const secondMort = parseFloat($('second-mortgage').value) || 0;
+    const secondLien = parseFloat($('second-lien').value) || 0;
+    const totalLiens = loan + secondMort + secondLien;
+    const cltv       = (totalLiens / propValue) * 100;
+    const hasCLTV    = (secondMort > 0 || secondLien > 0);
+
+    // PMI
+    const pmiRequired = ltv > 80;
+    // Estimated annual PMI cost range
+    const pmiLow  = loan * 0.005;
+    const pmiHigh = loan * 0.015;
+
+    // ── Show results ──
+    const resultsEl = $('results');
+    resultsEl.classList.add('visible');
+    resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    // Gauge
+    buildTracks();
+    updateGauge(ltv);
+
+    // Big number
+    $('ltv-big').textContent = pct(ltv);
+
+    // Status badge
+    const statusEl = $('ltv-status');
+    if (ltv < 80) {
+      statusEl.textContent = '✅ Excellent';
+      statusEl.className = 'ltv-status green';
+    } else if (ltv <= 90) {
+      statusEl.textContent = '⚠️ Fair';
+      statusEl.className = 'ltv-status yellow';
+    } else {
+      statusEl.textContent = '🔴 High Risk';
+      statusEl.className = 'ltv-status red';
+    }
+
+    // PMI Banner
+    const pmiBanner = $('pmi-banner');
+    if (pmiRequired) {
+      pmiBanner.classList.remove('hidden', 'good');
+      $('pmi-title').textContent = 'PMI Required';
+      $('pmi-icon').textContent = '⚠️';
+      $('pmi-desc').innerHTML = `Your LTV exceeds 80%, so lenders typically require Private Mortgage Insurance (PMI). Estimated cost: <b>${fmt(pmiLow)}–${fmt(pmiHigh)}</b> per year (0.5%–1.5% of loan).`;
+    } else {
+      pmiBanner.classList.remove('hidden');
+      pmiBanner.classList.add('good');
+      $('pmi-title').textContent = 'No PMI Required 🎉';
+      $('pmi-icon').textContent = '✅';
+      $('pmi-desc').textContent = 'Your LTV is below 80%. No Private Mortgage Insurance is required — great position!';
+    }
+
+    // Metrics
+    $('m-loan').textContent      = fmt(loan);
+    $('m-loan-sub').textContent  = pct(ltv) + ' of property';
+    $('m-down').textContent      = fmt(down);
+    $('m-down-pct').textContent  = pct(downPct) + ' of property';
+    $('m-equity').textContent    = fmt(equity);
+    $('m-equity-pct').textContent= pct(equityPct) + ' equity stake';
+    $('m-prop').textContent      = fmt(propValue);
+    $('m-pmi').textContent       = pmiRequired ? 'Required' : 'Not needed';
+    $('m-pmi-sub').textContent   = pmiRequired ? fmt(pmiLow) + '–' + fmt(pmiHigh) + '/yr' : 'LTV < 80%';
+    $('m-pmi').style.color       = pmiRequired ? 'var(--red)' : 'var(--green)';
+
+    // CLTV card
+    if (hasCLTV) {
+      $('cltv-card').style.display = '';
+      $('m-cltv').textContent = pct(cltv);
+      $('m-cltv-sub').textContent  = fmt(totalLiens) + ' total liens';
+    } else {
+      $('cltv-card').style.display = 'none';
+    }
+  }
+
+  // Init gauge tracks on page load
+  buildTracks();
+})();
+</script>
+
+</body>
+</html>
