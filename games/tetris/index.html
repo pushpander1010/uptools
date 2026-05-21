@@ -39,8 +39,8 @@
     .btn.secondary { background: #1a2436; color: var(--text); border: 1px solid var(--border) }
 
     .game-container { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; align-items: start; }
-    .game-board { width: 300px; height: 600px; border: 2px solid var(--border); background: #000; position: relative; margin: 0 auto; }
-    .game-cell { position: absolute; width: 30px; height: 30px; border: 1px solid #333; }
+    .game-board { width: 300px; height: 600px; border: 2px solid var(--border); background: #000; position: relative; margin: 0 auto; display: grid; grid-template-columns: repeat(10, 1fr); grid-template-rows: repeat(20, 1fr); }
+    .game-cell { border: 1px solid #111; }
     
     .next-piece { width: 120px; height: 120px; border: 2px solid var(--border); background: #000; margin: 1rem 0; position: relative; }
     .next-cell { position: absolute; width: 24px; height: 24px; border: 1px solid #333; }
@@ -352,8 +352,6 @@
         for (let x = 0; x < BOARD_WIDTH; x++) {
           const cell = document.createElement('div');
           cell.className = 'game-cell';
-          cell.style.left = x * CELL_SIZE + 'px';
-          cell.style.top = y * CELL_SIZE + 'px';
           cell.id = `cell-${x}-${y}`;
           gameBoard.appendChild(cell);
         }
@@ -766,45 +764,7 @@
     // Initialize game on load
     document.addEventListener('DOMContentLoaded', initGame);
 
-    // Fullscreen functionality
-    const fullscreenBtn = document.getElementById('fullscreenBtn');
-    let isFullscreen = false;
-    let exitFullscreenBtn = null;
-
-    function enterFullscreen() {
-      isFullscreen = true;
-      document.body.classList.add('fullscreen-mode');
-      
-      // Create exit button
-      exitFullscreenBtn = document.createElement('button');
-      exitFullscreenBtn.className = 'exit-fullscreen-btn';
-      exitFullscreenBtn.innerHTML = '✕ Exit Fullscreen';
-      exitFullscreenBtn.onclick = exitFullscreen;
-      document.body.appendChild(exitFullscreenBtn);
-      
-      fullscreenBtn.style.display = 'none';
-    }
-
-    function exitFullscreen() {
-      isFullscreen = false;
-      document.body.classList.remove('fullscreen-mode');
-      
-      // Remove exit button
-      if (exitFullscreenBtn) {
-        exitFullscreenBtn.remove();
-        exitFullscreenBtn = null;
-      }
-      
-      fullscreenBtn.style.display = 'block';
-    }
-
-    // Initialize fullscreen manager
-    document.addEventListener('DOMContentLoaded', () => {
-      const gameContainer = document.getElementById('gameContainer');
-      if (gameContainer && window.FullscreenManager) {
-        new FullscreenManager('#gameContainer', '.fullscreen-btn');
-      }
-    });
+    // FullscreenManager is automatically initialized by /games/fullscreen-utils.js
   </script>
 </body>
 </html>

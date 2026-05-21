@@ -8,6 +8,13 @@
     "binding": "ASSETS"
   },
 
+  "kv_namespaces": [
+    {
+      "binding": "GAMES_KV",
+      "id": "e0b5c165ba5c4e478ee6c76e2794017d"
+    }
+  ],
+
   "vars": {
     "CORS_ORIGINS": "https://www.uptools.in,https://uptools.in,http://localhost:5173",
     "LOG_LEVEL": "info"

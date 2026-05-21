@@ -1,7 +1,8 @@
-﻿// UpTools Worker: Static site + /ai (LLM proxy) + /proxy (finance CORS bridge)
+// UpTools Worker: Static site + /ai (LLM proxy) + /proxy (finance CORS bridge)
 
 export interface Env {
   ASSETS: Fetcher;
+  GAMES_KV?: KVNamespace;
 
   // Secrets
   TOGETHER_API_KEY: string;
@@ -22,6 +23,11 @@ const enc = new TextEncoder();
 export default {
   async fetch(req: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
     const url = new URL(req.url);
+
+    // --- Multiplayer API endpoint ---
+    if (url.pathname === "/api/multiplayer") {
+      return handleMultiplayer(req, env);
+    }
 
     // --- Finance CORS proxy (/proxy?u=<encoded target>) ---
     if (url.pathname === "/proxy") {
@@ -1380,4 +1386,112 @@ function translateOpenAIStyleSSE(upstream: Response, cors: HeadersInit): Respons
     status: 200,
     headers: { ...cors, "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-cache, no-transform", "X-Accel-Buffering": "no" }
   });
+}
+
+/* ---------------- Multiplayer Sync API ---------------- */
+
+const memoryLobby = new Map<string, { state: any; expires: number }>();
+
+function cleanupMemoryLobby() {
+  const now = Date.now();
+  for (const [key, value] of memoryLobby.entries()) {
+    if (now > value.expires) {
+      memoryLobby.delete(key);
+    }
+  }
+}
+
+async function handleMultiplayer(req: Request, env: Env): Promise<Response> {
+  const cors = corsHeaders(req, env);
+  
+  if (req.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers: cors });
+  }
+
+  const url = new URL(req.url);
+
+  if (req.method === "GET") {
+    const code = url.searchParams.get("code")?.trim().toUpperCase();
+    if (!code) {
+      return new Response(JSON.stringify({ error: "Missing code parameter" }), {
+        status: 400,
+        headers: { ...cors, "Content-Type": "application/json" }
+      });
+    }
+
+    try {
+      let stateStr: string | null = null;
+      if (env.GAMES_KV) {
+        stateStr = await env.GAMES_KV.get(`mp-game-${code}`);
+      } else {
+        cleanupMemoryLobby();
+        const lobbyObj = memoryLobby.get(code);
+        if (lobbyObj && Date.now() < lobbyObj.expires) {
+          stateStr = JSON.stringify(lobbyObj.state);
+        }
+      }
+
+      if (!stateStr) {
+        return new Response(JSON.stringify({ error: "Game not found" }), {
+          status: 404,
+          headers: { ...cors, "Content-Type": "application/json" }
+        });
+      }
+
+      return new Response(stateStr, {
+        status: 200,
+        headers: { ...cors, "Content-Type": "application/json", "Cache-Control": "no-cache" }
+      });
+    } catch (err: any) {
+      return new Response(JSON.stringify({ error: err.message }), {
+        status: 500,
+        headers: { ...cors, "Content-Type": "application/json" }
+      });
+    }
+  }
+
+  if (req.method === "POST") {
+    try {
+      const body = await req.json() as any;
+      const { gameId, state } = body;
+      const code = gameId?.trim().toUpperCase();
+
+      if (!code || !state) {
+        return new Response(JSON.stringify({ error: "Missing gameId or state" }), {
+          status: 400,
+          headers: { ...cors, "Content-Type": "application/json" }
+        });
+      }
+
+      const stateStr = JSON.stringify(state);
+
+      if (env.GAMES_KV) {
+        await env.GAMES_KV.put(`mp-game-${code}`, stateStr, { expirationTtl: 7200 });
+      } else {
+        cleanupMemoryLobby();
+        if (memoryLobby.size >= 5000) {
+          const keys = Array.from(memoryLobby.keys());
+          for (let i = 0; i < 100; i++) {
+            memoryLobby.delete(keys[i]);
+          }
+        }
+        memoryLobby.set(code, {
+          state,
+          expires: Date.now() + 2 * 60 * 60 * 1000 // 2 hours
+        });
+      }
+
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { ...cors, "Content-Type": "application/json" }
+      });
+    } catch (err: any) {
+      return new Response(JSON.stringify({ error: err.message }), {
+        status: 500,
+        headers: { ...cors, "Content-Type": "application/json" }
+      });
+    }
+  }
+
+  return new Response("Method not allowed", { status: 405, headers: cors });
 }

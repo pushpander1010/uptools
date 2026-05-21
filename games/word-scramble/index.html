@@ -15,6 +15,7 @@
   <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="/style.css?v=1.3.0" />
+  <script src="/games/fullscreen-utils.js" defer></script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"VideoGame","name":"Word Scramble","url":"https://www.uptools.in/games/word-scramble/","applicationCategory":"Game","genre":["Word","Puzzle","Brain"]}
   </script>
@@ -22,17 +23,31 @@
     body { --accent: #00e5a0; }
     .game-wrap { max-width: 640px; margin: 0 auto; }
     .scrambled { font-size: 2.5rem; font-weight: 900; letter-spacing: .2em; text-align: center; color: #00e5a0; padding: 1rem; background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; margin: 12px 0; text-transform: uppercase; }
-    .answer-input { width: 100%; background: #0e1628; border: 2px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .75rem; font-size: 1.3rem; text-align: center; text-transform: uppercase; letter-spacing: .1em; }
+    .answer-input { width: 100%; background: #0e1628; border: 2px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .75rem; font-size: 1.3rem; text-align: center; text-transform: uppercase; letter-spacing: .1em; min-height: 48px; }
     .answer-input:focus { border-color: #00e5a0; outline: none; }
     .score-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
     .score-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .5rem 1rem; text-align: center; }
     .score-val { font-size: 1.5rem; font-weight: 900; color: #00e5a0; }
     .score-lbl { font-size: .8rem; color: #9aa4b2; }
-    .hint-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .5rem .75rem; font-size: .9rem; color: #9aa4b2; margin: 8px 0; cursor: pointer; }
+    .hint-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .5rem .75rem; font-size: .9rem; color: #9aa4b2; margin: 8px 0; cursor: pointer; min-height: 44px; display: flex; align-items: center; justify-content: center; }
     .hint-box:hover { border-color: #7aa2ff; }
     #feedback { font-size: 1.1rem; font-weight: 700; min-height: 1.6em; text-align: center; }
     .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(18, 24, 38, 0.95);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      border-radius: .75rem;
+      padding: 1.5rem;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
   </style>
 </head>
 <body>
@@ -69,8 +84,9 @@
         </div>
       </section>
 
-      <section class="card" style="margin-top:12px">
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
+      <div class="game-container card" style="margin-top:12px; position:relative;">
+        <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;padding-right:45px;">
           <select id="catSel" style="background:#0e1628;border:1px solid #212a3a;border-radius:.5rem;color:#e6edf3;padding:.4rem .6rem">
             <option value="all">All Categories</option>
             <option value="animals">Animals</option>
@@ -101,7 +117,13 @@
         </div>
 
         <p id="feedback" style="margin-top:12px"></p>
-      </section>
+
+        <div id="gameOverlay" class="overlay">
+          <h2 id="overlayTitle">🎉 Perfect!</h2>
+          <p id="overlayMessage" style="font-size:1.1rem; margin-top:8px;"></p>
+          <button id="overlayActionBtn" class="btn primary" style="margin-top:16px; min-height:44px; min-width:120px;">Continue</button>
+        </div>
+      </div>
 
       <section class="card" style="margin-top:12px">
         <h2 style="margin-top:0">🎥 Improve your vocabulary</h2>
@@ -196,6 +218,65 @@
       ]
     };
 
+    class SoundEffects {
+      constructor() {
+        this.ctx = null;
+      }
+      init() {
+        if (!this.ctx) {
+          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      }
+      playCorrect() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.frequency.setValueAtTime(587.33, this.ctx.currentTime); // D5
+          osc.frequency.setValueAtTime(880, this.ctx.currentTime + 0.08); // A5
+          gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.2);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.2);
+        } catch (e) {}
+      }
+      playWrong() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(120, this.ctx.currentTime);
+          gain.gain.setValueAtTime(0.06, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.18);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.18);
+        } catch (e) {}
+      }
+      playNeutral() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.frequency.setValueAtTime(440, this.ctx.currentTime);
+          gain.gain.setValueAtTime(0.02, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.05);
+        } catch (e) {}
+      }
+    }
+    const sounds = new SoundEffects();
+
     let score = 0, streak = 0, questionNum = 1;
     let currentWord = '', hintRevealed = false;
 
@@ -224,11 +305,13 @@
       document.getElementById('answerInput').value = '';
       document.getElementById('feedback').textContent = '';
       document.getElementById('feedback').style.color = '';
+      document.getElementById('gameOverlay').style.display = 'none';
       document.getElementById('answerInput').focus();
       document.getElementById('hintBox').dataset.hint = entry.hint;
     }
 
     function submit() {
+      sounds.init();
       const answer = document.getElementById('answerInput').value.trim().toLowerCase();
       const fb = document.getElementById('feedback');
       if (!answer) return;
@@ -236,6 +319,7 @@
       if (answer === currentWord) {
         score += hintRevealed ? 5 : 10;
         streak++;
+        sounds.playCorrect();
         fb.textContent = `✅ Correct! +${hintRevealed ? 5 : 10} points`;
         fb.style.color = '#00e5a0';
         document.getElementById('scoreVal').textContent = score;
@@ -244,6 +328,7 @@
         document.getElementById('qVal').textContent = questionNum;
         setTimeout(nextWord, 1000);
       } else {
+        sounds.playWrong();
         streak = 0;
         document.getElementById('streakVal').textContent = 0;
         fb.textContent = `❌ Try again! (${answer.length} letters)`;
@@ -253,13 +338,18 @@
     }
 
     document.getElementById('hintBox').addEventListener('click', () => {
+      sounds.playNeutral();
       hintRevealed = true;
       document.getElementById('hintBox').textContent = `💡 ${document.getElementById('hintBox').dataset.hint}`;
     });
 
     document.getElementById('submitBtn').addEventListener('click', submit);
-    document.getElementById('answerInput').addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+    document.getElementById('answerInput').addEventListener('keydown', e => {
+      sounds.init();
+      if (e.key === 'Enter') submit();
+    });
     document.getElementById('skipBtn').addEventListener('click', () => {
+      sounds.playNeutral();
       streak = 0;
       document.getElementById('streakVal').textContent = 0;
       questionNum++;
@@ -267,20 +357,29 @@
       nextWord();
     });
     document.getElementById('revealBtn').addEventListener('click', () => {
-      document.getElementById('feedback').textContent = `The word was: ${currentWord.toUpperCase()}`;
-      document.getElementById('feedback').style.color = '#9aa4b2';
+      sounds.playNeutral();
+      document.getElementById('overlayTitle').textContent = 'Reveal Answer';
+      document.getElementById('overlayMessage').textContent = `The word was: ${currentWord.toUpperCase()}`;
+      document.getElementById('gameOverlay').style.display = 'flex';
       streak = 0;
       document.getElementById('streakVal').textContent = 0;
-      setTimeout(nextWord, 1500);
+    });
+    document.getElementById('overlayActionBtn').addEventListener('click', () => {
+      sounds.playNeutral();
+      nextWord();
     });
     document.getElementById('newGameBtn').addEventListener('click', () => {
+      sounds.playNeutral();
       score = 0; streak = 0; questionNum = 1;
       document.getElementById('scoreVal').textContent = 0;
       document.getElementById('streakVal').textContent = 0;
       document.getElementById('qVal').textContent = 1;
       nextWord();
     });
-    document.getElementById('catSel').addEventListener('change', nextWord);
+    document.getElementById('catSel').addEventListener('change', () => {
+      sounds.playNeutral();
+      nextWord();
+    });
 
     nextWord();
   </script>

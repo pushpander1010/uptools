@@ -1,6 +1,6 @@
 /**
  * Multiplayer Game Utilities
- * Provides robust multiplayer support using localStorage + polling
+ * Provides robust multiplayer support using Server API + polling + localStorage fallback
  */
 
 class MultiplayerGameManager {
@@ -12,6 +12,8 @@ class MultiplayerGameManager {
     this.storageKey = null;
     this.pollInterval = options.pollInterval || 500; // ms
     this.pollTimer = null;
+    this.isPollingActive = false;
+    this.lastProcessedRound = 0;
     this.gameState = {};
     this.onStateChange = options.onStateChange || null;
     this.onGameReady = options.onGameReady || null;
@@ -21,7 +23,7 @@ class MultiplayerGameManager {
   /**
    * Create a new multiplayer game
    */
-  createGame(playerName) {
+  async createGame(playerName) {
     if (!playerName || playerName.trim().length === 0) {
       throw new Error('Player name is required');
     }
@@ -53,10 +55,11 @@ class MultiplayerGameManager {
       round: 1,
       maxRounds: 5,
       status: 'waiting', // waiting, playing, completed
-      lastUpdate: Date.now()
+      lastUpdate: Date.now(),
+      lastRoundResult: null
     };
 
-    this.saveState();
+    await this.saveState();
     this.startPolling();
 
     return {
@@ -68,7 +71,7 @@ class MultiplayerGameManager {
   /**
    * Join an existing multiplayer game
    */
-  joinGame(gameId, playerName) {
+  async joinGame(gameId, playerName) {
     if (!gameId || gameId.trim().length === 0) {
       throw new Error('Game code is required');
     }
@@ -82,7 +85,7 @@ class MultiplayerGameManager {
     this.storageKey = `mp-game-${this.gameId}`;
 
     // Load existing game state
-    const state = this.loadState();
+    const state = await this.loadState();
     if (!state) {
       throw new Error('Game not found. Check the game code.');
     }
@@ -93,7 +96,7 @@ class MultiplayerGameManager {
     state.lastUpdate = Date.now();
 
     this.gameState = state;
-    this.saveState();
+    await this.saveState();
     this.startPolling();
 
     if (this.onGameReady) {
@@ -106,12 +109,12 @@ class MultiplayerGameManager {
   /**
    * Make a move in the game
    */
-  makeMove(choice) {
+  async makeMove(choice) {
     if (!this.gameState || !this.storageKey) {
       throw new Error('Game not initialized');
     }
 
-    const state = this.loadState();
+    const state = await this.loadState();
     if (!state) {
       throw new Error('Game state lost');
     }
@@ -127,11 +130,11 @@ class MultiplayerGameManager {
 
     state.lastUpdate = Date.now();
     this.gameState = state;
-    this.saveState();
+    await this.saveState();
 
     // Check if both players have made their move
     if (state.player1.ready && state.player2.ready) {
-      this.resolveRound(state);
+      await this.resolveRound(state);
     }
 
     return state;
@@ -140,7 +143,7 @@ class MultiplayerGameManager {
   /**
    * Resolve a round (determine winner)
    */
-  resolveRound(state) {
+  async resolveRound(state) {
     const p1Choice = state.player1.choice;
     const p2Choice = state.player2.choice;
 
@@ -156,6 +159,18 @@ class MultiplayerGameManager {
       state.player2.score += 1;
     }
 
+    // Set lastRoundResult
+    state.lastRoundResult = {
+      result,
+      p1Choice,
+      p2Choice,
+      scores: {
+        player1: state.player1.score,
+        player2: state.player2.score
+      },
+      round: state.round
+    };
+
     // Reset for next round
     state.player1.choice = null;
     state.player1.ready = false;
@@ -170,19 +185,10 @@ class MultiplayerGameManager {
 
     state.lastUpdate = Date.now();
     this.gameState = state;
-    this.saveState();
+    await this.saveState();
 
     if (this.onRoundComplete) {
-      this.onRoundComplete({
-        result,
-        p1Choice,
-        p2Choice,
-        scores: {
-          player1: state.player1.score,
-          player2: state.player2.score
-        },
-        round: state.round - 1
-      });
+      this.onRoundComplete(state.lastRoundResult);
     }
   }
 
@@ -197,8 +203,8 @@ class MultiplayerGameManager {
   /**
    * Get current game state
    */
-  getState() {
-    return this.loadState() || this.gameState;
+  async getState() {
+    return (await this.loadState()) || this.gameState;
   }
 
   /**
@@ -210,29 +216,61 @@ class MultiplayerGameManager {
   }
 
   /**
-   * Save state to localStorage
+   * Save state to localStorage and Server
    */
-  saveState() {
+  async saveState() {
     if (!this.storageKey) return;
     try {
       localStorage.setItem(this.storageKey, JSON.stringify(this.gameState));
     } catch (err) {
-      console.error('Failed to save game state:', err);
+      console.error('Failed to save game state to localStorage:', err);
+    }
+
+    try {
+      const response = await fetch('/api/multiplayer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          gameId: this.gameId,
+          state: this.gameState
+        })
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (err) {
+      console.error('Failed to save game state to server:', err);
     }
   }
 
   /**
-   * Load state from localStorage
+   * Load state from Server and fallback to localStorage
    */
-  loadState() {
+  async loadState() {
     if (!this.storageKey) return null;
+    let state = null;
     try {
-      const data = localStorage.getItem(this.storageKey);
-      return data ? JSON.parse(data) : null;
+      const response = await fetch(`/api/multiplayer?code=${encodeURIComponent(this.gameId)}`);
+      if (response.ok) {
+        state = await response.json();
+      } else if (response.status === 404) {
+        return null;
+      }
     } catch (err) {
-      console.error('Failed to load game state:', err);
-      return null;
+      console.error('Failed to load game state from server:', err);
     }
+
+    if (!state) {
+      try {
+        const data = localStorage.getItem(this.storageKey);
+        state = data ? JSON.parse(data) : null;
+      } catch (err) {
+        console.error('Failed to load game state from localStorage:', err);
+      }
+    }
+    return state;
   }
 
   /**
@@ -240,24 +278,57 @@ class MultiplayerGameManager {
    */
   startPolling() {
     if (this.pollTimer) return;
+    this.isPollingActive = true;
+    this.lastProcessedRound = this.gameState && this.gameState.round ? this.gameState.round - 1 : 0;
 
-    this.pollTimer = setInterval(() => {
-      const newState = this.loadState();
-      if (newState && JSON.stringify(newState) !== JSON.stringify(this.gameState)) {
-        this.gameState = newState;
-        if (this.onStateChange) {
-          this.onStateChange(newState);
+    const poll = async () => {
+      if (!this.isPollingActive) return;
+      try {
+        const newState = await this.loadState();
+        if (newState && this.isPollingActive) {
+          const stateChanged = JSON.stringify(newState) !== JSON.stringify(this.gameState);
+
+          // Check if there is a new round result we haven't processed yet
+          if (newState.lastRoundResult && newState.lastRoundResult.round > this.lastProcessedRound) {
+            this.lastProcessedRound = newState.lastRoundResult.round;
+            if (this.onRoundComplete) {
+              this.onRoundComplete(newState.lastRoundResult);
+            }
+          }
+
+          // Check if transition from waiting to playing occurred
+          if (this.gameState && this.gameState.status === 'waiting' && newState.status === 'playing') {
+            if (this.onGameReady) {
+              this.onGameReady(newState);
+            }
+          }
+
+          if (stateChanged) {
+            this.gameState = newState;
+            if (this.onStateChange) {
+              this.onStateChange(newState);
+            }
+          }
         }
+      } catch (err) {
+        console.error('Error during polling:', err);
       }
-    }, this.pollInterval);
+
+      if (this.isPollingActive) {
+        this.pollTimer = setTimeout(poll, this.pollInterval);
+      }
+    };
+
+    this.pollTimer = setTimeout(poll, this.pollInterval);
   }
 
   /**
    * Stop polling
    */
   stopPolling() {
+    this.isPollingActive = false;
     if (this.pollTimer) {
-      clearInterval(this.pollTimer);
+      clearTimeout(this.pollTimer);
       this.pollTimer = null;
     }
   }
@@ -289,8 +360,10 @@ class MultiplayerGameManager {
    * Check if game is ready (both players joined)
    */
   isGameReady() {
-    return this.gameState && 
-           this.gameState.player1.name && 
+    return this.gameState &&
+           this.gameState.player1 &&
+           this.gameState.player1.name &&
+           this.gameState.player2 &&
            this.gameState.player2.name;
   }
 

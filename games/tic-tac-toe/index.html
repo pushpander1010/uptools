@@ -732,6 +732,12 @@
       }
 
       newGame() {
+        if (this.gameMode === 'multiplayer') {
+          if (this.multiplayerManager) {
+            this.multiplayerManager.resetBoard();
+          }
+          return;
+        }
         this.board = Array(9).fill(null);
         this.currentPlayer = 'X';
         this.gameOver = false;
@@ -776,7 +782,7 @@
         }
       }
 
-      makeMultiplayerMove(index) {
+      async makeMultiplayerMove(index) {
         if (!this.multiplayerManager || !this.multiplayerManager.isGameReady()) {
           alert('Game not ready. Create or join first.');
           return;
@@ -788,10 +794,11 @@
         }
 
         try {
-          this.multiplayerManager.makeMove(index);
           this.isWaitingForOpponent = true;
-          document.getElementById('status').textContent = 'Waiting for opponent...';
+          document.getElementById('status').textContent = 'Updating board...';
+          await this.multiplayerManager.makeMove(index);
         } catch (err) {
+          this.isWaitingForOpponent = false;
           alert('Error: ' + err.message);
         }
       }
@@ -799,7 +806,7 @@
 
     let game;
 
-    function createMultiplayerGame() {
+    async function createMultiplayerGame() {
       const playerName = document.getElementById('playerName').value.trim();
       if (!playerName) {
         alert('Please enter your name!');
@@ -812,7 +819,7 @@
           onRoundComplete: (roundData) => handleMultiplayerRound(roundData)
         });
 
-        const { gameId, gameUrl } = manager.createGame(playerName);
+        const { gameId, gameUrl } = await manager.createGame(playerName);
         game.multiplayerManager = manager;
 
         document.getElementById('sharableLink').value = gameUrl;
@@ -828,7 +835,7 @@
       }
     }
 
-    function joinMultiplayerGame() {
+    async function joinMultiplayerGame() {
       const gameCode = document.getElementById('gameCode').value.trim();
       const playerName = document.getElementById('joinPlayerName').value.trim();
 
@@ -843,13 +850,13 @@
           onRoundComplete: (roundData) => handleMultiplayerRound(roundData)
         });
 
-        manager.joinGame(gameCode, playerName);
+        await manager.joinGame(gameCode, playerName);
         game.multiplayerManager = manager;
 
         document.getElementById('multiplayerSetup').classList.remove('active');
         document.getElementById('player1Label').textContent = manager.gameState.player1.name;
         document.getElementById('player2Label').textContent = playerName;
-        document.getElementById('status').textContent = 'Game started! Your turn.';
+        document.getElementById('status').textContent = 'Game started! Loading...';
       } catch (err) {
         alert('Error: ' + err.message);
       }
@@ -865,20 +872,179 @@
     }
 
     function updateMultiplayerDisplay(state) {
+      if (!game.multiplayerManager) return;
       document.getElementById('player1Score').textContent = state.player1.score;
       document.getElementById('player2Score').textContent = state.player2.score;
+
+      // Update board cells
+      document.querySelectorAll('.cell').forEach((cell, index) => {
+        const val = state.board ? state.board[index] : null;
+        cell.textContent = val || '';
+        cell.classList.remove('x', 'o', 'winner', 'disabled');
+        if (val) {
+          cell.classList.add(val.toLowerCase());
+          cell.classList.add('disabled');
+        }
+      });
+
+      // Update names
+      document.getElementById('player1Label').textContent = state.player1.name;
+      document.getElementById('player2Label').textContent = state.player2.name || 'Waiting...';
+
+      if (state.player2.name && document.getElementById('waitingMessage').classList.contains('active')) {
+        document.getElementById('waitingMessage').classList.remove('active');
+        document.getElementById('multiplayerSetup').classList.remove('active');
+      }
+
+      // Highlight winner if completed
+      if (state.status === 'completed') {
+        game.gameOver = true;
+        game.board = state.board ? [...state.board] : Array(9).fill(null);
+
+        // Highlight winning cells
+        const lines = [
+          [0, 1, 2], [3, 4, 5], [6, 7, 8],
+          [0, 3, 6], [1, 4, 7], [2, 5, 8],
+          [0, 4, 8], [2, 4, 6]
+        ];
+        let wonLine = null;
+        for (let line of lines) {
+          const [a, b, c] = line;
+          if (game.board[a] && game.board[a] === game.board[b] && game.board[a] === game.board[c]) {
+            wonLine = line;
+            break;
+          }
+        }
+        if (wonLine) {
+          document.querySelectorAll('.cell').forEach((cell, index) => {
+            if (wonLine.includes(index)) {
+              cell.classList.add('winner');
+            }
+          });
+        }
+
+        if (state.winner === 'draw') {
+          document.getElementById('status').textContent = "It's a Draw!";
+          document.getElementById('status').className = 'status draw';
+        } else {
+          const winnerName = state[state.winner].name;
+          const isMeWinner = (state.winner === 'player1' && game.multiplayerManager.playerId === 1) ||
+                             (state.winner === 'player2' && game.multiplayerManager.playerId === 2);
+          document.getElementById('status').textContent = isMeWinner ? '🎉 You Win!' : `😔 ${winnerName} Wins!`;
+          document.getElementById('status').className = 'status ' + (state.winner === 'player1' ? 'x-turn' : 'o-turn');
+        }
+      } else {
+        game.gameOver = false;
+        game.board = state.board ? [...state.board] : Array(9).fill(null);
+
+        // Update turn status
+        const isMyTurn = (state.turn === game.multiplayerManager.playerId);
+        game.isWaitingForOpponent = !isMyTurn;
+
+        if (isMyTurn) {
+          document.getElementById('status').textContent = 'Your turn!';
+          document.getElementById('status').className = 'status ' + (state.turn === 1 ? 'x-turn' : 'o-turn');
+        } else {
+          const opponentName = state.turn === 1 ? state.player1.name : state.player2.name;
+          document.getElementById('status').textContent = `Waiting for ${opponentName}...`;
+          document.getElementById('status').className = 'status ' + (state.turn === 1 ? 'x-turn' : 'o-turn');
+        }
+      }
     }
 
     function handleMultiplayerRound(roundData) {
-      game.isWaitingForOpponent = false;
-      document.getElementById('status').textContent = 'Your turn!';
+      // Round/game sync check
     }
 
     class TicTacToeMultiplayer extends MultiplayerGameManager {
-      determineWinner(choice1, choice2) {
-        // For Tic-Tac-Toe, we need to check the board state
-        // This is simplified - in a real implementation, you'd pass the full board
-        return 'tie';
+      async createGame(playerName) {
+        const result = await super.createGame(playerName);
+        this.gameState.board = Array(9).fill(null);
+        this.gameState.turn = 1;
+        this.gameState.winner = null;
+        await this.saveState();
+        return result;
+      }
+
+      async makeMove(index) {
+        if (!this.gameState || !this.storageKey) {
+          throw new Error('Game not initialized');
+        }
+
+        const state = await this.loadState();
+        if (!state) {
+          throw new Error('Game state lost');
+        }
+
+        if (state.turn !== this.playerId) {
+          throw new Error("It's not your turn");
+        }
+
+        if (state.board[index] !== null) {
+          throw new Error("Cell already taken");
+        }
+
+        state.board[index] = this.playerId === 1 ? 'X' : 'O';
+
+        const winResult = this.checkTicTacToeWinner(state.board);
+        if (winResult) {
+          state.winner = winResult === 'X' ? 'player1' : 'player2';
+          if (state.winner === 'player1') {
+            state.player1.score += 1;
+          } else {
+            state.player2.score += 1;
+          }
+          state.status = 'completed';
+        } else if (state.board.every(cell => cell !== null)) {
+          state.winner = 'draw';
+          state.status = 'completed';
+        } else {
+          state.turn = this.playerId === 1 ? 2 : 1;
+        }
+
+        state.lastUpdate = Date.now();
+        this.gameState = state;
+        await this.saveState();
+
+        if (this.onStateChange) {
+          this.onStateChange(state);
+        }
+
+        return state;
+      }
+
+      async resetBoard() {
+        const state = await this.loadState();
+        if (!state) return;
+
+        state.board = Array(9).fill(null);
+        state.round += 1;
+        state.turn = state.round % 2 === 1 ? 1 : 2;
+        state.winner = null;
+        state.status = 'playing';
+        state.lastUpdate = Date.now();
+
+        this.gameState = state;
+        await this.saveState();
+
+        if (this.onStateChange) {
+          this.onStateChange(state);
+        }
+      }
+
+      checkTicTacToeWinner(board) {
+        const lines = [
+          [0, 1, 2], [3, 4, 5], [6, 7, 8],
+          [0, 3, 6], [1, 4, 7], [2, 5, 8],
+          [0, 4, 8], [2, 4, 6]
+        ];
+        for (let line of lines) {
+          const [a, b, c] = line;
+          if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            return board[a];
+          }
+        }
+        return null;
       }
     }
 

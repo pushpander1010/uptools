@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -317,7 +317,7 @@
         }
       }
 
-      makeMultiplayerMove(choice) {
+      async makeMultiplayerMove(choice) {
         if (!this.multiplayerManager || !this.multiplayerManager.isGameReady()) {
           document.getElementById('result').textContent = 'Game not ready. Create or join first.';
           return;
@@ -327,12 +327,13 @@
           return;
         }
         try {
-          this.multiplayerManager.makeMove(choice);
           this.isWaitingForOpponent = true;
           document.getElementById('playerChoice').textContent = this.emojis[choice];
           document.getElementById('computerChoice').textContent = '❓';
           document.getElementById('result').textContent = 'Waiting for opponent...';
+          await this.multiplayerManager.makeMove(choice);
         } catch (err) {
+          this.isWaitingForOpponent = false;
           document.getElementById('result').textContent = 'Error: ' + err.message;
         }
       }
@@ -388,7 +389,7 @@
 
     let game;
 
-    function createMultiplayerGame() {
+    async function createMultiplayerGame() {
       const playerName = document.getElementById('playerName').value.trim();
       if (!playerName) { alert('Please enter your name!'); return; }
       try {
@@ -407,7 +408,7 @@
             game.updateMultiplayerDisplay(game.multiplayerManager.gameState);
           }
         });
-        const { gameId, gameUrl } = manager.createGame(playerName);
+        const { gameId, gameUrl } = await manager.createGame(playerName);
         game.multiplayerManager = manager;
         document.getElementById('sharableLink').value = gameUrl;
         document.getElementById('gameLink').style.display = 'block';
@@ -422,7 +423,7 @@
       }
     }
 
-    function joinMultiplayerGame() {
+    async function joinMultiplayerGame() {
       const gameCode = document.getElementById('gameCode').value.trim();
       const playerName = document.getElementById('joinPlayerName').value.trim();
       if (!gameCode || !playerName) { alert('Please enter both game code and your name!'); return; }
@@ -434,7 +435,7 @@
             game.updateMultiplayerDisplay(game.multiplayerManager.gameState);
           }
         });
-        manager.joinGame(gameCode, playerName);
+        await manager.joinGame(gameCode, playerName);
         game.multiplayerManager = manager;
         document.getElementById('multiplayerSetup').style.display = 'none';
         document.getElementById('player1Label').textContent = manager.gameState.player1.name;

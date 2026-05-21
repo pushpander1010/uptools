@@ -13,14 +13,44 @@
   <style>
     body { --accent: #ffff00; background: radial-gradient(1200px 600px at 10% -10%, #182033 0%, var(--bg) 45%) fixed; }
     .game-container { max-width: 700px; margin: 2rem auto; padding: 2rem; background: var(--card); border: 1px solid var(--cardBorder); border-radius: var(--radius); position: relative; }
-    .fullscreen-btn { position: absolute; top: 1rem; right: 1rem; background: var(--accent); color: #000; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-size: 1rem; z-index: 100; transition: all 0.2s ease; font-weight: 600; }
-    .fullscreen-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(255, 255, 0, 0.3); }
-    .exit-fullscreen-btn { position: fixed; top: 1rem; right: 1rem; background: #f44336; color: white; border: none; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 700; z-index: 10000; transition: all 0.2s ease; }
-    .exit-fullscreen-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3); }
-    .fullscreen-mode { position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: var(--bg) !important; z-index: 9999 !important; margin: 0 !important; padding: 1rem !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; overflow: auto !important; }
-    .fullscreen-mode .game-container { max-width: min(90vw, 900px) !important; width: 100% !important; margin: 0 !important; padding: 2rem !important; }
-    .fullscreen-mode .game-board { max-width: min(80vw, 600px) !important; }
-    .fullscreen-mode .stat-val { font-size: min(5vmin, 2rem) !important; }
+    
+    /* Fullscreen specific styles */
+    .game-container.fullscreen-mode {
+      max-width: 100vw !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      margin: 0 !important;
+      padding: 1.5rem !important;
+      box-sizing: border-box !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      background: var(--bg) !important;
+      border: none !important;
+      border-radius: 0 !important;
+    }
+    .game-container.fullscreen-mode .game-board {
+      max-width: min(85vw, 55vh) !important;
+      width: 100% !important;
+      margin: 0.75rem auto !important;
+      padding: 0.5rem !important;
+    }
+    .game-container.fullscreen-mode .info-section,
+    .game-container.fullscreen-mode footer,
+    .game-container.fullscreen-mode .game-subtitle {
+      display: none !important;
+    }
+    .game-container.fullscreen-mode .stats-row {
+      margin: 0.5rem 0 !important;
+      width: min(100%, 600px);
+    }
+    .game-container.fullscreen-mode .controls {
+      margin: 0.5rem 0 !important;
+    }
+    .game-container.fullscreen-mode .mobile-controls {
+      margin: 0.5rem 0 !important;
+    }
 
     .game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
     .game-title { margin: 0; font-size: 2rem; }
@@ -115,6 +145,13 @@
     <div class="game-container">
       <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶ Fullscreen</button>
       
+      <!-- Overlay for Game Over / Level Complete -->
+      <div id="gameOverlay" style="display: none; position: absolute; inset: 0; background: rgba(5,13,26,0.95); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-radius: var(--radius); padding: 2rem;">
+        <h2 id="overlayTitle" style="font-size: 3rem; margin: 0 0 1rem 0; color: var(--accent); font-weight: 900;">GAME OVER</h2>
+        <p id="overlayMessage" style="font-size: 1.2rem; color: var(--text); margin-bottom: 2rem;">A ghost caught you!</p>
+        <button id="overlayBtn" class="btn-primary" style="min-height: 44px; padding: 10px 24px; font-size: 16px;">Try Again</button>
+      </div>
+      
       <div class="game-header">
         <div>
           <h1 class="game-title">👻 Pac-Man</h1>
@@ -180,16 +217,7 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Initialize fullscreen manager
     let fullscreenManager = null;
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof FullscreenManager !== 'undefined') {
-        fullscreenManager = new FullscreenManager(
-          document.querySelector('.game-container'),
-          document.getElementById('fullscreenBtn')
-        );
-      }
-    });
 
     class PacManGame {
       constructor() {
@@ -362,6 +390,9 @@
           this.ghostInterval = null;
         }
         
+        const overlay = document.getElementById('gameOverlay');
+        if (overlay) overlay.style.display = 'none';
+        
         this.startBtn.textContent = '▶ Start Game';
         this.startBtn.onclick = () => this.startGame();
         this.updateStats();
@@ -462,24 +493,51 @@
         }
       }
       
+      showOverlay(title, message, buttonText, callback) {
+        const overlay = document.getElementById('gameOverlay');
+        const overlayTitle = document.getElementById('overlayTitle');
+        const overlayMessage = document.getElementById('overlayMessage');
+        const overlayBtn = document.getElementById('overlayBtn');
+        
+        overlayTitle.textContent = title;
+        overlayMessage.textContent = message;
+        overlayBtn.textContent = buttonText;
+        
+        overlay.style.display = 'flex';
+        
+        // Remove old listeners
+        const newBtn = overlayBtn.cloneNode(true);
+        overlayBtn.parentNode.replaceChild(newBtn, overlayBtn);
+        
+        newBtn.addEventListener('click', () => {
+          overlay.style.display = 'none';
+          callback();
+        });
+      }
+      
       checkWin() {
         const dotsRemaining = this.board.flat().filter(cell => cell === 2).length;
         if (dotsRemaining === 0) {
           this.gameRunning = false;
+          if (this.ghostInterval) {
+            clearInterval(this.ghostInterval);
+            this.ghostInterval = null;
+          }
           this.level++;
           this.ghostSpeed = Math.max(100, this.ghostSpeed - 20);
-          alert(`🎉 Level ${this.level - 1} Complete! Starting Level ${this.level}...`);
-          this.board = JSON.parse(JSON.stringify(this.originalBoard));
-          this.pacman = { x: 9, y: 15 };
-          this.ghosts = [
-            { x: 9, y: 9, symbol: '👻', color: '#ff0000' },
-            { x: 8, y: 10, symbol: '👻', color: '#ff69b4' },
-            { x: 10, y: 10, symbol: '👻', color: '#00ffff' }
-          ];
-          this.updateStats();
-          this.renderBoard();
-          this.startBtn.textContent = '▶ Start Game';
-          this.startBtn.onclick = () => this.startGame();
+          
+          this.showOverlay(`🎉 Level ${this.level - 1} Complete!`, `Get ready for Level ${this.level}`, 'Start Level', () => {
+            this.board = JSON.parse(JSON.stringify(this.originalBoard));
+            this.pacman = { x: 9, y: 15 };
+            this.ghosts = [
+              { x: 9, y: 9, symbol: '👻', color: '#ff0000' },
+              { x: 8, y: 10, symbol: '👻', color: '#ff69b4' },
+              { x: 10, y: 10, symbol: '👻', color: '#00ffff' }
+            ];
+            this.updateStats();
+            this.renderBoard();
+            this.startGame();
+          });
         }
       }
 
@@ -487,8 +545,14 @@
         const hitGhost = this.ghosts.some(ghost => ghost.x === this.pacman.x && ghost.y === this.pacman.y);
         if (hitGhost) {
           this.gameRunning = false;
-          alert('💀 Game Over! A ghost caught you!');
-          this.resetGame();
+          if (this.ghostInterval) {
+            clearInterval(this.ghostInterval);
+            this.ghostInterval = null;
+          }
+          this.showOverlay('💀 Game Over', `A ghost caught you! Score: ${this.score}`, 'Play Again', () => {
+            this.resetGame();
+            this.startGame();
+          });
         }
       }
       

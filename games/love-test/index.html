@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -115,6 +115,26 @@
             border-radius: .9rem;
             box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, .32));
             padding: 1rem;
+            position: relative;
+        }
+
+        .fullscreen-btn {
+            position: absolute;
+            top: .5rem;
+            right: .5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--cardBorder);
+            color: var(--muted);
+            padding: .3rem .6rem;
+            border-radius: .4rem;
+            cursor: pointer;
+            font-size: .8rem;
+            z-index: 10;
+        }
+        .fullscreen-btn:hover {
+            background: var(--accent);
+            color: #160914;
+            border-color: var(--accent);
         }
 
         .hud {
@@ -166,6 +186,10 @@
             font-weight: 800;
             cursor: pointer;
             transition: transform .12s ease, border-color .12s ease, background .12s ease;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .difficulty-btn.active {
@@ -180,6 +204,10 @@
             border-radius: .75rem;
             font-weight: 900;
             cursor: pointer;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn.primary {
@@ -240,7 +268,11 @@
             background: #180b20;
             color: #ffe6f1;
             font-weight: 800;
-            cursor: pointer
+            cursor: pointer;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .ps-btn.primary {
@@ -307,7 +339,13 @@
             border: 1px solid var(--cardBorder);
             border-radius: .65rem;
             background: #120915;
-            cursor: pointer
+            cursor: pointer;
+            min-height: 44px;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .opt:hover {
+            background: rgba(255, 95, 162, 0.1);
+            border-color: var(--accent);
         }
 
         .opt input {
@@ -364,6 +402,7 @@
   <meta property="og:description" content="" />
   <meta property="og:url" content="https://www.uptools.in/games/love-test/" />
   <meta property="og:type" content="website" />
+  <script src="/games/fullscreen-utils.js" defer></script>
 </head>
 <body style="--accent:#ff5fa2;--accent-2:#ff8ad4;--bg1:#120915;--bg2:#1a0f1a;">
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
@@ -401,7 +440,9 @@
                 session, then <b>share a challenge link</b> or play together.</p>
 </div>
 <section class="game-wrap">
+<div class="game-container" id="gameContainer">
 <div class="panel">
+<button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶ Fullscreen</button>
 <!-- HUD -->
 <div aria-live="polite" class="hud">
 <div class="kpi">
@@ -437,6 +478,37 @@
 </div>
 <p class="note" id="homeStatus" style="text-align:center;margin:.5rem 0 0">Best scores &amp; last played are
                     stored on this device only.</p>
+</div>
+<!-- FULL-SCREEN PLAY WINDOW -->
+<section aria-modal="true" id="playScreen" inert="" role="dialog">
+<div class="ps-top">
+<div class="left" style="display:flex; gap:.5rem; align-items:center">
+<button aria-label="Stop and go back" class="ps-btn" id="psBack" type="button">⟵ Back</button>
+<span class="ps-title">Couple Compatibility Quiz</span>
+</div>
+<div class="mid" style="display:flex; gap:.5rem; align-items:center">
+<span class="ps-progress" id="psProg">Q 1/10</span>
+</div>
+<div class="right" style="display:flex; gap:.5rem; align-items:center">
+<button class="ps-btn" id="psShare" title="Copy a challenge link">🔗 Share</button>
+</div>
+</div>
+<div class="ps-stage">
+<div class="board">
+<div aria-live="polite" class="qs" id="qs" role="region">
+<!-- dynamic question / name form renders here -->
+</div>
+<div class="qnav">
+<button class="ps-btn" disabled="" id="prevBtn">◀ Prev</button>
+<button class="ps-btn primary" id="nextBtn">Next ▶</button>
+</div>
+</div>
+</div>
+<div class="ps-bottom">
+<div class="tiny">Tip: Tap options or use ↑/↓ to move, Space/Enter to select. Back leaves &amp; stops the
+                session.</div>
+</div>
+</section>
 </div>
 <!-- Helpful links (SEO + backlinks) -->
 <div class="grid" style="margin-top:.85rem">
@@ -476,36 +548,6 @@
 </footer>
 </section>
 </main>
-<!-- FULL-SCREEN PLAY WINDOW -->
-<section aria-modal="true" id="playScreen" inert="" role="dialog">
-<div class="ps-top">
-<div class="left" style="display:flex; gap:.5rem; align-items:center">
-<button aria-label="Stop and go back" class="ps-btn" id="psBack" type="button">⟵ Back</button>
-<span class="ps-title">Couple Compatibility Quiz</span>
-</div>
-<div class="mid" style="display:flex; gap:.5rem; align-items:center">
-<span class="ps-progress" id="psProg">Q 1/10</span>
-</div>
-<div class="right" style="display:flex; gap:.5rem; align-items:center">
-<button class="ps-btn" id="psShare" title="Copy a challenge link">🔗 Share</button>
-</div>
-</div>
-<div class="ps-stage">
-<div class="board">
-<div aria-live="polite" class="qs" id="qs" role="region">
-<!-- dynamic question / name form renders here -->
-</div>
-<div class="qnav">
-<button class="ps-btn" disabled="" id="prevBtn">◀ Prev</button>
-<button class="ps-btn primary" id="nextBtn">Next ▶</button>
-</div>
-</div>
-</div>
-<div class="ps-bottom">
-<div class="tiny">Tip: Tap options or use ↑/↓ to move, Space/Enter to select. Back leaves &amp; stops the
-                session.</div>
-</div>
-</section>
 <!-- App (ESM). Uses shared utils where possible. -->
 <script type="module">
         import * as U from "/scripts/utils.js";

@@ -28,6 +28,7 @@
   <link rel="preload" href="/style.css?v=1.3.0" as="style">
   <link rel="stylesheet" href="/style.css?v=1.3.0" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+  <script src="/games/fullscreen-utils.js" defer></script>
 
   <style>
     :root{
@@ -44,11 +45,22 @@
     .wrap{ max-width:1100px; margin:0 auto; padding:1rem; }
 
     .panel{
+      position: relative;
       background:var(--card);
       border:1px solid var(--cardBorder);
       border-radius:.9rem;
       box-shadow:0 10px 34px rgba(0,0,0,.3);
-      padding:1rem;
+      padding:1.5rem;
+    }
+    .panel.fullscreen-mode {
+      background: var(--bg) !important;
+      border: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      padding: 2rem !important;
+      box-sizing: border-box !important;
     }
     .top-row{
       display:flex;
@@ -56,6 +68,8 @@
       align-items:center;
       flex-wrap:wrap;
       justify-content:space-between;
+      width: 100%;
+      margin-bottom: 1rem;
     }
     .stats{
       display:flex;
@@ -86,6 +100,10 @@
       font-weight:800;
       cursor:pointer;
       transition:transform .1s ease, box-shadow .1s ease;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
     .btn.secondary{
       background:transparent;
@@ -101,12 +119,15 @@
       border-radius:.6rem;
       padding:.5rem .6rem;
       font-weight:700;
+      min-height: 44px;
     }
 
     .board-wrap{
       margin-top:1rem;
       display:grid;
       place-items:center;
+      position: relative;
+      width: 100%;
     }
     .board{
       display:grid;
@@ -130,6 +151,9 @@
       border:1px solid rgba(255,255,255,.08);
       color:#e6edf3;
       transition:transform .05s ease, background .1s ease, box-shadow .1s ease;
+      font-size: clamp(14px, 2vmin, 18px);
+      padding: 0;
+      touch-action: manipulation;
     }
     .cell:active{ transform:scale(.97); }
     .cell.revealed{
@@ -152,6 +176,7 @@
       color:var(--muted);
       text-align:center;
       font-weight:600;
+      width: 100%;
     }
     .legend{
       margin-top:1rem;
@@ -159,6 +184,8 @@
       gap:.4rem;
       color:var(--muted);
       font-size:.92rem;
+      text-align: center;
+      width: 100%;
     }
 
     .bg-glow{
@@ -186,7 +213,7 @@
 
   <div class="bg-glow" aria-hidden="true"></div>
 
-    <!-- Header -->
+  <!-- Header -->
   <header class="site" role="banner">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="UpTools Home">
@@ -212,15 +239,16 @@
       <p>Clear the safe tiles, flag the bombs, and beat your time.</p>
     </div>
 
-    <section class="panel">
+    <section class="panel game-container">
+      <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
       <div class="top-row">
         <div class="stats" aria-live="polite">
           <div class="stat">Time: <span id="time">00:00</span></div>
-          <div class="stat">Mines Left: <span id="minesLeft">0</span></div>
-          <div class="stat">Tiles Cleared: <span id="cleared">0</span></div>
+          <div class="stat">Mines: <span id="minesLeft">0</span></div>
+          <div class="stat">Cleared: <span id="cleared">0</span></div>
         </div>
         <div class="controls" role="toolbar" aria-label="Controls">
-          <label for="difficulty"><b>Difficulty</b></label>
+          <label for="difficulty" style="display:none;">Difficulty</label>
           <select id="difficulty">
             <option value="easy">Easy (8x8, 10)</option>
             <option value="medium" selected>Medium (12x12, 20)</option>
@@ -233,6 +261,13 @@
 
       <div class="board-wrap">
         <div id="board" class="board" role="grid" aria-label="Minesweeper board"></div>
+        
+        <!-- Custom Game Over/Victory Overlay -->
+        <div id="gameOverlay" style="display: none; position: absolute; inset: 0; background: rgba(12, 19, 36, 0.96); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-radius: .75rem; padding: 1.5rem; box-sizing: border-box;">
+          <h2 id="overlayTitle" style="font-size: 2.2rem; margin: 0 0 0.5rem 0; font-weight: 900; letter-spacing: 1px;">VICTORY!</h2>
+          <p id="overlayMessage" style="font-size: 1.1rem; color: var(--muted); margin: 0 0 1.5rem 0; line-height: 1.4;"></p>
+          <button id="overlayBtn" class="btn" style="min-height: 44px; padding: 10px 24px; font-size: 16px;">Play Again</button>
+        </div>
       </div>
 
       <div class="status" id="status">Tip: Right-click or toggle to Flag mode to mark mines.</div>
@@ -270,7 +305,11 @@
       status: document.getElementById('status'),
       time: document.getElementById('time'),
       minesLeft: document.getElementById('minesLeft'),
-      cleared: document.getElementById('cleared')
+      cleared: document.getElementById('cleared'),
+      overlay: document.getElementById('gameOverlay'),
+      overlayTitle: document.getElementById('overlayTitle'),
+      overlayMessage: document.getElementById('overlayMessage'),
+      overlayBtn: document.getElementById('overlayBtn')
     };
 
     const state = {
@@ -286,6 +325,83 @@
       startAt: 0,
       flagMode: false
     };
+
+    let audioCtx = null;
+    function playSound(type) {
+      try {
+        audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+        if (type === 'click') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.08);
+        } else if (type === 'flag') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.1);
+        } else if (type === 'boom') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(100, audioCtx.currentTime);
+          osc.frequency.linearRampToValueAtTime(30, audioCtx.currentTime + 0.6);
+          gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.6);
+        } else if (type === 'victory') {
+          const notes = [523.25, 659.25, 783.99, 1046.50];
+          notes.forEach((freq, index) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.12);
+            gain.gain.setValueAtTime(0.05, audioCtx.currentTime + index * 0.12);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.12 + 0.2);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(audioCtx.currentTime + index * 0.12);
+            osc.stop(audioCtx.currentTime + index * 0.12 + 0.2);
+          });
+        }
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+
+    function showOverlay(title, message, buttonText, buttonColor, callback) {
+      if (!els.overlay || !els.overlayTitle || !els.overlayMessage || !els.overlayBtn) return;
+      els.overlayTitle.textContent = title;
+      els.overlayTitle.style.color = buttonColor;
+      els.overlayMessage.textContent = message;
+      els.overlayBtn.textContent = buttonText;
+      els.overlayBtn.style.background = buttonColor;
+      els.overlay.style.display = 'flex';
+
+      const newBtn = els.overlayBtn.cloneNode(true);
+      els.overlayBtn.parentNode.replaceChild(newBtn, els.overlayBtn);
+      els.overlayBtn = newBtn;
+
+      newBtn.addEventListener('click', () => {
+        els.overlay.style.display = 'none';
+        if (callback) callback();
+      });
+    }
 
     function startTimer() {
       if (state.timerId) clearInterval(state.timerId);
@@ -308,6 +424,7 @@
     }
 
     function initGame() {
+      if (els.overlay) els.overlay.style.display = 'none';
       const cfg = CONFIGS[els.difficulty.value];
       state.rows = cfg.rows;
       state.cols = cfg.cols;
@@ -408,6 +525,7 @@
       if (cell.revealed) return;
       cell.flagged = !cell.flagged;
       state.flags += cell.flagged ? 1 : -1;
+      playSound('flag');
       updateStats();
       updateBoardUI();
     }
@@ -421,12 +539,19 @@
       }
       cell.revealed = true;
       state.revealed += 1;
+      
       if (cell.mine) {
+        playSound('boom');
         gameOver(false);
         return;
       }
+      
+      playSound('click');
       if (cell.count === 0) floodReveal(r, c);
-      if (checkWin()) gameOver(true);
+      if (checkWin()) {
+        playSound('victory');
+        gameOver(true);
+      }
       updateStats();
       updateBoardUI();
     }
@@ -457,7 +582,21 @@
       state.over = true;
       stopTimer();
       revealAllMines();
+      const elapsed = Math.floor((Date.now() - state.startAt) / 1000);
+      const timeText = formatTime(elapsed);
       els.status.textContent = won ? 'You cleared the board. Nice work.' : 'Boom. Game over.';
+
+      setTimeout(() => {
+        if (won) {
+          showOverlay("VICTORY!", `Cleared the board in ${timeText}!`, "Play Again", "#2ed573", () => {
+            initGame();
+          });
+        } else {
+          showOverlay("GAME OVER", "You hit a mine!", "Try Again", "#ff6b6b", () => {
+            initGame();
+          });
+        }
+      }, 500);
     }
 
     function revealAllMines() {
@@ -481,15 +620,18 @@
         btn.classList.toggle('mine', cell.revealed && cell.mine);
         btn.textContent = '';
         if (cell.flagged && !cell.revealed) {
-          btn.textContent = 'F';
+          btn.textContent = '🚩';
         }
         if (cell.revealed && !cell.mine && cell.count > 0) {
           btn.textContent = String(cell.count);
+          // Set standard minesweeper colors for count text
+          const colors = ['#3b82f6', '#10b981', '#ef4444', '#6366f1', '#b91c1c', '#0d9488', '#000000', '#6b7280'];
+          btn.style.color = colors[cell.count - 1] || '#e6edf3';
         }
         if (showMines && cell.mine && !cell.flagged) {
-          btn.textContent = 'X';
+          btn.textContent = '💣';
         }
-        if (cell.revealed && cell.mine) btn.textContent = 'X';
+        if (cell.revealed && cell.mine) btn.textContent = '💥';
       });
     }
 
@@ -502,6 +644,7 @@
       state.flagMode = !state.flagMode;
       els.toggleMode.setAttribute('aria-pressed', state.flagMode ? 'true' : 'false');
       els.toggleMode.textContent = state.flagMode ? 'Mode: Flag' : 'Mode: Reveal';
+      els.toggleMode.classList.toggle('secondary', !state.flagMode);
     }
 
     els.newGame.addEventListener('click', initGame);

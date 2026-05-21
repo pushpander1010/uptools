@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Coin Flip Online - Virtual Coin Toss Free | UpTools Games</title>
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Flip a virtual coin online. Heads or tails? Free online coin toss with statistics and history. Perfect for decisions and games. No sign-up needed." />
@@ -15,9 +15,29 @@
   <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="/style.css?v=1.3.0" />
+  <script src="/games/fullscreen-utils.js" defer></script>
   <style>
     body { --accent: #f59e0b; }
     .game-wrap { max-width: 560px; margin: 0 auto; }
+    #coinGameContainer {
+      position: relative;
+    }
+    #coinGameContainer.fullscreen-mode {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      background: var(--bg) !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+      box-sizing: border-box;
+      padding: 20px !important;
+      overflow-y: auto;
+    }
+    #coinGameContainer.fullscreen-mode > * {
+      width: 100%;
+      max-width: 560px;
+    }
     .coin-container { display: flex; justify-content: center; margin: 24px 0; perspective: 600px; }
     .coin { width: 140px; height: 140px; border-radius: 50%; position: relative; transform-style: preserve-3d; cursor: pointer; transition: transform .6s ease; }
     .coin.flipping { animation: coinFlip .8s ease; }
@@ -43,11 +63,7 @@
   </style>
 </head>
 <body>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-    <!-- Header -->
+  <!-- Header -->
   <header class="site" role="banner">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="UpTools Home">
@@ -68,7 +84,9 @@
   </header>
 
   <main class="wrap">
-    <div class="game-wrap">
+    <div class="game-container game-wrap" id="coinGameContainer">
+      <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
+      
       <section class="card hero" aria-labelledby="title">
         <div>
           <h1 id="title">🪙 Coin Flip</h1>
@@ -150,16 +168,84 @@
     let heads = 0, tails = 0, total = 0, streak = 0, lastResult = '';
     const history = [];
 
+    let audioCtx = null;
+    function playSound(type) {
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        
+        if (type === 'spin') {
+          const duration = 0.8;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+          for (let i = 0; i < duration * 10; i++) {
+            const time = audioCtx.currentTime + (i * 0.08);
+            const freq = 150 + (i % 2 === 0 ? 120 : 0);
+            osc.frequency.setValueAtTime(freq, time);
+          }
+          
+          gain.gain.setValueAtTime(0.0, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+          
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + duration);
+        } else if (type === 'clink') {
+          const now = audioCtx.currentTime;
+          
+          const osc1 = audioCtx.createOscillator();
+          const gain1 = audioCtx.createGain();
+          osc1.type = 'sine';
+          osc1.frequency.setValueAtTime(1400, now);
+          gain1.gain.setValueAtTime(0.15, now);
+          gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+          osc1.connect(gain1);
+          gain1.connect(audioCtx.destination);
+          osc1.start();
+          osc1.stop(now + 0.15);
+          
+          setTimeout(() => {
+            try {
+              const now2 = audioCtx.currentTime;
+              const osc2 = audioCtx.createOscillator();
+              const gain2 = audioCtx.createGain();
+              osc2.type = 'sine';
+              osc2.frequency.setValueAtTime(1100, now2);
+              gain2.gain.setValueAtTime(0.1, now2);
+              gain2.gain.exponentialRampToValueAtTime(0.001, now2 + 0.1);
+              osc2.connect(gain2);
+              gain2.connect(audioCtx.destination);
+              osc2.start();
+              osc2.stop(now2 + 0.1);
+            } catch (e) {}
+          }, 80);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
     function flip() {
       const coin = document.getElementById('coin');
       if (coin.classList.contains('flipping')) return;
 
       const result = Math.random() < 0.5 ? 'H' : 'T';
       coin.classList.add('flipping');
+      playSound('spin');
 
       setTimeout(() => {
         coin.classList.remove('flipping');
         applyResult(result);
+        playSound('clink');
       }, 800);
     }
 

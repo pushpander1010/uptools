@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Single async ad (kept minimal for performance) -->
@@ -35,6 +35,7 @@
   <link rel="preload" href="/style.css?v=1.2.7" as="style">
   <link rel="stylesheet" href="/style.css?v=1.2.7" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/style.css?v=1.2.7"></noscript>
+  <script src="/games/fullscreen-utils.js" defer></script>
 
   <!-- Tiny page styles (CLS-safe) -->
   <style>
@@ -91,6 +92,14 @@
       padding: max(8px, env(safe-area-inset-top)) clamp(8px, 2vw, 18px) max(10px, env(safe-area-inset-bottom));
     }
     #playScreen.open{ display:grid; grid-template-rows:auto 1fr auto; gap:.6rem; }
+    #playScreen.fullscreen-mode {
+      display: grid !important;
+      grid-template-rows: auto 1fr auto !important;
+      gap: 0.6rem !important;
+      padding: 1rem !important;
+      box-sizing: border-box !important;
+      background: #0f1419 !important;
+    }
     .ps-top{
       display:flex; align-items:center; justify-content:space-between; gap:.5rem;
       background:rgba(255,255,255,.03); border:1px solid var(--cardBorder); border-radius:.65rem; padding:.5rem .6rem;
@@ -227,7 +236,7 @@
 
   <!-- FULL-SCREEN play window (opens on New Game) -->
   <!-- NOTE: default state is inert (not focusable / not exposed); we toggle this in JS. -->
-  <section id="playScreen" role="dialog" aria-modal="true" inert>
+  <section id="playScreen" class="game-container" role="dialog" aria-modal="true" inert>
     <div class="ps-top">
       <div class="left">
         <button id="psBack" class="ps-btn" type="button" aria-label="Stop and go back">⟵ Back</button>
@@ -239,13 +248,21 @@
       <div class="right" aria-label="Quick actions">
         <button id="psPause" class="ps-btn" aria-pressed="false">⏸️ Pause</button>
         <button id="psHint" class="ps-btn" title="Show all briefly (+5s)">💡 Hint</button>
+        <button class="ps-btn fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
       </div>
     </div>
 
     <div class="ps-stage">
-      <div class="board">
+      <div class="board" style="position: relative;">
         <!-- dynamic grid lives here while playing -->
         <div id="grid" class="grid easy" role="grid" aria-label="Memory cards"></div>
+
+        <!-- Custom Win Overlay -->
+        <div id="gameOverlay" style="display: none; position: absolute; inset: 0; background: rgba(12, 19, 36, 0.95); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-radius: 12px; padding: 1.5rem;">
+          <h2 id="overlayTitle" style="font-size: 2.2rem; margin: 0 0 0.5rem 0; color: var(--accent); font-weight: 900; letter-spacing: 1px;">VICTORY!</h2>
+          <p id="overlayMessage" style="font-size: 1.1rem; color: var(--muted); margin: 0 0 1.5rem 0; line-height: 1.4;"></p>
+          <button id="overlayBtn" class="btn primary" style="min-height: 44px; padding: 10px 24px; font-size: 16px;">Play Again</button>
+        </div>
       </div>
     </div>
 
@@ -331,6 +348,8 @@
 
       setup(){
         this.grid.className = "grid " + this.level;
+        const overlay = document.getElementById('gameOverlay');
+        if (overlay) overlay.style.display = 'none';
 
         const deck = this.buildDeck();
         this.mount(deck);
@@ -472,6 +491,13 @@
         if(curM===0 || this.moves<curM) localStorage.setItem(kM,String(this.moves));
         renderHomeBests();
         statusHome(`🎉 ${this.formatTime(total)} . ${this.moves} moves`);
+
+        setTimeout(() => {
+          showOverlay("VICTORY!", `Matched all pairs in ${this.formatTime(total)} with ${this.moves} moves!`, "Play Again", () => {
+            this.destroy();
+            openPlayWindow("");
+          });
+        }, 300);
       }
 
       hint(){
@@ -560,6 +586,28 @@
     }
     function statusHome(msg){ $("#homeStatus").textContent = msg; }
     renderHomeBests();
+
+    function showOverlay(title, message, buttonText, callback) {
+      const overlay = document.getElementById('gameOverlay');
+      const overlayTitle = document.getElementById('overlayTitle');
+      const overlayMessage = document.getElementById('overlayMessage');
+      const overlayBtn = document.getElementById('overlayBtn');
+      if (!overlay || !overlayTitle || !overlayMessage || !overlayBtn) return;
+
+      overlayTitle.textContent = title;
+      overlayMessage.textContent = message;
+      overlayBtn.textContent = buttonText;
+
+      overlay.style.display = 'flex';
+
+      const newBtn = overlayBtn.cloneNode(true);
+      overlayBtn.parentNode.replaceChild(newBtn, overlayBtn);
+
+      newBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        if (callback) callback();
+      });
+    }
 
     // ===== Full-screen window control (uses inert instead of aria-hidden) =====
     let game = null;

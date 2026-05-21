@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -29,6 +29,7 @@
 <link as="style" href="/style.css?v=1.3.0" rel="preload"/>
 <link href="/style.css?v=1.3.0" media="print" onload="this.media='all'" rel="stylesheet"/>
 <noscript><link href="/style.css?v=1.3.0" rel="stylesheet"/></noscript>
+<script src="/games/fullscreen-utils.js" defer></script>
 <!-- Per-game styles (CLS-safe) -->
 <style>
     :root{
@@ -237,7 +238,7 @@
 </div>
 </main>
 <!-- FULL-SCREEN Play Window (focusable when opened; uses inert when hidden) -->
-<section aria-modal="true" id="playScreen" inert="" role="dialog">
+<section aria-modal="true" id="playScreen" class="game-container" inert="" role="dialog">
 <div class="ps-top">
 <div class="left">
 <button aria-label="Stop and go back" class="ps-btn" id="psBack" type="button">⟵ Back</button>
@@ -251,6 +252,7 @@
 <button class="ps-btn" id="psUndo">↶ Undo</button>
 <button class="ps-btn" id="psRestart">⟲ Restart</button>
 <button class="ps-btn" id="psShare">🔗 Share</button>
+<button class="ps-btn fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
 </div>
 </div>
 <div class="ps-stage">
@@ -262,6 +264,13 @@
 <div class="bgcell"></div><div class="bgcell"></div><div class="bgcell"></div><div class="bgcell"></div>
 <div class="bgcell"></div><div class="bgcell"></div><div class="bgcell"></div><div class="bgcell"></div>
 <div class="bgcell"></div><div class="bgcell"></div><div class="bgcell"></div><div class="bgcell"></div>
+
+<!-- Custom Game Over Overlay -->
+<div id="gameOverlay" style="display: none; position: absolute; inset: 0; background: rgba(12, 19, 36, 0.95); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-radius: var(--tile-radius); padding: 1.5rem;">
+  <h2 id="overlayTitle" style="font-size: 2.2rem; margin: 0 0 0.5rem 0; color: var(--accent); font-weight: 900; letter-spacing: 1px;">GAME OVER</h2>
+  <p id="overlayMessage" style="font-size: 1.1rem; color: var(--muted); margin: 0 0 1.5rem 0; line-height: 1.4;"></p>
+  <button id="overlayBtn" class="btn primary" style="min-height: 44px; padding: 10px 24px; font-size: 16px;">Try Again</button>
+</div>
 </div>
 </div>
 </div>
@@ -473,6 +482,8 @@
       state.nextId = 1;
       state.score = 0;
       state.moves = 0;
+      const overlay = document.getElementById('gameOverlay');
+      if (overlay) overlay.style.display = 'none';
       updateHUD();
     }
     function startNew(seed=""){
@@ -620,8 +631,36 @@
 
       updateHUD(); saveLocal();
 
-      if(!canMove()) setTimeout(()=>alert("No more moves. Try again!"), 50);
+      if(!canMove()) {
+        setTimeout(() => {
+          showOverlay("GAME OVER", `No more moves! Final Score: ${state.score}`, "Try Again", () => {
+            startNew(state.seed || "");
+          });
+        }, 50);
+      }
       return true;
+    }
+
+    function showOverlay(title, message, buttonText, callback) {
+      const overlay = document.getElementById('gameOverlay');
+      const overlayTitle = document.getElementById('overlayTitle');
+      const overlayMessage = document.getElementById('overlayMessage');
+      const overlayBtn = document.getElementById('overlayBtn');
+      if (!overlay || !overlayTitle || !overlayMessage || !overlayBtn) return;
+
+      overlayTitle.textContent = title;
+      overlayMessage.textContent = message;
+      overlayBtn.textContent = buttonText;
+
+      overlay.style.display = 'flex';
+
+      const newBtn = overlayBtn.cloneNode(true);
+      overlayBtn.parentNode.replaceChild(newBtn, overlayBtn);
+
+      newBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        if (callback) callback();
+      });
     }
 
     // ---------- Input ----------

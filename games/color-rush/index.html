@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -33,6 +33,7 @@
 
     <!-- Shared CSS -->
     <link rel="stylesheet" href="/style.css?v=1.2.0" />
+    <script src="/games/fullscreen-utils.js" defer></script>
 
     <!-- Accent + compact tweaks -->
     <style>
@@ -50,7 +51,27 @@
 
         .game-container {
             max-width: 760px;
-            margin: 0 auto
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #colorRushGameContainer.fullscreen-mode {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            background: var(--bg) !important;
+            max-width: 100vw !important;
+            max-height: 100vh !important;
+            box-sizing: border-box;
+            padding: 20px !important;
+            overflow-y: auto !important;
+        }
+
+        #colorRushGameContainer.fullscreen-mode > .card {
+            width: 100%;
+            max-width: 760px;
+            margin: 0;
         }
 
         .compact {
@@ -378,7 +399,8 @@
             </div>
         </div>
 
-        <section class="game-container" aria-label="Color Rush game">
+        <section class="game-container" id="colorRushGameContainer" aria-label="Color Rush game">
+            <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
             <article class="card compact">
                 <div class="difficulty-selector" role="group" aria-label="Select difficulty">
                     <span class="muted">Difficulty:</span>
@@ -469,6 +491,19 @@
         </div>
     </div>
 
+    <!-- Custom Confirm Dialog -->
+    <div id="confirmDialog" class="dialog" role="dialog" aria-modal="true" aria-labelledby="confirm-title"
+        aria-describedby="confirm-desc">
+        <div class="dialog-card">
+            <h2 id="confirm-title" style="margin:0 0 6px; color:var(--accent);">Reset Confirmation</h2>
+            <p id="confirm-desc" class="note" style="margin:0 0 12px;">Are you sure you want to reset your best scores and streak? This action cannot be undone.</p>
+            <div class="btn-group" style="margin-top:12px; display:flex; gap:8px; justify-content:center;">
+                <button class="btn-game" id="confirmYesBtn" type="button">Yes, Reset</button>
+                <button class="btn-game btn-secondary" id="confirmNoBtn" type="button">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         (function () {
             const $ = (s, r = document) => r.querySelector(s);
@@ -484,14 +519,112 @@
 
             const STORAGE = "uptools:color-rush:v2";
 
+            let audioCtx = null;
+            function playSound(type) {
+                try {
+                    if (!audioCtx) {
+                        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    }
+                    if (audioCtx.state === 'suspended') {
+                        audioCtx.resume();
+                    }
+
+                    const now = audioCtx.currentTime;
+                    if (type === 'correct') {
+                        // High double chime
+                        const osc1 = audioCtx.createOscillator();
+                        const gain1 = audioCtx.createGain();
+                        osc1.type = 'sine';
+                        osc1.frequency.setValueAtTime(880, now);
+                        gain1.gain.setValueAtTime(0.0, now);
+                        gain1.gain.linearRampToValueAtTime(0.12, now + 0.02);
+                        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                        osc1.connect(gain1);
+                        gain1.connect(audioCtx.destination);
+                        osc1.start(now);
+                        osc1.stop(now + 0.15);
+
+                        const osc2 = audioCtx.createOscillator();
+                        const gain2 = audioCtx.createGain();
+                        osc2.type = 'sine';
+                        osc2.frequency.setValueAtTime(1320, now + 0.08);
+                        gain2.gain.setValueAtTime(0.0, now + 0.08);
+                        gain2.gain.linearRampToValueAtTime(0.12, now + 0.1);
+                        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                        osc2.connect(gain2);
+                        gain2.connect(audioCtx.destination);
+                        osc2.start(now + 0.08);
+                        osc2.stop(now + 0.25);
+                    } else if (type === 'wrong') {
+                        // Low buzzy sweep
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sawtooth';
+                        osc.frequency.setValueAtTime(180, now);
+                        osc.frequency.linearRampToValueAtTime(90, now + 0.25);
+                        gain.gain.setValueAtTime(0.0, now);
+                        gain.gain.linearRampToValueAtTime(0.1, now + 0.05);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now);
+                        osc.stop(now + 0.25);
+                    } else if (type === 'start') {
+                        // Rising major arpeggio
+                        const notes = [523.25, 659.25, 783.99];
+                        notes.forEach((freq, idx) => {
+                            const osc = audioCtx.createOscillator();
+                            const gain = audioCtx.createGain();
+                            osc.type = 'sine';
+                            osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+                            gain.gain.setValueAtTime(0.0, now + idx * 0.08);
+                            gain.gain.linearRampToValueAtTime(0.1, now + idx * 0.08 + 0.02);
+                            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.2);
+                            osc.connect(gain);
+                            gain.connect(audioCtx.destination);
+                            osc.start(now + idx * 0.08);
+                            osc.stop(now + idx * 0.08 + 0.2);
+                        });
+                    } else if (type === 'gameover') {
+                        // Descending sad sound
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(330, now);
+                        osc.frequency.linearRampToValueAtTime(110, now + 0.6);
+                        gain.gain.setValueAtTime(0.0, now);
+                        gain.gain.linearRampToValueAtTime(0.15, now + 0.05);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now);
+                        osc.stop(now + 0.6);
+                    }
+                } catch (e) {
+                    console.warn("Audio Context failed", e);
+                }
+            }
+
+            let confirmCallback = null;
+            function showConfirm(callback) {
+                confirmCallback = callback;
+                $("#confirmDialog").setAttribute("open", "");
+                $("#confirmNoBtn").focus();
+            }
+            function closeConfirm(confirmed) {
+                $("#confirmDialog").removeAttribute("open");
+                if (confirmed && confirmCallback) {
+                    confirmCallback();
+                }
+                confirmCallback = null;
+            }
+
             /* ✅ Difficulty config with slower timers and gentler decay */
             const CFG = {
                 easy: { grid: 3, baseLimit: 9000, step: 250, minLimit: 5000, scoreMul: 1.0 },
                 medium: { grid: 4, baseLimit: 7000, step: 220, minLimit: 3500, scoreMul: 1.5 },
                 hard: { grid: 5, baseLimit: 5500, step: 200, minLimit: 2500, scoreMul: 2.0 }
             };
-
-
 
             // PRNG for shareable challenges
             const lcg = (seed) => () => (seed = (1664525 * seed + 1013904223) >>> 0);
@@ -569,6 +702,7 @@
             }
 
             function startGame() {
+                playSound('start');
                 state.rng = lcg(state.seed);
                 state.level = 1;
                 state.score = 0;
@@ -600,6 +734,7 @@
                 }
             }
 
+            // runTimer function
             function runTimer() {
                 const tick = 50; // smooth
                 clearTimer();
@@ -680,6 +815,7 @@
             function onPick(index, tile) {
                 if (!state.running) return;
                 if (index === state.oddIndex) {
+                    playSound('correct');
                     tile.classList.add("fx-correct");
                     vibrate(40);
                     const add = Math.round(10 * CFG[state.difficulty].scoreMul * (1 + (state.timeLeft / state.timeLimit)));
@@ -695,6 +831,7 @@
                     updateHUD();
                     startRound();
                 } else {
+                    playSound('wrong');
                     tile.classList.add("fx-wrong");
                     vibrate(80);
                     state.score = Math.max(0, state.score - 5);
@@ -710,6 +847,7 @@
             }
 
             function gameOver() {
+                playSound('gameover');
                 state.running = false;
                 clearTimer();
                 els.status.textContent = "Time's up!";
@@ -724,9 +862,10 @@
             // Actions
             els.startBtn.addEventListener("click", startGame);
             els.resetBtn.addEventListener("click", () => {
-                if (!confirm("Reset best scores & streak?")) return;
-                state.best = { easy: 0, medium: 0, hard: 0 };
-                state.streak = 0; save(); updateHUD(); els.streak.textContent = "0";
+                showConfirm(() => {
+                    state.best = { easy: 0, medium: 0, hard: 0 };
+                    state.streak = 0; save(); updateHUD(); els.streak.textContent = "0";
+                });
             });
             els.shareBtn.addEventListener("click", async () => {
                 const qp = new URLSearchParams({ d: state.difficulty, seed: String(state.seed) });
@@ -759,6 +898,10 @@
             els.again.addEventListener("click", () => { closeDialog(); startGame(); });
             els.close.addEventListener("click", closeDialog);
             els.dialog.addEventListener("click", (e) => { if (e.target === els.dialog) closeDialog(); });
+
+            $("#confirmYesBtn").addEventListener("click", () => closeConfirm(true));
+            $("#confirmNoBtn").addEventListener("click", () => closeConfirm(false));
+            $("#confirmDialog").addEventListener("click", (e) => { if (e.target === $("#confirmDialog")) closeConfirm(false); });
 
             // ✅ Prevent page scroll/jump when using arrows/space inside the grid
             document.addEventListener("keydown", (e) => {

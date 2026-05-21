@@ -241,6 +241,67 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
 
+    class SoundEffects {
+      constructor() {
+        this.ctx = null;
+      }
+      init() {
+        if (!this.ctx) {
+          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      }
+      playCorrect() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+          gain.gain.setValueAtTime(0.02, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.05);
+        } catch (e) {}
+      }
+      playWrong() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(120, this.ctx.currentTime);
+          gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.15);
+        } catch (e) {}
+      }
+      playWin() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+          notes.forEach((freq, i) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.1);
+            gain.gain.setValueAtTime(0.05, this.ctx.currentTime + i * 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.1 + 0.25);
+            osc.start(this.ctx.currentTime + i * 0.1);
+            osc.stop(this.ctx.currentTime + i * 0.1 + 0.25);
+          });
+        } catch (e) {}
+      }
+    }
+    const sounds = new SoundEffects();
+
     // Initialize fullscreen manager
     let fullscreenManager = null;
     document.addEventListener('DOMContentLoaded', () => {
@@ -274,6 +335,7 @@
     let errors = 0;
     let totalTyped = 0;
     let startTime = null;
+    let lastLength = 0;
 
     const textDisplay = document.getElementById('textDisplay');
     const typingInput = document.getElementById('typingInput');
@@ -312,6 +374,15 @@
       return Math.round(((totalTyped - errors) / totalTyped) * 100);
     }
 
+    // Initialize sound context on first user interaction
+    function initAudio() {
+      sounds.init();
+      window.removeEventListener('keydown', initAudio);
+      window.removeEventListener('mousedown', initAudio);
+    }
+    window.addEventListener('keydown', initAudio);
+    window.addEventListener('mousedown', initAudio);
+
     function startTest() {
       testStarted = true;
       testFinished = false;
@@ -346,6 +417,7 @@
 
       resultBox.style.display = 'block';
       mainControls.style.display = 'none';
+      sounds.playWin();
     }
 
     function resetTest() {
@@ -355,6 +427,7 @@
       timeLeft = duration;
       errors = 0;
       totalTyped = 0;
+      lastLength = 0;
       startTime = null;
 
       currentText = pickText();
@@ -381,6 +454,16 @@
         startTest();
       }
 
+      if (typed.length > lastLength) {
+        const lastIdx = typed.length - 1;
+        if (typed[lastIdx] === currentText[lastIdx]) {
+          sounds.playCorrect();
+        } else {
+          sounds.playWrong();
+        }
+      }
+      lastLength = typed.length;
+
       renderText(typed);
       totalTyped = typed.length;
 
@@ -406,6 +489,7 @@
       if (typed.length >= currentText.length) {
         currentText = pickText();
         typingInput.value = '';
+        lastLength = 0;
         renderText('');
       }
     });

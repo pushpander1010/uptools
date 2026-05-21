@@ -27,6 +27,7 @@
 
   <!-- Common CSS -->
   <link rel="stylesheet" href="/style.css?v=1.3.0" />
+  <script src="/games/fullscreen-utils.js" defer></script>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -58,6 +59,46 @@
     body {
       --accent: #ec4899;
       --accent-glow: rgba(236, 72, 153, 0.35);
+    }
+
+    #wheelGameContainer {
+      position: relative;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    #wheelGameContainer.fullscreen-mode {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      background: var(--bg) !important;
+      padding: 24px !important;
+    }
+
+    #wheelGameContainer.fullscreen-mode .main-grid {
+      display: grid !important;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #wheelGameContainer.fullscreen-mode .wheel-container {
+      min-height: auto;
+      height: 100%;
+    }
+
+    #wheelGameContainer.fullscreen-mode .wheel-canvas-container {
+      width: min(100%, 55vh);
+    }
+
+    #wheelGameContainer.fullscreen-mode .names-textarea {
+      height: 140px;
     }
 
     .breadcrumb {
@@ -357,7 +398,9 @@
     </section>
 
     <!-- Main Workspace Grid -->
-    <div class="main-grid">
+    <div class="game-container" id="wheelGameContainer">
+      <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
+      <div class="main-grid">
       <!-- Left side: The Wheel spinner -->
       <section class="wheel-container" aria-label="Name Spinner Wheel">
         <div class="wheel-canvas-container">
@@ -426,7 +469,8 @@
         </div>
       </section>
     </div>
-
+    </div>
+ 
     <!-- Educational section -->
     <section class="card" style="margin-top: 16px;">
       <h2 style="margin-top:0;">🎥 The math and probability of spinners</h2>

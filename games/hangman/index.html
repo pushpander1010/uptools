@@ -18,6 +18,7 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"VideoGame","name":"Hangman","url":"https://www.uptools.in/games/hangman/","applicationCategory":"Game","genre":["Word","Classic","Puzzle"]}
   </script>
+  <script src="/games/fullscreen-utils.js" defer></script>
   <style>
     body { --accent: #7aa2ff; }
     .game-wrap { max-width: 680px; margin: 0 auto; }
@@ -25,7 +26,7 @@
     .word-display { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
     .letter-box { width: 36px; height: 44px; border-bottom: 3px solid #7aa2ff; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 900; text-transform: uppercase; }
     .keyboard { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 12px 0; }
-    .key-btn { width: 38px; height: 38px; border-radius: .4rem; border: 1px solid #212a3a; background: #121826; color: #e6edf3; font-weight: 700; cursor: pointer; font-size: .9rem; transition: all .1s; }
+    .key-btn { min-width: 44px; min-height: 44px; padding: 6px; border-radius: .4rem; border: 1px solid #212a3a; background: #121826; color: #e6edf3; font-weight: 700; cursor: pointer; font-size: .9rem; transition: all .1s; }
     .key-btn:hover:not(:disabled) { background: #7aa2ff; color: #0b1020; }
     .key-btn:disabled { opacity: .35; cursor: not-allowed; }
     .key-btn.wrong { background: #3a0a0a; border-color: #661e1e; color: #ff6b6b; }
@@ -34,6 +35,20 @@
     .wrong-letters { color: #ff6b6b; font-size: .9rem; min-height: 1.4em; }
     .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(18, 24, 38, 0.95);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      border-radius: .75rem;
+      padding: 1.5rem;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
   </style>
 </head>
 <body>
@@ -70,8 +85,9 @@
         </div>
       </section>
 
-      <section class="card" style="margin-top:12px">
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
+      <div class="game-container card" style="margin-top:12px; position:relative;">
+        <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px;padding-right:45px;">
           <label style="font-size:.9rem;color:#9aa4b2">Category:</label>
           <select id="catSel" style="background:#0e1628;border:1px solid #212a3a;border-radius:.5rem;color:#e6edf3;padding:.4rem .6rem">
             <option value="all">All</option>
@@ -109,7 +125,13 @@
         </div>
 
         <div class="keyboard" id="keyboard" aria-label="Letter keyboard"></div>
-      </section>
+
+        <div id="gameOverlay" class="overlay">
+          <h2 id="overlayTitle">🎉 You won!</h2>
+          <p id="overlayMessage" style="font-size:1.1rem; margin-top:8px;"></p>
+          <button id="overlayActionBtn" class="btn primary" style="margin-top:16px; min-height:44px; min-width:120px;">Play Again</button>
+        </div>
+      </div>
 
       <section class="card" style="margin-top:12px">
         <h2 style="margin-top:0">🎥 Word games for brain training</h2>
@@ -193,6 +215,88 @@
       ]
     };
 
+    class SoundEffects {
+      constructor() {
+        this.ctx = null;
+      }
+      init() {
+        if (!this.ctx) {
+          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      }
+      playCorrect() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(800, this.ctx.currentTime + 0.1);
+          gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.12);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.12);
+        } catch (e) {}
+      }
+      playWrong() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(150, this.ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(100, this.ctx.currentTime + 0.2);
+          gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.22);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.22);
+        } catch (e) {}
+      }
+      playWin() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+          notes.forEach((freq, i) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.1);
+            gain.gain.setValueAtTime(0.05, this.ctx.currentTime + i * 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.1 + 0.25);
+            osc.start(this.ctx.currentTime + i * 0.1);
+            osc.stop(this.ctx.currentTime + i * 0.1 + 0.25);
+          });
+        } catch (e) {}
+      }
+      playLose() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const notes = [392.00, 349.23, 311.13, 261.63]; // G4, F4, D#4, C4
+          notes.forEach((freq, i) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.12);
+            gain.gain.setValueAtTime(0.06, this.ctx.currentTime + i * 0.12);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.12 + 0.3);
+            osc.start(this.ctx.currentTime + i * 0.12);
+            osc.stop(this.ctx.currentTime + i * 0.12 + 0.3);
+          });
+        } catch (e) {}
+      }
+    }
+    const sounds = new SoundEffects();
+
     const PARTS = ['h-head', 'h-body', 'h-larm', 'h-rarm', 'h-lleg', 'h-rleg'];
     let word = '', guessed = new Set(), wrongCount = 0, gameOver = false;
 
@@ -213,6 +317,7 @@
       document.getElementById('hintBox').textContent = `Category: ${document.getElementById('catSel').value === 'all' ? 'Mixed' : document.getElementById('catSel').value} | Hint: ${entry.hint}`;
       document.getElementById('gameMsg').textContent = '';
       document.getElementById('wrongLetters').textContent = 'Wrong: —';
+      document.getElementById('gameOverlay').style.display = 'none';
 
       PARTS.forEach(id => document.getElementById(id).style.display = 'none');
       renderWord();
@@ -235,7 +340,10 @@
         return `<button class="key-btn ${isWrong ? 'wrong' : isCorrect ? 'correct' : ''}" data-key="${c}" ${isGuessed || gameOver ? 'disabled' : ''}>${c.toUpperCase()}</button>`;
       }).join('');
       kb.querySelectorAll('.key-btn').forEach(btn => {
-        btn.addEventListener('click', () => guess(btn.dataset.key));
+        btn.addEventListener('click', () => {
+          sounds.init();
+          guess(btn.dataset.key);
+        });
       });
     }
 
@@ -245,9 +353,12 @@
 
       if (!word.includes(letter)) {
         wrongCount++;
+        sounds.playWrong();
         if (wrongCount <= PARTS.length) {
           document.getElementById(PARTS[wrongCount - 1]).style.display = 'block';
         }
+      } else {
+        sounds.playCorrect();
       }
 
       const wrongLetters = [...guessed].filter(c => !word.includes(c));
@@ -261,22 +372,30 @@
       const won = word.split('').every(c => guessed.has(c));
       if (won) {
         gameOver = true;
-        document.getElementById('gameMsg').textContent = '🎉 You won!';
-        document.getElementById('gameMsg').style.color = '#00e5a0';
+        sounds.playWin();
+        document.getElementById('overlayTitle').textContent = '🎉 You won!';
+        document.getElementById('overlayMessage').textContent = `The word was: ${word.toUpperCase()}`;
+        document.getElementById('gameOverlay').style.display = 'flex';
       } else if (wrongCount >= PARTS.length) {
         gameOver = true;
-        document.getElementById('gameMsg').textContent = `💀 Game over! The word was: ${word.toUpperCase()}`;
-        document.getElementById('gameMsg').style.color = '#ff6b6b';
+        sounds.playLose();
+        document.getElementById('overlayTitle').textContent = '💀 Game over!';
+        document.getElementById('overlayMessage').textContent = `The word was: ${word.toUpperCase()}`;
+        document.getElementById('gameOverlay').style.display = 'flex';
         renderKeyboard();
       }
     }
 
     document.addEventListener('keydown', (e) => {
-      if (e.key.match(/^[a-z]$/i) && !gameOver) guess(e.key.toLowerCase());
+      if (e.key.match(/^[a-z]$/i) && !gameOver) {
+        sounds.init();
+        guess(e.key.toLowerCase());
+      }
     });
 
     document.getElementById('newGameBtn').addEventListener('click', newGame);
     document.getElementById('catSel').addEventListener('change', newGame);
+    document.getElementById('overlayActionBtn').addEventListener('click', newGame);
 
     newGame();
   </script>

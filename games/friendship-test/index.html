@@ -113,7 +113,8 @@
           <button class="difficulty-btn" data-len="20">Long (20)</button>
         </div>
         <div class="controls">
-          <button id="startBtn" class="btn primary">👫 Start Quiz</button>
+          <button id="startBtn" class="btn primary">Start Quiz</button>
+          <button id="joinBtn" class="btn secondary" hidden>🔗 Join Partner's Link</button>
           <button id="copyInvite" class="btn secondary">🔗 Challenge Link</button>
           <button id="resetStats" class="btn danger">Reset Stats</button>
         </div>
@@ -208,11 +209,20 @@
   </section>
 
   <script src="/scripts/utils.js" type="module"></script>
-  <script>
+  <script type="module">
+    import * as U from "/scripts/utils.js";
     const $ = s => document.querySelector(s);
     const $$ = s => [...document.querySelectorAll(s)];
     const persist = (k, v) => localStorage.setItem(k, JSON.stringify(v));
     const read = (k, d = null) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
+
+    const mulberry32 = (seed) => { let t = seed >>> 0; return () => { t += 0x6D2B79F5; let r = Math.imul(t ^ t >>> 15, 1 | t); r ^= r + Math.imul(r ^ r >>> 7, 61 | r); return ((r ^ r >>> 14) >>> 0) / 4294967296; }; };
+    const strHash = (s) => { let h = 2166136261 >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
+
+    const b64u = {
+      enc: s => btoa(unescape(encodeURIComponent(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''),
+      dec: s => decodeURIComponent(escape(atob((s.replace(/-/g, '+').replace(/_/g, '/')) + '==='.slice((s.length + 3) % 4))))
+    };
 
     const BANK = [
       { id:1, t:"I prefer texting over calling.", a:["Always","Usually","Rarely","Never"] },
@@ -238,7 +248,7 @@
     ];
 
     const F_BEST = 'ft-best', F_PLAYS = 'ft-plays';
-    const state = { step: 'names', length: 10, qIdx: [], cur: 0, a: [], b: [], nameA: '', nameB: '' };
+    const state = { step: 'names', length: 10, seed: '', qIdx: [], cur: 0, a: [], b: [], nameA: '', nameB: '', remoteMode: false };
 
     function renderHUD() {
       const best = read(F_BEST, null);
@@ -255,14 +265,34 @@
       $$('.difficulty-btn').forEach(x => x.classList.toggle('active', x === b));
     }));
 
-    function pickQuestions() {
-      const pool = [...BANK].sort(() => Math.random() - 0.5);
-      state.qIdx = pool.slice(0, state.length).map(q => q.id);
+    function selectQuestions(seed, n) {
+      const rng = mulberry32(strHash(seed));
+      const pool = [...BANK];
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      return pool.slice(0, n).map(q => q.id);
     }
 
     function getQ(idx) { return BANK.find(q => q.id === state.qIdx[idx]); }
 
+    function baseURL() {
+      return location.origin + "/games/friendship-test/";
+    }
+
+    (function detectRemote() {
+      const u = new URL(location.href);
+      const hasAnswers = u.searchParams.get("a");
+      const hasSeed = u.searchParams.get("seed");
+      if (hasAnswers || hasSeed) {
+        $('#joinBtn').hidden = false;
+        $('#joinBtn').removeAttribute('hidden');
+      }
+    })();
+
     function renderNameForm() {
+      state.step = 'names';
       $('#qs').innerHTML = `
         <div class="qcard">
           <div class="qtitle">👫 Enter your names to begin</div>
@@ -273,39 +303,65 @@
         </div>`;
       $('#nextBtn').textContent = 'Start ▶';
       $('#prevBtn').disabled = true;
-      $('#psProg').textContent = 'Names';
+    }
+
+    function renderStepBIntro(fromRemote = false) {
+      state.step = 'b_intro';
+      $('#qs').innerHTML = `
+        <div class="qcard">
+          <div class="qtitle">${fromRemote ? "You're joining your friend's quiz!" : "Friend's turn"}</div>
+          ${fromRemote ? `
+            <p style="color:#a5b4fc;margin:5px 0 15px">You will answer the same ${state.length} questions. We will compare your answers with <b>${state.nameA}</b>.</p>
+          ` : ""}
+          <label style="display:block;margin-bottom:4px;font-size:.9rem;color:#a5b4fc">${fromRemote ? "Your name" : `Confirm ${state.nameB}'s name`}</label>
+          <input id="nameB2" class="input" type="text" placeholder="Your name" maxlength="20" style="width:100%" value="${state.nameB || ''}" />
+        </div>`;
+      $('#nextBtn').textContent = 'Start ▶';
+      $('#prevBtn').disabled = true;
     }
 
     function renderQuestion(idx, player) {
       const q = getQ(idx);
       const answers = player === 'a' ? state.a : state.b;
       const name = player === 'a' ? state.nameA : state.nameB;
+      const chosen = answers[idx];
+
       $('#qs').innerHTML = `
         <div class="qcard">
           <div style="font-size:.85rem;color:#a5b4fc;margin-bottom:4px">${name}'s turn · Question ${idx + 1} of ${state.length}</div>
           <div class="qtitle">${q.t}</div>
           ${q.a.map((opt, i) => `
             <label class="opt">
-              <input type="radio" name="q${idx}" value="${i}" ${answers[idx] === i ? 'checked' : ''}>
+              <input type="radio" name="q${idx}" value="${i}" ${chosen === i ? 'checked' : ''}>
               <span>${opt}</span>
             </label>`).join('')}
         </div>`;
-      $('#psProg').textContent = `Q ${idx + 1}/${state.length}`;
-      $('#prevBtn').disabled = idx === 0 && player === 'a';
+
+      const radios = $$(".opt input", qs);
+      radios.forEach(r => r.addEventListener("change", e => {
+        const val = +e.target.value;
+        answers[state.cur] = val;
+        setTimeout(() => { $('#nextBtn').click(); }, 120);
+      }));
+
+      $('#prevBtn').disabled = idx === 0;
       $('#nextBtn').textContent = (player === 'a' && idx === state.length - 1) ? 'Hand off to ' + state.nameB + ' ▶' : (player === 'b' && idx === state.length - 1) ? 'See Results ▶' : 'Next ▶';
     }
 
     function renderHandoff() {
+      state.step = 'handoff';
       $('#qs').innerHTML = `
         <div class="qcard" style="text-align:center">
           <div style="font-size:3rem">🤝</div>
           <div class="qtitle">${state.nameA} is done!</div>
           <p style="color:#a5b4fc">Now hand the device to <strong>${state.nameB}</strong> to answer the same questions.</p>
+          <div style="margin:15px 0;padding:10px;border:1px dashed var(--cardBorder);border-radius:8px;background:rgba(255,255,255,0.02)">
+            Want to play on separate devices? Tap <b>Share</b> above to copy a challenge link containing your answers!
+          </div>
           <p style="color:#a5b4fc;font-size:.9rem">Don't peek at ${state.nameA}'s answers!</p>
         </div>`;
       $('#nextBtn').textContent = state.nameB + "'s Turn ▶";
       $('#prevBtn').disabled = true;
-      $('#psProg').textContent = 'Handoff';
     }
 
     function calcScore() {
@@ -321,7 +377,6 @@
       const emoji = score >= 80 ? '🏆' : score >= 60 ? '🌟' : score >= 40 ? '👍' : '💪';
       const msg = score >= 80 ? 'You two are basically the same person!' : score >= 60 ? 'Great friendship! You know each other well.' : score >= 40 ? 'Good friends with room to grow closer!' : 'You have a lot to learn about each other!';
 
-      // Save best
       const best = read(F_BEST, null);
       if (!best || score > best.score) {
         persist(F_BEST, { score, pair: `${state.nameA} & ${state.nameB}`, when: new Date().toLocaleDateString() });
@@ -334,6 +389,10 @@
           <div style="font-size:2.5rem;font-weight:900;color:var(--accent)">${score}%</div>
           <div style="font-size:1.1rem;font-weight:700;margin:.5rem 0">BFF Compatibility Score</div>
           <p style="color:#a5b4fc">${state.nameA} & ${state.nameB}: ${msg}</p>
+          <div class="bar" style="justify-content:center;margin:15px 0">
+            <button id="copyRes" class="btn secondary">Copy Result</button>
+            <button id="shareWA" class="btn secondary">WhatsApp</button>
+          </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;text-align:left">
             ${Array.from({length: state.length}, (_, i) => {
               const q = getQ(i);
@@ -347,9 +406,19 @@
             }).join('')}
           </div>
         </div>`;
+
+      $('#copyRes').onclick = () => {
+        const text = `Our BFF score on UpTools was ${score}% — ${msg} 👫\nPlay it here: ${baseURL()}`;
+        navigator.clipboard?.writeText(text);
+        alert('Result copied to clipboard!');
+      };
+      $('#shareWA').onclick = () => {
+        const text = encodeURIComponent(`Our BFF score on UpTools was ${score}% — ${msg} 👫\nPlay it here: ${baseURL()}`);
+        window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener');
+      };
+
       $('#nextBtn').textContent = 'Play Again ▶';
       $('#prevBtn').disabled = true;
-      $('#psProg').textContent = 'Results';
       renderHUD();
     }
 
@@ -358,10 +427,38 @@
       ps.classList.add('open');
       ps.removeAttribute('inert');
       document.body.style.overflow = 'hidden';
-      state.step = 'names';
-      state.a = []; state.b = []; state.cur = 0;
-      pickQuestions();
-      renderNameForm();
+
+      const u = new URL(location.href);
+      const len = +(u.searchParams.get("len") || state.length);
+      state.length = [10, 15, 20].includes(len) ? len : state.length;
+
+      state.seed = u.searchParams.get("seed") || Date.now().toString(36);
+      state.qIdx = selectQuestions(state.seed, state.length);
+      state.cur = 0;
+      state.a = [];
+      state.b = [];
+      state.remoteMode = Boolean(u.searchParams.get("a"));
+
+      if (state.remoteMode) {
+        try {
+          const raw = b64u.dec(u.searchParams.get("a"));
+          state.a = raw.split("").map(Number);
+          const names = u.searchParams.get("n") ? b64u.dec(u.searchParams.get("n")) : "";
+          [state.nameA, state.nameB] = names.includes("|") ? names.split("|") : ["Friend A", "Friend B"];
+          if (u.searchParams.get("q")) {
+            const idx = b64u.dec(u.searchParams.get("q")).split(",").map(Number);
+            if (idx.length) state.qIdx = idx;
+          }
+          state.length = state.a.length;
+          renderStepBIntro(true);
+        } catch (err) {
+          state.remoteMode = false;
+          renderNameForm();
+        }
+      } else {
+        renderNameForm();
+      }
+      updateProg();
     }
 
     function closePlay() {
@@ -369,6 +466,9 @@
       ps.classList.remove('open');
       ps.setAttribute('inert', '');
       document.body.style.overflow = '';
+      const url = new URL(location.href);
+      ["a", "n", "seed", "len", "q"].forEach(k => url.searchParams.delete(k));
+      history.replaceState(null, "", url.toString());
       renderHUD();
     }
 
@@ -378,33 +478,70 @@
         const nameB = $('#nameB')?.value.trim() || 'Player 2';
         state.nameA = nameA; state.nameB = nameB;
         state.step = 'a'; state.cur = 0;
+        state.a = new Array(state.length).fill(null);
         renderQuestion(0, 'a');
+        updateProg();
       } else if (state.step === 'a') {
         const sel = document.querySelector(`input[name="q${state.cur}"]:checked`);
-        if (!sel) { alert('Please select an answer!'); return; }
-        state.a[state.cur] = parseInt(sel.value);
-        if (state.cur < state.length - 1) { state.cur++; renderQuestion(state.cur, 'a'); }
-        else { state.step = 'handoff'; renderHandoff(); }
+        if (sel) {
+          state.a[state.cur] = parseInt(sel.value);
+        }
+        if (state.a[state.cur] === null || state.a[state.cur] === undefined) { alert('Please select an answer!'); return; }
+        if (state.cur < state.length - 1) { state.cur++; renderQuestion(state.cur, 'a'); updateProg(); }
+        else { renderHandoff(); updateProg(); }
       } else if (state.step === 'handoff') {
         state.step = 'b'; state.cur = 0;
+        state.b = new Array(state.length).fill(null);
         renderQuestion(0, 'b');
+        updateProg();
+      } else if (state.step === 'b_intro') {
+        const bName = $('#nameB2')?.value.trim() || 'Friend B';
+        state.nameB = bName;
+        state.step = 'b'; state.cur = 0;
+        state.b = new Array(state.length).fill(null);
+        renderQuestion(0, 'b');
+        updateProg();
       } else if (state.step === 'b') {
         const sel = document.querySelector(`input[name="q${state.cur}"]:checked`);
-        if (!sel) { alert('Please select an answer!'); return; }
-        state.b[state.cur] = parseInt(sel.value);
-        if (state.cur < state.length - 1) { state.cur++; renderQuestion(state.cur, 'b'); }
-        else { state.step = 'result'; renderResult(); }
+        if (sel) {
+          state.b[state.cur] = parseInt(sel.value);
+        }
+        if (state.b[state.cur] === null || state.b[state.cur] === undefined) { alert('Please select an answer!'); return; }
+        if (state.cur < state.length - 1) { state.cur++; renderQuestion(state.cur, 'b'); updateProg(); }
+        else { renderResult(); updateProg(); }
       } else if (state.step === 'result') {
         closePlay(); openPlay();
       }
     }
 
     function handlePrev() {
-      if (state.step === 'a' && state.cur > 0) { state.cur--; renderQuestion(state.cur, 'a'); }
-      else if (state.step === 'b' && state.cur > 0) { state.cur--; renderQuestion(state.cur, 'b'); }
+      if (state.step === 'a' && state.cur > 0) { state.cur--; renderQuestion(state.cur, 'a'); updateProg(); }
+      else if (state.step === 'b' && state.cur > 0) { state.cur--; renderQuestion(state.cur, 'b'); updateProg(); }
     }
 
-    $('#startBtn').addEventListener('click', openPlay);
+    function updateProg() {
+      const total = state.length;
+      const cur = (state.step === 'a' || state.step === 'b') ? (state.cur + 1) : 0;
+      $('#psProg').textContent = cur ? `Q ${cur}/${total}` : (state.step === 'names' ? 'Names' : state.step === 'handoff' ? 'Handoff' : state.step === 'b_intro' ? 'Intro' : 'Results');
+    }
+
+    function copyChallengeLink() {
+      const url = new URL(baseURL());
+      if (state.a?.length && state.a.every(x => x !== null && x !== undefined)) {
+        url.searchParams.set("seed", state.seed);
+        url.searchParams.set("len", String(state.length));
+        url.searchParams.set("q", b64u.enc(state.qIdx.join(",")));
+        url.searchParams.set("a", b64u.enc(state.a.join("")));
+        url.searchParams.set("n", b64u.enc(`${state.nameA}|${state.nameB}`));
+      } else {
+        url.searchParams.set("seed", state.seed);
+        url.searchParams.set("len", String(state.length));
+      }
+      navigator.clipboard?.writeText(url.toString()).then(() => alert('Link copied! Share with your friend.'));
+    }
+
+    $('#startBtn').addEventListener('click', () => openPlay());
+    $('#joinBtn').addEventListener('click', () => openPlay());
     $('#psBack').addEventListener('click', closePlay);
     $('#nextBtn').addEventListener('click', handleNext);
     $('#prevBtn').addEventListener('click', handlePrev);
@@ -412,12 +549,13 @@
       if (confirm('Reset all stats?')) { localStorage.removeItem(F_BEST); localStorage.removeItem(F_PLAYS); renderHUD(); }
     });
     $('#copyInvite').addEventListener('click', () => {
-      navigator.clipboard?.writeText(location.href).then(() => alert('Link copied! Share with your friend.'));
+      const seed = Date.now().toString(36);
+      const url = new URL(baseURL());
+      url.searchParams.set("seed", seed);
+      url.searchParams.set("len", String(state.length));
+      navigator.clipboard?.writeText(url.toString()).then(() => alert('Link copied! Share with your friend.'));
     });
-    $('#psShare').addEventListener('click', () => {
-      if (navigator.share) navigator.share({ title: 'Best Friend Compatibility Test', url: location.href });
-      else navigator.clipboard?.writeText(location.href).then(() => alert('Link copied!'));
-    });
+    $('#psShare').addEventListener('click', copyChallengeLink);
 
     document.addEventListener('keydown', e => {
       if (!$('#playScreen').classList.contains('open')) return;
