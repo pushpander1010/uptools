@@ -79,7 +79,31 @@
   </style>
 </head>
 <body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
   <a href="#main" class="sr-only">Skip to content</a>
+
+  <!-- Header -->
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/income-tax-tool/">Income Tax</a>
+        <a href="/emi-calculator/">EMI</a>
+        <a href="/gst-calculator/">GST</a>
+        <a href="/games/">Games</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
   <main class="wrap" id="main" role="main">
     <div class="grid">
       <div>
@@ -119,8 +143,13 @@
       </div>
     </div>
   </main>
-  <script src="/scripts/utils.js?v=1.3.0" type="module"></script>
+
+  <footer class="note small site-footer" role="contentinfo">
+    © <span id="y"></span> UpTools . <a href="/about/">About</a> . <a href="/contact/">Contact</a> . <a href="/sitemap.xml">Sitemap</a> . <a href="/privacy-policy/">Privacy Policy</a>
+  </footer>
+
   <script defer>
+    document.getElementById('y').textContent = new Date().getFullYear();
     const sportFields = {
       'cricket': [
         { name: 'runs', label: 'Runs Scored', min: 0 },
