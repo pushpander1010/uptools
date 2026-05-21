@@ -548,6 +548,23 @@
 </footer>
 </section>
 </main>
+<!-- Love Test Share Modal -->
+<div id="loveShareOverlay" style="position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .25s ease;" role="dialog" aria-modal="true">
+  <div id="loveShareCard" style="background:var(--card);border:1px solid var(--cardBorder);border-radius:1.2rem;padding:2rem;max-width:420px;width:100%;text-align:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px rgba(255,95,162,.2);transform:scale(.92);transition:transform .25s ease;">
+    <button onclick="closeLoveShareModal()" style="position:absolute;top:.75rem;right:.9rem;background:none;border:none;font-size:1.5rem;color:var(--muted);cursor:pointer;line-height:1;padding:.2rem .4rem;border-radius:.4rem;">&times;</button>
+    <h3 style="margin:0 0 1rem;color:var(--accent);font-size:1.3rem;">&#128279; Share Challenge</h3>
+    <div style="margin:0 auto 1.25rem;width:164px;height:164px;background:#fff;border-radius:.75rem;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+      <img id="loveShareQr" src="" alt="QR code" loading="lazy" style="width:160px;height:160px;display:block;">
+    </div>
+    <p style="color:var(--muted);font-size:.85rem;margin:0 0 .75rem;">Scan QR or share the link below</p>
+    <div style="display:flex;gap:.5rem;margin-bottom:1rem;">
+      <input id="loveShareUrlInput" type="text" readonly style="flex:1;padding:.65rem .75rem;border:1px solid var(--cardBorder);border-radius:.5rem;background:rgba(255,255,255,.04);color:var(--text);font-size:.82rem;min-width:0;">
+      <button id="loveShareCopyBtn" onclick="copyLoveShareUrl()" style="padding:.65rem 1rem;background:var(--accent);color:#fff;border:none;border-radius:.5rem;font-weight:700;cursor:pointer;white-space:nowrap;font-size:.9rem;">Copy</button>
+    </div>
+    <p style="color:var(--muted);font-size:.8rem;margin:0;">Your partner opens this link and answers the same questions &#128150;</p>
+  </div>
+</div>
+<div id="loveToast" style="position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(2rem);background:#222;color:#fff;padding:.65rem 1.4rem;border-radius:2rem;font-size:.9rem;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s ease,transform .3s ease;pointer-events:none;white-space:nowrap;"></div>
 <!-- App (ESM). Uses shared utils where possible. -->
 <script type="module">
         import * as U from "/scripts/utils.js";
@@ -1038,15 +1055,14 @@
             prevBtn.disabled = true;
             nextBtn.textContent = "Close";
             nextBtn.onclick = () => closePlay();
-            psShare.onclick = () => copyChallengeLink(); // allow sharing your A answers for friends to try later
+            psShare.onclick = () => copyChallengeLink(); // allow sharing — copyChallengeLink is redefined below to open modal
             updateProg();
             beep(820, 140, .03); setTimeout(() => beep(980, 140, .03), 120);
             buzz(18);
         }
 
-        // Copy challenge link (after A step, or from results to share A’s baseline)
-        function copyChallengeLink() {
-            // If A not filled yet, we generate a seed-only invite instead
+        // Share modal helpers
+        function openLoveShareModal() {
             const url = new URL(baseURL());
             if (state.a?.length && state.a.every(x => x > 0)) {
                 url.searchParams.set("seed", state.seed);
@@ -1058,11 +1074,58 @@
                 url.searchParams.set("seed", state.seed);
                 url.searchParams.set("len", String(state.length));
             }
-            navigator.clipboard?.writeText(url.toString());
+            const link = url.toString();
+            document.getElementById("loveShareUrlInput").value = link;
+            document.getElementById("loveShareQr").src =
+                `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(link)}`;
+            const overlay = document.getElementById("loveShareOverlay");
+            const card = document.getElementById("loveShareCard");
+            overlay.style.opacity = "0"; overlay.style.pointerEvents = "none";
+            overlay.style.display = "flex";
+            requestAnimationFrame(() => {
+                overlay.style.opacity = "1"; overlay.style.pointerEvents = "all";
+                card.style.transform = "scale(1)";
+            });
             beep(880, 70, .03); buzz(10);
         }
+        function closeLoveShareModal() {
+            const overlay = document.getElementById("loveShareOverlay");
+            overlay.style.opacity = "0"; overlay.style.pointerEvents = "none";
+            document.getElementById("loveShareCard").style.transform = "scale(.92)";
+        }
+        function copyLoveShareUrl() {
+            const input = document.getElementById("loveShareUrlInput");
+            const btn = document.getElementById("loveShareCopyBtn");
+            const val = input.value;
+            const doMark = () => {
+                btn.textContent = "\u2713 Copied"; btn.style.background = "#4caf50";
+                showLoveToast("\u2705 Link copied! Share with your partner.");
+                setTimeout(() => { btn.textContent = "Copy"; btn.style.background = ""; }, 2200);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(val).then(doMark).catch(() => {
+                    input.select(); try { document.execCommand("copy"); doMark(); } catch(_) {}
+                });
+            } else {
+                input.select(); try { document.execCommand("copy"); doMark(); } catch(_) {}
+            }
+        }
+        function showLoveToast(msg, ms = 2800) {
+            const el = document.getElementById("loveToast");
+            el.textContent = msg; el.style.opacity = "1"; el.style.transform = "translateX(-50%) translateY(0)";
+            clearTimeout(el._timer);
+            el._timer = setTimeout(() => { el.style.opacity = "0"; el.style.transform = "translateX(-50%) translateY(2rem)"; }, ms);
+        }
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLoveShareModal(); });
+        document.getElementById("loveShareOverlay").addEventListener("click", (e) => {
+            if (e.target === e.currentTarget) closeLoveShareModal();
+        });
 
-        psShare.addEventListener("click", () => copyChallengeLink());
+        // copyChallengeLink is called by renderHandoff() and renderResult() — redirect to modal
+        function copyChallengeLink() { openLoveShareModal(); }
+
+        // Wire share button to modal (initial binding; renderHandoff/renderResult override psShare.onclick too)
+        psShare.addEventListener("click", () => openLoveShareModal());
 
         // ---------------------------
         // Wire play navigation buttons when not in a step using them

@@ -208,6 +208,34 @@
     </div>
   </section>
 
+  <!-- Friendship Test Share Modal -->
+  <div id="ftShareOverlay" style="position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .25s ease;" role="dialog" aria-modal="true">
+    <div id="ftShareCard" style="background:var(--card);border:1px solid var(--cardBorder);border-radius:1.2rem;padding:2rem;max-width:420px;width:100%;text-align:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px rgba(99,179,237,.15);transform:scale(.92);transition:transform .25s ease;">
+      <button onclick="closeFTShareModal()" style="position:absolute;top:.75rem;right:.9rem;background:none;border:none;font-size:1.5rem;color:var(--muted);cursor:pointer;line-height:1;padding:.2rem .4rem;border-radius:.4rem;">&times;</button>
+      <h3 style="margin:0 0 1rem;color:var(--accent);font-size:1.3rem;">&#128279; Share Challenge</h3>
+      <div style="margin:0 auto 1.25rem;width:164px;height:164px;background:#fff;border-radius:.75rem;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+        <img id="ftShareQr" src="" alt="QR code" loading="lazy" style="width:160px;height:160px;display:block;">
+      </div>
+      <p style="color:var(--muted);font-size:.85rem;margin:0 0 .75rem;">Scan QR or share the link below</p>
+      <div style="display:flex;gap:.5rem;margin-bottom:1rem;">
+        <input id="ftShareUrlInput" type="text" readonly style="flex:1;padding:.65rem .75rem;border:1px solid var(--cardBorder);border-radius:.5rem;background:rgba(255,255,255,.04);color:var(--text);font-size:.82rem;min-width:0;">
+        <button id="ftShareCopyBtn" onclick="copyFTShareUrl()" style="padding:.65rem 1rem;background:var(--accent);color:#fff;border:none;border-radius:.5rem;font-weight:700;cursor:pointer;white-space:nowrap;font-size:.9rem;">Copy</button>
+      </div>
+      <p style="color:var(--muted);font-size:.8rem;margin:0;">Your friend opens this link and answers the same questions &#129309;</p>
+    </div>
+  </div>
+  <div id="ftToast" style="position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(2rem);background:#222;color:#fff;padding:.65rem 1.4rem;border-radius:2rem;font-size:.9rem;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s ease,transform .3s ease;pointer-events:none;white-space:nowrap;"></div>
+  <!-- Confirm overlay for reset stats -->
+  <div id="ftConfirmOverlay" style="position:fixed;inset:0;z-index:9600;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .25s ease;" role="alertdialog">
+    <div style="background:var(--card);border:1px solid var(--cardBorder);border-radius:1rem;padding:1.5rem;max-width:320px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);">
+      <p style="margin:0 0 1.25rem;font-size:1rem;">Reset all stats? This cannot be undone.</p>
+      <div style="display:flex;gap:.5rem;">
+        <button onclick="ftConfirmNo()" style="flex:1;padding:.75rem;background:transparent;border:1px solid var(--cardBorder);border-radius:.5rem;color:var(--text);cursor:pointer;font-weight:600;">Cancel</button>
+        <button onclick="ftConfirmYes()" style="flex:1;padding:.75rem;background:#f44336;border:none;border-radius:.5rem;color:#fff;cursor:pointer;font-weight:700;">Reset</button>
+      </div>
+    </div>
+  </div>
+
   <script src="/scripts/utils.js" type="module"></script>
   <script type="module">
     import * as U from "/scripts/utils.js";
@@ -525,6 +553,68 @@
       $('#psProg').textContent = cur ? `Q ${cur}/${total}` : (state.step === 'names' ? 'Names' : state.step === 'handoff' ? 'Handoff' : state.step === 'b_intro' ? 'Intro' : 'Results');
     }
 
+    // ── Friendship Test Share Modal ──
+    function openFTShareModal(link) {
+      document.getElementById('ftShareUrlInput').value = link;
+      document.getElementById('ftShareQr').src =
+        `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(link)}`;
+      const overlay = document.getElementById('ftShareOverlay');
+      const card = document.getElementById('ftShareCard');
+      overlay.style.opacity = '0'; overlay.style.pointerEvents = 'none';
+      overlay.style.display = 'flex';
+      requestAnimationFrame(() => {
+        overlay.style.opacity = '1'; overlay.style.pointerEvents = 'all';
+        card.style.transform = 'scale(1)';
+      });
+    }
+    function closeFTShareModal() {
+      const overlay = document.getElementById('ftShareOverlay');
+      overlay.style.opacity = '0'; overlay.style.pointerEvents = 'none';
+      document.getElementById('ftShareCard').style.transform = 'scale(.92)';
+    }
+    function copyFTShareUrl() {
+      const input = document.getElementById('ftShareUrlInput');
+      const btn = document.getElementById('ftShareCopyBtn');
+      const val = input.value;
+      const doMark = () => {
+        btn.textContent = '\u2713 Copied'; btn.style.background = '#4caf50';
+        showFTToast('\u2705 Link copied! Share with your friend.');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.style.background = ''; }, 2200);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(val).then(doMark).catch(() => {
+          input.select(); try { document.execCommand('copy'); doMark(); } catch(_) {}
+        });
+      } else {
+        input.select(); try { document.execCommand('copy'); doMark(); } catch(_) {}
+      }
+    }
+    function showFTToast(msg, ms = 2800) {
+      const el = document.getElementById('ftToast');
+      el.textContent = msg; el.style.opacity = '1'; el.style.transform = 'translateX(-50%) translateY(0)';
+      clearTimeout(el._timer);
+      el._timer = setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateX(-50%) translateY(2rem)'; }, ms);
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeFTShareModal(); ftConfirmNo(); } });
+    document.getElementById('ftShareOverlay').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeFTShareModal();
+    });
+
+    // ── Confirm dialog ──
+    function ftShowConfirm() {
+      const overlay = document.getElementById('ftConfirmOverlay');
+      overlay.style.opacity = '1'; overlay.style.pointerEvents = 'all';
+    }
+    function ftConfirmNo() {
+      const overlay = document.getElementById('ftConfirmOverlay');
+      overlay.style.opacity = '0'; overlay.style.pointerEvents = 'none';
+    }
+    function ftConfirmYes() {
+      ftConfirmNo();
+      localStorage.removeItem(F_BEST); localStorage.removeItem(F_PLAYS); renderHUD();
+      showFTToast('\u2705 Stats reset.');
+    }
+
     function copyChallengeLink() {
       const url = new URL(baseURL());
       if (state.a?.length && state.a.every(x => x !== null && x !== undefined)) {
@@ -537,7 +627,7 @@
         url.searchParams.set("seed", state.seed);
         url.searchParams.set("len", String(state.length));
       }
-      navigator.clipboard?.writeText(url.toString()).then(() => alert('Link copied! Share with your friend.'));
+      openFTShareModal(url.toString());
     }
 
     $('#startBtn').addEventListener('click', () => openPlay());
@@ -545,15 +635,13 @@
     $('#psBack').addEventListener('click', closePlay);
     $('#nextBtn').addEventListener('click', handleNext);
     $('#prevBtn').addEventListener('click', handlePrev);
-    $('#resetStats').addEventListener('click', () => {
-      if (confirm('Reset all stats?')) { localStorage.removeItem(F_BEST); localStorage.removeItem(F_PLAYS); renderHUD(); }
-    });
+    $('#resetStats').addEventListener('click', () => ftShowConfirm());
     $('#copyInvite').addEventListener('click', () => {
       const seed = Date.now().toString(36);
       const url = new URL(baseURL());
       url.searchParams.set("seed", seed);
       url.searchParams.set("len", String(state.length));
-      navigator.clipboard?.writeText(url.toString()).then(() => alert('Link copied! Share with your friend.'));
+      openFTShareModal(url.toString());
     });
     $('#psShare').addEventListener('click', copyChallengeLink);
 

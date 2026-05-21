@@ -439,6 +439,180 @@
     }
   </style>
 
+  <!-- Share Modal Styles -->
+  <style>
+    /* ── Share / QR Modal ── */
+    .share-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: rgba(0,0,0,.65);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    .share-modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .share-modal {
+      background: var(--card);
+      border: 1px solid var(--cardBorder);
+      border-radius: 1.2rem;
+      padding: 2rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(255,152,0,.15);
+      transform: scale(.92);
+      transition: transform .25s ease;
+      position: relative;
+    }
+    .share-modal-overlay.open .share-modal {
+      transform: scale(1);
+    }
+    .share-modal h3 {
+      margin: 0 0 1rem;
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    .share-modal .qr-box {
+      margin: 0 auto 1.25rem;
+      width: 160px;
+      height: 160px;
+      border-radius: .75rem;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .share-modal .qr-box img {
+      width: 160px;
+      height: 160px;
+      display: block;
+    }
+    .share-modal .share-url-row {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+    .share-modal .share-url-row input {
+      flex: 1;
+      padding: .65rem .75rem;
+      border: 1px solid var(--cardBorder);
+      border-radius: .5rem;
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-size: .85rem;
+      min-width: 0;
+    }
+    .share-modal .copy-btn {
+      padding: .65rem 1rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: .5rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .2s, transform .15s;
+      font-size: .9rem;
+    }
+    .share-modal .copy-btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+    .share-modal .copy-btn.copied { background: #4caf50; }
+    .share-modal .close-modal-btn {
+      position: absolute;
+      top: .75rem;
+      right: .9rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--muted);
+      cursor: pointer;
+      line-height: 1;
+      padding: .2rem .4rem;
+      border-radius: .4rem;
+      transition: color .2s, background .2s;
+    }
+    .share-modal .close-modal-btn:hover { color: var(--text); background: rgba(255,255,255,.08); }
+    /* Toast */
+    #tttToast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(2rem);
+      background: #222;
+      color: #fff;
+      padding: .65rem 1.4rem;
+      border-radius: 2rem;
+      font-size: .9rem;
+      font-weight: 600;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity .3s ease, transform .3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    #tttToast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    /* Auto-join prompt */
+    .autojoin-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 8500;
+      background: rgba(0,0,0,.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    .autojoin-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .autojoin-card {
+      background: var(--card);
+      border: 1px solid var(--cardBorder);
+      border-radius: 1.2rem;
+      padding: 2rem;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,.6);
+      transform: scale(.92);
+      transition: transform .25s ease;
+    }
+    .autojoin-overlay.open .autojoin-card { transform: scale(1); }
+    .autojoin-card h3 { margin: 0 0 .5rem; color: var(--accent); }
+    .autojoin-card p { color: var(--muted); margin: 0 0 1rem; font-size:.9rem; }
+    .autojoin-card input {
+      width: 100%;
+      padding: .75rem;
+      border: 1px solid var(--cardBorder);
+      border-radius: .5rem;
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+    }
+    .autojoin-card input:focus { outline: none; border-color: var(--accent); }
+    .autojoin-card .btn-row { display:flex; gap:.5rem; }
+    .autojoin-card .btn-row .btn { flex:1; }
+  </style>
+
   <meta property="og:title" content="Tic Tac Toe - Free Online Game | UpTools" />
   <meta property="og:description" content="Play Tic Tac Toe online! Classic game with AI opponent or multiplayer mode. Fast, free, no sign-ups required." />
   <meta property="og:url" content="https://www.uptools.in/games/tic-tac-toe/" />
@@ -495,10 +669,10 @@
         </div>
 
         <div class="game-link" id="gameLink">
-          <h4>Share this link:</h4>
+          <h4>Game created! Share with your friend:</h4>
           <div class="link-input-group">
             <input type="text" id="sharableLink" readonly>
-            <button class="btn" onclick="copyGameLink()">Copy</button>
+            <button class="btn" onclick="openShareModal()">🔗 Share & QR</button>
           </div>
         </div>
 
@@ -540,6 +714,38 @@
       </div>
     </div>
   </main>
+
+  <!-- Share Modal -->
+  <div class="share-modal-overlay" id="shareModalOverlay" role="dialog" aria-modal="true" aria-label="Share Game">
+    <div class="share-modal">
+      <button class="close-modal-btn" onclick="closeShareModal()" aria-label="Close">×</button>
+      <h3>🔗 Share Game</h3>
+      <div class="qr-box">
+        <img id="shareQrImg" src="" alt="QR code" loading="lazy">
+      </div>
+      <p style="color:var(--muted);font-size:.85rem;margin:0 0 .75rem">Scan QR or copy the link below</p>
+      <div class="share-url-row">
+        <input type="text" id="shareUrlInput" readonly>
+        <button class="copy-btn" id="shareCopyBtn" onclick="copyShareUrl()">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auto-join Prompt (shown when URL has ?game=CODE) -->
+  <div class="autojoin-overlay" id="autojoinOverlay" role="dialog" aria-modal="true">
+    <div class="autojoin-card">
+      <h3>👥 Join Game</h3>
+      <p id="autojoinDesc">Enter your name to join this Tic Tac Toe game.</p>
+      <input type="text" id="autojoinName" placeholder="Your name" maxlength="20" autocomplete="off">
+      <div class="btn-row">
+        <button class="btn secondary" onclick="closeAutojoin()">Cancel</button>
+        <button class="btn" id="autojoinConfirmBtn" onclick="confirmAutojoin()">Join Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="tttToast"></div>
 
   <footer class="note small site-footer" role="contentinfo">
     <p>&copy; 2024 UpTools. All rights reserved.</p>
@@ -777,19 +983,20 @@
         const urlParams = new URLSearchParams(window.location.search);
         const gameCode = urlParams.get('game');
         if (gameCode) {
-          document.getElementById('gameCode').value = gameCode;
           this.switchGameMode('multiplayer');
+          // Show auto-join prompt after a short delay so DOM is ready
+          setTimeout(() => openAutojoinPrompt(gameCode), 300);
         }
       }
 
       async makeMultiplayerMove(index) {
         if (!this.multiplayerManager || !this.multiplayerManager.isGameReady()) {
-          alert('Game not ready. Create or join first.');
+          showTTTToast('⚠️ Game not ready — create or join first');
           return;
         }
 
         if (this.isWaitingForOpponent) {
-          alert('Waiting for opponent...');
+          showTTTToast('⏳ Waiting for opponent…');
           return;
         }
 
@@ -799,17 +1006,93 @@
           await this.multiplayerManager.makeMove(index);
         } catch (err) {
           this.isWaitingForOpponent = false;
-          alert('Error: ' + err.message);
+          showTTTToast('❌ ' + err.message);
         }
       }
     }
 
     let game;
+    let _pendingAutojoinCode = null;
+
+    // ── Toast helper ──
+    let _tttToastTimer = null;
+    function showTTTToast(msg, durationMs = 2800) {
+      const el = document.getElementById('tttToast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(_tttToastTimer);
+      _tttToastTimer = setTimeout(() => el.classList.remove('show'), durationMs);
+    }
+
+    // ── Share Modal ──
+    function openShareModal() {
+      const link = document.getElementById('sharableLink').value;
+      if (!link) return;
+      document.getElementById('shareUrlInput').value = link;
+      const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(link)}`;
+      document.getElementById('shareQrImg').src = qrSrc;
+      document.getElementById('shareModalOverlay').classList.add('open');
+    }
+    function closeShareModal() {
+      document.getElementById('shareModalOverlay').classList.remove('open');
+    }
+    function copyShareUrl() {
+      const input = document.getElementById('shareUrlInput');
+      const btn = document.getElementById('shareCopyBtn');
+      const val = input.value;
+      const doMark = () => {
+        btn.textContent = '✓ Copied';
+        btn.classList.add('copied');
+        showTTTToast('✅ Link copied to clipboard!');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2200);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(val).then(doMark).catch(() => {
+          input.select(); try { document.execCommand('copy'); doMark(); } catch(_) {}
+        });
+      } else {
+        input.select();
+        try { document.execCommand('copy'); doMark(); } catch(_) {}
+      }
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeShareModal();
+    });
+    document.getElementById('shareModalOverlay').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeShareModal();
+    });
+
+    // ── Auto-join flow ──
+    function openAutojoinPrompt(gameCode) {
+      _pendingAutojoinCode = gameCode.toUpperCase();
+      document.getElementById('autojoinDesc').textContent =
+        `You were invited to a Tic Tac Toe game (code: ${_pendingAutojoinCode}). Enter your name to join.`;
+      document.getElementById('autojoinName').value = '';
+      document.getElementById('autojoinOverlay').classList.add('open');
+      setTimeout(() => document.getElementById('autojoinName').focus(), 120);
+    }
+    function closeAutojoin() {
+      document.getElementById('autojoinOverlay').classList.remove('open');
+      _pendingAutojoinCode = null;
+    }
+    async function confirmAutojoin() {
+      const name = document.getElementById('autojoinName').value.trim();
+      if (!name) { showTTTToast('⚠️ Please enter your name'); return; }
+      const code = _pendingAutojoinCode;
+      document.getElementById('autojoinOverlay').classList.remove('open');
+      // Pre-fill regular join UI then trigger join
+      document.getElementById('gameCode').value = code;
+      document.getElementById('joinPlayerName').value = name;
+      await joinMultiplayerGame();
+    }
+    document.getElementById('autojoinName').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') confirmAutojoin();
+    });
 
     async function createMultiplayerGame() {
       const playerName = document.getElementById('playerName').value.trim();
       if (!playerName) {
-        alert('Please enter your name!');
+        showTTTToast('⚠️ Please enter your name!');
         return;
       }
 
@@ -830,8 +1113,11 @@
 
         document.getElementById('player1Label').textContent = playerName;
         document.getElementById('player2Label').textContent = 'Waiting...';
+
+        // Auto-open share modal so host can share immediately
+        openShareModal();
       } catch (err) {
-        alert('Error: ' + err.message);
+        showTTTToast('❌ ' + err.message);
       }
     }
 
@@ -840,7 +1126,7 @@
       const playerName = document.getElementById('joinPlayerName').value.trim();
 
       if (!gameCode || !playerName) {
-        alert('Please enter both game code and your name!');
+        showTTTToast('⚠️ Please enter both game code and your name!');
         return;
       }
 
@@ -857,18 +1143,10 @@
         document.getElementById('player1Label').textContent = manager.gameState.player1.name;
         document.getElementById('player2Label').textContent = playerName;
         document.getElementById('status').textContent = 'Game started! Loading...';
+        showTTTToast('✅ Joined game successfully!');
       } catch (err) {
-        alert('Error: ' + err.message);
+        showTTTToast('❌ ' + err.message);
       }
-    }
-
-    function copyGameLink() {
-      const link = document.getElementById('sharableLink').value;
-      navigator.clipboard.writeText(link).then(() => {
-        alert('Link copied to clipboard!');
-      }).catch(() => {
-        alert('Failed to copy. Please copy manually.');
-      });
     }
 
     function updateMultiplayerDisplay(state) {
