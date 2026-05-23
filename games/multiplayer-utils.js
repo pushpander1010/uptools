@@ -255,9 +255,8 @@ class MultiplayerGameManager {
       const response = await fetch(`/api/multiplayer?code=${encodeURIComponent(this.gameId)}`);
       if (response.ok) {
         state = await response.json();
-      } else if (response.status === 404) {
-        return null;
       }
+      // For 404 or any server error: fall through to localStorage below
     } catch (err) {
       console.error('Failed to load game state from server:', err);
     }

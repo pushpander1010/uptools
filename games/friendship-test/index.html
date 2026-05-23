@@ -650,6 +650,12 @@
       if (e.key === 'Enter') handleNext();
       if (e.key === 'Escape') closePlay();
     });
+
+    // Export to window so HTML onclick attributes can call these (module scope ≠ global scope)
+    window.closeFTShareModal = closeFTShareModal;
+    window.copyFTShareUrl    = copyFTShareUrl;
+    window.ftConfirmNo       = ftConfirmNo;
+    window.ftConfirmYes      = ftConfirmYes;
   </script>
 </body>
 </html>

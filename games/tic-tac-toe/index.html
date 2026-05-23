@@ -10,7 +10,7 @@
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="stylesheet" href="/style.css?v=1.2.0">
   <script src="/games/fullscreen-utils.js" defer></script>
-  <script src="/games/multiplayer-utils.js" defer></script>
+  <script src="/games/multiplayer-utils.js"></script>
   
   <style>
     body {
@@ -1143,6 +1143,7 @@
         document.getElementById('player1Label').textContent = manager.gameState.player1.name;
         document.getElementById('player2Label').textContent = playerName;
         document.getElementById('status').textContent = 'Game started! Loading...';
+        updateMultiplayerDisplay(manager.gameState); // render board immediately, don't wait for first poll
         showTTTToast('✅ Joined game successfully!');
       } catch (err) {
         showTTTToast('❌ ' + err.message);
