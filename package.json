@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:worker": "wrangler dev --local",
+    "dev:full": "start \"Wrangler\" cmd /k wrangler dev --local && vite",
     "prebuild": "node scripts/generate-seo.mjs",
     "build": "tsc && vite build --base=/",
     "preview": "vite preview"
