@@ -43,6 +43,19 @@
 <link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
 <noscript><link href="/style.css?v=1.2.0" rel="stylesheet"/></noscript>
 <!-- Structured Data (SoftwareApplication + FAQ) -->
+
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.uptools.in/"}, {"@type": "ListItem", "position": 2, "name": "Gst Calculator", "item": "https://www.uptools.in/gst-calculator/"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to Calculate GST in India","description":"Step-by-step guide to calculating GST (CGST, SGST, IGST) for any amount at 0%, 5%, 12%, 18% or 28% rates.","step":[
+{"@type":"HowToStep","position":1,"name":"Enter the base amount","text":"Type the pre-GST amount in rupees."},
+{"@type":"HowToStep","position":2,"name":"Select GST rate","text":"Choose from 0%, 5%, 12%, 18%, or 28% — common Indian GST slabs."},
+{"@type":"HowToStep","position":3,"name":"Toggle Inclusive/Exclusive","text":"Choose whether the amount includes GST or not."},
+{"@type":"HowToStep","position":4,"name":"View CGST/SGST split","text":"See how GST splits into CGST (Central) and SGST (State) for intra-state, or IGST for inter-state."}
+],"totalTime":"PT1M","publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
+</script>
 <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -477,6 +490,51 @@
 <div class="note">Sponsored</div>
 <div id="ad-slot-1-inner"></div>
 </aside>
+
+<!-- Do's and Don'ts for GST -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">✅ Do's and ❌ Don'ts for GST Calculation</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="card" style="border-color:rgba(34,197,94,.3)">
+<h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">✅ <b>Do</b> verify the correct GST rate for your product/service category.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> distinguish between intra-state (CGST+SGST) and inter-state (IGST) transactions.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> use this tool to double-check invoices before filing GST returns.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> use the History feature to review recent calculations.</li>
+</ul>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+<h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">❌ <b>Don't</b> apply 28% GST without checking — most household items fall under 5-18%.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> confuse "inclusive" and "exclusive" modes — they give different totals.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> assume all services are exempt — most services attract 18% GST.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use this for official tax filing without verifying with GST portal data.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- SEO: FAQ -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
+<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+</section>
+<!-- SEO: How it works -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
+<p>Results update instantly as you type — no waiting for server responses.</p>
+<p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
+</div>
+</details>
+</section>
 <footer class="note small site-footer" role="contentinfo">
       © <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a> . <a href="/about/">About</a> . <a href="/contact/">Contact</a>
 </footer>

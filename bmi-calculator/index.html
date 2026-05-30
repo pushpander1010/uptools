@@ -13,6 +13,7 @@
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
 <title>BMI Calculator (Metric &amp; US) - Healthy Range, Body Fat %, WHtR, BMR/TDEE | UpTools</title>
 <meta content="Free BMI Calculator with instant results. Works for Metric (cm/kg) and US (ft/in, lb). Shows category (WHO/Asian), healthy weight range, BMI Prime, estimated body fat %, WHtR, BMR &amp; TDEE for calorie planning. Fast, private, offline-friendly." name="description"/>
+<meta content="bmi calculator, body mass index, bmi chart, healthy bmi, bmi formula, weight calculator, bmi category, bmr calculator, tdee calculator, body fat calculator, waist to height ratio, who bmi, asian bmi, ideal weight, calorie planner" name="keywords"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="#0b1020" name="theme-color"/>
 <link href="https://www.uptools.in/bmi-calculator/" rel="canonical">
@@ -530,6 +531,18 @@
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"BMI Calculator","operatingSystem":"Any","applicationCategory":"HealthApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"url":"https://www.uptools.in/bmi-calculator/","publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}  
   </script>
 <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"HowTo","name":"How to Calculate BMI (Body Mass Index)","description":"Step-by-step guide to calculating your BMI using metric or US units, interpreting WHO and Asian categories, and getting your healthy weight range.","step":[
+    {"@type":"HowToStep","position":1,"name":"Choose your unit system","text":"Select Metric (cm/kg) or US/UK (ft/in/lb) from the Units dropdown."},
+    {"@type":"HowToStep","position":2,"name":"Enter height and weight","text":"Type your height and weight. For US units, enter feet and inches separately."},
+    {"@type":"HowToStep","position":3,"name":"Optionally add age, sex and waist","text":"Adding age and sex improves body fat estimation. Waist circumference enables WHtR calculation."},
+    {"@type":"HowToStep","position":4,"name":"Select WHO or Asian cut-offs","text":"WHO uses 18.5-24.9 as normal. Asian cut-offs use 18.5-22.9 for many populations."},
+    {"@type":"HowToStep","position":5,"name":"Click Calculate and read results","text":"View your BMI, healthy weight range, BMI Prime, estimated body fat %, WHtR, BMR and TDEE."}
+  ],
+  "totalTime":"PT1M",
+  "tool":{"@type":"HowToTool","name":"UpTools BMI Calculator","url":"https://www.uptools.in/bmi-calculator/"},
+  "publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
+  </script>
+<script type="application/ld+json">
   {"@context":"https://schema.org","@type":"VideoObject","name":"BMI Calculation Formula Explained","description":"Quick video explaining BMI, categories, and context.","uploadDate":"2023-01-01","thumbnailUrl":"https://i.ytimg.com/vi/t9e46CV_pyM/hqdefault.jpg","embedUrl":"https://www.youtube-nocookie.com/embed/t9e46CV_pyM","publisher":{"@type":"Organization","name":"YouTube"}}
   </script>
 </link>  <link rel="canonical" href="https://www.uptools.in/bmi-calculator/" />
@@ -693,22 +706,107 @@
 </ul>
 </aside>
 <!-- FAQs -->
-<section aria-labelledby="faq" class="card">
-<h2 id="faq">FAQs</h2>
+<section aria-labelledby="faq" class="card" style="margin-top:16px">
+<h2 id="faq">Frequently Asked Questions</h2>
 <details>
-<summary>What are Asian BMI cut-offs?</summary>
-<div class="note">Under &lt;18.5, Normal 18.5-22.9, Overweight 23-24.9, Obese ≥25. Choose "Asian" from the
-                Cut-offs menu.</div>
+<summary>What is a healthy BMI?</summary>
+<div class="note" style="padding:6px 0">Using WHO adult cut-offs: <b>18.5–24.9</b> is normal. For many Asian populations, <b>18.5–22.9</b> is used. BMI Prime below 1.0 indicates healthy weight; above 1.0 indicates overweight risk.</div>
 </details>
 <details>
-<summary>What is BMI Prime?</summary>
-<div class="note">BMI Prime = BMI ÷ 25. Values &lt;1.0 are below the global overweight threshold; &gt;1.0
-                above.</div>
+<summary>Is BMI accurate for athletes or bodybuilders?</summary>
+<div class="note" style="padding:6px 0">BMI does not distinguish fat from muscle. Athletes with high muscle mass may register as "overweight" despite having low body fat. Use waist-to-height ratio (WHtR) and body fat % for better context.</div>
 </details>
 <details>
-<summary>What is WHtR?</summary>
-<div class="note">Waist-to-height ratio (waist/height). Aim for &lt;0.5; 0.50-0.59 increased risk; ≥0.60
-                high risk.</div>
+<summary>Does this work for children?</summary>
+<div class="note" style="padding:6px 0">No. Children require age- and sex-specific percentiles, which this adult calculator does not provide. Consult a pediatrician for child BMI interpretation.</div>
+</details>
+<details>
+<summary>What is BMI Prime and why does it matter?</summary>
+<div class="note" style="padding:6px 0">BMI Prime = BMI ÷ 25. It's a simple ratio where values below 1.0 are below the overweight threshold and above 1.0 are above it. It helps quickly gauge how far you are from the healthy upper limit.</div>
+</details>
+<details>
+<summary>What is WHtR (Waist-to-Height Ratio)?</summary>
+<div class="note" style="padding:6px 0">WHtR = waist circumference ÷ height. Aim for <b>&lt;0.5</b>; 0.50–0.59 means increased risk; ≥0.60 means high risk. It's a simple screen for abdominal obesity, which is a key driver of metabolic disease.</div>
+</details>
+<details>
+<summary>How do I measure my waist correctly?</summary>
+<div class="note" style="padding:6px 0">Measure at the narrowest point of your torso (usually near the navel), or at the midpoint between your lowest rib and hip bone. Keep the tape snug but not tight, and breathe out normally.</div>
+</details>
+<details>
+<summary>What is the BMI formula?</summary>
+<div class="note" style="padding:6px 0"><b>Metric:</b> BMI = weight (kg) ÷ height² (m²). <b>US:</b> BMI = (weight (lb) ÷ height² (in²)) × 703. For example, a 70 kg person at 1.70 m has BMI = 70 ÷ 2.89 = <b>24.2</b>.</div>
+</details>
+<details>
+<summary>How do I calculate BMI manually?</summary>
+<div class="note" style="padding:6px 0">Take your weight in kg and your height in meters. Square the height, then divide the weight by that number. For imperial: multiply your weight in pounds by 703 and divide by your height in inches squared.</div>
+</details>
+</section>
+<!-- How to use this calculator -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">How to Use This BMI Calculator</h2>
+<ol class="note" style="margin:0 0 0 1.2rem; padding:0; list-style:decimal; color:var(--muted)">
+<li><b>Select your unit system</b> — Metric (cm/kg) for international, or US/UK (ft/in, lb).</li>
+<li><b>Enter height and weight</b> — for US units, type feet and inches separately.</li>
+<li><b>Choose WHO or Asian cut-offs</b> — WHO uses 18.5–24.9 as normal range; Asian uses 18.5–22.9.</li>
+<li><b>Optionally enter age, sex, and waist</b> — this enables body fat estimation and WHtR calculation.</li>
+<li><b>Click Calculate</b> — your BMI, healthy weight range, BMI Prime, body fat %, WHtR, BMR, and TDEE appear instantly in the results panel.</li>
+</ol>
+<p class="note small" style="margin-top:10px">💡 <b>Tip:</b> Use the Calorie Planner to set a target BMI and see suggested daily calories for your goal.</p>
+</section>
+<!-- Do's and Don'ts -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">✅ Do's and ❌ Don'ts for BMI &amp; Weight Management</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="card" style="border-color:rgba(34,197,94,.3)">
+<h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
+<ul style="list-style:none;padding:0;margin:0;color:var(--muted)">
+<li style="padding:.35rem 0">✅ <b>Do</b> measure your waist alongside BMI for a complete risk picture.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> use Asian cut-offs if you're of South Asian, East Asian, or Southeast Asian descent.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> recalculate BMI as your weight changes over time.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> combine BMI with other metrics (body fat %, WHtR, blood pressure).</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> consult a doctor if your BMI is consistently above 25 or below 18.5.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> focus on sustainable habits rather than rapid weight loss.</li>
+</ul>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+<h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
+<ul style="list-style:none;padding:0;margin:0;color:var(--muted)">
+<li style="padding:.35rem 0">❌ <b>Don't</b> rely on BMI alone to assess health — it can't measure body composition.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use this calculator for children or pregnant women — different standards apply.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> panic about small daily weight fluctuations — measure weekly under the same conditions.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> assume a "normal" BMI means you're healthy — fitness and blood markers matter too.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> crash diet to lower BMI — it often leads to muscle loss and rebound weight gain.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> ignore abdominal fat — a normal BMI with high WHtR still carries health risks.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- How BMI is calculated -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How BMI is Calculated</summary>
+<div style="margin-top:8px;color:var(--muted)">
+<p><b>Metric formula:</b> BMI = weight (kg) ÷ height² (m²)</p>
+<p><b>US formula:</b> BMI = (weight in lb ÷ height in inches²) × 703</p>
+<h3 style="margin-top:12px">WHO BMI Categories</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:8px 0">
+<div style="padding:8px 12px;border-radius:8px;background:#1a2332;border-left:4px solid #60a5fa"><b style="color:#60a5fa">Underweight</b><br>&lt;18.5</div>
+<div style="padding:8px 12px;border-radius:8px;background:#1a2332;border-left:4px solid #22c55e"><b style="color:#22c55e">Normal</b><br>18.5 – 24.9</div>
+<div style="padding:8px 12px;border-radius:8px;background:#1a2332;border-left:4px solid #f59e0b"><b style="color:#f59e0b">Overweight</b><br>25 – 29.9</div>
+<div style="padding:8px 12px;border-radius:8px;background:#1a2332;border-left:4px solid #ef4444"><b style="color:#ef4444">Obese</b><br>≥ 30</div>
+</div>
+<h3 style="margin-top:12px">Asian BMI Categories (WHO SEAR/WPR)</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:8px 0">
+<div style="padding:8px 12px;border-radius:8px;background:#1a2332;border-left:4px solid #60a5fa"><b style="color:#60a5fa">Underweight</b><br>&lt;18.5</div>
+<div style="padding:8px 12px;border-radius:8px;background:#1a2332;border-left:4px solid #22c55e"><b style="color:#22c55e">Normal</b><br>18.5 – 22.9</div>
+<div style="padding:8px 12px;border-radius:8px;background:#1a2332;border-left:4px solid #f59e0b"><b style="color:#f59e0b">Overweight</b><br>23 – 24.9</div>
+<div style="padding:8px 12px;border-radius:8px;background:#1a2332;border-left:4px solid #ef4444"><b style="color:#ef4444">Obese</b><br>≥ 25</div>
+</div>
+<h3 style="margin-top:12px">Worked Example</h3>
+<p>If you weigh <b>70 kg</b> and are <b>170 cm</b> tall:<br>
+BMI = 70 ÷ (1.70)² = 70 ÷ 2.89 = <b>24.2</b> → Normal range (WHO)</p>
+<p class="note small">Also try: <a href="/bmr-calculator/">BMR Calculator</a> · <a href="/calorie-calculator/">Calorie Calculator</a> · <a href="/ideal-weight-calculator/">Ideal Weight</a></p>
+</div>
 </details>
 </section>
 <!-- Video with fixed size to avoid layout shift -->
@@ -717,6 +815,26 @@
 <div class="video-wrap"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/t9e46CV_pyM?rel=0&amp;modestbranding=1" title="BMI Calculation Formula Explained"></iframe></div>
 </section>
 </div>
+</section>
+
+<!-- SEO: FAQ -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
+<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+</section>
+<!-- SEO: How it works -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
+<p>Results update instantly as you type — no waiting for server responses.</p>
+<p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
+</div>
+</details>
 </section>
 <footer class="note small site-footer" role="contentinfo" style="margin:18px 0">
         © <span id="y"></span> UpTools . <a href="/about/">About</a> . <a href="/contact/">Contact</a> .

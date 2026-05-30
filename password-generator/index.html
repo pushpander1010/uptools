@@ -68,6 +68,10 @@
     .linkbtn:focus{outline:2px dashed var(--line,#2b3142);outline-offset:2px;border-radius:4px}
   </style>
 <!-- Structured Data -->
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.uptools.in/"}, {"@type": "ListItem", "position": 2, "name": "Password Generator", "item": "https://www.uptools.in/password-generator/"}]}
+</script>
 <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -268,6 +272,73 @@
 <section class="card">
 <ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-format="auto" data-ad-slot="9651757525" data-full-width-responsive="true" style="display:block;min-height:120px"></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</section>
+
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this password generator secure?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. It uses the browser's cryptographically secure random generator (window.crypto.getRandomValues). Nothing is sent to any server. The encrypted Vault uses AES-GCM with PBKDF2 key derivation.</p></details>
+<details><summary><b>What password length is recommended?</b></summary><p style="padding:6px 0;color:#9aa4b2">We suggest 16-24 characters with upper+lower+digits+symbols, or a 4-6 word passphrase with a separator and a number.</p></details>
+<details><summary><b>Where are saved passwords stored?</b></summary><p style="padding:6px 0;color:#9aa4b2">Only in your browser's local storage, encrypted with AES-GCM using your Vault PIN. You can export or clear them anytime.</p></details>
+<details><summary><b>What is entropy?</b></summary><p style="padding:6px 0;color:#9aa4b2">Entropy measures password randomness in bits. Higher = harder to crack. A 16-character password with mixed characters has ~100 bits of entropy and would take centuries to brute-force.</p></details>
+</section>
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">✅ Do's and ❌ Don'ts for Password Security</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="card" style="border-color:rgba(34,197,94,.3)">
+<h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">✅ <b>Do</b> use 16+ characters with mixed case, numbers, and symbols.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> use a unique password for every account.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> enable two-factor authentication (2FA) wherever available.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> use the encrypted Vault to save passwords securely.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> export your Vault backup and store it safely offline.</li>
+</ul>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+<h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">❌ <b>Don't</b> reuse the same password across multiple sites.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use personal info (birthday, name) in passwords.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> share your Vault PIN or master password.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> skip 2FA even if your password is strong.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> write passwords on sticky notes or unencrypted files.</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">🔐 How This Password Generator Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>Uses <b>window.crypto.getRandomValues()</b> — the same cryptographic API used by banking websites. Generate passwords from:</p>
+<ul style="margin:4px 0 8px 1.2rem">
+<li><b>Random characters</b> — mix uppercase, lowercase, digits, and symbols.</li>
+<li><b>Memorable passphrases</b> — random words with optional separator and numbers.</li>
+</ul>
+<p><b>Crack-time estimates:</b> A 16-char random password with all character types would take over 10 billion years to crack on modern hardware.</p>
+<p style="margin-top:8px">Also try: <a href="/username-generator/">Username Generator</a> · <a href="/uuid-generator/">UUID Generator</a> · <a href="/qr-generator/">QR Generator</a></p>
+</div>
+</details>
+</section>
+
+<!-- SEO: FAQ -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
+<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+</section>
+<!-- SEO: How it works -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
+<p>Results update instantly as you type — no waiting for server responses.</p>
+<p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
+</div>
+</details>
 </section>
 <footer class="site-foot">
 <nav class="nav-links small">
