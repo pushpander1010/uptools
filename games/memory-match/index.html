@@ -16,12 +16,16 @@
 
   <!-- OG/Twitter -->
   <meta property="og:title" content="Memory Match - Free Online Game (Easy/Medium/Hard, Peek, Best Time) | UpTools" />
-  <meta property="og:description" content="Play Memory Match online (mobile + desktop). Choose Easy, Medium, or Hard, then tap New Game: a clean full-screen window opens with timer and a back button. Peek start, keyboard support, sounds & haptics, per-level best time & moves, and a grid that always fits your screen. Stop anytime with Back to return to the home screen." />
+  <meta property="og:description" content="Memory Match - Free Online Game (Easy/Medium/Hard, Peek, Best Time). Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/games/memory-match/" />
   <meta property="og:site_name" content="UpTools" />
   <meta property="og:image" content="/assets/og/memory-match.png" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Memory Match - Free Online Game (Easy/Medium/Hard, Peek, Best Time) | UpTools" />
+  <meta name="twitter:description" content="Memory Match - Free Online Game (Easy/Medium/Hard, Peek, Best Time). Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
 
   <!-- Icons -->
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
@@ -150,7 +154,22 @@
     @keyframes pulse{ 0%,100%{ transform:scale(1)} 50%{ transform:scale(1.05)} }
     .peek .card-tile .face{ opacity:1; transform:scale(1) }
     .peek .card-tile{ border-color:rgba(255,255,255,.15) }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 
   <!-- Structured data -->
   <script type="application/ld+json">
@@ -158,6 +177,8 @@
   </script>
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
   <!-- small fixed -->
   <ins class="adsbygoogle"
        style="display:inline-block;width:500px;height:50px"
@@ -188,7 +209,7 @@
   </header>
 
   <!-- Home/Landing screen -->
-  <main class="wrap" id="homeScreen">
+  <main role="main" class="wrap" id="homeScreen">
     <div class="tool-header">
       <h1>🧠 Memory Match</h1>
       <p>Pick a difficulty and press <b>New Game</b>. A dedicated full-screen window opens with a timer and a back button.</p>

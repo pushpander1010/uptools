@@ -5,13 +5,14 @@
 <!-- Ads: NOT inserting page-level ad slots to avoid layout shift as requested -->
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>Live Crypto Prices (INR &amp; USD) — Bitcoin (BTC), Ethereum (ETH), Top Gainers/Losers &amp; Market Cap | UpTools</title>
 <meta content="Track live cryptocurrency prices in INR &amp; USD: Bitcoin (BTC), Ethereum (ETH), Solana (SOL), XRP, and 10,000+ coins. See market cap, volume, dominance, top gainers/losers, 1h/24h/7d change, and mini sparklines. Watchlist, search, filters, and auto-refresh. Fast &amp; privacy-first by UpTools." name="description"/>
 <meta content="crypto prices, live crypto prices, Bitcoin price, BTC price in INR, BTC price today, Ethereum price, ETH price today, crypto market cap, top gainers, crypto losers, cryptocurrency prices India, bitcoin price INR, btc to inr, btc price, ethereum price in inr" name="keywords"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="#0b0f1a" name="theme-color"/>
 <link href="https://www.uptools.in/crypto-prices/" rel="canonical"/>
+
 <!-- OG/Twitter -->
 <meta content="Live Crypto Prices (INR &amp; USD) — Bitcoin, Ethereum, Gainers/Losers" property="og:title"/>
 <meta content="Real-time cryptocurrency prices, market cap, dominance, and top gainers/losers. Watchlist, search, filters &amp; auto-refresh." property="og:description"/>
@@ -20,6 +21,9 @@
 <meta content="UpTools" property="og:site_name"/>
 <meta content="https://www.uptools.in/assets/og/crypto-prices.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="Live Crypto Prices (INR &amp; USD) — Bitcoin, Ethereum, Gainers/Losers" />
+  <meta name="twitter:description" content="Real-time cryptocurrency prices, market cap, dominance, and top gainers/losers. Watchlist, search, filters &amp; auto-refresh." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/crypto-prices.png" />
 <!-- Favicon -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -126,13 +130,30 @@
     .links-grid{ display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
     .links-grid a{ display:flex; align-items:center; gap:10px; padding:12px; border-radius:10px; background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft); text-decoration:none; color:var(--text); }
     .links-grid .txt-logo{ font-weight:900; letter-spacing:.5px; padding:6px 10px; border-radius:8px; background:#111b34; border:1px solid var(--border); }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 780px){
       .mini-kpis{ grid-template-columns:repeat(2,1fr); }
       .panel{ min-height:auto; }
       .table-wrap{ max-height: 62vh; }
       .pill-input input{ width:130px; }
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Structured Data (SoftwareApplication + WebPage + Breadcrumbs + FAQ) -->
 <script type="application/ld+json">
   {
@@ -169,15 +190,15 @@
     ]
   }
   </script>
-  <link rel="canonical" href="https://www.uptools.in/crypto-prices/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="Live Crypto Prices (INR &amp; USD) — Bitcoin (BTC), Ethereum (ETH), Top Gainers/Losers &amp; Market Cap | UpTools" />
-  <meta property="og:description" content="" />
+  
+  <meta property="og:description" content="Real-time cryptocurrency prices, market cap, dominance, and top gainers/losers. Watchlist, search, filters &amp;amp; auto-refresh." />
   <meta property="og:url" content="https://www.uptools.in/crypto-prices/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 <!-- Header -->
 <!-- Header -->
@@ -199,7 +220,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap" id="main">
+<main role="main" class="wrap" id="main">
 <!-- Hero -->
 <section aria-label="Crypto Prices" class="market-hero neon">
 <div class="market-ico">₿</div>
@@ -212,7 +233,7 @@
 <div class="group">
 <label aria-label="Search coins" class="pill-input">
 <svg aria-hidden="true" height="16" viewbox="0 0 24 24" width="16"><path d="m21.53 20.47l-4.66-4.66A7.92 7.92 0 0 0 18 10a8 8 0 1 0-8 8c1.86 0 3.57-.64 4.91-1.73l4.66 4.66zM4 10a6 6 0 1 1 6 6a6 6 0 0 1-6-6" fill="currentColor"></path></svg>
-<input autocomplete="off" id="q" placeholder="Search: bitcoin, eth, sol..." type="search"/>
+<input aria-label="Search: bitcoin, eth, sol..." autocomplete="off" id="q" placeholder="Search: bitcoin, eth, sol..." type="search"/>
 </label>
 <select aria-label="Quote currency" class="input currency-select" id="vs">
 <option selected="" value="inr">INR ₹</option>
@@ -234,7 +255,7 @@
 </div>
 </div>
 <div class="group">
-<label class="toggle"><input checked="" id="auto" type="checkbox"/> Auto-refresh (30s)</label>
+<label class="toggle"><input aria-label="Checkbox" checked="" id="auto" type="checkbox"/> Auto-refresh (30s)</label>
 <button class="btn sm secondary" id="refresh" type="button">Refresh</button>
 </div>
 </div>

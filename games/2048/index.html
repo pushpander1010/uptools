@@ -22,6 +22,9 @@
 <meta content="https://www.uptools.in/games/2048/" property="og:url"/>
 <meta content="https://www.uptools.in/assets/social/2048-card.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="Play 2048 - Free Online Game | UpTools" />
+  <meta name="twitter:description" content="Swipe or use arrow keys to merge tiles and reach 2048. Undo, auto-save, best score, and share." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/social/2048-card.png" />
 <!-- Icons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -141,7 +144,22 @@
     .n2048{background:linear-gradient(135deg,#6cf,#8bffb0); color:#05202e; font-size:clamp(16px, 5.2vmin, 36px)}
 
     .note{ color:var(--muted); font-size:.85rem; text-align:center; margin-top:.35rem }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Structured Data -->
 <script type="application/ld+json">
   {
@@ -163,8 +181,11 @@
   <meta property="og:description" content="" />
   <meta property="og:url" content="https://www.uptools.in/games/2048/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- small fixed -->
 <ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
 <script>
@@ -191,7 +212,7 @@
 </div>
 </header>
 <!-- Home / Landing -->
-<main class="wrap" id="homeScreen">
+<main role="main" class="wrap" id="homeScreen">
 <div class="tool-header" style="text-align:center;margin:1rem 0 .25rem">
 <h1>🎲 2048</h1>
 <p>Press <b>New Game</b>. A dedicated full-screen window opens with a back button and your score on top.</p>

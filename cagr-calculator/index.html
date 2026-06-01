@@ -2,16 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>CAGR Calculator - Compound Annual Growth Rate | UpTools</title>
   <meta name="description" content="Calculate CAGR from start value, end value and years. Free compound annual growth rate calculator for investments, revenue, traffic and business growth." />
-  <meta name="robots" content="cagr calculator, cagr calculator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<meta name="keywords" content="cagr calculator, cagr calculator, online tool, free calculator, uptools" />
+
   <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://www.uptools.in/cagr-calculator/" />
+<link href="https://www.uptools.in/cagr-calculator/" rel="canonical"/>
+  
   <meta property="og:title" content="CAGR Calculator - Compound Annual Growth Rate | UpTools" />
-  <meta property="og:description" content="Calculate CAGR from start value, end value and years. Free compound annual growth rate calculator for investments, revenue, traffic and business growth." />
+  <meta property="og:description" content="CAGR Calculator - Compound Annual Growth Rate. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/cagr-calculator/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -74,13 +77,29 @@
     .result-box { margin-top:12px; padding:14px; background:#101b30; border-radius:12px; border:1px solid #273551; min-height:120px; }
     .mini-grid { display:grid; gap:10px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-top:12px; }
     .mini-stat { background:#0f1a2d; border:1px solid #273551; border-radius:12px; padding:12px; }
-  </style>
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
     <!-- Header -->
   <header class="site" role="banner">
     <div class="header-inner">

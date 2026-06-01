@@ -2,15 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Subnet Calculator - IP CIDR Network | UpTools</title>
   <meta name="description" content="Free online Subnet Calculator — enter an IP address with CIDR notation or subnet mask to instantly get network address, broadcast address, usable host range, wildcard mask, IP class, and binary representations." />
+  <!-- Open Graph -->
+  <meta property="og:image" content="https://www.uptools.in/assets/home.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Subnet Calculator - IP CIDR Network | UpTools" />
+  <meta name="twitter:description" content="Subnet Calculator - IP CIDR Network. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
   <meta name="keywords" content="subnet calculator, CIDR calculator, IP address calculator, network address, broadcast address, subnet mask, wildcard mask, IP class" />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <link rel="canonical" href="https://www.uptools.in/subnet-calculator/" />
+<link href="https://www.uptools.in/subnet-calculator/" rel="canonical"/>
+  
   <meta property="og:title" content="Subnet Calculator - IP CIDR Network | UpTools" />
-  <meta property="og:description" content="Free online Subnet Calculator — enter an IP address with CIDR notation or subnet mask to instantly get network address, broadcast address, usable host range, wildcard mask, IP class, and binary representations." />
+  <meta property="og:description" content="Subnet Calculator - IP CIDR Network. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/subnet-calculator/" />
   <link rel="stylesheet" href="/style.css?v=1.3.0" />
 
@@ -112,6 +123,8 @@
       gap: 1rem;
       margin-bottom: 1rem;
     }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media(max-width:540px){ .input-row { grid-template-columns: 1fr; } }
 
     .field-group { display: flex; flex-direction: column; gap: .4rem; }
@@ -491,9 +504,26 @@
       .input-card { padding: 1.2rem 1rem; }
       .result-card { padding: .85rem .9rem; }
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 
 <!-- ── Header ──────────────────────────────────────────────────── -->
 <header class="site" role="banner">

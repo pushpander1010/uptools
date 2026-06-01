@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pac-Man - Free Online Game | UpTools</title>
   <meta name="description" content="Play Pac-Man online! Eat dots and avoid ghosts in this classic arcade game. Free browser game, no downloads required.">
+  <!-- Open Graph -->
+  <meta property="og:image" content="https://www.uptools.in/assets/home.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pac-Man - Free Online Game | UpTools" />
+  <meta name="twitter:description" content="Pac-Man - Free Online Game. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <link rel="canonical" href="https://www.uptools.in/games/pac-man/" />
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
@@ -114,14 +123,30 @@
       .controls { gap: 0.5rem; }
       .btn-primary, .btn-secondary { padding: 0.7rem 1.2rem; font-size: 0.9rem; }
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
   <meta property="og:title" content="Pac-Man - Free Online Game | UpTools" />
-  <meta property="og:description" content="Play Pac-Man online! Eat dots and avoid ghosts in this classic arcade game. Free browser game, no downloads required." />
+  <meta property="og:description" content="Pac-Man - Free Online Game. Free online tool by UpTools." />
   <meta property="og:url" content="https://www.uptools.in/games/pac-man/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
 </head>
 <body>
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
   <header class="site" role="banner">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="UpTools Home">
@@ -177,15 +202,15 @@
       <div class="game-board" id="gameBoard" role="region" aria-label="Game board"></div>
 
       <div class="mobile-controls" aria-label="Mobile controls">
-        <button class="btn-control spacer" aria-hidden="true"></button>
+        <button aria-label="Button" class="btn-control spacer" aria-hidden="true"></button>
         <button class="btn-control" data-move="up" title="Move up">↑</button>
-        <button class="btn-control spacer" aria-hidden="true"></button>
+        <button aria-label="Button" class="btn-control spacer" aria-hidden="true"></button>
         <button class="btn-control" data-move="left" title="Move left">←</button>
-        <button class="btn-control spacer" aria-hidden="true"></button>
+        <button aria-label="Button" class="btn-control spacer" aria-hidden="true"></button>
         <button class="btn-control" data-move="right" title="Move right">→</button>
-        <button class="btn-control spacer" aria-hidden="true"></button>
+        <button aria-label="Button" class="btn-control spacer" aria-hidden="true"></button>
         <button class="btn-control" data-move="down" title="Move down">↓</button>
-        <button class="btn-control spacer" aria-hidden="true"></button>
+        <button aria-label="Button" class="btn-control spacer" aria-hidden="true"></button>
       </div>
 
       <div class="controls">

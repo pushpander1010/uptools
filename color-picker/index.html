@@ -5,15 +5,16 @@
 <!-- Ads (single async include) -->
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="IE=edge" http-equiv="x-ua-compatible"/>
 <meta content="dark light" name="color-scheme"/>
 <title>Color Picker (HEX/RGB/HSL, WCAG Contrast, Shades &amp; Saved Swatches) - UpTools</title>
 <meta content="Free online color picker. Get HEX/RGB/HSL instantly, check WCAG contrast against light/dark backgrounds, generate shades &amp; tints, copy CSS snippets, use Eyedropper (if supported), save swatches, and share via URL. Fast and privacy-first." name="description"/>
 <meta content="color picker, color picker, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <meta content="#0f1419" name="theme-color"/>
 <link href="https://www.uptools.in/color-picker/" rel="canonical"/>
+
 <!-- Open Graph / Twitter -->
 <meta content="website" property="og:type"/>
 <meta content="Color Picker - HEX/RGB/HSL, Contrast, Shades" property="og:title"/>
@@ -22,6 +23,9 @@
 <meta content="UpTools" property="og:site_name"/>
 <meta content="https://www.uptools.in/og/color-picker.png" property="og:image"/>
 <meta content="summary" name="twitter:card"/>
+  <meta name="twitter:title" content="Color Picker - HEX/RGB/HSL, Contrast, Shades" />
+  <meta name="twitter:description" content="Pick a color, get HEX/RGB/HSL, check WCAG contrast, generate shades/tints, copy CSS, and save swatches." />
+  <meta name="twitter:image" content="https://www.uptools.in/og/color-picker.png" />
 <!-- Icons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -40,7 +44,23 @@
     .fail{ color:#f87171; }
     .preview-box{ height:64px; border-radius:10px; border:1px solid var(--border); display:grid; place-items:center; box-shadow: var(--glow-soft); }
     .codebox{ background:#0a1224; border:1px solid var(--border); border-radius:10px; padding:10px; box-shadow: var(--glow-soft); }
-  </style>
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Common CSS (non-blocking) -->
 <link as="style" href="/style.css?v=1.2.0" rel="preload"/>
 <link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
@@ -66,15 +86,17 @@
     "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
   }
   </script>
-  <link rel="canonical" href="https://www.uptools.in/color-picker/" />
-  <meta name="robots" content="color picker, color picker, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  
+
+
   <meta property="og:title" content="Color Picker (HEX/RGB/HSL, WCAG Contrast, Shades &amp; Saved Swatches) - UpTools" />
-  <meta property="og:description" content="" />
+  <meta property="og:description" content="Pick a color, get HEX/RGB/HSL, check WCAG contrast, generate shades/tints, copy CSS, and save swatches." />
   <meta property="og:url" content="https://www.uptools.in/color-picker/" />
   <meta property="og:type" content="website" />
 </head>
 <body style="--accent:#7dd3fc;">
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- Header -->
 <!-- Header -->
 <header class="site" role="banner">
@@ -95,7 +117,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap container" id="main">
+<main role="main" class="wrap container" id="main">
 <!-- Breadcrumb -->
 <nav aria-label="Breadcrumb" class="note small" style="margin-bottom:8px">
 <a href="/">Home</a> › <span aria-current="page">Color Picker</span>

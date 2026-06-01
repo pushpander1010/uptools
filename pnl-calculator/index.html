@@ -4,15 +4,16 @@
 <head>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="IE=edge" http-equiv="x-ua-compatible"/>
 <meta content="dark light" name="color-scheme"/>
 <title>Profit &amp; Loss Calculator (Average Cost, Break‑Even, Targets) | UpTools</title>
 <meta content="Track PnL across multiple buys/sells with fees (average cost). Shows realized and unrealized PnL, break‑even price, and target price. Works offline for stocks or crypto." name="description"/>
 <meta content="pnl calculator, pnl calculator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <meta content="#0b1020" name="theme-color"/>
 <link href="https://www.uptools.in/pnl-calculator/" rel="canonical"/>
+
 <meta content="Profit &amp; Loss Calculator (Average Cost, Break‑Even, Targets)" property="og:title"/>
 <meta content="Multiple trades with fees, realized/unrealized PnL, break‑even and target price. Offline." property="og:description"/>
 <meta content="website" property="og:type"/>
@@ -20,12 +21,17 @@
 <meta content="UpTools" property="og:site_name"/>
 <meta content="https://www.uptools.in/assets/og/home.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="Profit &amp; Loss Calculator (Average Cost, Break‑Even, Targets)" />
+  <meta name="twitter:description" content="Multiple trades with fees, realized/unrealized PnL, break‑even and target price. Offline." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/home.png" />
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link as="style" href="/style.css?v=1.2.0" rel="preload"/>
 <link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
 <noscript><link href="/style.css?v=1.2.0" rel="stylesheet"/></noscript>
 <style>
     .grid{ display:grid; gap:12px; grid-template-columns:1fr }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media(min-width:980px){ .grid{ grid-template-columns:1.2fr .8fr } }
     table{ width:100%; border-collapse:collapse }
     th,td{ padding:.5rem; border-top:1px solid var(--border); text-align:left }
@@ -38,17 +44,33 @@
     .pos{ color:#36d399 } .neg{ color:#ff6b6b }
     .small{ font-size:.85rem }
     .btn.sm{ min-height:32px }
-  </style>
-  <link rel="canonical" href="https://www.uptools.in/pnl-calculator/" />
-  <meta name="robots" content="pnl calculator, pnl calculator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  
+
   <meta property="og:title" content="Profit &amp; Loss Calculator (Average Cost, Break‑Even, Targets) | UpTools" />
-  <meta property="og:description" content="" />
+  <meta property="og:description" content="Multiple trades with fees, realized/unrealized PnL, break‑even and target price. Offline." />
   <meta property="og:url" content="https://www.uptools.in/pnl-calculator/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 <!-- Header -->
 <header class="site" role="banner">
@@ -69,7 +91,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap">
+<main role="main" class="wrap">
 <div class="tool-header">
 <div aria-hidden="true" class="tool-icon">📈</div>
 <h1 style="margin:0">Profit &amp; Loss Calculator</h1>
@@ -87,10 +109,10 @@
 <option value="buy">Buy</option>
 <option value="sell">Sell</option>
 </select>
-<input class="input mono" id="qty" inputmode="decimal" placeholder="Qty" style="max-width:160px"/>
-<input class="input mono" id="price" inputmode="decimal" placeholder="Price" style="max-width:180px"/>
-<input class="input mono" id="fee" inputmode="decimal" placeholder="Fee %" style="max-width:120px"/>
-<input class="input mono" id="feeFixed" inputmode="decimal" placeholder="Fee (flat)" style="max-width:120px"/>
+<input aria-label="Symbol" class="input mono" id="qty" inputmode="decimal" placeholder="Qty" style="max-width:160px"/>
+<input aria-label="Currency" class="input mono" id="price" inputmode="decimal" placeholder="Price" style="max-width:180px"/>
+<input aria-label="Currency" class="input mono" id="fee" inputmode="decimal" placeholder="Fee %" style="max-width:120px"/>
+<input aria-label="Fee (flat)" class="input mono" id="feeFixed" inputmode="decimal" placeholder="Fee (flat)" style="max-width:120px"/>
 <button class="btn sm" id="add">Add trade</button>
 <button class="btn secondary sm" id="reset">Reset</button>
 <div class="row" style="margin-left:auto">
@@ -126,13 +148,13 @@
 <div class="row"><span>ROI</span><span class="amount" id="roi">-</span></div>
 <div class="row"><span>Stop‑loss @</span>
 <span>
-<input class="input mono" id="stop" inputmode="decimal" placeholder="Stop" style="max-width:110px"/>
+<input aria-label="Stop‑loss @" class="input mono" id="stop" inputmode="decimal" placeholder="Stop" style="max-width:110px"/>
               → Risk: <b id="riskAbs">-</b> (<b id="riskPct">-</b>)
             </span>
 </div>
 <div class="row"><span>Target @</span>
 <span>
-<input class="input mono" id="targetPct" inputmode="decimal" style="max-width:90px" value="10"/>%
+<input aria-label="Stop‑loss @" class="input mono" id="targetPct" inputmode="decimal" style="max-width:90px" value="10"/>%
               → <b id="targetPrice">-</b>
 </span>
 </div>

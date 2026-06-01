@@ -4,13 +4,14 @@
 <head>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>Income Tax Calculator India 2025-26 | New vs Old Regime Comparison | Free Online Tool</title>
 <meta content="Calculate income tax for FY 2025-26 (AY 2026-27) instantly. Compare New vs Old Regime with 80C, 80D, NPS, HRA, home loan interest. Get monthly TDS breakdown, tax-saving tips &amp; optimal regime recommendation." name="description"/>
 <meta content="income tax calculator india,tax calculator 2025-26,new vs old regime,80c 80d calculator,hra exemption calculator,tds calculator,tax saving tips,income tax slab rates,standard deduction" name="keywords"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="#0f1419" name="theme-color"/>
 <link href="https://www.uptools.in/income-tax-tool/" rel="canonical"/>
+
 <!-- Favicon -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -24,6 +25,7 @@
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/income-tax.png" />
 <meta content="Income Tax Calculator India 2025-26 | Free Online Tool" name="twitter:title"/>
 <meta content="Compare New vs Old Regime, calculate 80C/80D/HRA exemptions, get monthly TDS breakdown. Updated for FY 2025-26." name="twitter:description"/>
 <!-- Schema -->
@@ -65,21 +67,37 @@
   a{color:var(--brand);text-decoration-thickness:.08em;text-underline-offset:.18em}
   .card{background:var(--surface);border:1px solid #212a3a;border-radius:var(--radius);padding:1rem}
   .btn{display:inline-block;padding:.65rem .9rem;border-radius:var(--radius);background:var(--brand);color:#0b1020;border:0;font-weight:600}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
 </style>
 <!-- 2) Load full stylesheet without blocking first paint -->
 <link as="style" href="/style.css?v=1.2.0" rel="preload"/>
 <link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
 <noscript><link href="/style.css?v=1.2.0" rel="stylesheet"/></noscript>
-  <link rel="canonical" href="https://www.uptools.in/income-tax-tool/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="Income Tax Calculator India 2025-26 | New vs Old Regime Comparison | Free Online Tool" />
-  <meta property="og:description" content="" />
+  
+  <meta property="og:description" content="Calculate income tax for FY 2025-26 instantly. Compare New vs Old Regime with 80C, 80D, NPS, HRA. Get monthly TDS breakdown &amp;amp; tax-saving recommendations." />
   <meta property="og:url" content="https://www.uptools.in/income-tax-tool/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- small fixed -->
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
@@ -103,7 +121,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap" id="main">
+<main role="main" class="wrap" id="main">
 <!-- Enhanced Tool Header -->
 <section class="card tool-header">
 <div class="tool-icon" style="background: linear-gradient(135deg, #4CAF50, #2E7D32)">₹</div>
@@ -177,14 +195,14 @@
         </h3>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem">
 <label class="check" style="display: flex; align-items: center; gap: .5rem; padding: .75rem; background: rgba(255,255,255,.02); border-radius: .5rem">
-<input checked="" id="includeStdDeduction" style="accent-color: var(--brand)" type="checkbox"/>
+<input aria-label="⚙️" checked="" id="includeStdDeduction" style="accent-color: var(--brand)" type="checkbox"/>
 <div>
 <span style="font-weight: 600">Standard Deduction (₹50,000)</span>
 <div class="note small">For salaried employees &amp; pensioners</div>
 </div>
 </label>
 <label class="check" style="display: flex; align-items: center; gap: .5rem; padding: .75rem; background: rgba(255,255,255,.02); border-radius: .5rem">
-<input id="surchargeToggle" style="accent-color: var(--brand)" type="checkbox"/>
+<input aria-label="Standard Deduction (₹50,000)" id="surchargeToggle" style="accent-color: var(--brand)" type="checkbox"/>
 <div>
 <span style="font-weight: 600">Apply Surcharge</span>
 <div class="note small">For high income (&gt;₹50L)</div>
@@ -270,7 +288,7 @@
 </div>
 </div>
 <label class="check" style="display: flex; align-items: center; gap: .5rem; margin-top: 1rem; padding: .5rem; background: rgba(255,255,255,.02); border-radius: .5rem">
-<input id="isMetro" style="accent-color: #2196F3" type="checkbox"/>
+<input aria-label="Rent Paid (₹/year)" id="isMetro" style="accent-color: #2196F3" type="checkbox"/>
 <div>
 <span style="font-weight: 600">Metro City</span>
 <div class="note small">50% of basic salary limit (40% for non-metro)</div>
@@ -334,7 +352,7 @@
 <!-- Auto-calculate toggle -->
 <div style="margin-top: 1rem; text-align: center">
 <label class="check" style="display: inline-flex; align-items: center; gap: .5rem; padding: .5rem; background: rgba(255,255,255,.05); border-radius: .5rem">
-<input checked="" id="autoCalculate" style="accent-color: var(--brand)" type="checkbox"/>
+<input aria-label="Checkbox" checked="" id="autoCalculate" style="accent-color: var(--brand)" type="checkbox"/>
 <span style="font-weight: 600">⚡ Auto-calculate on input change</span>
 </label>
 </div>

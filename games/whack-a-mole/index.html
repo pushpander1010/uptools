@@ -9,6 +9,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Whack-a-Mole - Free Online Game | UpTools</title>
   <meta name="description" content="Play Whack-a-Mole online! Fast-paced reflex game with score tracking and increasing difficulty. Test your reaction time!">
+  <!-- Open Graph -->
+  <meta property="og:image" content="https://www.uptools.in/assets/home.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Whack-a-Mole - Free Online Game | UpTools" />
+  <meta name="twitter:description" content="Whack-a-Mole - Free Online Game. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <link rel="canonical" href="https://www.uptools.in/games/whack-a-mole/" />
   
@@ -286,13 +295,31 @@
         font-size: min(10vmin, 3rem) !important;
       }
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
   <meta property="og:title" content="Whack-a-Mole - Free Online Game | UpTools" />
-  <meta property="og:description" content="Play Whack-a-Mole online! Fast-paced reflex game with score tracking and increasing difficulty. Test your reaction time!" />
+  <meta property="og:description" content="Whack-a-Mole - Free Online Game. Free online tool by UpTools." />
   <meta property="og:url" content="https://www.uptools.in/games/whack-a-mole/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
     <!-- Header -->
   <header class="site" role="banner">
     <div class="header-inner">
@@ -313,7 +340,7 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main role="main" class="wrap">
     <div class="game-container" style="position: relative">
       <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
       <h1>🔨 Whack-a-Mole</h1>

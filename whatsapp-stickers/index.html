@@ -6,14 +6,15 @@
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <!-- Core Meta -->
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>WhatsApp Sticker Maker (Free, No Sign-up) | UpTools</title>
 <meta content="Make WhatsApp stickers in your browser: upload, zoom/pan, rotate, rounded corners, padding, text/emoji, simple background removal, and export as 512×512 WebP/PNG. Build multi-sticker ZIP packs. Free &amp; fast." name="description"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="#0b1020" name="theme-color"/>
+<link href="https://www.uptools.in/whatsapp-stickers/" rel="canonical"/>
 <meta content="whatsapp sticker maker,create whatsapp sticker,webp sticker,whatsapp web sticker,transparent sticker,sticker pack zip,free sticker tool,uptools" name="keywords"/>
 <!-- Canonical + hreflang (use your final URL path) -->
-<link href="https://www.uptools.in/whatsapp-stickers/" rel="canonical"/>
+
 <link href="https://www.uptools.in/whatsapp-stickers/" hreflang="en-IN" rel="alternate"/>
 <link href="https://www.uptools.in/whatsapp-stickers/" hreflang="x-default" rel="alternate"/>
 <!-- Icons -->
@@ -93,6 +94,8 @@
 
     /* Workspace grid */
     main.workspace{max-width:var(--content-max);margin:12px auto;padding:0 16px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--gap);align-items:start;min-height:calc(var(--vh) - var(--hdr) - 24px)}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width:960px){
       main.workspace{grid-template-columns:1fr}
     }
@@ -150,19 +153,34 @@
     /* Breadcrumbs */
     .breadcrumbs{max-width:var(--content-max);margin:6px auto 0;padding:0 16px;font-size:.9rem;color:var(--muted,#9aa7bd)}
     .breadcrumbs a{color:inherit;text-decoration:underline;text-underline-offset:.15em}
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- ZIP lib -->
 <script defer="" src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-  <link rel="canonical" href="https://www.uptools.in/whatsapp-stickers/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="WhatsApp Sticker Maker (Free, No Sign-up) | UpTools" />
-  <meta property="og:description" content="" />
+  
+  <meta property="og:description" content="Upload, edit, and export stickers as 512×512 WebP/PNG. Add text/emoji, rounded corners, and pack into a ZIP." />
   <meta property="og:url" content="https://www.uptools.in/whatsapp-stickers/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- small fixed -->
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
@@ -260,7 +278,7 @@
 <!-- Background -->
 <div class="section">
 <div class="row">
-<label><input checked="" id="bgTransparent" type="checkbox"/> Transparent Background</label>
+<label><input aria-label="Padding" checked="" id="bgTransparent" type="checkbox"/> Transparent Background</label>
 </div>
 <div class="row">
 <label for="bgColor">BG Color</label>
@@ -270,7 +288,7 @@
 <!-- Key color removal -->
 <div class="section">
 <div class="row">
-<label><input id="rmEnable" type="checkbox"/> Remove Color</label>
+<label><input aria-label="BG Color" id="rmEnable" type="checkbox"/> Remove Color</label>
 </div>
 <div class="row">
 <label for="rmColor">Pick</label>

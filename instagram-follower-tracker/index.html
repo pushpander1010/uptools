@@ -2,21 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Instagram Follower Tracker - Track Growth | UpTools</title>
   <!-- Favicon -->
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Track your Instagram follower growth over time. Monitor daily changes and analyze trends." />
-  <meta name="robots" content="instagram follower tracker, instagram follower tracker, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <link rel="canonical" href="https://www.uptools.in/instagram-follower-tracker/" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/instagram-follower-tracker/" rel="canonical"/>
+<meta name="keywords" content="instagram follower tracker, instagram follower tracker, online tool, free calculator, uptools" />
+
+  
   <meta property="og:title" content="Instagram Follower Tracker - Track Growth | UpTools" />
-  <meta property="og:description" content="Track your Instagram follower growth over time. Monitor daily changes and analyze trends." />
+  <meta property="og:description" content="Instagram Follower Tracker - Track Growth. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/instagram-follower-tracker/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/instagram-follower-tracker.png" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Instagram Follower Tracker - Track Growth | UpTools" />
+  <meta name="twitter:description" content="Instagram Follower Tracker - Track Growth. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
   <style>
@@ -48,7 +54,23 @@
     .stat-box h3 { margin: 0 0 0.5rem; color: var(--accent) }
     .stat-box .value { font-size: 2rem; font-weight: 900; color: var(--accent) }
     .stat-box .change { color: #51cf66; font-size: 0.9rem; margin-top: 0.5rem }
-  </style>
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
   
 
 <script type="application/ld+json">
@@ -69,7 +91,7 @@
   </script>
 </head>
 <body>
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
     <!-- Header -->
   <header class="site" role="banner">
     <div class="header-inner">

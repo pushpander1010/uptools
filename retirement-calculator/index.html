@@ -2,13 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Retirement Calculator - When Can I Retire? | UpTools</title>
   <!-- Favicon -->
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
 <meta name="description" content="Calculate when you can retire based on savings, income needs, and investment returns. Free retirement planning calculator with detailed projections.">
-<link rel="canonical" href="https://www.uptools.in/retirement-calculator/" />
+  <!-- Open Graph -->
+  <meta property="og:image" content="https://www.uptools.in/assets/home.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Retirement Calculator - When Can I Retire? | UpTools" />
+  <meta name="twitter:description" content="Retirement Calculator - When Can I Retire?. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
+
 <meta property="og:title" content="Retirement Calculator - When Can I Retire? | UpTools" />
 <meta property="og:url" content="https://www.uptools.in/retirement-calculator/" />
 <link rel="preload" href="/style.css" as="style">
@@ -69,15 +78,34 @@
 .result-label{color:var(--muted)}
 .result-value{font-size:1.5rem;font-weight:800;color:var(--brand)}
 .result-value.large{font-size:2.5rem}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
 </style>
-  <meta name="robots" content="retirement calculator, retirement calculator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:description" content="Calculate when you can retire based on savings, income needs, and investment returns. Free retirement planning calculator with detailed projections." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/retirement-calculator/" rel="canonical"/>
+<meta name="keywords" content="retirement calculator, retirement calculator, online tool, free calculator, uptools" />
+
+  <meta property="og:description" content="Retirement Calculator - When Can I Retire?. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
 </head>
 <body>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-<a href="#main" class="sr-only">Skip to content</a>
+<a href="#main" class="sr-only skip-link">Skip to content</a>
   <!-- Header -->
   <header class="site" role="banner">
     <div class="header-inner">

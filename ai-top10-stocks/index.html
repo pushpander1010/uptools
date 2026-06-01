@@ -6,7 +6,7 @@
   <title>AI Top 10 Stocks for Tomorrow — Entry, Targets, Stop, Reasons | UpTools</title>
 
   <!-- Canonical & Favicons -->
-  <link rel="canonical" href="https://www.uptools.in/ai-top10-stocks/" />
+  
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
 
@@ -15,14 +15,19 @@
   <meta name="keywords" content="top 10 stocks for tomorrow,stock picks,tomorrow share market prediction,NSE picks,NASDAQ picks,AI stock screener,buy levels,targets,stop loss,news sentiment,technical analysis,fundamentals" />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta name="theme-color" content="#0b1020" />
+<link href="https://www.uptools.in/ai-top10-stocks/" rel="canonical"/>
 
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="AI Top 10 Stocks for Tomorrow — Entry, Targets, Stop, Reasons | UpTools" />
-  <meta property="og:description" content="Free AI tool that predicts the Top 10 stocks to consider for tomorrow across NSE, BSE, NASDAQ, NYSE, LSE, TSX, TSE, SSE, HKEX. Uses live quotes, chart patterns, support/resistance, moving averages, RSI, valuation, dividend and latest news sentiment to give BUY ideas with entry price, targets and stop-loss." />
+  <meta property="og:description" content="AI Top 10 Stocks for Tomorrow — Entry, Targets, Stop, Reasons. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/ai-top10-stocks/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/ai-top10-stocks.png" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Top 10 Stocks for Tomorrow — Entry, Targets, Stop, Reasons | UpTools" />
+  <meta name="twitter:description" content="AI Top 10 Stocks for Tomorrow — Entry, Targets, Stop, Reasons. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
 
   <!-- CSS (shared) -->
   <link rel="preload" href="/style.css" as="style">
@@ -118,6 +123,8 @@
 
     /* ── Pick cards ── */
     .picks-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:12px; }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width:600px) { .picks-grid { grid-template-columns:1fr; } }
 
     .pick-card { background:#0b1326; border:1px solid #1e2d45; border-radius:.9rem;
@@ -199,13 +206,28 @@
     .video-wrap { position:relative; width:100%; aspect-ratio:16/9; border-radius:.75rem;
                   overflow:hidden; border:1px solid #1e2d45; }
     .video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 
 <body>
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
     <!-- Header -->
@@ -392,19 +414,19 @@
 <div class="card" style="border-color:rgba(34,197,94,.3)">
 <h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
 <ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
-<li style="padding:.35rem 0">✅ <b>Do</b> use this tool to save time on manual calculations.</li>
-<li style="padding:.35rem 0">✅ <b>Do</b> double-check your inputs for accuracy.</li>
-<li style="padding:.35rem 0">✅ <b>Do</b> share results with teammates using the Share feature.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> review AI-generated content before using or publishing it.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> use AI output as a starting point for your own work.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> double-check facts and figures in AI-generated content.</li>
 <li style="padding:.35rem 0">✅ <b>Do</b> bookmark this tool for quick access.</li>
 </ul>
 </div>
 <div class="card" style="border-color:rgba(239,68,68,.3)">
 <h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
 <ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
-<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — this tool doesn't store anything.</li>
-<li style="padding:.35rem 0">❌ <b>Don't</b> use results as professional financial/legal/medical advice.</li>
-<li style="padding:.35rem 0">❌ <b>Don't</b> forget to verify critical calculations with official tools.</li>
-<li style="padding:.35rem 0">❌ <b>Don't</b> assume results are guarantees — they are estimates.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> assume AI output is always 100% accurate.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — only provide what's needed for generation.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> publish AI content without human review and editing.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use AI content to spread misinformation.</li>
 </ul>
 </div>
 </div>
@@ -413,17 +435,17 @@
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">Frequently Asked Questions</h2>
 <details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
-<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. Your input is sent to our secure AI API for processing only and is never stored or shared.</p></details>
 <details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
-<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+<details><summary><b>Does this work offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">No. This AI tool requires an internet connection to send your request to our secure API.</p></details>
 </section>
 <!-- SEO: How it works -->
 <section class="card" style="margin-top:16px">
 <details open>
 <summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
 <div style="margin-top:8px;color:#9aa4b2">
-<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
-<p>Results update instantly as you type — no waiting for server responses.</p>
+<p>This tool uses AI to generate content. Your input is sent to our secure AI API and is not stored.</p>
+<p>Results are generated in seconds — no waiting for local processing.</p>
 <p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
 </div>
 </details>

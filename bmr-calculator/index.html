@@ -3,16 +3,22 @@
 <head>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>BMR Calculator – Basal Metabolic Rate (3 Formulas) | UpTools</title>
   <meta name="description" content="Free BMR calculator using Mifflin-St Jeor, Harris-Benedict & Katch-McArdle formulas. Find your Basal Metabolic Rate, see TDEE at every activity level. Imperial & metric."/>
-  <meta name="robots" content="bmr calculator, bmr calculator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <link rel="canonical" href="https://www.uptools.in/bmr-calculator/" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/bmr-calculator/" rel="canonical"/>
+<meta name="keywords" content="bmr calculator, bmr calculator, online tool, free calculator, uptools" />
+
+  
   <meta property="og:title" content="BMR Calculator – Basal Metabolic Rate (3 Formulas) | UpTools" />
   <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/bmr-calculator/" />
   <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="BMR Calculator – Basal Metabolic Rate (3 Formulas) | UpTools" />
+  <meta name="twitter:description" content="BMR Calculator – Basal Metabolic Rate (3 Formulas). Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <link rel="icon" type="image/svg+xml" href="/assets/logo/uptools-logo.svg"/>
   <link rel="stylesheet" href="/style.css?v=1.3.0"/>
   <style>
@@ -25,6 +31,8 @@
     .unit-btn{padding:.45rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-weight:700;cursor:pointer;transition:all .18s;}
     .unit-btn.active{background:var(--accent);color:#0b0f1a;}
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media(max-width:480px){.form-grid{grid-template-columns:1fr;}}
     .field label{display:block;margin-bottom:.3rem;font-weight:700;color:var(--muted);font-size:.85rem;}
     .field input,.field select{width:100%;padding:.6rem .75rem;border-radius:10px;background:#0a1224;border:1px solid var(--border);color:var(--text);font:inherit;}
@@ -46,10 +54,27 @@
     .act-table td{padding:.5rem .75rem;border-bottom:1px solid rgba(255,255,255,.04);}
     .act-table td:last-child{color:var(--accent);font-weight:700;text-align:right;}
     .act-table tr:last-child td{border-bottom:none;}
-  </style>
-  <meta property="og:description" content="Free BMR calculator using Mifflin-St Jeor, Harris-Benedict & Katch-McArdle formulas. Find your Basal Metabolic Rate, see TDEE at every activity level. Imperial & metric." />
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <meta property="og:description" content="BMR Calculator – Basal Metabolic Rate (3 Formulas). Free online tool by UpTools." />
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <header class="site" role="banner">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="UpTools Home">
@@ -80,7 +105,7 @@
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 
-<main class="wrap">
+<main role="main" class="wrap">
   <div class="tool-hero">
     <h1>🔥 BMR Calculator</h1>
     <p>Mifflin-St Jeor · Harris-Benedict · Katch-McArdle · TDEE at every activity level</p>
@@ -95,7 +120,7 @@
     <div class="form-grid">
       <div class="field">
         <label>Age (years)</label>
-        <input id="age" type="number" min="10" max="100" value="30"/>
+        <input aria-label="Age (years)" id="age" type="number" min="10" max="100" value="30"/>
       </div>
       <div class="field">
         <label>Sex</label>
@@ -107,21 +132,21 @@
       <div class="field" id="hImperial">
         <label>Height</label>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem;">
-          <input id="hFt" type="number" min="3" max="8" value="5" placeholder="ft"/>
-          <input id="hIn" type="number" min="0" max="11" value="10" placeholder="in"/>
+          <input aria-label="Sex" id="hFt" type="number" min="3" max="8" value="5" placeholder="ft"/>
+          <input aria-label="Sex" id="hIn" type="number" min="0" max="11" value="10" placeholder="in"/>
         </div>
       </div>
       <div class="field" id="hMetric" style="display:none">
         <label>Height (cm)</label>
-        <input id="hCm" type="number" min="100" max="250" value="178"/>
+        <input aria-label="Height" id="hCm" type="number" min="100" max="250" value="178"/>
       </div>
       <div class="field">
         <label id="wLabel">Weight (lbs)</label>
-        <input id="weight" type="number" min="50" max="500" value="170"/>
+        <input aria-label="Height (cm)" id="weight" type="number" min="50" max="500" value="170"/>
       </div>
       <div class="field">
         <label>Body Fat % <span style="font-weight:400;color:var(--muted)">(optional — for Katch-McArdle)</span></label>
-        <input id="bf" type="number" min="1" max="70" step="0.1" placeholder="e.g. 20"/>
+        <input aria-label="Height (cm)" id="bf" type="number" min="1" max="70" step="0.1" placeholder="e.g. 20"/>
       </div>
     </div>
     <button class="btn calc-btn" onclick="calculate()">🔥 Calculate BMR</button>

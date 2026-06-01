@@ -2,20 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>IPL 2025 Points Table - Live Standings, NRR & Playoff Chances | UpTools</title>
   <meta name="description" content="IPL 2025 Points Table with live standings, Net Run Rate (NRR), matches played, wins, losses and playoff qualification tracker. Updated for all 10 IPL teams.">
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta name="theme-color" content="#0a0b0f">
+<link href="https://www.uptools.in/ipl-points-table/" rel="canonical"/>
   <meta name="keywords" content="IPL 2025 points table, IPL standings, IPL NRR, IPL playoff qualification, IPL live table, cricket points table">
-  <link rel="canonical" href="https://www.uptools.in/ipl-points-table/" />
+  
   <meta property="og:title" content="IPL 2025 Points Table - Live Standings, NRR & Playoff Chances | UpTools" />
-  <meta property="og:description" content="IPL 2025 Points Table with live standings, Net Run Rate (NRR), matches played, wins, losses and playoff qualification tracker. Updated for all 10 IPL teams." />
+  <meta property="og:description" content="IPL 2025 Points Table - Live Standings, NRR & Playoff Chances. Free online tool by UpTools." />
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/ipl-points-table/" />
   <meta property="og:site_name" content="UpTools">
   <meta property="og:image" content="https://www.uptools.in/assets/og/ipl-points-table.png">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IPL 2025 Points Table - Live Standings, NRR & Playoff Chances | UpTools" />
+  <meta name="twitter:description" content="IPL 2025 Points Table - Live Standings, NRR & Playoff Chances. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
 
   <link rel="preload" href="/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -148,20 +153,37 @@
       background: rgba(255,215,0,.06); font-size: .88rem; text-align: center; transition: background .2s;
     }
     .rel-link:hover { background: rgba(255,215,0,.14); }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 600px) {
       h1 { font-size: 1.35rem; }
       td, th { padding: 9px 8px; }
       .team-name { font-size: .88rem; }
     }
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
 
     <!-- Header -->
   <header class="site" role="banner">

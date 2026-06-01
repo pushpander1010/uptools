@@ -9,8 +9,9 @@
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="A production-ready library of professional AI prompts with real outputs. Categories: Image Editing, Website/App Making, SEO, Marketing, Resume, Data, Legal &amp; more. Copy, customize, open with your favorite AI, and export prompts." name="description"/>
 <meta content="AI prompts, prompt engineering, image editing prompt, website prompt, code generation prompt, SEO prompt, marketing prompt, resume prompt, chatgpt prompts, midjourney prompts, stable diffusion prompts" name="keywords"/>
-<link href="https://www.uptools.in/ai-prompts/" rel="canonical"/>
+
 <meta content="#0f1419" name="theme-color"/>
+<link href="https://www.uptools.in/ai-prompts/" rel="canonical"/>
 <!-- Open Graph / Twitter -->
 <meta content="website" property="og:type"/>
 <meta content="AI Prompts Library – Professional Prompt Packs &amp; Live Demos" property="og:title"/>
@@ -102,6 +103,8 @@
     .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap);}
     .col-span-7{grid-column: span 7;}
     .col-span-5{grid-column: span 5;}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 900px){
       .hero{grid-template-columns: 1fr; min-height:unset}
       .col-span-7,.col-span-5{grid-column: 1/-1;}
@@ -177,7 +180,22 @@
     }
     .popover[data-open="true"] .menu{display:block}
     .note{font-size:12px; opacity:.85}
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- JSON-LD -->
 
 <script type="application/ld+json">
@@ -216,16 +234,16 @@
     ]
   }
   </script>
-  <link rel="canonical" href="https://www.uptools.in/ai-prompts/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="AI Prompts Library – Professional Prompt Packs &amp; Live Demos | UpTools" />
-  <meta property="og:description" content="" />
+  
+  <meta property="og:description" content="Browse high-quality, proven prompts for images, websites, SEO, data, and more. Copy, tweak, open with your favorite AI, and export." />
   <meta property="og:url" content="https://www.uptools.in/ai-prompts/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- small fixed ad -->
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 <!-- Header (shared style) -->
 <!-- Header -->
@@ -309,7 +327,7 @@ User: Remove the background from this product image. Keep a soft, realistic shad
 <button class="btn primary copy-prompt">Copy Prompt</button>
 <button class="btn ghost small show-result">Show Result</button>
 <button class="btn small open-ai">Open in AI</button>
-<label class="btn small"><input class="select-prompt" hidden="" type="checkbox"/> Select</label>
+<label class="btn small"><input aria-label="Checkbox" class="select-prompt" hidden="" type="checkbox"/> Select</label>
 </div>
 <div class="result-pane" hidden="">
               Background removed, retained shadow via feathered mask; PNG 2048×2048 attached.”
@@ -324,7 +342,7 @@ User: Generate a complete, production-ready single file: index.html (Vite-friend
 <button class="btn primary copy-prompt">Copy Prompt</button>
 <button class="btn ghost small show-result">Show Result</button>
 <button class="btn small open-ai">Open in AI</button>
-<label class="btn small"><input class="select-prompt" hidden="" type="checkbox"/> Select</label>
+<label class="btn small"><input aria-label="Checkbox" class="select-prompt" hidden="" type="checkbox"/> Select</label>
 </div>
 <div class="result-pane" hidden="">index.html with structured data, canonical, preload, responsive grid, and CF-compatible asset paths.”</div>
 </article>
@@ -953,7 +971,7 @@ Rules:
           <button class="btn primary copy-prompt">Copy Prompt</button>
           <button class="btn ghost small show-result">Show Result</button>
           <button class="btn small open-ai">Open in AI</button>
-          <label class="btn small"><input type="checkbox" class="select-prompt" hidden> Select</label>
+          <label class="btn small"><input aria-label="${title}" type="checkbox" class="select-prompt" hidden> Select</label>
         </div>
         <div class="result-pane" hidden>${example}</div>
       `;

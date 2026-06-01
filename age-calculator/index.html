@@ -4,7 +4,7 @@
 <head>
 <!-- Performance-first, production-safe -->
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="IE=edge" http-equiv="x-ua-compatible"/>
 <meta content="dark light" name="color-scheme"/>
 <title>Age Calculator (Pro) - Exact Age, Next Birthday, Working Days &amp; Eligibility (India) | UpTools</title>
@@ -12,6 +12,7 @@
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="#0b1020" name="theme-color"/>
 <link href="https://www.uptools.in/age-calculator/" rel="canonical"/>
+
 <link href="https://www.uptools.in/age-calculator/" hreflang="en-IN" rel="alternate"/>
 <meta content="Age calculator, exact age, next birthday, working days between dates, India eligibility age, retirement countdown, half birthday calculator, age in days" name="keywords"/>
 <!-- Favicons -->
@@ -139,7 +140,23 @@
       display: grid;
       place-items: center
     }
-  </style>
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Common CSS (non-blocking) -->
 <link as="style" href="/style.css?v=1.2.0" rel="preload">
 <link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet">
@@ -198,17 +215,18 @@
     "embedUrl":"https://www.youtube.com/embed/2S0eD6CkI0Q"
   }
   </script>
-</link></link>  <link rel="canonical" href="https://www.uptools.in/age-calculator/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="Age Calculator (Pro) - Exact Age, Next Birthday, Working Days &amp; Eligibility (India) | UpTools" />
-  <meta property="og:description" content="" />
+</link></link>  
+
+  <meta property="og:description" content="Exact age, next birthday countdown, totals, eligibility (India), milestones, retirement &amp;amp; working days." />
   <meta property="og:url" content="https://www.uptools.in/age-calculator/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <!-- small fixed -->
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
@@ -232,7 +250,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap container" id="main">
+<main role="main" class="wrap container" id="main">
 <!-- Breadcrumb -->
 <nav aria-label="Breadcrumb" class="note small" style="margin-bottom:8px">
 <a href="/">Home</a> › <span aria-current="page">Age Calculator</span>
@@ -298,7 +316,7 @@
 <input class="input" id="wdEnd" type="date"/>
 </div>
 <div>
-<label class="check"><input checked="" id="wdWeekends" type="checkbox"/> <span>Exclude weekends</span></label>
+<label class="check"><input aria-label="Start Date" checked="" id="wdWeekends" type="checkbox"/> <span>Exclude weekends</span></label>
 </div>
 </div>
 <label class="label" for="wdHolidays" style="margin-top:12px">Optional Holidays (YYYY-MM-DD, comma

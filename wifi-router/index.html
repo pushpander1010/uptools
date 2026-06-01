@@ -5,13 +5,14 @@
 <!-- Google AdSense (async; no fixed ad slots here to avoid CLS) -->
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>WiFi Router Tools – FULL On-Site Default Passwords, Wi-Fi QR &amp; MAC Vendor Lookup | UpTools</title>
 <meta content="Professional WiFi Router Tools by UpTools. A FULL on-site, searchable catalog of default router passwords (educational), a Wi-Fi QR code generator (WPA/WPA2/WPA3), and a MAC address vendor (OUI) lookup. Fast, private, mobile-friendly." name="description"/>
 <meta content="default router passwords, router default credentials, wifi router admin, router login, admin password, Wi-Fi QR code, WPA3 QR, MAC lookup, OUI lookup, TP-Link, Netgear, D-Link, Linksys, ASUS, Huawei, JioFiber, Airtel Xstream" name="keywords"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="#0a1b0f" name="theme-color"/>
 <link href="https://www.uptools.in/wifi-router/" rel="canonical"/>
+
 <!-- Open Graph -->
 <meta content="WiFi Router Tools – Default Passwords, QR &amp; MAC Lookup (On-Site)" property="og:title"/>
 <meta content="Browse the full default router password list on this page, generate Wi-Fi QR codes, and look up MAC vendors. Free, privacy-first." property="og:description"/>
@@ -20,6 +21,9 @@
 <meta content="UpTools" property="og:site_name"/>
 <meta content="https://www.uptools.in/assets/og/wifi-router-tools.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="WiFi Router Tools – Default Passwords, QR &amp; MAC Lookup (On-Site)" />
+  <meta name="twitter:description" content="Browse the full default router password list on this page, generate Wi-Fi QR codes, and look up MAC vendors. Free, privacy-first." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/wifi-router-tools.png" />
 <!-- Icons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -199,7 +203,23 @@
             justify-content: flex-end;
             margin-top: 8px
         }
-    </style>
+        @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Common site CSS (shared across pages) -->
 <link as="style" href="/style.css?v=1.1.0" rel="preload"/>
 <link href="/style.css?v=1.1.0" media="print" onload="this.media='all'" rel="stylesheet"/>
@@ -208,16 +228,16 @@
 </noscript>
 <!-- Lightweight QR lib -->
 <script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <link rel="canonical" href="https://www.uptools.in/wifi-router/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="WiFi Router Tools – FULL On-Site Default Passwords, Wi-Fi QR &amp; MAC Vendor Lookup | UpTools" />
-  <meta property="og:description" content="" />
+  
+  <meta property="og:description" content="Browse the full default router password list on this page, generate Wi-Fi QR codes, and look up MAC vendors. Free, privacy-first." />
   <meta property="og:url" content="https://www.uptools.in/wifi-router/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- small fixed -->
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
@@ -242,7 +262,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap" id="main">
+<main role="main" class="wrap" id="main">
 <!-- Breadcrumbs (visual) -->
 <nav aria-label="Breadcrumb" class="note small">
 <a href="/">Home</a> › <a href="/#tools">Tools</a> › <span aria-current="page">WiFi Router Tools</span>
@@ -279,7 +299,7 @@
 </div>
 <!-- Controls -->
 <div class="controls">
-<input class="input" id="q" placeholder="Search brand, model, username…" style="flex:1 1 220px"/>
+<input aria-label="Router Default Passwords (On-Site)" class="input" id="q" placeholder="Search brand, model, username…" style="flex:1 1 220px"/>
 <select class="input" id="brand" style="max-width:180px"></select>
 <select class="input" id="perPage" style="max-width:120px">
 <option value="10">10 / page</option>
@@ -339,7 +359,7 @@
 <input class="input" id="pass" maxlength="63" placeholder="Use 12+ chars for WPA2/3" type="text">
 </input></div>
 <label class="check" style="display:block; margin-top:8px">
-<input id="hidden" type="checkbox"/> <span>Hidden SSID</span>
+<input aria-label="Encryption" id="hidden" type="checkbox"/> <span>Hidden SSID</span>
 </label>
 <div class="result center neon" style="margin-top:10px; padding:12px">
 <div id="qrPreview" style="width:220px; height:220px"></div>

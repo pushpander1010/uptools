@@ -5,7 +5,7 @@
 
   <!-- Basics -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="color-scheme" content="dark light" />
   <title>Contact UpTools - Feedback, Bug Reports & Feature Requests | Fast Reply</title>
@@ -13,7 +13,8 @@
     content="Contact the UpTools team for feedback, bug reports, feature requests, or partnerships. Use the quick contact form, email support@uptools.in, or open a GitHub issue. Attach system info and screenshots, track your request, and get tips for writing great bug reports." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta name="theme-color" content="#0b0f1a" />
-  <link rel="canonical" href="https://www.uptools.in/contact/" />
+<link href="https://www.uptools.in/contact/" rel="canonical"/>
+  
 
   <!-- Icons -->
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
@@ -21,8 +22,9 @@
 
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Contact UpTools - Feedback, Bug Reports & Feature Requests | Fast Reply" />
-  <meta property="og:description" content="Contact the UpTools team for feedback, bug reports, feature requests, or partnerships. Use the quick contact form, email support@uptools.in, or open a GitHub issue. Attach system info and screenshots, track your request, and get tips for writing great bug reports." />
+  <meta property="og:description" content="Contact UpTools - Feedback, Bug Reports & Feature Requests | Fast Reply. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/contact/" />
   <meta property="og:site_name" content="UpTools" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/contact.png" />
@@ -114,7 +116,23 @@
       height: 1px;
       overflow: hidden;
     }
-  </style>
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -145,10 +163,12 @@
 </head>
 
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"
     crossorigin="anonymous"></script>
   <!-- small fixed -->
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617"
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617"
     data-ad-slot="9810172647"></ins>
   <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
@@ -174,7 +194,7 @@
     </div>
   </header>
 
-  <main class="wrap" id="main">
+  <main role="main" class="wrap" id="main">
     <!-- Intro strip -->
     <div class="tool-header">
       <div class="tool-icon" aria-hidden="true">CT</div>
@@ -236,7 +256,7 @@
 
       <form id="form" novalidate>
         <div class="hp" aria-hidden="true">
-          <label>Website (leave blank)<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          <label>Website (leave blank)<input aria-label="Send a message" type="text" name="website" tabindex="-1" autocomplete="off"></label>
         </div>
 
         <label class="label" for="topic">Topic</label>

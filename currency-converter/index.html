@@ -3,22 +3,25 @@
 <head>
   <!-- Core meta -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="color-scheme" content="dark light" />
 
   <title>Currency Converter (Live FX) - INR, USD, EUR, GBP + Fees & History | UpTools</title>
   <meta name="description"
     content="Convert currencies instantly with live exchange rates (INR, USD, EUR, GBP, AED, CAD, AUD, JPY, more). Add bank/card fee %, swap, copy results, and see 30-day history with a mini chart. Privacy-first, fast, mobile-friendly. How to use: enter amount, pick From/To, optionally add fee, and Convert." />
-  <meta name="robots" content="currency converter, currency converter, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<meta name="keywords" content="currency converter, currency converter, online tool, free calculator, uptools" />
+
   <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://www.uptools.in/currency-converter/" />
+<link href="https://www.uptools.in/currency-converter/" rel="canonical"/>
+  
 
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Currency Converter (Live FX) - INR, USD, EUR, GBP + Fees & History | UpTools" />
-  <meta property="og:description" content="Convert currencies instantly with live exchange rates (INR, USD, EUR, GBP, AED, CAD, AUD, JPY, more). Add bank/card fee %, swap, copy results, and see 30-day history with a mini chart. Privacy-first, fast, mobile-friendly. How to use: enter amount, pick From/To, optionally add fee, and Convert." />
+  <meta property="og:description" content="Currency Converter (Live FX) - INR, USD, EUR, GBP + Fees & History. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/currency-converter/" />
   <meta property="og:site_name" content="UpTools" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/currency-converter.png" />
@@ -69,6 +72,8 @@
     .chip{ padding:.45rem .6rem; border-radius:999px; border:1px solid var(--border); background:#0b1326; cursor:pointer }
     .chip:active{ transform:translateY(0) }
     .grid{ display:grid; gap:12px; grid-template-columns:1fr }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media(min-width:820px){ .grid{ grid-template-columns:1.2fr .8fr } }
     .kpi{ display:grid; gap:6px }
     .kpi .row{ display:flex; justify-content:space-between; border-top:1px dashed var(--border); padding:.35rem 0 }
@@ -80,7 +85,22 @@
     .video-wrap{ width:100%; max-width:880px; margin:0 auto; border-radius:12px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--glow-soft) }
     .video-wrap iframe{ width:100%; aspect-ratio:16/9; display:block }
     .ico{ display:inline-grid; place-items:center; width:28px; height:28px; border-radius:7px; border:1px solid var(--border); font-weight:700 }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 
   <!-- JSON-LD: SoftwareApplication + FAQ -->
   
@@ -114,13 +134,15 @@
 </head>
 
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
   <!-- Neon FX background (canvas + soft mask) -->
   <canvas id="fxCanvas" aria-hidden="true"></canvas>
   <div class="fx-mask" aria-hidden="true"></div>
 
   <!-- Ads -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
   <!-- Global header -->
@@ -144,7 +166,7 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main role="main" class="wrap">
     <!-- Title strip -->
     <div class="tool-header">
       <div class="tool-icon" aria-hidden="true">CC</div>

@@ -21,6 +21,9 @@
 <meta content="https://www.uptools.in/games/breakout/" property="og:url"/>
 <meta content="https://www.uptools.in/assets/social/breakout-card.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="Play Breakout - Free Online Game | UpTools" />
+  <meta name="twitter:description" content="Mobile-perfect Breakout with power-ups, levels, and auto-save. Tap to play/pause." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/social/breakout-card.png" />
 <!-- Favicons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -152,7 +155,22 @@
     .touchbtn{ user-select:none; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); padding:.8rem 1.1rem; border-radius:.75rem; font-weight:800; }
 
     .badge{ display:inline-block; padding:.2rem .5rem; border-radius:.5rem; border:1px solid var(--cardBorder); margin-left:.25rem; background:rgba(255,255,255,.05); font-size:.75rem; }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Structured Data -->
 <script type="application/ld+json">
   {
@@ -174,8 +192,11 @@
   <meta property="og:description" content="" />
   <meta property="og:url" content="https://www.uptools.in/games/breakout/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- small fixed -->
 <ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
 <script>
@@ -202,7 +223,7 @@
 </div>
 </header>
 <!-- Home -->
-<main class="wrap" id="homeScreen">
+<main role="main" class="wrap" id="homeScreen">
 <div class="tool-header" style="text-align:center;margin:1rem 0 .25rem">
 <h1>🧱 Breakout</h1>
 <p>Tap <b>New Game</b> to open a full-screen window. Bricks auto-scale; tap playfield to launch/pause.</p>

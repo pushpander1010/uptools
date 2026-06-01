@@ -9,11 +9,21 @@
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Play the classic Snake game online-free, fast, and mobile-friendly. Swipe or use arrow keys, choose difficulty, toggle wrap walls, and track your best score. No login, privacy-first." />
+  <!-- Open Graph -->
+  <meta property="og:image" content="https://www.uptools.in/assets/home.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Snake Game - Free Online Game | UpTools" />
+  <meta name="twitter:description" content="Snake Game - Free Online Game. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta name="theme-color" content="#0f1419" />
   <meta property="og:title" content="Snake Game - Free Online Game | UpTools" />
-  <meta property="og:description" content="Play the classic Snake game online-free, fast, and mobile-friendly. Swipe or use arrow keys, choose difficulty, toggle wrap walls, and track your best score. No login, privacy-first." />
+  <meta property="og:description" content="Snake Game - Free Online Game. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/games/snake/" />
   <meta property="og:site_name" content="UpTools" />
   <link rel="canonical" href="https://www.uptools.in/games/snake/" />
@@ -387,9 +397,26 @@
         font-size: 1.2rem !important;
       }
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
   <!-- Header -->
   <header class="site" role="banner">
     <div class="header-inner">
@@ -508,10 +535,10 @@
             </select>
           </div>
           <div class="row">
-            <label class="toggle"><input type="checkbox" id="wrapWalls"> Wrap walls</label>
-            <label class="toggle"><input type="checkbox" id="showGrid" checked> Show grid</label>
-            <label class="toggle"><input type="checkbox" id="colorBlind"> Color-blind mode</label>
-            <label class="toggle"><input type="checkbox" id="sound" checked> Sound</label>
+            <label class="toggle"><input aria-label="Board Size (tiles)" type="checkbox" id="wrapWalls"> Wrap walls</label>
+            <label class="toggle"><input aria-label="Board Size (tiles)" type="checkbox" id="showGrid" checked> Show grid</label>
+            <label class="toggle"><input aria-label="Checkbox" type="checkbox" id="colorBlind"> Color-blind mode</label>
+            <label class="toggle"><input aria-label="Checkbox" type="checkbox" id="sound" checked> Sound</label>
           </div>
           <div class="controls" style="margin-top:.25rem">
             <button class="btn" id="resetBtn">Reset</button>

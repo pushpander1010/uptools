@@ -5,7 +5,7 @@
 <link crossorigin="" href="https://pagead2.googlesyndication.com" rel="preconnect"/>
 <link href="//pagead2.googlesyndication.com" rel="dns-prefetch"/>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="IE=edge" http-equiv="x-ua-compatible"/>
 <meta content="dark light" name="color-scheme"/>
 <!-- Favicon -->
@@ -14,9 +14,10 @@
 <title>BMI Calculator (Metric &amp; US) - Healthy Range, Body Fat %, WHtR, BMR/TDEE | UpTools</title>
 <meta content="Free BMI Calculator with instant results. Works for Metric (cm/kg) and US (ft/in, lb). Shows category (WHO/Asian), healthy weight range, BMI Prime, estimated body fat %, WHtR, BMR &amp; TDEE for calorie planning. Fast, private, offline-friendly." name="description"/>
 <meta content="bmi calculator, body mass index, bmi chart, healthy bmi, bmi formula, weight calculator, bmi category, bmr calculator, tdee calculator, body fat calculator, waist to height ratio, who bmi, asian bmi, ideal weight, calorie planner" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <meta content="#0b1020" name="theme-color"/>
-<link href="https://www.uptools.in/bmi-calculator/" rel="canonical">
+<link href="https://www.uptools.in/bmi-calculator/" rel="canonical"/>
+
 <!-- Open Graph / Twitter -->
 <meta content="BMI Calculator - Healthy Range, Body Fat %, WHtR, BMR/TDEE" property="og:title"/>
 <meta content="Instant BMI with WHO/Asian categories, healthy weight range, BMI Prime, body fat %, WHtR, and calorie targets (BMR/TDEE). Metric &amp; US." property="og:description"/>
@@ -25,6 +26,9 @@
 <meta content="UpTools" property="og:site_name"/>
 <meta content="https://www.uptools.in/assets/og/bmi.png" property="og:image"/>
 <meta content="summary" name="twitter:card"/>
+  <meta name="twitter:title" content="BMI Calculator - Healthy Range, Body Fat %, WHtR, BMR/TDEE" />
+  <meta name="twitter:description" content="Instant BMI with WHO/Asian categories, healthy weight range, BMI Prime, body fat %, WHtR, and calorie targets (BMR/TDEE). Metric &amp; US." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/bmi.png" />
 <!-- Common stylesheet (non-blocking) -->
 <link as="style" href="/style.css?v=1.2.1" rel="preload"/>
 <link href="/style.css?v=1.2.1" media="print" onload="this.media='all'" rel="stylesheet"/>
@@ -438,6 +442,8 @@
     }
 
     /* Mobile: bottom sheet */
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width:880px) {
       .sheet {
         left: 0;
@@ -513,7 +519,22 @@
       height: 1px;
       overflow: hidden
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Structured data -->
 <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
@@ -545,21 +566,21 @@
 <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"VideoObject","name":"BMI Calculation Formula Explained","description":"Quick video explaining BMI, categories, and context.","uploadDate":"2023-01-01","thumbnailUrl":"https://i.ytimg.com/vi/t9e46CV_pyM/hqdefault.jpg","embedUrl":"https://www.youtube-nocookie.com/embed/t9e46CV_pyM","publisher":{"@type":"Organization","name":"YouTube"}}
   </script>
-</link>  <link rel="canonical" href="https://www.uptools.in/bmi-calculator/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+</link>  
+  
   <meta property="og:title" content="BMI Calculator (Metric &amp; US) - Healthy Range, Body Fat %, WHtR, BMR/TDEE | UpTools" />
-  <meta property="og:description" content="" />
+  <meta property="og:description" content="Instant BMI with WHO/Asian categories, healthy weight range, BMI Prime, body fat %, WHtR, and calorie targets (BMR/TDEE). Metric &amp;amp; US." />
   <meta property="og:url" content="https://www.uptools.in/bmi-calculator/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <!-- small fixed -->
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
-<a class="sr-only" href="#main">Skip to content</a>
+<a class="sr-only skip-link" href="#main">Skip to content</a>
 <!-- Header -->
 <!-- Header -->
 <header class="site" role="banner">

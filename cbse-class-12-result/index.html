@@ -3,24 +3,29 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="color-scheme" content="dark light" />
   <title>CBSE Class 12 Result Checker and Analyzer | UpTools</title>
   <meta name="description" content="Use the official CBSE result links, verify your details, and analyze your Class 12 marks with percentage, grade summary, and next-step guidance." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://www.uptools.in/cbse-class-12-result/" />
+<link href="https://www.uptools.in/cbse-class-12-result/" rel="canonical"/>
+  
   <meta name="keywords" content="CBSE Class 12 result, CBSE result checker, Class 12 marks analyzer, board result percentage, CBSE result guide" />
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:title" content="CBSE Class 12 Result Checker and Analyzer | UpTools" />
-  <meta property="og:description" content="Use the official CBSE result links, verify your details, and analyze your Class 12 marks with percentage, grade summary, and next-step guidance." />
+  <meta property="og:description" content="CBSE Class 12 Result Checker and Analyzer. Free online tool by UpTools." />
   <meta property="og:url" content="https://www.uptools.in/cbse-class-12-result/" />
   <meta property="og:site_name" content="UpTools" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/cbse-result.png" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CBSE Class 12 Result Checker and Analyzer | UpTools" />
+  <meta name="twitter:description" content="CBSE Class 12 Result Checker and Analyzer. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <style>
     :root { --bg:#0f1419; --surface:#121826; --surface-2:#182133; --text:#e6edf3; --muted:#9aa4b2; --brand:#7aa2ff; --success:#10b981; --warn:#f59e0b; --danger:#ef4444; --border:#212a3a; --radius:.75rem }
@@ -47,8 +52,25 @@
     .badge { display:inline-flex; align-items:center; padding:4px 8px; border-radius:999px; font-size:12px; font-weight:700 } .badge.pass { background:rgba(16,185,129,.14); color:#7ef0b7 } .badge.review { background:rgba(245,158,11,.14); color:#ffd27c }
     .list-tight { margin:0; padding-left:18px } .site-footer { margin-top:24px; padding-top:12px; border-top:1px solid var(--border); text-align:center }
     .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border-width:0 }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width:640px) { .nav-links { display:none } .subject-row, .summary-row { grid-template-columns:1fr } }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
   <link rel="preload" href="/style.css?v=1.2.0" as="style" />
   <link rel="stylesheet" href="/style.css?v=1.2.0" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="/style.css?v=1.2.0" /></noscript>
@@ -56,9 +78,9 @@
 
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
   <header class="site" role="banner">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="UpTools Home"><img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager"><b>UpTools</b></a>
@@ -71,7 +93,7 @@
       </nav>
     </div>
   </header>
-  <main class="wrap container" id="main">
+  <main role="main" class="wrap container" id="main">
     <nav aria-label="Breadcrumb" class="note" style="margin-bottom:8px"><a href="/">Home</a> &rsaquo; <span aria-current="page">CBSE Class 12 Result Checker</span></nav>
     <section class="card hero">
       <h1>CBSE Class 12 Result Checker and Analyzer</h1>

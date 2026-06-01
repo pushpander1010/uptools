@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="preconnect" href="https://api.postalpincode.in" crossorigin>
   <link rel="dns-prefetch" href="//api.postalpincode.in">
@@ -10,15 +10,20 @@
   <meta name="description" content="Find post office details by PIN code in India. Get district, state, taluk, and all post offices under a pincode. Bulk lookup, CSV export, shareable links. Fast & free." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta name="theme-color" content="#0b1020" />
+<link href="https://www.uptools.in/pin-code-finder/" rel="canonical"/>
   <meta name="keywords" content="pin code finder,pincode search india,post office pincode,india postal code,pincode lookup,district by pincode,state by pincode,uptools" />
-  <link rel="canonical" href="https://www.uptools.in/pin-code-finder/" />
+  
   <meta property="og:title" content="PIN Code Finder India - Search Post Office by Pincode | UpTools" />
-  <meta property="og:description" content="Find post office details by PIN code in India. Get district, state, taluk, and all post offices under a pincode. Bulk lookup, CSV export, shareable links. Fast & free." />
+  <meta property="og:description" content="PIN Code Finder India - Search Post Office by Pincode. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/pin-code-finder/" />
   <meta property="og:site_name" content="UpTools" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PIN Code Finder India - Search Post Office by Pincode | UpTools" />
+  <meta name="twitter:description" content="PIN Code Finder India - Search Post Office by Pincode. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg" />
 
@@ -73,12 +78,28 @@
     .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
     .video-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:.75rem;overflow:hidden;border:1px solid var(--cardBorder)}
     .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-  </style>
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
     <!-- Header -->
@@ -101,7 +122,7 @@
     </div>
   </header>
 
-  <main class="wrap" id="main">
+  <main role="main" class="wrap" id="main">
     <a class="sr-only" href="#search">Skip to search</a>
 
     <div class="tool-header">

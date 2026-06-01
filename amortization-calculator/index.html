@@ -3,17 +3,23 @@
 <head>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>Amortization Calculator – Loan Payment Schedule | UpTools</title>
   <meta name="description" content="Free amortization calculator. See your monthly payment, total interest, and full amortization schedule. Add extra payments to see how much interest and time you save."/>
-  <meta name="robots" content="amortization calculator, amortization calculator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <link rel="canonical" href="https://www.uptools.in/amortization-calculator/" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/amortization-calculator/" rel="canonical"/>
+<meta name="keywords" content="amortization calculator, amortization calculator, online tool, free calculator, uptools" />
+
+  
   <meta property="og:title" content="Amortization Calculator – Loan Payment Schedule | UpTools" />
-  <meta property="og:description" content="Free amortization calculator. See your monthly payment, total interest, and full amortization schedule. Add extra payments to see how much interest and time you save." />
+  <meta property="og:description" content="Amortization Calculator – Loan Payment Schedule. Free online tool by UpTools." />
   <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/amortization-calculator/" />
   <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Amortization Calculator – Loan Payment Schedule | UpTools" />
+  <meta name="twitter:description" content="Amortization Calculator – Loan Payment Schedule. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <link rel="icon" type="image/svg+xml" href="/assets/logo/uptools-logo.svg"/>
   <link rel="stylesheet" href="/style.css?v=1.3.0"/>
   
@@ -87,9 +93,27 @@
     .td-paid{color:var(--accent-2);}
     .td-int{color:#f87171;}
     .td-bal{color:var(--accent);}
-  </style>
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <header class="site" role="banner">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="UpTools Home">
@@ -122,7 +146,7 @@
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 
-<main class="wrap">
+<main role="main" class="wrap">
   <div class="tool-hero">
     <h1>🏦 Amortization Calculator</h1>
     <p>Monthly payment · Full schedule · Extra payment savings</p>
@@ -132,19 +156,19 @@
     <div class="form-grid">
       <div class="field">
         <label>Loan Amount ($)</label>
-        <input id="loanAmt" type="number" min="0" value="300000" placeholder="300000"/>
+        <input aria-label="Loan Amount ($)" id="loanAmt" type="number" min="0" value="300000" placeholder="300000"/>
       </div>
       <div class="field">
         <label>Annual Interest Rate (%)</label>
-        <input id="intRate" type="number" min="0" max="30" step="0.01" value="6.5" placeholder="6.5"/>
+        <input aria-label="Loan Amount ($)" id="intRate" type="number" min="0" max="30" step="0.01" value="6.5" placeholder="6.5"/>
       </div>
       <div class="field">
         <label>Loan Term (Years)</label>
-        <input id="loanTerm" type="number" min="1" max="40" value="30" placeholder="30"/>
+        <input aria-label="Loan Amount ($)" id="loanTerm" type="number" min="1" max="40" value="30" placeholder="30"/>
       </div>
       <div class="field">
         <label>Extra Monthly Payment ($)</label>
-        <input id="extraPmt" type="number" min="0" value="0" placeholder="0"/>
+        <input aria-label="Annual Interest Rate (%)" id="extraPmt" type="number" min="0" value="0" placeholder="0"/>
       </div>
     </div>
     <button class="btn calc-btn" onclick="calculate()">🏦 Calculate Schedule</button>

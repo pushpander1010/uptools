@@ -9,16 +9,17 @@
 <link crossorigin="" href="https://api.qrserver.com" rel="preconnect"/>
 <link href="//api.qrserver.com" rel="dns-prefetch"/>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="IE=edge" http-equiv="x-ua-compatible"/>
 <meta content="dark light" name="color-scheme"/>
 <title>QR Code Generator (Text, URL, Wi-Fi, UPI, vCard) - Free, Fast, No Sign-up | UpTools</title>
 <meta content="Create high-quality QR codes for text, links, Wi-Fi, UPI, vCard, SMS, and email. Choose size, error correction, margin, and colors. Instant preview, one-click download (PNG/SVG), shareable permalink, and local history. Private and blazing fast." name="description"/>
 <meta content="qr generator, qr generator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <meta content="#0b1020" name="theme-color"/>
+<link href="https://www.uptools.in/qr-generator/" rel="canonical"/>
 <!-- Canonical -->
-<link href="https://www.uptools.in/qr-generator/" rel="canonical">
+
 <!-- Favicons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon"/>
@@ -29,6 +30,9 @@
 <meta content="https://www.uptools.in/qr-generator/" property="og:url"/>
 <meta content="https://www.uptools.in/assets/og/qr-generator.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="QR Code Generator - UpTools" />
+  <meta name="twitter:description" content="Generate QR codes for links, Wi-Fi, UPI, vCard and more. Customize and download in one click." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/qr-generator.png" />
 <!-- Structured Data (FAQ) -->
 
 <script type="application/ld+json">
@@ -52,15 +56,34 @@
 <link href="/style.css?v=1.2.0" rel="stylesheet"/>
 </noscript>
 <script src="/scripts/utils.js" type="module"></script>
-</link>  <link rel="canonical" href="https://www.uptools.in/qr-generator/" />
-  <meta name="robots" content="qr generator, qr generator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+</link>  
+  
+<meta name="keywords" content="qr generator, qr generator, online tool, free calculator, uptools" />
+
   <meta property="og:title" content="QR Code Generator (Text, URL, Wi-Fi, UPI, vCard) - Free, Fast, No Sign-up | UpTools" />
-  <meta property="og:description" content="" />
+  <meta property="og:description" content="Generate QR codes for links, Wi-Fi, UPI, vCard and more. Customize and download in one click." />
   <meta property="og:url" content="https://www.uptools.in/qr-generator/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+<style>
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+</style>
 </head>
 <body style="--accent:#ffd166;--bg1:#201a0b;--bg2:#2b230d;--cardBorder:#6b561e">
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- Header (shared pattern) -->
 <!-- Header -->
 <header class="site" role="banner">
@@ -81,7 +104,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap" id="content">
+<main role="main" class="wrap" id="content">
 <!-- Title row -->
 <div class="tool-header">
 <div aria-hidden="true" class="tool-icon">QR</div>
@@ -110,7 +133,7 @@
 <div class="grid three" style="margin-top:8px">
 <label class="label">
             Size (px)
-            <input class="input" id="size" max="1024" min="120" step="20" type="number" value="280"/>
+            <input aria-label="Text or URL" class="input" id="size" max="1024" min="120" step="20" type="number" value="280"/>
 </label>
 <label class="label">
             Error (ECC)
@@ -123,17 +146,17 @@
 </label>
 <label class="label">
             Margin
-            <input class="input" id="margin" max="20" min="0" type="number" value="2"/>
+            <input aria-label="Number input" class="input" id="margin" max="20" min="0" type="number" value="2"/>
 </label>
 </div>
 <div class="grid two">
 <label class="label">
             Foreground
-            <input class="input" id="fg" type="color" value="#000000"/>
+            <input aria-label="Color input" class="input" id="fg" type="color" value="#000000"/>
 </label>
 <label class="label">
             Background
-            <input class="input" id="bg" type="color" value="#ffffff"/>
+            <input aria-label="Color input" class="input" id="bg" type="color" value="#ffffff"/>
 </label>
 </div>
 <div class="row" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
@@ -284,8 +307,8 @@ END:VCARD`;
       if (m === 'wifi') {
         fieldsBox.innerHTML = `
           <div class="grid two">
-            <label class="label">SSID<input id="ssid" class="input" placeholder="Wi-Fi name"></label>
-            <label class="label">Password<input id="wpass" class="input" placeholder="••••••••"></label>
+            <label class="label">SSID<input aria-label="Text or URL" id="ssid" class="input" placeholder="Wi-Fi name"></label>
+            <label class="label">Password<input aria-label="Text or URL" id="wpass" class="input" placeholder="••••••••"></label>
           </div>
           <div class="grid two">
             <label class="label">Security
@@ -302,43 +325,43 @@ END:VCARD`;
       if (m === 'upi') {
         fieldsBox.innerHTML = `
           <div class="grid three">
-            <label class="label">VPA (pa)<input id="pa" class="input" placeholder="name@bank"></label>
-            <label class="label">Name (pn)<input id="pn" class="input" placeholder="Receiver name"></label>
-            <label class="label">Amount (am)<input id="am" class="input" inputmode="decimal" placeholder="199.00"></label>
+            <label class="label">VPA (pa)<input aria-label="name@bank" id="pa" class="input" placeholder="name@bank"></label>
+            <label class="label">Name (pn)<input aria-label="Receiver name" id="pn" class="input" placeholder="Receiver name"></label>
+            <label class="label">Amount (am)<input aria-label="199.00" id="am" class="input" inputmode="decimal" placeholder="199.00"></label>
           </div>
           <div class="grid two">
-            <label class="label">Currency<input id="cu" class="input" value="INR"></label>
-            <label class="label">Note (tn)<input id="tn" class="input" placeholder="Payment for..."></label>
+            <label class="label">Currency<input aria-label="Text input" id="cu" class="input" value="INR"></label>
+            <label class="label">Note (tn)<input aria-label="Payment for..." id="tn" class="input" placeholder="Payment for..."></label>
           </div>
         `;
       }
       if (m === 'vcard') {
         fieldsBox.innerHTML = `
           <div class="grid three">
-            <label class="label">Full name<input id="fn" class="input" placeholder="Ada Lovelace"></label>
-            <label class="label">Org<input id="org" class="input" placeholder="UpTools"></label>
-            <label class="label">Phone<input id="vtel" class="input" placeholder="+91 90000 00000"></label>
+            <label class="label">Full name<input aria-label="Ada Lovelace" id="fn" class="input" placeholder="Ada Lovelace"></label>
+            <label class="label">Org<input aria-label="UpTools" id="org" class="input" placeholder="UpTools"></label>
+            <label class="label">Phone<input aria-label="+91 90000 00000" id="vtel" class="input" placeholder="+91 90000 00000"></label>
           </div>
           <div class="grid two">
-            <label class="label">Email<input id="vemail" class="input" placeholder="you@example.com"></label>
-            <label class="label">URL<input id="vurl" class="input" placeholder="https://example.com"></label>
+            <label class="label">Email<input aria-label="you@example.com" id="vemail" class="input" placeholder="you@example.com"></label>
+            <label class="label">URL<input aria-label="https://example.com" id="vurl" class="input" placeholder="https://example.com"></label>
           </div>
         `;
       }
       if (m === 'sms') {
         fieldsBox.innerHTML = `
           <div class="grid two">
-            <label class="label">To<input id="smsTo" class="input" placeholder="+91 90000 00000"></label>
-            <label class="label">Message<input id="smsBody" class="input" placeholder="Hello..."></label>
+            <label class="label">To<input aria-label="+91 90000 00000" id="smsTo" class="input" placeholder="+91 90000 00000"></label>
+            <label class="label">Message<input aria-label="Hello..." id="smsBody" class="input" placeholder="Hello..."></label>
           </div>
         `;
       }
       if (m === 'mailto') {
         fieldsBox.innerHTML = `
           <div class="grid three">
-            <label class="label">To<input id="mto" class="input" placeholder="you@example.com"></label>
-            <label class="label">Subject<input id="msub" class="input" placeholder="Subject"></label>
-            <label class="label">Body<input id="mbody" class="input" placeholder="Message"></label>
+            <label class="label">To<input aria-label="you@example.com" id="mto" class="input" placeholder="you@example.com"></label>
+            <label class="label">Subject<input aria-label="Subject" id="msub" class="input" placeholder="Subject"></label>
+            <label class="label">Body<input aria-label="Message" id="mbody" class="input" placeholder="Message"></label>
           </div>
         `;
       }
@@ -579,6 +602,8 @@ END:VCARD`;
     .grid.three {
       grid-template-columns: 1fr 1fr 1fr;
     }
+
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
 
     @media (min-width: 960px) {
       .grid.two {

@@ -8,13 +8,14 @@
 <link crossorigin="" href="https://pagead2.googlesyndication.com" rel="preconnect"/>
 <link href="//pagead2.googlesyndication.com" rel="dns-prefetch"/>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>GST Calculator India 2025 | Inclusive/Exclusive + CGST/SGST/IGST Split | Free Online Tool</title>
 <meta content="Calculate GST instantly for 5%, 12%, 18%, 28% rates. Get base amount, GST breakdown (CGST/SGST/IGST), total with rounding. Supports inclusive/exclusive amounts, custom rates, bulk calculations &amp; CSV export." name="description"/>
 <meta content="gst calculator india,gst calculator online,cgst sgst igst calculator,gst inclusive exclusive calculator,18% gst calculator,28% gst calculator,gst rate calculator,gst breakdown,gst split calculator" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <meta content="#10B981" name="theme-color"/>
-<link href="https://www.uptools.in/gst-calculator/" rel="canonical">
+<link href="https://www.uptools.in/gst-calculator/" rel="canonical"/>
+
 <!-- Open Graph -->
 <meta content="GST Calculator India 2025 | Inclusive/Exclusive + CGST/SGST/IGST Split" property="og:title"/>
 <meta content="Calculate GST instantly for all rates (5%, 12%, 18%, 28%). Get base amount, GST breakdown, total with rounding. Supports bulk calculations &amp; CSV export." property="og:description"/>
@@ -25,6 +26,7 @@
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/gst.png" />
 <meta content="GST Calculator India 2025 | Free Online Tool" name="twitter:title"/>
 <meta content="Calculate GST for all rates with CGST/SGST/IGST breakdown. Supports inclusive/exclusive amounts &amp; bulk calculations." name="twitter:description"/>
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml">
@@ -37,7 +39,23 @@
     *{box-sizing:border-box} html{color-scheme:dark light;-webkit-text-size-adjust:100%}
     body{margin:0;font:400 16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Noto Sans,sans-serif}
     .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  </style>
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Common stylesheet (non-blocking) -->
 <link as="style" href="/style.css?v=1.2.0" rel="preload"/>
 <link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
@@ -79,14 +97,16 @@
     ]
   }
   </script>
-</link></link>  <link rel="canonical" href="https://www.uptools.in/gst-calculator/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+</link></link>  
+  
   <meta property="og:title" content="GST Calculator India 2025 | Inclusive/Exclusive + CGST/SGST/IGST Split | Free Online Tool" />
-  <meta property="og:description" content="" />
+  <meta property="og:description" content="Calculate GST instantly for all rates (5%, 12%, 18%, 28%). Get base amount, GST breakdown, total with rounding. Supports bulk calculations &amp;amp; CSV export." />
   <meta property="og:url" content="https://www.uptools.in/gst-calculator/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- Header (shared styles) -->
 <!-- Header -->
 <header class="site" role="banner">
@@ -107,7 +127,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap" id="main">
+<main role="main" class="wrap" id="main">
 <!-- Enhanced Tool Header -->
 <section class="card tool-header">
 <div class="tool-icon" style="background: linear-gradient(135deg, #10B981, #059669)">₹</div>
@@ -224,7 +244,7 @@
 <div class="card" style="background: rgba(255,255,255,.02)">
 <h4 style="margin-top: 0; font-size: .9rem; color: #2196F3">Amount Type</h4>
 <label class="check" style="display: flex; align-items: center; gap: .5rem; padding: .5rem; background: rgba(255,255,255,.02); border-radius: .5rem">
-<input id="inclusive" style="accent-color: #2196F3" type="checkbox"/>
+<input aria-label="Amount Type" id="inclusive" style="accent-color: #2196F3" type="checkbox"/>
 <div>
 <span style="font-weight: 600">GST Inclusive Amount</span>
 <div class="note small">Check if amount already includes GST</div>
@@ -240,14 +260,14 @@
 <h4 style="margin-top: 0; font-size: .9rem; color: #9C27B0">Supply Type</h4>
 <div style="display: grid; gap: .5rem">
 <label class="check" style="display: flex; align-items: center; gap: .5rem; padding: .5rem; background: rgba(255,255,255,.02); border-radius: .5rem">
-<input checked="" name="supply" style="accent-color: #9C27B0" type="radio" value="intra"/>
+<input aria-label="Supply Type" checked="" name="supply" style="accent-color: #9C27B0" type="radio" value="intra"/>
 <div>
 <span style="font-weight: 600">Intra-state (CGST + SGST)</span>
 <div class="note small">Within same state</div>
 </div>
 </label>
 <label class="check" style="display: flex; align-items: center; gap: .5rem; padding: .5rem; background: rgba(255,255,255,.02); border-radius: .5rem">
-<input name="supply" style="accent-color: #9C27B0" type="radio" value="inter"/>
+<input aria-label="Intra-state (CGST + SGST)" name="supply" style="accent-color: #9C27B0" type="radio" value="inter"/>
 <div>
 <span style="font-weight: 600">Inter-state (IGST)</span>
 <div class="note small">Between different states</div>
@@ -287,7 +307,7 @@
 <!-- Auto-calculate toggle -->
 <div style="margin-top: 1rem; text-align: center">
 <label class="check" style="display: inline-flex; align-items: center; gap: .5rem; padding: .5rem; background: rgba(255,255,255,.05); border-radius: .5rem">
-<input checked="" id="autoCalculate" style="accent-color: #10B981" type="checkbox"/>
+<input aria-label="Checkbox" checked="" id="autoCalculate" style="accent-color: #10B981" type="checkbox"/>
 <span style="font-weight: 600">⚡ Auto-calculate on input change</span>
 </label>
 </div>

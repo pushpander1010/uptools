@@ -13,15 +13,18 @@
   <!-- SEO -->
   <meta name="description"
     content="AI Writing Assistant powered by Mistral Small (Together AI). Summarize, rewrite, translate, extract keywords, and generate SEO metadata - privacy-first via a server-side proxy." />
-  <meta name="robots" content="ai writer, ai writer, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <link rel="canonical" href="https://www.uptools.in/ai-writer/" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<meta name="keywords" content="ai writer, ai writer, online tool, free calculator, uptools" />
+
+  
   <meta name="theme-color" content="#0b1020" />
+<link href="https://www.uptools.in/ai-writer/" rel="canonical"/>
 
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="AI Writing Assistant - Powered by Mistral Small | UpTools" />
-  <meta property="og:description" content="AI Writing Assistant powered by Mistral Small (Together AI). Summarize, rewrite, translate, extract keywords, and generate SEO metadata - privacy-first via a server-side proxy." />
+  <meta property="og:description" content="AI Writing Assistant - Powered by Mistral Small. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/ai-writer/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/ai-writing-assistant.png" />
   <meta property="og:image:width" content="1200" />
@@ -92,6 +95,8 @@
       gap: var(--gap);
       align-items: stretch;
     }
+
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
 
     @media (max-width: 950px) {
       .ai-grid {
@@ -231,14 +236,31 @@
     .ad-slot {
       display: none;
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"
     crossorigin="anonymous"></script>
   <!-- small fixed -->
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617"
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617"
     data-ad-slot="9810172647"></ins>
   <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
@@ -264,7 +286,7 @@
     </div>
   </header>
 
-  <main class="ai container" id="top">
+  <main role="main" class="ai container" id="top">
     <section class="card hero" aria-labelledby="title">
       <div>
         <h1 id="title">AI Writing Assistant</h1>
@@ -290,7 +312,7 @@
             </label>
             <button class="btn small" id="pasteBtn" type="button" title="Paste from clipboard">Paste</button>
             <label class="btn small" title="Import .txt or .md">
-              Import <input id="fileIn" type="file" accept=".txt,.md" hidden>
+              Import <input aria-label="Characters" id="fileIn" type="file" accept=".txt,.md" hidden>
             </label>
             <button class="btn small subtle" id="clearBtn" type="button" title="Clear input">Clear</button>
           </div>
@@ -318,7 +340,7 @@
 
           <div class="toolbar">
             <button id="runBtn" class="btn primary" type="button">Run ▶</button>
-            <button id="saveCfg" class="btn small subtle" type="button" title="Save settings" style="display:none"></button>
+            <button aria-label="Save" id="saveCfg" class="btn small subtle" type="button" title="Save settings" style="display:none"></button>
           </div>
         </div>
       </article>
@@ -391,19 +413,19 @@
 <div class="card" style="border-color:rgba(34,197,94,.3)">
 <h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
 <ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
-<li style="padding:.35rem 0">✅ <b>Do</b> use this tool to save time on manual calculations.</li>
-<li style="padding:.35rem 0">✅ <b>Do</b> double-check your inputs for accuracy.</li>
-<li style="padding:.35rem 0">✅ <b>Do</b> share results with teammates using the Share feature.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> review AI-generated content before using or publishing it.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> use AI output as a starting point for your own work.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> double-check facts and figures in AI-generated content.</li>
 <li style="padding:.35rem 0">✅ <b>Do</b> bookmark this tool for quick access.</li>
 </ul>
 </div>
 <div class="card" style="border-color:rgba(239,68,68,.3)">
 <h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
 <ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
-<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — this tool doesn't store anything.</li>
-<li style="padding:.35rem 0">❌ <b>Don't</b> use results as professional financial/legal/medical advice.</li>
-<li style="padding:.35rem 0">❌ <b>Don't</b> forget to verify critical calculations with official tools.</li>
-<li style="padding:.35rem 0">❌ <b>Don't</b> assume results are guarantees — they are estimates.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> assume AI output is always 100% accurate.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — only provide what's needed for generation.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> publish AI content without human review and editing.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use AI content to spread misinformation.</li>
 </ul>
 </div>
 </div>
@@ -412,17 +434,17 @@
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">Frequently Asked Questions</h2>
 <details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
-<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. Your input is sent to our secure AI API for processing only and is never stored or shared.</p></details>
 <details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
-<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+<details><summary><b>Does this work offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">No. This AI tool requires an internet connection to send your request to our secure API.</p></details>
 </section>
 <!-- SEO: How it works -->
 <section class="card" style="margin-top:16px">
 <details open>
 <summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
 <div style="margin-top:8px;color:#9aa4b2">
-<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
-<p>Results update instantly as you type — no waiting for server responses.</p>
+<p>This tool uses AI to generate content. Your input is sent to our secure AI API and is not stored.</p>
+<p>Results are generated in seconds — no waiting for local processing.</p>
 <p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
 </div>
 </details>
@@ -507,7 +529,7 @@
             </select>
           </label>
           <label class="inline"><span class="tiny-note">Max words</span>
-            <input id="optLen" type="number" class="input small" value="180" min="50" max="1000" style="width:100px">
+            <input aria-label="Style" id="optLen" type="number" class="input small" value="180" min="50" max="1000" style="width:100px">
           </label>`;
       } else if (t === 'rewrite') {
         html = `
@@ -518,17 +540,17 @@
             </select>
           </label>
           <label class="inline"><span class="tiny-note">Constraints</span>
-            <input id="optRules" class="input small" placeholder="e.g. shorter, active voice, no jargon" style="width:240px">
+            <input aria-label="Tone" id="optRules" class="input small" placeholder="e.g. shorter, active voice, no jargon" style="width:240px">
           </label>`;
       } else if (t === 'translate') {
         html = `
           <label class="inline"><span class="tiny-note">Language</span>
-            <input id="optLang" class="input small" value="Hindi" style="width:160px">
+            <input aria-label="Constraints" id="optLang" class="input small" value="Hindi" style="width:160px">
           </label>`;
       } else if (t === 'keywords') {
         html = `
           <label class="inline"><span class="tiny-note">Top N</span>
-            <input id="optTopN" type="number" class="input small" value="15" min="5" max="50" style="width:90px">
+            <input aria-label="Language" id="optTopN" type="number" class="input small" value="15" min="5" max="50" style="width:90px">
           </label>
           <label class="inline"><span class="tiny-note">Include phrases</span>
             <select id="optPhrases" class="select"><option>Yes</option><option>No</option></select>
@@ -541,7 +563,7 @@
       } else if (t === 'seometa') {
         html = `
           <label class="inline"><span class="tiny-note">Site/Brand</span>
-            <input id="optBrand" class="input small" value="UpTools" style="width:160px">
+            <input aria-label="Depth" id="optBrand" class="input small" value="UpTools" style="width:160px">
           </label>`;
       }
       taskOptions.innerHTML = html;

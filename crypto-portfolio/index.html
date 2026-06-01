@@ -5,13 +5,14 @@
 <!-- No inline ad slot to avoid CLS -->
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>Crypto Portfolio Tracker (Free, No Signup) + Live Tax Estimator | UpTools</title>
 <meta content="Free crypto portfolio tracker with live prices (CoinGecko), gain/loss, and allocation pie chart — no signup, all local. Smarter BTC/ETH suggestions, clear multi-color pie chart, and instant tax estimates (India &amp; USA)." name="description"/>
 <meta content="crypto portfolio tracker free,no signup,bitcoin portfolio,btc price in inr,ethereum price,eth price today,crypto tax india 30%,capital gains tax usa,crypto gain loss calculator,portfolio allocation pie chart,coin portfolio app,uptools" name="keywords"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="#0b0f1a" name="theme-color"/>
 <link href="https://www.uptools.in/crypto-portfolio/" rel="canonical"/>
+
 <!-- Social -->
 <meta content="Crypto Portfolio Tracker (Free, No Signup) + Live Tax Estimator" property="og:title"/>
 <meta content="Track holdings locally, fetch live prices, see gain/loss &amp; a clear multi-color allocation pie chart. Live price preview + smarter suggestions for BTC/ETH. India &amp; USA tax." property="og:description"/>
@@ -20,6 +21,9 @@
 <meta content="UpTools" property="og:site_name"/>
 <meta content="https://www.uptools.in/assets/og/crypto-portfolio.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="Crypto Portfolio Tracker (Free, No Signup) + Live Tax Estimator" />
+  <meta name="twitter:description" content="Track holdings locally, fetch live prices, see gain/loss &amp; a clear multi-color allocation pie chart. Live price preview + smarter suggestions for BTC/ETH. India &amp; USA tax." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/crypto-portfolio.png" />
 <!-- Icons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -105,6 +109,8 @@
     .video{ width:100%; max-width:560px; height:315px; border-radius:12px; overflow:hidden; border:1px solid var(--border); box-shadow: var(--glow-soft); }
     .txt-logo{ font-weight:900; letter-spacing:.5px; padding:6px 10px; border-radius:8px; background:#111b34; border:1px solid var(--border); }
     .links-grid{ display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 980px){
       .grid2{ grid-template-columns: 1fr; }
       .sticky{ position:static; }
@@ -112,7 +118,22 @@
       .pill-input input{ width:170px; }
       .legend{ grid-template-columns:1fr; }
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Structured Data -->
 
 
@@ -134,15 +155,15 @@
     "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
   }
   </script>
-  <link rel="canonical" href="https://www.uptools.in/crypto-portfolio/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="Crypto Portfolio Tracker (Free, No Signup) + Live Tax Estimator | UpTools" />
-  <meta property="og:description" content="" />
+  
+  <meta property="og:description" content="Track holdings locally, fetch live prices, see gain/loss &amp;amp; a clear multi-color allocation pie chart. Live price preview + smarter suggestions for BTC/ETH. India &amp;amp; USA tax." />
   <meta property="og:url" content="https://www.uptools.in/crypto-portfolio/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 <!-- Header -->
 <!-- Header -->
@@ -164,7 +185,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap" id="main">
+<main role="main" class="wrap" id="main">
 <!-- Hero -->
 <section aria-label="Crypto Portfolio Tracker" class="hero neon">
 <div class="ico">📊</div>
@@ -180,12 +201,12 @@
 <!-- Improved suggestions + live price preview -->
 <div class="pill-input" id="acRoot">
 <svg aria-hidden="true" height="16" viewbox="0 0 24 24" width="16"><path d="m21.53 20.47l-4.66-4.66A7.92 7.92 0 0 0 18 10a8 8 0 1 0-8 8c1.86 0 3.57-.64 4.91-1.73l4.66 4.66zM4 10a6 6 0 1 1 6 6a6 6 0 0 1-6-6" fill="currentColor"></path></svg>
-<input aria-activedescendant="" aria-autocomplete="list" aria-controls="sugPanel" aria-expanded="false" autocomplete="off" id="search" placeholder="Add coin: bitcoin / btc, ethereum / eth…" type="search"/>
+<input aria-label="Add coin: bitcoin / btc, ethereum / eth…" aria-activedescendant="" aria-autocomplete="list" aria-controls="sugPanel" aria-expanded="false" autocomplete="off" id="search" placeholder="Add coin: bitcoin / btc, ethereum / eth…" type="search"/>
 <span class="price-chip" id="livePrice">—</span>
 <div aria-label="Coin suggestions" class="sug-panel" id="sugPanel" role="listbox"></div>
 </div>
-<input class="input" id="qty" inputmode="decimal" placeholder="Quantity" step="0.00000001" style="max-width:160px" type="number"/>
-<input class="input" id="buy" inputmode="decimal" placeholder="Avg buy price" step="0.00000001" style="max-width:170px" type="number"/>
+<input aria-label="Quantity" class="input" id="qty" inputmode="decimal" placeholder="Quantity" step="0.00000001" style="max-width:160px" type="number"/>
+<input aria-label="Avg buy price" class="input" id="buy" inputmode="decimal" placeholder="Avg buy price" step="0.00000001" style="max-width:170px" type="number"/>
 <button class="btn" id="add" type="button">Add</button>
 <button class="btn secondary" id="reset" type="button">Reset</button>
 </div>
@@ -274,7 +295,7 @@
 </input></div>
 </div>
 <label class="check" style="display:block; margin-top:8px">
-<input checked="" id="treatVDA" type="checkbox"/> <span>India: treat crypto as VDA @ 30% + 4% cess (shows 1% TDS info)</span>
+<input aria-label="Other Taxable Income (annual)" checked="" id="treatVDA" type="checkbox"/> <span>India: treat crypto as VDA @ 30% + 4% cess (shows 1% TDS info)</span>
 </label>
 <div class="result" style="margin-top:10px">
 <div class="row"><span>Estimated Tax on Gains</span><span id="taxOut">—</span></div>
@@ -553,8 +574,8 @@
       const chCls = ch >= 0 ? 'chg-pos' : 'chg-neg';
       return `<tr data-id="${r.id}">
         <td><strong>${r.name}</strong><div class="note">${(r.symbol||'').toUpperCase()}</div></td>
-        <td><input class="input js-qty" type="number" step="0.00000001" value="${r.qty ?? ''}" style="max-width:160px"></td>
-        <td><input class="input js-buy" type="number" step="0.00000001" value="${r.buy ?? ''}" style="max-width:170px"></td>
+        <td><input aria-label="${(r.symbol||'').toUpperCase()}" class="input js-qty" type="number" step="0.00000001" value="${r.qty ?? ''}" style="max-width:160px"></td>
+        <td><input aria-label="${(r.symbol||'').toUpperCase()}" class="input js-buy" type="number" step="0.00000001" value="${r.buy ?? ''}" style="max-width:170px"></td>
         <td>${price?currencyFmt(price):'—'}</td>
         <td>${value?currencyFmt(value):'—'}</td>
         <td class="${pl>=0?'chg-pos':'chg-neg'}">${Number.isFinite(pl)?currencyFmt(pl):'—'}</td>

@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Body Frame Size Calculator - Small Medium Large | UpTools</title>
   <meta name="description" content="Determine your body frame size (small, medium, or large) using wrist circumference or elbow breadth methods. Includes ideal weight range for your frame type." />
-  <link rel="canonical" href="https://www.uptools.in/body-frame-size/" />
+  
 
   <!-- Open Graph -->
   <meta property="og:title" content="Body Frame Size Calculator - Small Medium Large | UpTools" />
-  <meta property="og:description" content="Determine your body frame size (small, medium, or large) using wrist circumference or elbow breadth methods. Includes ideal weight range for your frame type." />
+  <meta property="og:description" content="Body Frame Size Calculator - Small Medium Large. Free online tool by UpTools." />
   <meta property="og:url" content="https://www.uptools.in/body-frame-size/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:site_name" content="UpTools" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <meta name="twitter:title" content="Body Frame Size Calculator - Small Medium Large | UpTools" />
   <meta name="twitter:description" content="Determine your body frame size (small, medium, or large) using wrist circumference or elbow breadth methods. Includes ideal weight range for your frame type." />
 
@@ -211,6 +213,8 @@
       gap: 1.25rem;
       margin-bottom: 2rem;
     }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 640px) {
       .methods-grid { grid-template-columns: 1fr; }
     }
@@ -510,11 +514,30 @@
       .result-card { padding: 1.5rem 1rem; }
       .weight-section { min-width: unset; width: 100%; }
     }
-  </style>
-  <meta name="robots" content="body frame size, body frame size, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/body-frame-size/" rel="canonical"/>
+<meta name="keywords" content="body frame size, body frame size, online tool, free calculator, uptools" />
+
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 
 <!-- ─── Header ──────────────────────────────────────── -->
 <header class="site" role="banner">
@@ -548,13 +571,13 @@
 </nav>
 
 <!-- ─── AdSense ─────────────────────────────────────── -->
-<div class="ads-wrap" style="max-width:900px;margin:0 auto;padding:0 1rem;">
+<div class="ads-wrap" style="max-max-width:900px;margin:0 auto;padding:0 1rem;">
   <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
 <!-- ─── Main Content ─────────────────────────────────── -->
-<main class="page-wrap">
+<main role="main" class="page-wrap">
 
   <!-- Hero -->
   <div class="page-hero">

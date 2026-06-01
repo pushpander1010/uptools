@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="color-scheme" content="dark light" />
 
@@ -12,7 +12,8 @@
     content="Discover career paths after Class 12. Explore streams, courses, entrance exams, and career options in engineering, medical, commerce, arts, and more." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://www.uptools.in/career-after-12/" />
+<link href="https://www.uptools.in/career-after-12/" rel="canonical"/>
+  
   <meta name="keywords"
     content="career after 12, career options, streams after 12, engineering, medical, commerce, arts, career planning, entrance exams" />
 
@@ -22,12 +23,16 @@
 
   <!-- OG/Twitter -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:title" content="Career Path After Class 12 - Explore Options & Plan Your Future | UpTools" />
-  <meta property="og:description" content="Discover career paths after Class 12. Explore streams, courses, entrance exams, and career options in engineering, medical, commerce, arts, and more." />
+  <meta property="og:description" content="Career Path After Class 12 - Explore Options & Plan Your Future. Free online tool by UpTools." />
   <meta property="og:url" content="https://www.uptools.in/career-after-12/" />
   <meta property="og:site_name" content="UpTools" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/career-after-12.png" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Career Path After Class 12 - Explore Options & Plan Your Future | UpTools" />
+  <meta name="twitter:description" content="Career Path After Class 12 - Explore Options & Plan Your Future. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
 
   <!-- Preconnects -->
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
@@ -230,6 +235,8 @@
       border-width: 0
     }
 
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 640px) {
       .hero {
         flex-direction: column;
@@ -240,7 +247,22 @@
         display: none
       }
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 
   <!-- Common CSS -->
   <link rel="preload" href="/style.css?v=1.2.0" as="style" />
@@ -278,14 +300,14 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"
      crossorigin="anonymous"></script>
   <ins class="adsbygoogle"
-     style="display:inline-block;width:500px;height:50px"
+     style="display:inline-block;max-width:500px;height:50px"
      data-ad-client="ca-pub-6216304334889617"
      data-ad-slot="9810172647"></ins>
   <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
 
   <!-- Header -->
   <header class="site" role="banner">
@@ -304,7 +326,7 @@
     </div>
   </header>
 
-  <main class="wrap container" id="main">
+  <main role="main" class="wrap container" id="main">
     <!-- Breadcrumb -->
     <nav aria-label="Breadcrumb" class="note small" style="margin-bottom:8px">
       <a href="/">Home</a> › <span aria-current="page">Career Path After 12</span>

@@ -3,23 +3,27 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Free Online Games (No Sign-up) - Snake, 2048, Hangman, Typing Test & More | UpTools</title>
   <meta name="description"
     content="Play 24+ free online games instantly: Snake, 2048, Tetris, Pac-Man, Hangman, Typing Speed Test, Word Scramble, Quiz Trivia, Dice Roller, Coin Flip, Ping Pong and more. No downloads, no sign-ups. Mobile-friendly." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <meta name="theme-color" content="#0f1419" />
+<link href="https://www.uptools.in/games/" rel="canonical"/>
 
 
   <meta property="og:title" content="Free Online Games - UpTools" />
-  <meta property="og:description"
-    content="Play Snake, 2048, Tic Tac Toe, Memory Match & more. Fast, free, no sign-ups." />
+  <meta property="og:description" content="Free Online Games (No Sign-up) - Snake, 2048, Hangman, Typing Test & More. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/games/" />
   <meta property="og:site_name" content="UpTools" />
   <meta property="og:image" content="https://www.uptools.in/assets/logo/uptools-logo.svg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="canonical" href="https://www.uptools.in/games/" />
+  <meta name="twitter:title" content="games" />
+  <meta name="twitter:description" content="Free Online Games (No Sign-up) - Snake, 2048, Hangman, Typing Test & More. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+  
 
   
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
@@ -146,6 +150,8 @@
       grid-template-columns: 1fr;
       margin: 1rem 0
     }
+
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
 
     @media(min-width:900px) {
       .controls-bar {
@@ -371,7 +377,22 @@
     .site-footer {
       margin-top: 2rem
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 
   <script type="application/ld+json">
   {
@@ -412,10 +433,12 @@
 </head>
 
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"
     crossorigin="anonymous"></script>
 
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617"
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617"
     data-ad-slot="9810172647"></ins>
   <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
@@ -443,7 +466,7 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main role="main" class="wrap">
 
     <section class="games-hero">
       <h1>🎮 Free Online Games</h1>
@@ -459,17 +482,17 @@
         <button class="btn alt" id="clearBtn" aria-label="Clear search" title="Clear">Clear</button>
       </div>
       <div class="filters" aria-label="Filters">
-        <label class="chip"><input type="checkbox" value="classic" /> Classic</label>
-        <label class="chip"><input type="checkbox" value="arcade" /> Arcade</label>
-        <label class="chip"><input type="checkbox" value="puzzle" /> Puzzle</label>
-        <label class="chip"><input type="checkbox" value="brain" /> Brain</label>
-        <label class="chip"><input type="checkbox" value="reflex" /> Reflex</label>
-        <label class="chip"><input type="checkbox" value="quick" /> Quick Play</label>
-        <label class="chip"><input type="checkbox" value="memory" /> Memory</label>
-        <label class="chip"><input type="checkbox" value="logic" /> Logic</label>
-        <label class="chip"><input type="checkbox" value="word" /> Word</label>
-        <label class="chip"><input type="checkbox" value="quiz" /> Quiz</label>
-        <label class="chip"><input type="checkbox" value="casual" /> Casual</label>
+        <label class="chip"><input aria-label="Checkbox" type="checkbox" value="classic" /> Classic</label>
+        <label class="chip"><input aria-label="Checkbox" type="checkbox" value="arcade" /> Arcade</label>
+        <label class="chip"><input aria-label="Checkbox" type="checkbox" value="puzzle" /> Puzzle</label>
+        <label class="chip"><input aria-label="Checkbox" type="checkbox" value="brain" /> Brain</label>
+        <label class="chip"><input aria-label="Checkbox" type="checkbox" value="reflex" /> Reflex</label>
+        <label class="chip"><input aria-label="Classic" type="checkbox" value="quick" /> Quick Play</label>
+        <label class="chip"><input aria-label="Classic" type="checkbox" value="memory" /> Memory</label>
+        <label class="chip"><input aria-label="Arcade" type="checkbox" value="logic" /> Logic</label>
+        <label class="chip"><input aria-label="Puzzle" type="checkbox" value="word" /> Word</label>
+        <label class="chip"><input aria-label="Brain" type="checkbox" value="quiz" /> Quiz</label>
+        <label class="chip"><input aria-label="Reflex" type="checkbox" value="casual" /> Casual</label>
       </div>
     </section>
 

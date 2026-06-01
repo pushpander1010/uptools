@@ -43,6 +43,9 @@
 <meta content="https://www.uptools.in/games/sudoku/" property="og:url"/>
 <meta content="https://www.uptools.in/assets/social/sudoku-card.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="Play Sudoku – Free Online (Neon Dark) | UpTools" />
+  <meta name="twitter:description" content="Responsive, full-screen Sudoku with notes, mistake counter, and autosave. Challenge friends!" />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/social/sudoku-card.png" />
 <!-- Favicons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -230,7 +233,22 @@
       box-sizing: border-box !important;
       background: #0b1020 !important;
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Structured Data -->
 <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"VideoGame","name":"Sudoku","url":"https://www.uptools.in/games/sudoku/","applicationCategory":"Game","genre":"Puzzle","operatingSystem":"Browser","inLanguage":"en","publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
@@ -241,6 +259,7 @@
   <meta property="og:description" content="" />
   <meta property="og:url" content="https://www.uptools.in/games/sudoku/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
         notes:S.notes.map(row=>row.map(set=>Array.from(set))),
         mistakes:S.mistakes, elapsed:S.elapsed };
       localStorage.setItem(LS.STATE, JSON.stringify(obj));

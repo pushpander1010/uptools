@@ -2,16 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Time Zone Converter - World Clock & Meeting Planner | UpTools</title>
   <meta name="description" content="Convert time zones instantly across New York, London, Dubai, Singapore, Sydney, Tokyo and more. Compare cities, plan meetings, and share world-clock schedules online for free." />
-  <meta name="robots" content="timezone converter, timezone converter, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<meta name="keywords" content="timezone converter, timezone converter, online tool, free calculator, uptools" />
+
   <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://www.uptools.in/timezone-converter/" />
+<link href="https://www.uptools.in/timezone-converter/" rel="canonical"/>
+  
   <meta property="og:title" content="Time Zone Converter - World Clock & Meeting Planner | UpTools" />
-  <meta property="og:description" content="Convert time zones instantly across New York, London, Dubai, Singapore, Sydney, Tokyo and more. Compare cities, plan meetings, and share world-clock schedules online for free." />
+  <meta property="og:description" content="Time Zone Converter - World Clock & Meeting Planner. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/timezone-converter/" />
   <meta property="og:site_name" content="UpTools" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
@@ -46,14 +49,31 @@
     .label { display:block; margin-bottom:6px; color:#9aa4b2; font-size:.92rem; }
     .input, .select { width:100%; background:#0e1628; border:1px solid #212a3a; border-radius:.75rem; color:#e6edf3; padding:.7rem .8rem; }
     .small { font-size:.92rem; color:#9aa4b2; }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 900px){ .planner-grid { grid-template-columns:1fr; } }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
     <!-- Header -->
   <header class="site" role="banner">
     <div class="header-inner">

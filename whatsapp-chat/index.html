@@ -5,15 +5,16 @@
 <!-- Google Ads (stable; no in-page ad slot → zero CLS) -->
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>WhatsApp Click-to-Chat – Link &amp; QR Generator (Send Without Saving) | UpTools</title>
 <meta content="Generate a WhatsApp click-to-chat link in seconds. Enter phone &amp; optional message to open the chat instantly on mobile or desktop. Copy the link, share it, or get a QR. Fast, free &amp; privacy-first." name="description"/>
 <meta content="WhatsApp click to chat,whatsapp link generator,wa.me,send whatsapp without saving number,whatsapp qr,open whatsapp chat,whatsapp web link,whatsapp message link" name="keywords"/>
 <meta content="UpTools" name="author"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="#0b1f14" name="theme-color"/>
-<!-- Canonical + hreflang -->
 <link href="https://www.uptools.in/whatsapp-chat/" rel="canonical"/>
+<!-- Canonical + hreflang -->
+
 <link href="https://www.uptools.in/whatsapp-chat/" hreflang="en-IN" rel="alternate"/>
 <link href="https://www.uptools.in/whatsapp-chat/" hreflang="x-default" rel="alternate"/>
 <!-- Icons -->
@@ -46,6 +47,8 @@
     }
     /* Layout helpers */
     .grid-compact{display:grid;grid-template-columns:1fr;gap:12px}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (min-width:900px){.grid-compact{grid-template-columns:1.2fr .8fr}}
     .wqr{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center}
     .qr-box{width:110px;height:110px;border-radius:10px;overflow:hidden;background:#0a1224;border:1px solid var(--border);box-shadow:var(--glow-soft)}
@@ -69,7 +72,22 @@
     /* Breadcrumb micro style */
     .breadcrumbs{font-size:.9rem;margin:8px 0 0;color:var(--muted)}
     .breadcrumbs a{color:inherit;text-decoration:underline;text-underline-offset:.15em}
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Shared CSS -->
 <link as="style" href="/style.css?v=1.1.0" rel="preload"/>
 <link href="/style.css?v=1.1.0" media="print" onload="this.media='all'" rel="stylesheet"/>
@@ -134,16 +152,16 @@
     ]
   }
   </script>
-  <link rel="canonical" href="https://www.uptools.in/whatsapp-chat/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="WhatsApp Click-to-Chat – Link &amp; QR Generator (Send Without Saving) | UpTools" />
-  <meta property="og:description" content="" />
+  
+  <meta property="og:description" content="Enter phone &amp;amp; message to open WhatsApp instantly. Copy, share, and get a QR code." />
   <meta property="og:url" content="https://www.uptools.in/whatsapp-chat/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- small fixed -->
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>

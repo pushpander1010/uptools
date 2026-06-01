@@ -5,14 +5,15 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <title>Domain Finder (Available + Expiring) | UpTools</title>
   <meta name="description" content="Find ONLY real opportunities: domains AVAILABLE now or EXPIRING soon (with expiry dates). Use Seed Keyword Finder, Length-Based Generator, or Regex Filter. RDAP checks + optional traffic. Export CSV." />
   <meta name="keywords" content="domain finder, available domains, expiring domains, RDAP, regex domain search, length based domains, pronounceable domains, domain flipping, brandable names" />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://www.uptools.in/domain-finder/" />
+<link href="https://www.uptools.in/domain-finder/" rel="canonical"/>
+  
 
   <!-- Icons -->
   <link rel="icon" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
@@ -20,8 +21,9 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:title" content="Domain Finder (Available + Expiring) | UpTools" />
-  <meta property="og:description" content="Find ONLY real opportunities: domains AVAILABLE now or EXPIRING soon (with expiry dates). Use Seed Keyword Finder, Length-Based Generator, or Regex Filter. RDAP checks + optional traffic. Export CSV." />
+  <meta property="og:description" content="Domain Finder (Available + Expiring). Free online tool by UpTools." />
   <meta property="og:url" content="https://www.uptools.in/domain-finder/" />
   <meta property="og:image" content="/assets/og/domain-finder.png" />
   <meta property="og:site_name" content="UpTools" />
@@ -97,6 +99,8 @@
       gap:.75rem;
       min-height:560px;
     }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 1020px){ main.page{ grid-template-columns:1fr; height:auto; } }
 
     /* ---------- Panels ---------- */
@@ -163,9 +167,26 @@
 
     footer{ max-width:var(--content-w); margin:.6rem auto 1rem; color:#9db3c6; text-align:center; }
     footer a{ color:#9ac7ff; text-decoration:none; }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
   <!-- Header -->
     <!-- Header -->
   <header class="site" role="banner">
@@ -187,7 +208,7 @@
     </div>
   </header>
 
-  <main class="page">
+  <main role="main" class="page">
     <!-- LEFT: Three separate sections -->
     <section class="panel" id="controls">
       <div class="panel-header">

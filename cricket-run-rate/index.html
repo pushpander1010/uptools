@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Cricket Run Rate Calculator - Target Score & Required Run Rate | UpTools</title>
   <!-- Favicon -->
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
@@ -10,19 +10,24 @@
   <meta name="description" content="Free Cricket Run Rate Calculator by UpTools. Calculate required run rate, projected total, and target score for T20, ODI & Test cricket matches. Fast, accurate & privacy-first." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta name="theme-color" content="#0a0b0f" />
+<link href="https://www.uptools.in/cricket-run-rate/" rel="canonical"/>
   <meta name="keywords" content="cricket run rate calculator, required run rate, target score, t20 run rate, odi run rate, cricket target calculator, projected score, powerplay runs" />
 
-  <link rel="canonical" href="https://www.uptools.in/cricket-run-rate/" />
+  
 
   <meta property="og:title" content="Cricket Run Rate Calculator - Target Score & Required Run Rate | UpTools" />
-  <meta property="og:description" content="Free Cricket Run Rate Calculator by UpTools. Calculate required run rate, projected total, and target score for T20, ODI & Test cricket matches. Fast, accurate & privacy-first." />
+  <meta property="og:description" content="Cricket Run Rate Calculator - Target Score & Required Run Rate. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/cricket-run-rate/" />
   <meta property="og:site_name" content="UpTools" />
   <meta property="og:image" content="/assets/og/cricket-run-rate.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cricket Run Rate Calculator - Target Score & Required Run Rate | UpTools" />
+  <meta name="twitter:description" content="Cricket Run Rate Calculator - Target Score & Required Run Rate. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
 
   <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
@@ -50,6 +55,8 @@
     }
     .wrap{ max-width:1100px; margin:0 auto; padding:24px 16px 32px; display:grid; gap:16px; }
     .grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:16px; align-items:start; }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
     .card{ border:1px solid var(--line); border-radius:14px; background:var(--card); padding:1rem; }
     .tool-header{ display:flex; align-items:center; gap:12px; margin-bottom:8px; }
@@ -109,7 +116,22 @@
     .faqitem{ margin-bottom:12px; }
     .faqitem h3{ font-size:.95rem; margin:0 0 4px; color:var(--ink); }
     .faqitem p{ margin:0; color:var(--muted); font-size:.9rem; }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 
   <script type="application/ld+json">
   {
@@ -131,10 +153,10 @@
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
 
     <!-- Header -->
   <header class="site" role="banner">

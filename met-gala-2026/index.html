@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Met Gala 2026 Fashion Looks - Celebrity Red Carpet Styles & Designers</title>
   <meta name="description" content="Explore Met Gala 2026 red carpet fashion with searchable celebrity looks, designer credits, and styling details. Fast, visual guide to the year's most iconic fashion moments." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta name="theme-color" content="#0b1020" />
+<link href="https://www.uptools.in/met-gala-2026/" rel="canonical"/>
   <meta name="keywords" content="Met Gala 2026, red carpet fashion, celebrity looks, designer fashion, Rihanna, Beyonce, Kim Kardashian, Chanel, Saint Laurent, fashion highlights" />
-  <link rel="canonical" href="https://www.uptools.in/met-gala-2026/" />
+  
   <meta property="og:title" content="Met Gala 2026 Fashion Looks - Celebrity Red Carpet Styles & Designers" />
-  <meta property="og:description" content="Explore Met Gala 2026 red carpet fashion with searchable celebrity looks, designer credits, and styling details. Fast, visual guide to the year" />
+  <meta property="og:description" content="Met Gala 2026 Fashion Looks - Celebrity Red Carpet Styles & Designers. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/met-gala-2026/" />
   <meta property="og:image" content="https://images.unsplash.com/photo-1762285315034-0df9960d9905?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1200" />
   <meta property="og:image:width" content="1200" />
@@ -57,14 +59,31 @@
     .faq-item { margin-bottom: 20px; }
     .faq-item h3 { margin: 0 0 8px 0; color: #e7b85d; }
     .faq-item p { margin: 0; color: #b8c5dc; line-height: 1.6; }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 720px) { .toolbar { grid-template-columns: 1fr; } .gallery-preview { grid-template-columns: repeat(2, 1fr); } }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
     <!-- Header -->
   <header class="site" role="banner">
     <div class="header-inner">
@@ -116,7 +135,7 @@
       <div class="toolbar">
         <label>
           <span class="note small">Search celebrity or designer</span>
-          <input id="q" class="input" type="search" placeholder="Try Rihanna, Chanel, Saint Laurent..." />
+          <input aria-label="Search celebrity or designer" id="q" class="input" type="search" placeholder="Try Rihanna, Chanel, Saint Laurent..." />
         </label>
         <label>
           <span class="note small">Filter by designer</span>

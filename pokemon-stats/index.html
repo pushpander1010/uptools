@@ -11,6 +11,7 @@
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="#0b1020" name="theme-color"/>
 <link href="https://www.uptools.in/pokemon-stats/" rel="canonical"/>
+
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
 <!-- Open Graph / Twitter -->
@@ -22,6 +23,9 @@
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="Pokemon Stats Directory | UpTools" />
+  <meta name="twitter:description" content="Search all Pokemon and view base stats, types, abilities, and size. Export to CSV." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/home.png" />
 <link as="style" href="/style.css" rel="preload"/>
 <link href="/style.css" media="print" onload="this.media='all'" rel="stylesheet"/>
 <noscript><link href="/style.css" rel="stylesheet"/></noscript>
@@ -54,6 +58,8 @@
 <style>
     .hero { align-items:center; gap:12px }
     .grid { display:grid; grid-template-columns: 1fr 1.2fr; gap:12px }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 980px){ .grid { grid-template-columns: 1fr; } }
     .toolbar { display:flex; gap:8px; flex-wrap:wrap; align-items:center }
     .list { display:grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap:8px; }
@@ -69,16 +75,32 @@
     .muted { color:var(--muted); }
     .mini { font-size:12px; color:var(--muted); }
     .sticky { position: sticky; top: 12px; }
-  </style>
-  <link rel="canonical" href="https://www.uptools.in/pokemon-stats/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="Pokemon Stats Directory | All Pokemon Base Stats | UpTools" />
-  <meta property="og:description" content="" />
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  
+  <meta property="og:description" content="Search all Pokemon and view base stats, types, abilities, and size. Export to CSV." />
   <meta property="og:url" content="https://www.uptools.in/pokemon-stats/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
 </head>
 <body style="--accent:#22d3ee;--bg1:#0b0f1a;--bg2:#121a2f">
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
@@ -101,7 +123,7 @@
 </nav>
 </div>
 </header>
-<main class="container" id="top">
+<main role="main" class="container" id="top">
 <section aria-labelledby="title" class="card hero">
 <div class="tool-icon">PKM</div>
 <div>
@@ -118,7 +140,7 @@
 <div class="toolbar">
 <label class="inline" style="flex:1; min-width:220px;">
 <span class="mini">Search</span>
-<input autocomplete="off" class="input" id="search" placeholder="Type a name, e.g. pikachu"/>
+<input aria-label="All generations" autocomplete="off" class="input" id="search" placeholder="Type a name, e.g. pikachu"/>
 </label>
 <button class="btn secondary sm" id="loadMore" type="button">Load more</button>
 <button class="btn sm" id="exportCsv" type="button">Export all stats (CSV)</button>

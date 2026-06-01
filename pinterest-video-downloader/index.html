@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Pinterest Video Downloader - Download Pins & Videos | UpTools</title>
   <!-- Favicon -->
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Free Pinterest video downloader. Download Pinterest pins, videos, and images in HD quality. Save pins for offline viewing.">
-  <link rel="canonical" href="https://www.uptools.in/pinterest-video-downloader/" />
+  
   
   <meta property="og:title" content="Pinterest Video Downloader - Download Pins & Videos | UpTools" />
-  <meta property="og:description" content="Free Pinterest video downloader. Download Pinterest pins, videos, and images in HD quality. Save pins for offline viewing." />
+  <meta property="og:description" content="Pinterest Video Downloader - Download Pins & Videos. Free online tool by UpTools." />
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/pinterest-video-downloader/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/pinterest-video-downloader.png">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pinterest Video Downloader - Download Pins & Videos | UpTools" />
+  <meta name="twitter:description" content="Pinterest Video Downloader - Download Pins & Videos. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   
   <link rel="preload" href="/style.css" as="style">
   <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
@@ -65,14 +70,32 @@
     @media (prefers-reduced-motion: reduce) {
       .quality-option, .input-group button { transition: none; }
     }
-  </style>
-  <meta name="robots" content="pinterest video downloader, pinterest video downloader, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/pinterest-video-downloader/" rel="canonical"/>
+<meta name="keywords" content="pinterest video downloader, pinterest video downloader, online tool, free calculator, uptools" />
+
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
   
     <!-- Header -->
   <header class="site" role="banner">
@@ -227,19 +250,19 @@
 <div class="card" style="border-color:rgba(34,197,94,.3)">
 <h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
 <ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
-<li style="padding:.35rem 0">✅ <b>Do</b> use this tool to save time on manual calculations.</li>
-<li style="padding:.35rem 0">✅ <b>Do</b> double-check your inputs for accuracy.</li>
-<li style="padding:.35rem 0">✅ <b>Do</b> share results with teammates using the Share feature.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> respect content creators' rights and original work.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> use downloaded content for personal, non-commercial purposes.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> credit original creators when sharing their content.</li>
 <li style="padding:.35rem 0">✅ <b>Do</b> bookmark this tool for quick access.</li>
 </ul>
 </div>
 <div class="card" style="border-color:rgba(239,68,68,.3)">
 <h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
 <ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
-<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — this tool doesn't store anything.</li>
-<li style="padding:.35rem 0">❌ <b>Don't</b> use results as professional financial/legal/medical advice.</li>
-<li style="padding:.35rem 0">❌ <b>Don't</b> forget to verify critical calculations with official tools.</li>
-<li style="padding:.35rem 0">❌ <b>Don't</b> assume results are guarantees — they are estimates.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> download copyrighted content without permission.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> redistribute content as your own work.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use this tool for commercial purposes without rights.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> violate platform terms of service.</li>
 </ul>
 </div>
 </div>
@@ -248,17 +271,17 @@
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">Frequently Asked Questions</h2>
 <details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
-<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. Your input is used only to fetch the requested content. No data is stored on our servers.</p></details>
 <details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
-<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+<details><summary><b>Does this work offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">No. This tool requires an internet connection to fetch content from third-party services.</p></details>
 </section>
 <!-- SEO: How it works -->
 <section class="card" style="margin-top:16px">
 <details open>
 <summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
 <div style="margin-top:8px;color:#9aa4b2">
-<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
-<p>Results update instantly as you type — no waiting for server responses.</p>
+<p>This tool fetches content using third-party APIs. No data is stored on our servers.</p>
+<p>Results are generated in seconds — no waiting for local processing.</p>
 <p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
 </div>
 </details>

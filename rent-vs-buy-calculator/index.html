@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Rent vs Buy Calculator - Should I Rent or Buy a Home? | UpTools</title>
   <!-- Favicon -->
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Free rent vs buy calculator. Compare the true cost of renting vs buying a home. See which option saves you more money over time.">
-  <link rel="canonical" href="https://www.uptools.in/rent-vs-buy-calculator/" />
+  
   
   <meta property="og:title" content="Rent vs Buy Calculator - Should I Rent or Buy a Home? | UpTools" />
-  <meta property="og:description" content="Free rent vs buy calculator. Compare the true cost of renting vs buying a home. See which option saves you more money over time." />
+  <meta property="og:description" content="Rent vs Buy Calculator - Should I Rent or Buy a Home?. Free online tool by UpTools." />
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/rent-vs-buy-calculator/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/rent-vs-buy-calculator.png">
   
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <meta name="twitter:title" content="Rent vs Buy Calculator">
   <meta name="twitter:description" content="Compare the true cost of renting vs buying a home.">
   
@@ -152,17 +154,36 @@
     .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
     .comparison-col { padding: 1rem; background: rgba(122,162,255,.05); border-radius: var(--radius); }
     .winner { border: 2px solid var(--brand); background: rgba(122,162,255,.15); }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 640px) {
       .comparison { grid-template-columns: 1fr; }
     }
-  </style>
-  <meta name="robots" content="rent vs buy calculator, rent vs buy calculator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/rent-vs-buy-calculator/" rel="canonical"/>
+<meta name="keywords" content="rent vs buy calculator, rent vs buy calculator, online tool, free calculator, uptools" />
+
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
   
     <!-- Header -->
   <header class="site" role="banner">

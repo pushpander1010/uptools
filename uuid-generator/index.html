@@ -5,13 +5,14 @@
 <!-- Google Ads (async to avoid CLS) -->
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>UUID / GUID Generator &amp; Validator (v1, v4, v5) – UpTools</title>
 <meta content="Generate and validate UUIDs (v1, v4, v5). Batch create, copy, download CSV/TXT, toggle hyphens/uppercase/braces, and format as URN. Privacy-friendly: everything runs in your browser." name="description"/>
 <meta content="UUID generator, GUID generator, UUID v4, UUID v1, UUID v5, name-based UUID, RFC 4122, validate UUID, URN uuid, bulk uuid, download CSV, UpTools" name="keywords"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
 <meta content="#0b1020" name="theme-color"/>
 <link href="https://www.uptools.in/uuid-generator/" rel="canonical"/>
+
 <!-- Favicons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -23,6 +24,9 @@
 <meta content="UpTools" property="og:site_name"/>
 <meta content="/assets/og/uuid-generator.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="UUID / GUID Generator &amp; Validator (v1, v4, v5) – UpTools" />
+  <meta name="twitter:description" content="Generate v1, v4, v5 UUIDs, validate, and export. Batch mode, copy, URN/braces/uppercase options. 100% client-side." />
+  <meta name="twitter:image" content="/assets/og/uuid-generator.png" />
 <!-- Performance hints -->
 <link crossorigin="" href="https://pagead2.googlesyndication.com" rel="preconnect"/>
 <link href="//pagead2.googlesyndication.com" rel="dns-prefetch"/>
@@ -33,6 +37,8 @@
 <!-- Page-scoped styles (kept small; complements common CSS) -->
 <style>
     .two-col{display:grid;gap:12px;grid-template-columns:1fr}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (min-width: 920px){.two-col{grid-template-columns:1.15fr .85fr}}
     .stack{display:grid;gap:10px}
     .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
@@ -46,7 +52,22 @@
     .kbd{padding:2px 6px;border-radius:6px;border:1px solid var(--line,#2b3142);font:600 12px/1 ui-monospace,monospace}
     .pill.sec{background:#0b1326;border:1px solid var(--border)}
     .list-tight li{margin:.25rem 0}
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Structured Data: WebApplication + FAQ -->
 
 <script type="application/ld+json">
@@ -76,14 +97,14 @@
     ]
   }
   </script>
-  <link rel="canonical" href="https://www.uptools.in/uuid-generator/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="UUID / GUID Generator &amp; Validator (v1, v4, v5) – UpTools" />
-  <meta property="og:description" content="" />
+  
+  <meta property="og:description" content="Generate v1, v4, v5 UUIDs, validate, and export. Batch mode, copy, URN/braces/uppercase options. 100% client-side." />
   <meta property="og:url" content="https://www.uptools.in/uuid-generator/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- Site header (shared pattern) -->
 <!-- Header -->
 <header class="site" role="banner">
@@ -104,7 +125,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap" id="main">
+<main role="main" class="wrap" id="main">
 <!-- Hero -->
 <section aria-labelledby="pg-title" class="card hero">
 <div class="two-col">
@@ -154,10 +175,10 @@
 </input></div>
 <!-- Format options -->
 <div class="opt-grid">
-<label class="check"><input checked="" id="optHyphen" type="checkbox"/> <span>Hyphens</span></label>
-<label class="check"><input id="optUpper" type="checkbox"/> <span>Uppercase</span></label>
-<label class="check"><input id="optBraces" type="checkbox"/> <span>Braces { }</span></label>
-<label class="check"><input id="optURN" type="checkbox"/> <span>URN (urn:uuid:)</span></label>
+<label class="check"><input aria-label="Namespace UUID" checked="" id="optHyphen" type="checkbox"/> <span>Hyphens</span></label>
+<label class="check"><input aria-label="Name" id="optUpper" type="checkbox"/> <span>Uppercase</span></label>
+<label class="check"><input aria-label="Hyphens" id="optBraces" type="checkbox"/> <span>Braces { }</span></label>
+<label class="check"><input aria-label="Hyphens" id="optURN" type="checkbox"/> <span>URN (urn:uuid:)</span></label>
 </div>
 <!-- Output -->
 <div class="row">
@@ -181,7 +202,7 @@
 <div class="card" id="val-card">
 <h2 class="h3">Validator</h2>
 <div class="stack">
-<input class="input mono" id="valInput" placeholder="Paste a UUID here to validate…"/>
+<input aria-label="Validator" class="input mono" id="valInput" placeholder="Paste a UUID here to validate…"/>
 <div class="row">
 <button class="btn" id="valBtn">Validate</button>
 <button class="btn ghost" id="valClear">Clear</button>

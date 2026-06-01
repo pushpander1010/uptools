@@ -5,17 +5,18 @@
 <!-- Ads (kept stable to avoid layout shift; only inserted if ad-slot meta is set) -->
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>SIP Calculator (Index &amp; MF Live Rates) � Free Online | UpTools</title>
 <meta content="Free SIP Calculator by UpTools. Estimate future value of your monthly investments. Pull historical CAGR from Nifty indices or Indian mutual funds (MFAPI) to auto-fill expected return. Fast, responsive &amp; privacy-first." name="description"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <meta content="#0a0b0f" name="theme-color"/>
+<link href="https://www.uptools.in/sip-calculator/" rel="canonical"/>
 <meta content="SIP calculator, step up SIP, mutual fund calculator, nifty 50 CAGR, nifty bank CAGR, index sip, mfapi, indian mutual fund nav" name="keywords"/>
 <!-- Favicon / App Icons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
 <!-- Canonical -->
-<link href="https://www.uptools.in/sip-calculator/" rel="canonical">
+
 <!-- Open Graph / Twitter -->
 <meta content="SIP Calculator (Index &amp; MF Live Rates) � UpTools" property="og:title"/>
 <meta content="Estimate SIP future value with optional step-up &amp; inflation. Auto-fill expected return from Nifty indices or mutual funds." property="og:description"/>
@@ -26,6 +27,9 @@
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="SIP Calculator (Index &amp; MF Live Rates) � UpTools" />
+  <meta name="twitter:description" content="Estimate SIP future value with optional step-up &amp; inflation. Auto-fill expected return from Nifty indices or mutual funds." />
+  <meta name="twitter:image" content="/assets/og/sip-calculator.png" />
 <!-- Common CSS -->
 <link as="style" href="/style.css?v=1.0.1" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
 <noscript><link href="/style.css?v=1.0.1" rel="stylesheet"/></noscript>
@@ -91,6 +95,8 @@
     /* Layout */
     .wrap{ max-width:1100px; margin:0 auto; padding:24px 16px 32px; display:grid; gap:16px; }
     .grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:16px; align-items:start; }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
 
     /* Cards override to gold theme */
@@ -163,7 +169,22 @@
 
     /* Accessibility utility */
     .assistive{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Structured data: Breadcrumb + FAQ -->
 
 <script type="application/ld+json">
@@ -214,16 +235,18 @@
     ]
   }
   </script>
-</link>  <link rel="canonical" href="https://www.uptools.in/sip-calculator/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+</link>  
+  
   <meta property="og:title" content="SIP Calculator (Index &amp; MF Live Rates) � Free Online | UpTools" />
-  <meta property="og:description" content="" />
+  <meta property="og:description" content="Estimate SIP future value with optional step-up &amp;amp; inflation. Auto-fill expected return from Nifty indices or mutual funds." />
   <meta property="og:url" content="https://www.uptools.in/sip-calculator/" />
   <meta property="og:type" content="website" />
 </head>
 <body class="bg-accents">
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- small fixed -->
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
@@ -249,7 +272,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap">
+<main role="main" class="wrap">
 <div class="tool-header">
 <div aria-hidden="true" class="tool-icon">?</div>
 <h1 style="margin:0">SIP Calculator</h1>

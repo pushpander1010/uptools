@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tic Tac Toe - Free Online Game | UpTools</title>
   <meta name="description" content="Play Tic Tac Toe online! Classic game with AI opponent or multiplayer mode. Fast, free, no sign-ups required.">
+  <!-- Open Graph -->
+  <meta property="og:image" content="https://www.uptools.in/assets/home.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tic Tac Toe - Free Online Game | UpTools" />
+  <meta name="twitter:description" content="Tic Tac Toe - Free Online Game. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <link rel="canonical" href="https://www.uptools.in/games/tic-tac-toe/" />
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
@@ -611,15 +620,31 @@
     .autojoin-card input:focus { outline: none; border-color: var(--accent); }
     .autojoin-card .btn-row { display:flex; gap:.5rem; }
     .autojoin-card .btn-row .btn { flex:1; }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 
   <meta property="og:title" content="Tic Tac Toe - Free Online Game | UpTools" />
-  <meta property="og:description" content="Play Tic Tac Toe online! Classic game with AI opponent or multiplayer mode. Fast, free, no sign-ups required." />
+  <meta property="og:description" content="Tic Tac Toe - Free Online Game. Free online tool by UpTools." />
   <meta property="og:url" content="https://www.uptools.in/games/tic-tac-toe/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
 </head>
 <body>
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
   <header class="site" role="banner">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="UpTools Home">
@@ -654,7 +679,7 @@
         <div class="setup-section" id="createSection">
           <h3>Create Game</h3>
           <div class="input-group">
-            <input type="text" id="playerName" placeholder="Enter your name" maxlength="20">
+            <input aria-label="⭕ Tic Tac Toe" type="text" id="playerName" placeholder="Enter your name" maxlength="20">
             <button class="btn" onclick="createMultiplayerGame()">Create & Get Link</button>
           </div>
         </div>
@@ -662,8 +687,8 @@
         <div class="setup-section" id="joinSection">
           <h3>Join Game</h3>
           <div class="input-group">
-            <input type="text" id="gameCode" placeholder="Enter game code" maxlength="6">
-            <input type="text" id="joinPlayerName" placeholder="Enter your name" maxlength="20">
+            <input aria-label="Create Game" type="text" id="gameCode" placeholder="Enter game code" maxlength="6">
+            <input aria-label="Create Game" type="text" id="joinPlayerName" placeholder="Enter your name" maxlength="20">
             <button class="btn" onclick="joinMultiplayerGame()">Join Game</button>
           </div>
         </div>
@@ -671,7 +696,7 @@
         <div class="game-link" id="gameLink">
           <h4>Game created! Share with your friend:</h4>
           <div class="link-input-group">
-            <input type="text" id="sharableLink" readonly>
+            <input aria-label="Game created! Share with your friend" type="text" id="sharableLink" readonly>
             <button class="btn" onclick="openShareModal()">🔗 Share & QR</button>
           </div>
         </div>
@@ -725,7 +750,7 @@
       </div>
       <p style="color:var(--muted);font-size:.85rem;margin:0 0 .75rem">Scan QR or copy the link below</p>
       <div class="share-url-row">
-        <input type="text" id="shareUrlInput" readonly>
+        <input aria-label="🔗 Share Game" type="text" id="shareUrlInput" readonly>
         <button class="copy-btn" id="shareCopyBtn" onclick="copyShareUrl()">Copy</button>
       </div>
     </div>
@@ -736,7 +761,7 @@
     <div class="autojoin-card">
       <h3>👥 Join Game</h3>
       <p id="autojoinDesc">Enter your name to join this Tic Tac Toe game.</p>
-      <input type="text" id="autojoinName" placeholder="Your name" maxlength="20" autocomplete="off">
+      <input aria-label="👥 Join Game" type="text" id="autojoinName" placeholder="Your name" maxlength="20" autocomplete="off">
       <div class="btn-row">
         <button class="btn secondary" onclick="closeAutojoin()">Cancel</button>
         <button class="btn" id="autojoinConfirmBtn" onclick="confirmAutojoin()">Join Game</button>

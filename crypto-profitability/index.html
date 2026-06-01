@@ -2,16 +2,17 @@
 
 <html lang="en">
 <head>
-<!-- Ads: no inline ad slot to avoid CLS. (Place your fixed-size ad container where marked in <main> if enabled site-wide.) -->
+<!-- Ads: no inline ad slot to avoid CLS. (Place your fixed-size ad container where marked in <main role="main"> if enabled site-wide.) -->
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>Crypto Mining Profitability Calculator (BTC, LTC, ETC, RVN, XMR, KAS) — Hashrate → Earnings, Power Cost &amp; ROI | UpTools</title>
 <meta content="Calculate crypto mining profits in INR &amp; USD. Supports BTC, LTC, ETC, RVN, XMR, KAS. Enter hashrate, power (W), electricity cost, pool fee, uptime, and hardware cost. Auto-fetch coin prices, BTC network difficulty, estimate daily/weekly/monthly revenue, power cost, net profit, and ROI." name="description"/>
 <meta content="crypto mining calculator, bitcoin mining profitability, btc mining calculator, mining roi, hashrate to earnings, electricity cost mining, ethereum classic mining, ravencoin mining, monero mining, kaspa mining, litecoin mining, mining profit india, btc price in inr" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <meta content="#0b0f1a" name="theme-color"/>
 <link href="https://www.uptools.in/crypto-profitability/" rel="canonical"/>
+
 <!-- Social -->
 <meta content="Crypto Mining Profitability Calculator — Hashrate → Profit &amp; ROI" property="og:title"/>
 <meta content="Live prices + power cost: estimate daily/weekly/monthly profit for BTC, LTC, ETC, RVN, XMR, KAS in INR &amp; USD. Pool fee, uptime &amp; ROI included." property="og:description"/>
@@ -20,6 +21,9 @@
 <meta content="UpTools" property="og:site_name"/>
 <meta content="https://www.uptools.in/assets/og/crypto-mining-calc.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="Crypto Mining Profitability Calculator — Hashrate → Profit &amp; ROI" />
+  <meta name="twitter:description" content="Live prices + power cost: estimate daily/weekly/monthly profit for BTC, LTC, ETC, RVN, XMR, KAS in INR &amp; USD. Pool fee, uptime &amp; ROI included." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/crypto-mining-calc.png" />
 <!-- Favicon -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -76,13 +80,30 @@
     .result-box .lab{ color:var(--muted); font-size:12px; }
     .result-box .val{ font-weight:900; font-variant-numeric:tabular-nums; }
     .divider-hr{ height:1px; background: color-mix(in oklab, var(--accent) 25%, #243); margin:10px 0; }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 920px){
       .grid2{ grid-template-columns: 1fr; }
       .sticky-panel{ position:static; }
       .kpis{ grid-template-columns:repeat(2,1fr); }
       .result-grid{ grid-template-columns:1fr; }
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Structured Data -->
 
 <script type="application/ld+json">
@@ -111,15 +132,16 @@
     ]
   }
   </script>
-  <link rel="canonical" href="https://www.uptools.in/crypto-profitability/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="Crypto Mining Profitability Calculator (BTC, LTC, ETC, RVN, XMR, KAS) — Hashrate → Earnings, Power Cost &amp; ROI | UpTools" />
-  <meta property="og:description" content="" />
+  
+  
+  <meta property="og:description" content="Live prices + power cost: estimate daily/weekly/monthly profit for BTC, LTC, ETC, RVN, XMR, KAS in INR &amp;amp; USD. Pool fee, uptime &amp;amp; ROI included." />
   <meta property="og:url" content="https://www.uptools.in/crypto-profitability/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 <!-- Header -->
 <!-- Header -->
@@ -139,9 +161,7 @@
 <a href="/about/">About</a>
 <a href="/contact/">Contact</a>
 </nav>
-</div>
-</header>
-<main class="wrap" id="main">
+</div<main role="main" class="wrap" id="main">" id="main">
 <section aria-label="Crypto Mining Profitability Calculator" class="hero-miner neon">
 <div class="ico">⛏</div>
 <div>

@@ -9,11 +9,15 @@
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <link rel="canonical" href="https://www.uptools.in/games/hangman/" />
   <meta property="og:title" content="Hangman Game Online - Free Word Guessing Game | UpTools Games" />
-  <meta property="og:description" content="Play Hangman online for free. Classic word guessing game with multiple categories. No sign-up, no downloads. Mobile-friendly." />
+  <meta property="og:description" content="Hangman Game Online - Free Word Guessing Game. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/games/hangman/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="hangman" />
+  <meta name="twitter:description" content="Hangman Game Online - Free Word Guessing Game. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <link rel="stylesheet" href="/style.css?v=1.3.0" />
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"VideoGame","name":"Hangman","url":"https://www.uptools.in/games/hangman/","applicationCategory":"Game","genre":["Word","Classic","Puzzle"]}
@@ -49,9 +53,26 @@
       text-align: center;
       backdrop-filter: blur(8px);
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -76,7 +97,7 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main role="main" class="wrap">
     <div class="game-wrap">
       <section class="card hero" aria-labelledby="title">
         <div>

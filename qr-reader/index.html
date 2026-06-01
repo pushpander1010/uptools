@@ -15,9 +15,10 @@
 <!-- SEO -->
 <meta content="Free QR code scanner in your browser. Tap Enable Camera to trigger the permission prompt, then scan via camera or upload an image. Multiple codes, Wi-Fi &amp; vCard parsing, copy/share/open, torch, camera switch, local history. Privacy-first - no uploads." name="description"/>
 <meta content="qr reader, qr reader, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
-<link href="https://www.uptools.in/qr-reader/" rel="canonical">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+
 <meta content="#0b1020" name="theme-color"/>
+<link href="https://www.uptools.in/qr-reader/" rel="canonical"/>
 <!-- Favicons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="48x48" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -210,6 +211,8 @@
       aspect-ratio: 16/9
     }
 
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width:980px) {
       .qr-main {
         grid-template-columns: 1fr
@@ -227,16 +230,35 @@
         max-height: min(45vh, 420px)
       }
     }
-  </style>
-</link>  <link rel="canonical" href="https://www.uptools.in/qr-reader/" />
-  <meta name="robots" content="qr reader, qr reader, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+</link>  
+  
+<meta name="keywords" content="qr reader, qr reader, online tool, free calculator, uptools" />
+
   <meta property="og:title" content="QR Reader - Scan QR Codes Online (Camera &amp; Image) | UpTools" />
-  <meta property="og:description" content="" />
+  <meta property="og:description" content="Enable camera permission with one tap and scan QR codes instantly. Works on-device - no uploads." />
   <meta property="og:url" content="https://www.uptools.in/qr-reader/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <div class="qr-wrap">
 <!-- Header -->
 <!-- Header -->
@@ -258,7 +280,7 @@
 </nav>
 </div>
 </header>
-<main aria-labelledby="page-title" class="qr-main container" id="main">
+<main role="main" aria-labelledby="page-title" class="qr-main container" id="main">
 <!-- Camera + Controls -->
 <section aria-label="QR camera scanner" class="qr-panel qr-media">
 <div aria-live="polite" class="perm-strip" id="permStrip" role="status">

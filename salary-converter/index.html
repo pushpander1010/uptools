@@ -2,21 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Salary Converter - Hourly, Daily, Weekly, Monthly, Annual | UpTools</title>
   <meta name="description" content="Convert salary between hourly, daily, weekly, monthly and annual pay. Free wage calculator for remote jobs, freelancing, contracts and international work." />
-  <meta name="robots" content="salary converter, salary converter, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<meta name="keywords" content="salary converter, salary converter, online tool, free calculator, uptools" />
+
   <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://www.uptools.in/salary-converter/" />
+<link href="https://www.uptools.in/salary-converter/" rel="canonical"/>
+  
   <link rel="alternate" hreflang="en" href="https://www.uptools.in/salary-converter/" />
   <link rel="alternate" hreflang="de" href="https://www.uptools.in/de/salary-converter/" />
   <link rel="alternate" hreflang="fr" href="https://www.uptools.in/fr/salary-converter/" />
   <link rel="alternate" hreflang="es" href="https://www.uptools.in/es/salary-converter/" />
   <link rel="alternate" hreflang="x-default" href="https://www.uptools.in/salary-converter/" />
   <meta property="og:title" content="Salary Converter - Hourly, Daily, Weekly, Monthly, Annual | UpTools" />
-  <meta property="og:description" content="Convert salary between hourly, daily, weekly, monthly and annual pay. Free wage calculator for remote jobs, freelancing, contracts and international work." />
+  <meta property="og:description" content="Salary Converter - Hourly, Daily, Weekly, Monthly, Annual. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/salary-converter/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -44,13 +47,29 @@
     .input, .select { width:100%; background:#0e1628; border:1px solid #212a3a; border-radius:.75rem; color:#e6edf3; padding:.72rem .85rem; }
     .result-grid { display:grid; gap:10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-top:12px; }
     .result-box { background:#101b30; border-radius:12px; border:1px solid #273551; padding:12px; min-height:88px; }
-  </style>
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
     <!-- Header -->
   <header class="site" role="banner">
     <div class="header-inner">

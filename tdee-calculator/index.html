@@ -3,17 +3,23 @@
 <head>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>TDEE Calculator – Total Daily Energy Expenditure & Macros | UpTools</title>
   <meta name="description" content="Free TDEE calculator. Find your Total Daily Energy Expenditure, BMR, and macro targets for weight loss, maintenance, or muscle gain. Imperial & metric units."/>
-  <meta name="robots" content="tdee calculator, tdee calculator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <link rel="canonical" href="https://www.uptools.in/tdee-calculator/" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/tdee-calculator/" rel="canonical"/>
+<meta name="keywords" content="tdee calculator, tdee calculator, online tool, free calculator, uptools" />
+
+  
   <meta property="og:title" content="TDEE Calculator – Total Daily Energy Expenditure & Macros | UpTools" />
-  <meta property="og:description" content="Free TDEE calculator. Find your Total Daily Energy Expenditure, BMR, and macro targets for weight loss, maintenance, or muscle gain. Imperial & metric units." />
+  <meta property="og:description" content="TDEE Calculator – Total Daily Energy Expenditure & Macros. Free online tool by UpTools." />
   <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/tdee-calculator/" />
   <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="TDEE Calculator – Total Daily Energy Expenditure & Macros | UpTools" />
+  <meta name="twitter:description" content="TDEE Calculator – Total Daily Energy Expenditure & Macros. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <link rel="icon" type="image/svg+xml" href="/assets/logo/uptools-logo.svg"/>
   <link rel="stylesheet" href="/style.css?v=1.3.0"/>
   
@@ -69,6 +75,8 @@
     .unit-btn{padding:.45rem 1.1rem;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-weight:700;cursor:pointer;transition:all .18s;}
     .unit-btn.active{background:var(--accent);color:#071018;}
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media(max-width:480px){.form-grid{grid-template-columns:1fr;}}
     .field label{display:block;margin-bottom:.3rem;font-weight:700;color:var(--muted);font-size:.85rem;}
     .field input,.field select{width:100%;padding:.6rem .75rem;border-radius:10px;background:#0a1224;border:1px solid var(--border);color:var(--text);font:inherit;}
@@ -107,9 +115,26 @@
     .macro-table td:first-child{text-align:left;}
     .bar-wrap{height:8px;border-radius:99px;background:#1a2030;overflow:hidden;}
     .bar-fill{height:100%;border-radius:99px;}
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <header class="site" role="banner">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="UpTools Home">
@@ -142,7 +167,7 @@
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 
-<main class="wrap">
+<main role="main" class="wrap">
   <div class="tool-hero">
     <h1>🔥 TDEE Calculator</h1>
     <p>Total Daily Energy Expenditure · BMR · Macros for your goal</p>
@@ -157,7 +182,7 @@
     <div class="form-grid">
       <div class="field">
         <label>Age (years)</label>
-        <input id="age" type="number" min="10" max="100" value="25" placeholder="25"/>
+        <input aria-label="Age (years)" id="age" type="number" min="10" max="100" value="25" placeholder="25"/>
       </div>
       <div class="field">
         <label>Sex</label>
@@ -169,17 +194,17 @@
       <div class="field" id="heightField">
         <label id="heightLabel">Height (ft &amp; in)</label>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem;">
-          <input id="heightFt" type="number" min="3" max="8" value="5" placeholder="ft"/>
-          <input id="heightIn" type="number" min="0" max="11" value="10" placeholder="in"/>
+          <input aria-label="Sex" id="heightFt" type="number" min="3" max="8" value="5" placeholder="ft"/>
+          <input aria-label="Height (ft &amp; in)" id="heightIn" type="number" min="0" max="11" value="10" placeholder="in"/>
         </div>
       </div>
       <div class="field" id="heightFieldMetric" style="display:none">
         <label>Height (cm)</label>
-        <input id="heightCm" type="number" min="100" max="250" value="178" placeholder="cm"/>
+        <input aria-label="Height (ft &amp; in)" id="heightCm" type="number" min="100" max="250" value="178" placeholder="cm"/>
       </div>
       <div class="field">
         <label id="weightLabel">Weight (lbs)</label>
-        <input id="weight" type="number" min="50" max="500" value="165" placeholder="165"/>
+        <input aria-label="Height (cm)" id="weight" type="number" min="50" max="500" value="165" placeholder="165"/>
       </div>
     </div>
 
@@ -187,23 +212,23 @@
       <label style="margin-bottom:.5rem;display:block;">Activity Level</label>
       <ul class="activity-list" id="activityList">
         <li class="activity-item" data-val="1.2" onclick="selectActivity(this)">
-          <input type="radio" name="act" value="1.2"/>
+          <input aria-label="Weight (lbs)" type="radio" name="act" value="1.2"/>
           <div><div class="activity-label">Sedentary</div><div class="activity-desc">Little or no exercise, desk job</div></div>
         </li>
         <li class="activity-item active" data-val="1.375" onclick="selectActivity(this)">
-          <input type="radio" name="act" value="1.375" checked/>
+          <input aria-label="Activity Level" type="radio" name="act" value="1.375" checked/>
           <div><div class="activity-label">Lightly Active</div><div class="activity-desc">Light exercise 1-3 days/week</div></div>
         </li>
         <li class="activity-item" data-val="1.55" onclick="selectActivity(this)">
-          <input type="radio" name="act" value="1.55"/>
+          <input aria-label="Sedentary" type="radio" name="act" value="1.55"/>
           <div><div class="activity-label">Moderately Active</div><div class="activity-desc">Moderate exercise 3-5 days/week</div></div>
         </li>
         <li class="activity-item" data-val="1.725" onclick="selectActivity(this)">
-          <input type="radio" name="act" value="1.725"/>
+          <input aria-label="Lightly Active" type="radio" name="act" value="1.725"/>
           <div><div class="activity-label">Very Active</div><div class="activity-desc">Hard exercise 6-7 days/week</div></div>
         </li>
         <li class="activity-item" data-val="1.9" onclick="selectActivity(this)">
-          <input type="radio" name="act" value="1.9"/>
+          <input aria-label="Moderately Active" type="radio" name="act" value="1.9"/>
           <div><div class="activity-label">Extra Active</div><div class="activity-desc">Very hard exercise, physical job, or 2x/day training</div></div>
         </li>
       </ul>

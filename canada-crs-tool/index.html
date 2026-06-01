@@ -3,13 +3,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>Canada CRS Score Calculator (Express Entry) - 2025 Rules | UpTools</title>
 <meta content="Accurate 2025 Canada CRS calculator. Uses official IRCC age grid, CLB points (incl. CLB 4-6), IELTS→CLB conversion, second official language, proper skill-transferability caps, Canadian study, and no job-offer points (removed Mar 25, 2025). Shareable permalink, privacy-first." name="description"/>
 <meta content="canada crs tool, canada crs tool, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <meta content="#0f1419" name="theme-color"/>
 <link href="https://www.uptools.in/canada-crs-tool/" rel="canonical"/>
+
 <meta content="Canada CRS Score Calculator (Express Entry) - 2025 Rules" property="og:title"/>
 <meta content="Official tables: age, CLB (incl. CLB 4-6), IELTS→CLB, skill-transferability, Canadian study. No job-offer points per 2025 change." property="og:description"/>
 <meta content="website" property="og:type"/>
@@ -17,6 +18,9 @@
 <meta content="UpTools" property="og:site_name"/>
 <meta content="https://www.uptools.in/assets/logo/uptools-logo.svg" property="og:image"/>
 <meta content="summary" name="twitter:card"/>
+  <meta name="twitter:title" content="Canada CRS Score Calculator (Express Entry) - 2025 Rules" />
+  <meta name="twitter:description" content="Official tables: age, CLB (incl. CLB 4-6), IELTS→CLB, skill-transferability, Canadian study. No job-offer points per 2025 change." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/logo/uptools-logo.svg" />
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
 <!-- 1) Inline ONLY tiny critical rules (below) -->
@@ -99,6 +103,8 @@
       grid-template-columns: 1fr;
     }
 
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (min-width:900px) {
       .grid-2 {
         grid-template-columns: 1fr 1fr;
@@ -172,7 +178,22 @@
     .full {
       grid-column: 1/-1;
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Structured data (breadcrumbs + howto + faq) -->
 <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
@@ -195,22 +216,21 @@
     {"@type":"Question","name":"Do CLB 4-6 get language points?","acceptedAnswer":{"@type":"Answer","text":"Yes. First official language gives points from CLB 4 upward (per ability)."}},
     {"@type":"Question","name":"Can I enter IELTS with decimals (e.g., 7.5)?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select IELTS mode and enter decimal band scores. We convert to CLB using IRCC thresholds."}}
   ]}</script>
-  <link rel="canonical" href="https://www.uptools.in/canada-crs-tool/" />
-  <meta name="robots" content="canada crs tool, canada crs tool, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  
+
   <meta property="og:title" content="Canada CRS Score Calculator (Express Entry) - 2025 Rules | UpTools" />
-  <meta property="og:description" content="" />
+  <meta property="og:description" content="Official tables: age, CLB (incl. CLB 4-6), IELTS→CLB, skill-transferability, Canadian study. No job-offer points per 2025 change." />
   <meta property="og:url" content="https://www.uptools.in/canada-crs-tool/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <!-- small fixed -->
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
-<a class="sr-only" href="#main">Skip to content</a>
+<a class="sr-only skip-link" href="#main">Skip to content</a>
 <!-- Header -->
 <header class="site" role="banner">
 <div class="header-inner">

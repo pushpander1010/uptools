@@ -3,18 +3,24 @@
 <head>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>GPA Calculator – Weighted & Unweighted (4.0 / 5.0 Scale) | UpTools</title>
   <meta name="description" content="Free GPA calculator for high school and college students. Supports weighted (5.0) and unweighted (4.0) scales. Add multiple semesters, track cumulative GPA instantly."/>
-  <meta name="robots" content="gpa calculator, gpa calculator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <link rel="canonical" href="https://www.uptools.in/gpa-calculator/" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/gpa-calculator/" rel="canonical"/>
+<meta name="keywords" content="gpa calculator, gpa calculator, online tool, free calculator, uptools" />
+
+  
   <meta property="og:title" content="GPA Calculator – Weighted & Unweighted (4.0 / 5.0 Scale) | UpTools" />
-  <meta property="og:description" content="Free GPA calculator for high school and college students. Supports weighted (5.0) and unweighted (4.0) scales. Add multiple semesters, track cumulative GPA instantly." />
+  <meta property="og:description" content="GPA Calculator – Weighted & Unweighted (4.0 / 5.0 Scale). Free online tool by UpTools." />
   <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/gpa-calculator/" />
   <meta property="og:site_name" content="UpTools"/>
   <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="GPA Calculator – Weighted & Unweighted (4.0 / 5.0 Scale) | UpTools" />
+  <meta name="twitter:description" content="GPA Calculator – Weighted & Unweighted (4.0 / 5.0 Scale). Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <link rel="icon" type="image/svg+xml" href="/assets/logo/uptools-logo.svg"/>
   <link rel="stylesheet" href="/style.css?v=1.3.0"/>
   
@@ -90,13 +96,32 @@
     .gpa-bar{height:10px;border-radius:99px;background:#1a2030;margin:.5rem 0;overflow:hidden;}
     .gpa-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .5s cubic-bezier(.4,0,.2,1);}
     .actions-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media(max-width:500px){.course-row{grid-template-columns:1fr 80px 70px auto;}}
     .grade-color-good{color:#4ade80;}
     .grade-color-ok{color:#fbbf24;}
     .grade-color-bad{color:#f87171;}
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <header class="site" role="banner">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="UpTools Home">
@@ -129,7 +154,7 @@
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 
-<main class="wrap">
+<main role="main" class="wrap">
   <div class="tool-hero">
     <h1>🎓 GPA Calculator</h1>
     <p>Weighted (5.0) &amp; Unweighted (4.0) · Multi-semester · Cumulative GPA</p>
@@ -312,7 +337,7 @@ function render(){
     div.className='semester';div.id='sem-'+s.id;
     div.innerHTML=`
       <div class="sem-header">
-        <input class="sem-name-input input" style="max-width:180px;font-weight:800;" value="${s.name}" oninput="save()"/>
+        <input aria-label="Text input" class="sem-name-input input" style="max-width:180px;font-weight:800;" value="${s.name}" oninput="save()"/>
         <span class="sem-gpa-badge ${gpaColor}">GPA: ${gpaStr}</span>
         <button class="icon-btn" title="Remove semester" onclick="removeSemester(${s.id})">🗑</button>
       </div>
@@ -321,8 +346,8 @@ function render(){
       </div>
       ${s.courses.map((c,i)=>`
         <div class="course-entry" style="display:grid;grid-template-columns:1fr 80px 80px 32px;gap:.35rem;margin-bottom:.35rem;align-items:center;">
-          <input class="c-name input" placeholder="e.g. Math 101" value="${c.name}" style="font-size:.85rem;" oninput="save()"/>
-          <input class="c-credits input" type="number" min="0.5" max="6" step="0.5" value="${c.credits}" style="text-align:center;font-size:.85rem;" onchange="save();renderSummary()"/>
+          <input aria-label="Course Name" class="c-name input" placeholder="e.g. Math 101" value="${c.name}" style="font-size:.85rem;" oninput="save()"/>
+          <input aria-label="Course Name" class="c-credits input" type="number" min="0.5" max="6" step="0.5" value="${c.credits}" style="text-align:center;font-size:.85rem;" onchange="save();renderSummary()"/>
           <select class="c-grade" onchange="save();renderSummary()">${gradeOptions(c.grade)}</select>
           <button class="icon-btn" onclick="removeCourse(${s.id},${i})">✕</button>
         </div>`).join('')}

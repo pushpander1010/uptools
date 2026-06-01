@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Debt Payoff Calculator - Snowball vs Avalanche Method | UpTools</title>
   <!-- Favicon -->
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Free debt payoff calculator. Compare snowball vs avalanche methods. Calculate how fast you can become debt-free and save on interest.">
-  <link rel="canonical" href="https://www.uptools.in/debt-payoff-calculator/" />
+  
   
   <meta property="og:title" content="Debt Payoff Calculator - Snowball vs Avalanche Method | UpTools" />
-  <meta property="og:description" content="Free debt payoff calculator. Compare snowball vs avalanche methods. Calculate how fast you can become debt-free and save on interest." />
+  <meta property="og:description" content="Debt Payoff Calculator - Snowball vs Avalanche Method. Free online tool by UpTools." />
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/debt-payoff-calculator/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/debt-payoff-calculator.png">
   
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <meta name="twitter:title" content="Debt Payoff Calculator">
   <meta name="twitter:description" content="Calculate your path to becoming debt-free with snowball or avalanche method.">
   
@@ -170,14 +172,32 @@
       cursor: pointer;
       width: 100%;
     }
-  </style>
-  <meta name="robots" content="debt payoff calculator, debt payoff calculator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/debt-payoff-calculator/" rel="canonical"/>
+<meta name="keywords" content="debt payoff calculator, debt payoff calculator, online tool, free calculator, uptools" />
+
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
   
     <!-- Header -->
   <header class="site" role="banner">
@@ -228,23 +248,23 @@
         <h3>Your Debts</h3>
         <div class="debt-item">
           <label>Debt Name</label>
-          <input type="text" class="debt-name" value="Credit Card 1" placeholder="e.g., Credit Card">
+          <input aria-label="Payoff Method" type="text" class="debt-name" value="Credit Card 1" placeholder="e.g., Credit Card">
           <label>Balance ($)</label>
-          <input type="number" class="debt-balance" value="5000" min="0">
+          <input aria-label="Debt Name" type="number" class="debt-balance" value="5000" min="0">
           <label>Interest Rate (%)</label>
-          <input type="number" class="debt-rate" value="18" min="0" max="50" step="0.1">
+          <input aria-label="Debt Name" type="number" class="debt-rate" value="18" min="0" max="50" step="0.1">
           <label>Minimum Payment ($)</label>
-          <input type="number" class="debt-min" value="100" min="0">
+          <input aria-label="Debt Name" type="number" class="debt-min" value="100" min="0">
         </div>
         <div class="debt-item">
           <label>Debt Name</label>
-          <input type="text" class="debt-name" value="Credit Card 2" placeholder="e.g., Personal Loan">
+          <input aria-label="Balance ($)" type="text" class="debt-name" value="Credit Card 2" placeholder="e.g., Personal Loan">
           <label>Balance ($)</label>
-          <input type="number" class="debt-balance" value="3000" min="0">
+          <input aria-label="Interest Rate (%)" type="number" class="debt-balance" value="3000" min="0">
           <label>Interest Rate (%)</label>
-          <input type="number" class="debt-rate" value="22" min="0" max="50" step="0.1">
+          <input aria-label="Minimum Payment ($)" type="number" class="debt-rate" value="22" min="0" max="50" step="0.1">
           <label>Minimum Payment ($)</label>
-          <input type="number" class="debt-min" value="75" min="0">
+          <input aria-label="Debt Name" type="number" class="debt-min" value="75" min="0">
         </div>
       </div>
       

@@ -2,21 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>WhatsApp Backup Guide - How to Backup & Restore Chats | UpTools</title>
   <!-- Favicon -->
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Complete guide to backup WhatsApp chats on Android and iPhone. Learn how to restore messages and never lose important conversations." />
-  <meta name="robots" content="whatsapp backup guide, whatsapp backup guide, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <link rel="canonical" href="https://www.uptools.in/whatsapp-backup-guide/" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/whatsapp-backup-guide/" rel="canonical"/>
+<meta name="keywords" content="whatsapp backup guide, whatsapp backup guide, online tool, free calculator, uptools" />
+
+  
   <meta property="og:title" content="WhatsApp Backup Guide - How to Backup & Restore Chats | UpTools" />
-  <meta property="og:description" content="Complete guide to backup WhatsApp chats on Android and iPhone. Learn how to restore messages and never lose important conversations." />
+  <meta property="og:description" content="WhatsApp Backup Guide - How to Backup & Restore Chats. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/whatsapp-backup-guide/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/whatsapp-backup-guide.png" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="WhatsApp Backup Guide - How to Backup & Restore Chats | UpTools" />
+  <meta name="twitter:description" content="WhatsApp Backup Guide - How to Backup & Restore Chats. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
   <style>
@@ -48,7 +54,23 @@
     .step h3 { margin: 0 0 0.5rem; color: var(--accent) }
     .platform { margin: 2rem 0; padding: 1.5rem; background: #0d1626; border-radius: var(--radius) }
     .platform h3 { color: var(--accent); margin-top: 0 }
-  </style>
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
   
 
 <script type="application/ld+json">
@@ -69,7 +91,7 @@
   </script>
 </head>
 <body>
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
     <!-- Header -->
   <header class="site" role="banner">
     <div class="header-inner">

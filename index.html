@@ -23,6 +23,9 @@
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="UpTools - Free Online Calculators, Converters &amp; Mini Games" />
+  <meta name="twitter:description" content="Fast, privacy-first tools: Tax calculators, Instagram bio generator, social media tools, AI writing, and more. No sign-ups required." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/home.png" />
 <!-- Preconnects -->
 <link crossorigin="" href="https://www.youtube-nocookie.com" rel="preconnect"/>
 <link crossorigin="" href="https://pagead2.googlesyndication.com" rel="preconnect"/>
@@ -444,7 +447,22 @@
     @media (prefers-reduced-motion: reduce) {
       body::before, body::after { animation: none; opacity: .14 }
     }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
@@ -453,7 +471,7 @@
 <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
-<a class="sr-only" href="#main">Skip to content</a>
+<a class="sr-only skip-link" href="#main">Skip to content</a>
 <!-- Header -->
 <header class="site" role="banner">
 <div class="header-inner">
@@ -496,23 +514,23 @@
 <button aria-label="Clear search" class="btn secondary" id="clearBtn" title="Clear">Clear</button>
 </div>
 <div aria-label="Tags" class="filters">
-<label class="chip"><input type="checkbox" value="tax"/> Tax</label>
-<label class="chip"><input type="checkbox" value="finance"/> Finance</label>
-<label class="chip"><input type="checkbox" value="banking"/> Banking</label>
-<label class="chip"><input type="checkbox" value="crypto"/> Crypto</label>
-<label class="chip"><input type="checkbox" value="text"/> Text</label>
-<label class="chip"><input type="checkbox" value="dev"/> Dev</label>
-<label class="chip"><input type="checkbox" value="security"/> Security</label>
-<label class="chip"><input type="checkbox" value="images"/> Images</label>
-<label class="chip"><input type="checkbox" value="identity"/> Identity</label>
-<label class="chip"><input type="checkbox" value="canada"/> Canada</label>
-<label class="chip"><input type="checkbox" value="networking"/> Networking</label>
-<label class="chip"><input type="checkbox" value="social"/> Social</label>
-<label class="chip"><input type="checkbox" value="ai"/> AI</label>
-<label class="chip"><input type="checkbox" value="marketing"/> Marketing</label>
-<label class="chip"><input type="checkbox" value="fun"/> Fun</label>
-<label class="chip"><input type="checkbox" value="cricket"/> Cricket</label>
-<label class="chip"><input type="checkbox" value="sports"/> Sports</label>
+<label class="chip"><input aria-label="Checkbox" type="checkbox" value="tax"/> Tax</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="finance"/> Finance</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="banking"/> Banking</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="crypto"/> Crypto</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="text"/> Text</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="dev"/> Dev</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="security"/> Security</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="images"/> Images</label>
+<label class="chip"><input aria-label="Finance" type="checkbox" value="identity"/> Identity</label>
+<label class="chip"><input aria-label="Banking" type="checkbox" value="canada"/> Canada</label>
+<label class="chip"><input aria-label="Crypto" type="checkbox" value="networking"/> Networking</label>
+<label class="chip"><input aria-label="Text" type="checkbox" value="social"/> Social</label>
+<label class="chip"><input aria-label="Dev" type="checkbox" value="ai"/> AI</label>
+<label class="chip"><input aria-label="Security" type="checkbox" value="marketing"/> Marketing</label>
+<label class="chip"><input aria-label="Images" type="checkbox" value="fun"/> Fun</label>
+<label class="chip"><input aria-label="Identity" type="checkbox" value="cricket"/> Cricket</label>
+<label class="chip"><input aria-label="Canada" type="checkbox" value="sports"/> Sports</label>
 </div>
 </section>
 <!-- Category bar -->

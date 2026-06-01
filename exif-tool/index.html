@@ -5,13 +5,14 @@
 <!-- AdSense (async; no fixed ad slots here => no CLS) -->
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>EXIF Tool — Cleaner, Hidden Data Extractor &amp; Secret Embedder (Stego PNG) | UpTools</title>
 <meta content="EXIF Tool: extract EXIF, XMP, IPTC, ICC, JPEG comments, PNG/WebP chunks &amp; trailing bytes. Clean metadata and optionally embed/extract secrets (LSB stego, PNG tEXt, PNG trailer). AES-GCM optional. 100% local." name="description"/>
 <meta content="exif tool, exif cleaner, image metadata viewer, xmp, iptc, icc, png text chunks, itxt, ztxt, webp riff chunks, steganography, hide secret in image, lsb stego, png text chunk" name="keywords"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="#0a1b0f" name="theme-color"/>
 <link href="https://www.uptools.in/exif-tool/" rel="canonical"/>
+
 <!-- Open Graph / Twitter -->
 <meta content="EXIF Tool — Cleaner, Hidden Data Extractor &amp; Secret Embedder (Stego PNG)" property="og:title"/>
 <meta content="View &amp; remove hidden image data (EXIF/XMP/IPTC/ICC/PNG/WebP), then optionally embed/extract secrets locally (AES-GCM optional). Free &amp; private." property="og:description"/>
@@ -20,6 +21,9 @@
 <meta content="UpTools" property="og:site_name"/>
 <meta content="https://www.uptools.in/assets/og/exif-tool.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="EXIF Tool — Cleaner, Hidden Data Extractor &amp; Secret Embedder (Stego PNG)" />
+  <meta name="twitter:description" content="View &amp; remove hidden image data (EXIF/XMP/IPTC/ICC/PNG/WebP), then optionally embed/extract secrets locally (AES-GCM optional). Free &amp; private." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/exif-tool.png" />
 <!-- Icons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -65,6 +69,8 @@
 
     /* Layout */
     .panel{display:grid;grid-template-columns:1.15fr 1fr;gap:12px;align-items:start}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width: 960px){ .panel{grid-template-columns:1fr} }
     .preview-wrap{display:flex;gap:10px}
     .preview-box{flex:1;min-height:260px;background:#0a1224;border:1px solid color-mix(in oklab,var(--accent) 25%, #223);border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
@@ -92,21 +98,36 @@
     .file-cta svg{width:18px;height:18px;display:block}
     .file-meta{display:flex;align-items:center;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--muted);min-height:18px}
     .file-actions{display:flex;gap:6px;margin-top:8px}
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Common site CSS -->
 <link as="style" href="/style.css?v=1.1.0" rel="preload"/>
 <link href="/style.css?v=1.1.0" media="print" onload="this.media='all'" rel="stylesheet"/>
 <noscript><link href="/style.css?v=1.1.0" rel="stylesheet"/></noscript>
-  <link rel="canonical" href="https://www.uptools.in/exif-tool/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="EXIF Tool — Cleaner, Hidden Data Extractor &amp; Secret Embedder (Stego PNG) | UpTools" />
-  <meta property="og:description" content="" />
+  
+  <meta property="og:description" content="View &amp;amp; remove hidden image data (EXIF/XMP/IPTC/ICC/PNG/WebP), then optionally embed/extract secrets locally (AES-GCM optional). Free &amp;amp; private." />
   <meta property="og:url" content="https://www.uptools.in/exif-tool/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- small fixed -->
-<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
 <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
@@ -131,7 +152,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap" id="main">
+<main role="main" class="wrap" id="main">
 <!-- Breadcrumbs -->
 <nav aria-label="Breadcrumb" class="note small">
 <a href="/">Home</a> › <a href="/#tools">Tools</a> › <span aria-current="page">EXIF Tool</span>
@@ -263,7 +284,7 @@
 </div>
 <div class="grid" style="margin-top:8px">
 <div>
-<label class="check"><input id="encrypt" type="checkbox"/> <span>Encrypt secret (AES-GCM)</span></label>
+<label class="check"><input aria-label="Secret File (optional)" id="encrypt" type="checkbox"/> <span>Encrypt secret (AES-GCM)</span></label>
 </div>
 <div>
 <label class="label" for="passphrase">Passphrase (if encrypting)</label>

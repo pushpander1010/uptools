@@ -2,24 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Fantasy Sports Calculator - Dream11 & Fantasy Points | UpTools</title>
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Free Fantasy Sports Calculator by UpTools. Calculate fantasy points for cricket, football, basketball and more. Dream11 points calculator." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta name="theme-color" content="#0a0b0f" />
+<link href="https://www.uptools.in/fantasy-sports-calculator/" rel="canonical"/>
   <meta name="keywords" content="fantasy sports calculator, dream11 points, fantasy points, fantasy cricket, fantasy football, fantasy basketball" />
-  <link rel="canonical" href="https://www.uptools.in/fantasy-sports-calculator/" />
+  
   <meta property="og:title" content="Fantasy Sports Calculator - Dream11 & Fantasy Points | UpTools" />
-  <meta property="og:description" content="Free Fantasy Sports Calculator by UpTools. Calculate fantasy points for all sports." />
+  <meta property="og:description" content="Fantasy Sports Calculator - Dream11 & Fantasy Points. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/fantasy-sports-calculator/" />
   <meta property="og:site_name" content="UpTools" />
   <meta property="og:image" content="/assets/og/fantasy-sports-calculator.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Fantasy Sports Calculator - Dream11 & Fantasy Points | UpTools" />
+  <meta name="twitter:description" content="Fantasy Sports Calculator - Dream11 & Fantasy Points. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
   <style>
@@ -43,6 +48,8 @@
     }
     .wrap{ max-width:1100px; margin:0 auto; padding:24px 16px 32px; display:grid; gap:16px; }
     .grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:16px; align-items:start; }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
     .card{ border:1px solid var(--line); border-radius:14px; background:var(--card); padding:1rem; }
     .tool-header{ display:flex; align-items:center; gap:12px; margin-bottom:8px; }
@@ -76,14 +83,29 @@
     }
     .amount{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.2rem;color:var(--accent);}
     .note{color:var(--muted);font-size:.9rem;margin-top:8px;}
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
 
   <!-- Header -->
   <header class="site" role="banner">
@@ -225,7 +247,7 @@
       fields.forEach(field => {
         html += `<div class="row">
           <label class="label">${field.label}</label>
-          <input class="input" type="number" id="${field.name}" placeholder="0" min="${field.min}" ${field.max ? `max="${field.max}"` : ''} />
+          <input aria-label="${field.label}" class="input" type="number" id="${field.name}" placeholder="0" min="${field.min}" ${field.max ? `max="${field.max}"` : ''} />
         </div>`;
       });
       document.getElementById('fields').innerHTML = html;

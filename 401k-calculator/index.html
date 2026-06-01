@@ -2,20 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>401k Calculator - Retirement Savings & Employer Match | UpTools</title>
   <!-- Favicon -->
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Free 401k calculator with employer match. Calculate retirement savings, tax benefits, and investment growth. Plan your 401k contributions for maximum returns.">
-  <link rel="canonical" href="https://www.uptools.in/401k-calculator/" />
+  
   
   <meta property="og:title" content="401k Calculator - Retirement Savings & Employer Match | UpTools" />
-  <meta property="og:description" content="Free 401k calculator with employer match. Calculate retirement savings, tax benefits, and investment growth. Plan your 401k contributions for maximum returns." />
+  <meta property="og:description" content="401k Calculator - Retirement Savings & Employer Match. Free online tool by UpTools." />
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/401k-calculator/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/401k-calculator.png">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="401k Calculator - Retirement Savings & Employer Match | UpTools" />
+  <meta name="twitter:description" content="401k Calculator - Retirement Savings & Employer Match. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   
   <link rel="preload" href="/style.css" as="style">
   <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
@@ -114,14 +118,32 @@
     .result-value { font-size: 1.5rem; font-weight: 800; color: var(--brand); }
     .result-value.large { font-size: 2.5rem; }
     .highlight-box { background: rgba(122,162,255,0.1); border: 1px solid var(--brand); border-radius: var(--radius); padding: 1rem; margin: 1rem 0; }
-  </style>
-  <meta name="robots" content="401k calculator, 401k calculator, online tool, free calculator, uptools" name="keywords"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/401k-calculator/" rel="canonical"/>
+<meta name="keywords" content="401k calculator, 401k calculator, online tool, free calculator, uptools" />
+
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
   
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
   
     <!-- Header -->
   <header class="site" role="banner">

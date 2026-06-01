@@ -5,13 +5,14 @@
 <!-- Ads (async to avoid CLS) -->
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>Password Generator (Strong &amp; Memorable) - UpTools</title>
 <meta content="Create strong passwords and memorable passphrases. Local encrypted Vault with PIN, labels, search, export/import. Entropy meter, batch generator, copy, mask, and more. Free &amp; privacy-first." name="description"/>
 <meta content="password generator, strong password, passphrase, entropy, secure password, AES-GCM, local vault, offline password tool, UpTools" name="keywords"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
 <meta content="#0b1020" name="theme-color"/>
 <link href="https://www.uptools.in/password-generator/" rel="canonical"/>
+
 <!-- Favicons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
@@ -23,6 +24,9 @@
 <meta content="UpTools" property="og:site_name"/>
 <meta content="/assets/og/password-generator.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="Password Generator (Strong &amp; Memorable) - UpTools" />
+  <meta name="twitter:description" content="Generate strong passwords and passphrases. Save locally in an encrypted Vault with your PIN. Copy, mask, batch, entropy &amp; crack-time estimate. No tracking." />
+  <meta name="twitter:image" content="/assets/og/password-generator.png" />
 <!-- Performance hints -->
 <link crossorigin="" href="https://pagead2.googlesyndication.com" rel="preconnect"/>
 <link href="//pagead2.googlesyndication.com" rel="dns-prefetch"/>
@@ -33,6 +37,8 @@
 <!-- Page-scoped styles -->
 <style>
     .tool-grid{display:grid;grid-template-columns:1fr;gap:12px}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
     @media (min-width: 920px){.tool-grid{grid-template-columns:1.15fr .85fr}}
     .stack{display:grid;gap:10px}
     .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
@@ -66,7 +72,22 @@
     .micro-links{display:inline-flex;gap:8px;margin-left:8px}
     .linkbtn{background:none;border:none;padding:0;color:var(--link,#8ab4ff);cursor:pointer;font:600 12px/1.2 ui-sans-serif,system-ui}
     .linkbtn:focus{outline:2px dashed var(--line,#2b3142);outline-offset:2px;border-radius:4px}
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 <!-- Structured Data -->
 
 <script type="application/ld+json">
@@ -96,14 +117,14 @@
     ]
   }
   </script>
-  <link rel="canonical" href="https://www.uptools.in/password-generator/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="Password Generator (Strong &amp; Memorable) - UpTools" />
-  <meta property="og:description" content="" />
+  
+  <meta property="og:description" content="Generate strong passwords and passphrases. Save locally in an encrypted Vault with your PIN. Copy, mask, batch, entropy &amp;amp; crack-time estimate. No tracking." />
   <meta property="og:url" content="https://www.uptools.in/password-generator/" />
   <meta property="og:type" content="website" />
 </head>
 <body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
 <!-- Header -->
 <!-- Header -->
 <header class="site" role="banner">
@@ -124,7 +145,7 @@
 </nav>
 </div>
 </header>
-<main class="wrap" id="main">
+<main role="main" class="wrap" id="main">
 <!-- Hero -->
 <section aria-labelledby="pg-title" class="card hero">
 <div class="two-col">
@@ -157,14 +178,14 @@
 <input aria-label="Length slider" class="range grow" id="lenRange" max="64" min="6" type="range" value="16"/>
 </div>
 <div class="options-grid">
-<label class="check"><input checked="" id="lc" type="checkbox"/> <span>Lowercase</span></label>
-<label class="check"><input checked="" id="uc" type="checkbox"/> <span>Uppercase</span></label>
-<label class="check"><input checked="" id="dg" type="checkbox"/> <span>Digits</span></label>
-<label class="check"><input id="sc" type="checkbox"/> <span>Symbols</span></label>
-<label class="check"><input id="ns" type="checkbox"/> <span>Exclude similar (O0l1I)</span></label>
-<label class="check"><input checked="" id="reqAll" type="checkbox"/> <span>Require all selected types</span></label>
-<label class="check"><input id="amb" type="checkbox"/> <span>Only unambiguous symbols</span></label>
-<label class="check"><input id="startL" type="checkbox"/> <span>Start with a letter</span></label>
+<label class="check"><input aria-label="Length" checked="" id="lc" type="checkbox"/> <span>Lowercase</span></label>
+<label class="check"><input aria-label="Length" checked="" id="uc" type="checkbox"/> <span>Uppercase</span></label>
+<label class="check"><input aria-label="Length" checked="" id="dg" type="checkbox"/> <span>Digits</span></label>
+<label class="check"><input aria-label="Lowercase" id="sc" type="checkbox"/> <span>Symbols</span></label>
+<label class="check"><input aria-label="Lowercase" id="ns" type="checkbox"/> <span>Exclude similar (O0l1I)</span></label>
+<label class="check"><input aria-label="Lowercase" checked="" id="reqAll" type="checkbox"/> <span>Require all selected types</span></label>
+<label class="check"><input aria-label="Uppercase" id="amb" type="checkbox"/> <span>Only unambiguous symbols</span></label>
+<label class="check"><input aria-label="Digits" id="startL" type="checkbox"/> <span>Start with a letter</span></label>
 </div>
 <div class="row">
 <button class="btn" id="gen">Generate</button>
@@ -193,7 +214,7 @@
 <textarea class="input mono" id="batchOut" placeholder="Generated passwords will appear here" readonly="" rows="6"></textarea>
 </details>
 <label class="check">
-<input id="rememberLast" type="checkbox"/> <span>Save last password on this device</span>
+<input aria-label="Count" id="rememberLast" type="checkbox"/> <span>Save last password on this device</span>
 </label>
 <div class="notice hint" hidden="" id="saveNotice">
             Saved locally. You can clear it anytime.
@@ -214,8 +235,8 @@
 <input class="input" id="words" max="12" min="3" style="max-width:100px" type="number" value="4"/>
 <label class="label" for="sep">Separator</label>
 <input class="input" id="sep" maxlength="3" style="max-width:70px" type="text" value="-"/>
-<label class="check"><input id="capWords" type="checkbox"/> <span>Capitalize</span></label>
-<label class="check"><input checked="" id="addNum" type="checkbox"/> <span>Add number</span></label>
+<label class="check"><input aria-label="Words" id="capWords" type="checkbox"/> <span>Capitalize</span></label>
+<label class="check"><input aria-label="Words" checked="" id="addNum" type="checkbox"/> <span>Add number</span></label>
 </div>
 <div class="row">
 <button class="btn" id="phraseGen">Generate Passphrase</button>
@@ -238,7 +259,7 @@
 <button class="btn ghost sm" id="vaultSetPin">Set/Change PIN</button>
 <button class="btn ghost sm" id="vaultExport">Export</button>
 <label class="btn ghost sm" style="cursor:pointer">
-            Import <input accept="application/json" class="sr" id="vaultImport" type="file"/>
+            Import <input aria-label="🔒 Encrypted Vault (Local)" accept="application/json" class="sr" id="vaultImport" type="file"/>
 </label>
 <!-- NEW: Delete Vault -->
 <button aria-describedby="delHelp" class="btn ghost sm" id="vaultDelete">Delete Vault</button>
@@ -246,7 +267,7 @@
 </div>
 </div>
 <div class="row" style="margin-top:8px">
-<input class="input grow" id="vaultSearch" placeholder="Search by site/label…" type="search"/>
+<input aria-label="Deletes all saved items from this browser." class="input grow" id="vaultSearch" placeholder="Search by site/label…" type="search"/>
 <span class="badge pill sec">Stored: <b id="vaultCount">0</b></span>
 </div>
 <div aria-live="polite" class="vault-grid" id="vaultList" role="list">
@@ -646,7 +667,7 @@
       d.innerHTML = `<form method="dialog" class="card" style="margin:0">
         <h3 style="margin:0 0 6px">${site ? 'Entry' : 'Reveal'}</h3>
         <div class="note" style="margin:0 0 8px">${site?escape(site):''} ${user?('. '+escape(user)) : ''}</div>
-        <input class="input mono" value="${escape(value)}" readonly>
+        <input aria-label="${site ? 'Entry' : 'Reveal'}" class="input mono" value="${escape(value)}" readonly>
         <div class="hr"></div>
         <div class="row" style="justify-content:flex-end"><button class="btn" type="submit">Close</button></div>
       </form>`;

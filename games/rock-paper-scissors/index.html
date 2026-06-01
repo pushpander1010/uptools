@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rock Paper Scissors - Free Online Game | UpTools</title>
   <meta name="description" content="Play Rock Paper Scissors online! Classic game with AI opponent, score tracking, and fun animations. No downloads required.">
+  <!-- Open Graph -->
+  <meta property="og:image" content="https://www.uptools.in/assets/home.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rock Paper Scissors - Free Online Game | UpTools" />
+  <meta name="twitter:description" content="Rock Paper Scissors - Free Online Game. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <link rel="canonical" href="https://www.uptools.in/games/rock-paper-scissors/" />
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
@@ -141,14 +150,30 @@
     .autojoin-card .aj-input:focus { outline: none; border-color: var(--accent); }
     .autojoin-card .btn-row { display: flex; gap: .5rem; }
     .autojoin-card .btn-row .reset-btn { flex: 1; }
-  </style>
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
   <meta property="og:title" content="Rock Paper Scissors - Free Online Game | UpTools" />
-  <meta property="og:description" content="Play Rock Paper Scissors online! Classic game with AI opponent, score tracking, and fun animations. No downloads required." />
+  <meta property="og:description" content="Rock Paper Scissors - Free Online Game. Free online tool by UpTools." />
   <meta property="og:url" content="https://www.uptools.in/games/rock-paper-scissors/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
 </head>
 <body>
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
   <header class="site" role="banner">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="UpTools Home">
@@ -179,21 +204,21 @@
       <div id="multiplayerSetup" style="display: none; margin: 1rem 0; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: var(--radius);">
         <div id="createGame" style="text-align: center;">
           <h3>Create Multiplayer Game</h3>
-          <input type="text" id="playerName" placeholder="Enter your name" style="padding: 0.5rem; margin: 0.5rem; border-radius: 0.5rem; border: 1px solid var(--cardBorder); background: var(--card); color: var(--text);">
+          <input aria-label="Create Multiplayer Game" type="text" id="playerName" placeholder="Enter your name" style="padding: 0.5rem; margin: 0.5rem; border-radius: 0.5rem; border: 1px solid var(--cardBorder); background: var(--card); color: var(--text);">
           <br>
           <button class="reset-btn" onclick="createMultiplayerGame()">Create Game & Get Link</button>
         </div>
         <div id="joinGame" style="text-align: center; margin-top: 1rem;">
           <h3>Join Game</h3>
-          <input type="text" id="gameCode" placeholder="Enter game code" style="padding: 0.5rem; margin: 0.5rem; border-radius: 0.5rem; border: 1px solid var(--cardBorder); background: var(--card); color: var(--text);">
-          <input type="text" id="joinPlayerName" placeholder="Enter your name" style="padding: 0.5rem; margin: 0.5rem; border-radius: 0.5rem; border: 1px solid var(--cardBorder); background: var(--card); color: var(--text);">
+          <input aria-label="Create Multiplayer Game" type="text" id="gameCode" placeholder="Enter game code" style="padding: 0.5rem; margin: 0.5rem; border-radius: 0.5rem; border: 1px solid var(--cardBorder); background: var(--card); color: var(--text);">
+          <input aria-label="Join Game" type="text" id="joinPlayerName" placeholder="Enter your name" style="padding: 0.5rem; margin: 0.5rem; border-radius: 0.5rem; border: 1px solid var(--cardBorder); background: var(--card); color: var(--text);">
           <br>
           <button class="reset-btn" onclick="joinMultiplayerGame()">Join Game</button>
         </div>
         <div id="gameLink" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(76, 175, 80, 0.1); border-radius: 0.5rem;">
           <h4>Share this link with your friend:</h4>
           <div style="display: flex; gap: 0.5rem; align-items: center;">
-            <input type="text" id="sharableLink" readonly style="flex: 1; padding: 0.5rem; border-radius: 0.5rem; border: 1px solid var(--cardBorder); background: var(--card); color: var(--text);">
+            <input aria-label="Share this link with your friend" type="text" id="sharableLink" readonly style="flex: 1; padding: 0.5rem; border-radius: 0.5rem; border: 1px solid var(--cardBorder); background: var(--card); color: var(--text);">
             <button class="reset-btn" onclick="openRPSShareModal()">&#128279; Share &amp; QR</button>
           </div>
         </div>
@@ -261,7 +286,7 @@
       </div>
       <p style="color:var(--muted);font-size:.85rem;margin:0 0 .75rem">Scan QR or copy the link below</p>
       <div class="share-url-row">
-        <input type="text" id="rpsShareUrlInput" readonly>
+        <input aria-label="&#128279; Share Game" type="text" id="rpsShareUrlInput" readonly>
         <button class="copy-btn" id="rpsShareCopyBtn" onclick="copyRPSShareUrl()">Copy</button>
       </div>
     </div>
@@ -272,7 +297,7 @@
     <div class="autojoin-card">
       <h3>&#128101; Join Game</h3>
       <p id="rpsAutojoinDesc">Enter your name to join this Rock Paper Scissors game.</p>
-      <input type="text" class="aj-input" id="rpsAutojoinName" placeholder="Your name" maxlength="20" autocomplete="off">
+      <input aria-label="&#128101; Join Game" type="text" class="aj-input" id="rpsAutojoinName" placeholder="Your name" maxlength="20" autocomplete="off">
       <div class="btn-row">
         <button class="reset-btn" onclick="closeRPSAutojoin()" style="background:transparent;border:1px solid var(--cardBorder);color:var(--text);">Cancel</button>
         <button class="reset-btn" onclick="confirmRPSAutojoin()">Join Game</button>

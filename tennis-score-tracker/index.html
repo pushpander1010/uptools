@@ -2,24 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Tennis Score Tracker - Live Match Scoring | UpTools</title>
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Free Tennis Score Tracker by UpTools. Track live tennis match scores, sets, games, and points. Perfect for coaches and fans." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <meta name="theme-color" content="#0a0b0f" />
+<link href="https://www.uptools.in/tennis-score-tracker/" rel="canonical"/>
   <meta name="keywords" content="tennis score tracker, tennis scoring, match tracker, tennis points, tennis sets, live scoring" />
-  <link rel="canonical" href="https://www.uptools.in/tennis-score-tracker/" />
+  
   <meta property="og:title" content="Tennis Score Tracker - Live Match Scoring | UpTools" />
-  <meta property="og:description" content="Free Tennis Score Tracker by UpTools. Track live tennis match scores and sets." />
+  <meta property="og:description" content="Tennis Score Tracker - Live Match Scoring. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/tennis-score-tracker/" />
   <meta property="og:site_name" content="UpTools" />
   <meta property="og:image" content="/assets/og/tennis-score-tracker.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tennis Score Tracker - Live Match Scoring | UpTools" />
+  <meta name="twitter:description" content="Tennis Score Tracker - Live Match Scoring. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
   <style>
@@ -80,14 +85,30 @@
     .controls{
       display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;
     }
-  </style>
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
-  <a href="#main" class="sr-only">Skip to content</a>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
 
   <!-- Header -->
   <header class="site" role="banner">
