@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Sudoku – Free Online Game (Neon Dark, Mobile-Perfect) | UpTools</title>
-<meta content="Play Sudoku with neon-dark theme. Fully responsive board, mistake counter, timer, notes & autosave." name="description" />
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots" />
-<meta content="#0b1020" name="theme-color" />
-<link href="https://www.uptools.in/games/sudoku/" rel="canonical" />
-<meta content="Sudoku – Free Online Game (Neon Dark) | UpTools" property="og:title" />
-<meta content="Play Sudoku with neon-dark theme. Fully responsive board, mistake counter, timer, notes & autosave." property="og:description" />
-<meta content="website" property="og:type" />
-<meta content="https://www.uptools.in/games/sudoku/" property="og:url" />
-<meta content="https://www.uptools.in/assets/social/sudoku-card.png" property="og:image" />
-<meta content="summary_large_image" name="twitter:card" />
-<meta content="Sudoku – Free Online Game (Neon Dark) | UpTools" name="twitter:title" />
-<meta content="Play Sudoku with neon-dark theme. Fully responsive board, mistake counter, timer, notes & autosave." name="twitter:description" />
-<meta content="https://www.uptools.in/assets/social/sudoku-card.png" name="twitter:image" />
-<link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml" />
-<link as="style" href="/style.css?v=1.3.0" rel="preload" />
-<link href="/style.css?v=1.3.0" rel="stylesheet" />
+<meta name="description" content="Play Sudoku with neon-dark theme. Fully responsive board, mistake counter, timer, notes & autosave.">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large">
+<meta name="theme-color" content="#0b1020">
+<link rel="canonical" href="https://www.uptools.in/games/sudoku/">
+<meta property="og:title" content="Sudoku – Free Online Game (Neon Dark) | UpTools">
+<meta property="og:description" content="Play Sudoku with neon-dark theme. Fully responsive board, mistake counter, timer, notes & autosave.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.uptools.in/games/sudoku/">
+<meta property="og:image" content="https://www.uptools.in/assets/social/sudoku-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sudoku – Free Online Game (Neon Dark) | UpTools">
+<meta name="twitter:description" content="Play Sudoku with neon-dark theme. Fully responsive board, mistake counter, timer, notes & autosave.">
+<meta name="twitter:image" content="https://www.uptools.in/assets/social/sudoku-card.png">
+<link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+<link as="style" href="/style.css?v=1.3.0" rel="preload">
+<link href="/style.css?v=1.3.0" rel="stylesheet">
 <script src="/games/fullscreen-utils.js" defer></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"VideoGame","name":"Sudoku","url":"https://www.uptools.in/games/sudoku/","applicationCategory":"Game","genre":"Puzzle","operatingSystem":"Browser","inLanguage":"en","publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
@@ -44,10 +44,11 @@ html,body{ margin:0; color:#e6edf3; background:#0b1020; min-height:100svh; font-
 .btn.secondary{ background:transparent; color:#e6edf3; border:1px solid var(--cardBorder); }
 .btn.danger{ background:var(--danger); color:#0b1020; }
 .btn:hover{ transform:translateY(-1px); box-shadow:0 8px 26px rgba(0,0,0,.25); }
+.btn:active{ transform:translateY(1px) scale(.97); }
 select{ background:#0f151f; color:#e6edf3; border:1px solid var(--cardBorder); border-radius:.6rem; padding:.55rem .7rem; font-weight:700; }
 .status{ text-align:center; margin:.75rem 0 0; color:#9fb1c6; font-weight:600; }
 #playScreen{ position:fixed; inset:0; display:none; z-index:50; background:linear-gradient(180deg,rgba(7,12,20,.965),rgba(9,14,22,.985)); padding:max(6px,env(safe-area-inset-top)) clamp(8px,2vw,16px) max(8px,env(safe-area-inset-bottom)); box-sizing:border-box; height:100svh; width:100svw; overscroll-behavior:none; touch-action:none; overflow:clip; }
-#playScreen.open{ display:grid; grid-template-rows:var(--bar-h) 1fr; }
+#playScreen.open{ display:grid; grid-template-rows:var(--bar-h) 1fr; gap:clamp(6px,1vw,12px); }
 .ps-top{ height:var(--bar-h); background:rgba(255,255,255,.03); border:1px solid var(--cardBorder); border-radius:.65rem; padding:0 .5rem; display:flex; align-items:center; justify-content:space-between; gap:.35rem; min-width:0; }
 .ps-top>*{ min-width:0; display:flex; align-items:center; gap:.35rem; }
 .left,.mid,.right{ flex:1 1 0; }
@@ -58,8 +59,7 @@ select{ background:#0f151f; color:#e6edf3; border:1px solid var(--cardBorder); b
 @media (max-width:500px){ .ps-title{ display:none; } }
 .ps-chip,.ps-btn{ display:inline-flex; align-items:center; justify-content:center; height:calc(var(--bar-h) - 10px); padding:0 .55rem; border-radius:.55rem; border:1px solid var(--cardBorder); background:#0f151f; color:#e6edf3; font-weight:800; font-size:clamp(.78rem,2.2vw,.95rem); white-space:nowrap; min-width:0; }
 .ps-btn.primary{ background:var(--accent); color:#0b1020; border-color:var(--accent); }
-.chip-full{ display:inline; } .chip-short{ display:none; }
-@media (max-width:430px){ .chip-full{ display:none;} .chip-short{ display:inline; } }
+.ps-btn:active{ transform:scale(.93); background:rgba(255,255,255,.08); }
 .ps-stage{ min-height:0; display:grid; align-items:center; justify-items:center; }
 .board{ width:100%; height:100%; background:radial-gradient(100% 140% at 15% 10%,#0d1630 0%,#0b1226 55%,#08101e 100%); border:1px solid var(--cardBorder); border-radius:.85rem; padding:clamp(8px,1.6vw,16px); display:grid; grid-template-rows:auto 1fr auto; gap:clamp(8px,1.4vw,14px); position:relative; min-height:0; min-width:0; }
 .board-chips{ display:flex; justify-content:center; gap:.5rem; align-items:center; pointer-events:none; min-height:28px; }
@@ -74,20 +74,22 @@ select{ background:#0f151f; color:#e6edf3; border:1px solid var(--cardBorder); b
 .cell.same{ background:linear-gradient(180deg,rgba(99,229,255,.08),rgba(176,108,255,.08)); }
 .cell.peer{ background:rgba(255,255,255,.04); }
 .cell.error{ background:rgba(255,107,107,.14); box-shadow:inset 0 0 18px rgba(255,107,107,.28); }
-.note{ position:absolute; inset:0; display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:1fr; font-weight:700; font-size:clamp(9px,1.8vmin,16px); color:#9fb1c6; opacity:.95; pointer-events:none; }
+.note{ position:absolute; inset:0; display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:1fr; font-weight:700; font-size:clamp(10px,1.8vmin,14px); color:#9fb1c6; opacity:.92; pointer-events:none; }
 .note span{ display:grid; place-items:center; }
 #keypadWrap{ display:block; margin-top:clamp(6px,1.2vw,12px); }
 .keypad{ display:grid; grid-template-columns:repeat(10,1fr); gap:clamp(6px,1.2vw,12px); }
-.key{ user-select:none; padding:clamp(10px,2.2vw,14px) 0; border-radius:.7rem; border:1px solid rgba(99,229,255,.35); background:radial-gradient(100% 100% at 50% 0%,rgba(99,229,255,.12),rgba(176,108,255,.10)); font-weight:900; text-align:center; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.25),inset 0 0 18px rgba(99,229,255,.12); transition:transform .06s ease,box-shadow .1s ease; }
+.key{ user-select:none; padding:clamp(12px,2.2vw,16px) 0; border-radius:.7rem; border:1px solid rgba(99,229,255,.35); background:radial-gradient(100% 100% at 50% 0%,rgba(99,229,255,.12),rgba(176,108,255,.10)); font-weight:900; text-align:center; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.25),inset 0 0 18px rgba(99,229,255,.12); transition:transform .06s ease,box-shadow .1s ease; }
 .key:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,.28),inset 0 0 22px rgba(176,108,255,.16); }
+.key:active{ transform:scale(.92); }
 .key.sec{ border-style:dashed; color:#e6edf3; }
 .key.wide{ grid-column:span 2; }
 .key.on{ outline:2px solid var(--accent2); }
+.key.disabled{ opacity:.35; pointer-events:none; }
 .overlay{ position:absolute; inset:clamp(8px,1.2vw,12px); display:none; place-items:center; z-index:5; background:rgba(5,10,18,.55); border-radius:.65rem; border:1px solid rgba(255,255,255,.08); text-align:center; padding:clamp(10px,2vw,16px); }
 .overlay.show{ display:grid; }
 .overlay h3{ margin:.2rem 0 .6rem; }
-.bg-canvas{ position:fixed; inset:0; z-index:-1; pointer-events:none; background:radial-gradient(1100px 700px at 10% -10%,#101a34 0%,var(--bg) 45%) fixed; width:100%; height:100%; }
 #playScreen.fullscreen-mode{ display:grid !important; grid-template-rows:var(--bar-h) 1fr !important; gap:0.6rem !important; padding:1rem !important; box-sizing:border-box !important; background:#0b1020 !important; }
+#playScreen.fullscreen-mode .sudoku-wrap{ width:min(80vh,80vw,600px)!important; height:min(80vh,80vw,600px)!important; }
 .skip-link{ position:absolute; top:-40px; left:0; background:#000; color:#fff; padding:8px; z-index:10000; transition:top .3s; }
 .skip-link:focus{ top:0; }
 </style>
@@ -97,10 +99,10 @@ select{ background:#0f151f; color:#e6edf3; border:1px solid var(--cardBorder); b
 <div id="gameContent" class="game-wrap" role="main">
   <div class="panel">
     <div class="hud">
-      <div class="kpi"><div class="value" id="bestTime">&#8211;</div><div class="label">Best</div></div>
-      <div class="kpi"><div class="value" id="lastTime">&#8211;</div><div class="label">Last</div></div>
-      <div class="kpi"><div class="value" id="lastMist">&#8211;</div><div class="label">Mistakes</div></div>
-      <div class="kpi"><div class="value" id="lastDate">&#8211;</div><div class="label">Date</div></div>
+      <div class="kpi"><div class="value" id="bestTime">&mdash;</div><div class="label">Best</div></div>
+      <div class="kpi"><div class="value" id="lastTime">&mdash;</div><div class="label">Last</div></div>
+      <div class="kpi"><div class="value" id="lastMist">&mdash;</div><div class="label">Mistakes</div></div>
+      <div class="kpi"><div class="value" id="lastDate">&mdash;</div><div class="label">Date</div></div>
       <div class="kpi"><button class="btn danger" id="resetBestBtn" title="Reset best scores">Reset</button></div>
     </div>
     <div class="row">
@@ -128,13 +130,13 @@ select{ background:#0f151f; color:#e6edf3; border:1px solid var(--cardBorder); b
 <div id="playScreen" role="dialog" aria-label="Sudoku board" inert>
   <div class="ps-top">
     <div class="left">
-      <button class="ps-btn" id="psBack" aria-label="Exit">&#8592; Back</button>
-      <button class="ps-btn" id="psRestart" aria-label="Restart">&#8635;</button>
+      <button class="ps-btn" id="psBack" aria-label="Exit">&larr; Back</button>
+      <button class="ps-btn" id="psRestart" aria-label="Restart">&#x21bb;</button>
     </div>
     <div class="mid"><span class="ps-title">Sudoku</span></div>
     <div class="right">
       <span class="ps-chip" id="psTimer">00:00</span>
-      <span class="ps-chip" id="psErrors">&#10060; 0</span>
+      <span class="ps-chip" id="psErrors">&#x2716; 0</span>
       <button class="ps-btn" id="psNotes" aria-pressed="false">Notes</button>
       <button class="ps-btn primary" id="psShare">Share</button>
     </div>
@@ -143,7 +145,7 @@ select{ background:#0f151f; color:#e6edf3; border:1px solid var(--cardBorder); b
     <div class="board">
       <div class="board-chips">
         <span class="chip" id="boardTimer">00:00</span>
-        <span class="chip" id="boardErrors">&#10060; 0</span>
+        <span class="chip" id="boardErrors">&#x2716; 0</span>
         <span class="chip" id="boardMoves">Moves: 0</span>
       </div>
       <div class="grid-wrap">
@@ -165,6 +167,7 @@ select{ background:#0f151f; color:#e6edf3; border:1px solid var(--cardBorder); b
 "use strict";
 const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
 const LS = { STATE:'sudokuState', LAST:'sudokuLast', BEST:'sudokuBest' };
+const CROSS = '\u2716';
 
 const els = {
   diffSelect: $('#diffSelect'), mistLimit: $('#mistLimit'),
@@ -200,7 +203,7 @@ function updateTimerDisplay(){
   els.boardTimer.textContent = t;
 }
 
-/* Puzzle generation — deterministic solver + reliable generator */
+/* Puzzle generation */
 function solve(board){
   for(let r=0;r<9;r++) for(let c=0;c<9;c++){
     if(board[r][c]!==0) continue;
@@ -219,40 +222,23 @@ function solve(board){
   return true;
 }
 
-/* Pre-built valid solved board to seed generation reliably */
 const BASE_BOARD = [
-  [5,3,4,6,7,8,9,1,2],
-  [6,7,2,1,9,5,3,4,8],
-  [1,9,8,3,4,2,5,6,7],
-  [8,5,9,7,6,1,4,2,3],
-  [4,2,6,8,5,3,7,9,1],
-  [7,1,3,9,2,4,8,5,6],
-  [9,6,1,5,3,7,2,8,4],
-  [2,8,7,4,1,9,6,3,5],
-  [3,4,5,2,8,6,1,7,9]
+  [5,3,4,6,7,8,9,1,2],[6,7,2,1,9,5,3,4,8],[1,9,8,3,4,2,5,6,7],
+  [8,5,9,7,6,1,4,2,3],[4,2,6,8,5,3,7,9,1],[7,1,3,9,2,4,8,5,6],
+  [9,6,1,5,3,7,2,8,4],[2,8,7,4,1,9,6,3,5],[3,4,5,2,8,6,1,7,9]
 ];
 
 function generatePuzzle(diff){
   const seed=Date.now();
   let rng=seed;
   function rand(n){ rng=(rng*1103515245+12345)&0x7fffffff; return rng%n; }
-  /* Shuffle rows within bands, columns within bands, whole bands, and digits */
   const b=BASE_BOARD.map(row=>[...row]);
-  /* Swap row bands */
-  for(let t=0;t<3;t++){
-    const b1=t*3+rand(3), b2=t*3+rand(3);
-    if(b1!==b2){ [b[b1],b[b2]]=[b[b2],b[b1]]; }
-  }
-  /* Swap rows within each band */
-  for(let band=0;band<3;band++){
-    const r1=band*3+rand(3), r2=band*3+rand(3);
-    if(r1!==r2){ [b[r1],b[r2]]=[b[r2],b[r1]]; }
-  }
-  /* Swap column bands — swap entire columns across all rows */
-    for(let band=0;band<3;band++){
-      const c1=band*3+rand(3), c2=band*3+rand(3);
-      if(c1!==c2){ for(let r=0;r<9;r++){ [b[r][c1],b[r][c2]]=[b[r][c2],b[r][c1]]; } }
-    }
+  /* Shuffle row bands */
+  for(let t=0;t<3;t++){ const b1=t*3+rand(3), b2=t*3+rand(3); if(b1!==b2){ [b[b1],b[b2]]=[b[b2],b[b1]]; } }
+  /* Shuffle rows within each band */
+  for(let band=0;band<3;band++){ const r1=band*3+rand(3), r2=band*3+rand(3); if(r1!==r2){ [b[r1],b[r2]]=[b[r2],b[r1]]; } }
+  /* Shuffle column bands */
+  for(let band=0;band<3;band++){ const c1=band*3+rand(3), c2=band*3+rand(3); if(c1!==c2){ for(let r=0;r<9;r++){ [b[r][c1],b[r][c2]]=[b[r][c2],b[r][c1]]; } } }
   /* Digit permutation */
   const perm=[1,2,3,4,5,6,7,8,9];
   for(let i=8;i>0;i--){ const j=rand(i+1); [perm[i],perm[j]]=[perm[j],perm[i]]; }
@@ -267,8 +253,8 @@ function generatePuzzle(diff){
     const [r,c]=cells[idx];
     const saved=b[r][c]; b[r][c]=0;
     const copy=b.map(row=>[...row]);
-    if(solve(copy)) continue; /* unique solution still exists */
-    b[r][c]=saved; /* restore to maintain uniqueness */
+    if(solve(copy)) continue;
+    b[r][c]=saved;
   }
   const given=b.map(row=>row.map(v=>v!==0));
   return {puzzle:b.map(row=>[...row]), solution:sol.map(row=>[...row]), given};
@@ -292,27 +278,51 @@ function buildGrid(){
   updateCellDisplay();
 }
 
+/* Grey out keypad numbers already used in row/col/box */
+function updateKeypadState(){
+  const keys=$$('#keypad .key[data-k]');
+  keys.forEach(k=>{
+    const n=parseInt(k.dataset.k);
+    if(!n){ k.classList.remove('disabled'); return; }
+    if(S.selected.r<0||S.selected.c<0){ k.classList.remove('disabled'); return; }
+    const sr=S.selected.r, sc=S.selected.c;
+    /* Check if n is already placed in same row, col, or box */
+    let used=false;
+    for(let i=0;i<9;i++){
+      if(S.puzzle[sr][i]===n){ used=true; break; }
+      if(S.puzzle[i][sc]===n){ used=true; break; }
+    }
+    if(!used){
+      const br=Math.floor(sr/3)*3, bc=Math.floor(sc/3)*3;
+      for(let dr=0;dr<3&&!used;dr++) for(let dc=0;dc<3&&!used;dc++) if(S.puzzle[br+dr][bc+dc]===n) used=true;
+    }
+    k.classList.toggle('disabled', used);
+  });
+}
+
 function updateCellDisplay(){
   const cells=$$('#sudokuGrid .cell');
   cells.forEach(cell=>{
     const r=+cell.dataset.r, c=+cell.dataset.c;
     cell.classList.remove('selected','same','peer','error');
-    const val=S.puzzle[r][c];
-    if(S.selected.r>=0 && S.selected.c>=0){
-      const sr=S.selected.r, sc=S.selected.c;
-      if(r===sr && c===sc) cell.classList.add('selected');
-      else if(val!==0 && S.puzzle[sr][sc]!==0 && val===S.puzzle[sr][sc]) cell.classList.add('same');
-      else if(r===sr || c===sc || (Math.floor(r/3)===Math.floor(sr/3) && Math.floor(c/3)===Math.floor(sc/3))) cell.classList.add('peer');
-    }
     cell.innerHTML='';
+    const val=S.puzzle[r][c];
+    if(S.selected.r>=0&&S.selected.c>=0){
+      const sr=S.selected.r, sc=S.selected.c;
+      if(r===sr&&c===sc) cell.classList.add('selected');
+      else if(val!==0&&S.puzzle[sr][sc]!==0&&val===S.puzzle[sr][sc]) cell.classList.add('same');
+      else if(r===sr||c===sc||(Math.floor(r/3)===Math.floor(sr/3)&&Math.floor(c/3)===Math.floor(sc/3))) cell.classList.add('peer');
+    }
     if(S.given[r][c]){
       cell.classList.add('prefilled');
       cell.textContent=S.puzzle[r][c]||'';
     }else{
       cell.classList.remove('prefilled');
-      if(S.puzzle[r][c]!==0) cell.textContent=S.puzzle[r][c];
-      else if(S.notes[r][c].size>0){
-        const nDiv=document.createElement('div'); nDiv.className='note';
+      if(S.puzzle[r][c]!==0){
+        cell.textContent=S.puzzle[r][c];
+      }else if(S.notes[r][c].size>0){
+        const nDiv=document.createElement('div');
+        nDiv.className='note';
         for(let n=1;n<=9;n++){
           const span=document.createElement('span');
           span.textContent=S.notes[r][c].has(n)?n:'';
@@ -321,8 +331,9 @@ function updateCellDisplay(){
         cell.appendChild(nDiv);
       }
     }
-    if(S.mistakes>0 && !S.given[r][c] && S.puzzle[r][c]!==0 && S.puzzle[r][c]!==S.solution[r][c]) cell.classList.add('error');
+    if(S.mistakes>0&&!S.given[r][c]&&S.puzzle[r][c]!==0&&S.puzzle[r][c]!==S.solution[r][c]) cell.classList.add('error');
   });
+  updateKeypadState();
   updateHUD();
 }
 
@@ -330,7 +341,7 @@ function selectCell(r,c){
   S.selected={r,c}; updateCellDisplay();
   const idx=r*9+c;
   const cells=$$('#sudokuGrid .cell');
-  if(cells[idx]) cells[idx].focus({preventScroll:true});
+  if(cells[idx]) cells[idx].focus();
 }
 
 function placeNumber(n){
@@ -352,14 +363,14 @@ function placeNumber(n){
     S.notes[r][c]=new Set();
     S.moves++;
     saveState(); updateCellDisplay();
-    if(checkWin()) showOverlay('&#127881; You Win!',`Time: ${fmtTime(S.elapsed|0)} | Mistakes: ${S.mistakes}`);
+    if(checkWin()) showOverlay('You Win!', 'Time: '+fmtTime(S.elapsed|0)+' | Mistakes: '+S.mistakes);
   }else{
     S.mistakes++;
     S.moves++;
     if(S.mistakes>=S.mistLimit){
       stopTimer();
       S.paused=true;
-      showOverlay('&#128128; Game Over',`You made ${S.mistakes} mistakes.`);
+      showOverlay('Game Over', 'You made '+S.mistakes+' mistakes.');
     }
     saveState(); updateCellDisplay();
   }
@@ -373,9 +384,9 @@ function checkWin(){
 }
 
 function updateHUD(){
-  els.psErrors.textContent='&#10060; '+S.mistakes;
-  els.boardErrors.textContent='&#10060; '+S.mistakes+'/'+S.mistLimit;
-  els.boardMoves.textContent='Moves: '+S.moves;
+  els.psErrors.textContent = CROSS+' '+S.mistakes;
+  els.boardErrors.textContent = CROSS+' '+S.mistakes+'/'+S.mistLimit;
+  els.boardMoves.textContent = 'Moves: '+S.moves;
 }
 
 function showOverlay(title,msg){
@@ -385,7 +396,7 @@ function showOverlay(title,msg){
 }
 function hideOverlay(){
   els.overlay.classList.remove('show');
-  if(S.paused){ S.paused=false; }
+  if(S.paused) S.paused=false;
 }
 
 /* State persistence */
@@ -417,9 +428,9 @@ function maybeSaveBest(time,mistakes,diff){
 
 function updateHomeStats(){
   const b=loadBest();
-  $('#bestTime').textContent=b?fmtTime(b.time):'&#8211;';
-  $('#lastTime').textContent=b?fmtTime(b.time):'&#8211;';
-  $('#lastMist').textContent=b?(b.mist+' &#10060;'):'&#8211;';
+  $('#bestTime').textContent=b?fmtTime(b.time):'\u2014';
+  $('#lastTime').textContent=b?fmtTime(b.time):'\u2014';
+  $('#lastMist').textContent=b?b.mist+' \u2716':'\u2014';
   $('#lastDate').textContent='Today';
 }
 
