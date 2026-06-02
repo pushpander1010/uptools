@@ -70,7 +70,7 @@
     select{ background:#0f151f; color:#e6edf3; border:1px solid var(--cardBorder); border-radius:.6rem; padding:.55rem .7rem; font-weight:700; }
 
     /* ======= FULL-SCREEN Play Layer (non-scrollable) ======= */
-    #playScreen{
+    #gameContainer{
       position: fixed; inset: 0;
       display:none;
       z-index:50;
@@ -83,7 +83,7 @@
       touch-action: none;           /* canvas handles gestures */
       overflow: clip;               /* prevent any scrollbars without using overflow:hidden */
     }
-    #playScreen.open{
+    #gameContainer.open{
       display:grid;
       grid-template-rows: var(--bar-h) 1fr;
     }
@@ -137,6 +137,21 @@
       background: radial-gradient(100% 140% at 15% 10%, #0d1630 0%, #0b1226 55%, #08101e 100%);
       border-radius:.65rem;
       touch-action: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    #gameContainer.fullscreen-mode #gameCanvas,
+    #gameContainer.css-fullscreen-mode #gameCanvas {
+      width: 100vw !important;
+      height: 100vh !important;
+      border-radius: 0;
+    }
+    #gameContainer.fullscreen-mode .board,
+    #gameContainer.css-fullscreen-mode .board {
+      border-radius: 0;
+      border: none;
+      padding: 0;
     }
 
     .overlay{
@@ -151,12 +166,46 @@
     .touchbar{
       position:absolute; left:12px; right:12px; bottom:12px;
       display:flex; gap:12px; justify-content:space-between;
+      pointer-events: none;
     }
-    .touchbtn{ user-select:none; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); padding:.8rem 1.1rem; border-radius:.75rem; font-weight:800; }
+    .touchbtn{
+      user-select:none; -webkit-user-select:none; -webkit-touch-callout:none;
+      pointer-events: auto;
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
+      padding:.8rem 1.1rem; border-radius:.75rem; font-weight:800;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      min-width: 72px;
+      min-height: 56px;
+      font-size: 1.2rem;
+    }
+    .touchbtn:active{ background:rgba(255,255,255,.12); }
 
     .badge{ display:inline-block; padding:.2rem .5rem; border-radius:.5rem; border:1px solid var(--cardBorder); margin-left:.25rem; background:rgba(255,255,255,.05); font-size:.75rem; }
-  
-    .skip-link {
+
+            /* Responsive layout improvements */
+            @media (max-width: 480px) {
+              .hud{ gap:.4rem; }
+              .kpi{ padding:.35rem .5rem; }
+              .kpi .value{ font-size:.95rem; }
+              .kpi .label{ font-size:.65rem; }
+              .controls .btn{ padding:.5rem .75rem; font-size:.85rem; }
+              .board{ padding:.5rem; border-radius:.5rem; }
+              .touchbtn{ min-width:60px; min-height:48px; padding:.6rem .8rem; font-size:1rem; }
+              .ps-top{ padding:0 .35rem; }
+            }
+            @media (max-height: 500px) {
+              .board{ padding:.4rem; }
+              .ps-top{ height:38px; }
+              .ps-chip,.ps-btn{ height:30px; font-size:.75rem; padding:0 .4rem; }
+              .touchbar{ bottom:6px; gap:8px; }
+              .touchbtn{ min-width:50px; min-height:36px; padding:.35rem .5rem; font-size:.85rem; }
+            }
+            @media (min-width: 1200px) {
+              .board{ padding:1.2rem; }
+            }
+
+        .skip-link {
       position: absolute;
       top: -40px;
       left: 0;
@@ -286,7 +335,7 @@
 </div>
 </main>
 <!-- FULL-SCREEN Play Window -->
-<section aria-modal="true" id="playScreen" inert="" role="dialog">
+<section aria-modal="true" id="gameContainer" class="game-container" inert="" role="dialog">
 <div class="ps-top">
 <div class="left">
 <button aria-label="Back" class="ps-btn" id="psBack" type="button">⟵</button>
@@ -335,7 +384,7 @@
     const haptic = (ms) => { try { if (navigator.vibrate) navigator.vibrate(ms || 8) } catch { } };
 
     const els = {
-      home: $("#homeScreen"), play: $("#playScreen"),
+      home: $("#homeScreen"), play: $("#gameContainer"),
       newGame: $("#newGame"), continueBtn: $("#continueBtn"),
       shareBtn: $("#shareBtn"), resetBest: $("#resetBest"),
       difficulty: $("#difficulty"), soundToggle: $("#soundToggle"),
@@ -416,16 +465,104 @@
     if (window.visualViewport) visualViewport.addEventListener('resize', fitCanvas);
 
     let audioCtx = null;
-    function beep(freq = 440, dur = 0.06, type = "square", gain = 0.02) {
-      if (!S.soundOn) return;
-      try {
-        audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-        o.type = type; o.frequency.value = freq; g.gain.value = gain;
-        o.connect(g); g.connect(audioCtx.destination); o.start();
-        setTimeout(() => { o.stop(); }, dur * 1000);
-      } catch { }
-    }
+        function ensureAudioCtx() {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          return audioCtx;
+        }
+
+        // WebAudio sound effects
+        function playSound(name) {
+          if (!S.soundOn) return;
+          try {
+            const ctx = ensureAudioCtx();
+            const t = ctx.currentTime;
+
+            switch (name) {
+              case 'paddleHit': {
+                const osc = ctx.createOscillator(), gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(280, t);
+                osc.frequency.exponentialRampToValueAtTime(180, t + 0.06);
+                gain.gain.setValueAtTime(0.06, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.08);
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.start(t); osc.stop(t + 0.08);
+                break;
+              }
+              case 'brickBreak': {
+                const osc = ctx.createOscillator(), gain = ctx.createGain();
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(500 + Math.random() * 200, t);
+                gain.gain.setValueAtTime(0.03, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.start(t); osc.stop(t + 0.05);
+                break;
+              }
+              case 'wallBounce': {
+                const osc = ctx.createOscillator(), gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, t);
+                gain.gain.setValueAtTime(0.025, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.035);
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.start(t); osc.stop(t + 0.035);
+                break;
+              }
+              case 'gameOver': {
+                const osc = ctx.createOscillator(), gain = ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(440, t);
+                osc.frequency.exponentialRampToValueAtTime(80, t + 0.5);
+                gain.gain.setValueAtTime(0.04, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.5);
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.start(t); osc.stop(t + 0.5);
+                break;
+              }
+              case 'launchBall': {
+                const osc = ctx.createOscillator(), gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(300, t);
+                osc.frequency.exponentialRampToValueAtTime(600, t + 0.12);
+                gain.gain.setValueAtTime(0.03, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.start(t); osc.stop(t + 0.14);
+                break;
+              }
+              case 'levelUp': {
+                [350, 440, 550].forEach((freq, i) => {
+                  const osc = ctx.createOscillator(), gain = ctx.createGain();
+                  osc.type = 'triangle';
+                  osc.frequency.value = freq;
+                  gain.gain.setValueAtTime(0.03, t + i * 0.08);
+                  gain.gain.exponentialRampToValueAtTime(0.001, t + i * 0.08 + 0.1);
+                  osc.connect(gain); gain.connect(ctx.destination);
+                  osc.start(t + i * 0.08); osc.stop(t + i * 0.08 + 0.1);
+                });
+                break;
+              }
+            }
+          } catch { }
+        }
+
+        // Legacy beep function (kept for backward compat with power-ups etc.)
+        function beep(freq = 440, dur = 0.06, type = "square", gain = 0.02) {
+          if (!S.soundOn) return;
+          try {
+            const ctx = ensureAudioCtx();
+            const o = ctx.createOscillator(), g = ctx.createGain();
+            o.type = type; o.frequency.value = freq; g.gain.value = gain;
+            o.connect(g); g.connect(ctx.destination); o.start();
+            setTimeout(() => { o.stop(); }, dur * 1000);
+          } catch { }
+        }
 
     function resetEntities() {
       S.paddle = { x: S.width / 2, y: S.height - S.height * 0.08, w: Math.max(60, S.width * 0.14), h: Math.max(12, S.height * 0.018), speed: Math.max(220, S.width * 0.45) };
@@ -581,6 +718,7 @@
       resetEntities();
       refreshHUD(); saveLocal();
       showOverlay("Level " + S.level, "Tap to launch!");
+      playSound('levelUp');
     }
     function loseLife() {
       if (S.shield > 0) {
@@ -601,6 +739,7 @@
       if (S.level > S.bestLevel) S.bestLevel = S.level;
       saveLocal(); refreshHUD();
       showOverlay("Game Over", "Score: " + S.score + " | Level: " + S.level);
+      playSound('gameOver');
     }
     function refreshHUD() {
       els.scoreVal.textContent = S.score;
@@ -626,11 +765,12 @@
     }
 
     // NEW: helper to (re)launch the ball (also used for Sticky)
-    function launchBall() {
-      S.ball.launched = true;
-      if (S.state !== "running") S.state = "running";
-      hideOverlay();
-    }
+        function launchBall() {
+          S.ball.launched = true;
+          if (S.state !== "running") S.state = "running";
+          hideOverlay();
+          playSound('launchBall');
+        }
 
     function update(dt) {
       if (S.fireball > 0) S.fireball -= dt;
@@ -663,27 +803,27 @@
         S.ball.y += S.ball.vy * dt * speedMul;
       }
 
-      if (S.ball.x <= S.ball.r) { S.ball.x = S.ball.r; S.ball.vx = Math.abs(S.ball.vx); beep(600, .04); }
-      if (S.ball.x >= S.width - S.ball.r) { S.ball.x = S.width - S.ball.r; S.ball.vx = -Math.abs(S.ball.vx); beep(600, .04); }
-      if (S.ball.y <= S.ball.r + 6) { S.ball.y = S.ball.r + 6; S.ball.vy = Math.abs(S.ball.vy); beep(500, .04); }
-      if (S.ball.y > S.height + S.ball.r * 2) { haptic(20); loseLife(); return; }
+      if (S.ball.x <= S.ball.r) { S.ball.x = S.ball.r; S.ball.vx = Math.abs(S.ball.vx); playSound('wallBounce'); }
+            if (S.ball.x >= S.width - S.ball.r) { S.ball.x = S.width - S.ball.r; S.ball.vx = -Math.abs(S.ball.vx); playSound('wallBounce'); }
+            if (S.ball.y <= S.ball.r + 6) { S.ball.y = S.ball.r + 6; S.ball.vy = Math.abs(S.ball.vy); playSound('wallBounce'); }
+            if (S.ball.y > S.height + S.ball.r * 2) { haptic(20); loseLife(); return; }
 
-      // Paddle collision
-      if (S.ball.y + S.ball.r >= S.paddle.y - S.paddle.h / 2 &&
-          S.ball.y - S.ball.r <= S.paddle.y + S.paddle.h / 2 &&
-          S.ball.x >= S.paddle.x - half && S.ball.x <= S.paddle.x + half &&
-          S.ball.vy > 0) {
-        const rel = (S.ball.x - S.paddle.x) / half;
-        const angle = rel * (Math.PI / 3);
-        const speed = Math.hypot(S.ball.vx, S.ball.vy);
-        S.ball.vx = Math.sin(angle) * speed;
-        S.ball.vy = -Math.cos(angle) * speed;
-        S.ball.y = S.paddle.y - S.paddle.h / 2 - S.ball.r - .1;
+            // Paddle collision
+            if (S.ball.y + S.ball.r >= S.paddle.y - S.paddle.h / 2 &&
+                S.ball.y - S.ball.r <= S.paddle.y + S.paddle.h / 2 &&
+                S.ball.x >= S.paddle.x - half && S.ball.x <= S.paddle.x + half &&
+                S.ball.vy > 0) {
+              const rel = (S.ball.x - S.paddle.x) / half;
+              const angle = rel * (Math.PI / 3);
+              const speed = Math.hypot(S.ball.vx, S.ball.vy);
+              S.ball.vx = Math.sin(angle) * speed;
+              S.ball.vy = -Math.cos(angle) * speed;
+              S.ball.y = S.paddle.y - S.paddle.h / 2 - S.ball.r - .1;
 
-        // STICKY FIX: stick to paddle, then wait for user tap/space to relaunch
-        if (S.stickyTimer > 0) { S.ball.launched = false; }
-        beep(440, .04);
-      }
+              // STICKY FIX: stick to paddle, then wait for user tap/space to relaunch
+              if (S.stickyTimer > 0) { S.ball.launched = false; }
+              playSound('paddleHit');
+            }
 
       // Brick collisions
       let anyAlive = false;
@@ -698,8 +838,8 @@
           }
           b.hp--;
           if (b.hp <= 0) { b.alive = false; addScore(10 + 2 * S.level); maybeDropPower(b.x + b.w / 2, b.y + b.h / 2); }
-          else { addScore(5); }
-          beep(300 + rnd() * 200, .045, "square", .03);
+                      else { addScore(5); }
+                      playSound('brickBreak');
         }
       }
       if (!anyAlive) { nextLevel(); }
@@ -828,16 +968,38 @@
     els.boardWrap.addEventListener("click", boardTapHandler);
     els.overlay.addEventListener("click", boardTapHandler);
 
-    // pointer steer
-    els.canvas.addEventListener("pointermove", e => {
-      if (els.play.hasAttribute("inert")) return;
-      const rect = els.canvas.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width * S.width;
-      S.paddle.x = clamp(x, S.paddle.w / 2 + 6, S.width - S.paddle.w / 2 - 6);
-      if (!S.ball.launched && (S.state === "ready" || (S.state === "running" && !S.ball.launched))) {
-        S.ball.x = S.paddle.x;
-      }
-    }, { passive: true });
+    // pointer steer with capture for smooth drag on mobile
+        let pointerCaptured = false;
+        els.canvas.addEventListener("pointerdown", e => {
+          if (els.play.hasAttribute("inert")) return;
+          // Capture pointer for smooth drag even if finger moves off canvas
+          els.canvas.setPointerCapture(e.pointerId);
+          pointerCaptured = true;
+        }, { passive: true });
+
+        els.canvas.addEventListener("pointermove", e => {
+          if (els.play.hasAttribute("inert")) return;
+          // Re-capture if needed (some browsers drop capture on certain events)
+          if (e.pointerId !== undefined && !els.canvas.hasPointerCapture(e.pointerId)) {
+            try { els.canvas.setPointerCapture(e.pointerId); } catch {}
+          }
+          const rect = els.canvas.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width * S.width;
+          S.paddle.x = clamp(x, S.paddle.w / 2 + 6, S.width - S.paddle.w / 2 - 6);
+          if (!S.ball.launched && (S.state === "ready" || (S.state === "running" && !S.ball.launched))) {
+            S.ball.x = S.paddle.x;
+          }
+        }, { passive: true });
+
+        els.canvas.addEventListener("pointerup", e => {
+          pointerCaptured = false;
+          try { els.canvas.releasePointerCapture(e.pointerId); } catch {}
+        }, { passive: true });
+
+        els.canvas.addEventListener("pointercancel", e => {
+          pointerCaptured = false;
+          try { els.canvas.releasePointerCapture(e.pointerId); } catch {}
+        }, { passive: true });
 
     // Buttons
     $("#newGame").addEventListener('click', () => {
@@ -914,7 +1076,7 @@
     // Initialize fullscreen manager
     document.addEventListener('DOMContentLoaded', () => {
       if (typeof FullscreenManager !== 'undefined') {
-        new FullscreenManager('#playScreen', '#fullscreenBtn');
+        new FullscreenManager('#gameContainer', '#fullscreenBtn');
       }
     });
   </script>

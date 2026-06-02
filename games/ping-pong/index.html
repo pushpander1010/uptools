@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <title>Ping Pong Game Online - Play Pong Free | UpTools Games</title>
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Play classic Ping Pong (Pong) online for free. Challenge the AI or a friend in this retro arcade game. No downloads, no sign-up. Mobile-friendly." />
@@ -23,38 +23,76 @@
   <style>
     body { --accent: #00e5ff; }
     .game-wrap { max-width: 680px; margin: 0 auto; }
-    canvas { display: block; margin: 0 auto; border-radius: .75rem; border: 1px solid #212a3a; background: #050d1a; max-width: 100%; }
+    canvas {
+      display: block;
+      margin: 0 auto;
+      border-radius: .75rem;
+      border: 1px solid #212a3a;
+      background: #050d1a;
+      max-width: 100%;
+      touch-action: none;
+      -ms-touch-action: none;
+    }
     .controls-hint { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 8px 0; }
     .ctrl-chip { background: #182033; border: 1px solid #212a3a; border-radius: .5rem; padding: .3rem .7rem; font-size: .85rem; color: #9aa4b2; }
     .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+    /* Touch controls - hidden by default, shown on mobile */
     #touchControls { display: none; }
-    @media(max-width:768px){ 
+    @media(max-width:768px){
       #touchControls { display: flex; justify-content: space-between; align-items: center; margin: 8px auto; width: 95%; max-width: 600px; }
     }
-    
+    #touchControls button {
+      touch-action: none;
+      -ms-touch-action: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /* Exit fullscreen button style */
+    .exit-fullscreen-btn {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 9999;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 1rem;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .exit-fullscreen-btn:hover {
+      background: rgba(0,0,0,0.9);
+    }
+
     /* Fullscreen specific styles */
     .game-container.fullscreen-mode {
       display: flex !important;
       flex-direction: column !important;
       justify-content: center !important;
       align-items: center !important;
-      gap: 1.5rem !important;
-      padding: 1.5rem !important;
+      gap: 1rem !important;
+      padding: 1rem !important;
       box-sizing: border-box !important;
       background: #050d1a !important;
     }
     .game-container.fullscreen-mode #pongCanvas {
-      width: min(90vw, 120vh) !important;
-      height: min(54vw, 72vh) !important;
+      width: min(95vw, 130vh) !important;
+      height: min(57vw, 78vh) !important;
       max-width: none !important;
       max-height: none !important;
+      border-radius: 0 !important;
     }
     .game-container.fullscreen-mode #touchControls {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       width: min(600px, 90vw);
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -69,6 +107,11 @@
       top: 0;
     }
 
+    /* Responsive adjustments for very small screens */
+    @media(max-width:400px){
+      .game-container .btn { font-size: .75rem; padding: .25rem .5rem; }
+      #touchControls button { width: 56px !important; height: 42px !important; font-size: 1.2rem !important; }
+    }
 </style>
 </head>
 <body>
@@ -107,7 +150,7 @@
         </div>
       </section>
 
-      <section class="card game-container" style="margin-top:12px; position: relative;" id="pongContainer">
+      <section class="card game-container" style="margin-top:12px; position: relative;" id="gameContainer">
         <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;margin-right:50px">
           <label style="font-size:.9rem;color:#9aa4b2">Mode:</label>
@@ -130,13 +173,13 @@
         <div id="touchControls">
           <!-- Player 1 Touch (Left) -->
           <div id="p1Touch" style="display: flex; gap: 8px;">
-            <button class="btn secondary" id="touchUp1" style="width:70px;height:50px;font-size:1.5rem;user-select:none;">▲</button>
-            <button class="btn secondary" id="touchDown1" style="width:70px;height:50px;font-size:1.5rem;user-select:none;">▼</button>
+            <button class="btn secondary" id="touchUp1" style="width:70px;height:50px;font-size:1.5rem;user-select:none;-webkit-user-select:none;touch-action:none;">▲</button>
+            <button class="btn secondary" id="touchDown1" style="width:70px;height:50px;font-size:1.5rem;user-select:none;-webkit-user-select:none;touch-action:none;">▼</button>
           </div>
           <!-- Player 2 Touch (Right) -->
           <div id="p2Touch" style="display: flex; gap: 8px; display: none;">
-            <button class="btn secondary" id="touchUp2" style="width:70px;height:50px;font-size:1.5rem;user-select:none;">▲</button>
-            <button class="btn secondary" id="touchDown2" style="width:70px;height:50px;font-size:1.5rem;user-select:none;">▼</button>
+            <button class="btn secondary" id="touchUp2" style="width:70px;height:50px;font-size:1.5rem;user-select:none;-webkit-user-select:none;touch-action:none;">▲</button>
+            <button class="btn secondary" id="touchDown2" style="width:70px;height:50px;font-size:1.5rem;user-select:none;-webkit-user-select:none;touch-action:none;">▼</button>
           </div>
         </div>
 
@@ -185,12 +228,67 @@
     const canvas = document.getElementById('pongCanvas');
     const ctx = canvas.getContext('2d');
 
+    // ===================== WebAudio System =====================
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playTone(frequency, duration, type, volume) {
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type || 'square';
+        osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+        gain.gain.setValueAtTime(volume || 0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration + 0.05);
+      } catch(e) {
+        // Audio not available
+      }
+    }
+
+    function playPaddleHit() {
+      playTone(440, 0.08, 'square', 0.12);
+    }
+    function playWallBounce() {
+      playTone(300, 0.06, 'triangle', 0.08);
+    }
+    function playScore() {
+      playTone(660, 0.15, 'square', 0.12);
+      setTimeout(() => playTone(880, 0.15, 'square', 0.12), 100);
+    }
+    function playGameOver(won) {
+      if (won) {
+        playTone(523, 0.15, 'square', 0.12);
+        setTimeout(() => playTone(659, 0.15, 'square', 0.12), 120);
+        setTimeout(() => playTone(784, 0.15, 'square', 0.12), 240);
+        setTimeout(() => playTone(1047, 0.25, 'square', 0.15), 360);
+      } else {
+        playTone(400, 0.2, 'sawtooth', 0.1);
+        setTimeout(() => playTone(300, 0.2, 'sawtooth', 0.1), 150);
+        setTimeout(() => playTone(200, 0.3, 'sawtooth', 0.1), 300);
+      }
+    }
+    // ===================== End WebAudio =====================
+
     // Scale canvas to fit container
     function resizeCanvas() {
-      if (document.getElementById('pongContainer').classList.contains('fullscreen-mode')) {
+      if (document.getElementById('gameContainer').classList.contains('fullscreen-mode')) {
         return;
       }
-      const maxW = Math.min(600, canvas.parentElement.clientWidth - 32);
+      const parentW = canvas.parentElement.clientWidth - 32;
+      const maxW = Math.min(600, Math.max(280, parentW));
       canvas.style.width = maxW + 'px';
       canvas.style.height = (maxW * 0.6) + 'px';
     }
@@ -240,6 +338,10 @@
       }
     }
 
+    let lastWallBounce = 0;
+    let lastPaddleHit = 0;
+    let lastScoreEvent = 0;
+
     function update() {
       if (!gameRunning || gamePaused) return;
       const b = state.ball, p = state.player, ai = state.ai;
@@ -271,14 +373,26 @@
       b.x += b.vx;
       b.y += b.vy;
 
-      // Wall bounce
-      if (b.y <= 0 || b.y >= H - BALL_SIZE) b.vy *= -1;
+      // Wall bounce - play sound (throttle to avoid rapid-fire)
+      if (b.y <= 0 || b.y >= H - BALL_SIZE) {
+        b.vy *= -1;
+        const now = Date.now();
+        if (now - lastWallBounce > 80) {
+          playWallBounce();
+          lastWallBounce = now;
+        }
+      }
 
       // Player paddle collision
       if (b.x <= PADDLE_W + 20 && b.y + BALL_SIZE >= p.y && b.y <= p.y + PADDLE_H && b.vx < 0) {
         b.vx = Math.abs(b.vx) * 1.05;
         b.vy += (b.y - (p.y + PADDLE_H / 2)) * 0.1;
         b.x = PADDLE_W + 21;
+        const now = Date.now();
+        if (now - lastPaddleHit > 80) {
+          playPaddleHit();
+          lastPaddleHit = now;
+        }
       }
 
       // AI paddle collision
@@ -286,6 +400,11 @@
         b.vx = -Math.abs(b.vx) * 1.05;
         b.vy += (b.y - (ai.y + PADDLE_H / 2)) * 0.1;
         b.x = W - PADDLE_W - 21 - BALL_SIZE;
+        const now = Date.now();
+        if (now - lastPaddleHit > 80) {
+          playPaddleHit();
+          lastPaddleHit = now;
+        }
       }
 
       // Clamp ball speed
@@ -295,11 +414,13 @@
       // Scoring
       if (b.x < 0) {
         ai.score++;
+        playScore();
         if (ai.score >= WIN_SCORE) { endGame('Player 2'); return; }
         resetBall(1);
       }
       if (b.x > W) {
         p.score++;
+        playScore();
         if (p.score >= WIN_SCORE) { endGame('Player 1'); return; }
         resetBall(-1);
       }
@@ -397,15 +518,20 @@
       
       let winnerText = '';
       let winnerColor = '#ff6b6b';
+      let playerWon = false;
       
       if (gameMode === 'ai') {
-        winnerText = winner === 'Player 1' ? '🎉 You Win!' : '💀 AI Wins!';
-        winnerColor = winner === 'Player 1' ? '#00e5a0' : '#ff6b6b';
+        playerWon = winner === 'Player 1';
+        winnerText = playerWon ? '🎉 You Win!' : '💀 AI Wins!';
+        winnerColor = playerWon ? '#00e5a0' : '#ff6b6b';
       } else {
+        playerWon = winner === 'Player 1';
         winnerText = winner === 'Player 1' ? '🎉 Player 1 Wins!' : '🎉 Player 2 Wins!';
         winnerColor = winner === 'Player 1' ? '#00e5ff' : '#ff6b6b';
       }
       
+      playGameOver(playerWon);
+
       ctx.fillStyle = winnerColor;
       ctx.font = 'bold 36px system-ui';
       ctx.textAlign = 'center';
@@ -481,10 +607,11 @@
     });
     document.addEventListener('keyup', e => { state.keys[e.key.toLowerCase()] = false; });
 
-    // Touch controls setup
+    // ===================== Touch Controls Setup =====================
     let touchUp1 = false, touchDown1 = false;
     let touchUp2 = false, touchDown2 = false;
 
+    // Touch buttons
     document.getElementById('touchUp1').addEventListener('touchstart', e => { 
       e.preventDefault(); 
       touchUp1 = true; 
@@ -525,7 +652,58 @@
       state.keys['arrowdown'] = false; 
     });
 
-    // Initialize display and touch controls
+    // ===================== Pointer Events for Direct Paddle Tracking (Mobile) =====================
+    // Track finger Y on canvas to smoothly move player paddle
+    let pointerTracking = false;
+
+    canvas.addEventListener('pointerdown', (e) => {
+      // Only for touch devices, not mouse
+      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+        pointerTracking = true;
+        canvas.setPointerCapture(e.pointerId);
+        e.preventDefault();
+        updatePaddleFromPointer(e);
+        
+        // Initialize audio context on first touch (browser policy)
+        initAudio();
+      }
+    });
+
+    canvas.addEventListener('pointermove', (e) => {
+      if (pointerTracking && gameRunning && !gamePaused) {
+        e.preventDefault();
+        updatePaddleFromPointer(e);
+      }
+    });
+
+    canvas.addEventListener('pointerup', (e) => {
+      if (pointerTracking) {
+        pointerTracking = false;
+        e.preventDefault();
+      }
+    });
+
+    canvas.addEventListener('pointercancel', (e) => {
+      pointerTracking = false;
+    });
+
+    function updatePaddleFromPointer(e) {
+      const rect = canvas.getBoundingClientRect();
+      const scaleY = H / rect.height;
+      // Convert touch Y position to canvas Y coordinate
+      const canvasY = (e.clientY - rect.top) * scaleY;
+      // Move player paddle to follow finger, centered on the touch point
+      const halfPaddle = PADDLE_H / 2;
+      state.player.y = Math.max(0, Math.min(H - PADDLE_H, canvasY - halfPaddle));
+    }
+
+    // ===================== FullscreenManager Initialization =====================
+    // Explicitly initialize FullscreenManager for this game
+    if (typeof FullscreenManager !== 'undefined') {
+      window.fullscreenManager = new FullscreenManager('.game-container', '#fullscreenBtn');
+    }
+
+    // ===================== Initialize =====================
     updateTouchControlsDisplay();
     draw();
   </script>

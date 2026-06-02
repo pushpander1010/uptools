@@ -69,7 +69,40 @@
     .video-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:.75rem;overflow:hidden;border:1px solid var(--cardBorder)}
     .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
     [hidden]{display:none!important}
-  
+
+    /* ── Touch-friendly sizing ── */
+    .btn, .ps-btn, .difficulty-btn, .opt, #fullscreenBtn,
+    #copyRes, #shareWA, #startBtn, #joinBtn, #copyInvite, #resetStats,
+    #nextBtn, #prevBtn, #psBack, #psShare {
+      min-width:44px; min-height:44px;
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+    }
+    /* Ensure label-wrapped radios get tap area too */
+    .opt { min-height:44px; }
+
+    /* ── Touch feedback / active states ── */
+    .btn:active, .ps-btn:active, .difficulty-btn:active,
+    .opt:active, #fullscreenBtn:active,
+    #copyRes:active, #shareWA:active,
+    #startBtn:active, #joinBtn:active, #copyInvite:active, #resetStats:active,
+    #nextBtn:active, #prevBtn:active, #psBack:active, #psShare:active {
+      transform:scale(.96);
+      transition:transform .1s ease;
+    }
+    .btn.primary:active, .ps-btn.primary:active,
+    #startBtn:active, #nextBtn:active {
+      opacity:.85;
+    }
+    .opt:active {
+      background:rgba(99,102,241,.12);
+      border-color:var(--accent);
+    }
+    /* Smooth transitions for all interactive elements */
+    .btn, .ps-btn, .difficulty-btn, .opt {
+      transition:background .15s ease, border-color .15s ease, transform .1s ease, opacity .1s ease;
+    }
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -212,9 +245,10 @@
       </div>
       <span class="ps-progress" id="psProg">Q 1/10</span>
       <button id="psShare" class="ps-btn">🔗 Share</button>
+      <button id="fullscreenBtn" class="ps-btn" title="Fullscreen">⛶ Full</button>
     </div>
     <div class="ps-stage">
-      <div class="board">
+      <div class="board game-container" id="gameContainer">
         <div class="qs" id="qs" role="region" aria-live="polite"></div>
         <div class="qnav">
           <button id="prevBtn" class="ps-btn" disabled>◀ Prev</button>
@@ -256,12 +290,59 @@
   </div>
 
   <script src="/scripts/utils.js" type="module"></script>
+  <script src="/games/fullscreen-utils.js" defer></script>
   <script type="module">
     import * as U from "/scripts/utils.js";
     const $ = s => document.querySelector(s);
     const $$ = s => [...document.querySelectorAll(s)];
     const persist = (k, v) => localStorage.setItem(k, JSON.stringify(v));
     const read = (k, d = null) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
+
+    // ── WebAudio sound system ──
+    let __audioCtx = null;
+    function _getCtx() {
+      if (!__audioCtx) __audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return __audioCtx;
+    }
+    function playTone(freq, duration, type = 'sine', vol = 0.15) {
+      try {
+        const ctx = _getCtx();
+        if (ctx.state === 'suspended') ctx.resume();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(vol, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + duration);
+      } catch (_) { /* audio not available */ }
+    }
+    function playStartSound() {
+      playTone(523.25, 0.12, 'sine', 0.12);
+      setTimeout(() => playTone(659.25, 0.12, 'sine', 0.12), 100);
+      setTimeout(() => playTone(783.99, 0.18, 'sine', 0.12), 200);
+    }
+    function playResultSound() {
+      playTone(783.99, 0.18, 'sine', 0.13);
+      setTimeout(() => playTone(1046.50, 0.25, 'sine', 0.13), 150);
+      setTimeout(() => playTone(1318.51, 0.35, 'triangle', 0.10), 300);
+    }
+
+    // ── FullscreenManager initialization ──
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof FullscreenManager !== 'undefined') {
+        new FullscreenManager('#gameContainer', '#fullscreenBtn');
+      }
+    });
+
+    // ── Multiplayer localStorage sync helper ──
+    const FT_REMOTE_CACHE = 'ft-remote-cache';
+    function cacheRemoteState(data) { persist(FT_REMOTE_CACHE, data); }
+    function getCachedRemoteState() { return read(FT_REMOTE_CACHE, null); }
+    function clearRemoteCache() { localStorage.removeItem(FT_REMOTE_CACHE); }
 
     const mulberry32 = (seed) => { let t = seed >>> 0; return () => { t += 0x6D2B79F5; let r = Math.imul(t ^ t >>> 15, 1 | t); r ^= r + Math.imul(r ^ r >>> 7, 61 | r); return ((r ^ r >>> 14) >>> 0) / 4294967296; }; };
     const strHash = (s) => { let h = 2166136261 >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
@@ -430,6 +511,8 @@
       }
       persist(F_PLAYS, (read(F_PLAYS, 0) || 0) + 1);
 
+      playResultSound();
+
       $('#qs').innerHTML = `
         <div class="result">
           <div style="font-size:3rem">${emoji}</div>
@@ -497,15 +580,31 @@
             if (idx.length) state.qIdx = idx;
           }
           state.length = state.a.length;
+          // Cache remote state so subsequent visits on same device can restore it
+          cacheRemoteState({ a: state.a, nameA: state.nameA, nameB: state.nameB, seed: state.seed, qIdx: state.qIdx, length: state.length });
           renderStepBIntro(true);
         } catch (err) {
-          state.remoteMode = false;
-          renderNameForm();
+          // Try restoring from localStorage cache
+          const cached = getCachedRemoteState();
+          if (cached && cached.a && cached.a.length) {
+            state.a = cached.a;
+            state.nameA = cached.nameA || 'Friend A';
+            state.nameB = cached.nameB || 'Friend B';
+            state.seed = cached.seed || state.seed;
+            state.qIdx = cached.qIdx || state.qIdx;
+            state.length = cached.length || state.a.length;
+            state.remoteMode = true;
+            renderStepBIntro(true);
+          } else {
+            state.remoteMode = false;
+            renderNameForm();
+          }
         }
       } else {
         renderNameForm();
       }
       updateProg();
+      playStartSound();
     }
 
     function closePlay() {
@@ -642,6 +741,8 @@
         url.searchParams.set("q", b64u.enc(state.qIdx.join(",")));
         url.searchParams.set("a", b64u.enc(state.a.join("")));
         url.searchParams.set("n", b64u.enc(`${state.nameA}|${state.nameB}`));
+        // Cache for offline/fallback use
+        cacheRemoteState({ a: state.a, nameA: state.nameA, nameB: state.nameB, seed: state.seed, qIdx: state.qIdx, length: state.length });
       } else {
         url.searchParams.set("seed", state.seed);
         url.searchParams.set("len", String(state.length));

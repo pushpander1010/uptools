@@ -24,51 +24,77 @@
   </script>
   <script src="/games/fullscreen-utils.js" defer></script>
   <style>
-    body { --accent: #7aa2ff; }
-    .game-wrap { max-width: 680px; margin: 0 auto; }
-    .hangman-svg { display: block; margin: 0 auto; }
-    .word-display { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
-    .letter-box { width: 36px; height: 44px; border-bottom: 3px solid #7aa2ff; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 900; text-transform: uppercase; }
-    .keyboard { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 12px 0; }
-    .key-btn { min-width: 44px; min-height: 44px; padding: 6px; border-radius: .4rem; border: 1px solid #212a3a; background: #121826; color: #e6edf3; font-weight: 700; cursor: pointer; font-size: .9rem; transition: all .1s; }
-    .key-btn:hover:not(:disabled) { background: #7aa2ff; color: #0b1020; }
-    .key-btn:disabled { opacity: .35; cursor: not-allowed; }
-    .key-btn.wrong { background: #3a0a0a; border-color: #661e1e; color: #ff6b6b; }
-    .key-btn.correct { background: #0a2a1a; border-color: #1e6641; color: #00e5a0; }
-    .hint-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .5rem .75rem; font-size: .9rem; color: #9aa4b2; margin: 8px 0; }
-    .wrong-letters { color: #ff6b6b; font-size: .9rem; min-height: 1.4em; }
-    .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
-    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(18, 24, 38, 0.95);
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 200;
-      border-radius: .75rem;
-      padding: 1.5rem;
-      text-align: center;
-      backdrop-filter: blur(8px);
-    }
-  
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
+      body { --accent: #7aa2ff; }
+      .game-wrap { max-width: 680px; margin: 0 auto; }
+      .hangman-svg { display: block; margin: 0 auto; }
+      .word-display { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
+      .letter-box { min-width: 44px; min-height: 44px; width: 44px; height: 44px; border-bottom: 3px solid #7aa2ff; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 900; text-transform: uppercase; }
+      .keyboard { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 12px 0; }
+      .key-btn { min-width: 44px; min-height: 44px; padding: 6px; border-radius: .4rem; border: 1px solid #212a3a; background: #121826; color: #e6edf3; font-weight: 700; cursor: pointer; font-size: .9rem; transition: all .1s; }
+      .key-btn:hover:not(:disabled) { background: #7aa2ff; color: #0b1020; }
+      .key-btn:disabled { opacity: .35; cursor: not-allowed; }
+      .key-btn.wrong { background: #3a0a0a; border-color: #661e1e; color: #ff6b6b; }
+      .key-btn.correct { background: #0a2a1a; border-color: #1e6641; color: #00e5a0; }
+      .hint-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .5rem .75rem; font-size: .9rem; color: #9aa4b2; margin: 8px 0; }
+      .wrong-letters { color: #ff6b6b; font-size: .9rem; min-height: 1.4em; }
+      .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
+      .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(18, 24, 38, 0.95);
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+        border-radius: .75rem;
+        padding: 1.5rem;
+        text-align: center;
+        backdrop-filter: blur(8px);
+      }
 
-</style>
+      /* Animated SVG hangman body parts */
+      @keyframes drawHead {
+        0% { opacity: 0; stroke-dashoffset: 100; transform: scale(0.3); transform-origin: 100px 45px; }
+        50% { opacity: 1; transform: scale(1.1); }
+        100% { opacity: 1; stroke-dashoffset: 0; transform: scale(1); }
+      }
+      @keyframes drawLine {
+        0% { opacity: 0; stroke-dashoffset: 80; }
+        60% { opacity: 1; }
+        100% { opacity: 1; stroke-dashoffset: 0; }
+      }
+      .body-part {
+        opacity: 0;
+        stroke-dasharray: 100;
+        stroke-dashoffset: 100;
+      }
+      .body-part.visible {
+        animation-fill-mode: forwards;
+      }
+      .body-part.head { animation: drawHead 0.5s ease-out forwards; }
+      .body-part.body { animation: drawLine 0.4s ease-out forwards; }
+      .body-part.larm { animation: drawLine 0.4s ease-out forwards; }
+      .body-part.rarm { animation: drawLine 0.4s ease-out forwards; }
+      .body-part.lleg { animation: drawLine 0.4s ease-out forwards; }
+      .body-part.rleg { animation: drawLine 0.4s ease-out forwards; }
+
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #000;
+        color: #fff;
+        padding: 8px;
+        z-index: 10000;
+        transition: top 0.3s;
+      }
+      .skip-link:focus {
+        top: 0;
+      }
+
+  </style>
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -106,7 +132,7 @@
         </div>
       </section>
 
-      <div class="game-container card" style="margin-top:12px; position:relative;">
+      <div class="game-container card" style="margin-top:12px; position:relative;" id="gameContainer">
         <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px;padding-right:45px;">
           <label style="font-size:.9rem;color:#9aa4b2">Category:</label>
@@ -128,13 +154,13 @@
             <line x1="60" y1="170" x2="60" y2="10" stroke="#4a5568" stroke-width="4" stroke-linecap="round"/>
             <line x1="60" y1="10" x2="100" y2="10" stroke="#4a5568" stroke-width="4" stroke-linecap="round"/>
             <line x1="100" y1="10" x2="100" y2="30" stroke="#4a5568" stroke-width="4" stroke-linecap="round"/>
-            <!-- Body parts (shown based on wrong guesses) -->
-            <circle id="h-head" cx="100" cy="45" r="15" stroke="#ff6b6b" stroke-width="3" fill="none" style="display:none"/>
-            <line id="h-body" x1="100" y1="60" x2="100" y2="110" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round" style="display:none"/>
-            <line id="h-larm" x1="100" y1="75" x2="75" y2="95" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round" style="display:none"/>
-            <line id="h-rarm" x1="100" y1="75" x2="125" y2="95" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round" style="display:none"/>
-            <line id="h-lleg" x1="100" y1="110" x2="75" y2="140" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round" style="display:none"/>
-            <line id="h-rleg" x1="100" y1="110" x2="125" y2="140" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round" style="display:none"/>
+            <!-- Body parts (animated with CSS keyframes) -->
+                        <circle id="h-head" class="body-part head" cx="100" cy="45" r="15" stroke="#ff6b6b" stroke-width="3" fill="none"/>
+                        <line id="h-body" class="body-part body" x1="100" y1="60" x2="100" y2="110" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round"/>
+                        <line id="h-larm" class="body-part larm" x1="100" y1="75" x2="75" y2="95" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round"/>
+                        <line id="h-rarm" class="body-part rarm" x1="100" y1="75" x2="125" y2="95" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round"/>
+                        <line id="h-lleg" class="body-part lleg" x1="100" y1="110" x2="75" y2="140" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round"/>
+                        <line id="h-rleg" class="body-part rleg" x1="100" y1="110" x2="125" y2="140" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round"/>
           </svg>
 
           <div style="flex:1;min-width:200px">
@@ -181,169 +207,192 @@
   </main>
 
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+      document.getElementById('y').textContent = new Date().getFullYear();
 
-    const WORDS = {
-      animals: [
-        { word: 'elephant', hint: 'Largest land animal' },
-        { word: 'giraffe', hint: 'Tallest animal' },
-        { word: 'penguin', hint: 'Flightless bird from Antarctica' },
-        { word: 'dolphin', hint: 'Intelligent marine mammal' },
-        { word: 'cheetah', hint: 'Fastest land animal' },
-        { word: 'kangaroo', hint: 'Australian marsupial' },
-        { word: 'crocodile', hint: 'Ancient reptile' },
-        { word: 'butterfly', hint: 'Colorful flying insect' },
-      ],
-      countries: [
-        { word: 'australia', hint: 'Country and continent' },
-        { word: 'brazil', hint: 'Largest country in South America' },
-        { word: 'canada', hint: 'Country north of USA' },
-        { word: 'germany', hint: 'European country, capital Berlin' },
-        { word: 'japan', hint: 'Island nation in East Asia' },
-        { word: 'mexico', hint: 'Country south of USA' },
-        { word: 'nigeria', hint: 'Most populous African country' },
-        { word: 'thailand', hint: 'Southeast Asian country' },
-      ],
-      tech: [
-        { word: 'algorithm', hint: 'Step-by-step problem solving procedure' },
-        { word: 'database', hint: 'Organized collection of data' },
-        { word: 'javascript', hint: 'Popular web programming language' },
-        { word: 'blockchain', hint: 'Distributed ledger technology' },
-        { word: 'encryption', hint: 'Securing data with codes' },
-        { word: 'bandwidth', hint: 'Data transfer capacity' },
-        { word: 'framework', hint: 'Software development structure' },
-        { word: 'interface', hint: 'Point of interaction' },
-      ],
-      food: [
-        { word: 'spaghetti', hint: 'Italian pasta dish' },
-        { word: 'avocado', hint: 'Green creamy fruit' },
-        { word: 'chocolate', hint: 'Sweet made from cacao' },
-        { word: 'pineapple', hint: 'Tropical spiky fruit' },
-        { word: 'broccoli', hint: 'Green tree-like vegetable' },
-        { word: 'croissant', hint: 'French buttery pastry' },
-        { word: 'blueberry', hint: 'Small blue fruit' },
-        { word: 'cinnamon', hint: 'Brown spice from tree bark' },
-      ],
-      sports: [
-        { word: 'basketball', hint: 'Sport with hoops and orange ball' },
-        { word: 'volleyball', hint: 'Net sport with six players per side' },
-        { word: 'badminton', hint: 'Racket sport with shuttlecock' },
-        { word: 'swimming', hint: 'Water sport' },
-        { word: 'gymnastics', hint: 'Sport with flips and balance' },
-        { word: 'archery', hint: 'Sport with bow and arrow' },
-        { word: 'wrestling', hint: 'Combat sport' },
-        { word: 'marathon', hint: '42km running race' },
-      ]
-    };
+      const WORDS = {
+        animals: [
+          { word: 'elephant', hint: 'Largest land animal' },
+          { word: 'giraffe', hint: 'Tallest animal' },
+          { word: 'penguin', hint: 'Flightless bird from Antarctica' },
+          { word: 'dolphin', hint: 'Intelligent marine mammal' },
+          { word: 'cheetah', hint: 'Fastest land animal' },
+          { word: 'kangaroo', hint: 'Australian marsupial' },
+          { word: 'crocodile', hint: 'Ancient reptile' },
+          { word: 'butterfly', hint: 'Colorful flying insect' },
+        ],
+        countries: [
+          { word: 'australia', hint: 'Country and continent' },
+          { word: 'brazil', hint: 'Largest country in South America' },
+          { word: 'canada', hint: 'Country north of USA' },
+          { word: 'germany', hint: 'European country, capital Berlin' },
+          { word: 'japan', hint: 'Island nation in East Asia' },
+          { word: 'mexico', hint: 'Country south of USA' },
+          { word: 'nigeria', hint: 'Most populous African country' },
+          { word: 'thailand', hint: 'Southeast Asian country' },
+        ],
+        tech: [
+          { word: 'algorithm', hint: 'Step-by-step problem solving procedure' },
+          { word: 'database', hint: 'Organized collection of data' },
+          { word: 'javascript', hint: 'Popular web programming language' },
+          { word: 'blockchain', hint: 'Distributed ledger technology' },
+          { word: 'encryption', hint: 'Securing data with codes' },
+          { word: 'bandwidth', hint: 'Data transfer capacity' },
+          { word: 'framework', hint: 'Software development structure' },
+          { word: 'interface', hint: 'Point of interaction' },
+        ],
+        food: [
+          { word: 'spaghetti', hint: 'Italian pasta dish' },
+          { word: 'avocado', hint: 'Green creamy fruit' },
+          { word: 'chocolate', hint: 'Sweet made from cacao' },
+          { word: 'pineapple', hint: 'Tropical spiky fruit' },
+          { word: 'broccoli', hint: 'Green tree-like vegetable' },
+          { word: 'croissant', hint: 'French buttery pastry' },
+          { word: 'blueberry', hint: 'Small blue fruit' },
+          { word: 'cinnamon', hint: 'Brown spice from tree bark' },
+        ],
+        sports: [
+          { word: 'basketball', hint: 'Sport with hoops and orange ball' },
+          { word: 'volleyball', hint: 'Net sport with six players per side' },
+          { word: 'badminton', hint: 'Racket sport with shuttlecock' },
+          { word: 'swimming', hint: 'Water sport' },
+          { word: 'gymnastics', hint: 'Sport with flips and balance' },
+          { word: 'archery', hint: 'Sport with bow and arrow' },
+          { word: 'wrestling', hint: 'Combat sport' },
+          { word: 'marathon', hint: '42km running race' },
+        ]
+      };
 
-    class SoundEffects {
-      constructor() {
-        this.ctx = null;
-      }
-      init() {
-        if (!this.ctx) {
-          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+      class SoundEffects {
+        constructor() {
+          this.ctx = null;
         }
-      }
-      playCorrect() {
-        this.init();
-        if (!this.ctx) return;
-        try {
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
-          osc.frequency.setValueAtTime(600, this.ctx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(800, this.ctx.currentTime + 0.1);
-          gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.12);
-          osc.start();
-          osc.stop(this.ctx.currentTime + 0.12);
-        } catch (e) {}
-      }
-      playWrong() {
-        this.init();
-        if (!this.ctx) return;
-        try {
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(150, this.ctx.currentTime);
-          osc.frequency.linearRampToValueAtTime(100, this.ctx.currentTime + 0.2);
-          gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.22);
-          osc.start();
-          osc.stop(this.ctx.currentTime + 0.22);
-        } catch (e) {}
-      }
-      playWin() {
-        this.init();
-        if (!this.ctx) return;
-        try {
-          const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-          notes.forEach((freq, i) => {
+        init() {
+          if (!this.ctx) {
+            this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+        }
+        playCorrect() {
+          this.init();
+          if (!this.ctx) return;
+          try {
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
             osc.connect(gain);
             gain.connect(this.ctx.destination);
-            osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.1);
-            gain.gain.setValueAtTime(0.05, this.ctx.currentTime + i * 0.1);
-            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.1 + 0.25);
-            osc.start(this.ctx.currentTime + i * 0.1);
-            osc.stop(this.ctx.currentTime + i * 0.1 + 0.25);
-          });
-        } catch (e) {}
-      }
-      playLose() {
-        this.init();
-        if (!this.ctx) return;
-        try {
-          const notes = [392.00, 349.23, 311.13, 261.63]; // G4, F4, D#4, C4
-          notes.forEach((freq, i) => {
+            osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(800, this.ctx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.12);
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.12);
+          } catch (e) {}
+        }
+        playWrong() {
+          this.init();
+          if (!this.ctx) return;
+          try {
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
             osc.connect(gain);
             gain.connect(this.ctx.destination);
             osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.12);
-            gain.gain.setValueAtTime(0.06, this.ctx.currentTime + i * 0.12);
-            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.12 + 0.3);
-            osc.start(this.ctx.currentTime + i * 0.12);
-            osc.stop(this.ctx.currentTime + i * 0.12 + 0.3);
-          });
-        } catch (e) {}
+            osc.frequency.setValueAtTime(150, this.ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(100, this.ctx.currentTime + 0.2);
+            gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.22);
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.22);
+          } catch (e) {}
+        }
+        playWin() {
+          this.init();
+          if (!this.ctx) return;
+          try {
+            const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+            notes.forEach((freq, i) => {
+              const osc = this.ctx.createOscillator();
+              const gain = this.ctx.createGain();
+              osc.connect(gain);
+              gain.connect(this.ctx.destination);
+              osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.1);
+              gain.gain.setValueAtTime(0.05, this.ctx.currentTime + i * 0.1);
+              gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.1 + 0.25);
+              osc.start(this.ctx.currentTime + i * 0.1);
+              osc.stop(this.ctx.currentTime + i * 0.1 + 0.25);
+            });
+          } catch (e) {}
+        }
+        playLose() {
+          this.init();
+          if (!this.ctx) return;
+          try {
+            const notes = [392.00, 349.23, 311.13, 261.63]; // G4, F4, D#4, C4
+            notes.forEach((freq, i) => {
+              const osc = this.ctx.createOscillator();
+              const gain = this.ctx.createGain();
+              osc.connect(gain);
+              gain.connect(this.ctx.destination);
+              osc.type = 'sawtooth';
+              osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.12);
+              gain.gain.setValueAtTime(0.06, this.ctx.currentTime + i * 0.12);
+              gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.12 + 0.3);
+              osc.start(this.ctx.currentTime + i * 0.12);
+              osc.stop(this.ctx.currentTime + i * 0.12 + 0.3);
+            });
+          } catch (e) {}
+        }
       }
-    }
-    const sounds = new SoundEffects();
+      const sounds = new SoundEffects();
 
-    const PARTS = ['h-head', 'h-body', 'h-larm', 'h-rarm', 'h-lleg', 'h-rleg'];
-    let word = '', guessed = new Set(), wrongCount = 0, gameOver = false;
+      const PARTS = ['h-head', 'h-body', 'h-larm', 'h-rarm', 'h-lleg', 'h-rleg'];
+      let word = '', guessed = new Set(), wrongCount = 0, gameOver = false, hasStarted = false;
 
-    function getWords() {
-      const cat = document.getElementById('catSel').value;
-      if (cat === 'all') return Object.values(WORDS).flat();
-      return WORDS[cat] || WORDS.animals;
-    }
+      function isMidGame() {
+        return wrongCount > 0 || guessed.size > 0;
+      }
 
-    function newGame() {
-      const pool = getWords();
-      const entry = pool[Math.floor(Math.random() * pool.length)];
-      word = entry.word.toLowerCase();
-      guessed = new Set();
-      wrongCount = 0;
-      gameOver = false;
+      function confirmRestart(callback) {
+        if (isMidGame()) {
+          const confirmed = confirm('You are in the middle of a game. Starting a new game will lose your progress. Continue?');
+          if (!confirmed) return;
+        }
+        callback();
+      }
 
-      document.getElementById('hintBox').textContent = `Category: ${document.getElementById('catSel').value === 'all' ? 'Mixed' : document.getElementById('catSel').value} | Hint: ${entry.hint}`;
-      document.getElementById('gameMsg').textContent = '';
-      document.getElementById('wrongLetters').textContent = 'Wrong: —';
-      document.getElementById('gameOverlay').style.display = 'none';
+      function getWords() {
+        const cat = document.getElementById('catSel').value;
+        if (cat === 'all') return Object.values(WORDS).flat();
+        return WORDS[cat] || WORDS.animals;
+      }
 
-      PARTS.forEach(id => document.getElementById(id).style.display = 'none');
-      renderWord();
-      renderKeyboard();
-    }
+      function newGame(force) {
+        if (!force && isMidGame()) {
+          confirmRestart(() => newGame(true));
+          return;
+        }
+        const pool = getWords();
+        const entry = pool[Math.floor(Math.random() * pool.length)];
+        word = entry.word.toLowerCase();
+        guessed = new Set();
+        wrongCount = 0;
+        gameOver = false;
+        hasStarted = false;
+
+        document.getElementById('hintBox').textContent = `Category: ${document.getElementById('catSel').value === 'all' ? 'Mixed' : document.getElementById('catSel').value} | Hint: ${entry.hint}`;
+        document.getElementById('gameMsg').textContent = '';
+        document.getElementById('wrongLetters').textContent = 'Wrong: —';
+        document.getElementById('gameOverlay').style.display = 'none';
+
+        PARTS.forEach(id => {
+          const el = document.getElementById(id);
+          el.classList.remove('visible');
+          el.style.animation = 'none';
+          void el.offsetHeight;
+          el.style.animation = '';
+        });
+        renderWord();
+        renderKeyboard();
+      }
 
     function renderWord() {
       const display = document.getElementById('wordDisplay');
@@ -369,56 +418,63 @@
     }
 
     function guess(letter) {
-      if (gameOver || guessed.has(letter)) return;
-      guessed.add(letter);
+          if (gameOver || guessed.has(letter)) return;
+          guessed.add(letter);
+          hasStarted = true;
 
-      if (!word.includes(letter)) {
-        wrongCount++;
-        sounds.playWrong();
-        if (wrongCount <= PARTS.length) {
-          document.getElementById(PARTS[wrongCount - 1]).style.display = 'block';
+          if (!word.includes(letter)) {
+            wrongCount++;
+            sounds.playWrong();
+            if (wrongCount <= PARTS.length) {
+              const el = document.getElementById(PARTS[wrongCount - 1]);
+              el.classList.add('visible');
+            }
+          } else {
+            sounds.playCorrect();
+          }
+
+          const wrongLetters = [...guessed].filter(c => !word.includes(c));
+          document.getElementById('wrongLetters').textContent = wrongLetters.length
+            ? `Wrong: ${wrongLetters.map(c => c.toUpperCase()).join(', ')}`
+            : 'Wrong: —';
+
+          renderWord();
+          renderKeyboard();
+
+          const won = word.split('').every(c => guessed.has(c));
+          if (won) {
+            gameOver = true;
+            sounds.playWin();
+            document.getElementById('overlayTitle').textContent = '🎉 You won!';
+            document.getElementById('overlayMessage').textContent = `The word was: ${word.toUpperCase()}`;
+            document.getElementById('gameOverlay').style.display = 'flex';
+          } else if (wrongCount >= PARTS.length) {
+            gameOver = true;
+            sounds.playLose();
+            document.getElementById('overlayTitle').textContent = '💀 Game over!';
+            document.getElementById('overlayMessage').textContent = `The word was: ${word.toUpperCase()}`;
+            document.getElementById('gameOverlay').style.display = 'flex';
+            renderKeyboard();
+          }
         }
-      } else {
-        sounds.playCorrect();
-      }
 
-      const wrongLetters = [...guessed].filter(c => !word.includes(c));
-      document.getElementById('wrongLetters').textContent = wrongLetters.length
-        ? `Wrong: ${wrongLetters.map(c => c.toUpperCase()).join(', ')}`
-        : 'Wrong: —';
+        document.addEventListener('keydown', (e) => {
+          if (e.key.match(/^[a-z]$/i) && !gameOver) {
+            sounds.init();
+            guess(e.key.toLowerCase());
+          }
+        });
 
-      renderWord();
-      renderKeyboard();
+        document.getElementById('newGameBtn').addEventListener('click', () => newGame());
+        document.getElementById('catSel').addEventListener('change', () => newGame());
+        document.getElementById('overlayActionBtn').addEventListener('click', () => newGame(true));
 
-      const won = word.split('').every(c => guessed.has(c));
-      if (won) {
-        gameOver = true;
-        sounds.playWin();
-        document.getElementById('overlayTitle').textContent = '🎉 You won!';
-        document.getElementById('overlayMessage').textContent = `The word was: ${word.toUpperCase()}`;
-        document.getElementById('gameOverlay').style.display = 'flex';
-      } else if (wrongCount >= PARTS.length) {
-        gameOver = true;
-        sounds.playLose();
-        document.getElementById('overlayTitle').textContent = '💀 Game over!';
-        document.getElementById('overlayMessage').textContent = `The word was: ${word.toUpperCase()}`;
-        document.getElementById('gameOverlay').style.display = 'flex';
-        renderKeyboard();
-      }
-    }
+        newGame();
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key.match(/^[a-z]$/i) && !gameOver) {
-        sounds.init();
-        guess(e.key.toLowerCase());
-      }
-    });
-
-    document.getElementById('newGameBtn').addEventListener('click', newGame);
-    document.getElementById('catSel').addEventListener('change', newGame);
-    document.getElementById('overlayActionBtn').addEventListener('click', newGame);
-
-    newGame();
-  </script>
+        // Proper FullscreenManager initialization
+        if (window.FullscreenManager) {
+          window.fullscreenManager = new FullscreenManager('#gameContainer', '#fullscreenBtn');
+        }
+      </script>
 </body>
 </html>

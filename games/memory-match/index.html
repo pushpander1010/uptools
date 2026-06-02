@@ -90,13 +90,13 @@
     }
 
     /* ========= FULL-SCREEN PLAY WINDOW ========= */
-    #playScreen{
+    #gameContainer{
       position:fixed; inset:0; display:none; z-index:50;
       background:linear-gradient(180deg, rgba(7,12,20,.95), rgba(9,14,22,.98));
       padding: max(8px, env(safe-area-inset-top)) clamp(8px, 2vw, 18px) max(10px, env(safe-area-inset-bottom));
     }
-    #playScreen.open{ display:grid; grid-template-rows:auto 1fr auto; gap:.6rem; }
-    #playScreen.fullscreen-mode {
+    #gameContainer.open{ display:grid; grid-template-rows:auto 1fr auto; gap:.6rem; }
+    #gameContainer.fullscreen-mode {
       display: grid !important;
       grid-template-rows: auto 1fr auto !important;
       gap: 0.6rem !important;
@@ -132,22 +132,24 @@
       display:grid; gap: var(--gap);
       margin:0 auto; justify-content:center; width:100%; max-width:100%;
     }
-    .grid.easy, .grid.medium, .grid.hard{
-      grid-template-columns: repeat(var(--cols,4), var(--tile,72px));
-      grid-auto-rows: var(--tile,72px);
-    }
 
     .card-tile{
       aspect-ratio:1; position:relative; border-radius:12px;
       border:2px solid var(--cardBorder); background:#0f151f;
       display:grid; place-items:center; cursor:pointer; user-select:none;
-      transition:transform .12s ease, border-color .12s ease, background .12s ease;
+      transition:transform .08s ease, border-color .08s ease, background .08s ease;
       outline:none; min-width:24px; min-height:24px;
-      touch-action: manipulation; /* snappier taps */
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
-    .card-tile:hover{ transform:translateY(-1px); border-color:var(--accent) }
+    .card-tile:hover{ transform:translateY(-2px); border-color:var(--accent2) }
+    .card-tile:active{
+      transform:scale(0.92);
+      border-color:var(--accent);
+      background:rgba(78,205,196,0.08);
+    }
     .card-tile:focus-visible{ box-shadow:0 0 0 3px color-mix(in hsl, var(--accent) 35%, transparent); border-color:var(--accent) }
-    .face{ font-size:clamp(16px, calc(var(--tile,72px) * .42), 40px); transform:scale(.85); opacity:0; transition:opacity .12s ease, transform .12s ease; }
+    .face{ font-size:clamp(16px, calc(var(--tile,72px) * .42), 40px); transform:scale(.85); opacity:0; transition:opacity .12s ease, transform .12s ease; pointer-events:none; }
     .flipped .face{ opacity:1; transform:scale(1) }
     .flipped{ background:linear-gradient(135deg, #0f151f, #203040); border-color:var(--accent) }
     .matched{ background:var(--accent); border-color:var(--accent); color:#0b1020; animation:pulse .35s ease-in-out }
@@ -168,6 +170,23 @@
     .skip-link:focus {
       top: 0;
     }
+
+    /* Responsive: small screens get compact grid */
+    @media (max-width: 480px) {
+      .grid { --gap: clamp(4px, 1.5vw, 8px); }
+      .card-tile { border-radius: 8px; border-width: 1.5px; }
+      .ps-top { padding: 0.35rem 0.4rem; flex-wrap: wrap; }
+      .ps-btn { padding: 0.4rem 0.55rem; font-size: 0.85rem; }
+      .board { padding: 0.4rem; }
+    }
+    @media (max-width: 360px) {
+      .board { padding: 0.25rem; }
+      .grid { --gap: 3px; }
+    }
+
+    /* FullscreenManager styles (matches fullscreen-utils.js convention) */
+    .fullscreen-btn { cursor:pointer; }
+    .fullscreen-btn:hover { border-color:var(--accent); background:rgba(78,205,196,0.08); }
 
 </style>
 
@@ -257,7 +276,7 @@
 
   <!-- FULL-SCREEN play window (opens on New Game) -->
   <!-- NOTE: default state is inert (not focusable / not exposed); we toggle this in JS. -->
-  <section id="playScreen" class="game-container" role="dialog" aria-modal="true" inert>
+  <section id="gameContainer" role="dialog" aria-modal="true" inert>
     <div class="ps-top">
       <div class="left">
         <button id="psBack" class="ps-btn" type="button" aria-label="Stop and go back">⟵ Back</button>
@@ -276,7 +295,7 @@
     <div class="ps-stage">
       <div class="board" style="position: relative;">
         <!-- dynamic grid lives here while playing -->
-        <div id="grid" class="grid easy" role="grid" aria-label="Memory cards"></div>
+        <div id="grid" class="grid" role="grid" aria-label="Memory cards"></div>
 
         <!-- Custom Win Overlay -->
         <div id="gameOverlay" style="display: none; position: absolute; inset: 0; background: rgba(12, 19, 36, 0.95); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-radius: 12px; padding: 1.5rem;">
@@ -325,25 +344,262 @@
     $("#toggleHaptics")?.addEventListener("click", ()=>{ hapticsOn=!hapticsOn; localStorage.setItem("mem-haptics", JSON.stringify(hapticsOn)); setToggle($("#toggleHaptics"), hapticsOn, "📳 Haptics On", "📴 Haptics Off"); });
     $("#toggleCB")?.addEventListener("click", ()=>{ cbAssist=!cbAssist; localStorage.setItem("mem-cb", JSON.stringify(cbAssist)); setToggle($("#toggleCB"), cbAssist, "🅰️ CB Assist", "🅰️ CB Assist Off"); document.body.classList.toggle("cb", cbAssist); });
 
-    // WebAudio bleeps
-    let audioCtx = null;
-    const beep = (type="square", freq=440, ms=80, gain=0.025) => {
-      if (!soundOn) return;
-      try{
-        audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-        o.type = type; o.frequency.value = freq; g.gain.value = gain;
-        o.connect(g); g.connect(audioCtx.destination); o.start();
-        setTimeout(()=>{ o.stop(); o.disconnect(); g.disconnect(); }, ms);
-      }catch{}
+    // ===== FullscreenManager: proper init + event wiring =====
+    const FullscreenManager = {
+      el: null,
+      btn: null,
+      _fullscreenChangeHandler: null,
+      _btnClickHandler: null,
+
+      init(containerSelector, btnSelector) {
+        this.el = document.querySelector(containerSelector);
+        this.btn = document.querySelector(btnSelector);
+        if (!this.el || !this.btn) return;
+
+        // Toggle class on fullscreen change
+        this._fullscreenChangeHandler = () => {
+          const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+          this.el.classList.toggle("fullscreen-mode", fs);
+          this.btn.textContent = fs ? "⛶" : "⛶";
+          this.btn.title = fs ? "Exit Fullscreen" : "Enter Fullscreen";
+        };
+
+        // Click to toggle
+        this._btnClickHandler = () => {
+          if (document.fullscreenElement || document.webkitFullscreenElement) {
+            if (document.exitFullscreen) document.exitFullscreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+          } else {
+            const target = this.el;
+            if (target.requestFullscreen) target.requestFullscreen();
+            else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+          }
+        };
+
+        document.addEventListener("fullscreenchange", this._fullscreenChangeHandler);
+        document.addEventListener("webkitfullscreenchange", this._fullscreenChangeHandler);
+        this.btn.addEventListener("click", this._btnClickHandler);
+
+        // Initial state (in case already fullscreen)
+        this._fullscreenChangeHandler();
+      },
+
+      destroy() {
+        if (this._fullscreenChangeHandler) {
+          document.removeEventListener("fullscreenchange", this._fullscreenChangeHandler);
+          document.removeEventListener("webkitfullscreenchange", this._fullscreenChangeHandler);
+        }
+        if (this._btnClickHandler && this.btn) {
+          this.btn.removeEventListener("click", this._btnClickHandler);
+        }
+        this.el = null;
+        this.btn = null;
+      }
     };
+
+    // Init FullscreenManager on DOMContentLoaded
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => FullscreenManager.init("#gameContainer", "#fullscreenBtn"), {once:true});
+    } else {
+      FullscreenManager.init("#gameContainer", "#fullscreenBtn");
+    }
+
+    // ===== WebAudio sound system =====
+    let audioCtx = null;
+
+    function getAudioCtx() {
+      if (!audioCtx) {
+        const Ctor = window.AudioContext || window.webkitAudioContext;
+        if (!Ctor) return null;
+        audioCtx = new Ctor();
+        // Resume on first user interaction (autoplay policy)
+        if (audioCtx.state === "suspended") {
+          const resumeHandler = () => {
+            audioCtx.resume().catch(()=>{});
+            document.removeEventListener("click", resumeHandler);
+            document.removeEventListener("touchstart", resumeHandler);
+          };
+          document.addEventListener("click", resumeHandler, {once:true});
+          document.addEventListener("touchstart", resumeHandler, {once:true});
+        }
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, type, duration, gainVal, rampEnd) {
+      if (!soundOn) return;
+      const ctx = getAudioCtx();
+      if (!ctx || ctx.state === "closed") return;
+      try {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(gainVal, ctx.currentTime);
+        if (rampEnd !== undefined) {
+          gain.gain.exponentialRampToValueAtTime(rampEnd, ctx.currentTime + duration / 1000);
+        } else {
+          gain.gain.setValueAtTime(gainVal, ctx.currentTime + duration / 1000);
+        }
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + duration / 1000);
+      } catch(e) {
+        // Silently fail
+      }
+    }
+
+    // Rich sound effects
+    const SOUNDS = {
+      flip() {
+        // Short click/pop - 800Hz triangle, fast decay
+        if (!soundOn) return;
+        const ctx = getAudioCtx();
+        if (!ctx || ctx.state === "closed") return;
+        try {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(800, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.08);
+          gain.gain.setValueAtTime(0.06, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime);
+          osc.stop(ctx.currentTime + 0.08);
+        } catch(e) {}
+      },
+      match() {
+        // Happy ascending two-tone
+        if (!soundOn) return;
+        const ctx = getAudioCtx();
+        if (!ctx || ctx.state === "closed") return;
+        try {
+          // First tone (C5)
+          const o1 = ctx.createOscillator();
+          const g1 = ctx.createGain();
+          o1.type = "sine";
+          o1.frequency.setValueAtTime(523, ctx.currentTime);
+          g1.gain.setValueAtTime(0.05, ctx.currentTime);
+          g1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+          o1.connect(g1); g1.connect(ctx.destination);
+          o1.start(ctx.currentTime); o1.stop(ctx.currentTime + 0.12);
+
+          // Second tone (E5) - slightly delayed
+          const o2 = ctx.createOscillator();
+          const g2 = ctx.createGain();
+          o2.type = "sine";
+          o2.frequency.setValueAtTime(659, ctx.currentTime + 0.08);
+          g2.gain.setValueAtTime(0.05, ctx.currentTime + 0.08);
+          g2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+          o2.connect(g2); g2.connect(ctx.destination);
+          o2.start(ctx.currentTime + 0.08); o2.stop(ctx.currentTime + 0.2);
+        } catch(e) {}
+      },
+      mismatch() {
+        // Low descending buzz
+        if (!soundOn) return;
+        const ctx = getAudioCtx();
+        if (!ctx || ctx.state === "closed") return;
+        try {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sawtooth";
+          osc.frequency.setValueAtTime(220, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.15);
+          gain.gain.setValueAtTime(0.04, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime);
+          osc.stop(ctx.currentTime + 0.15);
+        } catch(e) {}
+      },
+      victory() {
+        // Celebratory arpeggio: C5 -> E5 -> G5 -> C6 (ascending)
+        if (!soundOn) return;
+        const ctx = getAudioCtx();
+        if (!ctx || ctx.state === "closed") return;
+        const notes = [523, 659, 784, 1047]; // C5, E5, G5, C6
+        try {
+          notes.forEach((freq, i) => {
+            const delay = i * 0.12;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+            gain.gain.setValueAtTime(0.05, ctx.currentTime + delay);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.3);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(ctx.currentTime + delay);
+            osc.stop(ctx.currentTime + delay + 0.3);
+          });
+        } catch(e) {}
+      }
+    };
+
     const buzz = (ms=15) => { if (hapticsOn && navigator.vibrate) navigator.vibrate(ms); };
+
+    // Legacy beep kept for backward compat but unused by new code
+    const beep = (type, freq=440, ms=80, gain=0.025) => {
+      playTone(freq, type, ms, gain, 0.001);
+    };
+
+    // ===== Daily Streak System =====
+    function getDailyStreak() {
+      const raw = localStorage.getItem("mem-daily-streak") || "0";
+      return parseInt(raw, 10) || 0;
+    }
+
+    function setDailyStreak(val) {
+      localStorage.setItem("mem-daily-streak", String(val));
+    }
+
+    function getStreakDate() {
+      return localStorage.getItem("mem-streak-date") || "";
+    }
+
+    function setStreakDate(dateStr) {
+      localStorage.setItem("mem-streak-date", dateStr);
+    }
+
+    function incrementDailyStreak() {
+      const today = new Date();
+      const dateStr = today.toISOString().slice(0, 10); // YYYY-MM-DD
+      const lastDate = getStreakDate();
+
+      if (lastDate === dateStr) {
+        // Already played today, don't increment again
+        return getDailyStreak();
+      }
+
+      // Check if yesterday
+      const yesterday = new Date(today);
+      yesterday.setDate(yesterday.getDate() - 1);
+      const yesterdayStr = yesterday.toISOString().slice(0, 10);
+
+      let streak;
+      if (lastDate === yesterdayStr) {
+        // Consecutive day: increment
+        streak = getDailyStreak() + 1;
+      } else {
+        // Streak broken or first time: reset to 1
+        streak = 1;
+      }
+
+      setDailyStreak(streak);
+      setStreakDate(dateStr);
+      return streak;
+    }
 
     // Seed helpers for shareable boards
     const mulberry32 = (seed) => { let t=seed>>>0; return ()=>{ t+=0x6D2B79F5; let r=Math.imul(t^t>>>15,1|t); r^=r+Math.imul(r^r>>>7,61|r); return ((r^r>>>14)>>>0)/4294967296; }; };
     const strHash = (s) => { let h=2166136261>>>0; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619);} return h>>>0; };
 
-    // ===== Game Class (rendered only inside #playScreen) =====
+    // ===== Game Class (rendered only inside #gameContainer) =====
     class MemoryMatch {
       constructor(level, seed=""){
         this.level = level;
@@ -356,8 +612,8 @@
         this.running=false; this.paused=false; this.seconds=0; this.penalty=0; this._tick=null;
 
         // Mobile-friendly interaction control
-        this.lock = false;      // lock only during mismatch flip-back
-        this._queued = null;    // queue a tap during lock
+        this.lock = false;
+        this._queued = null;
 
         // DOM in play window
         this.grid = $("#grid");
@@ -368,7 +624,12 @@
       }
 
       setup(){
-        this.grid.className = "grid " + this.level;
+        const cfg = this.cfg[this.level];
+        const cols = cfg.cols;
+        const rows = Math.ceil((cfg.pairs*2)/cols);
+        this.grid.style.setProperty('--cols', cols);
+        this.grid.style.setProperty('--rows', rows);
+
         const overlay = document.getElementById('gameOverlay');
         if (overlay) overlay.style.display = 'none';
 
@@ -424,6 +685,10 @@
           // No letters (anti-cheat)
           el.innerHTML = `<span class="face" aria-hidden="true">${card.symbol}</span>`;
           el.addEventListener("click",()=>this.flip(el));
+          el.addEventListener("touchstart", ()=>{
+            // Touch feedback: immediate haptic on touch
+            buzz(8);
+          }, {passive:true});
           el.addEventListener("keydown",(e)=>{ if(e.key===" "||e.key==="Enter"){ e.preventDefault(); this.flip(el);} });
           this.grid.appendChild(el);
           return { ...card, el, matched:false };
@@ -460,7 +725,9 @@
 
         if(!this.running) this.start();
 
-        el.classList.add("flipped"); beep("triangle", 560, 50, .02);
+        el.classList.add("flipped");
+        SOUNDS.flip();
+        buzz(10);
         this.flipped = this.flipped || [];
         this.flipped.push(el);
 
@@ -477,13 +744,14 @@
         if(same){
           a.classList.add("matched"); b.classList.add("matched");
           this.pairsFound++; this.flipped=[];
-          beep("sine",760,90,.03); buzz(12);
+          SOUNDS.match();
+          buzz(12);
           if(this.isDone()) this.finish();
           // No lock on match → allow immediate third flip
         }else{
           // lock only during flip-back; make it snappy on phones
           this.lock = true;
-          beep("sawtooth",220,90,.025);
+          SOUNDS.mismatch();
           setTimeout(()=>{
             a.classList.remove("flipped");
             b.classList.remove("flipped");
@@ -497,7 +765,7 @@
             } else {
               this._queued = null;
             }
-          }, 420); // shorter than before (650ms)
+          }, 420);
         }
       }
 
@@ -505,6 +773,14 @@
 
       finish(){
         this.stop();
+
+        // Victory sound
+        SOUNDS.victory();
+        buzz([50, 80, 50, 100]);
+
+        // Increment daily streak on victory
+        incrementDailyStreak();
+
         const total = this.seconds + this.penalty;
         const kT=`mem-best-${this.level}-time`, kM=`mem-best-${this.level}-moves`;
         const curT=+(localStorage.getItem(kT)||0), curM=+(localStorage.getItem(kM)||0);
@@ -560,9 +836,12 @@
         const tileH = Math.floor((availH - (rows-1)*gap)/rows);
         const tile = Math.max(cfg.minTile, Math.min(tileW, tileH));
 
+        // Responsive: ensure tile never exceeds available space
         this.grid.style.setProperty('--tile', tile + 'px');
         const boardW = cols*tile + (cols-1)*gap;
         this.grid.style.width = Math.min(boardW, availW) + "px";
+        this.grid.style.gridTemplateColumns = `repeat(${cols}, ${tile}px)`;
+        this.grid.style.gridTemplateRows = `repeat(${rows}, ${tile}px)`;
       }
     }
 
@@ -588,8 +867,10 @@
         localStorage.removeItem(`mem-best-${l}-time`);
         localStorage.removeItem(`mem-best-${l}-moves`);
       });
+      localStorage.removeItem("mem-daily-streak");
+      localStorage.removeItem("mem-streak-date");
       renderHomeBests();
-      statusHome("Best stats reset.");
+      statusHome("Best stats & streak reset.");
     });
 
     const timeStr = (s)=>`${pad2(Math.floor(s/60))}:${pad2(s%60)}`;
@@ -602,7 +883,7 @@
       $("#bestHard").textContent = tH ? timeStr(+tH) : "--:--";
       const bm = localStorage.getItem(`mem-best-${currentLevel}-moves`);
       $("#bestMoves").textContent = bm || "--";
-      const streak = +(localStorage.getItem("mem-daily-streak") || 0);
+      const streak = getDailyStreak();
       $("#streak").textContent = String(streak);
     }
     function statusHome(msg){ $("#homeStatus").textContent = msg; }
@@ -633,7 +914,7 @@
     // ===== Full-screen window control (uses inert instead of aria-hidden) =====
     let game = null;
     let escHandler = null;
-    const playScreen = $("#playScreen");
+    const playScreen = $("#gameContainer");
     const homeScreen = $("#homeScreen");
 
     function setInert(el, val){

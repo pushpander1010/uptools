@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
   <title>Wheel of Names - Free Random Name Picker & Spinner | UpTools Games</title>
   
   <!-- SEO -->
@@ -61,9 +61,10 @@
     body {
       --accent: #ec4899;
       --accent-glow: rgba(236, 72, 153, 0.35);
+      -webkit-tap-highlight-color: transparent;
     }
 
-    #wheelGameContainer {
+    #gameContainer {
       position: relative;
       background: transparent;
       border: none;
@@ -72,7 +73,7 @@
       width: 100%;
     }
 
-    #wheelGameContainer.fullscreen-mode {
+    #gameContainer.fullscreen-mode {
       display: flex !important;
       flex-direction: column !important;
       justify-content: center !important;
@@ -81,7 +82,7 @@
       padding: 24px !important;
     }
 
-    #wheelGameContainer.fullscreen-mode .main-grid {
+    #gameContainer.fullscreen-mode .main-grid {
       display: grid !important;
       grid-template-columns: 1.2fr 1fr;
       gap: 24px;
@@ -90,16 +91,16 @@
       margin: 0 auto;
     }
 
-    #wheelGameContainer.fullscreen-mode .wheel-container {
+    #gameContainer.fullscreen-mode .wheel-container {
       min-height: auto;
       height: 100%;
     }
 
-    #wheelGameContainer.fullscreen-mode .wheel-canvas-container {
+    #gameContainer.fullscreen-mode .wheel-canvas-container {
       width: min(100%, 55vh);
     }
 
-    #wheelGameContainer.fullscreen-mode .names-textarea {
+    #gameContainer.fullscreen-mode .names-textarea {
       height: 140px;
     }
 
@@ -152,7 +153,7 @@
 
     .wheel-canvas-container {
       position: relative;
-      width: min(100%, 420px);
+      width: min(100%, min(80vw, 420px));
       aspect-ratio: 1/1;
       margin: 0 auto;
     }
@@ -185,6 +186,7 @@
       color: #111827;
       font-size: 0.95rem;
       user-select: none;
+      -webkit-tap-highlight-color: transparent;
       transition: transform 0.1s ease, box-shadow 0.1s ease;
       z-index: 5;
     }
@@ -194,8 +196,36 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.7), inset 0 2px 4px rgba(255,255,255,0.9);
     }
 
-    .spin-center-btn:active {
-      transform: translate(-50%, -50%) scale(0.95);
+    .spin-center-btn:active,
+    .spin-center-btn.touch-active {
+      transform: translate(-50%, -50%) scale(0.92);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.4);
+    }
+
+    /* Touch feedback for all buttons */
+    .btn,
+    .btn.secondary,
+    .spin-center-btn,
+    .fullscreen-btn,
+    #modalBtnGotIt,
+    #modalBtnRemove,
+    select.input,
+    input[type="checkbox"] {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .btn:active,
+    .btn.secondary:active,
+    .btn.touch-active,
+    .btn.secondary.touch-active {
+      transform: scale(0.95);
+      opacity: 0.85;
+    }
+
+    .fullscreen-btn:active,
+    .fullscreen-btn.touch-active {
+      transform: scale(0.9);
     }
 
     /* Top pointer peg */
@@ -228,13 +258,15 @@
       width: 100%;
       height: 220px;
       font-family: inherit;
-      font-size: 1rem;
+      font-size: 16px; /* 16px prevents iOS auto-zoom on focus */
       padding: 12px;
       background: #0b1220;
       border: 1px solid var(--border);
       border-radius: var(--radius);
       color: #fff;
       resize: vertical;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .names-textarea:focus {
@@ -376,6 +408,43 @@
       top: 0;
     }
 
+    /* Responsive wheel sizing - small screens */
+    @media (max-width: 600px) {
+      .wheel-container {
+        padding: 12px;
+        min-height: 320px;
+      }
+      .wheel-canvas-container {
+        width: min(100%, min(85vw, 320px));
+      }
+      .spin-center-btn {
+        width: 56px;
+        height: 56px;
+        font-size: 0.8rem;
+        border-width: 4px;
+      }
+      .names-textarea {
+        height: 150px;
+        font-size: 16px;
+      }
+      .winner-name {
+        font-size: 2rem;
+      }
+      .winner-card {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .wheel-canvas-container {
+        width: min(100%, 95vw);
+      }
+      .spin-center-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 0.7rem;
+      }
+    }
 </style>
 </head>
 
@@ -417,7 +486,7 @@
     </section>
 
     <!-- Main Workspace Grid -->
-    <div class="game-container" id="wheelGameContainer">
+    <div class="game-container" id="gameContainer">
       <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
       <div class="main-grid">
       <!-- Left side: The Wheel spinner -->
@@ -437,7 +506,7 @@
         <!-- Input text area -->
         <div class="card textarea-container">
           <h2 style="margin-top:0;">📝 Edit Names</h2>
-          <textarea id="namesInput" class="names-textarea" placeholder="Enter one name per line..."></textarea>
+          <textarea id="namesInput" class="names-textarea" placeholder="Enter one name per line..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
           <div class="quick-actions">
             <button id="btnShuffle" class="btn secondary">🔀 Shuffle</button>
             <button id="btnNumbers" class="btn secondary">🔢 Numbers 1-10</button>
@@ -454,7 +523,7 @@
               <div class="setting-label">Sound Effects</div>
               <div class="setting-description">Play ticker sound and fanfare</div>
             </div>
-            <input aria-label="⚙️ Customizations" type="checkbox" id="chkSound" checked style="width: 20px; height: 20px; cursor:pointer;" />
+            <input aria-label="Sound Effects" type="checkbox" id="chkSound" checked style="width: 20px; height: 20px; cursor:pointer;" />
           </div>
 
           <div class="setting-row">
@@ -462,7 +531,7 @@
               <div class="setting-label">Remove Winner after Spin</div>
               <div class="setting-description">Auto remove winner from the list</div>
             </div>
-            <input aria-label="Sound Effects" type="checkbox" id="chkRemove" style="width: 20px; height: 20px; cursor:pointer;" />
+            <input aria-label="Remove Winner" type="checkbox" id="chkRemove" style="width: 20px; height: 20px; cursor:pointer;" />
           </div>
 
           <div class="setting-row" style="flex-direction:column; align-items:stretch; gap:6px;">
@@ -568,6 +637,15 @@
     const confettiCanvas = $("#confettiCanvas");
     const confettiCtx = confettiCanvas.getContext("2d");
 
+    // FullscreenManager
+    // The fullscreen-utils.js auto-inits on DOMContentLoaded, but we also ensure
+    // the FullscreenManager instance is accessible and the container ID matches.
+    // If FullscreenManager didn't init (e.g. script loaded before container),
+    // manually initialize it.
+    if (!window.fullscreenManager && document.querySelector('.fullscreen-btn')) {
+      window.fullscreenManager = new FullscreenManager('#gameContainer', '.fullscreen-btn');
+    }
+
     // Default list of names
     const defaultNames = ["Emma", "Noah", "Olivia", "Liam", "Ava", "William", "Sophia", "Mason", "Isabella", "James"];
 
@@ -595,49 +673,99 @@
     // Initialize text area
     namesInput.value = names.join("\n");
 
-    // Audio effects Synthesizer
+    // ─── WebAudio with shared AudioContext ─────────────────────────────────
+    let audioCtx = null;
+
+    /** Create (or resume) the shared AudioContext on first user gesture */
+    function ensureAudioContext() {
+      if (!audioCtx) {
+        try {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {
+          return null;
+        }
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+      }
+      return audioCtx;
+    }
+
+    // Web Audio peg tick and win fanfare
     const playSound = (type) => {
       if (!chkSound.checked) return;
+      const ctx = ensureAudioContext();
+      if (!ctx) return;
       try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-        
-        osc.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
         if (type === "tick") {
+          const osc = ctx.createOscillator();
+          const gainNode = ctx.createGain();
           osc.type = "triangle";
-          osc.frequency.setValueAtTime(650, audioCtx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + 0.04);
-          gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
-          gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
-          osc.start();
-          osc.stop(audioCtx.currentTime + 0.04);
+          osc.frequency.setValueAtTime(650, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.04);
+          gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.045);
+          osc.connect(gainNode);
+          gainNode.connect(ctx.destination);
+          osc.start(ctx.currentTime);
+          osc.stop(ctx.currentTime + 0.05);
         } else if (type === "win") {
           const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
           notes.forEach((freq, idx) => {
-            const o = audioCtx.createOscillator();
-            const g = audioCtx.createGain();
+            const o = ctx.createOscillator();
+            const g = ctx.createGain();
             o.type = "sine";
             o.frequency.value = freq;
             o.connect(g);
-            g.connect(audioCtx.destination);
-            g.gain.setValueAtTime(0.08, audioCtx.currentTime + idx * 0.09);
-            g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.09 + 0.45);
-            o.start(audioCtx.currentTime + idx * 0.09);
-            o.stop(audioCtx.currentTime + idx * 0.09 + 0.45);
+            g.connect(ctx.destination);
+            g.gain.setValueAtTime(0.08, ctx.currentTime + idx * 0.09);
+            g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.09 + 0.45);
+            o.start(ctx.currentTime + idx * 0.09);
+            o.stop(ctx.currentTime + idx * 0.09 + 0.45);
           });
         }
-      } catch (err) {}
+      } catch (err) {
+        // Audio not available
+      }
     };
+
+    // ─── Responsive Canvas Sizing ─────────────────────────────────────────
+
+    /** Resize canvas backing-pixel dimensions to match CSS display size × devicePixelRatio */
+    function resizeCanvas() {
+      const container = canvas.parentElement;
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      // Use container width as the canvas logical size (square aspect)
+      const size = Math.floor(rect.width);
+      if (size < 50) return;
+      // For sharp rendering, set canvas buffer to match pixel ratio
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = size * dpr;
+      canvas.height = size * dpr;
+      // Scale context so all drawing coordinates are in CSS pixels
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      drawWheel();
+    }
+
+    // Debounced resize listener
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+      if (resizeTimer) cancelAnimationFrame(resizeTimer);
+      resizeTimer = requestAnimationFrame(() => {
+        resizeCanvas();
+        resizeTimer = null;
+      });
+    });
 
     // Draw the Wheel
     function drawWheel() {
-      const size = canvas.width;
+      const size = canvas.width / (window.devicePixelRatio || 1);
       const center = size / 2;
       const radius = center - 20;
 
+      ctx.save();
+      ctx.setTransform(window.devicePixelRatio || 1, 0, 0, window.devicePixelRatio || 1, 0, 0);
       ctx.clearRect(0, 0, size, size);
 
       if (names.length === 0) {
@@ -651,10 +779,11 @@
         ctx.stroke();
 
         ctx.fillStyle = "#94a3b8";
-        ctx.font = "bold 24px system-ui, sans-serif";
+        ctx.font = `bold ${Math.max(16, Math.min(24, size / 20))}px system-ui, sans-serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText("Enter names to begin", center, center);
+        ctx.restore();
         return;
       }
 
@@ -691,8 +820,8 @@
         ctx.shadowColor = "rgba(0,0,0,0.5)";
         ctx.shadowBlur = 4;
         
-        // Scale font size according to slice sizes
-        let fontSize = Math.min(26, Math.max(12, Math.floor(400 / names.length)));
+        // Scale font size according to slice sizes and canvas size
+        let fontSize = Math.min(size / 20, Math.max(12, Math.floor(400 / names.length)));
         ctx.font = `bold ${fontSize}px system-ui, sans-serif`;
         ctx.textAlign = "right";
         ctx.textBaseline = "middle";
@@ -714,15 +843,17 @@
       // Draw elegant outer border rim
       ctx.beginPath();
       ctx.arc(center, center, radius, 0, 2 * Math.PI);
-      ctx.lineWidth = 10;
+      ctx.lineWidth = Math.max(6, Math.min(10, size / 60));
       ctx.strokeStyle = "#1e293b";
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.arc(center, center, radius + 5, 0, 2 * Math.PI);
+      ctx.arc(center, center, radius + Math.max(3, Math.min(5, size / 100)), 0, 2 * Math.PI);
       ctx.lineWidth = 2;
       ctx.strokeStyle = "rgba(255,255,255,0.1)";
       ctx.stroke();
+
+      ctx.restore();
     }
 
     // Spin mechanism animation
@@ -733,6 +864,8 @@
 
     function startSpin() {
       if (isSpinning || names.length === 0) return;
+      // Ensure AudioContext is ready on user gesture (required by mobile browsers)
+      ensureAudioContext();
       isSpinning = true;
       spinBtn.disabled = true;
 
@@ -755,7 +888,6 @@
       const easeFactor = 1 - Math.pow(1 - progress, 4);
       
       // Update angle based on ease out progress
-      const totalAngleChange = initialSpinVelocity * (targetSpinTime / 16);
       currentAngle = (currentAngle + (initialSpinVelocity * Math.pow(1 - progress, 3))) % (2 * Math.PI);
 
       // Web Audio peg tick ticker simulation
@@ -889,6 +1021,25 @@
       hideWinnerModal();
     }
 
+    // ─── Touch Feedback on All Buttons ────────────────────────────────────
+
+    /** Add touch-active class to buttons on touch devices for visual feedback */
+    function setupTouchFeedback() {
+      const buttons = document.querySelectorAll('.btn, .btn.secondary, .spin-center-btn, .fullscreen-btn, #modalBtnGotIt, #modalBtnRemove');
+      buttons.forEach(btn => {
+        btn.addEventListener('touchstart', () => btn.classList.add('touch-active'), { passive: true });
+        btn.addEventListener('touchend', () => btn.classList.remove('touch-active'), { passive: true });
+        btn.addEventListener('touchcancel', () => btn.classList.remove('touch-active'), { passive: true });
+      });
+    }
+
+    // ─── Mobile keyboard handling ─────────────────────────────────────────
+    // When keyboard opens on mobile, scroll the textarea into view
+    namesInput.addEventListener('focus', () => {
+      // Small delay to let the keyboard open
+      setTimeout(() => namesInput.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
+    });
+
     // Wire listeners
     namesInput.addEventListener("input", parseInput);
     
@@ -941,7 +1092,9 @@
     };
 
     // Initialize UI
+    setupTouchFeedback();
     initConfetti();
+    resizeCanvas(); // Sets the canvas to correct size on load
     drawWheel();
   </script>
 </body>

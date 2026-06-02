@@ -11,21 +11,21 @@
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>2048 - Free Online Game (Undo, Save, Share) | UpTools</title>
 <!-- SEO -->
-<meta content="Play 2048 online (mobile + desktop). Smooth swipes &amp; arrows, undo, auto-save, best score &amp; best tile, and a clean full-screen play window with a back button. Share your run to challenge friends!" name="description"/>
-<link href="https://www.uptools.in/games/2048/" rel="canonical">
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
-<meta content="#0f1419" name="theme-color"/>
-<!-- OpenGraph / Twitter -->
-<meta content="Play 2048 - Free Online Game | UpTools" property="og:title"/>
-<meta content="Swipe or use arrow keys to merge tiles and reach 2048. Undo, auto-save, best score, and share." property="og:description"/>
-<meta content="website" property="og:type"/>
-<meta content="https://www.uptools.in/games/2048/" property="og:url"/>
-<meta content="https://www.uptools.in/assets/social/2048-card.png" property="og:image"/>
-<meta content="summary_large_image" name="twitter:card"/>
-  <meta name="twitter:title" content="Play 2048 - Free Online Game | UpTools" />
-  <meta name="twitter:description" content="Swipe or use arrow keys to merge tiles and reach 2048. Undo, auto-save, best score, and share." />
-  <meta name="twitter:image" content="https://www.uptools.in/assets/social/2048-card.png" />
-<!-- Icons -->
+    <meta content="Play 2048 online (mobile + desktop). Smooth swipes &amp; arrows, undo, auto-save, best score &amp; best tile, and a clean full-screen play window with a back button. Share your run to challenge friends!" name="description"/>
+    <link href="https://www.uptools.in/games/2048/" rel="canonical"/>
+    <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
+    <meta content="#0f1419" name="theme-color"/>
+    <!-- OpenGraph / Twitter -->
+    <meta content="2048 - Free Online Game (Undo, Save, Share) | UpTools" property="og:title"/>
+    <meta content="Play 2048 online (mobile + desktop). Smooth swipes &amp; arrows, undo, auto-save, best score &amp; best tile, and a clean full-screen play window with a back button. Share your run to challenge friends!" property="og:description"/>
+    <meta content="website" property="og:type"/>
+    <meta content="https://www.uptools.in/games/2048/" property="og:url"/>
+    <meta content="https://www.uptools.in/assets/social/2048-card.png" property="og:image"/>
+    <meta content="summary_large_image" name="twitter:card"/>
+    <meta name="twitter:title" content="2048 - Free Online Game (Undo, Save, Share) | UpTools" />
+    <meta name="twitter:description" content="Play 2048 online (mobile + desktop). Smooth swipes &amp; arrows, undo, auto-save, best score &amp; best tile, and a clean full-screen play window with a back button. Share your run to challenge friends!" />
+    <meta name="twitter:image" content="https://www.uptools.in/assets/social/2048-card.png" />
+    <!-- Icons -->
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
 <!-- Base CSS -->
@@ -115,20 +115,24 @@
     }
 
     .tile{
-      position:absolute; inset:auto;
-      width: calc((var(--board-size) - var(--gap) * 5) / 4);
-      height: calc((var(--board-size) - var(--gap) * 5) / 4);
-      border-radius:var(--tile-radius);
-      display:grid; place-items:center;
-      font-weight:900; font-size:clamp(18px, 6.2vmin, 42px);
-      color:#0b1020;
-      transition: transform .12s ease-out;
-      will-change: transform;
-    }
-    .tile.pop{ animation:pop .14s ease-out; }
-    .tile.merge{ animation:merge .16s ease-out; }
-    @keyframes pop{ from{ transform:scale(.72) } to{ transform:scale(1) } }
-    @keyframes merge{ 0%{ transform:scale(1) } 50%{ transform:scale(1.08) } 100%{ transform:scale(1) } }
+          position:absolute; inset:auto;
+          width: calc((var(--board-size) - var(--gap) * 5) / 4);
+          height: calc((var(--board-size) - var(--gap) * 5) / 4);
+          border-radius:var(--tile-radius);
+          display:grid; place-items:center;
+          font-weight:900;
+          font-size:var(--tile-font, clamp(18px, 6.2vmin, 42px));
+          color:#0b1020;
+          transition: transform .12s ease-out;
+          will-change: transform;
+        }
+            .tile.pop{ animation:pop .14s ease-out; }
+            .tile.merge{ animation:merge .16s ease-out; }
+            @keyframes pop{ from{ transform:scale(.72) } to{ transform:scale(1) } }
+            @keyframes merge{ 0%{ transform:scale(1) } 50%{ transform:scale(1.08) } 100%{ transform:scale(1) } }
+
+            /* Responsive tile font size - dynamically set via JS */
+            .tile{ font-size: var(--tile-font, 32px); }
 
     /* Classic 2048 palette */
     .n2{background:#eee4da;color:#776e65}
@@ -175,14 +179,7 @@
     "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
   }
   </script>
-</link>  <link rel="canonical" href="https://www.uptools.in/games/2048/" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta property="og:title" content="2048 - Free Online Game (Undo, Save, Share) | UpTools" />
-  <meta property="og:description" content="" />
-  <meta property="og:url" content="https://www.uptools.in/games/2048/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="UpTools">
-</head>
+  </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
 
@@ -277,7 +274,7 @@
 </div>
 </div>
 <div class="ps-stage">
-<div class="board">
+<div class="board" id="gameContainer">
 <!-- The square board that always fits -->
 <div aria-atomic="false" aria-label="2048 board" aria-live="polite" id="board">
 <!-- Background cells for layout stability (avoid CLS) -->
@@ -318,7 +315,7 @@
       homeLast:   $("#lastScore"),
       homeMoves:  $("#movesHome"),
       status:     $("#homeStatus"),
-      boardWrap:  document.querySelector(".board"), // wrapper that owns the available size
+      boardWrap:  $("body") ? ($("#gameContainer") || document.querySelector(".board")) : null, // wrapper that owns the available size
       board:      $("#board"),
       psBack:     $("#psBack"),
       psScore:    $("#psScore"),
@@ -327,6 +324,69 @@
       psRestart:  $("#psRestart"),
       psShare:    $("#psShare"),
     };
+
+    // ---------- WebAudio ----------
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    function ensureAudioCtx(){
+      if(!audioCtx) audioCtx = new AudioCtx();
+      if(audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+    function playTone(freq, duration, type='sine', gainVal=0.08){
+      try{
+        const ctx = ensureAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(gainVal, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + duration);
+      }catch(e){ /* silently fail if audio unavailable */ }
+    }
+    const SFX = {
+      move(){ playTone(200, 0.08, 'triangle', 0.06); },
+      merge(freq=440){ playTone(freq, 0.15, 'sine', 0.09);
+        // harmonic overtone
+        setTimeout(()=>playTone(freq*1.5, 0.12, 'sine', 0.04), 30);
+      },
+      gameOver(){
+        playTone(300, 0.3, 'sawtooth', 0.06);
+        setTimeout(()=>playTone(200, 0.4, 'sawtooth', 0.05), 200);
+      }
+    };
+
+    // ---------- Fullscreen Manager ----------
+    (function initFullscreen(){
+      const el = document.documentElement;
+      const btn = document.getElementById('fullscreenBtn');
+      if(!btn) return;
+      function updateIcon(){
+        if(document.fullscreenElement || document.webkitFullscreenElement){
+          btn.textContent = '⛶ X';
+          btn.title = 'Exit Fullscreen';
+        } else {
+          btn.textContent = '⛶';
+          btn.title = 'Enter Fullscreen';
+        }
+      }
+      btn.addEventListener('click', ()=>{
+        if(document.fullscreenElement || document.webkitFullscreenElement){
+          if(document.exitFullscreen) document.exitFullscreen();
+          else if(document.webkitExitFullscreen) document.webkitExitFullscreen();
+        } else {
+          if(el.requestFullscreen) el.requestFullscreen();
+          else if(el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+        }
+      });
+      document.addEventListener('fullscreenchange', updateIcon);
+      document.addEventListener('webkitfullscreenchange', updateIcon);
+      updateIcon();
+    })();
 
     // ---------- Storage keys ----------
     const LS = {
@@ -376,26 +436,31 @@
     }
 
     // ---------- Responsive: fit square board to visible wrapper (.board) ----------
-    function fitBoardSize(){
-      // Measure the wrapper that actually receives the available height in the grid (no magic constants)
-      const wrap = els.boardWrap;
-      if(!wrap) return;
-      const cs = getComputedStyle(wrap);
-      const padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
-      const padY = parseFloat(cs.paddingTop)  + parseFloat(cs.paddingBottom);
-      const availW = Math.max(160, wrap.clientWidth  - padX);
-      const availH = Math.max(180, wrap.clientHeight - padY);
-      // Square that always fits - never clips, even on small phones with toolbars
-      const size = Math.floor(Math.min(availW, availH));
-      document.documentElement.style.setProperty('--board-size', size + 'px');
-      // Re-position tiles after size change
-      for(const t of state.tiles.values()) placeTile(t);
-    }
+        function fitBoardSize(){
+          // Measure the wrapper that actually receives the available height in the grid (no magic constants)
+          const wrap = els.boardWrap;
+          if(!wrap) return;
+          const cs = getComputedStyle(wrap);
+          const padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+          const padY = parseFloat(cs.paddingTop)  + parseFloat(cs.paddingBottom);
+          const availW = Math.max(160, wrap.clientWidth  - padX);
+          const availH = Math.max(180, wrap.clientHeight - padY);
+          // Square that always fits - never clips, even on small phones with toolbars
+          const size = Math.floor(Math.min(availW, availH));
+          const oldSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--board-size')) || 0;
+          if(Math.abs(size - oldSize) < 2) return; // avoid unnecessary reflows
+          document.documentElement.style.setProperty('--board-size', size + 'px');
+          // Also scale font based on board size
+          document.documentElement.style.setProperty('--tile-font', Math.max(14, Math.min(42, size * 0.095)) + 'px');
+          // Re-position tiles after size change
+          for(const t of state.tiles.values()) placeTile(t);
+        }
 
-    // Observe size changes of the wrapper (handles rotations, browser bars, split view)
-    const ro = new ResizeObserver(()=>fitBoardSize());
-    ro.observe(els.boardWrap);
-    addEventListener('orientationchange', fitBoardSize, {passive:true});
+        // Observe size changes of the wrapper (handles rotations, browser bars, split view)
+        const ro = new ResizeObserver(()=>fitBoardSize());
+        if(els.boardWrap) ro.observe(els.boardWrap);
+        addEventListener('orientationchange', fitBoardSize, {passive:true});
+        addEventListener('resize', fitBoardSize, {passive:true});
 
     // ---------- Utilities ----------
     function bgPos(r,c){
@@ -637,11 +702,16 @@
       for(const t of state.tiles.values()) placeTile(t);
 
       // score, moves, bests
+      const prevScore = state.score;
       state.score += gained;
       state.moves += 1;
       state.best = Math.max(state.best, state.score);
       const biggest = Math.max(...[...state.tiles.values()].map(t=>t.v), 0);
       state.bestTile = Math.max(state.bestTile, biggest);
+
+      // Audio feedback
+      SFX.move();
+      if(gained > 0) SFX.merge(440 + (biggest % 1000) * 0.5);
 
       // spawn new
       addRandomTile();
@@ -653,7 +723,8 @@
       updateHUD(); saveLocal();
 
       if(!canMove()) {
-        setTimeout(() => {
+              SFX.gameOver();
+              setTimeout(() => {
           showOverlay("GAME OVER", `No more moves! Final Score: ${state.score}`, "Try Again", () => {
             startNew(state.seed || "");
           });
@@ -695,26 +766,33 @@
     }
 
     function getPoint(e){
-      if(e.changedTouches && e.changedTouches[0]) return {x:e.changedTouches[0].clientX, y:e.changedTouches[0].clientY};
-      return {x:e.clientX, y:e.clientY};
-    }
-    function onPointerDown(e){
-      if(!state.playing) return;
-      state.pointer.active = true;
-      const p = getPoint(e); state.pointer.x=p.x; state.pointer.y=p.y;
-    }
-    function onPointerUp(e){
-      if(!state.playing || !state.pointer.active) return;
-      const p = getPoint(e);
-      const dx = p.x - state.pointer.x;
-      const dy = p.y - state.pointer.y;
-      state.pointer.active = false;
-      const absX = Math.abs(dx), absY = Math.abs(dy);
-      const threshold = 24;
-      if(absX < threshold && absY < threshold) return;
-      const dir = absX>absY ? (dx>0?'right':'left') : (dy>0?'down':'up');
-      move(dir);
-    }
+          if(e.changedTouches && e.changedTouches[0]) return {x:e.changedTouches[0].clientX, y:e.changedTouches[0].clientY};
+          if(e.touches && e.touches[0]) return {x:e.touches[0].clientX, y:e.touches[0].clientY};
+          return {x:e.clientX, y:e.clientY};
+        }
+        function onPointerDown(e){
+          if(!state.playing) return;
+          e.preventDefault(); // prevent scroll/zoom on mobile
+          state.pointer.active = true;
+          const p = getPoint(e); state.pointer.x=p.x; state.pointer.y=p.y;
+        }
+        function onPointerMove(e){
+          if(!state.playing || !state.pointer.active) return;
+          e.preventDefault(); // prevent scroll/zoom while swiping
+        }
+        function onPointerUp(e){
+          if(!state.playing || !state.pointer.active) return;
+          e.preventDefault();
+          const p = getPoint(e);
+          const dx = p.x - state.pointer.x;
+          const dy = p.y - state.pointer.y;
+          state.pointer.active = false;
+          const absX = Math.abs(dx), absY = Math.abs(dy);
+          const threshold = Math.max(12, Math.min(30, Math.min(absX, absY) * 0.08));
+          if(absX < threshold && absY < threshold) return;
+          const dir = absX>absY ? (dx>0?'right':'left') : (dy>0?'down':'up');
+          move(dir);
+        }
 
     // ---------- HUD / Screen Toggle ----------
     function updateHUD(){
@@ -739,11 +817,15 @@
       state.playing = true;
 
       // listeners
-      document.addEventListener('keydown', onKey, {passive:false});
-      els.board.addEventListener('pointerdown', onPointerDown, {passive:true});
-      els.board.addEventListener('pointerup', onPointerUp, {passive:true});
-      els.board.addEventListener('touchstart', onPointerDown, {passive:true});
-      els.board.addEventListener('touchend', onPointerUp, {passive:true});
+            document.addEventListener('keydown', onKey, {passive:false});
+            els.board.addEventListener('pointerdown', onPointerDown, {passive:false});
+            els.board.addEventListener('pointermove', onPointerMove, {passive:false});
+            els.board.addEventListener('pointerup', onPointerUp, {passive:true});
+            els.board.addEventListener('pointercancel', onPointerUp, {passive:true});
+            els.board.addEventListener('touchstart', onPointerDown, {passive:false});
+            els.board.addEventListener('touchmove', onPointerMove, {passive:false});
+            els.board.addEventListener('touchend', onPointerUp, {passive:true});
+            els.board.addEventListener('touchcancel', onPointerUp, {passive:true});
 
       if(seedFromURL){ state.seed = seedFromURL; reseed(state.seed); }
       startNew(state.seed);
@@ -757,11 +839,15 @@
       state.playing = false;
 
       // remove listeners
-      document.removeEventListener('keydown', onKey);
-      els.board.removeEventListener('pointerdown', onPointerDown);
-      els.board.removeEventListener('pointerup', onPointerUp);
-      els.board.removeEventListener('touchstart', onPointerDown);
-      els.board.removeEventListener('touchend', onPointerUp);
+            document.removeEventListener('keydown', onKey);
+            els.board.removeEventListener('pointerdown', onPointerDown);
+            els.board.removeEventListener('pointermove', onPointerMove);
+            els.board.removeEventListener('pointerup', onPointerUp);
+            els.board.removeEventListener('pointercancel', onPointerUp);
+            els.board.removeEventListener('touchstart', onPointerDown);
+            els.board.removeEventListener('touchmove', onPointerMove);
+            els.board.removeEventListener('touchend', onPointerUp);
+            els.board.removeEventListener('touchcancel', onPointerUp);
 
       if(stop){
         localStorage.setItem(LS.LAST, String(state.score));

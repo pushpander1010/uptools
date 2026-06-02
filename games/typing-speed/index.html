@@ -28,8 +28,8 @@
     .game-container { max-width: 700px; margin: 2rem auto; padding: 2rem; background: var(--card); border: 1px solid var(--cardBorder); border-radius: var(--radius); position: relative; width: 100%; box-sizing: border-box; }
     .fullscreen-btn { position: absolute; top: 1rem; right: 1rem; background: var(--accent); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-size: 1rem; z-index: 100; transition: all 0.2s ease; font-weight: 600; }
     .fullscreen-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3); }
-    .exit-fullscreen-btn { position: fixed; top: 1rem; right: 1rem; background: #f44336; color: white; border: none; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 700; z-index: 10000; transition: all 0.2s ease; }
-    .exit-fullscreen-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3); }
+
+    /* FullscreenManager's own exit button (id='exitFullscreenBtn') covers this — no separate .exit-fullscreen-btn needed */
     .fullscreen-mode { position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: var(--bg) !important; z-index: 9999 !important; margin: 0 !important; padding: 1rem !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; overflow: auto !important; }
     .fullscreen-mode .game-container { max-width: min(90vw, 800px) !important; width: 100% !important; margin: 0 !important; padding: 2rem !important; }
     .fullscreen-mode .text-display { font-size: min(3vmin, 1.3rem) !important; }
@@ -38,9 +38,11 @@
     .fullscreen-mode .result-wpm { font-size: min(10vmin, 3.5rem) !important; }
 
     .duration-selector { display: flex; gap: 0.75rem; justify-content: center; margin: 1.5rem 0; flex-wrap: wrap; }
-    .duration-btn { background: rgba(255, 255, 255, 0.05); color: var(--text); border: 2px solid var(--cardBorder); padding: 0.75rem 1.5rem; border-radius: var(--radius); cursor: pointer; transition: all 0.3s ease; font-weight: 600; font-size: 1rem; }
+    .duration-btn { background: rgba(255, 255, 255, 0.05); color: var(--text); border: 2px solid var(--cardBorder); padding: 0.75rem 1.5rem; border-radius: var(--radius); cursor: pointer; transition: all 0.3s ease; font-weight: 600; font-size: 1rem; -webkit-tap-highlight-color: transparent; user-select: none; }
     .duration-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
     .duration-btn:hover:not(.active) { border-color: var(--accent); background: rgba(0, 229, 255, 0.1); }
+    .duration-btn:active { transform: scale(0.95); border-color: var(--accent); background: rgba(0, 229, 255, 0.2); }
+    .duration-btn.active:active { transform: scale(0.95); }
 
     .text-display { background: rgba(255, 255, 255, 0.02); border: 2px solid var(--cardBorder); border-radius: var(--radius); padding: 1.5rem; font-size: 1.3rem; line-height: 1.8; letter-spacing: 0.02em; min-height: 120px; max-height: 200px; margin: 1.5rem 0; font-family: 'Courier New', monospace; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; overflow-y: auto; width: 100%; box-sizing: border-box; white-space: pre-wrap; }
     .char { transition: all 0.05s ease; display: inline; white-space: pre-wrap; }
@@ -114,7 +116,7 @@
       .controls { gap: 0.5rem; }
       .btn-primary, .btn-secondary { padding: 0.7rem 1.2rem; font-size: 0.9rem; }
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -153,7 +155,7 @@
   </header>
 
   <main id="main" class="wrap" role="main">
-    <div class="game-container">
+    <div class="game-container" id="gameContainer">
       <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶ Fullscreen</button>
       <h1>⌨️ Typing Speed Test</h1>
       <p style="color: var(--muted); margin: 0.5rem 0 0 0;">Test your typing speed and accuracy. How fast can you type?</p>
@@ -260,6 +262,9 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
 
+    // ------------------------------------------------------------------
+    // WebAudio Sound Effects
+    // ------------------------------------------------------------------
     class SoundEffects {
       constructor() {
         this.ctx = null;
@@ -268,6 +273,27 @@
         if (!this.ctx) {
           this.ctx = new (window.AudioContext || window.webkitAudioContext)();
         }
+        // Resume if suspended (autoplay policy)
+        if (this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+      /** Short tick for every keystroke */
+      playKeypress() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(660, this.ctx.currentTime);
+          gain.gain.setValueAtTime(0.015, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.04);
+        } catch (e) {}
       }
       playCorrect() {
         this.init();
@@ -277,6 +303,7 @@
           const gain = this.ctx.createGain();
           osc.connect(gain);
           gain.connect(this.ctx.destination);
+          osc.type = 'sine';
           osc.frequency.setValueAtTime(800, this.ctx.currentTime);
           gain.gain.setValueAtTime(0.02, this.ctx.currentTime);
           gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
@@ -300,6 +327,47 @@
           osc.stop(this.ctx.currentTime + 0.15);
         } catch (e) {}
       }
+      /** Rising chime when a word is completed */
+      playWordComplete() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const notes = [523.25, 659.25]; // C5, E5
+          notes.forEach((freq, i) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.06);
+            gain.gain.setValueAtTime(0.03, this.ctx.currentTime + i * 0.06);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.06 + 0.12);
+            osc.start(this.ctx.currentTime + i * 0.06);
+            osc.stop(this.ctx.currentTime + i * 0.06 + 0.12);
+          });
+        } catch (e) {}
+      }
+      /** Alarm-style beeps when timer runs out */
+      playTimerEnd() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const notes = [440, 349.23, 293.66]; // A4, F4, D4
+          notes.forEach((freq, i) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.15);
+            gain.gain.setValueAtTime(0.06, this.ctx.currentTime + i * 0.15);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.15 + 0.25);
+            osc.start(this.ctx.currentTime + i * 0.15);
+            osc.stop(this.ctx.currentTime + i * 0.15 + 0.25);
+          });
+        } catch (e) {}
+      }
+      /** Victory arpeggio */
       playWin() {
         this.init();
         if (!this.ctx) return;
@@ -310,6 +378,7 @@
             const gain = this.ctx.createGain();
             osc.connect(gain);
             gain.connect(this.ctx.destination);
+            osc.type = 'sine';
             osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.1);
             gain.gain.setValueAtTime(0.05, this.ctx.currentTime + i * 0.1);
             gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.1 + 0.25);
@@ -321,16 +390,11 @@
     }
     const sounds = new SoundEffects();
 
-    // Initialize fullscreen manager
-    let fullscreenManager = null;
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof FullscreenManager !== 'undefined') {
-        fullscreenManager = new FullscreenManager(
-          document.querySelector('.game-container'),
-          document.getElementById('fullscreenBtn')
-        );
-      }
-    });
+    // ------------------------------------------------------------------
+    // FullscreenManager — auto-initialized by fullscreen-utils.js
+    // fullscreen-utils.js uses selectors '.game-container' and '.fullscreen-btn'
+    // which match the DOM. No manual init needed — the global script handles it.
+    // ------------------------------------------------------------------
 
     const TEXTS = [
       "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.",
@@ -355,6 +419,7 @@
     let totalTyped = 0;
     let startTime = null;
     let lastLength = 0;
+    let lastWordCount = 0;
 
     const textDisplay = document.getElementById('textDisplay');
     const typingInput = document.getElementById('typingInput');
@@ -381,6 +446,11 @@
         }
         return `<span class="${cls}">${c === ' ' ? '&nbsp;' : c}</span>`;
       }).join('');
+      // Auto-scroll to current position
+      const currentEl = textDisplay.querySelector('.char.current');
+      if (currentEl) {
+        currentEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
     }
 
     function calcWPM(typed, elapsedSeconds) {
@@ -436,6 +506,7 @@
 
       resultBox.style.display = 'block';
       mainControls.style.display = 'none';
+      sounds.playTimerEnd();
       sounds.playWin();
     }
 
@@ -447,6 +518,7 @@
       errors = 0;
       totalTyped = 0;
       lastLength = 0;
+      lastWordCount = 0;
       startTime = null;
 
       currentText = pickText();
@@ -480,7 +552,17 @@
         } else {
           sounds.playWrong();
         }
+      } else if (typed.length < lastLength) {
+        // Backspace — just a keypress sound for feedback
+        sounds.playKeypress();
       }
+
+      // Detect word completion: word count increased and we're past a space
+      const currentWordCount = typed.trim().split(/\s+/).filter(Boolean).length;
+      if (currentWordCount > lastWordCount && currentWordCount > 0) {
+        sounds.playWordComplete();
+      }
+      lastWordCount = currentWordCount;
       lastLength = typed.length;
 
       renderText(typed);
@@ -509,6 +591,7 @@
         currentText = pickText();
         typingInput.value = '';
         lastLength = 0;
+        lastWordCount = 0;
         renderText('');
       }
     });

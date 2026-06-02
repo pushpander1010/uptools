@@ -85,6 +85,8 @@
       min-width: 44px;
       min-height: 44px;
       touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
     .simon-button::after {
       content: '';
@@ -94,25 +96,73 @@
       border: 1px solid rgba(255,255,255,0.1);
     }
     .simon-button:hover { 
-      transform: scale(1.02); 
+      transform: scale(1.05); 
       opacity: 0.85;
     }
     .simon-button.active { 
-      transform: scale(1.05); 
+      transform: scale(1.08); 
+      opacity: 1;
+    }
+    .simon-button:active {
+      transform: scale(1.08);
+      opacity: 1;
+    }
+    .simon-button.touch-active {
+      transform: scale(1.08);
       opacity: 1;
     }
     .red { background: radial-gradient(circle at center, #ff6b81 0%, #ff4757 100%); }
     .red.active { box-shadow: 0 0 35px #ff4757, inset 0 0 10px rgba(255,255,255,0.5); }
+    .red:active { box-shadow: 0 0 35px #ff4757, inset 0 0 10px rgba(255,255,255,0.5); }
+    .red.touch-active { box-shadow: 0 0 35px #ff4757, inset 0 0 10px rgba(255,255,255,0.5); }
     
     .blue { background: radial-gradient(circle at center, #70a1ff 0%, #1e90ff 100%); }
     .blue.active { box-shadow: 0 0 35px #1e90ff, inset 0 0 10px rgba(255,255,255,0.5); }
+    .blue:active { box-shadow: 0 0 35px #1e90ff, inset 0 0 10px rgba(255,255,255,0.5); }
+    .blue.touch-active { box-shadow: 0 0 35px #1e90ff, inset 0 0 10px rgba(255,255,255,0.5); }
     
     .green { background: radial-gradient(circle at center, #2ed573 0%, #26af56 100%); }
     .green.active { box-shadow: 0 0 35px #2ed573, inset 0 0 10px rgba(255,255,255,0.5); }
+    .green:active { box-shadow: 0 0 35px #2ed573, inset 0 0 10px rgba(255,255,255,0.5); }
+    .green.touch-active { box-shadow: 0 0 35px #2ed573, inset 0 0 10px rgba(255,255,255,0.5); }
     
     .yellow { background: radial-gradient(circle at center, #eccc68 0%, #ffa502 100%); }
     .yellow.active { box-shadow: 0 0 35px #ffa502, inset 0 0 10px rgba(255,255,255,0.5); }
+    .yellow:active { box-shadow: 0 0 35px #ffa502, inset 0 0 10px rgba(255,255,255,0.5); }
+    .yellow.touch-active { box-shadow: 0 0 35px #ffa502, inset 0 0 10px rgba(255,255,255,0.5); }
 
+    .score-row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 10px 0;
+    }
+    .score-item {
+      text-align: center;
+    }
+    .score-item .value {
+      font-size: 24px;
+      font-weight: 800;
+      color: #2ed573;
+    }
+    .score-item.best .value {
+      color: #ffa502;
+    }
+    .score-item .label {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .message { 
+      font-size: 16px; 
+      color: var(--muted);
+      margin: 10px 0; 
+      min-height: 25px; 
+      font-weight: 600;
+    }
+  
     .controls { 
       margin: 1.5rem 0; 
       display: flex;
@@ -144,20 +194,7 @@
     .btn.secondary:hover {
       background: #34495e;
     }
-    .score { 
-      font-size: 24px; 
-      font-weight: 800;
-      margin: 10px 0; 
-      color: #2ed573;
-    }
-    .message { 
-      font-size: 16px; 
-      color: var(--muted);
-      margin: 10px 0; 
-      min-height: 25px; 
-      font-weight: 600;
-    }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -204,11 +241,20 @@
     </div>
   </header>
 
-  <div class="game-container">
-    <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
-    <h1>🔴 Simon Says</h1>
-    <div class="score">Score: <span id="score">0</span></div>
-    <div class="message" id="message">Click Start to begin!</div>
+  <div class="game-container" id="gameContainer">
+      <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
+      <h1>🔴 Simon Says</h1>
+      <div class="score-row">
+        <div class="score-item">
+          <div class="value" id="score">0</div>
+          <div class="label">Score</div>
+        </div>
+        <div class="score-item best">
+          <div class="value" id="bestScore">0</div>
+          <div class="label">Best</div>
+        </div>
+      </div>
+      <div class="message" id="message">Click Start to begin!</div>
     
     <div class="simon-board">
       <button class="simon-button red" data-color="red" aria-label="Red tile"></button>
@@ -245,19 +291,44 @@
         
         this.buttons = document.querySelectorAll('.simon-button');
         this.scoreElement = document.getElementById('score');
+        this.bestScoreElement = document.getElementById('bestScore');
         this.messageElement = document.getElementById('message');
         this.startBtn = document.getElementById('startBtn');
         this.resetBtn = document.getElementById('resetBtn');
         
         this.audioCtx = null;
+        // Musical tones: C4, E4, G4, C5 (sine waves)
         this.tones = {
-          red: 310,
-          green: 415,
-          blue: 252,
-          yellow: 209
+          red: 261.63,   // C4
+          blue: 329.63,  // E4
+          green: 392.00, // G4
+          yellow: 523.25 // C5
         };
 
+        this.bestScore = this.loadBestScore();
+        this.updateBestScore();
+
         this.bindEvents();
+      }
+
+      loadBestScore() {
+        try {
+          return parseInt(localStorage.getItem('simon-best-score') || '0', 10);
+        } catch(e) {
+          return 0;
+        }
+      }
+
+      saveBestScore() {
+        try {
+          localStorage.setItem('simon-best-score', String(this.bestScore));
+        } catch(e) {}
+      }
+
+      updateBestScore() {
+        if (this.bestScoreElement) {
+          this.bestScoreElement.textContent = this.bestScore;
+        }
       }
       
       bindEvents() {
@@ -270,6 +341,22 @@
               this.handlePlayerInput(e.target.dataset.color);
             }
           });
+
+          // Touch feedback: touch-active class on touchstart/touchend
+          button.addEventListener('touchstart', () => {
+            button.classList.add('touch-active');
+            if (!this.isShowingSequence) {
+              this.playTone(button.dataset.color);
+            }
+          }, { passive: true });
+
+          button.addEventListener('touchend', () => {
+            button.classList.remove('touch-active');
+          }, { passive: true });
+
+          button.addEventListener('touchcancel', () => {
+            button.classList.remove('touch-active');
+          }, { passive: true });
         });
       }
       
@@ -294,6 +381,11 @@
       startGame() {
         const overlay = document.getElementById('gameOverlay');
         if (overlay) overlay.style.display = 'none';
+        
+        // Resume AudioContext after user gesture
+        if (this.audioCtx && this.audioCtx.state === 'suspended') {
+          this.audioCtx.resume();
+        }
         
         this.isPlaying = true;
         this.sequence = [];
@@ -377,6 +469,13 @@
         this.isPlaying = false;
         this.messageElement.textContent = `Game Over! Final Score: ${this.score}`;
         
+        // Update best score
+        if (this.score > this.bestScore) {
+          this.bestScore = this.score;
+          this.saveBestScore();
+          this.updateBestScore();
+        }
+
         // Play failure sound
         try {
           this.audioCtx = this.audioCtx || new (window.AudioContext || window.webkitAudioContext)();
@@ -434,6 +533,11 @@
     // Initialize game when page loads
     document.addEventListener('DOMContentLoaded', () => {
       new SimonGame();
+
+      // FullscreenManager initialization
+      if (typeof FullscreenManager !== 'undefined') {
+        new FullscreenManager('#gameContainer', '#fullscreenBtn');
+      }
     });
   </script>
 </body>

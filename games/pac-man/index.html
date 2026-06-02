@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Pac-Man - Free Online Game | UpTools</title>
   <meta name="description" content="Play Pac-Man online! Eat dots and avoid ghosts in this classic arcade game. Free browser game, no downloads required.">
   <!-- Open Graph -->
@@ -72,7 +72,7 @@
     .stat-lbl { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
     .game-board { background: #0a0a0a; border: 3px solid var(--accent); border-radius: var(--radius); padding: 1rem; margin: 1.5rem 0; display: grid; grid-template-columns: repeat(19, 1fr); gap: 2px; max-width: 600px; margin-left: auto; margin-right: auto; }
-    .cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border-radius: 2px; transition: all 0.1s ease; }
+    .cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border-radius: 2px; }
     .cell.wall { background: #0066ff; }
     .cell.dot { background: #0a0a0a; }
     .cell.dot::after { content: '·'; color: var(--accent); font-size: 1.5rem; }
@@ -89,7 +89,7 @@
     .btn-secondary:hover { border-color: var(--accent); background: rgba(255, 255, 0, 0.1); }
 
     .mobile-controls { display: none; grid-template-columns: repeat(3, 60px); grid-template-rows: repeat(3, 60px); gap: 0.5rem; justify-content: center; margin: 1.5rem 0; }
-    .mobile-controls .btn-control { background: rgba(255, 255, 0, 0.1); border: 2px solid var(--accent); color: var(--accent); padding: 0; width: 60px; height: 60px; border-radius: 0.5rem; cursor: pointer; font-size: 1.5rem; font-weight: bold; transition: all 0.2s ease; }
+    .mobile-controls .btn-control { background: rgba(255, 255, 0, 0.1); border: 2px solid var(--accent); color: var(--accent); padding: 0; width: 60px; height: 60px; border-radius: 0.5rem; cursor: pointer; font-size: 1.5rem; font-weight: bold; transition: all 0.1s ease; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
     .mobile-controls .btn-control:active { background: rgba(255, 255, 0, 0.3); transform: scale(0.95); }
     .mobile-controls .spacer { visibility: hidden; }
 
@@ -244,6 +244,141 @@
 
     let fullscreenManager = null;
 
+    // ---- Audio System ----
+    class SoundSystem {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+        this.buffers = {};
+        this.initialized = false;
+        // Generate sounds procedurally
+      }
+
+      init() {
+        if (this.initialized) return;
+        try {
+          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+          this._generateSounds();
+          this.initialized = true;
+        } catch (e) {
+          this.enabled = false;
+        }
+      }
+
+      _genTone(freq, duration, type = 'square', ramp = true) {
+        if (!this.ctx) return null;
+        const sampleRate = this.ctx.sampleRate;
+        const length = sampleRate * duration;
+        const buffer = this.ctx.createBuffer(1, length, sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < length; i++) {
+          const t = i / sampleRate;
+          let sample = 0;
+          if (type === 'square') {
+            sample = Math.sin(2 * Math.PI * freq * t) > 0 ? 0.3 : -0.3;
+          } else if (type === 'sine') {
+            sample = Math.sin(2 * Math.PI * freq * t) * 0.3;
+          } else if (type === 'sawtooth') {
+            sample = 2.0 * ((freq * t) % 1.0) - 1.0;
+            sample *= 0.2;
+          }
+          if (ramp) {
+            const env = Math.min(1, (length - i) / (sampleRate * 0.05));
+            sample *= env;
+          }
+          data[i] = sample;
+        }
+        return buffer;
+      }
+
+      _combine(...parts) {
+        if (!this.ctx) return null;
+        let totalLen = 0;
+        for (const p of parts) totalLen += p.length;
+        const buffer = this.ctx.createBuffer(1, totalLen, this.ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        let offset = 0;
+        for (const p of parts) {
+          const src = p.getChannelData(0);
+          for (let i = 0; i < src.length; i++) {
+            data[offset + i] = src[i];
+          }
+          offset += src.length;
+        }
+        return buffer;
+      }
+
+      _generateSounds() {
+        const sr = this.ctx.sampleRate;
+        // Chomp: two quick low tones
+        const c1 = this._genTone(160, 0.08, 'square');
+        const c2 = this._genTone(200, 0.08, 'square');
+        this.buffers.chomp = this._combine(c1, c2);
+
+        // Ghost death: descending wail
+        const gdLen = sr * 0.35;
+        const gdBuf = this.ctx.createBuffer(1, gdLen, sr);
+        const gdData = gdBuf.getChannelData(0);
+        for (let i = 0; i < gdLen; i++) {
+          const t = i / sr;
+          const freq = 400 - (t / 0.35) * 250;
+          const env = 1 - (i / gdLen);
+          gdData[i] = (Math.sin(2 * Math.PI * freq * t) > 0 ? 0.25 : -0.25) * env;
+        }
+        this.buffers.ghostDeath = gdBuf;
+
+        // Power pellet: ascending sparkle
+        const ppLen = sr * 0.15;
+        const ppBuf = this.ctx.createBuffer(1, ppLen, sr);
+        const ppData = ppBuf.getChannelData(0);
+        for (let i = 0; i < ppLen; i++) {
+          const t = i / sr;
+          const freq = 300 + (t / 0.15) * 600;
+          ppData[i] = Math.sin(2 * Math.PI * freq * t) * 0.2 * (1 - i / ppLen);
+        }
+        this.buffers.powerPellet = ppBuf;
+
+        // Death: descending phase
+        const dLen = sr * 0.6;
+        const dBuf = this.ctx.createBuffer(1, dLen, sr);
+        const dData = dBuf.getChannelData(0);
+        for (let i = 0; i < dLen; i++) {
+          const t = i / sr;
+          const freq = 500 - (t / 0.6) * 350;
+          const env = 1 - (i / dLen);
+          dData[i] = (Math.sin(2 * Math.PI * freq * t) > 0 ? 0.3 : -0.3) * env;
+        }
+        this.buffers.death = dBuf;
+
+        // Win: ascending 3-note arpeggio
+        const w1 = this._genTone(262, 0.12, 'sine');
+        const w2 = this._genTone(330, 0.12, 'sine');
+        const w3 = this._genTone(392, 0.12, 'sine');
+        const w4 = this._genTone(523, 0.2, 'sine');
+        this.buffers.win = this._combine(w1, w2, w3, w4);
+      }
+
+      play(name) {
+        if (!this.enabled || !this.ctx || !this.buffers[name]) return;
+        // Resume context if suspended (browser autoplay policy)
+        if (this.ctx.state === 'suspended') {
+          this.ctx.resume().catch(() => {});
+        }
+        try {
+          const src = this.ctx.createBufferSource();
+          src.buffer = this.buffers[name];
+          const gain = this.ctx.createGain();
+          gain.gain.value = 0.4;
+          src.connect(gain);
+          gain.connect(this.ctx.destination);
+          src.start(0);
+        } catch (e) {
+          // ignore audio errors silently
+        }
+      }
+    }
+
+    // ---- Main Game ----
     class PacManGame {
       constructor() {
         this.board = [
@@ -281,21 +416,94 @@
         this.level = 1;
         this.gameRunning = false;
         this.gamePaused = false;
-        this.ghostInterval = null;
         this.ghostSpeed = 220;
-        
+        this.ghostAccum = 0;
+
+        // rAF state
+        this.rafId = null;
+        this.lastTime = 0;
+        this.chompToggle = false;
+
+        // Cell references for incremental updates
+        this.cells = [];
+
         this.gameBoard = document.getElementById('gameBoard');
         this.scoreVal = document.getElementById('scoreVal');
         this.levelVal = document.getElementById('levelVal');
         this.dotsVal = document.getElementById('dotsVal');
         this.startBtn = document.getElementById('startBtn');
         this.resetBtn = document.getElementById('resetBtn');
+
+        this.sound = new SoundSystem();
         
         this.bindEvents();
+        this.buildCells();
         this.updateStats();
         this.renderBoard();
       }
-      
+
+      buildCells() {
+        // Create all DOM cells once (static grid)
+        this.gameBoard.innerHTML = '';
+        this.cells = [];
+        for (let y = 0; y < this.board.length; y++) {
+          this.cells[y] = [];
+          for (let x = 0; x < this.board[y].length; x++) {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            // Skip cells out of bounds
+            if (this.board[y][x] === 0 && (y < 0 || y >= this.board.length || x < 0 || x >= this.board[0].length)) {
+              cell.className += ' empty';
+            }
+            this.gameBoard.appendChild(cell);
+            this.cells[y][x] = cell;
+          }
+        }
+      }
+
+      renderBoard() {
+        // Incremental update: only modify classList and content, no DOM creation
+        for (let y = 0; y < this.board.length; y++) {
+          for (let x = 0; x < this.board[y].length; x++) {
+            const cell = this.cells[y][x];
+            // Determine new classes
+            const classes = ['cell'];
+            let content = '';
+            let color = '';
+
+            if (x === this.pacman.x && y === this.pacman.y) {
+              classes.push('pacman');
+            } else if (this.ghosts.some(ghost => ghost.x === x && ghost.y === y)) {
+              classes.push('ghost');
+              const ghost = this.ghosts.find(g => g.x === x && g.y === y);
+              content = ghost.symbol;
+              color = ghost.color;
+            } else {
+              switch (this.board[y][x]) {
+                case 1: classes.push('wall'); break;
+                case 2: classes.push('dot'); break;
+                default: classes.push('empty'); break;
+              }
+            }
+
+            // Only update if changed
+            const newClass = classes.join(' ');
+            if (cell.className !== newClass) {
+              cell.className = newClass;
+            }
+            if (cell.textContent !== content) {
+              cell.textContent = content;
+            }
+            // Only set style if needed for ghosts
+            if (color && cell.style.color !== color) {
+              cell.style.color = color;
+            } else if (!color && cell.style.color) {
+              cell.style.color = '';
+            }
+          }
+        }
+      }
+
       bindEvents() {
         this.startBtn.addEventListener('click', () => this.startGame());
         this.resetBtn.addEventListener('click', () => this.resetGame());
@@ -327,30 +535,24 @@
           }
         });
 
+        // Mobile touch/click controls — improved with passive: true for scroll perf
         document.querySelectorAll('.mobile-controls [data-move]').forEach(btn => {
           const move = btn.dataset.move;
           const handler = (e) => {
             e.preventDefault();
             if (!this.gameRunning) return;
             switch (move) {
-              case 'up':
-                this.movePacman(0, -1);
-                break;
-              case 'down':
-                this.movePacman(0, 1);
-                break;
-              case 'left':
-                this.movePacman(-1, 0);
-                break;
-              case 'right':
-                this.movePacman(1, 0);
-                break;
+              case 'up': this.movePacman(0, -1); break;
+              case 'down': this.movePacman(0, 1); break;
+              case 'left': this.movePacman(-1, 0); break;
+              case 'right': this.movePacman(1, 0); break;
             }
           };
           btn.addEventListener('click', handler);
           btn.addEventListener('touchstart', handler, { passive: false });
         });
 
+        // Swipe controls
         let touchStart = null;
         this.gameBoard.addEventListener('touchstart', (e) => {
           if (!this.gameRunning) return;
@@ -377,28 +579,62 @@
       }
       
       startGame() {
+        // Initialize audio on first user interaction
+        this.sound.init();
+
         this.gameRunning = true;
         this.startBtn.textContent = '⏸ Pause';
         this.startBtn.onclick = () => this.togglePause();
         
-        if (this.ghostInterval) clearInterval(this.ghostInterval);
-        this.ghostInterval = setInterval(() => this.moveGhosts(), this.ghostSpeed);
+        // Start rAF loop
+        this.lastTime = performance.now();
+        this.ghostAccum = 0;
+        if (this.rafId) cancelAnimationFrame(this.rafId);
+        this.rafId = requestAnimationFrame((t) => this.gameLoop(t));
+      }
+
+      stopLoop() {
+        if (this.rafId) {
+          cancelAnimationFrame(this.rafId);
+          this.rafId = null;
+        }
+      }
+
+      gameLoop(timestamp) {
+        if (!this.gameRunning) return;
+        if (this.gamePaused) {
+          this.rafId = requestAnimationFrame((t) => this.gameLoop(t));
+          return;
+        }
+
+        const dt = timestamp - this.lastTime;
+        this.lastTime = timestamp;
+
+        // Accumulate time for ghost movement
+        this.ghostAccum += dt;
+        if (this.ghostAccum >= this.ghostSpeed) {
+          this.ghostAccum -= this.ghostSpeed;
+          this.moveGhosts();
+        }
+
+        this.renderBoard();
+        
+        this.rafId = requestAnimationFrame((t) => this.gameLoop(t));
       }
 
       togglePause() {
         this.gamePaused = !this.gamePaused;
         this.startBtn.textContent = this.gamePaused ? '▶ Resume' : '⏸ Pause';
-        if (!this.gamePaused && this.ghostInterval === null) {
-          this.ghostInterval = setInterval(() => this.moveGhosts(), this.ghostSpeed);
-        } else if (this.gamePaused && this.ghostInterval) {
-          clearInterval(this.ghostInterval);
-          this.ghostInterval = null;
+        if (!this.gamePaused) {
+          this.lastTime = performance.now();
         }
       }
       
       resetGame() {
         this.gameRunning = false;
         this.gamePaused = false;
+        this.stopLoop();
+
         this.score = 0;
         this.level = 1;
         this.ghostSpeed = 220;
@@ -410,11 +646,6 @@
         ];
         this.board = JSON.parse(JSON.stringify(this.originalBoard));
         
-        if (this.ghostInterval) {
-          clearInterval(this.ghostInterval);
-          this.ghostInterval = null;
-        }
-        
         const overlay = document.getElementById('gameOverlay');
         if (overlay) overlay.style.display = 'none';
         
@@ -425,7 +656,7 @@
       }
       
       movePacman(dx, dy) {
-        if (this.gamePaused) return;
+        if (this.gamePaused || !this.gameRunning) return;
         
         const newX = this.pacman.x + dx;
         const newY = this.pacman.y + dy;
@@ -438,9 +669,9 @@
             this.board[newY][newX] = 0;
             this.score += 10;
             this.updateStats();
+            this.sound.play('chomp');
           }
           
-          this.renderBoard();
           this.checkWin();
           this.checkLoss();
         }
@@ -481,43 +712,9 @@
           return { ...ghost, x: ghost.x + move.dx, y: ghost.y + move.dy };
         });
 
-        this.renderBoard();
         this.checkLoss();
       }
 
-      renderBoard() {
-        this.gameBoard.innerHTML = '';
-        
-        for (let y = 0; y < this.board.length; y++) {
-          for (let x = 0; x < this.board[y].length; x++) {
-            const cell = document.createElement('div');
-            cell.className = 'cell';
-            
-            if (x === this.pacman.x && y === this.pacman.y) {
-              cell.className += ' pacman';
-            } else if (this.ghosts.some(ghost => ghost.x === x && ghost.y === y)) {
-              cell.className += ' ghost';
-              const ghost = this.ghosts.find(g => g.x === x && g.y === y);
-              cell.textContent = ghost.symbol;
-              cell.style.color = ghost.color;
-            } else {
-              switch(this.board[y][x]) {
-                case 1:
-                  cell.className += ' wall';
-                  break;
-                case 2:
-                  cell.className += ' dot';
-                  break;
-                default:
-                  cell.className += ' empty';
-              }
-            }
-            
-            this.gameBoard.appendChild(cell);
-          }
-        }
-      }
-      
       showOverlay(title, message, buttonText, callback) {
         const overlay = document.getElementById('gameOverlay');
         const overlayTitle = document.getElementById('overlayTitle');
@@ -544,12 +741,11 @@
         const dotsRemaining = this.board.flat().filter(cell => cell === 2).length;
         if (dotsRemaining === 0) {
           this.gameRunning = false;
-          if (this.ghostInterval) {
-            clearInterval(this.ghostInterval);
-            this.ghostInterval = null;
-          }
+          this.stopLoop();
           this.level++;
           this.ghostSpeed = Math.max(100, this.ghostSpeed - 20);
+          
+          this.sound.play('win');
           
           this.showOverlay(`🎉 Level ${this.level - 1} Complete!`, `Get ready for Level ${this.level}`, 'Start Level', () => {
             this.board = JSON.parse(JSON.stringify(this.originalBoard));
@@ -570,10 +766,10 @@
         const hitGhost = this.ghosts.some(ghost => ghost.x === this.pacman.x && ghost.y === this.pacman.y);
         if (hitGhost) {
           this.gameRunning = false;
-          if (this.ghostInterval) {
-            clearInterval(this.ghostInterval);
-            this.ghostInterval = null;
-          }
+          this.stopLoop();
+          
+          this.sound.play('death');
+          
           this.showOverlay('💀 Game Over', `A ghost caught you! Score: ${this.score}`, 'Play Again', () => {
             this.resetGame();
             this.startGame();

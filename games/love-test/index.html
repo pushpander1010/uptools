@@ -133,11 +133,26 @@
             cursor: pointer;
             font-size: .8rem;
             z-index: 10;
+            min-width: 44px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
         .fullscreen-btn:hover {
             background: var(--accent);
             color: #160914;
             border-color: var(--accent);
+        }
+        .fullscreen-btn:active,
+        .fullscreen-btn:focus-visible {
+            background: var(--accent-2);
+            color: #160914;
+            border-color: var(--accent-2);
+            transform: scale(.96);
         }
 
         .hud {
@@ -183,17 +198,24 @@
         }
 
         .difficulty-btn {
-            padding: .55rem .9rem;
-            border-radius: .6rem;
-            color: #ffe6f1;
-            font-weight: 800;
-            cursor: pointer;
-            transition: transform .12s ease, border-color .12s ease, background .12s ease;
-            min-height: 44px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
+                    padding: .55rem .9rem;
+                    border-radius: .6rem;
+                    color: #ffe6f1;
+                    font-weight: 800;
+                    cursor: pointer;
+                    transition: transform .12s ease, border-color .12s ease, background .12s ease;
+                    min-height: 44px;
+                    min-width: 44px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    touch-action: manipulation;
+                    -webkit-tap-highlight-color: transparent;
+                    user-select: none;
+                }
+                .difficulty-btn:active {
+                    transform: scale(.95);
+                }
 
         .difficulty-btn.active {
             background: linear-gradient(135deg, var(--accent), var(--accent-2));
@@ -208,9 +230,18 @@
             font-weight: 900;
             cursor: pointer;
             min-height: 44px;
+            min-width: 44px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+        }
+
+        .btn:active {
+            transform: scale(.95);
         }
 
         .btn.primary {
@@ -273,9 +304,17 @@
             font-weight: 800;
             cursor: pointer;
             min-height: 44px;
+            min-width: 44px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            transition: transform .15s ease, background .15s ease, border-color .15s ease;
+        }
+        .ps-btn:active {
+            transform: scale(.95);
         }
 
         .ps-btn.primary {
@@ -335,21 +374,29 @@
         }
 
         .opt {
-            display: flex;
-            align-items: center;
-            gap: .55rem;
-            padding: .5rem .6rem;
-            border: 1px solid var(--cardBorder);
-            border-radius: .65rem;
-            background: #120915;
-            cursor: pointer;
-            min-height: 44px;
-            transition: background 0.2s, border-color 0.2s;
-        }
-        .opt:hover {
-            background: rgba(255, 95, 162, 0.1);
-            border-color: var(--accent);
-        }
+                    display: flex;
+                    align-items: center;
+                    gap: .55rem;
+                    padding: .5rem .6rem;
+                    border: 1px solid var(--cardBorder);
+                    border-radius: .65rem;
+                    background: #120915;
+                    cursor: pointer;
+                    min-height: 44px;
+                    touch-action: manipulation;
+                    -webkit-tap-highlight-color: transparent;
+                    user-select: none;
+                    transition: background 0.2s, border-color 0.2s, transform 0.15s ease;
+                }
+                .opt:hover {
+                    background: rgba(255, 95, 162, 0.1);
+                    border-color: var(--accent);
+                }
+                .opt:active {
+                    background: rgba(255, 95, 162, 0.2);
+                    border-color: var(--accent-2);
+                    transform: scale(.98);
+                }
 
         .opt input {
             accent-color: var(--accent);
@@ -421,6 +468,21 @@
   <meta property="og:url" content="https://www.uptools.in/games/love-test/" />
   <meta property="og:type" content="website" />
   <script src="/games/fullscreen-utils.js" defer></script>
+  <script>
+    // Ensure FullscreenManager is initialized after DOM content loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // fullscreen-utils.js auto-initializes, but ensure it targets #gameContainer
+      if (window.fullscreenManager) {
+        // Already initialized by the utility
+      } else if (document.querySelector('.fullscreen-btn')) {
+        try {
+          window.fullscreenManager = new FullscreenManager('#gameContainer', '.fullscreen-btn');
+        } catch (e) {
+          console.warn('FullscreenManager init deferred:', e);
+        }
+      }
+    });
+  </script>
 </head>
 <body style="--accent:#ff5fa2;--accent-2:#ff8ad4;--bg1:#120915;--bg2:#1a0f1a;">
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
@@ -599,18 +661,80 @@
             const d = new Date();
             return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
         };
-        const beep = (() => { // ultra-light WebAudio bleep
+        const beep = (() => { // WebAudio sound engine
             let ctx = null;
-            return (freq = 620, ms = 60, gain = 0.02) => {
+            const masterGain = { value: 0.08 };
+            const ensureCtx = () => {
+                if (!ctx) {
+                    try {
+                        ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    } catch { return null; }
+                }
+                if (ctx.state === 'suspended') ctx.resume();
+                return ctx;
+            };
+            // Play a simple tone
+            const tone = (freq = 620, ms = 60, gain = 0.02, type = 'triangle') => {
                 if (!state.soundOn) return;
+                const c = ensureCtx();
+                if (!c) return;
                 try {
-                    ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
-                    const o = ctx.createOscillator(), g = ctx.createGain();
-                    o.type = 'triangle'; o.frequency.value = freq; g.gain.value = gain;
-                    o.connect(g); g.connect(ctx.destination); o.start();
-                    setTimeout(() => { o.stop(); o.disconnect(); g.disconnect(); }, ms);
+                    const o = c.createOscillator(), g = c.createGain();
+                    o.type = type; o.frequency.value = freq;
+                    g.gain.setValueAtTime(gain, c.currentTime);
+                    g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + ms / 1000);
+                    o.connect(g); g.connect(c.destination);
+                    o.start(c.currentTime);
+                    o.stop(c.currentTime + ms / 1000);
+                    o.onended = () => { o.disconnect(); g.disconnect(); };
                 } catch { }
             };
+            // Play a rising happy chime (for results)
+            const chime = () => {
+                if (!state.soundOn) return;
+                const c = ensureCtx();
+                if (!c) return;
+                try {
+                    [523, 659, 784, 1047].forEach((f, i) => {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'triangle'; o.frequency.value = f;
+                            g.gain.setValueAtTime(0.06, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(c.currentTime);
+                            o.stop(c.currentTime + 0.35);
+                            o.onended = () => { o.disconnect(); g.disconnect(); };
+                        }, i * 120);
+                    });
+                } catch { }
+            };
+            // Play a start fanfare
+            const fanfare = () => {
+                if (!state.soundOn) return;
+                const c = ensureCtx();
+                if (!c) return;
+                try {
+                    [392, 523, 659, 784].forEach((f, i) => {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sine'; o.frequency.value = f;
+                            g.gain.setValueAtTime(0.07, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.25);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(c.currentTime);
+                            o.stop(c.currentTime + 0.3);
+                            o.onended = () => { o.disconnect(); g.disconnect(); };
+                        }, i * 100);
+                    });
+                } catch { }
+            };
+            // Simple beep (backward compat)
+            const beep = (freq = 620, ms = 60, gain = 0.02) => tone(freq, ms, gain);
+            beep.tone = tone;
+            beep.chime = chime;
+            beep.fanfare = fanfare;
+            return beep;
         })();
         const buzz = (ms = 15) => { if (state.hapticsOn && navigator.vibrate) navigator.vibrate(ms); };
 
@@ -774,53 +898,63 @@
         // ---------------------------
         // Game flow
         // ---------------------------
-        startBtn.addEventListener("click", () => openPlay());
+        startBtn.addEventListener("click", () => { beep.fanfare(); openPlay(); });
 
         function openPlay() {
-            // Lock body scroll, open full-screen
-            setInert(home, true);
-            setInert(playScreen, false);
-            playScreen.classList.add("open");
-            document.body.classList.add("lock-scroll");
-            window.addEventListener("keydown", keyNav);
+                    // Lock body scroll, open full-screen
+                    setInert(home, true);
+                    setInert(playScreen, false);
+                    playScreen.classList.add("open");
+                    document.body.classList.add("lock-scroll");
+                    window.addEventListener("keydown", keyNav);
 
-            // Hydrate from URL (join mode or plain)
-            const u = new URL(location.href);
-            const len = +(u.searchParams.get("len") || state.length);
-            state.length = [10, 15, 20].includes(len) ? len : state.length;
-            setLenButtons();
+                    // Hydrate from URL (join mode or plain)
+                    const u = new URL(location.href);
+                    state.seed = u.searchParams.get("seed") || Date.now().toString(36);
+                    state.remoteMode = Boolean(u.searchParams.get("a"));
 
-            state.seed = u.searchParams.get("seed") || Date.now().toString(36);
-            state.qIdx = selectQuestions(state.seed, state.length);
-            state.cur = 0;
-            state.a = [];
-            state.b = [];
-            state.remoteMode = Boolean(u.searchParams.get("a")); // joining partner answers
-            if (state.remoteMode) {
-                try {
-                    const raw = b64u.dec(u.searchParams.get("a"));
-                    state.a = raw.split("").map(x => +x);
-                    const names = u.searchParams.get("n") ? b64u.dec(u.searchParams.get("n")) : "";
-                    [state.nameA, state.nameB] = names.includes("|") ? names.split("|") : ["Partner A", "Partner B"];
-                    // Force same questions/length when joining
-                    if (u.searchParams.get("q")) {
-                        const idx = b64u.dec(u.searchParams.get("q")).split(",").map(x => +x);
-                        if (idx.length) state.qIdx = idx;
+                    if (state.remoteMode) {
+                        try {
+                            const raw = b64u.dec(u.searchParams.get("a"));
+                            state.a = raw.split("").map(x => +x);
+                            state.length = state.a.length;
+                            const names = u.searchParams.get("n") ? b64u.dec(u.searchParams.get("n")) : "";
+                            [state.nameA, state.nameB] = names.includes("|") ? names.split("|") : ["Partner A", "Partner B"];
+                            if (u.searchParams.get("q")) {
+                                const idx = b64u.dec(u.searchParams.get("q")).split(",").map(x => +x);
+                                state.qIdx = idx.length ? idx : selectQuestions(state.seed, state.length);
+                            } else {
+                                state.qIdx = selectQuestions(state.seed, state.length);
+                            }
+                            state.cur = 0;
+                            state.b = [];
+                            renderStepBIntro(true);
+                        } catch {
+                            state.remoteMode = false;
+                            const len = +(u.searchParams.get("len") || state.length);
+                            state.length = [10, 15, 20].includes(len) ? len : state.length;
+                            setLenButtons();
+                            state.qIdx = selectQuestions(state.seed, state.length);
+                            state.cur = 0;
+                            state.a = [];
+                            state.b = [];
+                            renderNames();
+                        }
+                    } else {
+                        const len = +(u.searchParams.get("len") || state.length);
+                        state.length = [10, 15, 20].includes(len) ? len : state.length;
+                        setLenButtons();
+                        state.qIdx = selectQuestions(state.seed, state.length);
+                        state.cur = 0;
+                        state.a = [];
+                        state.b = [];
+                        renderNames();
                     }
-                    state.length = state.a.length;
-                    renderStepBIntro(true);
-                } catch {
-                    state.remoteMode = false;
-                    renderNames();
+                    updateProg();
+                    prevBtn.disabled = true;
                 }
-            } else {
-                renderNames();
-            }
-            updateProg();
-            prevBtn.disabled = true;
-        }
 
-        function closePlay() {
+                        function closePlay() {
             window.removeEventListener("keydown", keyNav);
             playScreen.classList.remove("open");
             document.body.classList.remove("lock-scroll");
@@ -1075,6 +1209,7 @@
             nextBtn.onclick = () => closePlay();
             psShare.onclick = () => copyChallengeLink(); // allow sharing — copyChallengeLink is redefined below to open modal
             updateProg();
+            beep.chime();
             beep(820, 140, .03); setTimeout(() => beep(980, 140, .03), 120);
             buzz(18);
         }

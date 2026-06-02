@@ -125,7 +125,7 @@
       z-index: 10;
     }
 
-    #numberGuessingGameContainer.fullscreen-mode {
+    #gameContainer.fullscreen-mode {
       display: flex !important;
       flex-direction: column !important;
       justify-content: center !important;
@@ -138,10 +138,28 @@
       overflow-y: auto !important;
     }
 
-    #numberGuessingGameContainer.fullscreen-mode > .card {
+    #gameContainer.fullscreen-mode > .card {
       width: 100%;
       max-width: 760px;
       margin: 0;
+    }
+
+    /* Touch feedback on buttons */
+    .btn-game:active {
+      transform: scale(0.95) !important;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3) !important;
+      transition: transform 0.05s, box-shadow 0.05s !important;
+    }
+    .difficulty-btn:active {
+      transform: scale(0.95) !important;
+    }
+    .fullscreen-btn:active {
+      transform: scale(0.92) !important;
+      background: rgba(0,0,0,0.4) !important;
+    }
+    .guess-input input:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
   
     .skip-link {
@@ -222,7 +240,7 @@
       </div>
     </div>
 
-    <section class="game-container" id="numberGuessingGameContainer" aria-label="Number guessing game">
+    <section class="game-container" id="gameContainer" aria-label="Number guessing game">
       <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
       <article class="card compact">
         <div class="difficulty-selector" role="group" aria-label="Select difficulty">
@@ -251,7 +269,7 @@
 
           <form class="guess-input" id="guessForm" autocomplete="off">
             <label class="sr" for="guessInput">Enter your guess</label>
-            <input type="number" id="guessInput" inputmode="numeric" placeholder="Start first →" min="1" max="50" aria-describedby="range-display" disabled />
+            <input type="number" id="guessInput" inputmode="numeric" enterkeyhint="go" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Start first →" min="1" max="50" aria-describedby="range-display" disabled />
             <button class="btn-game" id="submitGuess" type="submit" aria-label="Submit guess" disabled>Guess</button>
             <button class="btn-game btn-secondary" id="midBtn" type="button" title="Fill with midpoint" disabled>Midpoint</button>
             <button class="btn-game btn-secondary" id="hintBtn" type="button" aria-label="Get a hint" disabled>Hint</button>
@@ -407,6 +425,20 @@
           gain.connect(audioCtx.destination);
           osc.start(now);
           osc.stop(now + 0.4);
+        } else if (type === 'gameOver') {
+          // descending buzz for game over
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(400, now);
+          osc.frequency.linearRampToValueAtTime(100, now + 0.6);
+          gain.gain.setValueAtTime(0.0, now);
+          gain.gain.linearRampToValueAtTime(0.1, now + 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.6);
         }
       } catch (e) {
         console.warn("Audio Context failed", e);
@@ -576,6 +608,7 @@
         }
       } else {
         state.stats.streak = 0;
+        playSound('gameOver');
       }
       els.streak.textContent = state.stats.streak;
       saveStats();
@@ -732,6 +765,14 @@
       // Make start obvious on first visit
       if (state.firstVisit) els.startBtn.classList.add("start-pulse");
       setControlsEnabled(false);
+      // Initialize FullscreenManager
+      if (typeof FullscreenManager !== 'undefined') {
+        const fm = new FullscreenManager({
+          containerId: 'gameContainer',
+          btnId: 'fullscreenBtn'
+        });
+        fm.init();
+      }
     })();
   })();
   </script>

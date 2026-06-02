@@ -42,6 +42,11 @@
       background: radial-gradient(1200px 600px at 10% -10%, #152032 0%, var(--bg) 45%) fixed;
     }
 
+    /* Ensure emoji render properly on all browsers */
+    .emoji, button, .back-btn, .fullscreen-btn, h1, h2, h3, .cbtn, .mobile-menu-toggle {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+    }
+
     .tool-header { text-align:center; margin:1rem 0 0.25rem }
     .tool-header h1{ display:flex; align-items:center; gap:.5rem; justify-content:center }
     .tool-header h1 .badge{ font-size:.8rem; padding:.2rem .5rem; border:1px solid var(--cardBorder); background:var(--card); border-radius:999px; color:var(--muted)}
@@ -424,7 +429,7 @@
         <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
         <b>UpTools</b>
       </a>
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">?</button>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
       <nav class="nav-links" aria-label="Primary">
         <a href="/#tools">Tools</a>
         <a href="/income-tax-tool/">Income Tax</a>
@@ -448,8 +453,8 @@
   </script>
   <div class="container">
     <div class="tool-header">
-      <button id="backSmart" class="back-btn" type="button" aria-label="Back to games">? Back</button>
-      <h1>?? Snake <span class="badge">No ads interrupting gameplay</span></h1>
+      <button id="backSmart" class="back-btn" type="button" aria-label="Back to games">← Back</button>
+      <h1>🐍 Snake <span class="badge">No ads interrupting gameplay</span></h1>
       <p>Fast, responsive, and privacy-first. Arrow keys / swipe to play.</p>
     </div>
 
@@ -464,7 +469,7 @@
         </div>
 
         <div class="board-outer" id="boardWrap">
-          <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">?</button>
+          <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
           <div class="board-inner">
             <canvas id="game"></canvas>
 
@@ -506,10 +511,10 @@
 
         <!-- Mobile D-Pad -->
         <div class="dpad" aria-label="Directional controls">
-          <button class="cbtn up" data-dir="up" aria-label="Up">??</button>
-          <button class="cbtn left" data-dir="left" aria-label="Left">??</button>
-          <button class="cbtn right" data-dir="right" aria-label="Right">??</button>
-          <button class="cbtn down" data-dir="down" aria-label="Down">??</button>
+          <button class="cbtn up" data-dir="up" aria-label="Up">▲</button>
+                    <button class="cbtn left" data-dir="left" aria-label="Left">◀</button>
+                    <button class="cbtn right" data-dir="right" aria-label="Right">▶</button>
+                    <button class="cbtn down" data-dir="down" aria-label="Down">▼</button>
         </div>
       </section>
 
@@ -522,16 +527,16 @@
               <option value="easy">Easy (slow)</option>
               <option value="normal" selected>Normal</option>
               <option value="hard">Hard (fast)</option>
-              <option value="extreme">Extreme ?</option>
+              <option value="extreme">Extreme 🔥</option>
             </select>
           </div>
           <div class="field">
             <label for="gridSize">Board Size (tiles)</label>
             <select id="gridSize">
-              <option value="16">Small (16�16)</option>
-              <option value="20" selected>Classic (20�20)</option>
-              <option value="24">Large (24�24)</option>
-              <option value="32">XL (32�32)</option>
+              <option value="16">Small (16×16)</option>
+              <option value="20" selected>Classic (20×20)</option>
+              <option value="24">Large (24×24)</option>
+              <option value="32">XL (32×32)</option>
             </select>
           </div>
           <div class="row">
@@ -547,7 +552,7 @@
         </div>
 
         <div class="panel help" style="margin-top:1rem">
-          <h3 style="color:var(--accent); margin:0 0 .25rem">?? How to Play</h3>
+          <h3 style="color:var(--accent); margin:0 0 .25rem">🐍 How to Play</h3>
           <ul>
             <li><b>Desktop:</b> Arrow keys to steer, <b>Space</b> to pause/resume.</li>
             <li><b>Mobile:</b> Swipe or use the D-pad.</li>
@@ -573,20 +578,91 @@
         if (keysToBlock.has(e.key)) e.preventDefault();
       }, { passive:false });
 
-      // Tiny WebAudio beeps (no files)
+      // ----- WebAudio Sound System (no external files)
       let audioCtx = null;
+      const getAudioCtx = () => {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        // Resume if suspended (autoplay policy)
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        return audioCtx;
+      };
+      const soundEnabled = () => document.getElementById('sound').checked;
+      
+      // Apple eating sound: short bright chirp with harmonic richness
+      const playEatSound = () => {
+        if (!soundEnabled()) return;
+        try {
+          const ctx = getAudioCtx();
+          const now = ctx.currentTime;
+          
+          // Two oscillators for a rich "chirp"
+          const osc1 = ctx.createOscillator();
+          const osc2 = ctx.createOscillator();
+          const gain = ctx.createGain();
+          
+          osc1.type = 'triangle';
+          osc1.frequency.setValueAtTime(880, now);
+          osc1.frequency.exponentialRampToValueAtTime(1320, now + 0.06);
+          
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(1320, now);
+          osc2.frequency.exponentialRampToValueAtTime(1760, now + 0.06);
+          
+          gain.gain.setValueAtTime(0.04, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+          
+          osc1.connect(gain);
+          osc2.connect(gain);
+          gain.connect(ctx.destination);
+          
+          osc1.start(now);
+          osc2.start(now);
+          osc1.stop(now + 0.12);
+          osc2.stop(now + 0.12);
+        } catch(e) { /* silently fail */ }
+      };
+      
+      // Game over sound: descending sad tone
+      const playGameOverSound = () => {
+        if (!soundEnabled()) return;
+        try {
+          const ctx = getAudioCtx();
+          const now = ctx.currentTime;
+          
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(400, now);
+          osc.frequency.exponentialRampToValueAtTime(80, now + 0.35);
+          
+          gain.gain.setValueAtTime(0.05, now);
+          gain.gain.linearRampToValueAtTime(0.03, now + 0.15);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+          
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          
+          osc.start(now);
+          osc.stop(now + 0.4);
+        } catch(e) { /* silently fail */ }
+      };
+      
+      // Generic beep (backward compatible)
       const beep = (type="square", freq=440, ms=80, gain=0.02) => {
-        if (!$("#sound").checked) return;
+        if (!soundEnabled()) return;
         try{
-          audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-          const o = audioCtx.createOscillator();
-          const g = audioCtx.createGain();
+          const ctx = getAudioCtx();
+          const o = ctx.createOscillator();
+          const g = ctx.createGain();
           o.type = type; o.frequency.value = freq;
           g.gain.value = gain;
-          o.connect(g); g.connect(audioCtx.destination);
+          o.connect(g); g.connect(ctx.destination);
           o.start();
           setTimeout(()=>{ o.stop(); o.disconnect(); g.disconnect() }, ms);
-        }catch{}
+        }catch(e){}
       };
 
       // Haptics (best-effort)
@@ -759,8 +835,8 @@
           scoreEl.textContent = score;
           lengthEl.textContent = snake.length;
           placeFood();
-          beep("triangle", 660, 60, .03);
-          buzz(10);
+          playEatSound();
+                    buzz(10);
           // subtle speed-up each fruit (cap)
           speedMs = Math.max(55, Math.round(speedMs * 0.985));
           speedKpi.textContent = (140/Math.max(1, speedMs)).toFixed(1)+'x';
@@ -849,7 +925,7 @@
       const gameOver = () => {
         running = false;
         paused = false;
-        beep("sawtooth", 160, 180, .04);
+        playGameOverSound();
         buzz(20);
         finalScore.textContent = score;
         if (score > best) {
@@ -869,7 +945,7 @@
       $("#resumeBtn").addEventListener("click", resume);
       $("#againBtn").addEventListener("click", start);
       $("#shareBtn").addEventListener("click", async () => {
-        const txt = `I scored ${score} on ?? Snake at UpTools! https://www.uptools.in/games/snake`;
+        const txt = `I scored ${score} on 🐍 Snake at UpTools! https://www.uptools.in/games/snake`;
         try {
           await navigator.clipboard.writeText(txt);
           alert("Copied score to clipboard!");
@@ -879,7 +955,7 @@
       $("#resetBtn").addEventListener("click", () => {
         reset(); draw(); show(startOverlay);
       });
-      $("#saveSettingsBtn").addEventListener("click", () => { saveSettings(); alert("Saved as default ?"); });
+      $("#saveSettingsBtn").addEventListener("click", () => { saveSettings(); alert("Saved as default ✅"); });
 
       // Settings live effects
       selDifficulty.addEventListener("change", () => { setDifficulty(selDifficulty.value) });
@@ -968,7 +1044,7 @@
         // Create exit button
         exitFullscreenBtn = document.createElement('button');
         exitFullscreenBtn.className = 'exit-fullscreen-btn';
-        exitFullscreenBtn.innerHTML = '? Exit Fullscreen';
+        exitFullscreenBtn.innerHTML = '⛶ Exit Fullscreen';
         exitFullscreenBtn.onclick = exitFullscreen;
         document.body.appendChild(exitFullscreenBtn);
         

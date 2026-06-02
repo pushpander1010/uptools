@@ -33,7 +33,7 @@
     .score-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .5rem 1rem; text-align: center; }
     .score-val { font-size: 1.5rem; font-weight: 900; color: #00e5a0; }
     .score-lbl { font-size: .8rem; color: #9aa4b2; }
-    .hint-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .5rem .75rem; font-size: .9rem; color: #9aa4b2; margin: 8px 0; cursor: pointer; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .hint-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .5rem .75rem; font-size: .9rem; color: #9aa4b2; margin: 8px 0; cursor: pointer; min-height: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; }
     .hint-box:hover { border-color: #7aa2ff; }
     #feedback { font-size: 1.1rem; font-weight: 700; min-height: 1.6em; text-align: center; }
     .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
@@ -52,7 +52,7 @@
       text-align: center;
       backdrop-filter: blur(8px);
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -67,7 +67,53 @@
       top: 0;
     }
 
-</style>
+    /* Fullscreen mode styles */
+    .fullscreen-mode,
+    #gameContainer.fullscreen-mode {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+      overflow: hidden auto !important;
+      z-index: 9999 !important;
+      background: rgba(7,12,20,.97) !important;
+      padding: max(8px, env(safe-area-inset-top)) clamp(8px, 2vw, 18px) max(10px, env(safe-area-inset-bottom)) !important;
+      margin: 0 !important;
+      border-radius: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .fullscreen-mode .game-wrap { height: auto !important; max-width: 100% !important; }
+    .fullscreen-mode header,
+    .fullscreen-mode .site-footer,
+    .fullscreen-mode footer { display: none !important; }
+
+    /* Touch feedback on interactive elements */
+    .btn:active,
+    .btn.primary:active,
+    .btn.secondary:active {
+      transform: scale(0.95);
+      transition: transform 0.05s ease;
+    }
+    #hintBox:active {
+      transform: scale(0.97);
+      transition: transform 0.05s ease;
+    }
+    .fullscreen-btn:active {
+      transform: scale(0.90);
+      transition: transform 0.05s ease;
+    }
+    @media (hover: hover) {
+      .btn:hover { opacity: 0.9; }
+      #hintBox:hover { border-color: #7aa2ff; }
+    }
+    @media (hover: none) {
+      .btn, #hintBox, .fullscreen-btn { -webkit-tap-highlight-color: rgba(0,229,160,0.2); }
+    }
+  </style>
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -105,7 +151,7 @@
         </div>
       </section>
 
-      <div class="game-container card" style="margin-top:12px; position:relative;">
+      <div id="gameContainer" class="game-container card" style="margin-top:12px; position:relative;">
         <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;padding-right:45px;">
           <select id="catSel" style="background:#0e1628;border:1px solid #212a3a;border-radius:.5rem;color:#e6edf3;padding:.4rem .6rem">
@@ -280,6 +326,24 @@
           osc.stop(this.ctx.currentTime + 0.18);
         } catch (e) {}
       }
+      playHint() {
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
+          osc.frequency.setValueAtTime(659.25, this.ctx.currentTime + 0.06); // E5
+          osc.frequency.setValueAtTime(783.99, this.ctx.currentTime + 0.12); // G5
+          gain.gain.setValueAtTime(0.03, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.25);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.25);
+        } catch (e) {}
+      }
       playNeutral() {
         this.init();
         if (!this.ctx) return;
@@ -359,7 +423,7 @@
     }
 
     document.getElementById('hintBox').addEventListener('click', () => {
-      sounds.playNeutral();
+      sounds.playHint();
       hintRevealed = true;
       document.getElementById('hintBox').textContent = `💡 ${document.getElementById('hintBox').dataset.hint}`;
     });
@@ -401,6 +465,11 @@
       sounds.playNeutral();
       nextWord();
     });
+
+    // Proper FullscreenManager initialization
+    if (window.FullscreenManager) {
+      window.fullscreenManager = new FullscreenManager('#gameContainer', '#fullscreenBtn');
+    }
 
     nextWord();
   </script>

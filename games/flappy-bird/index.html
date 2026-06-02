@@ -45,7 +45,19 @@
     .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(156, 39, 176, .3); }
 
     .game-container { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; align-items: start; }
-    .game-canvas { border: 2px solid var(--border); border-radius: var(--radius); background: linear-gradient(to bottom, #87CEEB 0%, #98FB98 100%); display: block; margin: 0 auto; width: 100%; max-width: 500px; height: auto; }
+
+    /* Canvas with aspect-ratio for responsive sizing */
+    .game-canvas {
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: linear-gradient(to bottom, #87CEEB 0%, #98FB98 100%);
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      aspect-ratio: 5 / 7;
+    }
     
     .game-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; background: rgba(0,0,0,0.8); color: white; padding: 2rem; border-radius: 1rem; display: none; }
     .game-wrapper { position: relative; display: inline-block; }
@@ -57,7 +69,7 @@
 
     @media (max-width: 768px) {
       .game-container { grid-template-columns: 1fr; gap: 1rem; }
-      .game-canvas { width: 100%; max-width: 350px; height: 500px; }
+      .game-canvas { max-width: 100%; }
     }
 
     /* Fullscreen Styles */
@@ -74,10 +86,20 @@
       font-size: 1.2rem;
       z-index: 100;
       transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
     }
     .fullscreen-btn:hover {
       transform: scale(1.1);
       box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
+    }
+    .fullscreen-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
     }
 
     /* Fullscreen mode styles */
@@ -125,6 +147,7 @@
       width: min(80vmin, 600px) !important;
       height: min(60vmin, 450px) !important;
       max-width: none !important;
+      aspect-ratio: 5 / 7;
     }
 
     /* Exit fullscreen button */
@@ -156,6 +179,7 @@
       .fullscreen-mode .game-canvas {
         width: min(90vmin, 400px) !important;
         height: min(70vmin, 300px) !important;
+        aspect-ratio: 5 / 7;
       }
     }
   
@@ -211,14 +235,18 @@
     <div class="game-container">
       <!-- Game Area -->
       <div class="card" style="position: relative">
-        <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
+        <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+          </svg>
+        </button>
         <div class="game-wrapper">
           <canvas id="gameCanvas" class="game-canvas" width="500" height="700"></canvas>
           <div class="game-overlay" id="gameOverlay">
             <h2 id="overlayTitle">Flappy Bird</h2>
             <p id="overlayMessage">Click or tap to start flying!</p>
             <div id="overlayScore" style="margin: 1rem 0; font-size: 1.5rem; font-weight: 700;"></div>
-            <button class="btn" onclick="startGame()">🎮 Start Game</button>
+            <button class="btn" id="startGameBtn">🎮 Start Game</button>
           </div>
         </div>
         
@@ -272,12 +300,77 @@
   </main>
 
   <script>
-    // Game variables
+    // ── Constants ──
+    const GROUND_HEIGHT = 20;
+
+    // ── DOM refs ──
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     const overlay = document.getElementById('gameOverlay');
+    const startBtn = document.getElementById('startGameBtn');
 
-    // Game state
+    // ── Audio (WebAudio) ──
+    let audioCtx = null;
+    function getAudioCtx() {
+      if (!audioCtx) {
+        const Ctor = window.AudioContext || window.webkitAudioContext;
+        if (Ctor) audioCtx = new Ctor();
+      }
+      return audioCtx;
+    }
+
+    function playSound(type) {
+      try {
+        const ctx = getAudioCtx();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        if (type === 'flap') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(350, now);
+          osc.frequency.exponentialRampToValueAtTime(700, now + 0.08);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+          osc.start(now);
+          osc.stop(now + 0.1);
+        } else if (type === 'score') {
+          // Two ascending beeps
+          [523, 659].forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.type = 'sine';
+            const t = now + i * 0.1;
+            osc.frequency.setValueAtTime(freq, t);
+            gain.gain.setValueAtTime(0.25, t);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+            osc.start(t);
+            osc.stop(t + 0.09);
+          });
+        } else if (type === 'collision') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(200, now);
+          osc.frequency.exponentialRampToValueAtTime(40, now + 0.3);
+          gain.gain.setValueAtTime(0.35, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        }
+      } catch (_) {
+        // Audio not available – silently ignore
+      }
+    }
+
+    // ── Game state ──
     let gameState = {
       running: false,
       score: 0,
@@ -304,18 +397,16 @@
       highScore: parseInt(localStorage.getItem('flappyHighScore') || '0')
     };
 
-    // Initialize game
+    // ── Initialization ──
     function initGame() {
       overlay.style.display = 'block';
       updateStats();
       updateAchievements();
       setupEventListeners();
-      
-      // Start game loop for animations even when not playing
       gameLoop();
     }
 
-    // Start game
+    // ── Start game (bound in JS, not via onclick) ──
     function startGame() {
       gameState.running = true;
       gameState.score = 0;
@@ -323,22 +414,21 @@
       gameState.bird.velocity = 0;
       gameState.pipes = [];
       gameState.frameCount = 0;
-      
+
       overlay.style.display = 'none';
       updateScore();
-      
-      // Add first pipe
+
       addPipe();
     }
 
-    // Game loop
+    // ── Game loop ──
     function gameLoop() {
       update();
       draw();
       requestAnimationFrame(gameLoop);
     }
 
-    // Update game state
+    // ── Update game state ──
     function update() {
       if (!gameState.running) return;
 
@@ -357,6 +447,7 @@
           if (!pipe.scored) {
             gameState.score++;
             updateScore();
+            playSound('score');
             pipe.scored = true;
           }
           return false;
@@ -372,16 +463,21 @@
 
       // Check collisions
       if (checkCollisions()) {
+        playSound('collision');
         endGame();
+        return;
       }
 
       // Check if bird is out of bounds
-      if (gameState.bird.y > canvas.height || gameState.bird.y < 0) {
+      // Bird center Y accounting for ground height
+      const maxY = canvas.height - GROUND_HEIGHT;
+      if (gameState.bird.y + gameState.bird.height > maxY || gameState.bird.y < 0) {
+        playSound('collision');
         endGame();
       }
     }
 
-    // Draw game
+    // ── Draw ──
     function draw() {
       // Clear canvas with gradient background
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
@@ -390,87 +486,84 @@
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Draw clouds
       drawClouds();
-
-      // Draw pipes
-      gameState.pipes.forEach(pipe => {
-        drawPipe(pipe);
-      });
-
-      // Draw bird
+      gameState.pipes.forEach(pipe => { drawPipe(pipe); });
       drawBird();
 
       // Draw ground
       ctx.fillStyle = '#8B4513';
-      ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+      ctx.fillRect(0, canvas.height - GROUND_HEIGHT, canvas.width, GROUND_HEIGHT);
     }
 
-    // Draw bird
+    // ── Draw bird ──
     function drawBird() {
       const bird = gameState.bird;
-      
+      const cx = bird.x + bird.width / 2;
+      const cy = bird.y + bird.height / 2;
+      const r = bird.width / 2;
+
       // Bird body (circle)
       ctx.fillStyle = '#FFD700';
       ctx.beginPath();
-      ctx.arc(bird.x + bird.width/2, bird.y + bird.height/2, bird.width/2, 0, Math.PI * 2);
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
       ctx.fill();
 
       // Bird beak
       ctx.fillStyle = '#FF8C00';
       ctx.beginPath();
-      ctx.moveTo(bird.x + bird.width, bird.y + bird.height/2);
-      ctx.lineTo(bird.x + bird.width + 10, bird.y + bird.height/2 - 5);
-      ctx.lineTo(bird.x + bird.width + 10, bird.y + bird.height/2 + 5);
+      ctx.moveTo(bird.x + bird.width, cy);
+      ctx.lineTo(bird.x + bird.width + 10, cy - 5);
+      ctx.lineTo(bird.x + bird.width + 10, cy + 5);
       ctx.closePath();
       ctx.fill();
 
       // Bird eye
       ctx.fillStyle = '#000';
       ctx.beginPath();
-      ctx.arc(bird.x + bird.width/2 + 5, bird.y + bird.height/2 - 5, 3, 0, Math.PI * 2);
+      ctx.arc(cx + 5, cy - 5, 3, 0, Math.PI * 2);
       ctx.fill();
 
       // Bird wing
       ctx.fillStyle = '#FFA500';
       ctx.beginPath();
-      ctx.ellipse(bird.x + bird.width/2 - 5, bird.y + bird.height/2 + 3, 8, 5, 0, 0, Math.PI * 2);
+      ctx.ellipse(cx - 5, cy + 3, 8, 5, 0, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // Draw pipe
+    // ── Draw pipe ──
     function drawPipe(pipe) {
       // Pipe gradient
       const gradient = ctx.createLinearGradient(pipe.x, 0, pipe.x + gameState.pipeWidth, 0);
       gradient.addColorStop(0, '#228B22');
       gradient.addColorStop(0.5, '#32CD32');
       gradient.addColorStop(1, '#228B22');
-      
+
       ctx.fillStyle = gradient;
-      
+
       // Top pipe
       ctx.fillRect(pipe.x, 0, gameState.pipeWidth, pipe.topHeight);
-      
-      // Bottom pipe
-      ctx.fillRect(pipe.x, pipe.topHeight + gameState.pipeGap, gameState.pipeWidth, canvas.height - pipe.topHeight - gameState.pipeGap);
-      
+
+      // Bottom pipe (up to ground)
+      const bottomTop = pipe.topHeight + gameState.pipeGap;
+      const bottomH = canvas.height - GROUND_HEIGHT - bottomTop;
+      ctx.fillRect(pipe.x, bottomTop, gameState.pipeWidth, bottomH);
+
       // Pipe caps
       ctx.fillStyle = '#006400';
       ctx.fillRect(pipe.x - 5, pipe.topHeight - 20, gameState.pipeWidth + 10, 20);
-      ctx.fillRect(pipe.x - 5, pipe.topHeight + gameState.pipeGap, gameState.pipeWidth + 10, 20);
+      ctx.fillRect(pipe.x - 5, bottomTop, gameState.pipeWidth + 10, 20);
     }
 
-    // Draw clouds
+    // ── Draw clouds ──
     function drawClouds() {
       ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-      
-      // Simple cloud shapes
+
       const clouds = [
         {x: 100, y: 50, size: 20},
         {x: 250, y: 80, size: 15},
         {x: 350, y: 40, size: 25}
       ];
-      
+
       clouds.forEach(cloud => {
         ctx.beginPath();
         ctx.arc(cloud.x, cloud.y, cloud.size, 0, Math.PI * 2);
@@ -480,12 +573,12 @@
       });
     }
 
-    // Add new pipe
+    // ── Add new pipe ──
     function addPipe() {
       const minHeight = 50;
-      const maxHeight = canvas.height - gameState.pipeGap - minHeight - 20; // 20 for ground
+      const maxHeight = canvas.height - gameState.pipeGap - minHeight - GROUND_HEIGHT;
       const topHeight = Math.random() * (maxHeight - minHeight) + minHeight;
-      
+
       gameState.pipes.push({
         x: canvas.width,
         topHeight: topHeight,
@@ -493,93 +586,112 @@
       });
     }
 
-    // Check collisions
+    // ── Circle-rect collision helper ──
+    // Bird is a circle centered at (cx, cy) with radius r
+    // Pipe rectangles are axis-aligned
+    function circleRectCollision(cx, cy, r, rx, ry, rw, rh) {
+      const closestX = Math.max(rx, Math.min(cx, rx + rw));
+      const closestY = Math.max(ry, Math.min(cy, ry + rh));
+      const dx = cx - closestX;
+      const dy = cy - closestY;
+      return (dx * dx + dy * dy) < (r * r);
+    }
+
+    // ── Check collisions (bird circle vs pipe rectangles) ──
     function checkCollisions() {
       const bird = gameState.bird;
-      
+      const cx = bird.x + bird.width / 2;
+      const cy = bird.y + bird.height / 2;
+      const r = bird.width / 2 - 2; // slight shrink for forgiveness
+
       return gameState.pipes.some(pipe => {
-        // Check if bird is within pipe x range
-        if (bird.x < pipe.x + gameState.pipeWidth && bird.x + bird.width > pipe.x) {
-          // Check if bird hits top or bottom pipe
-          if (bird.y < pipe.topHeight || bird.y + bird.height > pipe.topHeight + gameState.pipeGap) {
-            return true;
-          }
+        // Top pipe rectangle
+        if (circleRectCollision(cx, cy, r, pipe.x, 0, gameState.pipeWidth, pipe.topHeight)) {
+          return true;
+        }
+        // Bottom pipe rectangle
+        const bottomTop = pipe.topHeight + gameState.pipeGap;
+        const bottomH = canvas.height - GROUND_HEIGHT - bottomTop;
+        if (circleRectCollision(cx, cy, r, pipe.x, bottomTop, gameState.pipeWidth, bottomH)) {
+          return true;
         }
         return false;
       });
     }
 
-    // Make bird jump
+    // ── Make bird jump ──
     function jump() {
       if (gameState.running) {
         gameState.bird.velocity = gameState.bird.jump;
+        playSound('flap');
       }
     }
 
-    // End game
+    // ── End game ──
     function endGame() {
       gameState.running = false;
-      
-      // Update stats
+
       gameStats.gamesPlayed++;
       gameStats.totalScore += gameState.score;
-      
+
       if (gameState.score > gameStats.highScore) {
         gameStats.highScore = gameState.score;
         localStorage.setItem('flappyHighScore', gameStats.highScore.toString());
       }
-      
+
       localStorage.setItem('flappyGamesPlayed', gameStats.gamesPlayed.toString());
       localStorage.setItem('flappyTotalScore', gameStats.totalScore.toString());
-      
-      // Show game over overlay
+
       document.getElementById('overlayTitle').textContent = 'Game Over!';
       document.getElementById('overlayMessage').textContent = 'Great flying! Try again?';
       document.getElementById('overlayScore').textContent = `Score: ${gameState.score}`;
       overlay.style.display = 'block';
-      
+
       updateStats();
       updateAchievements();
     }
 
-    // Update score display
+    // ── Update score display ──
     function updateScore() {
       document.getElementById('currentScore').textContent = gameState.score;
     }
 
-    // Update stats display
+    // ── Update stats display ──
     function updateStats() {
       document.getElementById('highScore').textContent = gameStats.highScore;
       document.getElementById('gamesPlayed').textContent = gameStats.gamesPlayed;
       document.getElementById('totalScore').textContent = gameStats.totalScore;
-      
+
       const average = gameStats.gamesPlayed > 0 ? Math.round(gameStats.totalScore / gameStats.gamesPlayed) : 0;
       document.getElementById('averageScore').textContent = average;
     }
 
-    // Update achievements
+    // ── Update achievements ──
     function updateAchievements() {
       const achievements = [];
-      
+
       if (gameStats.highScore >= 1) achievements.push('🥉 First Flight - Score 1 point');
       if (gameStats.highScore >= 5) achievements.push('🥈 Getting Better - Score 5 points');
       if (gameStats.highScore >= 10) achievements.push('🥇 Flying High - Score 10 points');
       if (gameStats.highScore >= 20) achievements.push('🏆 Bird Master - Score 20 points');
       if (gameStats.gamesPlayed >= 10) achievements.push('🎮 Persistent - Play 10 games');
       if (gameStats.totalScore >= 100) achievements.push('📊 Century Club - 100 total points');
-      
+
       const container = document.getElementById('achievements');
       if (achievements.length === 0) {
         container.innerHTML = '<div>Start playing to unlock achievements!</div>';
       } else {
-        container.innerHTML = achievements.map(achievement => 
+        container.innerHTML = achievements.map(achievement =>
           `<div style="margin: 0.25rem 0">${achievement}</div>`
         ).join('');
       }
     }
 
-    // Event listeners
+    // ── Event listeners ──
     function setupEventListeners() {
+      // Bind start game button (no global onclick pollution)
+      startBtn.addEventListener('click', startGame);
+
       // Click/tap to jump
       canvas.addEventListener('click', jump);
       canvas.addEventListener('touchstart', (e) => {
@@ -598,13 +710,13 @@
       // Mobile menu setup
       const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
       const navLinks = document.querySelector('.nav-links');
-      
+
       if (mobileMenuToggle && navLinks) {
         mobileMenuToggle.addEventListener('click', () => {
           const isActive = navLinks.classList.contains('active');
           navLinks.classList.toggle('active');
           mobileMenuToggle.setAttribute('aria-expanded', !isActive);
-          
+
           const menuIcon = mobileMenuToggle.querySelector('.menu-icon');
           if (menuIcon) {
             menuIcon.textContent = isActive ? '☰' : '✕';
@@ -613,7 +725,7 @@
       }
     }
 
-    // Initialize game on load
+    // ── Initialize game on load ──
     document.addEventListener('DOMContentLoaded', () => {
       initGame();
     });
