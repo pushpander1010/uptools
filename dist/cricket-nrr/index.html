@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Cricket Net Run Rate (NRR) Calculator - Tournament Standings | UpTools</title>
+  <!-- Favicon -->
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/uptools-logo-D0y93_iK.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/uptools-logo-D0y93_iK.svg">
+  <meta name="description" content="Free Cricket NRR Calculator by UpTools. Calculate net run rate for IPL, World Cup & tournament league standings. Compute for multiple matches. Accurate and privacy-first." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta name="theme-color" content="#0a0b0f" />
+<link href="https://www.uptools.in/cricket-nrr/" rel="canonical"/>
+  <meta name="keywords" content="cricket net run rate calculator, nrr calculator, tournament standings, ipl nrr, world cup nrr, league nrr" />
+
+  
+
+  <meta property="og:title" content="Cricket Net Run Rate (NRR) Calculator - Tournament Standings | UpTools" />
+  <meta property="og:description" content="Cricket Net Run Rate (NRR) Calculator - Tournament Standings. Free online tool by UpTools." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <meta property="og:url" content="https://www.uptools.in/cricket-nrr/" />
+  <meta property="og:site_name" content="UpTools" />
+  <meta property="og:image" content="/assets/og/cricket-nrr.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cricket Net Run Rate (NRR) Calculator - Tournament Standings | UpTools" />
+  <meta name="twitter:description" content="Cricket Net Run Rate (NRR) Calculator - Tournament Standings. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
+  <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+
+  <style>
+    :root{
+      --bg1:#0a0b0f;
+      --bg2:#0b0f1a;
+      --ink:#e9ecf5;
+      --muted:#a6adbb;
+      --purple:#b388ff;
+      --purple-2:#7c4dff;
+      --pink:#ff4081;
+      --green:#00e676;
+      --red:#ff5252;
+      --line:rgba(255,255,255,.10);
+      --card:rgba(255,255,255,.04);
+    }
+    html,body{height:100%}
+    body{
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 800px at 10% 5%, rgba(179,136,255,.08), transparent 55%),
+        radial-gradient(900px 600px at 88% 10%, rgba(255,64,129,.06), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+    .wrap{ max-width:1100px; margin:0 auto; padding:24px 16px 32px; display:grid; gap:16px; }
+    .card{ border:1px solid var(--line);border-radius:14px;background:var(--card);padding:1rem; }
+    .tool-header{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+    .tool-icon{
+      width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:24px;
+      background:linear-gradient(135deg, var(--purple), var(--purple-2));
+      box-shadow:0 8px 24px rgba(179,136,255,.3);
+    }
+    h1{margin:0;font-size:1.75rem;text-shadow:0 0 10px rgba(179,136,255,.4);}
+    .inputs{display:grid;gap:12px;}
+    .row{flex-direction:column;gap:6px;display:flex;}
+    .label{font-weight:600;color:var(--muted);font-size:.9rem;}
+    .input{
+      padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.3);
+      color:var(--ink);font-size:1rem;font-family:inherit;
+      transition:border-color .2s,box-shadow .2s;
+    }
+    .input:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px rgba(179,136,255,.15);}
+    .btn{
+      padding:12px 20px;border-radius:10px;border:1px solid var(--purple);
+      background:linear-gradient(135deg, rgba(179,136,255,.2), rgba(124,77,255,.15));
+      color:var(--purple);font-weight:700;cursor:pointer;font-size:1rem;
+      transition:transform .1s,filter .15s;
+    }
+    .btn:hover{filter:brightness(1.15);transform:translateY(-1px);}
+    .btn.secondary{background:#1a2230;border-color:var(--line);color:var(--ink);}
+    .btn.danger{border-color:var(--red);color:var(--red);}
+    .team-table{width:100%;border-collapse:collapse;margin-top:12px;}
+    .team-table th,.team-table td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);}
+    .team-table th{color:var(--muted);font-weight:600;font-size:.85rem;text-transform:uppercase;}
+    .team-table td{font-weight:500;}
+    .team-table tr:hover{background:rgba(179,136,255,.05);}
+    .pos{width:40px;}
+    .nrr{font-weight:800;}
+    .nrr.pos{color:var(--green);}
+    .nrr.neg{color:var(--red);}
+    .add-match{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    @media(max-width:600px){.add-match{grid-template-columns:1fr;}}
+    .result{display:grid;gap:10px;margin-top:12px;}
+    .result .row{display:flex;justify-content:space-between;padding:10px 12px;border:1px solid var(--line);border-radius:8px;}
+    .highlight{color:var(--purple);font-weight:800;font-size:1.1rem;}
+    .rel-links{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px;}
+    @media(max-width:600px){.rel-links{grid-template-columns:1fr;}}
+    .rel-links a{display:flex;align-items:center;justify-content:center;min-height:48px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);background:rgba(179,136,255,.08);}
+    .rel-links a:hover{background:rgba(179,136,255,.15);}
+    .note{color:var(--muted);font-size:.9rem;}
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"SoftwareApplication","name":"Cricket NRR Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
+      {"@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"item":{"@id":"https://www.uptools.in/","name":"UpTools"}},
+        {"@type":"ListItem","position":2,"item":{"@id":"https://www.uptools.in/cricket-nrr/","name":"Cricket NRR Calculator"}}
+      ]},
+      {"@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"How is Net Run Rate calculated?","acceptedAnswer":{"@type":"Answer","text":"NRR = (Team Run Rate) - (Opposition Run Rate). Run Rate = Runs Scored / Overs Faced. For full tournament, average the NRR across all matches."}},
+        {"@type":"Question","name":"Why is NRR important?","acceptedAnswer":{"@type":"Answer","text":"NRR is used to break ties in tournament standings. Higher NRR means better position. Critical in IPL, World Cup group stages."}}
+      ]}
+    }
+  </script>
+  <script type="module" crossorigin src="/assets/cricket-nrr-CP5341us.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/assets/utils-BBOWJhvt.js">
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+    <!-- Header -->
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      <nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap" role="main">
+    <div class="tool-header">
+      <div class="tool-icon" aria-hidden="true">🧮</div>
+      <h1>Cricket Net Run Rate (NRR) Calculator</h1>
+    </div>
+
+    <section class="card">
+      <h2 style="margin:0 0 12px">Add Match Result</h2>
+      <div class="add-match">
+        <div class="row">
+          <label class="label">Your Team Runs</label>
+          <input aria-label="Your Team Runs" id="ourRuns" class="input" type="number" min="0" step="1" placeholder="e.g., 165" value="165">
+        </div>
+        <div class="row">
+          <label class="label">Overs Used</label>
+          <input aria-label="Your Team Runs" id="ourOvers" class="input" type="number" min="0.1" max="20" step="0.1" placeholder="e.g., 19.4" value="19.4">
+        </div>
+        <div class="row">
+          <label class="label">Opposition Runs</label>
+          <input aria-label="Your Team Runs" id="oppRuns" class="input" type="number" min="0" step="1" placeholder="e.g., 158" value="158">
+        </div>
+        <button id="addBtn" class="btn" type="button">Add</button>
+      </div>
+      <button id="clearBtn" class="btn secondary" type="button" style="margin-top:10px">Clear All</button>
+    </section>
+
+    <section class="card">
+      <h2 style="margin:0 0 12px">NRR Calculation</h2>
+      <table class="team-table">
+        <thead>
+          <tr>
+            <th class="pos">#</th>
+            <th>Match</th>
+            <th>Our RR</th>
+            <th>Opp RR</th>
+            <th>NRR</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr><td colspan="5" class="note">Add matches above to calculate NRR</td></tr>
+        </tbody>
+      </table>
+      <div class="result" id="summary" aria-live="polite"></div>
+    </section>
+
+    <section class="card">
+      <div class="rel-links">
+        <a href="/cricket-run-rate/">Run Rate</a>
+        <a href="/cricket-score-predictor/">Score Predictor</a>
+        <a href="/emi-calculator/">EMI</a>
+      </div>
+    </section>
+  </main>
+
+  
+<!-- SEO: Do's and Don'ts -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="card" style="border-color:rgba(34,197,94,.3)">
+<h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">✅ <b>Do</b> use this tool to save time on manual calculations.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> double-check your inputs for accuracy.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> share results with teammates using the Share feature.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> bookmark this tool for quick access.</li>
+</ul>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+<h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — this tool doesn't store anything.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use results as professional financial/legal/medical advice.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> forget to verify critical calculations with official tools.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> assume results are guarantees — they are estimates.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- SEO: FAQ -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
+<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+</section>
+<!-- SEO: How it works -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
+<p>Results update instantly as you type — no waiting for server responses.</p>
+<p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
+</div>
+</details>
+</section>
+<footer class="note small" style="margin-top:6px;text-align:center">
+    <span>&copy; <span id="yr"></span> <a href="/">UpTools</a> . Cricket utilities</span>
+  </footer>
+
+</body>
+</html>

@@ -8,8 +8,7 @@ yarn-error.log*
 node_modules/
 graphify-out
 
-# Production build output
-dist/
+# dist is served by Vercel — must be committed
 *.md
 
 # Logs
@@ -35,7 +34,6 @@ coverage/
 lerna-debug.log*
 
 node_modules
-dist
 dist-ssr
 *.local
 

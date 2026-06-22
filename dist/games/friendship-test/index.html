@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Best Friend Compatibility Test 👫 How Well Do You Know Each Other? | UpTools</title>
+  <meta name="description" content="Play the ultimate best friend compatibility quiz! Answer questions about each other and see how well you really know your BFF. 2-player, challenge link, full-screen. Free, no sign-up." />
+  <meta name="keywords" content="best friend quiz,friendship test,bff quiz,how well do you know me,friend compatibility,friendship compatibility test,2 player quiz" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta name="theme-color" content="#6366f1" />
+  <link rel="canonical" href="https://www.uptools.in/games/friendship-test/" />
+  <link rel="icon" type="image/svg+xml" href="/assets/uptools-logo-D0y93_iK.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/uptools-logo-D0y93_iK.svg" />
+  <meta property="og:title" content="Best Friend Compatibility Test 👫 How Well Do You Know Each Other? | UpTools" />
+  <meta property="og:description" content="Best Friend Compatibility Test 👫 How Well Do You Know Each Other?. Free online tool by UpTools." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <meta property="og:url" content="https://www.uptools.in/games/friendship-test/" />
+  <meta property="og:site_name" content="UpTools" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Best Friend Compatibility Test 👫 How Well Do You Know Each Other? | UpTools" />
+  <meta name="twitter:description" content="Best Friend Compatibility Test 👫 How Well Do You Know Each Other?. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Best Friend Compatibility Test","applicationCategory":"Game","operatingSystem":"Any","url":"https://www.uptools.in/games/friendship-test/","publisher":{"@type":"Organization","name":"UpTools"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+  <link rel="preload" href="/style.css?v=1.3.0" as="style">
+  <link rel="stylesheet" href="/style.css?v=1.3.0" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+  <style>
+    :root{--accent:#6366f1;--accent2:#818cf8;--bg:#0d0f1a;--card:#131629;--muted:#a5b4fc;--cardBorder:color-mix(in oklab,#6366f1 30%,#1e2040)}
+    body{background:radial-gradient(1200px 700px at 10% -10%,#1a1040 0%,transparent 45%),radial-gradient(1000px 600px at 110% 10%,#0d1a40 0%,transparent 45%),linear-gradient(135deg,#0d0f1a,#111428) fixed;min-height:100svh;color:#e6edf3}
+    body::after{content:"";position:fixed;inset:-40px 0 0 0;z-index:0;pointer-events:none;opacity:.12;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><text y="30" font-size="24" fill="%236366f1" opacity="0.6">⭐</text></svg>');background-size:48px 48px;animation:starDrift 60s linear infinite}
+    @keyframes starDrift{0%{background-position:0 0}100%{background-position:0 800px}}
+    header.site,main,footer,#playScreen{position:relative;z-index:1}
+    .game-wrap{max-width:1100px;margin:0 auto;padding:1rem}
+    .panel{background:color-mix(in oklab,var(--card) 95%,transparent);border:1px solid var(--cardBorder);border-radius:.9rem;padding:1rem}
+    .hud{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:.75rem}
+    @media(max-width:720px){.hud{grid-template-columns:repeat(2,1fr)}}
+    .kpi{text-align:center;padding:.6rem .75rem;border:1px solid var(--cardBorder);border-radius:.75rem;background:rgba(255,255,255,.03)}
+    .kpi .value{font-weight:900;font-size:1.15rem;color:var(--accent)}
+    .kpi .label{font-size:.78rem;color:var(--muted)}
+    .bar,.controls{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:.5rem}
+    .difficulty-btn{padding:.55rem .9rem;border-radius:.6rem;border:1px solid var(--cardBorder);background:#131629;color:#e6edf3;font-weight:800;cursor:pointer;transition:all .12s}
+    .difficulty-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:var(--accent)}
+    .btn{padding:.66rem 1.05rem;border:none;border-radius:.75rem;font-weight:900;cursor:pointer}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+    .btn.secondary{background:transparent;color:#e6edf3;border:1px solid var(--cardBorder)}
+    .btn.danger{background:#ef4444;color:#fff}
+    #playScreen{position:fixed;inset:0;display:none;z-index:50;background:linear-gradient(180deg,rgba(13,15,26,.96),rgba(17,20,40,.985));padding:max(8px,env(safe-area-inset-top)) clamp(8px,2vw,18px) max(10px,env(safe-area-inset-bottom))}
+    #playScreen.open{display:grid;grid-template-rows:auto 1fr auto;gap:.6rem}
+    .ps-top{display:flex;align-items:center;justify-content:space-between;gap:.5rem;background:rgba(255,255,255,.04);border:1px solid var(--cardBorder);border-radius:.75rem;padding:.5rem .65rem;flex-wrap:wrap}
+    .ps-btn{padding:.5rem .8rem;border-radius:.6rem;border:1px solid var(--cardBorder);background:#131629;color:#e6edf3;font-weight:800;cursor:pointer}
+    .ps-btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:var(--accent)}
+    .ps-progress{font-weight:900;font-variant-numeric:tabular-nums;padding:.28rem .55rem;border:1px solid var(--cardBorder);border-radius:.5rem;background:#131629}
+    .ps-stage{min-height:0;display:grid;align-items:center;justify-items:center}
+    .board{width:min(1100px,100%);height:100%;background:color-mix(in oklab,var(--card) 96%,transparent);border:1px solid var(--cardBorder);border-radius:.9rem;padding:clamp(.6rem,2vw,1rem);display:grid;grid-template-rows:1fr auto;gap:.6rem;overflow:hidden}
+    .qs{overflow:auto;overscroll-behavior:contain}
+    .qcard{display:grid;gap:.75rem;padding:clamp(.6rem,2.2vw,1rem);border:1px solid var(--cardBorder);border-radius:.8rem;background:#0d0f1a}
+    .qtitle{font-size:1.1rem;font-weight:900}
+    .opt{display:flex;align-items:center;gap:.55rem;padding:.5rem .6rem;border:1px solid var(--cardBorder);border-radius:.65rem;background:#0d0f1a;cursor:pointer}
+    .opt input{accent-color:var(--accent)}
+    .qnav{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+    .result{text-align:center;padding:.8rem;border:1px solid var(--cardBorder);border-radius:.75rem;background:rgba(255,255,255,.04)}
+    .ps-bottom{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+    .tiny{font-size:.82rem;color:var(--muted);text-align:center}
+    .note{color:var(--muted)}
+    .video-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:.75rem;overflow:hidden;border:1px solid var(--cardBorder)}
+    .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    [hidden]{display:none!important}
+
+    /* ── Touch-friendly sizing ── */
+    .btn, .ps-btn, .difficulty-btn, .opt, #fullscreenBtn,
+    #copyRes, #shareWA, #startBtn, #joinBtn, #copyInvite, #resetStats,
+    #nextBtn, #prevBtn, #psBack, #psShare {
+      min-width:44px; min-height:44px;
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+    }
+    /* Ensure label-wrapped radios get tap area too */
+    .opt { min-height:44px; }
+
+    /* ── Touch feedback / active states ── */
+    .btn:active, .ps-btn:active, .difficulty-btn:active,
+    .opt:active, #fullscreenBtn:active,
+    #copyRes:active, #shareWA:active,
+    #startBtn:active, #joinBtn:active, #copyInvite:active, #resetStats:active,
+    #nextBtn:active, #prevBtn:active, #psBack:active, #psShare:active {
+      transform:scale(.96);
+      transition:transform .1s ease;
+    }
+    .btn.primary:active, .ps-btn.primary:active,
+    #startBtn:active, #nextBtn:active {
+      opacity:.85;
+    }
+    .opt:active {
+      background:rgba(99,102,241,.12);
+      border-color:var(--accent);
+    }
+    /* Smooth transitions for all interactive elements */
+    .btn, .ps-btn, .difficulty-btn, .opt {
+      transition:background .15s ease, border-color .15s ease, transform .1s ease, opacity .1s ease;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <script type="module" crossorigin src="/assets/games/friendship-test-Cg6EYPFi.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/assets/utils-BBOWJhvt.js">
+</head>
+<body style="--accent:#6366f1;--accent2:#818cf8">
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+    <!-- Header -->
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      <nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap" role="main">
+    <div style="text-align:center;margin:1rem 0 .25rem">
+      <h1 style="display:flex;gap:.5rem;align-items:center;justify-content:center">👫 Best Friend Compatibility Test</h1>
+      <p class="note">Two-player friendship quiz. Answer questions about each other and see your BFF score. Share a challenge link!</p>
+    </div>
+
+    <section class="game-wrap">
+      <div class="panel">
+        <div class="hud" aria-live="polite">
+          <div class="kpi"><div class="value" id="bestScore">--%</div><div class="label">Best BFF Score</div></div>
+          <div class="kpi"><div class="value" id="lastPair">—</div><div class="label">Last Played</div></div>
+          <div class="kpi"><div class="value" id="lastWhen">—</div><div class="label">Last Time</div></div>
+          <div class="kpi"><div class="value" id="plays">0</div><div class="label">Total Plays</div></div>
+        </div>
+        <div class="bar">
+          <button class="difficulty-btn active" data-len="10">Short (10)</button>
+          <button class="difficulty-btn" data-len="15">Standard (15)</button>
+          <button class="difficulty-btn" data-len="20">Long (20)</button>
+        </div>
+        <div class="controls">
+          <button id="startBtn" class="btn primary">Start Quiz</button>
+          <button id="joinBtn" class="btn secondary" hidden>🔗 Join Partner's Link</button>
+          <button id="copyInvite" class="btn secondary">🔗 Challenge Link</button>
+          <button id="resetStats" class="btn danger">Reset Stats</button>
+        </div>
+        <p class="note" style="text-align:center;margin:.5rem 0 0;font-size:.9rem">Scores saved on this device only.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-top:.85rem">
+        <article class="card">
+          <h3 style="margin-bottom:.25rem">You might also like</h3>
+          <ul style="padding-left:1.2rem;margin:0">
+            <li><a href="/games/love-test/">❤️ Couple Love Test</a></li>
+            <li><a href="/games/quiz-trivia/">🧠 Quiz Trivia</a></li>
+            <li><a href="/games/memory-match/">🧠 Memory Match</a></li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3 style="margin-bottom:.25rem">Friendship resources</h3>
+          <ul style="padding-left:1.2rem;margin:0">
+            <li><a href="https://www.psychologytoday.com/us/basics/friendship" target="_blank" rel="noopener">Psychology of Friendship</a></li>
+            <li><a href="https://greatergood.berkeley.edu/topic/friendship" target="_blank" rel="noopener">Greater Good: Friendship</a></li>
+          </ul>
+        </article>
+      </div>
+
+      <section style="margin-top:12px">
+        <h2>🎥 Fun friendship challenge ideas</h2>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube-nocookie.com/embed/gWiG3RrnUZQ?rel=0&modestbranding=1"
+            title="Best Friend Quiz Challenge"
+            loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <p class="note" style="margin-top:8px;font-size:.9rem">Fun challenges to try with your best friend after the quiz!</p>
+      </section>
+
+      <nav aria-label="Breadcrumb" style="margin-top:12px">
+        <ol class="breadcrumb" style="display:flex;gap:6px;list-style:none;padding:0;margin:0;font-size:.9rem;color:#a5b4fc">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">›</li>
+          <li><a href="/games/">Games</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page">Best Friend Compatibility Test</li>
+        </ol>
+      </nav>
+
+      <section class="panel" style="margin-top:12px" aria-labelledby="faq-title">
+        <h2 id="faq-title" style="margin-top:0">Frequently Asked Questions</h2>
+        <details style="margin-bottom:10px">
+          <summary style="cursor:pointer;font-weight:600">How does the friendship test work?</summary>
+          <p class="note" style="margin-top:6px">Player 1 answers all questions first, then hands the device to Player 2 who answers the same questions. Your compatibility score is based on how many answers match.</p>
+        </details>
+        <details style="margin-bottom:10px">
+          <summary style="cursor:pointer;font-weight:600">Is the test free?</summary>
+          <p class="note" style="margin-top:6px">Yes, completely free with no sign-up required. Scores are saved locally on your device only.</p>
+        </details>
+        <details>
+          <summary style="cursor:pointer;font-weight:600">Can I share the test with my friend?</summary>
+          <p class="note" style="margin-top:6px">Yes! Use the Challenge Link button to copy the URL and share it with your friend so they can play on their own device.</p>
+        </details>
+      </section>
+
+      <footer style="text-align:center;margin:1rem 0 2rem">
+        <nav style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a href="/">UpTools</a> <a href="/games/">Games</a> <a href="/about/">About</a>
+        </nav>
+        <p class="note" style="font-size:.85rem">Privacy-first · Works offline once loaded</p>
+      </footer>
+    </section>
+  </main>
+
+  <section id="playScreen" role="dialog" aria-modal="true" inert>
+    <div class="ps-top">
+      <div style="display:flex;gap:.5rem;align-items:center">
+        <button id="psBack" class="ps-btn">⟵ Back</button>
+        <span style="font-weight:900">Best Friend Compatibility Test</span>
+      </div>
+      <span class="ps-progress" id="psProg">Q 1/10</span>
+      <button id="psShare" class="ps-btn">🔗 Share</button>
+      <button id="fullscreenBtn" class="ps-btn" title="Fullscreen">⛶ Full</button>
+    </div>
+    <div class="ps-stage">
+      <div class="board game-container" id="gameContainer">
+        <div class="qs" id="qs" role="region" aria-live="polite"></div>
+        <div class="qnav">
+          <button id="prevBtn" class="ps-btn" disabled>◀ Prev</button>
+          <button id="nextBtn" class="ps-btn primary">Next ▶</button>
+        </div>
+      </div>
+    </div>
+    <div class="ps-bottom">
+      <div class="tiny">Tip: Use ↑/↓ to navigate options, Space/Enter to select.</div>
+    </div>
+  </section>
+
+  <!-- Friendship Test Share Modal -->
+  <div id="ftShareOverlay" style="position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .25s ease;" role="dialog" aria-modal="true">
+    <div id="ftShareCard" style="background:var(--card);border:1px solid var(--cardBorder);border-radius:1.2rem;padding:2rem;max-width:420px;width:100%;text-align:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px rgba(99,179,237,.15);transform:scale(.92);transition:transform .25s ease;">
+      <button onclick="closeFTShareModal()" style="position:absolute;top:.75rem;right:.9rem;background:none;border:none;font-size:1.5rem;color:var(--muted);cursor:pointer;line-height:1;padding:.2rem .4rem;border-radius:.4rem;">&times;</button>
+      <h3 style="margin:0 0 1rem;color:var(--accent);font-size:1.3rem;">&#128279; Share Challenge</h3>
+      <div style="margin:0 auto 1.25rem;width:164px;height:164px;background:#fff;border-radius:.75rem;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+        <img id="ftShareQr" src="" alt="QR code" loading="lazy" style="width:160px;height:160px;display:block;">
+      </div>
+      <p style="color:var(--muted);font-size:.85rem;margin:0 0 .75rem;">Scan QR or share the link below</p>
+      <div style="display:flex;gap:.5rem;margin-bottom:1rem;">
+        <input aria-label="Text input" id="ftShareUrlInput" type="text" readonly style="flex:1;padding:.65rem .75rem;border:1px solid var(--cardBorder);border-radius:.5rem;background:rgba(255,255,255,.04);color:var(--text);font-size:.82rem;min-width:0;">
+        <button id="ftShareCopyBtn" onclick="copyFTShareUrl()" style="padding:.65rem 1rem;background:var(--accent);color:#fff;border:none;border-radius:.5rem;font-weight:700;cursor:pointer;white-space:nowrap;font-size:.9rem;">Copy</button>
+      </div>
+      <p style="color:var(--muted);font-size:.8rem;margin:0;">Your friend opens this link and answers the same questions &#129309;</p>
+    </div>
+  </div>
+  <div id="ftToast" style="position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(2rem);background:#222;color:#fff;padding:.65rem 1.4rem;border-radius:2rem;font-size:.9rem;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s ease,transform .3s ease;pointer-events:none;white-space:nowrap;"></div>
+  <!-- Confirm overlay for reset stats -->
+  <div id="ftConfirmOverlay" style="position:fixed;inset:0;z-index:9600;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .25s ease;" role="alertdialog">
+    <div style="background:var(--card);border:1px solid var(--cardBorder);border-radius:1rem;padding:1.5rem;max-width:320px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);">
+      <p style="margin:0 0 1.25rem;font-size:1rem;">Reset all stats? This cannot be undone.</p>
+      <div style="display:flex;gap:.5rem;">
+        <button onclick="ftConfirmNo()" style="flex:1;padding:.75rem;background:transparent;border:1px solid var(--cardBorder);border-radius:.5rem;color:var(--text);cursor:pointer;font-weight:600;">Cancel</button>
+        <button onclick="ftConfirmYes()" style="flex:1;padding:.75rem;background:#f44336;border:none;border-radius:.5rem;color:#fff;cursor:pointer;font-weight:700;">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/games/fullscreen-utils.js" defer></script>
+</body>
+</html>

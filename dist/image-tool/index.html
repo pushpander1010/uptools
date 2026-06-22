@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Image Tool - Background Remover, Eraser &amp; Filters | UpTools</title>
+<meta content="Free online image editor: one-click background removal, manual eraser, grayscale/monochrome, color correction, brightness/contrast/saturation, and export with transparency. Fast, private, in-browser." name="description"/>
+
+<meta content="image tool, image tool, online tool, free calculator, uptools" name="keywords"/>
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<meta content="#0b0f1a" name="theme-color"/>
+<link href="https://www.uptools.in/image-tool/" rel="canonical"/>
+<meta content="Image Tool - Background Remover, Eraser &amp; Filters" property="og:title"/>
+<meta content="Edit images in your browser: remove background, erase, grayscale &amp; color-correct, then export PNG/WebP/JPG." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.uptools.in/image-tool/" property="og:url"/>
+<meta content="/assets/og/image-tool.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="Image Tool - Background Remover, Eraser &amp; Filters" />
+  <meta name="twitter:description" content="Edit images in your browser: remove background, erase, grayscale &amp; color-correct, then export PNG/WebP/JPG." />
+  <meta name="twitter:image" content="/assets/og/image-tool.png" />
+<link href="/assets/uptools-logo-D0y93_iK.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
+<link href="/assets/uptools-logo-D0y93_iK.svg" rel="apple-touch-icon" sizes="180x180"/>
+<link as="style" href="/style.css?v=1.2.0" rel="preload"/>
+<link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="/style.css?v=1.2.0" rel="stylesheet"/></noscript>
+<style>
+    :root{
+      --content-w:1200px;
+      --stage-vh:56vh; /* ↓ smaller stage height */
+    }
+
+    /* Keep page within viewport; internal scrolling for side panels */
+    html,body{height:100%}
+    main.wrap{min-height:calc(100dvh - 64px)} /* header ≈64px; adjust if needed */
+
+    .tool-grid{
+      display:grid; gap:12px;
+      grid-template-columns:320px minmax(0,1fr) 320px;
+      align-items:stretch;
+    }
+    @media (max-width:1080px){
+      .tool-grid{grid-template-columns:1fr}
+    }
+
+    /* Side panels scroll internally on desktop so page doesn't */
+    @media (min-width:1081px){
+      aside.card.controls,
+      aside.card[aria-label="Learn"]{
+        max-height:calc(100dvh - 180px); /* header + header-strip space */
+        overflow:auto; overscroll-behavior:contain;
+      }
+    }
+
+    /* Stage smaller but comfy */
+    #stage.card{
+      display:grid; place-items:center; padding:0;
+      min-height:400px; /* ↓ from 520 */
+      overflow:hidden
+    }
+    .stage-inner{width:100%; height:100%; display:grid; place-items:center; position:relative}
+
+    #stage[data-bg="transparent"] .stage-inner{
+      background:conic-gradient(#0000 90deg,#1b2236 0) 0 0/32px 32px,
+                 conic-gradient(#0000 90deg,#0e1630 0) 16px 16px/32px 32px
+    }
+    #stage[data-bg="white"] .stage-inner{background:#fff}
+    #stage[data-bg="black"] .stage-inner{background:#000}
+
+    #canvas{
+      max-width:100%;
+      max-height:var(--stage-vh);
+      display:block;
+      background-color:transparent;
+      border-radius:10px
+    }
+    @media (max-width:768px){
+      #canvas{max-height:50vh} /* tighter on mobile */
+    }
+
+    .controls .row{border:0; padding:0}
+
+    .bg-toggle{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+    .bg-toggle .chip input{accent-color:#22d3ee}
+
+    .ctrl{display:grid; gap:6px; margin:6px 0}
+    .ctrl input[type="range"]{width:100%}
+
+    .stage-bar{
+      position:sticky; bottom:0; inset-inline:0;
+      display:flex; flex-wrap:wrap; gap:6px; justify-content:center;
+      background: color-mix(in oklab,#0b1326 82%,transparent);
+      padding:8px; border-top:1px solid var(--border)
+    }
+
+    .drop{
+      display:grid; place-items:center; text-align:center; gap:8px;
+      padding:14px; border:1px dashed var(--border); border-radius:12px; background:#0b1326
+    }
+    .drop.dragover{border-style:solid; box-shadow:var(--glow)}
+
+    /* Collapsible sections to cut height */
+    .fold{border:1px solid var(--border); border-radius:10px; background:#0b1326; padding:4px 8px}
+    .fold + .fold{margin-top:8px}
+    .fold>summary{
+      cursor:pointer; list-style:none; font-weight:700; padding:6px 2px; display:flex; align-items:center; gap:8px
+    }
+    .fold>summary::-webkit-details-marker{display:none}
+    .fold .content{padding:6px 2px 8px}
+
+    .video-wrap{position:relative; width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#0b1326; border:1px solid var(--border); box-shadow:var(--glow-soft)}
+    .video-wrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0; display:block}
+
+    .txt-logo{display:inline-grid; place-items:center; font-weight:900; width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#06121a; box-shadow:inset 0 0 0 1px rgba(255,255,255,.25); font-size:12px}
+
+    .sep{height:1px; background:color-mix(in oklab,var(--accent) 25%, #243); margin:8px 0}
+    /* compact headings inside controls */
+    .controls h2{margin:6px 0}
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Image Tool free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's completely free with no sign-ups required."}}, {"@type": "Question", "name": "Is Image Tool private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All calculations run in your browser. No data is uploaded."}}, {"@type": "Question", "name": "Does Image Tool work on mobile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All tools are mobile-responsive and work on any device."}}]}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.uptools.in/"}, {"@type": "ListItem", "position": 2, "name": "Image Tool", "item": "https://www.uptools.in/image-tool/"}]}
+</script>
+<script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"UpTools Image Tool","applicationCategory":"MultimediaApplication","operatingSystem":"Any","url":"https://www.uptools.in/image-tool/","description":"Browser-based image editor with background removal, eraser and color filters. Exports PNG/WebP/JPG.","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}
+  </script>
+  
+
+  <meta property="og:title" content="Image Tool - Background Remover, Eraser &amp; Filters | UpTools" />
+  <meta property="og:description" content="Edit images in your browser: remove background, erase, grayscale &amp;amp; color-correct, then export PNG/WebP/JPG." />
+  <meta property="og:url" content="https://www.uptools.in/image-tool/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <script type="module" crossorigin src="/assets/image-tool-Dayl4EBM.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/assets/utils-BBOWJhvt.js">
+</head>
+<body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+<!-- small fixed -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
+<script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" width="28"/>
+<b>UpTools</b>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
+<nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
+</div>
+</header>
+<main role="main" class="wrap" id="main">
+<div class="tool-header" style="justify-content:space-between;align-items:center">
+<div style="display:flex;align-items:center;gap:12px">
+<div class="tool-icon">🖼️</div>
+<div>
+<h1 style="margin:0">Image Tool - Background Remover, Eraser &amp; Filters</h1>
+<p class="note" style="margin:2px 0 0">Upload → adjust → auto/remove by color/erase → export PNG/WebP/JPG</p>
+</div>
+</div>
+<a class="pill" href="/image-converter/" title="Go to Image Converter">
+<span class="txt-logo">IC</span> <span>Image Converter</span>
+</a>
+</div>
+<section class="tool-grid">
+<!-- LEFT: Controls (compact with collapsibles) -->
+<aside aria-label="Controls" class="card controls">
+<h2>1) Upload image</h2>
+<div class="drop" id="drop">
+<img alt="Upload icon" height="60" src="data:image/svg+xml;utf8,&lt;?xml version='1.0' ?&gt;&lt;svg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'&gt;&lt;rect width='120' height='60' rx='10' ry='10' fill='%2312182c'/&gt;&lt;path d='M15 40h90M60 18v22M60 18l-9 9M60 18l9 9' stroke='%239fb1c8' stroke-width='2' fill='none' stroke-linecap='round'/&gt;&lt;/svg&gt;" width="120"/>
+<div class="note">Drop image here or</div>
+<label class="btn sm" for="file">Choose file</label>
+<input accept="image/*" class="hidden" id="file" type="file"/>
+</div>
+<div class="sep"></div>
+<h2>2) Working area</h2>
+<div class="bg-toggle">
+<label class="chip"><input aria-label="Choose file" checked="" name="stage-bg" type="radio" value="transparent"/> Transparent</label>
+<label class="chip"><input aria-label="Choose file" name="stage-bg" type="radio" value="white"/> White</label>
+<label class="chip"><input aria-label="Choose file" name="stage-bg" type="radio" value="black"/> Black</label>
+</div>
+<!-- Collapsible groups -->
+<details class="fold" id="fold-filters">
+<summary>3) Filters</summary>
+<div class="content">
+<div class="ctrl"><label class="label" for="brightness">Brightness</label><input id="brightness" max="150" min="50" type="range" value="100"/></div>
+<div class="ctrl"><label class="label" for="contrast">Contrast</label><input id="contrast" max="150" min="50" type="range" value="100"/></div>
+<div class="ctrl"><label class="label" for="saturation">Saturation</label><input id="saturation" max="200" min="0" type="range" value="100"/></div>
+<div class="ctrl"><label class="label" for="grayscale">Grayscale</label><input id="grayscale" max="100" min="0" type="range" value="0"/></div>
+<div class="ctrl"><label class="label" for="temperature">Temperature (Warm/Cool)</label><input id="temperature" max="50" min="-50" type="range" value="0"/></div>
+<div class="row" style="margin-top:6px">
+<button class="btn sm" id="resetFilters" type="button">Reset Filters</button>
+<button class="btn sm secondary" id="clearAll" type="button">Clear Canvas</button>
+</div>
+</div>
+</details>
+<details class="fold" id="fold-bg">
+<summary>4) Background remover</summary>
+<div class="content">
+<div class="row" style="gap:8px;flex-wrap:wrap">
+<button class="btn sm" id="autoBG" title="Auto remove background" type="button">Auto Remove BG</button>
+<button class="btn sm" id="autoWhite" title="Remove whites quickly" type="button">Remove Whites</button>
+</div>
+<div class="ctrl">
+<label class="label" for="pickColor">Key Color</label>
+<input id="pickColor" type="color" value="#ffffff">
+</input></div>
+<div class="ctrl">
+<label class="label" for="tolerance">Tolerance</label>
+<input id="tolerance" max="255" min="0" type="range" value="28"/>
+</div>
+<div class="row">
+<button class="btn sm secondary" id="keyRemove" type="button">Remove by Color</button>
+<button class="btn sm secondary" id="clearMask" type="button">Clear Mask</button>
+</div>
+</div>
+</details>
+<details class="fold" id="fold-eraser">
+<summary>5) Eraser</summary>
+<div class="content">
+<div class="ctrl">
+<label class="label" for="eraserSize">Eraser size</label>
+<input id="eraserSize" max="100" min="5" type="range" value="28"/>
+</div>
+<div class="row">
+<button aria-pressed="false" class="btn sm" id="toggleEraser" type="button">Enable Eraser</button>
+<button class="btn sm secondary" id="undoErase" type="button">Undo</button>
+</div>
+</div>
+</details>
+<details class="fold" id="fold-export">
+<summary>6) Export</summary>
+<div class="content">
+<div class="row" style="gap:8px;flex-wrap:wrap">
+<select class="input" id="expFmt" style="max-width:160px">
+<option selected="" value="image/png">PNG (transparent if WA=Transparent)</option>
+<option value="image/webp">WEBP</option>
+<option value="image/jpeg">JPEG (no transparency)</option>
+</select>
+<input aria-label="Export quality" class="input" id="expQ" max="1" min="0.1" step="0.1" type="number" value="0.92"/>
+<button class="btn sm" id="exportBtn" type="button">Download</button>
+</div>
+</div>
+</details>
+</aside>
+<!-- CENTER: Stage -->
+<section aria-label="Working area" class="card" data-bg="transparent" id="stage">
+<div class="stage-inner">
+<canvas aria-label="Editable canvas" height="720" id="canvas" width="1280"></canvas>
+<div class="stage-bar">
+<button class="btn sm secondary" id="fitIn" title="Fit to screen" type="button">Fit</button>
+<button class="btn sm secondary" id="actualSize" title="Actual size" type="button">100%</button>
+<button class="btn sm" id="quickPNG" type="button">Quick Download (PNG)</button>
+<button class="btn sm secondary" id="undoBtn" title="Undo last change" type="button">Undo</button>
+</div>
+</div>
+</section>
+<!-- RIGHT: Help / Video / SEO -->
+<aside aria-label="Learn" class="card">
+<h2>How to remove background</h2>
+<ol class="note" style="margin:0 0 10px 18px">
+<li>Upload an image</li>
+<li>Try <b>Auto Remove BG</b> (or pick a color → <b>Remove by Color</b>)</li>
+<li>Fine-tune with the <b>Eraser</b></li>
+<li>Export as <b>PNG</b> for transparency</li>
+</ol>
+<div aria-label="Tutorial video" class="video-wrap">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/f1cL9uavSbU" title="Microsoft Paint: Layers, Cocreator &amp; Remove Background"></iframe>
+</div>
+<div class="sep"></div>
+<h3>Why UpTools?</h3>
+<ul class="note" style="margin:0 0 10px 18px">
+<li>Private: runs in your browser</li>
+<li>No upload limits for common images</li>
+<li>Precision eraser + color key</li>
+</ul>
+<div class="sep"></div>
+<div class="grid">
+<a aria-label="Open Image Converter" class="tool-link accent-violet" href="/image-converter/">
+<span class="ico"><span aria-hidden="true" class="txt-logo">IC</span></span>
+<div><strong>Image Converter</strong><div class="note">Resize, crop &amp; change formats</div></div>
+</a>
+<a aria-label="About UpTools" class="tool-link accent-cyan" href="/about/">
+<span class="ico"><span aria-hidden="true" class="txt-logo">ABT</span></span>
+<div><strong>About</strong><div class="note">What is UpTools?</div></div>
+</a>
+<a aria-label="Contact UpTools" class="tool-link accent-green" href="/contact/">
+<span class="ico"><span aria-hidden="true" class="txt-logo">CT</span></span>
+<div><strong>Contact</strong><div class="note">Tell us what to build next</div></div>
+</a>
+</div>
+</aside>
+</section>
+
+<!-- SEO: Do's and Don'ts -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="card" style="border-color:rgba(34,197,94,.3)">
+<h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">✅ <b>Do</b> use this tool to save time on manual calculations.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> double-check your inputs for accuracy.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> share results with teammates using the Share feature.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> bookmark this tool for quick access.</li>
+</ul>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+<h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — this tool doesn't store anything.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use results as professional financial/legal/medical advice.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> forget to verify critical calculations with official tools.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> assume results are guarantees — they are estimates.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- SEO: FAQ -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
+<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+</section>
+<!-- SEO: How it works -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
+<p>Results update instantly as you type — no waiting for server responses.</p>
+<p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
+</div>
+</details>
+</section>
+<footer class="note small site-footer" role="contentinfo" style="margin-top:8px">
+      © <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a>
+</footer>
+</main>
+</body>
+</html>

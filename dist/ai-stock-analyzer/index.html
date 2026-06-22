@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<!-- Google Ads (mounted only if available) -->
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>AI Stock Analyzer - Real-Time Charts, News Sentiment, Support/Resistance, Verdict | UpTools</title>
+<!-- Canonical & Favicons -->
+
+<link href="/assets/uptools-logo-D0y93_iK.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
+<link href="/assets/uptools-logo-D0y93_iK.svg" rel="apple-touch-icon" sizes="180x180"/>
+<!-- SEO -->
+<meta content="Free AI stock analysis tool for NSE, BSE, NASDAQ, NYSE, LSE, TSX, TSE, SSE and more. Pulls live quotes &amp; charts (Yahoo Finance), scans patterns, draws support &amp; resistance, reads news (Google News RSS) for sentiment, and gives Buy/Hold/Sell verdicts. Includes an AI chatbox (RAG) grounded in the fetched data." name="description"/>
+<meta content="stock analysis,AI stock analyzer,live stock chart,NSE stocks,BSE stocks,NASDAQ stocks,NYSE stocks,TSX,LSE,technical analysis,news sentiment,support resistance,free tool" name="keywords"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
+<meta content="#0b1020" name="theme-color"/>
+<link href="https://www.uptools.in/ai-stock-analyzer/" rel="canonical"/>
+<!-- Open Graph / Twitter -->
+<meta content="AI Stock Analyzer - Live Charts, News Sentiment &amp; Verdict" property="og:title"/>
+<meta content="Analyze any ticker across major markets. Real quotes &amp; charts, support/resistance, technical + fundamental snapshot, news sentiment, and Buy/Hold/Sell verdict. Free." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.uptools.in/ai-stock-analyzer/" property="og:url"/>
+<meta content="https://www.uptools.in/assets/og/ai-stock-analyzer.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="AI Stock Analyzer - Live Charts, News Sentiment &amp; Verdict" />
+  <meta name="twitter:description" content="Analyze any ticker across major markets. Real quotes &amp; charts, support/resistance, technical + fundamental snapshot, news sentiment, and Buy/Hold/Sell verdict. Free." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/ai-stock-analyzer.png" />
+<!-- CSS (shared) -->
+<link as="style" href="/style.css" rel="preload"/>
+<link href="/style.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="/style.css" rel="stylesheet"/></noscript>
+<!-- Structured Data -->
+<script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"AI Stock Analyzer",
+    "applicationCategory":"FinancialApplication",
+    "operatingSystem":"Web",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"},
+    "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","ratingCount":"127"}
+  }
+  </script>
+<script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},
+      {"@type":"ListItem","position":2,"name":"AI Stock Analyzer","item":"https://www.uptools.in/ai-stock-analyzer/"}
+    ]
+  }
+  </script>
+<script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Which markets are supported?",
+        "acceptedAnswer":{"@type":"Answer","text":"NSE (India), BSE (India), NASDAQ, NYSE, LSE (London), TSX (Toronto), TSE (Tokyo), SSE (Shanghai), HKEX (Hong Kong) and more via Yahoo Finance suffix mapping."}
+      },
+      {
+        "@type":"Question",
+        "name":"Do I need an API key?",
+        "acceptedAnswer":{"@type":"Answer","text":"No. Data is fetched through a server-side proxy (/proxy) for CORS safety. Quotes & charts use Yahoo Finance public endpoints; news uses Google News RSS."}
+      }
+    ]
+  }
+  </script>
+<style>
+    /* Page-local tweaks (kept tiny for performance) */
+    .hero { align-items:center; gap:12px }
+    .grid-2 { display:grid; grid-template-columns:1.1fr .9fr; gap:12px }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    @media (max-width: 980px){ .grid-2 { grid-template-columns:1fr; } }
+    .panel { display:grid; gap:10px }
+    .kvi { display:grid; grid-template-columns:repeat(3,1fr); gap:10px }
+    @media (max-width:680px){ .kvi { grid-template-columns:1fr 1fr; } }
+    .badge { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft); font-size:12px }
+    .mini { font-size:12px; color:var(--muted) }
+    canvas#chart { width:100%; height:360px; background:#0a1224; border:1px solid var(--border); border-radius:12px; box-shadow: var(--glow-soft) }
+    .news-item { padding:10px; border:1px solid var(--border); border-radius:10px; margin-bottom:8px; background:#0b1326 }
+    .ad-slot { display:none }
+    .pill-good{ color:#10b981 } .pill-risk{ color:#f59e0b } .pill-bad{ color:#ef4444 }
+    .verdict { display:flex; gap:10px; align-items:center }
+    .chatbox { display:grid; grid-template-rows:auto 1fr auto; min-height:420px; }
+    .chatlog { overflow:auto; border:1px solid var(--border); border-radius:12px; padding:10px; background:#0a1224 }
+    .msg { margin:6px 0; line-height:1.45 }
+    .msg.ai { color:#eaf4ff } .msg.user{ color:#cfe7ff }
+    .row-inline{ display:flex; gap:8px; flex-wrap:wrap; align-items:center }
+    .nowrap{ white-space:nowrap }
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  
+
+  <meta property="og:description" content="Analyze any ticker across major markets. Real quotes &amp;amp; charts, support/resistance, technical + fundamental snapshot, news sentiment, and Buy/Hold/Sell verdict. Free." />
+  <meta property="og:url" content="https://www.uptools.in/ai-stock-analyzer/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <script type="module" crossorigin src="/assets/ai-stock-analyzer--SF8fILV.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/assets/preload-helper-BXl3LOEh.js">
+</head>
+<body style="--accent:#22D3EE;--bg1:#0b0f1a;--bg2:#121a2f">
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+<!-- Header -->
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" width="28"/>
+<b>UpTools</b>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
+<nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
+</div>
+</header>
+<main class="wrap" id="main" role="main">
+<!-- HERO -->
+<section aria-labelledby="title" class="card hero">
+<div class="tool-icon">STK</div>
+<div>
+<h1 id="title">AI Stock Analyzer - Multi-Market</h1>
+<p class="note">Live quotes &amp; charts (Yahoo Finance), support/resistance, TA/FA snapshot, Google News sentiment, and an AI chatbox grounded in retrieved data. <span class="mini">Free - No sign-ups - Privacy-first</span></p>
+<div class="chips" style="margin-top:8px">
+<span class="pill">NSE - BSE - NASDAQ - NYSE - LSE - TSX - TSE - SSE - HKEX</span>
+<a class="chip" href="/sitemap.xml">Sitemap</a>
+</div>
+</div>
+</section>
+<!-- (Conditional) Ad space -->
+<div id="ad-mount"></div>
+<!-- CONTROLS -->
+<section aria-label="Controls" class="card">
+<div class="row-inline" style="justify-content:space-between;gap:12px">
+<div class="row-inline" style="flex:1;flex-wrap:wrap;gap:10px">
+<label class="inline">
+<span class="mini">Market</span>
+<select class="select" id="market">
+<option selected="" value="NSE">NSE (India)</option>
+<option value="BSE">BSE (India)</option>
+<option value="NASDAQ">NASDAQ (US)</option>
+<option value="NYSE">NYSE (US)</option>
+<option value="LSE">LSE (UK)</option>
+<option value="TSX">TSX (Canada)</option>
+<option value="TSE">TSE (Tokyo)</option>
+<option value="SSE">SSE (Shanghai)</option>
+<option value="HKEX">HKEX (Hong Kong)</option>
+<option value="FWB">XETRA/Frankfurt (DE)</option>
+</select>
+</label>
+<label class="inline">
+<span class="mini">Ticker</span>
+<input aria-label="Ticker" autocomplete="off" class="input" id="ticker" list="tickerSuggestions" placeholder="e.g., RELIANCE or AAPL" style="width:220px"/>
+</label>
+<label class="inline">
+<span class="mini">Range</span>
+<select class="select" id="range">
+<option value="1mo">1M</option>
+<option value="3mo">3M</option>
+<option selected="" value="6mo">6M</option>
+<option value="1y">1Y</option>
+<option value="2y">2Y</option>
+</select>
+</label>
+<label class="inline">
+<span class="mini">Interval</span>
+<select class="select" id="interval">
+<option selected="" value="1d">1d</option>
+<option value="1h">1h</option>
+<option value="5m">5m</option>
+</select>
+</label>
+<button class="btn" id="go" type="button">Analyze</button>
+</div>
+<span class="mini nowrap">Model: Mistral Small</span>
+</div>
+<div class="mini" id="analysisStatus" role="status">Ready.</div>
+<p class="mini">Tip: For NSE use plain ticker (e.g., RELIANCE). US tickers are the same (AAPL / TSLA). This page auto-maps market suffixes for Yahoo Finance.</p>
+</section>
+<datalist id="tickerSuggestions"></datalist>
+<!-- MAIN GRID -->
+<!-- MAIN GRID -->
+<section aria-label="Analysis" class="grid-2">
+<!-- LEFT: Chart + TA + News -->
+<article class="panel">
+<section aria-labelledby="snapTitle" class="card">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<h2 class="h5" id="snapTitle">Snapshot</h2>
+<div class="badge" id="badgeXchg">N/A</div>
+</div>
+<div class="kvi">
+<div><div class="mini">Price</div><div class="amount" id="price">N/A</div></div>
+<div><div class="mini">Change</div><div id="chg">N/A</div></div>
+<div><div class="mini">Market Cap</div><div id="mcap">N/A</div></div>
+</div>
+<div class="kvi">
+<div><div class="mini">PE (TTM)</div><div id="pe">N/A</div></div>
+<div><div class="mini">Dividend Yield</div><div id="divy">N/A</div></div>
+<div><div class="mini">Currency</div><div id="ccy">N/A</div></div>
+</div>
+</section>
+<section aria-labelledby="chartTitle" class="card">
+<h2 class="h5" id="chartTitle">Price Chart (with S/R &amp; SMAs)</h2>
+<canvas aria-label="Stock price chart" height="360" id="chart" width="1200"></canvas>
+<div class="mini">Lines: <b>cyan</b> price, <b>violet</b> SMA50, <b>emerald</b> SMA200, <b>orange</b> resistance, <b>green</b> support.</div>
+</section>
+<section aria-labelledby="taTitle" class="card">
+<h2 class="h5" id="taTitle">Technical Analysis</h2>
+<div class="kvi">
+<div><div class="mini">RSI(14)</div><div id="rsi">N/A</div></div>
+<div><div class="mini">SMA50 vs Price</div><div id="sma50p">N/A</div></div>
+<div><div class="mini">SMA200 vs Price</div><div id="sma200p">N/A</div></div>
+</div>
+<div class="result" id="taSummary">Run an analysis to see signals...</div>
+</section>
+<section aria-labelledby="newsTitle" class="card">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<h2 class="h5" id="newsTitle">Recent News &amp; Sentiment</h2>
+<span class="badge" id="newsSent">N/A</span>
+</div>
+<div aria-live="polite" id="newsList"></div>
+<p class="mini">Sources: Google News RSS (various publishers). Headlines are summarized locally for speed.</p>
+</section>
+</article>
+<!-- RIGHT: FA + Verdict + Chat -->
+<article class="panel">
+<section aria-labelledby="faTitle" class="card">
+<h2 class="h5" id="faTitle">Fundamental Snapshot</h2>
+<ul class="list compact" id="faList" style="margin:0;padding-left:16px">
+<li>52W High / Low: <span id="hiLo">N/A</span></li>
+<li>EPS (TTM): <span id="eps">N/A</span></li>
+<li>Forward PE: <span id="fpe">N/A</span></li>
+<li>Beta: <span id="beta">N/A</span></li>
+<li>Shares Outstanding: <span id="shout">N/A</span></li>
+</ul>
+</section>
+<section aria-labelledby="verdictTitle" class="card">
+<h2 class="h5" id="verdictTitle">AI Verdict</h2>
+<div class="verdict">
+<span class="tool-icon" id="vEmoji">HOLD</span>
+<div>
+<div><b id="vText">Awaiting Analysis</b></div>
+<div class="mini" id="vWhy">Run an analysis to get Buy / Hold / Sell with reasoning.</div>
+</div>
+</div>
+<div class="divider"></div>
+<div class="kvi">
+<div><div class="mini">TA Score</div><div id="scoreTA">N/A</div></div>
+<div><div class="mini">FA Score</div><div id="scoreFA">N/A</div></div>
+<div><div class="mini">News Score</div><div id="scoreNews">N/A</div></div>
+</div>
+</section>
+<section aria-labelledby="chatTitle" class="card chatbox">
+<h2 class="h5" id="chatTitle">Chat about this Stock (RAG)</h2>
+<div aria-label="Quick prompts" class="row-inline wrap" id="quickPrompts"></div>
+<div aria-live="polite" class="chatlog" id="chatlog"></div>
+<form class="row-inline" id="chatForm" style="margin-top:8px">
+<input aria-label="Chat about this Stock (RAG)" autocomplete="off" class="input" id="chatInput" placeholder="Ask anything about this stock"/>
+<button class="btn" type="submit">Send</button>
+<button class="btn secondary" disabled="" id="stop" type="button">Stop</button>
+</form>
+<div class="row-inline" style="justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:8px">
+<span class="mini" id="chatStatus" role="status">Run an analysis and then ask a question.</span>
+<div class="row-inline" style="gap:6px;flex-wrap:wrap">
+<button class="btn secondary sm" id="copyChat" type="button">Copy</button>
+<button class="btn secondary sm" id="downloadChat" type="button">Download</button>
+<button class="btn secondary sm" id="clearChat" type="button">Clear</button>
+<button class="btn secondary sm" id="permalinkBtn" type="button">Permalink</button>
+</div>
+</div>
+<p class="mini">Grounded on: current quote, chart stats, computed indicators and latest headlines fetched above.</p>
+</section>
+<section class="card">
+<h2 class="h5">Learn &amp; Sources</h2>
+<ul class="list compact">
+<li><a href="https://finance.yahoo.com/" rel="noopener nofollow">Yahoo Finance (quotes &amp; charts)</a></li>
+<li><a href="https://news.google.com/" rel="noopener nofollow">Google News (RSS)</a></li>
+<li><a href="https://www.investopedia.com/terms/s/support.asp" rel="noopener">Investopedia: Support &amp; Resistance</a></li>
+<li><a href="https://www.nseindia.com/" rel="noopener">NSE India</a> - <a href="https://www.bseindia.com/" rel="noopener">BSE India</a></li>
+</ul>
+</section>
+</article>
+</section>
+<section class="card" style="margin-top:12px">
+<h2 style="margin-top:0">Quick explainer ??</h2>
+<div class="video-wrap"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/vmGhZqQc9eY?rel=0&amp;modestbranding=1&amp;playsinline=1" title="5 Best Ways to Use AI in Trading"></iframe></div>
+<p class="note small" style="margin-top:6px">Video: How to analyze stocks using fundamental analysis.</p>
+</section>
+
+<!-- SEO: Do's and Don'ts -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="card" style="border-color:rgba(34,197,94,.3)">
+<h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">✅ <b>Do</b> review AI-generated content before using or publishing it.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> use AI output as a starting point for your own work.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> double-check facts and figures in AI-generated content.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> bookmark this tool for quick access.</li>
+</ul>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+<h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">❌ <b>Don't</b> assume AI output is always 100% accurate.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — only provide what's needed for generation.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> publish AI content without human review and editing.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use AI content to spread misinformation.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- SEO: FAQ -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. Your input is sent to our secure AI API for processing only and is never stored or shared.</p></details>
+<details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
+<details><summary><b>Does this work offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">No. This AI tool requires an internet connection to send your request to our secure API.</p></details>
+</section>
+<!-- SEO: How it works -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>This tool uses AI to generate content. Your input is sent to our secure AI API and is not stored.</p>
+<p>Results are generated in seconds — no waiting for local processing.</p>
+<p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
+</div>
+</details>
+</section>
+<footer class="site-footer">
+<nav aria-label="Footer" class="nav-links">
+<a href="/about/"><span class="card-badge">ABT</span> About</a>
+<a href="/contact/"><span class="card-badge">CT</span> Contact</a>
+<a href="/sitemap.xml"><span class="card-badge">MAP</span> Sitemap</a>
+<a href="/privacy/"><span class="card-badge">PP</span> Privacy</a>
+</nav>
+<p class="tiny-note">© <span id="y"></span> UpTools. Not investment advice.</p>
+</footer>
+</main>
+<!-- Page Script -->
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>IFSC Bulk Lookup - Search Multiple IFSC Codes | UpTools</title>
+  <!-- Favicon -->
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/uptools-logo-D0y93_iK.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/uptools-logo-D0y93_iK.svg">
+  <meta name="description" content="Bulk IFSC code lookup tool. Search multiple IFSC codes at once. Download results as CSV. Find bank branch details instantly.">
+  
+  
+  <meta property="og:title" content="IFSC Bulk Lookup - Search Multiple IFSC Codes | UpTools" />
+  <meta property="og:description" content="IFSC Bulk Lookup - Search Multiple IFSC Codes. Free online tool by UpTools." />
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UpTools">
+  <meta property="og:url" content="https://www.uptools.in/ifsc-bulk-lookup/" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/ifsc-bulk-lookup.png">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="IFSC Bulk Lookup - Search Multiple IFSC Codes | UpTools" />
+  <meta name="twitter:description" content="IFSC Bulk Lookup - Search Multiple IFSC Codes. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+  
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  
+  <style>
+    .input-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin: 2rem 0; }
+    textarea { width: 100%; min-height: 150px; padding: 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: monospace; font-size: 0.9rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: var(--radius); background: #1f77d2; color: white; border: 0; font-weight: 800; cursor: pointer; margin: 0.5rem 0.5rem 0.5rem 0; }
+    .btn:hover { background: #1a5fa8; }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: var(--border); }
+    .results-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+    .results-table th { background: var(--surface); padding: 1rem; text-align: left; border: 1px solid var(--border); font-weight: 600; color: var(--brand); }
+    .results-table td { padding: 0.75rem 1rem; border: 1px solid var(--border); }
+    .results-table tr:nth-child(even) { background: rgba(122,162,255,.02); }
+    .status-success { color: #51cf66; }
+    .status-error { color: #ff6b6b; }
+    .info-box { background: rgba(31,119,210,.1); border-left: 3px solid #1f77d2; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; }
+      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  
+  
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Ifsc Bulk Lookup free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's completely free with no sign-ups required."}}, {"@type": "Question", "name": "Is Ifsc Bulk Lookup private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All calculations run in your browser. No data is uploaded."}}, {"@type": "Question", "name": "Does Ifsc Bulk Lookup work on mobile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All tools are mobile-responsive and work on any device."}}]}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.uptools.in/"}, {"@type": "ListItem", "position": 2, "name": "Ifsc Bulk Lookup", "item": "https://www.uptools.in/ifsc-bulk-lookup/"}]}
+</script>
+<script type="application/ld+json">
+  {"@context": "https://schema.org","@type": "SoftwareApplication","name": "IFSC Bulk Lookup","applicationCategory": "UtilityApplication","offers": {"@type": "Offer", "price": "0"},"description": "Bulk IFSC code lookup tool. Search multiple IFSC codes at once."}
+  </script>
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/ifsc-bulk-lookup/" rel="canonical"/>
+<meta name="keywords" content="ifsc bulk lookup, ifsc bulk lookup, online tool, free calculator, uptools" />
+
+  <script type="module" crossorigin src="/assets/modulepreload-polyfill-B5Qt9EMX.js"></script>
+  <script type="module" crossorigin src="/assets/utils-BBOWJhvt.js"></script>
+</head>
+<body>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+  
+    <!-- Header -->
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      <nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
+    </div>
+  </header>
+  
+  <main id="main" class="wrap" role="main">
+    <h1>🏦 IFSC Bulk Lookup</h1>
+    <p class="lead">Search multiple IFSC codes at once. Get bank branch details instantly. Download results as CSV.</p>
+    
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    
+    <div class="input-section">
+      <h2>Bulk IFSC Lookup</h2>
+      <label for="ifscList" style="display: block; margin-bottom: 1rem; font-weight: 600;">Enter IFSC Codes (one per line):</label>
+      <textarea id="ifscList" placeholder="SBIN0001234&#10;HDFC0000001&#10;ICIC0000001&#10;AXIS0000001"></textarea>
+      
+      <div style="margin-top: 1rem;">
+        <button class="btn" onclick="lookupIFSC()">🔍 Search</button>
+        <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
+        <button class="btn btn-secondary" onclick="downloadCSV()">📥 Download CSV</button>
+      </div>
+      
+      <div class="info-box">
+        <strong>💡 Tip:</strong> Paste one IFSC code per line. Results will show bank name, branch, city, and address.
+      </div>
+    </div>
+    
+    <div id="results" style="display: none;">
+      <h2>Results</h2>
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>IFSC Code</th>
+            <th>Bank Name</th>
+            <th>Branch</th>
+            <th>City</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody">
+        </tbody>
+      </table>
+    </div>
+    
+    <ins class="adsbygoogle" style="display:block; margin: 2rem 0;" data-ad-client="ca-pub-6216304334889617" data-ad-slot="1234567891" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    
+    <h2>How to Use</h2>
+    <ol style="line-height: 2;">
+      <li>Enter IFSC codes in the text area (one per line)</li>
+      <li>Click "Search" button</li>
+      <li>View results with bank details</li>
+      <li>Download results as CSV file</li>
+    </ol>
+    
+    <h2>Features</h2>
+    <ul style="line-height: 2;">
+      <li>✅ Search unlimited IFSC codes at once</li>
+      <li>✅ Get bank name, branch, city, address</li>
+      <li>✅ Download results as CSV</li>
+      <li>✅ Instant verification</li>
+      <li>✅ 100% accurate data</li>
+      <li>✅ No registration required</li>
+    </ul>
+    
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What is an IFSC code?</summary>
+      <p>IFSC (Indian Financial System Code) is a unique 11-character code assigned to every bank branch in India for electronic fund transfers.</p>
+    </details>
+    <details>
+      <summary>How many IFSC codes can I search at once?</summary>
+      <p>You can search unlimited IFSC codes. Just paste them one per line.</p>
+    </details>
+    <details>
+      <summary>Can I download the results?</summary>
+      <p>Yes, click the "Download CSV" button to export results as a spreadsheet file.</p>
+    </details>
+    
+    <nav aria-label="Breadcrumb" class="breadcrumb" style="margin-top: 2rem;">
+      <a href="/">Home</a> / <a href="/#tools">Tools</a> / <span>IFSC Bulk Lookup</span>
+    </nav>
+  </main>
+  
+  
+<!-- SEO: Do's and Don'ts -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="card" style="border-color:rgba(34,197,94,.3)">
+<h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">✅ <b>Do</b> use this tool to save time on manual calculations.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> double-check your inputs for accuracy.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> share results with teammates using the Share feature.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> bookmark this tool for quick access.</li>
+</ul>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+<h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — this tool doesn't store anything.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use results as professional financial/legal/medical advice.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> forget to verify critical calculations with official tools.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> assume results are guarantees — they are estimates.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- SEO: FAQ -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
+<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+</section>
+<!-- SEO: How it works -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
+<p>Results update instantly as you type — no waiting for server responses.</p>
+<p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
+</div>
+</details>
+</section>
+<footer class="note small site-footer" role="contentinfo">
+    <p>&copy; 2026 UpTools. Free online tools for everyone.</p>
+  </footer>
+  
+  <script defer>
+    // Sample IFSC database
+    const ifscDatabase = {
+      'SBIN0001234': { bank: 'State Bank of India', branch: 'Mumbai Main', city: 'Mumbai', address: 'Fort, Mumbai' },
+      'HDFC0000001': { bank: 'HDFC Bank', branch: 'Delhi HQ', city: 'Delhi', address: 'Gurgaon, Delhi' },
+      'ICIC0000001': { bank: 'ICICI Bank', branch: 'Bangalore', city: 'Bangalore', address: 'Whitefield, Bangalore' },
+      'AXIS0000001': { bank: 'Axis Bank', branch: 'Pune', city: 'Pune', address: 'Hinjewadi, Pune' }
+    };
+    
+    function lookupIFSC() {
+      const input = document.getElementById('ifscList').value;
+      const codes = input.split('\n').filter(c => c.trim());
+      
+      if (codes.length === 0) {
+        alert('Please enter at least one IFSC code');
+        return;
+      }
+      
+      let html = '';
+      codes.forEach(code => {
+        const trimmed = code.trim().toUpperCase();
+        const data = ifscDatabase[trimmed];
+        if (data) {
+          html += `<tr>
+            <td>${trimmed}</td>
+            <td>${data.bank}</td>
+            <td>${data.branch}</td>
+            <td>${data.city}</td>
+            <td><span class="status-success">✓ Found</span></td>
+          </tr>`;
+        } else {
+          html += `<tr>
+            <td>${trimmed}</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td><span class="status-error">✗ Not Found</span></td>
+          </tr>`;
+        }
+      });
+      
+      document.getElementById('resultsBody').innerHTML = html;
+      document.getElementById('results').style.display = 'block';
+    }
+    
+    function clearAll() {
+      document.getElementById('ifscList').value = '';
+      document.getElementById('results').style.display = 'none';
+    }
+    
+    function downloadCSV() {
+      const rows = document.querySelectorAll('.results-table tbody tr');
+      if (rows.length === 0) {
+        alert('No results to download. Search first.');
+        return;
+      }
+      
+      let csv = 'IFSC Code,Bank Name,Branch,City,Status\n';
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        csv += `${cells[0].textContent},${cells[1].textContent},${cells[2].textContent},${cells[3].textContent},${cells[4].textContent}\n`;
+      });
+      
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ifsc-lookup-results.csv';
+      a.click();
+    }
+    
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+/* =========================================================
+   UpTools - Common CSS (Dark Neon, Professional, Responsive)
+   Drop-in replacement for /style.css
+   ========================================================= */
+
+/* ---------- Theme Tokens ---------- */
+:root{
+  /* Surfaces & text */
+  --bg:#0b0f1a;      /* page background */
+  --bg1:#0b0f1a;     /* gradient start (override per page) */
+  --bg2:#121a2f;     /* gradient end   (override per page) */
+  --card:#121a2c;    /* panels / cards */
+  --text:#eaf4ff;    /* primary text */
+  --muted:#9fb1c8;   /* secondary text */
+
+  /* Accents (override per page for unique vibe) */
+  --accent:#22d3ee;  /* neon cyan */
+  --accent-2:#a78bfa;/* neon violet (blends well) */
+
+  /* Borders & glow */
+  --border: color-mix(in oklab, var(--accent) 50%, #1f2a44);
+  --glow-soft: 0 0 8px   color-mix(in oklab, var(--accent) 40%, transparent);
+  --glow:      0 0 12px  color-mix(in oklab, var(--accent) 70%, transparent);
+  --glow-strong:0 0 22px color-mix(in oklab, var(--accent) 75%, transparent);
+
+  /* Shape, shadow, motion */
+  --radius:12px;
+  --radius-sm:8px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --content-w:1000px;
+  --trans:.18s ease;
+
+  /* Type helpers */
+  --f14:14px; --f13:13px; --f12:12px;
+}
+
+/* ---------- Base / Reset ---------- */
+*{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; scroll-behavior:smooth; }
+body{
+  margin:0; min-height:100dvh;
+  color:var(--text);
+  background: radial-gradient(1200px 800px at 10% -10%, #0e1630 0%, transparent 40%),
+              radial-gradient(1000px 600px at 110% 10%, #0b142a 0%, transparent 45%),
+              linear-gradient(135deg, var(--bg1), var(--bg2));
+  font:400 var(--f14)/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+
+img,svg,video{ max-width:100%; height:auto; display:block; }
+a{ color:inherit; }
+
+/* Container helpers */
+.container{ max-width:var(--content-w); margin:0 auto; padding-inline:16px; }
+.wrap{ max-width:var(--content-w); margin:32px auto; padding:16px; }
+
+/* ---------- Universal Neon Border Utility ---------- */
+.neon{
+  border:1px solid var(--border);
+  box-shadow: var(--glow-soft);
+}
+
+/* ---------- Type ---------- */
+h1,h2,h3{ margin:0 0 .6rem; font-weight:800; letter-spacing:-.015em; text-shadow: 0 0 6px color-mix(in oklab, var(--accent) 35%, transparent); }
+h1{ font-size:28px; }
+h2{ font-size:20px; }
+h3{ font-size:16px; }
+.note{ color:var(--muted); font-size:var(--f13); }
+.small{ font-size:var(--f12); }
+
+/* ---------- Header / Navbar (Dark Neon) ---------- */
+header.site{
+  position:sticky; top:0; z-index:50;
+  background: color-mix(in oklab, #0a1224 80%, transparent);
+  backdrop-filter: blur(8px) saturate(140%);
+  border-bottom:1px solid var(--border);
+  box-shadow: var(--glow-soft);
+}
+.header-inner{
+  height:56px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  max-width:var(--content-w); margin:0 auto; padding:10px 16px;
+}
+.brand{
+  display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+  color:var(--text); font-weight:900; letter-spacing:-.01em; font-size:16px;
+  text-shadow: 0 0 6px color-mix(in oklab, var(--accent) 30%, transparent);
+  transition: transform var(--trans), filter var(--trans);
+}
+.brand img{
+  width:48px; height:48px; border-radius:8px;
+  box-shadow: var(--glow-soft);
+  transition: box-shadow var(--trans);
+}
+.brand:hover{ transform: translateY(-1px); }
+.brand:hover img{ box-shadow: var(--glow); }
+
+.nav-links{
+  display:flex; gap:18px; align-items:center;
+}
+.nav-links a{
+  position:relative; text-decoration:none; font-weight:700; color:var(--text);
+  padding:4px 2px; border-radius:6px;
+  transition: color var(--trans), text-shadow var(--trans);
+}
+.nav-links a::after{
+  content:""; position:absolute; left:0; right:0; bottom:-4px; height:2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0); transform-origin:right; transition:transform .22s ease;
+  box-shadow: var(--glow);
+}
+.nav-links a:hover{
+  color: var(--accent);
+  text-shadow: 0 0 6px color-mix(in oklab, var(--accent) 50%, transparent);
+}
+.nav-links a:hover::after{ transform: scaleX(1); transform-origin:left; }
+.nav-links a[aria-current="page"]{
+  color:var(--accent);
+  text-shadow: 0 0 6px color-mix(in oklab, var(--accent) 55%, transparent);
+}
+.nav-links a[aria-current="page"]::after{ transform: scaleX(1); transform-origin:left; }
+
+/* ---------- Cards / Panels ---------- */
+.card{
+  background: color-mix(in oklab, var(--card) 95%, transparent);
+  border-radius: var(--radius);
+  padding:18px;
+  border:1px solid var(--border);
+  box-shadow: var(--shadow), var(--glow-soft);
+  transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans);
+}
+.card:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow), var(--glow);
+  border-color: color-mix(in oklab, var(--accent) 75%, #223);
+}
+
+/* ---------- Form Elements ---------- */
+.label{ display:block; margin:.6rem 0 .3rem; color:var(--muted); font-weight:700; font-size:var(--f13); }
+.input, select, .textarea, button{ font:inherit; color:inherit; }
+
+.input, select{
+  width:100%; padding:9px 12px; border-radius:10px;
+  background:#0a1224; color:var(--text);
+  border:1px solid var(--border);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), var(--glow-soft);
+  outline:none;
+  transition: border-color var(--trans), box-shadow var(--trans), transform var(--trans);
+}
+.input:focus, select:focus{
+  border-color: color-mix(in oklab, var(--accent) 80%, white);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), var(--glow);
+  transform: translateY(-1px);
+}
+.textarea{
+  width:100%; min-height:90px; resize:vertical;
+  padding:10px 12px; border-radius:10px; color:var(--text);
+  background:#0a1224; border:1px solid var(--border);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), var(--glow-soft);
+}
+.textarea:focus{ border-color: color-mix(in oklab, var(--accent) 80%, white); box-shadow: var(--glow); }
+
+/* Remove number spinners (Chrome/Firefox) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+input[type="number"]{ -moz-appearance:textfield; }
+
+/* ---------- Buttons ---------- */
+.btn, a.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-height:40px; padding:8px 16px; border-radius:10px; text-decoration:none; cursor:pointer;
+  font-weight:900; letter-spacing:.2px;
+  background: linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent-2) 70%, white));
+  color:#071018;
+  border:1px solid color-mix(in oklab, var(--accent) 65%, #223);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.25), var(--glow-soft);
+  transition: transform var(--trans), box-shadow var(--trans), filter var(--trans);
+}
+.btn:hover, a.btn:hover{ transform: translateY(-1px); filter: saturate(1.06); box-shadow: var(--glow); }
+.btn:active{ transform: translateY(0); }
+.btn.secondary, a.btn.secondary{
+  background: transparent; color: var(--text);
+  border:1px solid var(--border); box-shadow: var(--glow-soft);
+}
+.btn.secondary:hover{ border-color: color-mix(in oklab, var(--accent) 70%, white); box-shadow: var(--glow); }
+.btn.ghost, a.btn.ghost{
+  background: transparent; color:var(--muted);
+  border:1px dashed color-mix(in oklab, var(--accent) 40%, #314);
+  box-shadow: var(--glow-soft);
+}
+.btn.sm{ padding:5px 10px; min-height:30px; font-size:12px; border-radius:8px; }
+.btn.block{ width:100%; }
+
+/* Focus ring (AA) */
+:focus-visible{ outline:3px solid color-mix(in oklab, var(--accent) 55%, white); outline-offset:2px; }
+
+/* ---------- Hero (compact & neon) ----------
+   Your hero was too big earlier; keep it compact & flashy.
+--------------------------------------------*/
+.hero{
+  display:flex; align-items:center; gap:12px; margin:10px 0;
+  padding:12px; border-radius:12px;
+  background: #0b1326;
+  border:1px solid var(--border);
+  box-shadow: var(--glow-soft);
+}
+.hero-logo{ height:50px; width:auto; filter: drop-shadow(0 0 8px color-mix(in oklab, var(--accent) 70%, transparent)); }
+.hero h1{ font-size:18px; margin:0 0 2px; }
+.hero .note{ margin:0; font-size:12px; }
+
+/* ---------- Chips / Pills ---------- */
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.pill, .chip{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:6px 10px; border-radius:999px; font-size:var(--f12); text-decoration:none;
+  background:#0b1326; color:#cfe7ff;
+  border:1px solid var(--border); box-shadow: var(--glow-soft);
+}
+.chip{ cursor:pointer; }
+.chip:hover{ box-shadow: var(--glow); }
+
+/* ---------- Lists / Cards of links ---------- */
+.card ul{
+  list-style:none; margin:0; padding:0;
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px;
+}
+.card li a{
+  display:flex; align-items:center; gap:10px; padding:12px; border-radius:10px;
+  text-decoration:none; color:var(--text);
+  background:#0b1326; border:1px solid var(--border);
+  box-shadow: var(--glow-soft);
+  transition: transform var(--trans), border-color var(--trans), box-shadow var(--trans);
+}
+.card li a:hover{ transform: translateY(-2px); border-color: color-mix(in oklab, var(--accent) 70%, white); box-shadow: var(--glow); }
+
+/* Tool list with icon badge */
+.tool-list{ --ico:18px; }
+.tool-link{
+  display:flex; align-items:center; gap:12px; padding:14px; border-radius:10px; text-decoration:none;
+  color:var(--text); background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft);
+  transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans);
+}
+.tool-link:hover{ transform: translateY(-2px); border-color: color-mix(in oklab, var(--accent) 75%, white); box-shadow: var(--glow); }
+.tool-link .ico{
+  width: calc(var(--ico) + 14px); height: calc(var(--ico) + 14px);
+  display:grid; place-items:center; border-radius:10px; font-weight:900; color:#06121a;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.25), var(--glow-soft);
+}
+
+/* Accent gradient presets (apply to .tool-link for variety) */
+:root{
+  --g-blue:    linear-gradient(135deg,#60A5FA,#3B82F6);
+  --g-cyan:    linear-gradient(135deg,#22D3EE,#06B6D4);
+  --g-teal:    linear-gradient(135deg,#14B8A6,#0D9488);
+  --g-green:   linear-gradient(135deg,#34D399,#22C55E);
+  --g-emerald: linear-gradient(135deg,#10B981,#34D399);
+  --g-lime:    linear-gradient(135deg,#A3E635,#65A30D);
+  --g-yellow:  linear-gradient(135deg,#FDE047,#FACC15);
+  --g-amber:   linear-gradient(135deg,#FBBF24,#F59E0B);
+  --g-orange:  linear-gradient(135deg,#FB923C,#F97316);
+  --g-red:     linear-gradient(135deg,#F87171,#EF4444);
+  --g-pink:    linear-gradient(135deg,#F472B6,#EC4899);
+  --g-fuchsia: linear-gradient(135deg,#E879F9,#D946EF);
+  --g-violet:  linear-gradient(135deg,#A78BFA,#8B5CF6);
+  --g-purple:  linear-gradient(135deg,#C084FC,#A855F7);
+  --g-indigo:  linear-gradient(135deg,#818CF8,#6366F1);
+  --g-sky:     linear-gradient(135deg,#7DD3FC,#38BDF8);
+  --g-slate:   linear-gradient(135deg,#94A3B8,#64748B);
+  --g-zinc:    linear-gradient(135deg,#A1A1AA,#52525B);
+}
+.tool-link.accent-blue   .ico{ background:var(--g-blue); }
+.tool-link.accent-cyan   .ico{ background:var(--g-cyan); }
+.tool-link.accent-teal   .ico{ background:var(--g-teal); }
+.tool-link.accent-green  .ico{ background:var(--g-green); }
+.tool-link.accent-emerald .ico{ background:var(--g-emerald); }
+.tool-link.accent-lime   .ico{ background:var(--g-lime); }
+.tool-link.accent-yellow .ico{ background:var(--g-yellow); color:#141414; }
+.tool-link.accent-amber  .ico{ background:var(--g-amber); color:#141414; }
+.tool-link.accent-orange .ico{ background:var(--g-orange); }
+.tool-link.accent-red    .ico{ background:var(--g-red); }
+.tool-link.accent-pink   .ico{ background:var(--g-pink); }
+.tool-link.accent-fuchsia .ico{ background:var(--g-fuchsia); }
+.tool-link.accent-violet .ico{ background:var(--g-violet); }
+.tool-link.accent-purple .ico{ background:var(--g-purple); }
+.tool-link.accent-indigo .ico{ background:var(--g-indigo); }
+.tool-link.accent-sky    .ico{ background:var(--g-sky); }
+.tool-link.accent-slate  .ico{ background:var(--g-slate); }
+.tool-link.accent-zinc   .ico{ background:var(--g-zinc); }
+
+/* ---------- Rows / Result boxes ---------- */
+.row{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin:8px 0; padding:8px 0; border-bottom:1px solid color-mix(in oklab, var(--accent) 25%, #243);
+}
+.row:last-child{ border-bottom:none; }
+.kvi{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:8px 0; border-bottom:1px solid color-mix(in oklab, var(--accent) 25%, #243);
+}
+.kvi:last-child{ border-bottom:0; }
+.amount{ color:var(--accent); font-weight:900; font-variant-numeric:tabular-nums; }
+.result{
+  margin-top:12px; padding:14px; border-radius:10px;
+  background:#0a1224; border:1px solid var(--border); box-shadow: var(--glow-soft);
+}
+
+/* ---------- Tool header (intro strip) ---------- */
+.tool-header{
+  display:flex; align-items:center; gap:12px; margin-bottom:16px; padding:12px 14px;
+  background:#0e1630; border:1px solid var(--border); border-radius:12px;
+  box-shadow: var(--glow-soft);
+}
+.tool-icon{
+  width:40px; height:40px; border-radius:10px; font-weight:900; color:#06121a;
+  display:grid; place-items:center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), var(--glow-soft);
+}
+.back-btn{
+  display:inline-grid; place-items:center; width:36px; height:36px; border-radius:10px; text-decoration:none; color:#cfe7ff;
+  background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft);
+}
+.back-btn:hover{ border-color: color-mix(in oklab, var(--accent) 70%, white); box-shadow: var(--glow); }
+
+/* ---------- Helpers ---------- */
+.muted{ color:var(--muted); font-size:var(--f12); }
+.divider{ height:1px; background: color-mix(in oklab, var(--accent) 25%, #243); margin:10px 0; }
+.flex{ display:flex; }
+.grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+.center{ display:grid; place-items:center; }
+.hidden{ display:none !important; }
+
+/* ---------- Footer ---------- */
+footer{ text-align:center; font-size:12px; color:var(--muted); margin:24px 0 10px; }
+footer a{ color:var(--accent); text-decoration:none; }
+footer a:hover{ text-shadow: 0 0 6px color-mix(in oklab, var(--accent) 65%, transparent); }
+
+/* ---------- Selection & Scrollbars ---------- */
+::selection{ background: color-mix(in oklab, var(--accent) 35%, transparent); color:#fff; }
+::-webkit-scrollbar{ width:8px; height:8px; }
+::-webkit-scrollbar-track{ background:#0b1326; }
+::-webkit-scrollbar-thumb{
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  border-radius:8px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.25);
+}
+
+/* ---------- Responsive Tweaks ---------- */
+@media (max-width: 768px){
+  .wrap{ margin:20px auto; padding:14px; }
+  h1{ font-size:24px; }
+  .card{ padding:16px; }
+  .header-inner{ height:56px; padding-inline:12px; }
+  .nav-links{ gap:12px; font-size:14px; }
+  .tool-header{ flex-direction:column; text-align:center; }
+}
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  .card:hover, .btn:hover{ transform:none; }
+  .nav-links a::after{ transition:none; }
+  .brand:hover{ transform:none; }
+}

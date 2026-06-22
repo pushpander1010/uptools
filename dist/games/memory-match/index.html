@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Single async ad (kept minimal for performance) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>Memory Match - Free Online Game (Easy/Medium/Hard, Peek, Best Time) | UpTools</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Play Memory Match online (mobile + desktop). Choose Easy, Medium, or Hard, then tap New Game: a clean full-screen window opens with timer and a back button. Peek start, keyboard support, sounds & haptics, per-level best time & moves, and a grid that always fits your screen. Stop anytime with Back to return to the home screen." />
+  <link rel="canonical" href="https://www.uptools.in/games/memory-match/" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta name="theme-color" content="#0f1419" />
+
+  <!-- OG/Twitter -->
+  <meta property="og:title" content="Memory Match - Free Online Game (Easy/Medium/Hard, Peek, Best Time) | UpTools" />
+  <meta property="og:description" content="Memory Match - Free Online Game (Easy/Medium/Hard, Peek, Best Time). Free online tool by UpTools." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <meta property="og:url" content="https://www.uptools.in/games/memory-match/" />
+  <meta property="og:site_name" content="UpTools" />
+  <meta property="og:image" content="/assets/og/memory-match.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Memory Match - Free Online Game (Easy/Medium/Hard, Peek, Best Time) | UpTools" />
+  <meta name="twitter:description" content="Memory Match - Free Online Game (Easy/Medium/Hard, Peek, Best Time). Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
+  <!-- Icons -->
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/uptools-logo-D0y93_iK.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/uptools-logo-D0y93_iK.svg">
+
+  <!-- Performance hints -->
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+
+  <!-- Common CSS -->
+  <link rel="preload" href="/style.css?v=1.2.7" as="style">
+  <link rel="stylesheet" href="/style.css?v=1.2.7" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css?v=1.2.7"></noscript>
+  <script src="/games/fullscreen-utils.js" defer></script>
+
+  <!-- Tiny page styles (CLS-safe) -->
+  <style>
+    :root{
+      --accent:#4ecdc4; --accent2:#5fe1d8; --danger:#ff6b6b;
+      --bg:#0f1419; --bg1:#0f1419; --bg2:#121a26; --card:#1e2634; --cardBorder:#2a3b55; --muted:#9aa4b2;
+    }
+    body{ background: radial-gradient(1200px 600px at 10% -10%, #162130 0%, var(--bg) 45%) fixed; min-height:100svh; }
+    body.lock-scroll{ overflow:hidden; }
+
+    /* Landing (home) */
+    .tool-header{ text-align:center; margin:1rem 0 .25rem }
+    .tool-header h1{ display:flex; align-items:center; justify-content:center; gap:.5rem }
+    .tool-header p{ margin:.25rem 0 0 }
+
+    .game-wrap{ max-width:1100px; margin:0 auto; padding:1rem; }
+    .panel{
+      background:var(--card); border:1px solid var(--cardBorder);
+      border-radius:.75rem; box-shadow:0 6px 30px rgba(0,0,0,.25);
+      padding:1rem; margin:0 auto; overflow:hidden;
+    }
+    .hud{ display:grid; grid-template-columns:repeat(5,1fr); gap:.75rem; align-items:center; margin-bottom:.75rem; }
+    .kpi{ text-align:center; padding:.5rem .75rem; border:1px solid var(--cardBorder); border-radius:.75rem; background:rgba(255,255,255,.02) }
+    .kpi .value{ font-size:1.15rem; font-weight:800; color:var(--accent) }
+    .kpi .label{ font-size:.75rem; color:var(--muted) }
+
+    .bar{ display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; justify-content:center; margin:.5rem 0 0; }
+    .difficulty-btn{
+      padding:.55rem .9rem; border-radius:.6rem; border:1px solid var(--cardBorder);
+      background:#0f151f; color:#e6edf3; font-weight:700; cursor:pointer;
+      transition:transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .difficulty-btn:hover{ border-color:var(--accent) }
+    .difficulty-btn.active{ background:var(--accent); color:#0b1020; border-color:var(--accent) }
+
+    .controls{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin:.75rem 0 0 }
+    .btn{ padding:.66rem 1.05rem; border:none; border-radius:.75rem; font-weight:800; cursor:pointer; transition: transform .12s ease, box-shadow .12s ease; }
+    .btn.primary{ background:var(--accent); color:#0b1020 }
+    .btn.secondary{ background:transparent; color:#e6edf3; border:1px solid var(--cardBorder) }
+    .btn.danger{ background:var(--danger); color:#0b1020 }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 8px 26px rgba(0,0,0,.25) }
+
+    .status{ text-align:center; margin:.75rem 0 0; color:var(--muted); font-weight:600 }
+
+    @media (max-width:640px){
+      .hud{ grid-template-columns:repeat(2,1fr); }
+      .panel{ padding:.75rem; }
+    }
+
+    /* ========= FULL-SCREEN PLAY WINDOW ========= */
+    #gameContainer{
+      position:fixed; inset:0; display:none; z-index:50;
+      background:linear-gradient(180deg, rgba(7,12,20,.95), rgba(9,14,22,.98));
+      padding: max(8px, env(safe-area-inset-top)) clamp(8px, 2vw, 18px) max(10px, env(safe-area-inset-bottom));
+    }
+    #gameContainer.open{ display:grid; grid-template-rows:auto 1fr auto; gap:.6rem; }
+    #gameContainer.fullscreen-mode {
+      display: grid !important;
+      grid-template-rows: auto 1fr auto !important;
+      gap: 0.6rem !important;
+      padding: 1rem !important;
+      box-sizing: border-box !important;
+      background: #0f1419 !important;
+    }
+    .ps-top{
+      display:flex; align-items:center; justify-content:space-between; gap:.5rem;
+      background:rgba(255,255,255,.03); border:1px solid var(--cardBorder); border-radius:.65rem; padding:.5rem .6rem;
+    }
+    .ps-top .left, .ps-top .right{ display:flex; align-items:center; gap:.5rem }
+    .ps-title{ font-weight:900 }
+    .ps-timer{ font-weight:900; font-variant-numeric:tabular-nums; padding:.25rem .5rem; border-radius:.45rem; background:#0f151f; border:1px solid var(--cardBorder) }
+    .ps-btn{ padding:.5rem .8rem; border-radius:.6rem; border:1px solid var(--cardBorder); background:#0f151f; color:#e6edf3; font-weight:800; cursor:pointer }
+    .ps-btn.primary{ background:var(--accent); color:#0b1020; border-color:var(--accent) }
+
+    .ps-stage{
+      min-height:0; display:grid; align-items:center; justify-items:center;
+    }
+    .board{
+      background:var(--card); border:1px solid var(--cardBorder); border-radius:.75rem;
+      padding:.75rem; width:min(1100px,100%); height:100%;
+      display:grid; align-content:center; justify-items:center; overflow:hidden;
+    }
+
+    .ps-bottom{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center }
+    .note{ color:var(--muted); font-size:.85rem; text-align:center; margin-top:.35rem }
+
+    /* Grid/tiles inside play window */
+    .grid{
+      --gap: clamp(6px, 2.2vw, 14px);
+      display:grid; gap: var(--gap);
+      margin:0 auto; justify-content:center; width:100%; max-width:100%;
+    }
+
+    .card-tile{
+      aspect-ratio:1; position:relative; border-radius:12px;
+      border:2px solid var(--cardBorder); background:#0f151f;
+      display:grid; place-items:center; cursor:pointer; user-select:none;
+      transition:transform .08s ease, border-color .08s ease, background .08s ease;
+      outline:none; min-width:24px; min-height:24px;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .card-tile:hover{ transform:translateY(-2px); border-color:var(--accent2) }
+    .card-tile:active{
+      transform:scale(0.92);
+      border-color:var(--accent);
+      background:rgba(78,205,196,0.08);
+    }
+    .card-tile:focus-visible{ box-shadow:0 0 0 3px color-mix(in hsl, var(--accent) 35%, transparent); border-color:var(--accent) }
+    .face{ font-size:clamp(16px, calc(var(--tile,72px) * .42), 40px); transform:scale(.85); opacity:0; transition:opacity .12s ease, transform .12s ease; pointer-events:none; }
+    .flipped .face{ opacity:1; transform:scale(1) }
+    .flipped{ background:linear-gradient(135deg, #0f151f, #203040); border-color:var(--accent) }
+    .matched{ background:var(--accent); border-color:var(--accent); color:#0b1020; animation:pulse .35s ease-in-out }
+    @keyframes pulse{ 0%,100%{ transform:scale(1)} 50%{ transform:scale(1.05)} }
+    .peek .card-tile .face{ opacity:1; transform:scale(1) }
+    .peek .card-tile{ border-color:rgba(255,255,255,.15) }
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* Responsive: small screens get compact grid */
+    @media (max-width: 480px) {
+      .grid { --gap: clamp(4px, 1.5vw, 8px); }
+      .card-tile { border-radius: 8px; border-width: 1.5px; }
+      .ps-top { padding: 0.35rem 0.4rem; flex-wrap: wrap; }
+      .ps-btn { padding: 0.4rem 0.55rem; font-size: 0.85rem; }
+      .board { padding: 0.4rem; }
+    }
+    @media (max-width: 360px) {
+      .board { padding: 0.25rem; }
+      .grid { --gap: 3px; }
+    }
+
+    /* FullscreenManager styles (matches fullscreen-utils.js convention) */
+    .fullscreen-btn { cursor:pointer; }
+    .fullscreen-btn:hover { border-color:var(--accent); background:rgba(78,205,196,0.08); }
+
+</style>
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Memory Match","url":"https://www.uptools.in/games/memory-match","applicationCategory":"Game","operatingSystem":"Any","publisher":{"@type":"Organization","name":"UpTools"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+  <script type="module" crossorigin src="/assets/games/memory-match-CCKbhLfs.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/assets/utils-BBOWJhvt.js">
+</head>
+<body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+  <!-- small fixed -->
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:500px;height:50px"
+       data-ad-client="ca-pub-6216304334889617"
+       data-ad-slot="9810172647"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+  <!-- Header -->
+    <!-- Header -->
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      <nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
+    </div>
+  </header>
+
+  <!-- Home/Landing screen -->
+  <main role="main" class="wrap" id="homeScreen">
+    <div class="tool-header">
+      <h1>🧠 Memory Match</h1>
+      <p>Pick a difficulty and press <b>New Game</b>. A dedicated full-screen window opens with a timer and a back button.</p>
+    </div>
+
+    <div class="game-wrap">
+      <section class="panel">
+        <div class="hud" aria-live="polite">
+          <div class="kpi"><div class="value" id="bestEasy">--:--</div><div class="label">Best Easy</div></div>
+          <div class="kpi"><div class="value" id="bestMed">--:--</div><div class="label">Best Medium</div></div>
+          <div class="kpi"><div class="value" id="bestHard">--:--</div><div class="label">Best Hard</div></div>
+          <div class="kpi"><div class="value" id="bestMoves">--</div><div class="label">Best Moves (Current)</div></div>
+          <div class="kpi"><div class="value" id="streak">0</div><div class="label">Daily Streak</div></div>
+        </div>
+
+        <div class="bar" role="toolbar" aria-label="Difficulty">
+          <button class="difficulty-btn active" data-level="easy">Easy (8)</button>
+          <button class="difficulty-btn" data-level="medium">Medium (18)</button>
+          <button class="difficulty-btn" data-level="hard">Hard (32)</button>
+        </div>
+
+        <div class="controls" role="toolbar" aria-label="Controls">
+          <button id="newGame" class="btn primary">New Game</button>
+          <button id="toggleSound" class="btn secondary" aria-pressed="true">🔊 Sound On</button>
+          <button id="toggleHaptics" class="btn secondary" aria-pressed="true">📳 Haptics On</button>
+          <button id="toggleCB" class="btn secondary" aria-pressed="false">🅰️ CB Assist</button>
+          <button id="resetBest" class="btn danger">Reset Bests</button>
+          <button id="shareBtn" class="btn secondary">🔗 Challenge Link</button>
+        </div>
+
+        <p class="status" id="homeStatus">Peek start is enabled. Best times are stored on your device.</p>
+      </section>
+    </div>
+
+    <footer class="site-foot small" style="text-align:center; margin:1rem 0 2rem">
+      <nav class="nav-links small">
+        <a href="/">UpTools</a> . <a href="/sitemap.xml">Sitemap</a> . <a href="/games/">Games</a> . <a href="/about/">About</a> . <a href="/contact/">Contact</a>
+      </nav>
+      <div class="note">Privacy-first . Works offline once loaded</div>
+      <nav class="nav-links small" style="margin-top:.25rem">
+        Related: <a href="/games/color-rush/">Color Rush</a> . <a href="/games/snake/">Snake</a>
+      </nav>
+    </footer>
+  </main>
+
+  <!-- FULL-SCREEN play window (opens on New Game) -->
+  <!-- NOTE: default state is inert (not focusable / not exposed); we toggle this in JS. -->
+  <section id="gameContainer" role="dialog" aria-modal="true" inert>
+    <div class="ps-top">
+      <div class="left">
+        <button id="psBack" class="ps-btn" type="button" aria-label="Stop and go back">⟵ Back</button>
+        <span class="ps-title">Memory Match</span>
+      </div>
+      <div class="mid">
+        <span class="ps-timer" id="psTimer">00:00</span>
+      </div>
+      <div class="right" aria-label="Quick actions">
+        <button id="psPause" class="ps-btn" aria-pressed="false">⏸️ Pause</button>
+        <button id="psHint" class="ps-btn" title="Show all briefly (+5s)">💡 Hint</button>
+        <button class="ps-btn fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
+      </div>
+    </div>
+
+    <div class="ps-stage">
+      <div class="board" style="position: relative;">
+        <!-- dynamic grid lives here while playing -->
+        <div id="grid" class="grid" role="grid" aria-label="Memory cards"></div>
+
+        <!-- Custom Win Overlay -->
+        <div id="gameOverlay" style="display: none; position: absolute; inset: 0; background: rgba(12, 19, 36, 0.95); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-radius: 12px; padding: 1.5rem;">
+          <h2 id="overlayTitle" style="font-size: 2.2rem; margin: 0 0 0.5rem 0; color: var(--accent); font-weight: 900; letter-spacing: 1px;">VICTORY!</h2>
+          <p id="overlayMessage" style="font-size: 1.1rem; color: var(--muted); margin: 0 0 1.5rem 0; line-height: 1.4;"></p>
+          <button id="overlayBtn" class="btn primary" style="min-height: 44px; padding: 10px 24px; font-size: 16px;">Play Again</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ps-bottom">
+      <button id="psNew" class="ps-btn primary">New Game</button>
+      <button id="psShare" class="ps-btn">🔗 Share this board</button>
+    </div>
+    <div class="note">Use <kbd>Space</kbd>/<kbd>Enter</kbd> to flip, <kbd>Esc</kbd> or <b>Back</b> to stop.</div>
+  </section>
+
+  <!-- App script (ESM, imports from /scripts/utils.js) -->
+</body>
+</html>

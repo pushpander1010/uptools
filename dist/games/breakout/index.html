@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<!-- Single async ad -->
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
+<link crossorigin="" href="https://pagead2.googlesyndication.com" rel="preconnect"/>
+<link href="//pagead2.googlesyndication.com" rel="dns-prefetch"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Breakout - Free Online Game (Fast, Mobile-Perfect) | UpTools</title>
+<!-- SEO -->
+<meta content="Play Breakout online (mobile + desktop). Super responsive canvas, fixed compact HUD, power-ups (Shield, Sticky, Laser, x2, AutoPilot), auto-save, challenge links. Tap to play/pause!" name="description"/>
+<link href="https://www.uptools.in/games/breakout/" rel="canonical">
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
+<meta content="#0f1419" name="theme-color"/>
+<!-- OpenGraph / Twitter -->
+<meta content="Play Breakout - Free Online Game | UpTools" property="og:title"/>
+<meta content="Mobile-perfect Breakout with power-ups, levels, and auto-save. Tap to play/pause." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.uptools.in/games/breakout/" property="og:url"/>
+<meta content="https://www.uptools.in/assets/social/breakout-card.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="Play Breakout - Free Online Game | UpTools" />
+  <meta name="twitter:description" content="Mobile-perfect Breakout with power-ups, levels, and auto-save. Tap to play/pause." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/social/breakout-card.png" />
+<!-- Favicons -->
+<link href="/assets/uptools-logo-D0y93_iK.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
+<link href="/assets/uptools-logo-D0y93_iK.svg" rel="apple-touch-icon" sizes="180x180"/>
+<!-- Base CSS -->
+<link as="style" href="/style.css?v=1.3.0" rel="preload"/>
+<link href="/style.css?v=1.3.0" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="/style.css?v=1.3.0" rel="stylesheet"/></noscript>
+<script src="/games/fullscreen-utils.js" defer></script>
+<!-- Game styles (no overflow hidden hacks) -->
+<style>
+    :root {
+      --accent: #6cf;
+      --accent2: #8bffb0;
+      --danger: #ff6b6b;
+      --bg: #0f1419;
+      --card: #0e1526;
+      --cardBorder: #223249;
+      --muted: #9aa4b2;
+      --bar-h: 46px;
+    }
+    @media (max-width:380px){ :root{ --bar-h:44px; } }
+
+    * , *::before , *::after { box-sizing: border-box; }
+    html, body { margin:0; color:#e6edf3; background: radial-gradient(1100px 700px at 10% -10%, #101a34 0%, var(--bg) 45%) fixed; min-height:100svh; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans"; touch-action: manipulation; }
+    .game-wrap{ max-width:1100px; margin:0 auto; padding:1rem; }
+
+    .panel{ background:var(--card); border:1px solid var(--cardBorder); border-radius:.85rem; box-shadow:0 6px 30px rgba(0,0,0,.25); padding:1rem; margin:0 auto; }
+    .hud{ display:grid; grid-template-columns:repeat(5,1fr); gap:.75rem; align-items:center; margin-bottom:.75rem; }
+    .kpi{ text-align:center; padding:.5rem .75rem; border:1px solid var(--cardBorder); border-radius:.75rem; background:rgba(255,255,255,.02); }
+    .kpi .value{ font-size:1.1rem; font-weight:800; color:var(--accent); }
+    .kpi .label{ font-size:.75rem; color:var(--muted); }
+    @media (max-width:900px){ .hud{ grid-template-columns:repeat(3,1fr);} }
+    @media (max-width:560px){ .hud{ grid-template-columns:repeat(2,1fr);} }
+
+    .controls{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin:.75rem 0 0; }
+    .btn{ padding:.66rem 1.05rem; border:none; border-radius:.75rem; font-weight:800; cursor:pointer; transition:transform .12s ease, box-shadow .12s ease; }
+    .btn.primary{ background:var(--accent); color:#0b1020; }
+    .btn.secondary{ background:transparent; color:#e6edf3; border:1px solid var(--cardBorder); }
+    .btn.danger{ background:var(--danger); color:#0b1020; }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 8px 26px rgba(0,0,0,.25); }
+
+    .status{ text-align:center; margin:.75rem 0 0; color:var(--muted); font-weight:600; }
+    .row{ display:flex; gap:.5rem; align-items:center; justify-content:center; flex-wrap:wrap; }
+    select{ background:#0f151f; color:#e6edf3; border:1px solid var(--cardBorder); border-radius:.6rem; padding:.55rem .7rem; font-weight:700; }
+
+    /* ======= FULL-SCREEN Play Layer (non-scrollable) ======= */
+    #gameContainer{
+      position: fixed; inset: 0;
+      display:none;
+      z-index:50;
+      background: linear-gradient(180deg, rgba(7,12,20,.965), rgba(9,14,22,.985));
+      padding: max(6px, env(safe-area-inset-top)) clamp(8px, 2vw, 16px) max(8px, env(safe-area-inset-bottom));
+      box-sizing: border-box;
+      height: 100svh; 
+      width: 100svw;              /* full visual viewport */
+      overscroll-behavior: none;    /* keep page from bouncing */
+      touch-action: none;           /* canvas handles gestures */
+      overflow: clip;               /* prevent any scrollbars without using overflow:hidden */
+    }
+    #gameContainer.open{
+      display:grid;
+      grid-template-rows: var(--bar-h) 1fr;
+    }
+
+    /* Fixed-height HUD */
+    .ps-top{
+      height:var(--bar-h);
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--cardBorder);
+      border-radius:.65rem;
+      padding:0 .5rem;
+      display:flex; align-items:center; justify-content:space-between; gap:.35rem; min-width:0;
+    }
+    .ps-top > *{ min-width:0; display:flex; align-items:center; gap:.35rem; }
+    .left,.mid,.right{ flex:1 1 0; }
+    .left{ justify-content:flex-start; }
+    .mid{ justify-content:center; flex-wrap:nowrap; }
+    .right{ justify-content:flex-end; }
+
+    .ps-title{ font-weight:900; white-space:nowrap; }
+    @media (max-width:500px){ .ps-title{ display:none; } }
+
+    .ps-chip,.ps-btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      height: calc(var(--bar-h) - 10px);
+      padding: 0 .55rem;
+      border-radius:.55rem; border:1px solid var(--cardBorder);
+      background:#0f151f; color:#e6edf3; font-weight:800;
+      font-size: clamp(.78rem, 2.2vw, .95rem);
+      white-space:nowrap; min-width:0;
+    }
+    .ps-btn.primary{ background:var(--accent); color:#0b1020; border-color:var(--accent); }
+
+    .chip-full{ display:inline; } .chip-short{ display:none; }
+    @media (max-width:430px){ .chip-full{ display:none;} .chip-short{ display:inline; } }
+    @media (max-width:360px){ #psBest{ display:none; } } /* hide last to keep width */
+
+    .ps-stage{ min-height:0; display:grid; align-items:center; justify-items:center; }
+    .board{
+      width:100%;
+      height:100%;
+      background:var(--card);
+      border:1px solid var(--cardBorder);
+      border-radius:.85rem;
+      padding:.9rem;
+      display:grid; align-content:center; justify-items:start;
+      min-height:0; position:relative;
+    }
+    #gameCanvas{
+      width:100%; height:100%; display:block;
+      background: radial-gradient(100% 140% at 15% 10%, #0d1630 0%, #0b1226 55%, #08101e 100%);
+      border-radius:.65rem;
+      touch-action: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    #gameContainer.fullscreen-mode #gameCanvas,
+    #gameContainer.css-fullscreen-mode #gameCanvas {
+      width: 100vw !important;
+      height: 100vh !important;
+      border-radius: 0;
+    }
+    #gameContainer.fullscreen-mode .board,
+    #gameContainer.css-fullscreen-mode .board {
+      border-radius: 0;
+      border: none;
+      padding: 0;
+    }
+
+    .overlay{
+      position:absolute; inset:12px; display:none; place-items:center; z-index:3;
+      background:rgba(5,10,18,.55);
+      border-radius:.65rem; border:1px solid rgba(255,255,255,.08);
+      text-align:center; padding:10px;
+    }
+    .overlay.show{ display:grid; }
+    .overlay h3{ margin:.2rem 0 .6rem; }
+
+    .touchbar{
+      position:absolute; left:12px; right:12px; bottom:12px;
+      display:flex; gap:12px; justify-content:space-between;
+      pointer-events: none;
+    }
+    .touchbtn{
+      user-select:none; -webkit-user-select:none; -webkit-touch-callout:none;
+      pointer-events: auto;
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
+      padding:.8rem 1.1rem; border-radius:.75rem; font-weight:800;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      min-width: 72px;
+      min-height: 56px;
+      font-size: 1.2rem;
+    }
+    .touchbtn:active{ background:rgba(255,255,255,.12); }
+
+    .badge{ display:inline-block; padding:.2rem .5rem; border-radius:.5rem; border:1px solid var(--cardBorder); margin-left:.25rem; background:rgba(255,255,255,.05); font-size:.75rem; }
+
+            /* Responsive layout improvements */
+            @media (max-width: 480px) {
+              .hud{ gap:.4rem; }
+              .kpi{ padding:.35rem .5rem; }
+              .kpi .value{ font-size:.95rem; }
+              .kpi .label{ font-size:.65rem; }
+              .controls .btn{ padding:.5rem .75rem; font-size:.85rem; }
+              .board{ padding:.5rem; border-radius:.5rem; }
+              .touchbtn{ min-width:60px; min-height:48px; padding:.6rem .8rem; font-size:1rem; }
+              .ps-top{ padding:0 .35rem; }
+            }
+            @media (max-height: 500px) {
+              .board{ padding:.4rem; }
+              .ps-top{ height:38px; }
+              .ps-chip,.ps-btn{ height:30px; font-size:.75rem; padding:0 .4rem; }
+              .touchbar{ bottom:6px; gap:8px; }
+              .touchbtn{ min-width:50px; min-height:36px; padding:.35rem .5rem; font-size:.85rem; }
+            }
+            @media (min-width: 1200px) {
+              .board{ padding:1.2rem; }
+            }
+
+        .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+<!-- Structured Data -->
+<script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"VideoGame",
+    "name":"Breakout",
+    "url":"https://www.uptools.in/games/breakout/",
+    "applicationCategory":"Game",
+    "genre":"Arcade",
+    "operatingSystem":"Browser",
+    "inLanguage":"en",
+    "publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</link>  <link rel="canonical" href="https://www.uptools.in/games/breakout/" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta property="og:title" content="Breakout - Free Online Game (Fast, Mobile-Perfect) | UpTools" />
+  <meta property="og:description" content="" />
+  <meta property="og:url" content="https://www.uptools.in/games/breakout/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <script type="module" crossorigin src="/assets/games/breakout-nxVIgpdg.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+</head>
+<body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+<!-- small fixed -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+<!-- Header -->
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" width="28"/>
+<b>UpTools</b>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
+<nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
+</div>
+</header>
+<!-- Home -->
+<main role="main" class="wrap" id="homeScreen">
+<div class="tool-header" style="text-align:center;margin:1rem 0 .25rem">
+<h1>🧱 Breakout</h1>
+<p>Tap <b>New Game</b> to open a full-screen window. Bricks auto-scale; tap playfield to launch/pause.</p>
+</div>
+<div class="game-wrap">
+<section class="panel">
+<div aria-live="polite" class="hud">
+<div class="kpi"><div class="value" id="bestScore">0</div><div class="label">Best Score</div></div>
+<div class="kpi"><div class="value" id="bestLevel">1</div><div class="label">Best Level</div></div>
+<div class="kpi"><div class="value" id="lastScore">0</div><div class="label">Last Score</div></div>
+<div class="kpi"><div class="value" id="lastLevel">1</div><div class="label">Last Level</div></div>
+<div class="kpi"><div class="value" id="lastDate">-</div><div class="label">Last Played</div></div>
+</div>
+<div class="row">
+<label for="difficulty"><b>Difficulty</b></label>
+<select id="difficulty">
+<option value="easy">Easy 🐢</option>
+<option selected="" value="normal">Normal ⚡</option>
+<option value="hard">Hard 🔥</option>
+</select>
+<label for="soundToggle"><b>Sound</b></label>
+<select id="soundToggle">
+<option selected="" value="on">On 🔊</option>
+<option value="off">Off 🔇</option>
+</select>
+</div>
+<div aria-label="Controls" class="controls" role="toolbar">
+<button class="btn primary" id="newGame">New Game</button>
+<button class="btn secondary" id="continueBtn">↩️ Continue</button>
+<button class="btn secondary" id="shareBtn">📣 Challenge Friends</button>
+<button class="btn danger" id="resetBest">Reset Best</button>
+</div>
+<p class="status" id="homeStatus">Keyboard: ← / → or A / D. On mobile: drag to steer, tap to pause/resume.</p>
+<div class="grid" style="display:grid;grid-template-columns:1fr;gap:.75rem;margin-top:1rem">
+<div class="card" style="background:#0b1326;border:1px solid #233351;border-radius:.75rem;padding:.75rem">
+<b>Power-ups</b>
+<p class="status" style="margin:0">
+<b>Shield</b>, <b>Sticky</b>, <b>Laser</b>, <b>x2</b>, <b>AutoPilot</b>, <b>Expand</b>, <b>Slow</b>, <b>Fireball</b>.
+            </p>
+<div class="video-wrap">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/gnx48Nh7YRc?si=pVZjr70xbcqqpBnR" title="YouTube video player"></iframe>
+</div>
+<p class="status" style="margin-top:.6rem">
+              Also try <a href="/games/2048/" rel="internal">2048</a> . learn more on
+              <a href="https://wikipedia.org/wiki/Breakout_(video_game)" rel="noopener nofollow">Wikipedia</a>.
+            </p>
+</div>
+</div>
+<nav class="nav-links small" style="justify-content:center;margin-top:.75rem">
+          Related on UpTools:
+          <a href="/games/">All Games</a> .
+          <a href="/qr-generator/">QR Code Generator</a> .
+          <a href="/image-converter/">Image Converter</a> .
+          <a href="/bmi-calculator/">BMI Calculator</a> .
+          <a href="/ifsc-finder/">IFSC Finder</a> .
+          <a href="/gst-calculator/">GST Calculator</a> .
+          <a href="/currency-converter/">Currency Converter</a>
+</nav>
+</section>
+</div>
+</main>
+<!-- FULL-SCREEN Play Window -->
+<section aria-modal="true" id="gameContainer" class="game-container" inert="" role="dialog">
+<div class="ps-top">
+<div class="left">
+<button aria-label="Back" class="ps-btn" id="psBack" type="button">⟵</button>
+<span class="ps-title">Breakout</span>
+</div>
+<div aria-live="polite" class="mid">
+<span class="ps-chip" id="psScore"><span class="chip-full">Score:</span><span class="chip-short">S:</span> <span id="scoreVal">0</span></span>
+<span class="ps-chip" id="psLevel"><span class="chip-full">Level:</span><span class="chip-short">Lv:</span> <span id="levelVal">1</span></span>
+<span class="ps-chip" id="psLives"><span class="chip-full">Lives:</span><span class="chip-short">♥:</span> <span id="livesVal">3</span></span>
+<span class="ps-chip" id="psBest"><span class="chip-full">Best:</span><span class="chip-short">B:</span> <span id="bestVal">0</span></span>
+<span class="ps-chip" id="psBuffs" title="Active power-ups"></span>
+</div>
+<div aria-label="Actions" class="right">
+<button class="ps-btn" id="psRestart" title="Restart">⟲</button>
+<button class="ps-btn" id="psShare" title="Share">🔗</button>
+<button class="ps-btn fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
+</div>
+</div>
+<div class="ps-stage">
+<div class="board" id="board">
+<canvas aria-label="Breakout game area" id="gameCanvas"></canvas>
+<!-- overlay -->
+<div aria-hidden="true" class="overlay" id="overlay">
+<div class="panel">
+<h3 id="ovTitle">Paused</h3>
+<p class="status" id="ovDesc">Tap anywhere or press Space/P</p>
+<div class="row" style="margin-top:.5rem">
+<button class="ps-btn primary" id="ovResume">Resume</button>
+<button class="ps-btn" id="ovRestart">Restart</button>
+</div>
+</div>
+</div>
+<!-- touch arrows -->
+<div class="touchbar" id="touchbar">
+<button class="touchbtn" id="btnLeft">⟵</button>
+<button class="touchbtn" id="btnRight">⟶</button>
+</div>
+</div>
+</div>
+</section>
+<!-- App -->
+</body>
+</html>

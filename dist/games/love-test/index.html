@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Couple Compatibility Quiz ❤️ Romantic Love Test (2-Player + Challenge Link) | UpTools</title>
+<meta content="Play a romantic couple compatibility quiz with a cute pink heart vibe. Two-player on the same device or send a challenge link. Full-screen gameplay, responsive on mobile &amp; desktop, saves best score and last played." name="description"/>
+<meta content="couple game,couple quiz,love test,romantic game,relationship quiz,date night game,compatibility test,play with partner" name="keywords"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
+<meta content="#ff5fa2" name="theme-color"/>
+<!-- Canonical + Icons -->
+<link href="https://www.uptools.in/games/love-test/" rel="canonical"/>
+<link href="/assets/uptools-logo-D0y93_iK.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/uptools-logo-D0y93_iK.svg" rel="apple-touch-icon" sizes="180x180"/>
+<!-- Open Graph -->
+<meta content="Couple Compatibility Quiz — Romantic Love Test | UpTools" property="og:title"/>
+<meta content="Answer sweet prompts, compare with your partner, and get a love score. Two-player on one device or share a link." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.uptools.in/games/love-test/" property="og:url"/>
+<meta content="UpTools" property="og:site_name"/>
+<meta content="https://www.uptools.in/assets/og/love-test.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="Couple Compatibility Quiz — Romantic Love Test | UpTools" />
+  <meta name="twitter:description" content="Answer sweet prompts, compare with your partner, and get a love score. Two-player on one device or share a link." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/love-test.png" />
+<!-- Structured data -->
+<script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Couple Compatibility Quiz","applicationCategory":"Game","operatingSystem":"Any","url":"https://www.uptools.in/games/love-test/","publisher":{"@type":"Organization","name":"UpTools"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+<!-- Common CSS (shared site styles) -->
+<link as="style" href="/style.css?v=1.2.7" rel="preload"/>
+<link href="/style.css?v=1.2.7" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript>
+<link href="/style.css?v=1.2.7" rel="stylesheet"/>
+</noscript>
+<!-- Page-specific, pink romantic theme + ultra-light CSS hearts background -->
+<style>
+        :root {
+            --accent: #ff5fa2;
+            /* hot pink */
+            --accent-2: #ff8ad4;
+            /* soft pink */
+            --bg: #120915;
+            --bg1: #120915;
+            /* gradient start */
+            --bg2: #1a0f1a;
+            /* gradient end   */
+            --card: #1c1020;
+            --muted: #ffd4e7;
+            --cardBorder: color-mix(in oklab, var(--accent) 35%, #2a1830);
+        }
+
+        body {
+            background:
+                radial-gradient(1200px 700px at 10% -10%, #1f0f25 0%, transparent 45%),
+                radial-gradient(1000px 600px at 110% 10%, #1a0d20 0%, transparent 45%),
+                linear-gradient(135deg, var(--bg1), var(--bg2)) fixed;
+            min-height: 100svh;
+        }
+
+        /* Floating hearts overlay — tiny inline SVG pattern (no images, very light) */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: -40px 0 0 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: .18;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="36" viewBox="0 0 40 36"><path fill="%23ff8db7" fill-opacity="0.55" d="M20 33l-2.4-2.2C7.2 21.4 0 15.1 0 7.6 0 3.4 3.3 0 7.4 0c2.5 0 4.8 1.1 6.4 2.9C15.8 1.1 18 0 20.6 0 24.7 0 28 3.4 28 7.6c0 7.5-7.2 13.8-17.6 23.2L20 33z"/></svg>');
+            background-size: 44px 40px;
+            background-repeat: repeat;
+            animation: heartsDrift 50s linear infinite;
+            filter: blur(.3px) saturate(110%);
+        }
+
+        @keyframes heartsDrift {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 0 600px;
+            }
+        }
+
+        /* Keep content above hearts overlay */
+        header.site,
+        main,
+        footer,
+        #playScreen {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Home: compact header + HUD */
+        .tool-header {
+            text-align: center;
+            margin: 1rem 0 .25rem
+        }
+
+        .tool-header h1 {
+            display: flex;
+            gap: .5rem;
+            align-items: center;
+            justify-content: center
+        }
+
+        .game-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem
+        }
+
+        .panel {
+            background: color-mix(in oklab, var(--card) 95%, transparent);
+            border: 1px solid var(--cardBorder);
+            border-radius: .9rem;
+            box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, .32));
+            padding: 1rem;
+            position: relative;
+        }
+
+        .fullscreen-btn {
+            position: absolute;
+            top: .5rem;
+            right: .5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--cardBorder);
+            color: var(--muted);
+            padding: .3rem .6rem;
+            border-radius: .4rem;
+            cursor: pointer;
+            font-size: .8rem;
+            z-index: 10;
+            min-width: 44px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .fullscreen-btn:hover {
+            background: var(--accent);
+            color: #160914;
+            border-color: var(--accent);
+        }
+        .fullscreen-btn:active,
+        .fullscreen-btn:focus-visible {
+            background: var(--accent-2);
+            color: #160914;
+            border-color: var(--accent-2);
+            transform: scale(.96);
+        }
+
+        .hud {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: .75rem;
+            align-items: center;
+            margin-bottom: .75rem
+        }
+
+        .kpi {
+            text-align: center;
+            padding: .6rem .75rem;
+            border: 1px solid var(--cardBorder);
+            border-radius: .75rem;
+            background: rgba(255, 255, 255, .03)
+        }
+
+        .kpi .value {
+            font-weight: 900;
+            font-size: 1.15rem;
+            color: var(--accent)
+        }
+
+        .kpi .label {
+            font-size: .78rem;
+            color: var(--muted)
+        }
+
+        .bar,
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            justify-content: center;
+            margin-top: .5rem
+        }
+
+        .chip,
+        .difficulty-btn {
+            background: #1a0d20;
+            border: 1px solid var(--cardBorder)
+        }
+
+        .difficulty-btn {
+                    padding: .55rem .9rem;
+                    border-radius: .6rem;
+                    color: #ffe6f1;
+                    font-weight: 800;
+                    cursor: pointer;
+                    transition: transform .12s ease, border-color .12s ease, background .12s ease;
+                    min-height: 44px;
+                    min-width: 44px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    touch-action: manipulation;
+                    -webkit-tap-highlight-color: transparent;
+                    user-select: none;
+                }
+                .difficulty-btn:active {
+                    transform: scale(.95);
+                }
+
+        .difficulty-btn.active {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #160914;
+            border-color: var(--accent)
+        }
+
+        .btn {
+            padding: .66rem 1.05rem;
+            border: none;
+            border-radius: .75rem;
+            font-weight: 900;
+            cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+        }
+
+        .btn:active {
+            transform: scale(.95);
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #160914
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: #ffe6f1;
+            border: 1px solid var(--cardBorder)
+        }
+
+        .btn.danger {
+            background: #ff6b9a;
+            color: #160914
+        }
+
+        .note {
+            color: #ffd1e5
+        }
+
+        /* FULL-SCREEN play window — fixed, non-moving play area */
+        #playScreen {
+            position: fixed;
+            inset: 0;
+            display: none;
+            z-index: 50;
+            background: linear-gradient(180deg, rgba(16, 8, 20, .96), rgba(18, 10, 22, .985));
+            padding: max(8px, env(safe-area-inset-top)) clamp(8px, 2vw, 18px) max(10px, env(safe-area-inset-bottom));
+        }
+
+        #playScreen.open {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: .6rem;
+        }
+
+        .ps-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: .5rem;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid var(--cardBorder);
+            border-radius: .75rem;
+            padding: .5rem .65rem;
+        }
+
+        .ps-title {
+            font-weight: 900
+        }
+
+        .ps-btn {
+            padding: .5rem .8rem;
+            border-radius: .6rem;
+            border: 1px solid var(--cardBorder);
+            background: #180b20;
+            color: #ffe6f1;
+            font-weight: 800;
+            cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            transition: transform .15s ease, background .15s ease, border-color .15s ease;
+        }
+        .ps-btn:active {
+            transform: scale(.95);
+        }
+
+        .ps-btn.primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #160914;
+            border-color: var(--accent)
+        }
+
+        .ps-progress {
+            font-weight: 900;
+            font-variant-numeric: tabular-nums;
+            padding: .28rem .55rem;
+            border: 1px solid var(--cardBorder);
+            border-radius: .5rem;
+            background: #180b20
+        }
+
+        .ps-stage {
+            min-height: 0;
+            display: grid;
+            align-items: center;
+            justify-items: center
+        }
+
+        .board {
+            width: min(1100px, 100%);
+            height: 100%;
+            background: color-mix(in oklab, var(--card) 96%, transparent);
+            border: 1px solid var(--cardBorder);
+            border-radius: .9rem;
+            padding: clamp(.6rem, 2vw, 1rem);
+            display: grid;
+            grid-template-rows: 1fr auto;
+            gap: .6rem;
+            overflow: hidden;
+        }
+
+        .qs {
+            overflow: auto;
+            overscroll-behavior: contain;
+            padding-right: .3rem
+        }
+
+        .qcard {
+            display: grid;
+            gap: .75rem;
+            padding: clamp(.6rem, 2.2vw, 1rem);
+            border: 1px solid var(--cardBorder);
+            border-radius: .8rem;
+            background: #150a1a;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .26);
+        }
+
+        .qtitle {
+            font-size: 1.1rem;
+            font-weight: 900
+        }
+
+        .opt {
+                    display: flex;
+                    align-items: center;
+                    gap: .55rem;
+                    padding: .5rem .6rem;
+                    border: 1px solid var(--cardBorder);
+                    border-radius: .65rem;
+                    background: #120915;
+                    cursor: pointer;
+                    min-height: 44px;
+                    touch-action: manipulation;
+                    -webkit-tap-highlight-color: transparent;
+                    user-select: none;
+                    transition: background 0.2s, border-color 0.2s, transform 0.15s ease;
+                }
+                .opt:hover {
+                    background: rgba(255, 95, 162, 0.1);
+                    border-color: var(--accent);
+                }
+                .opt:active {
+                    background: rgba(255, 95, 162, 0.2);
+                    border-color: var(--accent-2);
+                    transform: scale(.98);
+                }
+
+        .opt input {
+            accent-color: var(--accent);
+        }
+
+        .qnav {
+            display: flex;
+            gap: .5rem;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .result {
+            text-align: center;
+            padding: .8rem;
+            border: 1px solid var(--cardBorder);
+            border-radius: .75rem;
+            background: rgba(255, 255, 255, .04)
+        }
+
+        .ps-bottom {
+            display: flex;
+            gap: .5rem;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .tiny {
+            font-size: .82rem;
+            color: #ffd1e5;
+            text-align: center
+        }
+
+        @media (max-width: 720px) {
+            .hud {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .ps-top {
+                align-items: start;
+                flex-wrap: wrap;
+                gap: .5rem
+            }
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+    
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <link rel="canonical" href="https://www.uptools.in/games/love-test/" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta property="og:title" content="Couple Compatibility Quiz ❤️ Romantic Love Test (2-Player + Challenge Link) | UpTools" />
+  <meta property="og:description" content="" />
+  <meta property="og:url" content="https://www.uptools.in/games/love-test/" />
+  <meta property="og:type" content="website" />
+  <script src="/games/fullscreen-utils.js" defer></script>
+  <script>
+    // Ensure FullscreenManager is initialized after DOM content loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // fullscreen-utils.js auto-initializes, but ensure it targets #gameContainer
+      if (window.fullscreenManager) {
+        // Already initialized by the utility
+      } else if (document.querySelector('.fullscreen-btn')) {
+        try {
+          window.fullscreenManager = new FullscreenManager('#gameContainer', '.fullscreen-btn');
+        } catch (e) {
+          console.warn('FullscreenManager init deferred:', e);
+        }
+      }
+    });
+  </script>
+  <script type="module" crossorigin src="/assets/games/love-test-eIRVOoAQ.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/assets/utils-BBOWJhvt.js">
+</head>
+<body style="--accent:#ff5fa2;--accent-2:#ff8ad4;--bg1:#120915;--bg2:#1a0f1a;">
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
+<!-- small fixed -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+<a class="sr-only skip-link" href="#main">Skip to content</a>
+<!-- Header (shared styles from /style.css) -->
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" width="28"/>
+<b>UpTools</b>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
+<nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
+</div>
+</header>
+<!-- HOME / LANDING -->
+<main class="wrap" id="main" role="main">
+<div class="tool-header">
+<h1>❤️ Couple Compatibility Quiz</h1>
+<p class="note">Two-player romantic quiz with a soft pink theme &amp; floating hearts. Start a full-screen
+                session, then <b>share a challenge link</b> or play together.</p>
+</div>
+<section class="game-wrap">
+<div class="game-container" id="gameContainer">
+<div class="panel">
+<button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶ Fullscreen</button>
+<!-- HUD -->
+<div aria-live="polite" class="hud">
+<div class="kpi">
+<div class="value" id="bestScore">--%</div>
+<div class="label">Best Love Score</div>
+</div>
+<div class="kpi">
+<div class="value" id="lastPair">—</div>
+<div class="label">Last Played</div>
+</div>
+<div class="kpi">
+<div class="value" id="lastWhen">—</div>
+<div class="label">Last Time</div>
+</div>
+<div class="kpi">
+<div class="value" id="plays">0</div>
+<div class="label">Total Plays (This Device)</div>
+</div>
+</div>
+<!-- Options -->
+<div aria-label="Quiz options" class="bar" role="toolbar">
+<button class="difficulty-btn active" data-len="10">Short (10)</button>
+<button class="difficulty-btn" data-len="15">Standard (15)</button>
+<button class="difficulty-btn" data-len="20">Long (20)</button>
+</div>
+<div aria-label="Theme &amp; toggles" class="controls" role="toolbar">
+<button class="btn primary" id="startBtn">💖 Start Quiz</button>
+<button class="btn secondary" hidden="" id="joinBtn">🔗 Join Partner’s Link</button>
+<button class="btn secondary" id="copyInvite">🔗 Invite Link</button>
+<button aria-pressed="true" class="btn secondary" id="toggleSound">🔊 Sound On</button>
+<button aria-pressed="true" class="btn secondary" id="toggleHaptics">📳 Haptics On</button>
+<button class="btn danger" id="resetStats">Reset Stats</button>
+</div>
+<p class="note" id="homeStatus" style="text-align:center;margin:.5rem 0 0">Best scores &amp; last played are
+                    stored on this device only.</p>
+</div>
+<!-- FULL-SCREEN PLAY WINDOW -->
+<section aria-modal="true" id="playScreen" inert="" role="dialog">
+<div class="ps-top">
+<div class="left" style="display:flex; gap:.5rem; align-items:center">
+<button aria-label="Stop and go back" class="ps-btn" id="psBack" type="button">⟵ Back</button>
+<span class="ps-title">Couple Compatibility Quiz</span>
+</div>
+<div class="mid" style="display:flex; gap:.5rem; align-items:center">
+<span class="ps-progress" id="psProg">Q 1/10</span>
+</div>
+<div class="right" style="display:flex; gap:.5rem; align-items:center">
+<button class="ps-btn" id="psShare" title="Copy a challenge link">🔗 Share</button>
+</div>
+</div>
+<div class="ps-stage">
+<div class="board">
+<div aria-live="polite" class="qs" id="qs" role="region">
+<!-- dynamic question / name form renders here -->
+</div>
+<div class="qnav">
+<button class="ps-btn" disabled="" id="prevBtn">◀ Prev</button>
+<button class="ps-btn primary" id="nextBtn">Next ▶</button>
+</div>
+</div>
+</div>
+<div class="ps-bottom">
+<div class="tiny">Tip: Tap options or use ↑/↓ to move, Space/Enter to select. Back leaves &amp; stops the
+                session.</div>
+</div>
+</section>
+</div>
+<!-- Helpful links (SEO + backlinks) -->
+<div class="grid" style="margin-top:.85rem">
+<article class="card">
+<h3 style="margin-bottom:.25rem">You might also like</h3>
+<ul>
+<li><a class="tool-link accent-pink" href="/games/memory-match/"><span class="ico">🧠</span><span><b>Memory Match</b> — sweet icon pack &amp; best
+                                    times</span></a></li>
+<li><a class="tool-link accent-red" href="/games/tic-tac-toe/"><span class="ico">❌</span><span><b>Tic Tac Toe</b> — hearts vs. roses</span></a></li>
+<li><a class="tool-link accent-violet" href="/games/snake/"><span class="ico">🐍</span><span><b>Snake</b> — classic with neon glow</span></a></li>
+</ul>
+</article>
+<article class="card">
+<h3 style="margin-bottom:.25rem">Relationship resources</h3>
+<ul>
+<li><a class="tool-link accent-fuchsia" href="https://www.5lovelanguages.com/" rel="noopener" target="_blank"><span class="ico">💬</span><span>Five Love Languages
+                                    (external)</span></a></li>
+<li><a class="tool-link accent-purple" href="https://www.gottman.com/blog/" rel="noopener" target="_blank"><span class="ico">🧪</span><span>Gottman Institute Blog
+                                    (external)</span></a></li>
+</ul>
+</article>
+</div>
+<!-- Video (privacy-enhanced) -->
+<section aria-labelledby="video-learn" class="section" style="margin-top:12px">
+<h2 id="video-learn">🎥 Cute Couple Challenge Ideas</h2>
+<div class="card center">
+<div class="video-wrap"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/IltsOcCj1Ak?si=h7ibZOR6-Kk32qcq" title="YouTube video player"></iframe></div>
+<p class="note small" style="margin-top:8px">Watch for playful date prompts to try after your quiz.
+                    </p>
+</div>
+</section>
+<footer class="site-foot small" style="text-align:center;margin:1rem 0 2rem">
+<nav class="nav-links small">
+<a href="/">UpTools</a> . <a href="/sitemap.xml">Sitemap</a> . <a href="/games/">Games</a> . <a href="/about/">About</a> . <a href="/contact/">Contact</a>
+</nav>
+<div class="note">Privacy-first . Works offline once loaded</div>
+</footer>
+</section>
+</main>
+<!-- Love Test Share Modal -->
+<div id="loveShareOverlay" style="position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .25s ease;" role="dialog" aria-modal="true">
+  <div id="loveShareCard" style="background:var(--card);border:1px solid var(--cardBorder);border-radius:1.2rem;padding:2rem;max-width:420px;width:100%;text-align:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px rgba(255,95,162,.2);transform:scale(.92);transition:transform .25s ease;">
+    <button onclick="closeLoveShareModal()" style="position:absolute;top:.75rem;right:.9rem;background:none;border:none;font-size:1.5rem;color:var(--muted);cursor:pointer;line-height:1;padding:.2rem .4rem;border-radius:.4rem;">&times;</button>
+    <h3 style="margin:0 0 1rem;color:var(--accent);font-size:1.3rem;">&#128279; Share Challenge</h3>
+    <div style="margin:0 auto 1.25rem;width:164px;height:164px;background:#fff;border-radius:.75rem;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+      <img id="loveShareQr" src="" alt="QR code" loading="lazy" style="width:160px;height:160px;display:block;">
+    </div>
+    <p style="color:var(--muted);font-size:.85rem;margin:0 0 .75rem;">Scan QR or share the link below</p>
+    <div style="display:flex;gap:.5rem;margin-bottom:1rem;">
+      <input aria-label="Text input" id="loveShareUrlInput" type="text" readonly style="flex:1;padding:.65rem .75rem;border:1px solid var(--cardBorder);border-radius:.5rem;background:rgba(255,255,255,.04);color:var(--text);font-size:.82rem;min-width:0;">
+      <button id="loveShareCopyBtn" onclick="copyLoveShareUrl()" style="padding:.65rem 1rem;background:var(--accent);color:#fff;border:none;border-radius:.5rem;font-weight:700;cursor:pointer;white-space:nowrap;font-size:.9rem;">Copy</button>
+    </div>
+    <p style="color:var(--muted);font-size:.8rem;margin:0;">Your partner opens this link and answers the same questions &#128150;</p>
+  </div>
+</div>
+<div id="loveToast" style="position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(2rem);background:#222;color:#fff;padding:.65rem 1.4rem;border-radius:2rem;font-size:.9rem;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s ease,transform .3s ease;pointer-events:none;white-space:nowrap;"></div>
+<!-- App (ESM). Uses shared utils where possible. -->
+</body>
+</html>

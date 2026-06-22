@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Subnet Calculator - IP CIDR Network | UpTools</title>
+  <meta name="description" content="Free online Subnet Calculator — enter an IP address with CIDR notation or subnet mask to instantly get network address, broadcast address, usable host range, wildcard mask, IP class, and binary representations." />
+  <!-- Open Graph -->
+  <meta property="og:image" content="https://www.uptools.in/assets/home.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Subnet Calculator - IP CIDR Network | UpTools" />
+  <meta name="twitter:description" content="Subnet Calculator - IP CIDR Network. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
+  <meta name="keywords" content="subnet calculator, CIDR calculator, IP address calculator, network address, broadcast address, subnet mask, wildcard mask, IP class" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/subnet-calculator/" rel="canonical"/>
+  
+  <meta property="og:title" content="Subnet Calculator - IP CIDR Network | UpTools" />
+  <meta property="og:description" content="Subnet Calculator - IP CIDR Network. Free online tool by UpTools." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <meta property="og:url" content="https://www.uptools.in/subnet-calculator/" />
+  <link rel="stylesheet" href="/style.css?v=1.3.0" />
+
+  <style>
+    /* ── Design tokens ─────────────────────────────────────────── */
+    :root {
+      --bg:       #0b0f1a;
+      --surface:  #121a2c;
+      --surface2: #1a2540;
+      --border:   #1e2d4a;
+      --accent:   #22d3ee;
+      --accent2:  #818cf8;
+      --accent3:  #f472b6;
+      --text:     #e2e8f0;
+      --muted:    #64748b;
+      --success:  #34d399;
+      --warn:     #fbbf24;
+      --glow:     0 0 20px rgba(34,211,238,.25);
+      --glow-lg:  0 0 40px rgba(34,211,238,.18);
+      --radius:   12px;
+      --radius-lg:18px;
+      --transition: .25s cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── Layout ─────────────────────────────────────────────────── */
+    .page-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1rem 3rem;
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .tool-hero {
+      text-align: center;
+      padding: 2.5rem 1rem 1.5rem;
+      position: relative;
+    }
+    .tool-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 200px;
+      background: radial-gradient(ellipse at center, rgba(34,211,238,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .tool-icon {
+      font-size: 3rem;
+      margin-bottom: .75rem;
+      display: block;
+      filter: drop-shadow(0 0 12px rgba(34,211,238,.5));
+    }
+    .tool-hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: .5rem;
+    }
+    .tool-hero p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── Input card ─────────────────────────────────────────────── */
+    .input-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,.4);
+    }
+    .input-card h2 {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    @media(max-width:540px){ .input-row { grid-template-columns: 1fr; } }
+
+    .field-group { display: flex; flex-direction: column; gap: .4rem; }
+    .field-group label {
+      font-size: .8rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .field-group input {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: .7rem 1rem;
+      color: var(--text);
+      font-size: 1rem;
+      font-family: 'Courier New', monospace;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      width: 100%;
+    }
+    .field-group input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(34,211,238,.15);
+    }
+    .field-group input.error { border-color: #f87171; box-shadow: 0 0 0 3px rgba(248,113,113,.15); }
+
+    .divider-or {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      color: var(--muted);
+      font-size: .8rem;
+      margin-bottom: 1rem;
+    }
+    .divider-or::before,.divider-or::after {
+      content:''; flex:1; height:1px; background: var(--border);
+    }
+
+    .cidr-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+    @media(max-width:400px){ .cidr-row { grid-template-columns: 1fr; } }
+
+    .btn-calc {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      border: none;
+      border-radius: var(--radius);
+      color: #0b0f1a;
+      font-weight: 800;
+      font-size: .95rem;
+      padding: .72rem 1.8rem;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+      white-space: nowrap;
+      letter-spacing: .02em;
+    }
+    .btn-calc:hover { transform: translateY(-2px); box-shadow: var(--glow); }
+    .btn-calc:active { transform: translateY(0); }
+
+    .btn-clear {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: .85rem;
+      padding: .65rem 1.2rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      margin-top: .75rem;
+    }
+    .btn-clear:hover { border-color: var(--accent); color: var(--accent); }
+
+    .error-msg {
+      color: #f87171;
+      font-size: .85rem;
+      margin-top: .5rem;
+      min-height: 1.2em;
+    }
+
+    /* ── Results ─────────────────────────────────────────────────── */
+    .results-section {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .4s ease, transform .4s ease;
+      pointer-events: none;
+    }
+    .results-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .section-title {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--accent);
+      margin-bottom: .9rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .section-title::after { content:''; flex:1; height:1px; background: var(--border); }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: .9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .result-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color var(--transition), transform var(--transition);
+      animation: cardIn .35s ease both;
+    }
+    .result-card:hover { border-color: rgba(34,211,238,.35); transform: translateY(-2px); }
+    .result-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .result-card:hover::before { opacity: 1; }
+
+    @keyframes cardIn {
+      from { opacity:0; transform:translateY(12px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .rc-label {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      margin-bottom: .3rem;
+    }
+    .rc-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      font-family: 'Courier New', monospace;
+      word-break: break-all;
+    }
+    .rc-value.accent { color: var(--accent); }
+    .rc-value.accent2 { color: var(--accent2); }
+    .rc-value.success { color: var(--success); }
+    .rc-value.warn { color: var(--warn); }
+
+    .copy-btn {
+      position: absolute;
+      top: .7rem; right: .7rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: .7rem;
+      padding: .25rem .5rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+    }
+    .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .copy-btn.copied { color: var(--success); border-color: var(--success); }
+
+    /* ── Binary section ─────────────────────────────────────────── */
+    .binary-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+    .binary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Courier New', monospace;
+      font-size: .82rem;
+      min-width: 560px;
+    }
+    .binary-table th {
+      text-align: left;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: .4rem .6rem;
+      border-bottom: 1px solid var(--border);
+      font-size: .72rem;
+    }
+    .binary-table td {
+      padding: .55rem .6rem;
+      vertical-align: middle;
+      border-bottom: 1px solid rgba(30,45,74,.5);
+    }
+    .binary-table tr:last-child td { border-bottom: none; }
+    .binary-table .label-col { color: var(--muted); width: 140px; }
+    .binary-table .dec-col { color: var(--accent); width: 140px; }
+    .binary-table .bin-col { color: var(--text); letter-spacing: .04em; }
+    .bin-byte { color: var(--text); }
+    .bin-byte + .bin-byte::before { content: '.'; color: var(--muted); }
+    .bin-highlight { color: var(--accent2); }
+    .bin-host { color: var(--warn); }
+
+    /* ── CIDR Reference table ───────────────────────────────────── */
+    .cidr-ref-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+    .cidr-ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .8rem;
+      min-width: 480px;
+    }
+    .cidr-ref-table th {
+      color: var(--muted);
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      padding: .45rem .7rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      position: sticky;
+      top: 0;
+      background: var(--surface);
+    }
+    .cidr-ref-table td {
+      padding: .38rem .7rem;
+      border-bottom: 1px solid rgba(30,45,74,.4);
+      font-family: 'Courier New', monospace;
+    }
+    .cidr-ref-table tr:last-child td { border-bottom: none; }
+    .cidr-ref-table tr.active-row td { background: rgba(34,211,238,.07); }
+    .cidr-ref-table tr.active-row td:first-child { color: var(--accent); font-weight: 700; }
+    .cidr-ref-table tr:hover td { background: rgba(34,211,238,.04); }
+    .badge-class {
+      display: inline-block;
+      font-size: .65rem;
+      padding: .1rem .45rem;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+    .cls-a { background: rgba(34,211,238,.15); color: var(--accent); }
+    .cls-b { background: rgba(129,140,248,.15); color: var(--accent2); }
+    .cls-c { background: rgba(52,211,153,.15); color: var(--success); }
+    .cls-d { background: rgba(251,191,36,.15); color: var(--warn); }
+    .cls-e { background: rgba(244,114,182,.15); color: var(--accent3); }
+    .cls-lo{ background: rgba(248,113,113,.15); color: #f87171; }
+    .cls-hst{ background: rgba(100,116,139,.15); color: var(--muted); }
+
+    /* ── IPv6 note ──────────────────────────────────────────────── */
+    .ipv6-note {
+      background: linear-gradient(135deg, rgba(129,140,248,.08) 0%, rgba(34,211,238,.05) 100%);
+      border: 1px solid rgba(129,140,248,.25);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .ipv6-note h3 {
+      color: var(--accent2);
+      font-size: 1rem;
+      margin-bottom: .6rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .ipv6-note p {
+      color: var(--muted);
+      font-size: .875rem;
+      line-height: 1.7;
+      margin-bottom: .5rem;
+    }
+    .ipv6-note p:last-child { margin-bottom: 0; }
+    .ipv6-note code {
+      background: rgba(34,211,238,.1);
+      color: var(--accent);
+      padding: .1rem .4rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: .82rem;
+    }
+
+    /* ── Info section ───────────────────────────────────────────── */
+    .info-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media(max-width:600px){ .info-section { grid-template-columns: 1fr; } }
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem;
+    }
+    .info-card h4 {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--accent);
+      margin-bottom: .6rem;
+    }
+    .info-card p { font-size: .82rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── Breadcrumb ─────────────────────────────────────────────── */
+    .breadcrumb { padding: .6rem 0; }
+    .breadcrumb-list { list-style: none; display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; font-size: .82rem; }
+    .breadcrumb-item { color: var(--muted); }
+    .breadcrumb-item a { color: var(--accent); text-decoration: none; }
+    .breadcrumb-item a:hover { text-decoration: underline; }
+    .breadcrumb-item + .breadcrumb-item::before { content: '›'; margin-right: .3rem; color: var(--border); }
+
+    /* ── Tooltip ────────────────────────────────────────────────── */
+    .tooltip-wrap { position: relative; display: inline-block; }
+    .tooltip-text {
+      visibility: hidden;
+      opacity: 0;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: .75rem;
+      border-radius: 6px;
+      padding: .4rem .7rem;
+      position: absolute;
+      bottom: 130%;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      transition: opacity .2s;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .tooltip-wrap:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+    /* ── Pulse animation for accent elements ────────────────────── */
+    @keyframes pulse-glow {
+      0%,100%{ box-shadow: 0 0 10px rgba(34,211,238,.2); }
+      50%{ box-shadow: 0 0 24px rgba(34,211,238,.45); }
+    }
+
+    /* ── CIDR ref container scrollable ─────────────────────────── */
+    .cidr-ref-scroll {
+      max-height: 420px;
+      overflow-y: auto;
+      border-radius: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .cidr-ref-scroll::-webkit-scrollbar { width: 6px; }
+    .cidr-ref-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ── Responsive tweaks ──────────────────────────────────────── */
+    @media(max-width:480px){
+      .input-card { padding: 1.2rem 1rem; }
+      .result-card { padding: .85rem .9rem; }
+    }
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+</head>
+<body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+
+<!-- ── Header ──────────────────────────────────────────────────── -->
+<header class="site" role="banner">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="UpTools Home">
+      <img src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" alt="UpTools logo" width="28" height="28" loading="eager">
+      <b>UpTools</b>
+    </a>
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/#tools">Tools</a>
+      <a href="/games/">Games</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-wrapper">
+
+  <!-- ── Breadcrumb ────────────────────────────────────────────── -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+        <meta itemprop="position" content="1" />
+      </li>
+      <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+        <span itemprop="name">Subnet Calculator</span>
+        <meta itemprop="position" content="2" />
+      </li>
+    </ol>
+  </nav>
+
+  <!-- ── AdSense ───────────────────────────────────────────────── -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <div class="tool-hero">
+    <span class="tool-icon" aria-hidden="true">🌐</span>
+    <h1>Subnet Calculator</h1>
+    <p>Calculate network address, broadcast, host range, wildcard mask, and binary representations from any IP/CIDR or subnet mask.</p>
+  </div>
+
+  <!-- ── Input Card ────────────────────────────────────────────── -->
+  <div class="input-card">
+    <h2>⚙ Enter IP Address &amp; Subnet</h2>
+
+    <!-- IP + Mask row -->
+    <div class="input-row">
+      <div class="field-group">
+        <label for="ip-input">IP Address</label>
+        <input type="text" id="ip-input" placeholder="192.168.1.0" maxlength="15" autocomplete="off" spellcheck="false" />
+      </div>
+      <div class="field-group">
+        <label for="mask-input">Subnet Mask</label>
+        <input type="text" id="mask-input" placeholder="255.255.255.0" maxlength="15" autocomplete="off" spellcheck="false" />
+      </div>
+    </div>
+
+    <div class="divider-or">— OR use CIDR notation —</div>
+
+    <!-- CIDR row -->
+    <div class="cidr-row">
+      <div class="field-group" style="flex:1">
+        <label for="cidr-input">CIDR Notation</label>
+        <input type="text" id="cidr-input" placeholder="192.168.1.0/24" maxlength="19" autocomplete="off" spellcheck="false" />
+      </div>
+      <button class="btn-calc" id="calc-btn" onclick="calculate()">Calculate</button>
+    </div>
+
+    <div class="error-msg" id="error-msg" aria-live="polite"></div>
+
+    <div style="display:flex; gap:.75rem; flex-wrap:wrap; margin-top:.75rem; align-items:center;">
+      <button class="btn-clear" onclick="clearAll()">✕ Clear</button>
+      <button class="btn-clear" onclick="loadExample('192.168.1.0/24')" style="color:var(--accent);border-color:rgba(34,211,238,.3)">Example: /24</button>
+      <button class="btn-clear" onclick="loadExample('10.0.0.0/8')" style="color:var(--accent2);border-color:rgba(129,140,248,.3)">Example: /8</button>
+      <button class="btn-clear" onclick="loadExample('172.16.0.0/12')" style="color:var(--success);border-color:rgba(52,211,153,.3)">Example: /12</button>
+    </div>
+  </div>
+
+  <!-- ── Results Section ───────────────────────────────────────── -->
+  <section class="results-section" id="results-section" aria-live="polite" aria-label="Subnet calculation results">
+
+    <div class="section-title">📊 Subnet Results</div>
+
+    <div class="results-grid" id="results-grid">
+      <!-- Cards injected by JS -->
+    </div>
+
+    <div class="section-title">🔢 Binary Representations</div>
+
+    <div class="binary-card" id="binary-card">
+      <table class="binary-table" id="binary-table" aria-label="Binary representation table">
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Decimal</th>
+            <th>Binary</th>
+          </tr>
+        </thead>
+        <tbody id="binary-tbody"></tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <!-- ── CIDR Reference Table ──────────────────────────────────── -->
+  <div class="section-title" style="margin-top:2rem">📋 CIDR Reference Table</div>
+  <div class="cidr-ref-card">
+    <div class="cidr-ref-scroll">
+      <table class="cidr-ref-table" id="cidr-ref-table" aria-label="CIDR prefix length reference table">
+        <thead>
+          <tr>
+            <th>CIDR</th>
+            <th>Subnet Mask</th>
+            <th>Wildcard</th>
+            <th>Total IPs</th>
+            <th>Usable Hosts</th>
+            <th>Class</th>
+          </tr>
+        </thead>
+        <tbody id="cidr-ref-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── IPv6 Note ─────────────────────────────────────────────── -->
+  <div class="ipv6-note" role="note">
+    <h3>🔷 About IPv6 Subnetting</h3>
+    <p>This calculator handles <strong>IPv4</strong> addresses (32-bit). IPv6 uses 128-bit addresses and a different subnetting model — prefix notation still applies (e.g., <code>2001:db8::/32</code>) but the calculations differ substantially.</p>
+    <p>IPv6 does not use broadcast addresses. The equivalent of a network address is the <strong>subnet prefix</strong>, and the "last" address is the <strong>anycast/subnet-router anycast</strong> address. Host enumeration is impractical beyond <code>/64</code> which alone provides <strong>2<sup>64</sup> ≈ 18.4 quintillion</strong> addresses.</p>
+    <p>A dedicated IPv6 subnet calculator will be added to UpTools soon.</p>
+  </div>
+
+  <!-- ── Info cards ─────────────────────────────────────────────── -->
+  <div class="info-section">
+    <div class="info-card">
+      <h4>🔑 What is a Subnet?</h4>
+      <p>A subnet (subnetwork) divides a larger IP network into smaller, manageable segments. The subnet mask determines which part of an IP address identifies the network and which part identifies the host.</p>
+    </div>
+    <div class="info-card">
+      <h4>📐 CIDR Notation</h4>
+      <p>CIDR (Classless Inter-Domain Routing) uses a suffix like <code style="background:rgba(34,211,238,.1);color:var(--accent);padding:.05rem .3rem;border-radius:3px">/24</code> to indicate how many bits are in the network portion. <code>/24</code> means 24 network bits and 8 host bits = 256 addresses.</p>
+    </div>
+    <div class="info-card">
+      <h4>🏠 Usable Hosts</h4>
+      <p>The first address (network address) and last address (broadcast) are reserved, so usable hosts = 2ⁿ − 2, where n is the number of host bits. A /30 gives only 2 usable hosts — perfect for point-to-point links.</p>
+    </div>
+    <div class="info-card">
+      <h4>🃏 Wildcard Mask</h4>
+      <p>The wildcard mask is the inverse of the subnet mask. It's widely used in ACLs and routing protocols (e.g., OSPF) to specify address ranges. For a /24 mask (255.255.255.0) the wildcard is 0.0.0.255.</p>
+    </div>
+  </div>
+
+</div><!-- /.page-wrapper -->
+
+<!-- ── Footer ──────────────────────────────────────────────────── -->
+
+<!-- SEO: Do's and Don'ts -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="card" style="border-color:rgba(34,197,94,.3)">
+<h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">✅ <b>Do</b> use this tool to save time on manual calculations.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> double-check your inputs for accuracy.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> share results with teammates using the Share feature.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> bookmark this tool for quick access.</li>
+</ul>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+<h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — this tool doesn't store anything.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use results as professional financial/legal/medical advice.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> forget to verify critical calculations with official tools.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> assume results are guarantees — they are estimates.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- SEO: FAQ -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
+<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+</section>
+<!-- SEO: How it works -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
+<p>Results update instantly as you type — no waiting for server responses.</p>
+<p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
+</div>
+</details>
+</section>
+<footer style="text-align:center; padding: 2rem 1rem; color: var(--muted); font-size: 0.85rem">
+  <nav style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:0.5rem">
+    <a href="/" style="color:var(--accent); text-decoration:none">UpTools</a>
+    <a href="/#tools" style="color:var(--accent); text-decoration:none">All Tools</a>
+    <a href="/games/" style="color:var(--accent); text-decoration:none">Games</a>
+    <a href="/about/" style="color:var(--accent); text-decoration:none">About</a>
+    <a href="/contact/" style="color:var(--accent); text-decoration:none">Contact</a>
+  </nav>
+  <div>© 2025 UpTools. Free tools for everyone.</div>
+</footer>
+
+<script>
+/* ================================================================
+   Subnet Calculator — all logic self-contained
+   ================================================================ */
+
+// ── Utilities ────────────────────────────────────────────────────
+
+function ipToLong(ip) {
+  const parts = ip.trim().split('.');
+  if (parts.length !== 4) return null;
+  let n = 0;
+  for (let i = 0; i < 4; i++) {
+    const v = parseInt(parts[i], 10);
+    if (isNaN(v) || v < 0 || v > 255) return null;
+    n = (n * 256) + v;
+  }
+  return n >>> 0; // force unsigned
+}
+
+function longToIp(n) {
+  n = n >>> 0;
+  return [
+    (n >>> 24) & 255,
+    (n >>> 16) & 255,
+    (n >>>  8) & 255,
+     n         & 255
+  ].join('.');
+}
+
+function cidrToMask(cidr) {
+  if (cidr < 0 || cidr > 32) return null;
+  if (cidr === 0) return 0;
+  return (0xFFFFFFFF << (32 - cidr)) >>> 0;
+}
+
+function maskToCidr(mask) {
+  let n = mask >>> 0;
+  // Check contiguous 1s
+  let found0 = false;
+  let count = 0;
+  for (let i = 31; i >= 0; i--) {
+    const bit = (n >> i) & 1;
+    if (bit === 1) {
+      if (found0) return null; // non-contiguous
+      count++;
+    } else {
+      found0 = true;
+    }
+  }
+  // Verify: mask should equal cidrToMask(count)
+  if ((cidrToMask(count) >>> 0) === (n >>> 0)) return count;
+  return null;
+}
+
+function toBinaryDotted(n, highlightBits) {
+  // Returns array of 4 byte binary strings
+  n = n >>> 0;
+  const bytes = [];
+  for (let i = 3; i >= 0; i--) {
+    let byte = (n >> (i * 8)) & 0xFF;
+    bytes.unshift(byte.toString(2).padStart(8, '0'));
+  }
+  return bytes;
+}
+
+function isValidIp(ip) {
+  return ipToLong(ip) !== null;
+}
+
+function getIpClass(ip) {
+  const first = parseInt(ip.split('.')[0], 10);
+  if (first === 127) return 'Loopback';
+  if (first >= 1   && first <= 126) return 'A';
+  if (first >= 128 && first <= 191) return 'B';
+  if (first >= 192 && first <= 223) return 'C';
+  if (first >= 224 && first <= 239) return 'D';
+  if (first >= 240 && first <= 255) return 'E';
+  return '—';
+}
+
+function formatLargeNumber(n) {
+  if (n === 0) return '0';
+  return n.toLocaleString('en-US');
+}
+
+// ── Copy to clipboard ────────────────────────────────────────────
+function copyValue(btn, value) {
+  navigator.clipboard.writeText(value).then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 1500);
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = value; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Copied'; btn.classList.add('copied');
+    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+// ── Result card builder ──────────────────────────────────────────
+function makeCard(label, value, colorClass, id) {
+  return `
+    <div class="result-card" style="animation-delay:${id * 0.06}s">
+      <div class="rc-label">${label}</div>
+      <div class="rc-value ${colorClass}" id="rc-${id}">${value}</div>
+      <button class="copy-btn" aria-label="Copy ${label}" onclick="copyValue(this,'${value.replace(/'/g,"\\'")}')">
+        📋 Copy
+      </button>
+    </div>`;
+}
+
+// ── Binary table row builder ─────────────────────────────────────
+function makeBinaryRow(label, decValue, netBits) {
+  const long = ipToLong(decValue);
+  if (long === null) return '';
+  const bytes = toBinaryDotted(long);
+  // Color network bits vs host bits
+  let bitPos = 0;
+  const coloredBytes = bytes.map(byteStr => {
+    let colored = '';
+    for (let c of byteStr) {
+      if (netBits !== undefined) {
+        const cls = bitPos < netBits ? 'bin-highlight' : 'bin-host';
+        colored += `<span class="${cls}">${c}</span>`;
+      } else {
+        colored += c;
+      }
+      bitPos++;
+    }
+    return colored;
+  });
+  const binStr = coloredBytes.join('<span style="color:var(--muted)">.</span>');
+  return `
+    <tr>
+      <td class="label-col">${label}</td>
+      <td class="dec-col">${decValue}</td>
+      <td class="bin-col">${binStr}</td>
+    </tr>`;
+}
+
+// ── Main calculate function ──────────────────────────────────────
+function calculate() {
+  const errEl  = document.getElementById('error-msg');
+  const ipInp  = document.getElementById('ip-input');
+  const maskInp= document.getElementById('mask-input');
+  const cidrInp= document.getElementById('cidr-input');
+
+  errEl.textContent = '';
+  [ipInp, maskInp, cidrInp].forEach(el => el.classList.remove('error'));
+
+  let ip, cidr, mask;
+
+  const cidrRaw = cidrInp.value.trim();
+  const ipRaw   = ipInp.value.trim();
+  const maskRaw = maskInp.value.trim();
+
+  if (cidrRaw) {
+    // Parse CIDR
+    const match = cidrRaw.match(/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\/(\d{1,2})$/);
+    if (!match) {
+      errEl.textContent = 'Invalid CIDR format. Use e.g. 192.168.1.0/24';
+      cidrInp.classList.add('error');
+      return;
+    }
+    ip   = match[1];
+    cidr = parseInt(match[2], 10);
+    if (!isValidIp(ip)) {
+      errEl.textContent = 'Invalid IP address in CIDR notation.';
+      cidrInp.classList.add('error');
+      return;
+    }
+    if (cidr < 0 || cidr > 32) {
+      errEl.textContent = 'CIDR prefix must be between 0 and 32.';
+      cidrInp.classList.add('error');
+      return;
+    }
+    mask = longToIp(cidrToMask(cidr));
+    // Sync inputs
+    ipInp.value   = ip;
+    maskInp.value = mask;
+  } else if (ipRaw && maskRaw) {
+    ip = ipRaw; mask = maskRaw;
+    if (!isValidIp(ip)) {
+      errEl.textContent = 'Invalid IP address.';
+      ipInp.classList.add('error');
+      return;
+    }
+    if (!isValidIp(mask)) {
+      errEl.textContent = 'Invalid subnet mask.';
+      maskInp.classList.add('error');
+      return;
+    }
+    const c = maskToCidr(ipToLong(mask));
+    if (c === null) {
+      errEl.textContent = 'Subnet mask has non-contiguous bits (invalid).';
+      maskInp.classList.add('error');
+      return;
+    }
+    cidr = c;
+    cidrInp.value = ip + '/' + cidr;
+  } else {
+    errEl.textContent = 'Please enter either CIDR notation OR an IP + subnet mask.';
+    if (!cidrRaw) cidrInp.classList.add('error');
+    return;
+  }
+
+  // ── Compute values ──────────────────────────────────────────────
+  const ipLong      = ipToLong(ip) >>> 0;
+  const maskLong    = cidrToMask(cidr) >>> 0;
+  const wildLong    = (~maskLong) >>> 0;
+  const netLong     = (ipLong & maskLong) >>> 0;
+  const bcastLong   = (netLong | wildLong) >>> 0;
+  const firstLong   = cidr < 31 ? (netLong + 1) >>> 0 : netLong;
+  const lastLong    = cidr < 31 ? (bcastLong - 1) >>> 0 : bcastLong;
+
+  const totalIPs    = cidr === 0 ? 4294967296 : Math.pow(2, 32 - cidr);
+  const usable      = cidr >= 31 ? (cidr === 32 ? 1 : 2) : totalIPs - 2;
+
+  const networkAddr = longToIp(netLong);
+  const broadcastAddr = longToIp(bcastLong);
+  const firstHost   = longToIp(firstLong);
+  const lastHost    = longToIp(lastLong);
+  const subnetMask  = mask;
+  const wildcardMask= longToIp(wildLong);
+  const ipClass     = getIpClass(ip);
+
+  // ── Render result cards ─────────────────────────────────────────
+  const grid = document.getElementById('results-grid');
+  const cards = [
+    ['Network Address',    networkAddr,              'accent',  0],
+    ['Broadcast Address',  broadcastAddr,            'accent3', 1],
+    ['First Usable Host',  firstHost,                'success', 2],
+    ['Last Usable Host',   lastHost,                 'success', 3],
+    ['Usable Hosts',       formatLargeNumber(usable),'warn',    4],
+    ['Total IPs',          formatLargeNumber(totalIPs),'',      5],
+    ['Subnet Mask',        subnetMask,               'accent2', 6],
+    ['Wildcard Mask',      wildcardMask,             'accent2', 7],
+    ['CIDR Prefix',        '/' + cidr,               'accent',  8],
+    ['IP Class',           ipClass,                  'warn',    9],
+  ];
+  grid.innerHTML = cards.map(([label, val, cls, idx]) => makeCard(label, val, cls, idx)).join('');
+
+  // ── Render binary table ─────────────────────────────────────────
+  const tbody = document.getElementById('binary-tbody');
+  tbody.innerHTML = [
+    makeBinaryRow('IP Address',       ip,           cidr),
+    makeBinaryRow('Subnet Mask',      subnetMask,   cidr),
+    makeBinaryRow('Wildcard Mask',    wildcardMask, undefined),
+    makeBinaryRow('Network Address',  networkAddr,  cidr),
+    makeBinaryRow('Broadcast Addr.',  broadcastAddr,cidr),
+  ].join('');
+
+  // Legend
+  const legend = `
+    <tr>
+      <td colspan="3" style="padding:.6rem;color:var(--muted);font-size:.72rem;font-family:system-ui">
+        <span style="color:var(--accent2)">■</span> Network bits &nbsp;
+        <span style="color:var(--warn)">■</span> Host bits
+      </td>
+    </tr>`;
+  tbody.innerHTML += legend;
+
+  // ── Highlight active CIDR row ───────────────────────────────────
+  document.querySelectorAll('#cidr-ref-tbody tr').forEach(tr => {
+    tr.classList.toggle('active-row', tr.dataset.prefix === String(cidr));
+  });
+
+  // ── Show results ────────────────────────────────────────────────
+  const sec = document.getElementById('results-section');
+  sec.classList.add('visible');
+  setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+}
+
+// ── Clear ────────────────────────────────────────────────────────
+function clearAll() {
+  ['ip-input','mask-input','cidr-input'].forEach(id => {
+    const el = document.getElementById(id);
+    el.value = '';
+    el.classList.remove('error');
+  });
+  document.getElementById('error-msg').textContent = '';
+  const sec = document.getElementById('results-section');
+  sec.classList.remove('visible');
+  document.querySelectorAll('#cidr-ref-tbody tr').forEach(tr => tr.classList.remove('active-row'));
+}
+
+function loadExample(cidr) {
+  document.getElementById('cidr-input').value = cidr;
+  document.getElementById('ip-input').value   = '';
+  document.getElementById('mask-input').value = '';
+  calculate();
+}
+
+// ── Build CIDR reference table ───────────────────────────────────
+function buildCidrTable() {
+  const tbody = document.getElementById('cidr-ref-tbody');
+
+  const classInfo = (prefix) => {
+    if (prefix === 32) return ['cls-hst','Host'];
+    if (prefix === 31) return ['cls-hst','P2P'];
+    if (prefix >= 24) return ['cls-c','C'];
+    if (prefix >= 16) return ['cls-b','B'];
+    if (prefix >= 8)  return ['cls-a','A'];
+    if (prefix >= 4)  return ['cls-d','D'];
+    return ['cls-e','E'];
+  };
+
+  let rows = '';
+  for (let p = 0; p <= 32; p++) {
+    const maskLong  = cidrToMask(p) >>> 0;
+    const wildLong  = (~maskLong) >>> 0;
+    const maskStr   = longToIp(maskLong);
+    const wildStr   = longToIp(wildLong);
+    const total     = p === 0 ? 4294967296 : Math.pow(2, 32 - p);
+    const usable    = p >= 31 ? (p === 32 ? 1 : 2) : total - 2;
+    const [cls, lbl] = classInfo(p);
+
+    const totalStr  = total >= 1e9 ? (total / 1e9).toFixed(2) + 'B'
+                    : total >= 1e6 ? (total / 1e6).toFixed(2) + 'M'
+                    : total >= 1e3 ? (total / 1e3).toFixed(1) + 'K'
+                    : total.toString();
+
+    const usableStr = usable <= 0 ? '—'
+                    : usable >= 1e9 ? (usable / 1e9).toFixed(2) + 'B'
+                    : usable >= 1e6 ? (usable / 1e6).toFixed(2) + 'M'
+                    : usable >= 1e3 ? (usable / 1e3).toFixed(1) + 'K'
+                    : usable.toString();
+
+    rows += `
+      <tr data-prefix="${p}">
+        <td>/${p}</td>
+        <td>${maskStr}</td>
+        <td>${wildStr}</td>
+        <td>${totalStr}</td>
+        <td>${usableStr}</td>
+        <td><span class="badge-class ${cls}">${lbl}</span></td>
+      </tr>`;
+  }
+  tbody.innerHTML = rows;
+}
+
+// ── Keyboard shortcut: Enter to calculate ───────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const active = document.activeElement;
+    const ids = ['ip-input','mask-input','cidr-input'];
+    if (ids.includes(active && active.id)) calculate();
+  }
+});
+
+// ── Mobile menu toggle ───────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.querySelector('.mobile-menu-toggle');
+  const nav    = document.querySelector('.nav-links');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('open');
+    });
+  }
+  buildCidrTable();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>UpTools - Free Online Calculators, Converters &amp; Mini Games</title>
+<meta content="Fast, privacy-first tools for everyday tasks: Income Tax, GST, EMI, Currency Converter, Instagram Bio Generator, Social Media Tools, AI Writing, JSON Formatter, and mini games. No sign-ups, no bloat." name="description"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta content="#0f1419" name="theme-color"/>
+<meta content="income tax calculator,gst calculator,emi calculator,currency converter,instagram bio generator,social media tools,ai writing,ai blog generator,ai youtube script,ai email writer,ai caption generator,ai budget planner,ai business name generator,ai product description generator,crypto prices,json formatter,age calculator,ai tools,india tools,uptools,ai name generator,ai joke generator,grammar checker,cover letter generator,fifa world cup 2026,world cup countdown,world cup groups,world cup schedule,world cup golden boot,world cup bracket,world cup venues,fifa 2026 predictions" name="keywords"/>
+<!-- Canonical & Icons -->
+<link href="https://www.uptools.in/" rel="canonical"/>
+<link href="/assets/uptools-logo-D0y93_iK.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
+<link href="/assets/uptools-logo-D0y93_iK.svg" rel="apple-touch-icon" sizes="180x180"/>
+<!-- Open Graph -->
+<meta content="UpTools - Free Online Calculators, Converters &amp; Mini Games" property="og:title"/>
+<meta content="Fast, privacy-first tools: Tax calculators, Instagram bio generator, social media tools, AI writing, and more. No sign-ups required." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.uptools.in/" property="og:url"/>
+<meta content="UpTools" property="og:site_name"/>
+<meta content="https://www.uptools.in/assets/og/home.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+  <meta name="twitter:title" content="UpTools - Free Online Calculators, Converters &amp; Mini Games" />
+  <meta name="twitter:description" content="Fast, privacy-first tools: Tax calculators, Instagram bio generator, social media tools, AI writing, and more. No sign-ups required." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/og/home.png" />
+<!-- Preconnects -->
+<link crossorigin="" href="https://www.youtube-nocookie.com" rel="preconnect"/>
+<link crossorigin="" href="https://pagead2.googlesyndication.com" rel="preconnect"/>
+<!-- Critical CSS (page-scoped only; global is in /style.css) -->
+<style>
+    :root {
+      --bg: #0f1419;
+      --surface: #121826;
+      --text: #e6edf3;
+      --muted: #9aa4b2;
+      --brand: #7aa2ff;
+      --radius: .75rem;
+      --border: #212a3a
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      color-scheme: dark light;
+      -webkit-text-size-adjust: 100%
+    }
+
+    body {
+      margin: 0;
+      font: 400 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Noto Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text)
+    }
+
+    img,
+    svg,
+    video {
+      max-width: 100%;
+      height: auto;
+      display: block
+    }
+
+    a {
+      color: var(--brand);
+      text-decoration-thickness: .08em;
+      text-underline-offset: .18em
+    }
+
+    .wrap {
+      width: min(100% - 24px, 1120px);
+      margin: 24px auto
+    }
+
+    .card {
+      background: #121826;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .6rem .9rem;
+      border-radius: var(--radius);
+      background: var(--brand);
+      color: #0b1020;
+      border: 0;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer
+    }
+
+    .btn.secondary {
+      background: #1a2436;
+      color: var(--text);
+      border: 1px solid var(--border)
+    }
+
+    .btn.secondary.sm {
+      padding: .45rem .7rem;
+      font-weight: 700
+    }
+
+    .pill,
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .25rem .6rem;
+      border-radius: 999px;
+      background: #182033;
+      border: 1px solid var(--border);
+      font-size: .85rem;
+      color: var(--muted)
+    }
+
+    .badge {
+      font-size: .75rem;
+      background: #0d1628;
+      color: #9fb5ff;
+      border-color: #2a3a5a
+    }
+
+    .note {
+      color: var(--muted)
+    }
+
+    .note.small {
+      font-size: .9rem
+    }
+
+    .sr-only {
+      position: absolute;
+      left: -9999px
+    }
+
+    /* Header */
+    .site {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(180deg, #0f1419, #0f1419f2 70%, transparent);
+      backdrop-filter: saturate(140%) blur(6px);
+      border-bottom: 1px solid #0f1a2a
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: min(100% - 24px, 1120px);
+      margin: 0 auto;
+      min-height: 56px;
+      padding: 8px 0
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 900
+    }
+    .brand b {
+      transition: opacity 0.2s ease, max-width 0.3s ease;
+      overflow: hidden;
+      max-width: 0;
+      opacity: 0;
+      white-space: nowrap
+    }
+    .brand:hover b {
+      max-width: 200px;
+      opacity: 1
+    }
+
+    .nav-links {
+      position: relative;
+      display: flex;
+      gap: .75rem;
+      align-items: center
+    }
+    .nav-links a {
+      color: var(--text);
+      opacity: .9;
+      text-decoration: none;
+      padding: .25rem .4rem;
+      border-radius: .5rem;
+      white-space: nowrap
+    }
+    .nav-links a[aria-current="page"] {
+      background: #182033;
+      border: 1px solid var(--border)
+    }
+    .more-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap
+    }
+    .more-btn:hover {
+      background: rgba(255,255,255,0.12)
+    }
+    .more-btn .arrow {
+      font-size: 10px;
+      transition: transform 0.2s ease
+    }
+    .more-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 200px;
+      background: #0e1628;
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      padding: 6px 0;
+      z-index: 1000
+    }
+    .more-menu.open {
+      display: block
+    }
+    .more-menu a {
+      display: block;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none
+    }
+    .more-menu a:hover {
+      background: rgba(255,255,255,0.08)
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      min-height: 128px
+    }
+
+    .hero-logo {
+      width: 48px;
+      height: 48px
+    }
+
+    h1 {
+      margin: .1rem 0 .25rem 0;
+      line-height: 1.25
+    }
+
+    /* Controls */
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: .75rem;
+      margin: 16px 0 8px
+    }
+
+    .controls .search {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      background: #0e1628;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: .4rem .6rem
+    }
+
+    .controls .search span {
+      opacity: .8
+    }
+
+    .controls .search .input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: 0;
+      outline: 0;
+      color: var(--text);
+      font-size: 1rem
+    }
+
+    .filters {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap
+    }
+
+    /* Category bar */
+    .catbar {
+      display: flex;
+      gap: .5rem;
+      overflow: auto;
+      padding: .5rem;
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      background: #0d1626;
+      scrollbar-width: thin
+    }
+
+    .cat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .45rem .7rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #121a2c;
+      color: var(--text);
+      white-space: nowrap;
+      font-weight: 700;
+      cursor: pointer
+    }
+
+    .cat-pill[aria-current="true"] {
+      outline: 2px solid #3b82f6
+    }
+
+    /* Grid + cards */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px
+    }
+
+    .tool-card {
+      min-height: 200px
+    }
+
+    .tool-title {
+      display: inline-block
+    }
+
+    .tool-desc {
+      min-height: 2.3em
+    }
+
+    .tags {
+      display: flex;
+      gap: .35rem;
+      flex-wrap: wrap
+    }
+
+    /* Video */
+    .video-shell {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: .75rem;
+      overflow: hidden;
+      background: #0b1220;
+      border: 1px solid var(--border)
+    }
+
+    .video-shell iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0
+    }
+
+    /* Hide empty sections fully */
+    .reserved {
+      min-height: var(--reserve, 0)
+    }
+
+    .is-invisible {
+      display: none !important
+    }
+
+    /* Skeletons */
+    .skeleton {
+      position: relative;
+      overflow: hidden;
+      background: #0f1627;
+      border: 1px solid var(--border);
+      border-radius: .75rem
+    }
+
+    .s1 {
+      height: 20px;
+      width: 40%;
+      margin: .3rem 0;
+      border-radius: .35rem
+    }
+
+    .s2 {
+      height: 14px;
+      width: 70%;
+      margin: .25rem 0;
+      border-radius: .35rem
+    }
+
+    .s3 {
+      height: 14px;
+      width: 55%;
+      margin: .25rem 0;
+      border-radius: .35rem
+    }
+
+    .skeleton::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-100%);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .06), transparent);
+      animation: sh .9s infinite
+    }
+
+    @keyframes sh {
+      to {
+        transform: translateX(100%)
+      }
+    }
+  </style>
+<!-- Global CSS & (attempt) shared utils -->
+<link as="style" href="/style.css?v=1.3.0" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript>
+<link href="/style.css?v=1.3.0" rel="stylesheet"/>
+</noscript>
+<!-- Structured Data -->
+
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Uptools free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's completely free with no sign-ups required."}}, {"@type": "Question", "name": "Is Uptools private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All calculations run in your browser. No data is uploaded."}}, {"@type": "Question", "name": "Does Uptools work on mobile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All tools are mobile-responsive and work on any device."}}]}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.uptools.in/"}, {"@type": "ListItem", "position": 2, "name": "Uptools", "item": "https://www.uptools.in/uptools/"}]}
+</script>
+<script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"UpTools","url":"https://www.uptools.in/","publisher":{"@type":"Organization","name":"UpTools","logo":{"@type":"ImageObject","url":"https://www.uptools.in/assets/logo/uptools-logo.svg","width":256,"height":256}},"potentialAction":{"@type":"SearchAction","target":"https://www.uptools.in/?q={search_term_string}","query-input":"required name=search_term_string"}}
+  </script>
+<script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"CollectionPage","name":"UpTools - Tool Categories","url":"https://www.uptools.in/","about":[
+    {"@type":"Thing","name":"Finance"},{"@type":"Thing","name":"Tax"},{"@type":"Thing","name":"Banking"},
+    {"@type":"Thing","name":"Images"},{"@type":"Thing","name":"Text"},{"@type":"Thing","name":"Developer"},
+    {"@type":"Thing","name":"Social Media"},{"@type":"Thing","name":"AI Tools"},{"@type":"Thing","name":"Marketing"},
+    {"@type":"Thing","name":"Security"},{"@type":"Thing","name":"Networking"},{"@type":"Thing","name":"Fun"},
+    {"@type":"Thing","name":"Health"},{"@type":"Thing","name":"Canada"},{"@type":"Thing","name":"Romantic"},
+    {"@type":"Thing","name":"Crypto"}
+  ]}
+  </script>
+<!-- 🔥 Neon BG Boosters (CSS only layer) -->
+<style>
+    /* Big neon blobs for a stronger, but still lightweight, look */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -20vmax;
+      z-index: -3;
+      pointer-events: none;
+      filter: blur(60px) saturate(1.2);
+      opacity: .36;
+      mix-blend-mode: screen;
+      background:
+        radial-gradient(35vmax 35vmax at 15% 10%, rgba(124, 77, 255, .8), transparent 60%),
+        radial-gradient(28vmax 28vmax at 85% 20%, rgba(0, 229, 255, .8), transparent 60%),
+        radial-gradient(26vmax 26vmax at 50% 90%, rgba(0, 255, 163, .75), transparent 60%);
+      animation: neonFloat 18s ease-in-out infinite alternate;
+      will-change: transform, opacity, filter;
+    }
+
+    body::after {
+      opacity: .22;
+      filter: blur(90px) saturate(1.4) brightness(1.1);
+      animation-duration: 26s;
+      animation-name: neonFloat2;
+    }
+
+    @keyframes neonFloat {
+      0% { transform: translate3d(0, 0, 0) rotate(0.001deg) }
+      50% { transform: translate3d(-2vmax, -1vmax, 0) scale(1.02) }
+      100% { transform: translate3d(2vmax, 2vmax, 0) scale(1.06) }
+    }
+
+    @keyframes neonFloat2 {
+      0% { transform: translate3d(0, 0, 0) rotate(0.001deg) }
+      50% { transform: translate3d(3vmax, -2vmax, 0) scale(1.05) }
+      100% { transform: translate3d(-3vmax, 3vmax, 0) scale(1.1) }
+    }
+
+    /* Respect user motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      body::before, body::after { animation: none; opacity: .14 }
+    }
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <script type="module" crossorigin src="/assets/main-B_x65w31.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/assets/utils.js_v_1.3-l0sNRNKZ.js">
+  <link rel="modulepreload" crossorigin href="/assets/utils-BBOWJhvt.js">
+</head>
+<body>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
+<!-- small fixed -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;width:500px;height:50px"></ins>
+<script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+<a class="sr-only skip-link" href="#main">Skip to content</a>
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" width="28"/>
+<b>UpTools</b>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
+<nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
+</div>
+</header>
+<main class="wrap" id="main" role="main">
+<!-- Hero -->
+<section aria-labelledby="hero-title" class="card hero">
+<img alt="UpTools compact logo" class="hero-logo" height="48" loading="eager" src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" width="48"/>
+<div>
+<h1 id="hero-title">Your everyday toolkit.</h1>
+<p class="note" style="margin:0">Calculators, converters, formatters &amp; games — fast, privacy-first, no
+          sign-ups.</p>
+<div class="chips" style="margin-top:10px">
+<span class="pill">⚡ Loads fast</span>
+<span class="pill">🕵️ Privacy-first</span>
+<a class="chip" href="/sitemap.xml" title="Explore everything">Sitemap</a>
+</div>
+</div>
+</section>
+<!-- Search + tags -->
+<section aria-label="Search and filters" class="controls">
+<div class="search" role="search">
+<span aria-hidden="true">🔎</span>
+<input aria-label="Search tools" class="input" id="q" inputmode="search" placeholder="Search tools (e.g., tax, gst, currency, json)…" type="search"/>
+<button aria-label="Clear search" class="btn secondary" id="clearBtn" title="Clear">Clear</button>
+</div>
+<div aria-label="Tags" class="filters">
+<label class="chip"><input aria-label="Checkbox" type="checkbox" value="tax"/> Tax</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="finance"/> Finance</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="banking"/> Banking</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="crypto"/> Crypto</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="text"/> Text</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="dev"/> Dev</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="security"/> Security</label>
+<label class="chip"><input aria-label="Tax" type="checkbox" value="images"/> Images</label>
+<label class="chip"><input aria-label="Finance" type="checkbox" value="identity"/> Identity</label>
+<label class="chip"><input aria-label="Banking" type="checkbox" value="canada"/> Canada</label>
+<label class="chip"><input aria-label="Crypto" type="checkbox" value="networking"/> Networking</label>
+<label class="chip"><input aria-label="Text" type="checkbox" value="social"/> Social</label>
+<label class="chip"><input aria-label="Dev" type="checkbox" value="ai"/> AI</label>
+<label class="chip"><input aria-label="Security" type="checkbox" value="marketing"/> Marketing</label>
+<label class="chip"><input aria-label="Images" type="checkbox" value="fun"/> Fun</label>
+<label class="chip"><input aria-label="Identity" type="checkbox" value="cricket"/> Cricket</label>
+<label class="chip"><input aria-label="Canada" type="checkbox" value="sports"/> Sports</label>
+<label class="chip"><input aria-label="Football" type="checkbox" value="fifa"/> ⚽ FIFA WC 2026</label>
+</div>
+</section>
+<!-- Category bar -->
+<section aria-label="Browse by category" class="card">
+<div aria-label="Categories" class="catbar" id="catBar" role="tablist"></div>
+</section>
+<!-- Favourites -->
+<section class="section reserved is-invisible" id="favSec" style="--reserve:280px">
+<h2>⭐ Your favourites</h2>
+<div aria-live="polite" class="tools-grid" id="favGrid" role="region">
+<div class="skeleton" style="height:200px"></div>
+<div class="skeleton" style="height:200px"></div>
+</div>
+</section>
+<!-- Featured -->
+<section aria-labelledby="featured" class="section">
+<h2 id="featured">🔥 Featured</h2>
+<div class="tools-grid" id="featuredGrid">
+<article class="card skeleton" style="height:200px;padding:1rem">
+<div class="s1"></div>
+<div class="s2"></div>
+<div class="s3"></div>
+</article>
+<article class="card skeleton" style="height:200px;padding:1rem">
+<div class="s1"></div>
+<div class="s2"></div>
+<div class="s3"></div>
+</article>
+<article class="card skeleton" style="height:200px;padding:1rem">
+<div class="s1"></div>
+<div class="s2"></div>
+<div class="s3"></div>
+</article>
+<article class="card skeleton" style="height:200px;padding:1rem">
+<div class="s1"></div>
+<div class="s2"></div>
+<div class="s3"></div>
+</article>
+</div>
+<!-- All tools -->
+<section aria-labelledby="tools-heading" class="section" id="tools">
+<h2 id="tools-heading">🧰 All tools</h2>
+<div aria-live="polite" class="tools-grid" id="grid" role="region">
+<article class="card skeleton" style="height:200px;padding:1rem">
+<div class="s1"></div>
+<div class="s2"></div>
+<div class="s3"></div>
+</article>
+<article class="card skeleton" style="height:200px;padding:1rem">
+<div class="s1"></div>
+<div class="s2"></div>
+<div class="s3"></div>
+</article>
+<article class="card skeleton" style="height:200px;padding:1rem">
+<div class="s1"></div>
+<div class="s2"></div>
+<div class="s3"></div>
+</article>
+<article class="card skeleton" style="height:200px;padding:1rem">
+<div class="s1"></div>
+<div class="s2"></div>
+<div class="s3"></div>
+</article>
+</div>
+</section>
+<!-- Video -->
+<section aria-labelledby="video-learn" class="section">
+<h2 id="video-learn">🎥 Learn: Using calculators smartly</h2>
+<div class="card">
+<div aria-label="Tutorial video" class="video-wrap">
+<iframe allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/WjfAsX8fQ3U" title="12 AI Tools You Won't Believe Are FREE!">
+</iframe>
+</div>
+<p class="note small" style="margin-top:8px">
+            A curated video showcasing free web tools — aligned with UpTools' privacy-first, no-sign-up ethos.
+          </p>
+</div>
+</section>
+<!-- Recently used -->
+<section class="section reserved is-invisible" id="recentSec" style="--reserve:280px">
+<h2>⏱️ Continue</h2>
+<div aria-live="polite" class="tools-grid" id="recentGrid" role="region">
+<div class="skeleton" style="height:200px"></div>
+<div class="skeleton" style="height:200px"></div>
+<div class="skeleton" style="height:200px"></div>
+</div>
+<p class="note small">Tip: recent tools are saved on this device only.</p>
+</section>
+<!-- Footer -->
+
+<!-- SEO: Do's and Don'ts -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="card" style="border-color:rgba(34,197,94,.3)">
+<h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">✅ <b>Do</b> use this tool to save time on manual calculations.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> double-check your inputs for accuracy.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> share results with teammates using the Share feature.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> bookmark this tool for quick access.</li>
+</ul>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+<h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — this tool doesn't store anything.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use results as professional financial/legal/medical advice.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> forget to verify critical calculations with official tools.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> assume results are guarantees — they are estimates.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- SEO: FAQ -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
+<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+</section>
+<!-- SEO: How it works -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
+<p>Results update instantly as you type — no waiting for server responses.</p>
+<p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
+</div>
+</details>
+</section>
+<footer class="note small site-footer" role="contentinfo">
+        © <span id="y"></span> UpTools . <a href="/about/">About</a> . <a href="/contact/">Contact</a> .
+        <a href="/sitemap.xml">Sitemap</a> . <a href="/robots.txt">Robots</a> .
+        <a href="/privacy-policy/">Privacy Policy</a>
+</footer>
+</section>
+<!-- BELOW-FOLD reserve (collapsed after load for CLS control) -->
+<div id="belowFoldReserve" style="height:1600px"></div>
+</main>
+<!-- App script (DEFERRED). Includes SAFE FALLBACKS so content renders even if /scripts/utils.js fails. -->
+<script defer="">
+    (function () {
+      // ---- Safe fallbacks if shared utils not loaded ----
+      const $ = window.$ || ((s, r = document) => r.querySelector(s));
+      const $$ = window.$$ || ((s, r = document) => Array.from(r.querySelectorAll(s)));
+      const debounce = window.debounce || ((fn, d = 150) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), d); }; });
+      const persist = window.persist || ((k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { } });
+      const read = window.read || ((k, d = null) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d } });
+
+      // ---- Categories ----
+      const CATEGORIES = {
+        all: { label: "All", icon: "🧰", desc: "Every tool on UpTools" },
+        finance: { label: "Finance", icon: "💰", desc: "Money, loans & returns" },
+        tax: { label: "Tax", icon: "🧮", desc: "GST, Income Tax & HST" },
+        banking: { label: "Banking", icon: "🏦", desc: "IFSC & bank utilities" },
+        crypto: { label: "Crypto", icon: "🪙", desc: "Prices, mining & portfolio" },
+        images: { label: "Images", icon: "🖼️", desc: "Convert, edit, generate" },
+        text: { label: "Text", icon: "🔡", desc: "Formatters & counters" },
+        dev: { label: "Developer", icon: "💻", desc: "JSON, UUID, Base64, QR" },
+        security: { label: "Security", icon: "🛡️", desc: "Passwords & QR reader" },
+        networking: { label: "Networking", icon: "🌐", desc: "IP & network helpers" },
+        fun: { label: "Fun", icon: "🎮", desc: "Mini games" },
+        health: { label: "Health", icon: "❤️", desc: "BMI & wellness" },
+        canada: { label: "Canada", icon: "🍁", desc: "CRS & HST tools" },
+        romantic: { label: "Romantic", icon: "💘", desc: "Couple & love utilities" },
+        social: { label: "Social", icon: "📱", desc: "Social media tools" },
+        whatsapp: { label: "WhatsApp", icon: "💬", desc: "WhatsApp tools" },
+        wifi: { label: "WiFi", icon: "📡", desc: "WiFi tools" },
+        ai: { label: "AI", icon: "🤖", desc: "AI-powered tools" },
+        marketing: { label: "Marketing", icon: "📈", desc: "SEO & marketing tools" },
+        cricket: { label: "Cricket", icon: "🏏", desc: "Cricket calculators & stats" },
+        sports: { label: "Sports", icon: "⚽", desc: "Sports calculators & trackers" },
+        fifa: { label: "FIFA WC 2026", icon: "🏆", desc: "FIFA World Cup 2026 tools & calculators" },
+      };
+
+      // ---- Tools (assign categories with `cats`) ----
+      const TOOLS = [
+        { slug: "income-tax-tool", title: "Income Tax Calculator", icon: "🧾", desc: "Estimate income tax quickly.", href: "/income-tax-tool/", tags: ["tax","finance"], cats: ["all","tax","finance"] },
+        { slug: "gst-calculator", title: "GST Calculator", icon: "🧮", desc: "Add or remove GST in a click.", href: "/gst-calculator/", tags: ["tax","finance"], cats: ["all","tax","finance"] },
+        { slug: "emi-calculator", title: "EMI Calculator", icon: "📊", desc: "Plan monthly loan repayments.", href: "/emi-calculator/", tags: ["finance"], cats: ["all","finance"] },
+        { slug: "fd-calculator", title: "FD Calculator", icon: "🏦", desc: "Check fixed deposit maturity values.", href: "/fd-calculator/", tags: ["finance"], cats: ["all","finance","banking"] },
+        { slug: "sip-calculator", title: "SIP Calculator", icon: "📈", desc: "Project SIP returns and wealth.", href: "/sip-calculator/", tags: ["finance"], cats: ["all","finance"] },
+        { slug: "pnl-calculator", title: "Profit & Loss Calculator", icon: "💹", desc: "Track realised and unrealised gains.", href: "/pnl-calculator/", tags: ["finance"], cats: ["all","finance"] },
+        { slug: "currency-converter", title: "Currency Converter", icon: "💱", desc: "Convert FX with live interbank rates.", href: "/currency-converter/", tags: ["finance","networking"], cats: ["all","finance","networking"] },
+        { slug: "ai-stock-analyzer", title: "AI Stock Analyzer", icon: "🤖", desc: "AI verdicts with charts and sentiment.", href: "/ai-stock-analyzer/", tags: ["ai","finance"], cats: ["all","finance"] },
+        { slug: "ai-top10-stocks", title: "AI Top 10 Stocks", icon: "🏆", desc: "Tomorrow's AI-picked trading ideas.", href: "/ai-top10-stocks/", tags: ["ai","finance"], cats: ["all","finance"] },
+        { slug: "crypto-prices", title: "Cryptocurrency Prices", icon: "🪙", desc: "Track live cryptocurrency markets.", href: "/crypto-prices/", tags: ["finance","crypto"], cats: ["all","finance","crypto"] },
+        { slug: "crypto-portfolio", title: "Crypto Portfolio Tracker", icon: "📊", desc: "Monitor holdings and net worth.", href: "/crypto-portfolio/", tags: ["finance","crypto"], cats: ["all","finance","crypto"] },
+        { slug: "crypto-profitability", title: "Crypto Profitability", icon: "🚀", desc: "Gauge mining and trading profits.", href: "/crypto-profitability/", tags: ["finance","crypto"], cats: ["all","finance","crypto"] },
+        { slug: "age-calculator", title: "Age Calculator", icon: "🎂", desc: "Compute age by date of birth.", href: "/age-calculator/", tags: ["identity"], cats: ["all","text"] },
+        { slug: "bmi-calculator", title: "BMI Calculator", icon: "⚖️", desc: "Check BMI, body fat and wellness ranges.", href: "/bmi-calculator/", tags: ["health"], cats: ["all","health"] },
+        { slug: "unit-converter", title: "Unit Converter", icon: "📏", desc: "Convert length, weight and temperature.", href: "/unit-converter/", tags: ["dev"], cats: ["all","dev"] },
+        { slug: "pan-validator", title: "PAN Format Validator", icon: "🪪", desc: "Verify Indian PAN structure instantly.", href: "/pan-validator/", tags: ["identity","text"], cats: ["all","text"] },
+        { slug: "pan-aadhaar-link-status", title: "PAN–Aadhaar Link Status Guide", icon: "🔗", desc: "Validate format and open the official status page.", href: "/pan-aadhaar-link-status/", tags: ["identity","tax"], cats: ["all","tax"] },
+        { slug: "vehicle-registration-details", title: "Vehicle Registration Details", icon: "🚗", desc: "Select country and open the official registration portal.", href: "/vehicle-registration-details/", tags: ["identity","security"], cats: ["all","security"] },
+        { slug: "ifsc-finder", title: "IFSC Finder", icon: "🏧", desc: "Search bank IFSC codes with branch data.", href: "/ifsc-finder/", tags: ["banking","networking"], cats: ["all","banking"] },
+        { slug: "canada-crs-tool", title: "Canada CRS Calculator", icon: "🍁", desc: "Estimate Express Entry CRS score.", href: "/canada-crs-tool/", tags: ["canada","identity"], cats: ["all","canada"] },
+        { slug: "canada-hst-tool", title: "Canada GST/HST Calculator", icon: "💸", desc: "Compute provincial GST/HST totals.", href: "/canada-hst-tool/", tags: ["canada","tax"], cats: ["all","canada","tax"] },
+        { slug: "rrsp-optimizer", title: "RRSP Contribution Optimizer", icon: "🍁", desc: "Estimate RRSP refund impact.", href: "/rrsp-optimizer/", tags: ["canada","finance"], cats: ["all","canada","finance"] },
+        { slug: "tfsa-room-tracker", title: "TFSA Room Tracker", icon: "🍁", desc: "Estimate TFSA contribution room.", href: "/tfsa-room-tracker/", tags: ["canada","finance"], cats: ["all","canada","finance"] },
+        { slug: "cpp-ei-calculator", title: "CPP & EI Calculator", icon: "🍁", desc: "Estimate payroll deductions.", href: "/cpp-ei-calculator/", tags: ["canada","finance"], cats: ["all","canada","finance"] },
+        { slug: "canada-tax-bracket-calculator", title: "Canada Tax Brackets", icon: "🍁", desc: "Federal tax estimate.", href: "/canada-tax-bracket-calculator/", tags: ["canada","tax"], cats: ["all","canada","tax"] },
+        { slug: "canada-mortgage-affordability", title: "Canada Mortgage Affordability", icon: "🍁", desc: "Estimate max mortgage.", href: "/canada-mortgage-affordability/", tags: ["canada","finance"], cats: ["all","canada","finance"] },
+        { slug: "cra-refund-estimator", title: "CRA Refund Estimator", icon: "🍁", desc: "Refund vs balance estimate.", href: "/cra-refund-estimator/", tags: ["canada","tax"], cats: ["all","canada","tax"] },
+        { slug: "sin-validator", title: "SIN Validator", icon: "🍁", desc: "Validate SIN checksum.", href: "/sin-validator/", tags: ["canada","identity"], cats: ["all","canada","identity"] },
+        { slug: "cra-noa-checklist", title: "CRA NOA Checklist", icon: "🍁", desc: "Document checklist.", href: "/cra-noa-checklist/", tags: ["canada","text"], cats: ["all","canada","text"] },
+        { slug: "vehicle-import-duty-estimator", title: "Vehicle Import Duty Estimator", icon: "🍁", desc: "Estimate import costs.", href: "/vehicle-import-duty-estimator/", tags: ["canada","finance"], cats: ["all","canada","finance"] },
+        { slug: "password-generator", title: "Password Generator", icon: "🔐", desc: "Create strong, random passwords.", href: "/password-generator/", tags: ["security"], cats: ["all","security","dev"] },
+        { slug: "base64-encoder", title: "Base64 Encoder & Decoder", icon: "🧬", desc: "Encode or decode Base64 text & files.", href: "/base64-encoder/", tags: ["dev","security"], cats: ["all","dev","security"] },
+        { slug: "uuid-generator", title: "UUID / GUID Generator", icon: "🆔", desc: "Generate and validate UUID v1/v4/v5.", href: "/uuid-generator/", tags: ["dev"], cats: ["all","dev"] },
+        { slug: "json-formatter", title: "JSON Formatter", icon: "🛠️", desc: "Prettify and validate JSON payloads.", href: "/json-formatter/", tags: ["dev"], cats: ["all","dev"] },
+        { slug: "ai-prompts", title: "AI Prompts Library", icon: "🧠", desc: "Curated prompts for design, SEO and resumes.", href: "/ai-prompts/", tags: ["ai","text","images"], cats: ["all","text","dev"] },
+        { slug: "ai-writer", title: "AI Writing Assistant", icon: "✍️", desc: "Draft posts with Perplexity, Gemini & Groq.", href: "/ai-writer/", tags: ["ai","text"], cats: ["all","text","dev"] },
+        { slug: "ai-blog-generator", title: "AI Blog Post Generator", icon: "📝", desc: "Generate full SEO-optimized blog posts instantly.", href: "/ai-blog-generator/", tags: ["ai","text","content"], cats: ["all","text"] },
+        { slug: "ai-youtube-script", title: "AI YouTube Script Writer", icon: "🎬", desc: "Write retention-optimized YouTube scripts with AI.", href: "/ai-youtube-script/", tags: ["ai","text","content","video"], cats: ["all","text","social"] },
+        { slug: "ai-email-writer", title: "AI Email Writer", icon: "📧", desc: "Write professional emails instantly — cold outreach, follow-ups, job applications.", href: "/ai-email-writer/", tags: ["ai","text","email"], cats: ["all","text"] },
+        { slug: "ai-caption-generator", title: "AI Caption Generator", icon: "📸", desc: "Generate 5 captions for Instagram, Facebook, LinkedIn & TikTok.", href: "/ai-caption-generator/", tags: ["ai","text","social","content"], cats: ["all","text","social"] },
+        { slug: "ai-budget-planner", title: "AI Budget Planner", icon: "💰", desc: "Get a personalized budget plan and savings strategy with AI.", href: "/ai-budget-planner/", tags: ["ai","finance","budget"], cats: ["all","finance"] },
+        { slug: "ai-business-name-generator", title: "AI Business Name Generator", icon: "💡", desc: "Generate 20 unique brandable business names with taglines.", href: "/ai-business-name-generator/", tags: ["ai","text","business","branding"], cats: ["all","text"] },
+        { slug: "ai-product-description", title: "AI Product Description Generator", icon: "🛒", desc: "Write SEO-optimized product descriptions for Amazon, Shopify & more.", href: "/ai-product-description/", tags: ["ai","text","ecommerce","content"], cats: ["all","text"] },
+        { slug: "ai-plagiarism", title: "AI Plagiarism Checker", icon: "🛡️", desc: "Check originality and paraphrase safely.", href: "/ai-plagiarism/", tags: ["ai","text"], cats: ["all","text","dev"] },
+        { slug: "resume-analyzer", title: "AI Resume Analyzer", icon: "💼", desc: "ATS score your resume against any JD.", href: "/resume-analyzer/", tags: ["ai","text"], cats: ["all","text","dev"] },
+        { slug: "rawcv-resume-builder", title: "AI Resume Builder (rawcv)", icon: "📄", desc: "Build an ATS-friendly resume with AI. Free, no login, no watermark.", href: "https://www.rawcv.com/build", tags: ["ai","career"], cats: ["all","text","ai"] },
+        { slug: "pokemon-stats", title: "Pokemon Stats Directory", icon: "🧬", desc: "Search all Pokemon base stats and export CSV.", href: "/pokemon-stats/", tags: ["fun","data"], cats: ["all","fun"] },
+        { slug: "text-case-converter", title: "Text Case Converter", icon: "🔡", desc: "Switch between upper, lower and title case.", href: "/text-case-converter/", tags: ["text"], cats: ["all","text"] },
+        { slug: "word-counter", title: "Word Counter", icon: "📝", desc: "Count words, characters and reading time.", href: "/word-counter/", tags: ["text"], cats: ["all","text"] },
+        { slug: "qr-generator", title: "QR Code Generator", icon: "🔳", desc: "Create QR codes for links and text.", href: "/qr-generator/", tags: ["images","dev"], cats: ["all","images","dev"] },
+        { slug: "qr-reader", title: "QR Reader", icon: "📷", desc: "Scan QR codes from camera or images.", href: "/qr-reader/", tags: ["images","security"], cats: ["all","images","security"] },
+        { slug: "image-converter", title: "Image Converter", icon: "🖼️", desc: "Resize, crop and change image formats.", href: "/image-converter/", tags: ["images"], cats: ["all","images"] },
+        { slug: "image-tool", title: "Image Tool", icon: "🪄", desc: "Remove backgrounds and apply filters.", href: "/image-tool/", tags: ["images"], cats: ["all","images"] },
+        { slug: "color-picker", title: "Color Picker", icon: "🎨", desc: "Pick HEX/RGB, contrast check and save swatches.", href: "/color-picker/", tags: ["images","dev"], cats: ["all","images","dev"] },
+        { slug: "exif-tool", title: "EXIF Tool", icon: "🕵️", desc: "Inspect, clean or embed photo metadata.", href: "/exif-tool/", tags: ["images","security"], cats: ["all","images","security"] },
+        { slug: "ip-address", title: "IP Address & ISP Lookup", icon: "🌐", desc: "See your public IP, ISP and DNS speed tests.", href: "/ip-address/", tags: ["networking","security"], cats: ["all","networking","security"] },
+        { slug: "wifi-router", title: "WiFi Router Tools", icon: "📡", desc: "Find default passwords, Wi-Fi QR & vendors.", href: "/wifi-router/", tags: ["wifi","networking"], cats: ["all","wifi","networking"] },
+        { slug: "domain-finder", title: "Domain Name Finder", icon: "🔍", desc: "Discover available domains instantly.", href: "/domain-finder/", tags: ["networking","dev"], cats: ["all","networking","dev"] },
+        { slug: "whatsapp-chat", title: "WhatsApp Click-to-Chat", icon: "💬", desc: "Open chats without saving numbers.", href: "/whatsapp-chat/", tags: ["whatsapp","networking"], cats: ["all","whatsapp","networking"] },
+        { slug: "whatsapp-stickers", title: "WhatsApp Sticker Maker", icon: "🧩", desc: "Design and export sticker packs.", href: "/whatsapp-stickers/", tags: ["whatsapp","images"], cats: ["all","whatsapp","images"] },
+        { slug: "instagram-auditor", title: "Instagram Auditor", icon: "📊", desc: "Find non-followers, fans & mutuals. Privacy-first analysis.", href: "/instagram-auditor/", tags: ["social","privacy","analytics"], cats: ["all","social","security"] },
+        { slug: "instagram-bio-generator", title: "Instagram Bio Generator", icon: "✨", desc: "Create engaging and creative Instagram bios with AI.", href: "/instagram-bio-generator/", tags: ["social","ai","text"], cats: ["all","social","text"] },
+        { slug: "instagram-caption-generator", title: "Instagram Caption Generator", icon: "💬", desc: "Generate engaging captions for your Instagram posts.", href: "/instagram-caption-generator/", tags: ["social","ai","text"], cats: ["all","social","text"] },
+        { slug: "instagram-hashtag-generator", title: "Instagram Hashtag Generator", icon: "#️⃣", desc: "Find trending hashtags to boost your reach.", href: "/instagram-hashtag-generator/", tags: ["social","marketing"], cats: ["all","social","text"] },
+        { slug: "instagram-username-generator", title: "Instagram Username Generator", icon: "👤", desc: "Generate unique and catchy Instagram usernames.", href: "/instagram-username-generator/", tags: ["social","creative"], cats: ["all","social","text"] },
+        { slug: "instagram-story-templates", title: "Instagram Story Templates", icon: "📱", desc: "Beautiful templates for Instagram Stories.", href: "/instagram-story-templates/", tags: ["social","design","templates"], cats: ["all","social","images"] },
+        { slug: "instagram-story-downloader", title: "Instagram Story Downloader", icon: "📥", desc: "Download Instagram stories, reels and posts without watermark.", href: "/instagram-story-downloader/", tags: ["social","download"], cats: ["all","social","images"] },
+        { slug: "instagram-dp-downloader", title: "Instagram DP Downloader", icon: "👤", desc: "Download Instagram profile pictures in full HD quality.", href: "/instagram-dp-downloader/", tags: ["social","download"], cats: ["all","social","images"] },
+        { slug: "instagram-reels-downloader", title: "Instagram Reels Downloader", icon: "🎬", desc: "Download Instagram Reels videos without watermark.", href: "/instagram-reels-downloader/", tags: ["social","download","video"], cats: ["all","social","images"] },
+        { slug: "instagram-post-downloader", title: "Instagram Post Downloader", icon: "📸", desc: "Download Instagram photos and carousel posts easily.", href: "/instagram-post-downloader/", tags: ["social","download"], cats: ["all","social","images"] },
+        { slug: "instagram-video-downloader", title: "Instagram Video Downloader", icon: "🎥", desc: "Download Instagram videos in HD quality.", href: "/instagram-video-downloader/", tags: ["social","download","video"], cats: ["all","social","images"] },
+        { slug: "instagram-igtv-downloader", title: "Instagram IGTV Downloader", icon: "📺", desc: "Download IGTV videos from Instagram.", href: "/instagram-igtv-downloader/", tags: ["social","download","video"], cats: ["all","social","images"] },
+        { slug: "instagram-carousel-downloader", title: "Instagram Carousel Downloader", icon: "🖼️", desc: "Download all photos from Instagram carousel posts.", href: "/instagram-carousel-downloader/", tags: ["social","download"], cats: ["all","social","images"] },
+        { slug: "instagram-highlight-downloader", title: "Instagram Highlight Downloader", icon: "⭐", desc: "Download Instagram story highlights from any profile.", href: "/instagram-highlight-downloader/", tags: ["social","download"], cats: ["all","social","images"] },
+        { slug: "instagram-follower-list-exporter", title: "Instagram Follower List Exporter", icon: "📋", desc: "Export your Instagram followers list to CSV.", href: "/instagram-follower-list-exporter/", tags: ["social","analytics","export"], cats: ["all","social","marketing"] },
+        { slug: "instagram-following-list-exporter", title: "Instagram Following List Exporter", icon: "📋", desc: "Export your Instagram following list to CSV.", href: "/instagram-following-list-exporter/", tags: ["social","analytics","export"], cats: ["all","social","marketing"] },
+        { slug: "instagram-unfollower-tracker", title: "Instagram Unfollower Tracker", icon: "👋", desc: "Find who unfollowed you on Instagram.", href: "/instagram-unfollower-tracker/", tags: ["social","analytics"], cats: ["all","social","marketing"] },
+        { slug: "instagram-fake-follower-checker", title: "Instagram Fake Follower Checker", icon: "🤖", desc: "Detect fake followers and bot accounts on Instagram.", href: "/instagram-fake-follower-checker/", tags: ["social","analytics","security"], cats: ["all","social","security"] },
+        { slug: "instagram-bio-link-generator", title: "Instagram Bio Link Generator", icon: "🔗", desc: "Create clickable link trees for your Instagram bio.", href: "/instagram-bio-link-generator/", tags: ["social","marketing","links"], cats: ["all","social","marketing"] },
+        { slug: "instagram-story-viewer", title: "Instagram Story Viewer", icon: "👁️", desc: "View Instagram stories anonymously without being seen.", href: "/instagram-story-viewer/", tags: ["social","privacy"], cats: ["all","social","security"] },
+        { slug: "instagram-post-scheduler", title: "Instagram Post Scheduler", icon: "⏰", desc: "Schedule Instagram posts for optimal posting times.", href: "/instagram-post-scheduler/", tags: ["social","marketing","scheduling"], cats: ["all","social","marketing"] },
+        { slug: "instagram-content-calendar", title: "Instagram Content Calendar", icon: "📅", desc: "Plan and organize your Instagram content strategy.", href: "/instagram-content-calendar/", tags: ["social","planning","marketing"], cats: ["all","social","marketing"] },
+        { slug: "instagram-growth-calculator", title: "Instagram Growth Calculator", icon: "📈", desc: "Project your Instagram growth based on engagement rate.", href: "/instagram-growth-calculator/", tags: ["social","analytics"], cats: ["all","social","marketing"] },
+        { slug: "instagram-reach-calculator", title: "Instagram Reach Calculator", icon: "🎯", desc: "Calculate potential reach for your Instagram posts.", href: "/instagram-reach-calculator/", tags: ["social","analytics"], cats: ["all","social","marketing"] },
+        { slug: "instagram-story-ideas-generator", title: "Instagram Story Ideas Generator", icon: "💡", desc: "Generate creative Instagram story ideas with AI.", href: "/instagram-story-ideas-generator/", tags: ["social","ai","content"], cats: ["all","social","ai"] },
+        { slug: "tiktok-hashtag-generator", title: "TikTok Hashtag Generator", icon: "🎵", desc: "Find viral hashtags for your TikTok videos.", href: "/tiktok-hashtag-generator/", tags: ["social","tiktok","marketing"], cats: ["all","social","text"] },
+        { slug: "games", title: "Free Mini Games", icon: "🎮", desc: "Play fast, sign-up free browser games.", href: "/games/", tags: ["fun"], cats: ["all","fun"] },
+        { slug: "games-love-test", title: "Love Compatibility Test", icon: "💘", desc: "Fun love quiz for couples.", href: "/games/love-test/", tags: ["fun","romantic"], cats: ["all","fun","romantic"] },
+        { slug: "games-typing-speed", title: "Typing Speed Test", icon: "⌨️", desc: "Test your WPM and accuracy online.", href: "/games/typing-speed/", tags: ["fun","text"], cats: ["all","fun","text"] },
+        { slug: "games-hangman", title: "Hangman", icon: "🪢", desc: "Classic word guessing game.", href: "/games/hangman/", tags: ["fun","text"], cats: ["all","fun"] },
+        { slug: "games-word-scramble", title: "Word Scramble", icon: "🔀", desc: "Unscramble jumbled letters to find the word.", href: "/games/word-scramble/", tags: ["fun","text"], cats: ["all","fun"] },
+        { slug: "games-quiz-trivia", title: "Quiz Trivia", icon: "🧠", desc: "100+ general knowledge trivia questions.", href: "/games/quiz-trivia/", tags: ["fun","ai"], cats: ["all","fun"] },
+        { slug: "games-dice-roller", title: "Dice Roller", icon: "🎲", desc: "Roll D4 to D20 virtual dice.", href: "/games/dice-roller/", tags: ["fun"], cats: ["all","fun"] },
+        { slug: "games-coin-flip", title: "Coin Flip", icon: "🪙", desc: "Virtual coin toss with stats.", href: "/games/coin-flip/", tags: ["fun"], cats: ["all","fun"] },
+        { slug: "games-ping-pong", title: "Ping Pong", icon: "🏓", desc: "Classic Pong against AI.", href: "/games/ping-pong/", tags: ["fun"], cats: ["all","fun"] },
+        { slug: "games-wheel-of-names", title: "Wheel of Names", icon: "🎡", desc: "Spin a custom wheel of names to pick a random winner.", href: "/games/wheel-of-names/", tags: ["fun","decision"], cats: ["all","fun"] },
+        { slug: "ai-name-generator", title: "AI Name Generator", icon: "🤖", desc: "Generate baby, business, brand & character names.", href: "/ai-name-generator/", tags: ["ai","text"], cats: ["all","ai","text"] },
+        { slug: "ai-joke-generator", title: "AI Joke Generator", icon: "😂", desc: "Get hilarious jokes, puns & one-liners instantly.", href: "/ai-joke-generator/", tags: ["ai","fun"], cats: ["all","ai","fun"] },
+        { slug: "ai-grammar-checker", title: "AI Grammar Checker", icon: "✅", desc: "Fix grammar, spelling & punctuation instantly.", href: "/ai-grammar-checker/", tags: ["ai","text"], cats: ["all","ai","text"] },
+        { slug: "ai-cover-letter", title: "AI Cover Letter Generator", icon: "📄", desc: "Generate professional cover letters in seconds.", href: "/ai-cover-letter/", tags: ["ai","text"], cats: ["all","ai","text"] },
+        { slug: "pin-code-finder", title: "PIN Code Finder India", icon: "📮", desc: "Find post office, district & state by PIN code. Bulk lookup + CSV.", href: "/pin-code-finder/", tags: ["banking","identity"], cats: ["all","banking","networking"] },
+        { slug: "gst-number-search", title: "GST Number Search & Validator", icon: "🧾", desc: "Verify GSTIN format, decode state, PAN & entity type.", href: "/gst-number-search/", tags: ["tax","finance","identity"], cats: ["all","tax","finance"] },
+        { slug: "whatsapp-link-generator", title: "WhatsApp Link Generator", icon: "💬", desc: "Create wa.me links with pre-filled messages & QR codes.", href: "/whatsapp-link-generator/", tags: ["whatsapp","social","marketing"], cats: ["all","whatsapp","social"] },
+        { slug: "games-friendship-test", title: "Best Friend Compatibility Test", icon: "👫", desc: "2-player BFF quiz with challenge link & score.", href: "/games/friendship-test/", tags: ["fun","social"], cats: ["all","fun","social"] },
+        { slug: "ai-blog-generator", title: "AI Blog Post Generator", icon: "📝", desc: "Generate full SEO-optimized blog posts instantly with AI.", href: "/ai-blog-generator/", tags: ["ai","text","content"], cats: ["all","text","ai"] },
+        { slug: "ai-youtube-script", title: "AI YouTube Script Writer", icon: "🎬", desc: "Write retention-optimized YouTube scripts with hook, intro & CTA.", href: "/ai-youtube-script/", tags: ["ai","text","content"], cats: ["all","text","ai","social"] },
+        { slug: "ai-email-writer", title: "AI Email Writer", icon: "📧", desc: "Write professional emails instantly — cold outreach, follow-ups, job applications.", href: "/ai-email-writer/", tags: ["ai","text","email"], cats: ["all","text","ai"] },
+        { slug: "ai-caption-generator", title: "AI Caption Generator", icon: "📸", desc: "Generate 5 captions for Instagram, Facebook, LinkedIn & TikTok.", href: "/ai-caption-generator/", tags: ["ai","text","social"], cats: ["all","text","ai","social"] },
+        { slug: "ai-budget-planner", title: "AI Budget Planner", icon: "💰", desc: "Get a personalized budget plan and savings strategy with AI.", href: "/ai-budget-planner/", tags: ["ai","finance","budget"], cats: ["all","finance","ai"] },
+        { slug: "ai-business-name-generator", title: "AI Business Name Generator", icon: "💡", desc: "Generate 20 unique brandable business names with taglines.", href: "/ai-business-name-generator/", tags: ["ai","text","branding"], cats: ["all","text","ai"] },
+        { slug: "ai-product-description", title: "AI Product Description Generator", icon: "🛒", desc: "Write SEO-optimized product descriptions for Amazon, Shopify & more.", href: "/ai-product-description/", tags: ["ai","text","ecommerce"], cats: ["all","text","ai"] },
+        { slug: "timezone-converter", title: "Time Zone Converter", icon: "🌍", desc: "Convert time zones, compare world clocks and find meeting overlaps.", href: "/timezone-converter/", tags: ["productivity","time","international"], cats: ["all","networking","marketing"] },
+        { slug: "percentage-calculator", title: "Percentage Calculator", icon: "📈", desc: "Calculate discounts, markups, percent change and percentage of a number.", href: "/percentage-calculator/", tags: ["finance","math","shopping"], cats: ["all","finance","text"] },
+        { slug: "cagr-calculator", title: "CAGR Calculator", icon: "📉", desc: "Calculate compound annual growth rate for investments, revenue and traffic.", href: "/cagr-calculator/", tags: ["finance","investment","international"], cats: ["all","finance"] },
+        { slug: "markup-margin-calculator", title: "Markup vs Margin Calculator", icon: "🏷️", desc: "Convert cost, sale price, markup, margin and gross profit.", href: "/markup-margin-calculator/", tags: ["finance","ecommerce","pricing"], cats: ["all","finance","marketing"] },
+        { slug: "salary-converter", title: "Salary Converter", icon: "💼", desc: "Convert hourly, daily, weekly, monthly and annual pay fast.", href: "/salary-converter/", tags: ["salary","jobs","international"], cats: ["all","finance","marketing"] },
+        { slug: "break-even-calculator", title: "Break-Even Calculator", icon: "⚖️", desc: "Calculate break-even units, revenue and sales needed for profit.", href: "/break-even-calculator/", tags: ["business","pricing","finance"], cats: ["all","finance","marketing"] },
+        { slug: "overtime-calculator", title: "Overtime Calculator", icon: "⏱️", desc: "Estimate overtime pay with custom hourly rates and multipliers.", href: "/overtime-calculator/", tags: ["salary","work","payroll"], cats: ["all","finance","marketing"] },
+        { slug: "invoice-calculator", title: "Invoice Calculator", icon: "🧾", desc: "Calculate invoice subtotal, discount, tax and total due.", href: "/invoice-calculator/", tags: ["invoice","freelance","tax"], cats: ["all","finance","tax","marketing"] },
+        { slug: "met-gala-2026", title: "Met Gala 2026 Fashion Looks", icon: "✨", desc: "Searchable red carpet guide with celebrity looks, designer credits & styling details.", href: "/met-gala-2026/", tags: ["fashion","celebrity","social","style"], cats: ["all","social","marketing"] },
+        { slug: "cricket-run-rate", title: "Cricket Run Rate Calculator", icon: "🏏", desc: "Calculate required run rate, target and projected score for T20, ODI & Test matches.", href: "/cricket-run-rate/", tags: ["cricket","sports"], cats: ["all","cricket"] },
+        { slug: "cricket-score-predictor", title: "Cricket Score Predictor", icon: "📊", desc: "Predict match outcome and winning probability based on current score and overs.", href: "/cricket-score-predictor/", tags: ["cricket","sports"], cats: ["all","cricket"] },
+        { slug: "cricket-nrr", title: "Cricket Net Run Rate (NRR)", icon: "🧮", desc: "Calculate net run rate for tournament standings and league matches.", href: "/cricket-nrr/", tags: ["cricket","sports"], cats: ["all","cricket"] },
+        { slug: "ipl-points-table", title: "IPL 2025 Points Table", icon: "🏆", desc: "Live IPL standings with NRR, wins, losses and playoff tracker.", href: "/ipl-points-table/", tags: ["cricket","ipl","sports"], cats: ["all","cricket"] },
+        { slug: "ipl-fantasy-calculator", title: "IPL Fantasy Points Calculator", icon: "⭐", desc: "Calculate Dream11 fantasy points for batting, bowling and fielding.", href: "/ipl-fantasy-calculator/", tags: ["cricket","ipl","fantasy"], cats: ["all","cricket"] },
+        { slug: "ipl-team-stats", title: "IPL Team Statistics", icon: "📈", desc: "All-time IPL records, wins, titles and performance stats.", href: "/ipl-team-stats/", tags: ["cricket","ipl","stats"], cats: ["all","cricket"] },
+        { slug: "ai-linkedin-headline-generator", title: "AI LinkedIn Headline Generator", icon: "💼", desc: "Create keyword-rich LinkedIn headlines for jobs, freelancing and founders.", href: "/ai-linkedin-headline-generator/", tags: ["ai","social","marketing"], cats: ["all","ai","social","marketing"] },
+        { slug: "ai-travel-planner", title: "AI Travel Planner", icon: "🧳", desc: "Generate day-by-day trip itineraries by destination, budget and pace.", href: "/ai-travel-planner/", tags: ["ai","travel","international"], cats: ["all","ai","marketing"] },
+        { slug: "tip-calculator", title: "Tip Calculator", icon: "💵", desc: "Calculate tips and split bills for restaurants and services.", href: "/tip-calculator/", tags: ["finance","calculator"], cats: ["all","finance"] },
+        { slug: "sales-tax-calculator", title: "US Sales Tax Calculator", icon: "🧾", desc: "Calculate sales tax for all 50 US states with accurate rates.", href: "/sales-tax-calculator/", tags: ["tax","finance","usa"], cats: ["all","tax","finance"] },
+        { slug: "vat-calculator", title: "VAT Calculator", icon: "🇪🇺", desc: "Calculate European VAT for all EU countries and rates.", href: "/vat-calculator/", tags: ["tax","finance","europe"], cats: ["all","tax","finance"] },
+        { slug: "mortgage-calculator", title: "Mortgage Calculator", icon: "🏠", desc: "Calculate monthly mortgage payments and total interest.", href: "/mortgage-calculator/", tags: ["finance","calculator","housing"], cats: ["all","finance"] },
+        { slug: "calorie-calculator", title: "Calorie Calculator", icon: "🍎", desc: "Calculate daily calorie needs (TDEE) for weight goals.", href: "/calorie-calculator/", tags: ["health","fitness","calculator"], cats: ["all","health"] },
+        { slug: "401k-calculator", title: "401k Calculator", icon: "💰", desc: "Calculate 401k retirement savings with employer match.", href: "/401k-calculator/", tags: ["finance","retirement","usa"], cats: ["all","finance"] },
+        { slug: "house-affordability-calculator", title: "House Affordability Calculator", icon: "🏠", desc: "Calculate how much house you can afford based on income.", href: "/house-affordability-calculator/", tags: ["finance","real-estate","housing"], cats: ["all","finance"] },
+        { slug: "car-loan-calculator", title: "Car Loan Calculator", icon: "🚗", desc: "Calculate car loan payments and total interest costs.", href: "/car-loan-calculator/", tags: ["finance","automotive","loans"], cats: ["all","finance"] },
+        { slug: "retirement-calculator", title: "Retirement Calculator", icon: "🏖️", desc: "Calculate when you can retire based on savings and income.", href: "/retirement-calculator/", tags: ["finance","retirement","planning"], cats: ["all","finance"] },
+        { slug: "life-insurance-calculator", title: "Life Insurance Calculator", icon: "🛡️", desc: "Calculate how much life insurance coverage you need.", href: "/life-insurance-calculator/", tags: ["finance","insurance","planning"], cats: ["all","finance"] },
+        { slug: "investment-return-calculator", title: "Investment Return Calculator", icon: "📊", desc: "Calculate ROI and compound interest on investments.", href: "/investment-return-calculator/", tags: ["finance","investment","calculator"], cats: ["all","finance"] },
+        { slug: "roth-ira-calculator", title: "Roth IRA Calculator", icon: "💎", desc: "Calculate tax-free retirement savings with Roth IRA.", href: "/roth-ira-calculator/", tags: ["finance","retirement","usa"], cats: ["all","finance"] },
+        { slug: "debt-payoff-calculator", title: "Debt Payoff Calculator", icon: "💳", desc: "Calculate debt-free timeline with snowball or avalanche.", href: "/debt-payoff-calculator/", tags: ["finance","debt","planning"], cats: ["all","finance"] },
+        { slug: "net-worth-calculator", title: "Net Worth Calculator", icon: "💰", desc: "Calculate your total net worth: assets minus liabilities.", href: "/net-worth-calculator/", tags: ["finance","wealth","planning"], cats: ["all","finance"] },
+        { slug: "savings-goal-calculator", title: "Savings Goal Calculator", icon: "🎯", desc: "Calculate how long to reach your savings goal.", href: "/savings-goal-calculator/", tags: ["finance","savings","planning"], cats: ["all","finance"] },
+        { slug: "rent-vs-buy-calculator", title: "Rent vs Buy Calculator", icon: "🏘️", desc: "Compare renting vs buying a home over time.", href: "/rent-vs-buy-calculator/", tags: ["finance","real-estate","housing"], cats: ["all","finance"] },
+        { slug: "refinance-calculator", title: "Refinance Calculator", icon: "🔄", desc: "Calculate if refinancing your mortgage saves money.", href: "/refinance-calculator/", tags: ["finance","mortgage","real-estate"], cats: ["all","finance"] },
+        { slug: "property-tax-calculator", title: "Property Tax Calculator", icon: "🏛️", desc: "Estimate annual property taxes on your home.", href: "/property-tax-calculator/", tags: ["finance","tax","real-estate"], cats: ["all","finance","tax"] },
+        { slug: "stamp-duty-calculator", title: "UK Stamp Duty Calculator", icon: "🇬🇧", desc: "Calculate UK Stamp Duty Land Tax on property.", href: "/stamp-duty-calculator/", tags: ["finance","tax","uk","real-estate"], cats: ["all","finance","tax"] },
+        { slug: "home-equity-calculator", title: "Home Equity Calculator", icon: "📊", desc: "Calculate equity in your home and track growth.", href: "/home-equity-calculator/", tags: ["finance","real-estate","equity"], cats: ["all","finance"] },
+        { slug: "whatsapp-status-saver", title: "WhatsApp Status Saver", icon: "💾", desc: "Learn how to save WhatsApp status videos and photos.", href: "/whatsapp-status-saver/", tags: ["whatsapp","social","guide"], cats: ["all","whatsapp","social"] },
+        { slug: "whatsapp-dp-downloader", title: "WhatsApp DP Downloader", icon: "📥", desc: "Download WhatsApp profile pictures in full size.", href: "/whatsapp-dp-downloader/", tags: ["whatsapp","social","download"], cats: ["all","whatsapp","social"] },
+        { slug: "whatsapp-group-name-generator", title: "WhatsApp Group Name Generator", icon: "💬", desc: "Generate creative group names for any occasion.", href: "/whatsapp-group-name-generator/", tags: ["whatsapp","social","generator"], cats: ["all","whatsapp","social"] },
+        { slug: "snapchat-username-generator", title: "Snapchat Username Generator", icon: "👻", desc: "Create unique and cool Snapchat usernames.", href: "/snapchat-username-generator/", tags: ["snapchat","social","generator"], cats: ["all","social"] },
+        { slug: "snapchat-score-calculator", title: "Snapchat Score Calculator", icon: "📊", desc: "Calculate and understand your Snapchat score.", href: "/snapchat-score-calculator/", tags: ["snapchat","social","calculator"], cats: ["all","social"] },
+        { slug: "whatsapp-message-scheduler", title: "WhatsApp Message Scheduler", icon: "⏰", desc: "Learn how to schedule WhatsApp messages for free.", href: "/whatsapp-message-scheduler/", tags: ["whatsapp","social","guide"], cats: ["all","whatsapp","social"] },
+        { slug: "whatsapp-business-name-generator", title: "WhatsApp Business Name Generator", icon: "💼", desc: "Generate professional business names for WhatsApp.", href: "/whatsapp-business-name-generator/", tags: ["whatsapp","business","generator"], cats: ["all","whatsapp","social"] },
+        { slug: "whatsapp-font-generator", title: "WhatsApp Font Generator", icon: "✍️", desc: "Generate bold, italic, strikethrough text for WhatsApp.", href: "/whatsapp-font-generator/", tags: ["whatsapp","text","generator"], cats: ["all","whatsapp","text"] },
+        { slug: "whatsapp-emoji-translator", title: "WhatsApp Emoji Translator", icon: "😊", desc: "Convert text to emojis for WhatsApp messages.", href: "/whatsapp-emoji-translator/", tags: ["whatsapp","emoji","fun"], cats: ["all","whatsapp","fun"] },
+        { slug: "whatsapp-group-invite-link", title: "WhatsApp Group Invite Link", icon: "🔗", desc: "Learn how to create and share group invite links.", href: "/whatsapp-group-invite-link/", tags: ["whatsapp","social","guide"], cats: ["all","whatsapp","social"] },
+        { slug: "snapchat-filters-guide", title: "Snapchat Filters Guide", icon: "👻", desc: "Complete guide to using Snapchat filters and lenses.", href: "/snapchat-filters-guide/", tags: ["snapchat","social","guide"], cats: ["all","social"] },
+        { slug: "snapchat-story-ideas", title: "Snapchat Story Ideas Generator", icon: "💡", desc: "Generate creative story ideas for Snapchat.", href: "/snapchat-story-ideas/", tags: ["snapchat","social","generator"], cats: ["all","social"] },
+        { slug: "snapchat-streak-calculator", title: "Snapchat Streak Calculator", icon: "🔥", desc: "Calculate and track your Snapchat streaks.", href: "/snapchat-streak-calculator/", tags: ["snapchat","social","calculator"], cats: ["all","social"] },
+        { slug: "contact", title: "Contact UpTools", icon: "✉️", desc: "Share feedback, bugs or feature requests.", href: "/contact/", tags: ["text"], cats: ["all","text"] },
+        { slug: "privacy-policy", title: "Privacy Policy", icon: "📜", desc: "Understand how UpTools handles data.", href: "/privacy-policy/", tags: ["security"], cats: ["all","security"] },
+        { slug: "whatsapp-web-guide", title: "WhatsApp Web Guide", icon: "💬", desc: "Complete guide to use WhatsApp on desktop.", href: "/whatsapp-web-guide/", tags: ["whatsapp","guide"], cats: ["all","whatsapp","social"] },
+        { slug: "whatsapp-tricks", title: "WhatsApp Tricks & Hidden Features", icon: "🎯", desc: "Unlock hidden WhatsApp features and pro tips.", href: "/whatsapp-tricks/", tags: ["whatsapp","tips"], cats: ["all","whatsapp","social"] },
+        { slug: "whatsapp-backup-guide", title: "WhatsApp Backup Guide", icon: "💾", desc: "How to backup and restore WhatsApp chats.", href: "/whatsapp-backup-guide/", tags: ["whatsapp","guide"], cats: ["all","whatsapp","social"] },
+        { slug: "instagram-reels-ideas", title: "Instagram Reels Ideas Generator", icon: "🎬", desc: "Generate viral Instagram Reels ideas with AI.", href: "/instagram-reels-ideas/", tags: ["social","ai","content"], cats: ["all","social","ai"] },
+        { slug: "instagram-engagement-calculator", title: "Instagram Engagement Calculator", icon: "📊", desc: "Calculate engagement rate and analyze performance.", href: "/instagram-engagement-calculator/", tags: ["social","analytics"], cats: ["all","social","marketing"] },
+        { slug: "instagram-best-time-to-post", title: "Instagram Best Time to Post", icon: "⏰", desc: "Find optimal posting times for maximum reach.", href: "/instagram-best-time-to-post/", tags: ["social","marketing"], cats: ["all","social","marketing"] },
+        { slug: "instagram-follower-tracker", title: "Instagram Follower Tracker", icon: "📈", desc: "Track follower growth and analyze trends.", href: "/instagram-follower-tracker/", tags: ["social","analytics"], cats: ["all","social","marketing"] },
+        { slug: "instagram-profile-analyzer", title: "Instagram Profile Analyzer", icon: "📊", desc: "Analyze profile performance and get insights.", href: "/instagram-profile-analyzer/", tags: ["social","analytics"], cats: ["all","social","marketing"] },
+        { slug: "tiktok-video-downloader", title: "TikTok Video Downloader", icon: "🎵", desc: "Download TikTok videos without watermark.", href: "/tiktok-video-downloader/", tags: ["social","download"], cats: ["all","social"] },
+        { slug: "facebook-video-downloader", title: "Facebook Video Downloader", icon: "📹", desc: "Download Facebook videos in HD quality.", href: "/facebook-video-downloader/", tags: ["social","download"], cats: ["all","social"] },
+        { slug: "youtube-video-downloader", title: "YouTube Video Downloader", icon: "🎥", desc: "Download YouTube videos and audio in HD.", href: "/youtube-video-downloader/", tags: ["social","download"], cats: ["all","social"] },
+        { slug: "twitter-video-downloader", title: "Twitter/X Video Downloader", icon: "🐦", desc: "Download Twitter/X videos instantly.", href: "/twitter-video-downloader/", tags: ["social","download"], cats: ["all","social"] },
+        { slug: "linkedin-profile-analyzer", title: "LinkedIn Profile Analyzer", icon: "💼", desc: "Analyze and optimize your LinkedIn profile.", href: "/linkedin-profile-analyzer/", tags: ["social","professional"], cats: ["all","social","marketing"] },
+        { slug: "meeting-scheduler", title: "Meeting Scheduler", icon: "🌍", desc: "Find best meeting times across timezones.", href: "/meeting-scheduler/", tags: ["productivity","time"], cats: ["all","networking","marketing"] },
+        { slug: "todo-list-maker", title: "Todo List Maker", icon: "✅", desc: "Simple online todo list with local storage.", href: "/todo-list-maker/", tags: ["productivity","task"], cats: ["all","text"] },
+        { slug: "note-taking-app", title: "Note Taking App", icon: "📝", desc: "Quick notes online with local storage.", href: "/note-taking-app/", tags: ["productivity","notes"], cats: ["all","text"] },
+        { slug: "habit-tracker", title: "Habit Tracker", icon: "📊", desc: "Track daily habits and build streaks.", href: "/habit-tracker/", tags: ["productivity","health"], cats: ["all","health"] },
+        { slug: "multi-currency-converter", title: "Multi-Currency Converter", icon: "💱", desc: "Convert 150+ currencies with real-time rates.", href: "/multi-currency-converter/", tags: ["finance","international"], cats: ["all","finance"] },
+        { slug: "world-clock", title: "World Clock", icon: "🌍", desc: "Check time in 200+ cities worldwide.", href: "/world-clock/", tags: ["time","international"], cats: ["all","networking"] },
+        { slug: "roi-calculator", title: "ROI Calculator", icon: "📈", desc: "Calculate return on investment instantly.", href: "/roi-calculator/", tags: ["business","finance"], cats: ["all","finance","marketing"] },
+        { slug: "calorie-intake-calculator", title: "Calorie Intake Calculator", icon: "🔥", desc: "Calculate daily calorie needs for your goals.", href: "/calorie-intake-calculator/", tags: ["health","fitness"], cats: ["all","health"] },
+        { slug: "language-detector", title: "Language Detector", icon: "🌐", desc: "Automatically detect language from text. Supports 50+ languages.", href: "/language-detector/", tags: ["language","text"], cats: ["all","text"] },
+        { slug: "english-to-devanagari", title: "English to Devanagari", icon: "अ", desc: "Convert English (Roman) text to Devanagari (Hindi) script instantly. Phonetic transliterator — no signup.", href: "/english-to-devanagari/", tags: ["language","text","hindi","india"], cats: ["all","text"] },
+        { slug: "fancy-text-generator", title: "Fancy Text Generator", icon: "𝓕", desc: "Convert text to 15+ Unicode fancy styles — Bold, Italic, Script, Cursive, Upside Down. Perfect for Instagram bio & WhatsApp.", href: "/fancy-text-generator/", tags: ["text","social","fun"], cats: ["all","text","social","fun"] },
+        { slug: "text-repeater", title: "Text Repeater", icon: "🔁", desc: "Repeat text online 1–1000 times with custom separators (newline, comma, pipe). Copy or download instantly.", href: "/text-repeater/", tags: ["text","productivity"], cats: ["all","text"] },
+        { slug: "morse-code-translator", title: "Morse Code Translator", icon: "📡", desc: "Convert text to Morse code with audio playback.", href: "/morse-code-translator/", tags: ["language","text"], cats: ["all","text"] },
+        { slug: "binary-code-translator", title: "Binary Code Translator", icon: "🔢", desc: "Convert text to binary, hex, and decimal codes.", href: "/binary-code-translator/", tags: ["dev","text"], cats: ["all","dev","text"] },
+        { slug: "phonetic-alphabet-converter", title: "Phonetic Alphabet Converter", icon: "🔤", desc: "Convert text to NATO phonetic alphabet.", href: "/phonetic-alphabet-converter/", tags: ["language","text"], cats: ["all","text"] },
+        { slug: "accent-mark-generator", title: "Accent Mark Generator", icon: "🎨", desc: "Add accent marks and diacritics to text.", href: "/accent-mark-generator/", tags: ["language","text"], cats: ["all","text"] },
+        { slug: "unix-timestamp-converter", title: "Unix Timestamp Converter", icon: "⏱️", desc: "Convert Unix timestamps to dates and vice versa.", href: "/unix-timestamp-converter/", tags: ["dev","time"], cats: ["all","dev"] },
+        { slug: "countdown-timer", title: "Countdown Timer", icon: "⏲️", desc: "Customizable countdown timer with notifications.", href: "/countdown-timer/", tags: ["productivity","time"], cats: ["all","text"] },
+        { slug: "days-between-dates", title: "Days Between Dates", icon: "📅", desc: "Calculate days, weeks, months between two dates.", href: "/days-between-dates/", tags: ["time","calculator"], cats: ["all","text"] },
+        { slug: "age-calculator-by-date", title: "Age Calculator by Date", icon: "🎂", desc: "Calculate exact age with zodiac sign and birthday countdown.", href: "/age-calculator-by-date/", tags: ["time","calculator"], cats: ["all","text"] },
+        { slug: "lunar-calendar", title: "Lunar Calendar", icon: "🌙", desc: "View lunar calendar with moon phases and zodiac.", href: "/lunar-calendar/", tags: ["time","calendar"], cats: ["all","text"] },
+        { slug: "temperature-converter", title: "Temperature Converter", icon: "🌡️", desc: "Convert temperature between Celsius, Fahrenheit, Kelvin.", href: "/temperature-converter/", tags: ["conversion","science"], cats: ["all","dev"] },
+        { slug: "speed-converter", title: "Speed Converter", icon: "🚀", desc: "Convert speed units: km/h, mph, knots, m/s.", href: "/speed-converter/", tags: ["conversion","science"], cats: ["all","dev"] },
+        { slug: "pressure-converter", title: "Pressure Converter", icon: "🔧", desc: "Convert pressure units: PSI, bar, pascal, atm.", href: "/pressure-converter/", tags: ["conversion","science"], cats: ["all","dev"] },
+        { slug: "energy-converter", title: "Energy Converter", icon: "⚡", desc: "Convert energy units: Joules, calories, BTU, kWh.", href: "/energy-converter/", tags: ["conversion","science"], cats: ["all","dev"] },
+        { slug: "power-converter", title: "Power Converter", icon: "💪", desc: "Convert power units: Watts, horsepower, kilowatts.", href: "/power-converter/", tags: ["conversion","science"], cats: ["all","dev"] },
+        { slug: "density-converter", title: "Density Converter", icon: "📦", desc: "Convert density units: kg/m³, g/cm³, lb/ft³.", href: "/density-converter/", tags: ["conversion","science"], cats: ["all","dev"] },
+        { slug: "viscosity-converter", title: "Viscosity Converter", icon: "🧴", desc: "Convert viscosity units: Centipoise, Stokes, Pa·s.", href: "/viscosity-converter/", tags: ["conversion","science"], cats: ["all","dev"] },
+        { slug: "frequency-converter", title: "Frequency Converter", icon: "📻", desc: "Convert frequency units: Hz, kHz, MHz, GHz, rpm.", href: "/frequency-converter/", tags: ["conversion","science"], cats: ["all","dev"] },
+        { slug: "macro-calculator", title: "Macro Calculator", icon: "🥗", desc: "Calculate macronutrient ratios for fitness goals.", href: "/macro-calculator/", tags: ["health","fitness"], cats: ["all","health"] },
+        { slug: "water-intake-calculator", title: "Water Intake Calculator", icon: "💧", desc: "Calculate daily water intake needs.", href: "/water-intake-calculator/", tags: ["health","fitness"], cats: ["all","health"] },
+        { slug: "sleep-calculator", title: "Sleep Calculator", icon: "😴", desc: "Calculate optimal sleep cycles and wake times.", href: "/sleep-calculator/", tags: ["health","fitness"], cats: ["all","health"] },
+        { slug: "ideal-weight-calculator", title: "Ideal Weight Calculator", icon: "⚖️", desc: "Calculate ideal weight based on height and frame.", href: "/ideal-weight-calculator/", tags: ["health","fitness"], cats: ["all","health"] },
+        { slug: "body-fat-percentage-calculator", title: "Body Fat Percentage Calculator", icon: "📊", desc: "Calculate body fat percentage with multiple methods.", href: "/body-fat-percentage-calculator/", tags: ["health","fitness"], cats: ["all","health"] },
+        { slug: "ovulation-calculator", title: "Ovulation Calculator", icon: "🔄", desc: "Calculate ovulation date and fertility window.", href: "/ovulation-calculator/", tags: ["health","fitness"], cats: ["all","health"] },
+        { slug: "instagram-video-downloader", title: "Instagram Video Downloader", icon: "📸", desc: "Download Instagram videos, reels, and stories in HD.", href: "/instagram-video-downloader/", tags: ["social","downloader"], cats: ["all","social"] },
+        { slug: "ifsc-bulk-lookup", title: "IFSC Bulk Lookup", icon: "🏦", desc: "Search multiple IFSC codes at once. Download as CSV.", href: "/ifsc-bulk-lookup/", tags: ["banking","finance"], cats: ["all","banking"] },
+        { slug: "youtube-audio-downloader", title: "YouTube Audio Downloader", icon: "🎵", desc: "Download YouTube audio as MP3 in high quality.", href: "/youtube-audio-downloader/", tags: ["downloader","music"], cats: ["all","social"] },
+        { slug: "facebook-video-downloader-hd", title: "Facebook Video Downloader HD", icon: "👍", desc: "Download Facebook videos in HD from feed, pages, and groups.", href: "/facebook-video-downloader-hd/", tags: ["social","downloader"], cats: ["all","social"] },
+        { slug: "snapchat-video-downloader", title: "Snapchat Video Downloader", icon: "👻", desc: "Download Snapchat snaps, stories, and memories before expiry.", href: "/snapchat-video-downloader/", tags: ["social","downloader"], cats: ["all","social"] },
+        { slug: "twitter-video-downloader", title: "Twitter/X Video Downloader", icon: "𝕏", desc: "Download videos and GIFs from X (formerly Twitter) in HD.", href: "/twitter-video-downloader/", tags: ["social","downloader"], cats: ["all","social"] },
+        { slug: "pinterest-video-downloader", title: "Pinterest Video Downloader", icon: "📌", desc: "Download Pinterest pins and videos in original quality.", href: "/pinterest-video-downloader/", tags: ["social","downloader"], cats: ["all","social"] },
+        { slug: "linkedin-video-downloader", title: "LinkedIn Video Downloader", icon: "💼", desc: "Download LinkedIn videos from posts, articles, and courses.", href: "/linkedin-video-downloader/", tags: ["social","downloader"], cats: ["all","social"] },
+        { slug: "telegram-video-downloader", title: "Telegram Video Downloader", icon: "✈️", desc: "Download videos and media from Telegram channels and groups.", href: "/telegram-video-downloader/", tags: ["social","downloader"], cats: ["all","social"] },
+        { slug: "instagram-story-downloader", title: "Instagram Story Downloader", icon: "📖", desc: "Download Instagram stories and highlights before they expire.", href: "/instagram-story-downloader/", tags: ["social","downloader"], cats: ["all","social"] },
+        { slug: "tiktok-audio-downloader", title: "TikTok Audio Downloader", icon: "🎵", desc: "Download TikTok music and sounds as MP3 in high quality.", href: "/tiktok-audio-downloader/", tags: ["downloader","music"], cats: ["all","social"] },
+        { slug: "bank-branch-finder", title: "Bank Branch Finder", icon: "🏦", desc: "Find bank branches, ATMs, and contact details in your city.", href: "/bank-branch-finder/", tags: ["banking","finance"], cats: ["all","banking"] },
+        { slug: "cbse-class-12-result", title: "CBSE Class 12 Result Checker", icon: "📋", desc: "Use official result links and analyze Class 12 marks locally.", href: "/cbse-class-12-result/", tags: ["education","india"], cats: ["all","text"] },
+        { slug: "cbse-percentage-calculator", title: "CBSE Percentage Calculator", icon: "📊", desc: "Calculate Class 12 percentage from subject-wise marks instantly.", href: "/cbse-percentage-calculator/", tags: ["education","calculator"], cats: ["all","text"] },
+        { slug: "best-of-five-calculator", title: "Best of Five Calculator", icon: "🧮", desc: "Find your best-of-five percentage and included subjects.", href: "/best-of-five-calculator/", tags: ["education","calculator"], cats: ["all","text"] },
+        { slug: "india-college-rankings", title: "India College Rankings", icon: "📚", desc: "Explore top colleges and universities across India with rankings.", href: "/india-college-rankings/", tags: ["education","india"], cats: ["all","text"] },
+        { slug: "career-after-12", title: "Career Path After 12", icon: "🎯", desc: "Discover career paths, streams, and courses after Class 12.", href: "/career-after-12/", tags: ["education","career"], cats: ["all","text"] },
+        { slug: "exams-after-12", title: "Entrance Exams After 12", icon: "📝", desc: "Compare JEE, NEET, CUET, CLAT, NDA, design entrances, and more after Class 12.", href: "/exams-after-12/", tags: ["education","exam"], cats: ["all","text"] },
+        { slug: "college-course-finder", title: "College Course Finder", icon: "🎓", desc: "Find suitable college courses after 12th based on stream and interests.", href: "/college-course-finder/", tags: ["education","career"], cats: ["all","text"] },
+        { slug: "sports-score-converter", title: "Sports Score Converter", icon: "⚽", desc: "Convert scores between different sports formats and scoring systems.", href: "/sports-score-converter/", tags: ["sports"], cats: ["all","sports"] },
+        { slug: "football-stats-calculator", title: "Football Stats Calculator", icon: "🏈", desc: "Calculate player performance metrics, completion percentage, and passer rating.", href: "/football-stats-calculator/", tags: ["sports","football"], cats: ["all","sports"] },
+        // ---- FIFA World Cup 2026 Tools ----
+        { slug: "fifa-world-cup-countdown", title: "FIFA World Cup 2026 Countdown", icon: "⏱️", desc: "Live countdown timer to the FIFA World Cup 2026 Final at MetLife Stadium.", href: "/fifa-world-cup-countdown/", tags: ["fifa","worldcup","countdown","sports"], cats: ["all","fifa","sports"] },
+        { slug: "fifa-world-cup-groups", title: "FIFA World Cup 2026 Groups & Standings", icon: "📊", desc: "All 12 groups, live standings, match results and fixtures for FIFA World Cup 2026.", href: "/fifa-world-cup-groups/", tags: ["fifa","worldcup","groups","standings","sports"], cats: ["all","fifa","sports"] },
+        { slug: "fifa-world-cup-schedule", title: "FIFA World Cup 2026 Full Schedule", icon: "📅", desc: "Complete FIFA World Cup 2026 schedule with all 104 matches, dates, venues and times.", href: "/fifa-world-cup-schedule/", tags: ["fifa","worldcup","schedule","fixtures","sports"], cats: ["all","fifa","sports"] },
+        { slug: "fifa-world-cup-golden-boot", title: "FIFA World Cup 2026 Golden Boot Tracker", icon: "🏆", desc: "Top goal scorers leaderboard for FIFA World Cup 2026 with goals, assists and stats.", href: "/fifa-world-cup-golden-boot/", tags: ["fifa","worldcup","golden-boot","scorers","sports"], cats: ["all","fifa","sports"] },
+        { slug: "fifa-world-cup-bracket", title: "FIFA World Cup 2026 Knockout Bracket", icon: "🗺️", desc: "Interactive tournament bracket from Round of 32 to the Final. Make your predictions!", href: "/fifa-world-cup-bracket/", tags: ["fifa","worldcup","bracket","knockout","sports"], cats: ["all","fifa","sports"] },
+        { slug: "fifa-world-cup-venues", title: "FIFA World Cup 2026 Venues & Stadiums", icon: "🏟️", desc: "All 16 FIFA World Cup 2026 venues across USA, Mexico and Canada with capacities.", href: "/fifa-world-cup-venues/", tags: ["fifa","worldcup","venues","stadiums","sports"], cats: ["all","fifa","sports"] },
+        { slug: "fifa-world-cup-predictions", title: "FIFA World Cup 2026 Predictions", icon: "🔮", desc: "Make your FIFA World Cup 2026 predictions. Pick group winners and predict the champion.", href: "/fifa-world-cup-predictions/", tags: ["fifa","worldcup","predictions","winner","sports"], cats: ["all","fifa","sports"] },
+        { slug: "fifa-world-cup-timezone", title: "FIFA World Cup 2026 Time Zone Converter", icon: "🌍", desc: "Convert World Cup 2026 match times to your local timezone. Never miss a game.", href: "/fifa-world-cup-timezone/", tags: ["fifa","worldcup","timezone","match-times","sports"], cats: ["all","fifa","sports"] },
+        { slug: "fifa-world-cup-discipline", title: "FIFA World Cup 2026 Discipline Tracker", icon: "🟨", desc: "Yellow card and red card tracker for FIFA World Cup 2026. Live discipline stats.", href: "/fifa-world-cup-discipline/", tags: ["fifa","worldcup","yellow-cards","red-cards","sports"], cats: ["all","fifa","sports"] },
+        { slug: "basketball-stats-calculator", title: "Basketball Stats Calculator", icon: "🏀", desc: "Calculate shooting percentages, true shooting %, and player efficiency metrics.", href: "/basketball-stats-calculator/", tags: ["sports","basketball"], cats: ["all","sports"] },
+        { slug: "tennis-score-tracker", title: "Tennis Score Tracker", icon: "🎾", desc: "Track live tennis match scores, sets, games, and points in real-time.", href: "/tennis-score-tracker/", tags: ["sports","tennis"], cats: ["all","sports"] },
+        { slug: "golf-handicap-calculator", title: "Golf Handicap Calculator", icon: "⛳", desc: "Calculate your golf handicap index, course handicap, and net score.", href: "/golf-handicap-calculator/", tags: ["sports","golf"], cats: ["all","sports"] },
+        { slug: "fantasy-sports-calculator", title: "Fantasy Sports Calculator", icon: "⭐", desc: "Calculate fantasy points for cricket, football, basketball and more. Dream11 points.", href: "/fantasy-sports-calculator/", tags: ["sports","fantasy"], cats: ["all","sports"] },
+      ];
+
+      // ---- Elements ----
+      const grid = $("#grid");
+      const favSec = $("#favSec");
+      const recentSec = $("#recentSec");
+      const q = $("#q");
+      const catBar = $("#catBar");
+      $("#y").textContent = new Date().getFullYear();
+
+      let ACTIVE_CAT = "all";
+      const FAV_KEY = "uptools-tool-favs";
+      const RECENT_KEY = "uptools-tool-recent";
+
+      const getFavs = () => new Set(read(FAV_KEY, []));
+      const setFavs = (s) => persist(FAV_KEY, [...s]);
+      const getRecent = () => read(RECENT_KEY, []);
+      const pushRecent = (slug) => {
+        const now = Date.now();
+        const list = getRecent().filter(x => x.slug !== slug);
+        list.unshift({ slug, ts: now });
+        persist(RECENT_KEY, list.slice(0, 10));
+      };
+
+      // ---- Rendering helpers ----
+      function badgeFor(t) {
+        const c = (t.cats || [])[0] || "all";
+        return CATEGORIES[c]?.label || "Tool";
+      }
+      function tagBadges(t) {
+        return (t.tags || []).slice(0, 4).map(x => `<span class="pill">${x}</span>`).join("");
+      }
+      function cardHTML(t, favs) {
+        const isFav = favs.has(t.slug);
+        return `
+      <article class="tool-card card" data-tags="${(t.tags || []).join(',')}" data-title="${t.title.toLowerCase()}" data-cats="${(t.cats || []).join(',')}">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem">
+          <div aria-hidden="true" style="font-size:20px">${t.icon}</div>
+          <span class="badge pill">${badgeFor(t)}</span>
+        </div>
+        <a class="tool-title" href="${t.href}" aria-label="${t.title}" style="font-size:1.05rem;font-weight:800;text-decoration:none;color:inherit">${t.title}</a>
+        <p class="tool-desc note">${t.desc}</p>
+        <div class="tags">${tagBadges(t)}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.35rem">
+          <a class="btn" href="${t.href}">Open</a>
+          <button class="fav btn secondary sm ${isFav ? 'active' : ''}" data-fav="${t.slug}" aria-label="Favourite ${t.title}" title="Favourite">
+            ${isFav ? '★ Favourited' : '☆ Favourite'}
+          </button>
+        </div>
+      </article>`;
+      }
+      function mount(container, list) {
+        const favs = getFavs();
+        container.innerHTML = list.map(t => cardHTML(t, favs)).join("");
+        bindInteractions(container);
+      }
+      function renderAll(list) { mount(grid, list); }
+
+      function renderFavs() {
+        const favs = getFavs();
+        const list = TOOLS.filter(t => favs.has(t.slug));
+        const has = list.length > 0;
+        favSec.classList.toggle("is-invisible", !has);
+        if (has) mount($("#favGrid"), list);
+      }
+      function renderRecent() {
+        const rec = getRecent().slice(0, 8);
+        const list = rec.map(r => TOOLS.find(t => t.slug === r.slug)).filter(Boolean);
+        const has = list.length > 0;
+        recentSec.classList.toggle("is-invisible", !has);
+        if (has) mount($("#recentGrid"), list);
+      }
+
+      // ---- Category bar ----
+      function countByCat() {
+        const counts = {};
+        for (const t of TOOLS) {
+          const cs = t.cats?.length ? t.cats : ["all"];
+          for (const c of cs) {
+            counts[c] = (counts[c] ?? 0) + 1;
+          }
+        }
+        counts.all = TOOLS.length;
+        return counts;
+      }
+      function buildCatBar() {
+        const counts = countByCat();
+        const order = ["all", ...Object.keys(CATEGORIES).filter(c => c !== "all")];
+        catBar.innerHTML = order
+          .filter(c => CATEGORIES[c])
+          .map(c => {
+            const { label, icon } = CATEGORIES[c];
+            const count = counts[c] ?? 0;
+            return `<button class="cat-pill" role="tab" aria-current="${c === ACTIVE_CAT}" data-cat="${c}" title="${label} — ${CATEGORIES[c].desc}">
+            <span aria-hidden="true">${icon}</span> ${label} <span class="count">(${count})</span>
+          </button>`;
+          }).join("");
+        $$(".cat-pill", catBar).forEach(btn => {
+          btn.addEventListener("click", () => {
+            ACTIVE_CAT = btn.getAttribute("data-cat");
+            $$(".cat-pill", catBar).forEach(b => b.setAttribute("aria-current", String(b === btn)));
+            applyFilters();
+            history.replaceState({}, "", ACTIVE_CAT === "all" ? location.pathname : `#cat=${ACTIVE_CAT}`);
+          }, { passive: true });
+        });
+      }
+
+      // ---- Filters (search + tags + category) ----
+      const filtersEl = $(".filters");
+      const currentTagFilters = () => [...filtersEl.querySelectorAll("input:checked")].map(i => i.value);
+
+      function matchesCategory(card) {
+        if (ACTIVE_CAT === "all") return true;
+        const cats = (card.dataset.cats || "").split(",").filter(Boolean);
+        return cats.includes(ACTIVE_CAT);
+      }
+      function matchesText(card, text) {
+        if (!text) return true;
+        const title = card.dataset.title || "";
+        return title.includes(text);
+      }
+      function matchesTags(card, filters) {
+        if (filters.length === 0) return true;
+        const tags = (card.dataset.tags || "").split(",").filter(Boolean);
+        return filters.every(f => tags.includes(f));
+      }
+      function applyFilters() {
+        const text = q.value.trim().toLowerCase();
+        const filters = currentTagFilters();
+        const cards = $$(".tool-card");
+        for (const c of cards) {
+          const show = matchesCategory(c) && matchesText(c, text) && matchesTags(c, filters);
+          c.style.display = show ? "grid" : "none";
+        }
+      }
+
+      // ---- Interactions ----
+      function bindInteractions(scope) {
+        scope.querySelectorAll("[data-fav]").forEach(btn => {
+          btn.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            const slug = btn.getAttribute("data-fav");
+            const favs = getFavs();
+            favs.has(slug) ? favs.delete(slug) : favs.add(slug);
+            setFavs(favs);
+            document.querySelectorAll(`[data-fav="${slug}"]`).forEach(b => {
+              const active = favs.has(slug);
+              b.classList.toggle("active", active);
+              b.textContent = active ? "★ Favourited" : "☆ Favourite";
+            });
+            renderFavs();
+          }, { passive: true });
+        });
+        scope.querySelectorAll("a.btn, a.tool-title").forEach(a => {
+          a.addEventListener("click", () => {
+            const slug = a.closest(".tool-card").querySelector("[data-fav]").getAttribute("data-fav");
+            pushRecent(slug);
+          }, { passive: true });
+        });
+      }
+
+      // ---- URL hydration (supports ?q=, ?used=, and #cat=) ----
+      (function hydrateFromURL() {
+        const u = new URL(location.href);
+        const s = u.searchParams.get("q");
+        if (s) { q.value = s; }
+        const used = u.searchParams.get("used");
+        if (used) pushRecent(used);
+        const hash = new URLSearchParams(location.hash.replace(/^#/, ""));
+        const cat = hash.get("cat");
+        if (cat && CATEGORIES[cat]) ACTIVE_CAT = cat;
+      })();
+
+      // ---- Featured mount ----
+      (function mountFeatured() {
+        const feat = [
+          { slug: "timezone-converter", title: "Time Zone Converter", icon: "🌍", desc: "Compare cities, convert times and find overlap windows fast.", href: "/timezone-converter/", tags: ["time","international"], cats: ["all","networking"] },
+          { slug: "salary-converter", title: "Salary Converter", icon: "💼", desc: "Compare hourly, monthly and annual pay for offers across countries.", href: "/salary-converter/", tags: ["jobs","international"], cats: ["all","finance"] },
+          { slug: "invoice-calculator", title: "Invoice Calculator", icon: "🧾", desc: "Quick totals for freelance, service and product invoices.", href: "/invoice-calculator/", tags: ["freelance","business"], cats: ["all","finance"] },
+          { slug: "ai-blog-generator", title: "AI Blog Post Generator", icon: "📝", desc: "Full SEO blog posts in seconds — streams live.", href: "/ai-blog-generator/", tags: ["ai","text"], cats: ["all","text","ai"] },
+          { slug: "ai-linkedin-headline-generator", title: "AI LinkedIn Headline Generator", icon: "💼", desc: "Sharper profile headlines for recruiters, clients and founders.", href: "/ai-linkedin-headline-generator/", tags: ["ai","social"], cats: ["all","ai","social"] },
+          { slug: "ai-youtube-script", title: "AI YouTube Script Writer", icon: "🎬", desc: "Hook, intro, sections & CTA — retention-optimized.", href: "/ai-youtube-script/", tags: ["ai","text"], cats: ["all","text","ai"] },
+          { slug: "ai-travel-planner", title: "AI Travel Planner", icon: "🧳", desc: "Practical itineraries for city breaks, holidays and work trips.", href: "/ai-travel-planner/", tags: ["ai","travel"], cats: ["all","ai"] },
+          { slug: "rawcv-resume-builder", title: "AI Resume Builder", icon: "📄", desc: "Build an ATS-friendly resume with AI — free, no login.", href: "https://www.rawcv.com/build", tags: ["ai","career"], cats: ["all","ai"] },
+        ];
+        const g = $("#featuredGrid");
+        const favs = new Set();
+        g.innerHTML = feat.map(t => cardHTML(t, favs)).join("");
+        bindInteractions(g);
+      })();
+
+      // ---- Init ----
+      function init() {
+        buildCatBar();
+        renderAll(TOOLS);
+        renderFavs();
+        renderRecent();
+        applyFilters();
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init, { once: true });
+      } else {
+        init();
+      }
+
+      // Re-hydrate on pageshow (bfcache restore)
+      window.addEventListener("pageshow", () => { renderFavs(); renderRecent(); }, { passive: true });
+
+      // Collapse spacer after load for CLS control
+      window.addEventListener("load", () => {
+        const r = $("#belowFoldReserve");
+        if (r) r.style.height = "0px";
+      }, { once: true });
+
+      // Keyboard + search
+      q.addEventListener("input", debounce(applyFilters, 200), { passive: true });
+      
+      // Scroll to results only on explicit search (Enter key or Clear button)
+      q.addEventListener("keydown", (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const toolsSection = $("#tools");
+          if (toolsSection) {
+            toolsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }
+      }, { passive: false });
+      
+      $("#clearBtn").addEventListener("click", () => { 
+        q.value = ""; 
+        applyFilters(); 
+        q.focus(); 
+      });
+      
+      window.addEventListener("keydown", (e) => {
+        if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+        if (e.key === 'Escape') { q.blur(); }
+      }, { passive: false });
+    })();
+  </script>
+<!-- ⚡ Neon Particle Canvas (powerful but lightweight) -->
+<script>
+    (function () {
+      const preferReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (preferReduce) return;
+
+      // Avoid duplicate mount
+      if (document.getElementById('bg-anim')) return;
+
+      const c = document.createElement('canvas');
+      c.id = 'bg-anim';
+      Object.assign(c.style, {
+        position: 'fixed',
+        inset: '0',
+        width: '100%',
+        height: '100%',
+        zIndex: '-2',
+        pointerEvents: 'none'
+      });
+      document.body.prepend(c);
+      const ctx = c.getContext('2d', { alpha: true, desynchronized: true });
+
+      let w, h, dpr, orbs = [], running = true, lastT = 0, boostUntil = 0;
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = c.clientWidth;
+        h = c.clientHeight;
+        c.width = Math.floor(w * dpr);
+        c.height = Math.floor(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        // Regenerate orbs based on area
+        const target = Math.min(64, Math.max(28, Math.floor((w * h) / 42000)));
+        if (orbs.length === 0) {
+          orbs = Array.from({ length: target }, () => makeOrb());
+        } else if (orbs.length < target) {
+          orbs.push(...Array.from({ length: target - orbs.length }, () => makeOrb()));
+        } else if (orbs.length > target) {
+          orbs.length = target;
+        }
+      }
+
+      const palette = [
+        [0, 229, 255],   // cyan
+        [124, 77, 255],  // violet
+        [0, 255, 163]    // mint
+      ];
+
+      function rnd(min, max) { return Math.random() * (max - min) + min; }
+      function pick(arr) { return arr[(Math.random() * arr.length) | 0]; }
+
+      function makeOrb() {
+        const speed = rnd(0.06, 0.22);
+        const size = rnd(30, 90);
+        const [r, g, b] = pick(palette);
+        const angle = rnd(0, Math.PI * 2);
+        const radius = rnd(Math.min(w, h) * 0.15, Math.max(w, h) * 0.55);
+        const cx = w * rnd(0.15, 0.85);
+        const cy = h * rnd(0.1, 0.9);
+        return { r, g, b, size, speed, t: rnd(0, 1000), angle, radius, cx, cy };
+      }
+
+      function drawOrb(o, dt, boost) {
+        o.t += o.speed * (boost ? 2.2 : 1.0) * dt;
+        const x = o.cx + Math.cos(o.t + o.angle) * o.radius * 0.12;
+        const y = o.cy + Math.sin(o.t * 0.9 + o.angle) * o.radius * 0.1;
+
+        const pulse = 0.65 + Math.sin(o.t * 1.5) * 0.35;
+        const rad = o.size * (boost ? 1.15 : 1) * (0.7 + pulse * 0.6);
+
+        const grd = ctx.createRadialGradient(x, y, 0, x, y, rad);
+        const alpha = (boost ? 0.08 : 0.04);
+        grd.addColorStop(0, `rgba(${o.r},${o.g},${o.b},${alpha})`);
+        grd.addColorStop(0.55, `rgba(${o.r},${o.g},${o.b},${alpha * 0.2})`);
+        grd.addColorStop(1, 'rgba(0,0,0,0)');
+
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(x, y, rad, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function tick(t) {
+        if (!running) return;
+        const dt = Math.min(33, t - (lastT || t)) / 16.67; // normalize to ~60fps
+        lastT = t;
+
+        // Trail fade
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = 'rgba(4, 8, 18, 0.08)';
+        ctx.fillRect(0, 0, w, h);
+
+        const boost = t < boostUntil;
+        for (let i = 0; i < orbs.length; i++) drawOrb(orbs[i], dt, boost);
+
+        requestAnimationFrame(tick);
+      }
+
+      // Interactions to momentarily "power up" the glow
+      function boostNow() { boostUntil = performance.now() + 1400; }
+      window.addEventListener('pointermove', boostNow, { passive: true });
+      window.addEventListener('scroll', boostNow, { passive: true });
+
+      // Lifecycle
+      resize();
+      requestAnimationFrame(tick);
+      window.addEventListener('resize', resize, { passive: true });
+      document.addEventListener('visibilitychange', () => {
+        running = document.visibilityState === 'visible';
+        if (running) { lastT = 0; requestAnimationFrame(tick); }
+      });
+    })();
+  </script>
+</body>
+</html>
+<!-- Mobile Menu Initialization -->

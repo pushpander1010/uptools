@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Simon Says - Free Online Game | UpTools</title>
+  <!-- Favicon -->
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/uptools-logo-D0y93_iK.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/uptools-logo-D0y93_iK.svg">
+  <meta name="description" content="Play Simon Says online! Test your memory by repeating the color sequence. Free browser game, no downloads required.">
+  <!-- Open Graph -->
+  <meta property="og:image" content="https://www.uptools.in/assets/home.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Simon Says - Free Online Game | UpTools" />
+  <meta name="twitter:description" content="Simon Says - Free Online Game. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/games/fullscreen-utils.js" defer></script>
+  
+  <style>
+    :root {
+      --accent: #5f27cd;
+      --bg: #0f1419;
+      --card: #1e2634;
+      --cardBorder: #2a3b55;
+      --muted: #9aa4b2;
+    }
+    body { 
+      background: radial-gradient(1200px 600px at 10% -10%, #162130 0%, var(--bg) 45%) fixed;
+      color: #e6edf3; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+      display: flex; 
+      flex-direction: column;
+      justify-content: center; 
+      align-items: center; 
+      min-height: 100vh; 
+      margin: 0; 
+    }
+    .game-container { 
+      position: relative;
+      text-align: center; 
+      width: 100%;
+      max-width: 420px; 
+      padding: 2rem; 
+      background: var(--card);
+      border: 1px solid var(--cardBorder);
+      border-radius: 1rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+      box-sizing: border-box;
+      margin: 2rem auto;
+    }
+    .game-container.fullscreen-mode {
+      margin: 0 !important;
+      max-width: 100vw !important;
+      height: 100vh !important;
+      border: none !important;
+      border-radius: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      box-sizing: border-box;
+    }
+    .simon-board { 
+      position: relative;
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 15px; 
+      margin: 2rem auto; 
+      max-width: 280px; 
+      aspect-ratio: 1;
+    }
+    .simon-button { 
+      aspect-ratio: 1;
+      border: 3px solid rgba(255,255,255,0.05); 
+      border-radius: 50%; 
+      cursor: pointer; 
+      transition: all 0.15s ease; 
+      position: relative;
+      opacity: 0.6;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+      min-width: 44px;
+      min-height: 44px;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .simon-button::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .simon-button:hover { 
+      transform: scale(1.05); 
+      opacity: 0.85;
+    }
+    .simon-button.active { 
+      transform: scale(1.08); 
+      opacity: 1;
+    }
+    .simon-button:active {
+      transform: scale(1.08);
+      opacity: 1;
+    }
+    .simon-button.touch-active {
+      transform: scale(1.08);
+      opacity: 1;
+    }
+    .red { background: radial-gradient(circle at center, #ff6b81 0%, #ff4757 100%); }
+    .red.active { box-shadow: 0 0 35px #ff4757, inset 0 0 10px rgba(255,255,255,0.5); }
+    .red:active { box-shadow: 0 0 35px #ff4757, inset 0 0 10px rgba(255,255,255,0.5); }
+    .red.touch-active { box-shadow: 0 0 35px #ff4757, inset 0 0 10px rgba(255,255,255,0.5); }
+    
+    .blue { background: radial-gradient(circle at center, #70a1ff 0%, #1e90ff 100%); }
+    .blue.active { box-shadow: 0 0 35px #1e90ff, inset 0 0 10px rgba(255,255,255,0.5); }
+    .blue:active { box-shadow: 0 0 35px #1e90ff, inset 0 0 10px rgba(255,255,255,0.5); }
+    .blue.touch-active { box-shadow: 0 0 35px #1e90ff, inset 0 0 10px rgba(255,255,255,0.5); }
+    
+    .green { background: radial-gradient(circle at center, #2ed573 0%, #26af56 100%); }
+    .green.active { box-shadow: 0 0 35px #2ed573, inset 0 0 10px rgba(255,255,255,0.5); }
+    .green:active { box-shadow: 0 0 35px #2ed573, inset 0 0 10px rgba(255,255,255,0.5); }
+    .green.touch-active { box-shadow: 0 0 35px #2ed573, inset 0 0 10px rgba(255,255,255,0.5); }
+    
+    .yellow { background: radial-gradient(circle at center, #eccc68 0%, #ffa502 100%); }
+    .yellow.active { box-shadow: 0 0 35px #ffa502, inset 0 0 10px rgba(255,255,255,0.5); }
+    .yellow:active { box-shadow: 0 0 35px #ffa502, inset 0 0 10px rgba(255,255,255,0.5); }
+    .yellow.touch-active { box-shadow: 0 0 35px #ffa502, inset 0 0 10px rgba(255,255,255,0.5); }
+
+    .score-row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 10px 0;
+    }
+    .score-item {
+      text-align: center;
+    }
+    .score-item .value {
+      font-size: 24px;
+      font-weight: 800;
+      color: #2ed573;
+    }
+    .score-item.best .value {
+      color: #ffa502;
+    }
+    .score-item .label {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .message { 
+      font-size: 16px; 
+      color: var(--muted);
+      margin: 10px 0; 
+      min-height: 25px; 
+      font-weight: 600;
+    }
+  
+    .controls { 
+      margin: 1.5rem 0; 
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+    .btn { 
+      background: var(--accent); 
+      color: white; 
+      border: none; 
+      padding: 12px 24px; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      font-weight: 700;
+      font-size: 15px;
+      transition: all 0.2s ease;
+      min-height: 44px;
+      box-shadow: 0 4px 10px rgba(95, 39, 205, 0.3);
+    }
+    .btn:hover { 
+      background: #4812b1; 
+      transform: translateY(-1px);
+    }
+    .btn.secondary {
+      background: #2a3b55;
+      color: #e6edf3;
+      box-shadow: none;
+    }
+    .btn.secondary:hover {
+      background: #34495e;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <link rel="canonical" href="https://www.uptools.in/games/simon-says/" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta property="og:title" content="Simon Says - Free Online Game | UpTools" />
+  <meta property="og:description" content="Simon Says - Free Online Game. Free online tool by UpTools." />
+  <meta property="og:url" content="https://www.uptools.in/games/simon-says/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+</head>
+<body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+  <!-- Header -->
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      <nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
+    </div>
+  </header>
+
+  <div class="game-container" id="gameContainer">
+      <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶</button>
+      <h1>🔴 Simon Says</h1>
+      <div class="score-row">
+        <div class="score-item">
+          <div class="value" id="score">0</div>
+          <div class="label">Score</div>
+        </div>
+        <div class="score-item best">
+          <div class="value" id="bestScore">0</div>
+          <div class="label">Best</div>
+        </div>
+      </div>
+      <div class="message" id="message">Click Start to begin!</div>
+    
+    <div class="simon-board">
+      <button class="simon-button red" data-color="red" aria-label="Red tile"></button>
+      <button class="simon-button blue" data-color="blue" aria-label="Blue tile"></button>
+      <button class="simon-button green" data-color="green" aria-label="Green tile"></button>
+      <button class="simon-button yellow" data-color="yellow" aria-label="Yellow tile"></button>
+
+      <!-- Custom game over overlay -->
+      <div id="gameOverlay" style="display: none; position: absolute; inset: 0; background: rgba(12, 19, 36, 0.96); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-radius: 1rem; padding: 1.5rem; box-sizing: border-box;">
+        <h2 id="overlayTitle" style="font-size: 2.2rem; margin: 0 0 0.5rem 0; color: #ff4757; font-weight: 900; letter-spacing: 1px;">GAME OVER</h2>
+        <p id="overlayMessage" style="font-size: 1.1rem; color: var(--muted); margin: 0 0 1.5rem 0; line-height: 1.4;"></p>
+        <button id="overlayBtn" class="btn" style="min-height: 44px; padding: 10px 24px; font-size: 16px;">Try Again</button>
+      </div>
+    </div>
+    
+    <div class="controls">
+      <button class="btn" id="startBtn">Start Game</button>
+      <button class="btn secondary" id="resetBtn">Reset</button>
+    </div>
+    
+    <div style="margin-top: 20px;">
+      <a href="/games/" class="btn secondary">← Back to Games</a>
+    </div>
+  </div>
+
+  <script>
+    class SimonGame {
+      constructor() {
+        this.sequence = [];
+        this.playerSequence = [];
+        this.score = 0;
+        this.isPlaying = false;
+        this.isShowingSequence = false;
+        
+        this.buttons = document.querySelectorAll('.simon-button');
+        this.scoreElement = document.getElementById('score');
+        this.bestScoreElement = document.getElementById('bestScore');
+        this.messageElement = document.getElementById('message');
+        this.startBtn = document.getElementById('startBtn');
+        this.resetBtn = document.getElementById('resetBtn');
+        
+        this.audioCtx = null;
+        // Musical tones: C4, E4, G4, C5 (sine waves)
+        this.tones = {
+          red: 261.63,   // C4
+          blue: 329.63,  // E4
+          green: 392.00, // G4
+          yellow: 523.25 // C5
+        };
+
+        this.bestScore = this.loadBestScore();
+        this.updateBestScore();
+
+        this.bindEvents();
+      }
+
+      loadBestScore() {
+        try {
+          return parseInt(localStorage.getItem('simon-best-score') || '0', 10);
+        } catch(e) {
+          return 0;
+        }
+      }
+
+      saveBestScore() {
+        try {
+          localStorage.setItem('simon-best-score', String(this.bestScore));
+        } catch(e) {}
+      }
+
+      updateBestScore() {
+        if (this.bestScoreElement) {
+          this.bestScoreElement.textContent = this.bestScore;
+        }
+      }
+      
+      bindEvents() {
+        this.startBtn.addEventListener('click', () => this.startGame());
+        this.resetBtn.addEventListener('click', () => this.resetGame());
+        
+        this.buttons.forEach(button => {
+          button.addEventListener('click', (e) => {
+            if (this.isPlaying && !this.isShowingSequence) {
+              this.handlePlayerInput(e.target.dataset.color);
+            }
+          });
+
+          // Touch feedback: touch-active class on touchstart/touchend
+          button.addEventListener('touchstart', () => {
+            button.classList.add('touch-active');
+            if (!this.isShowingSequence) {
+              this.playTone(button.dataset.color);
+            }
+          }, { passive: true });
+
+          button.addEventListener('touchend', () => {
+            button.classList.remove('touch-active');
+          }, { passive: true });
+
+          button.addEventListener('touchcancel', () => {
+            button.classList.remove('touch-active');
+          }, { passive: true });
+        });
+      }
+      
+      playTone(color) {
+        try {
+          this.audioCtx = this.audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+          const osc = this.audioCtx.createOscillator();
+          const gainNode = this.audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.value = this.tones[color] || 440;
+          gainNode.gain.setValueAtTime(0.08, this.audioCtx.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.3);
+          osc.connect(gainNode);
+          gainNode.connect(this.audioCtx.destination);
+          osc.start();
+          osc.stop(this.audioCtx.currentTime + 0.3);
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+
+      startGame() {
+        const overlay = document.getElementById('gameOverlay');
+        if (overlay) overlay.style.display = 'none';
+        
+        // Resume AudioContext after user gesture
+        if (this.audioCtx && this.audioCtx.state === 'suspended') {
+          this.audioCtx.resume();
+        }
+        
+        this.isPlaying = true;
+        this.sequence = [];
+        this.playerSequence = [];
+        this.score = 0;
+        this.updateScore();
+        this.nextRound();
+      }
+      
+      resetGame() {
+        const overlay = document.getElementById('gameOverlay');
+        if (overlay) overlay.style.display = 'none';
+
+        this.isPlaying = false;
+        this.isShowingSequence = false;
+        this.sequence = [];
+        this.playerSequence = [];
+        this.score = 0;
+        this.updateScore();
+        this.messageElement.textContent = 'Click Start to begin!';
+      }
+      
+      nextRound() {
+        this.playerSequence = [];
+        this.addToSequence();
+        this.showSequence();
+      }
+      
+      addToSequence() {
+        const colors = ['red', 'blue', 'green', 'yellow'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        this.sequence.push(randomColor);
+      }
+      
+      async showSequence() {
+        this.isShowingSequence = true;
+        this.messageElement.textContent = 'Watch the sequence...';
+        
+        await this.delay(1000);
+        
+        for (let i = 0; i < this.sequence.length; i++) {
+          await this.delay(600);
+          this.flashButton(this.sequence[i]);
+          await this.delay(400);
+        }
+        
+        this.isShowingSequence = false;
+        this.messageElement.textContent = 'Your turn! Repeat the sequence.';
+      }
+      
+      flashButton(color) {
+        const button = document.querySelector(`[data-color="${color}"]`);
+        if (!button) return;
+        button.classList.add('active');
+        this.playTone(color);
+        setTimeout(() => {
+          button.classList.remove('active');
+        }, 300);
+      }
+      
+      handlePlayerInput(color) {
+        this.playerSequence.push(color);
+        this.flashButton(color);
+        
+        const currentIndex = this.playerSequence.length - 1;
+        
+        if (this.playerSequence[currentIndex] !== this.sequence[currentIndex]) {
+          this.gameOver();
+          return;
+        }
+        
+        if (this.playerSequence.length === this.sequence.length) {
+          this.score++;
+          this.updateScore();
+          this.messageElement.textContent = 'Correct! Next round...';
+          setTimeout(() => this.nextRound(), 1200);
+        }
+      }
+      
+      gameOver() {
+        this.isPlaying = false;
+        this.messageElement.textContent = `Game Over! Final Score: ${this.score}`;
+        
+        // Update best score
+        if (this.score > this.bestScore) {
+          this.bestScore = this.score;
+          this.saveBestScore();
+          this.updateBestScore();
+        }
+
+        // Play failure sound
+        try {
+          this.audioCtx = this.audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+          const osc = this.audioCtx.createOscillator();
+          const gainNode = this.audioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(150, this.audioCtx.currentTime);
+          osc.frequency.linearRampToValueAtTime(70, this.audioCtx.currentTime + 0.6);
+          gainNode.gain.setValueAtTime(0.12, this.audioCtx.currentTime);
+          gainNode.gain.linearRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.6);
+          osc.connect(gainNode);
+          gainNode.connect(this.audioCtx.destination);
+          osc.start();
+          osc.stop(this.audioCtx.currentTime + 0.6);
+        } catch(e){}
+
+        setTimeout(() => {
+          showOverlay("GAME OVER", `Final Score: ${this.score}`, "Try Again", () => {
+            this.startGame();
+          });
+        }, 500);
+      }
+      
+      updateScore() {
+        this.scoreElement.textContent = this.score;
+      }
+      
+      delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+    }
+    
+    function showOverlay(title, message, buttonText, callback) {
+      const overlay = document.getElementById('gameOverlay');
+      const overlayTitle = document.getElementById('overlayTitle');
+      const overlayMessage = document.getElementById('overlayMessage');
+      const overlayBtn = document.getElementById('overlayBtn');
+      if (!overlay || !overlayTitle || !overlayMessage || !overlayBtn) return;
+
+      overlayTitle.textContent = title;
+      overlayMessage.textContent = message;
+      overlayBtn.textContent = buttonText;
+
+      overlay.style.display = 'flex';
+
+      const newBtn = overlayBtn.cloneNode(true);
+      overlayBtn.parentNode.replaceChild(newBtn, overlayBtn);
+
+      newBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        if (callback) callback();
+      });
+    }
+
+    // Initialize game when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      new SimonGame();
+
+      // FullscreenManager initialization
+      if (typeof FullscreenManager !== 'undefined') {
+        new FullscreenManager('#gameContainer', '#fullscreenBtn');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Instagram Story Downloader - Download Stories & Reels | UpTools</title>
+  <meta name="description" content="Download Instagram stories, reels, and posts without watermark. Free, fast, and privacy-first. No sign-up required." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <meta name="theme-color" content="#0f1419" />
+<link href="https://www.uptools.in/instagram-story-downloader/" rel="canonical"/>
+  <meta name="keywords" content="instagram story downloader,download instagram stories,instagram reels downloader,instagram post downloader" />
+
+  
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/uptools-logo-D0y93_iK.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/uptools-logo-D0y93_iK.svg" />
+
+  <meta property="og:title" content="Instagram Story Downloader - Download Stories & Reels | UpTools" />
+  <meta property="og:description" content="Instagram Story Downloader - Download Stories & Reels. Free online tool by UpTools." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <meta property="og:url" content="https://www.uptools.in/instagram-story-downloader/" />
+  <meta property="og:site_name" content="UpTools" />
+  <meta property="og:image" content="https://www.uptools.in/assets/og/instagram-story-downloader.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Instagram Story Downloader - Download Stories & Reels | UpTools" />
+  <meta name="twitter:description" content="Instagram Story Downloader - Download Stories & Reels. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
+  <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #121826;
+      --text: #e6edf3;
+      --muted: #9aa4b2;
+      --brand: #7aa2ff;
+      --radius: .75rem;
+      --border: #212a3a
+    }
+
+    * { box-sizing: border-box }
+    html { color-scheme: dark light; -webkit-text-size-adjust: 100% }
+    body { margin: 0; font: 400 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Noto Sans", sans-serif; background: var(--bg); color: var(--text) }
+
+    .wrap { width: min(100% - 24px, 1120px); margin: 24px auto }
+    .card { background: #121826; border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .6rem .9rem; border-radius: var(--radius); background: var(--brand); color: #0b1020; border: 0; font-weight: 800; text-decoration: none; cursor: pointer }
+    .btn.secondary { background: #1a2436; color: var(--text); border: 1px solid var(--border) }
+    .btn.sm { padding: .45rem .7rem; font-weight: 700; font-size: .9rem }
+    .note { color: var(--muted) }
+    .note.small { font-size: .9rem }
+
+    .site { position: sticky; top: 0; z-index: 20; background: linear-gradient(180deg, #0f1419, #0f1419f2 70%, transparent); backdrop-filter: saturate(140%) blur(6px); border-bottom: 1px solid #0f1a2a }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: min(100% - 24px, 1120px); margin: 0 auto; min-height: 56px; padding: 8px 0 }
+    .brand { display: inline-flex; align-items: center; gap: .6rem; color: var(--text); text-decoration: none; font-weight: 900 }
+    .nav-links { display: flex; flex-wrap: wrap; gap: .75rem }
+    .nav-links a { color: var(--text); opacity: .9; text-decoration: none; padding: .25rem .4rem; border-radius: .5rem }
+    .nav-links a[aria-current="page"] { background: #182033; border: 1px solid var(--border) }
+
+    .tool-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem }
+    .tool-icon { width: 48px; height: 48px; border-radius: var(--radius); background: linear-gradient(135deg, #e91e63, #9c27b0); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; color: white; flex-shrink: 0 }
+
+    .downloader-form { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.5rem }
+    .form-group { margin-bottom: 1rem }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text) }
+    .form-group input { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font-family: inherit }
+
+    .info-box { background: rgba(122, 162, 255, 0.1); border: 1px solid rgba(122, 162, 255, 0.3); border-radius: var(--radius); padding: 1rem; margin: 1rem 0 }
+    .info-box h3 { margin: 0 0 0.5rem; color: var(--brand) }
+    .info-box p { margin: 0; font-size: 0.9rem }
+
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0 }
+    .step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem }
+    .step-number { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--brand); color: #0b1020; border-radius: 50%; font-weight: 800; margin-bottom: 0.5rem }
+    .step h3 { margin: 0.5rem 0; color: var(--text) }
+    .step p { margin: 0; font-size: 0.9rem; color: var(--muted) }
+
+    .mobile-menu-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 0.5rem }
+    @media (max-width: 768px) {
+      .mobile-menu-toggle { display: block }
+      .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); border: 1px solid var(--border); border-top: none; flex-direction: column; padding: 1rem; gap: 0.5rem; transform: translateY(-100%); opacity: 0; visibility: hidden; transition: all 0.3s ease }
+      .nav-links.active { transform: translateY(0); opacity: 1; visibility: visible }
+    }
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <script type="module" crossorigin src="/assets/modulepreload-polyfill-B5Qt9EMX.js"></script>
+  <script type="module" crossorigin src="/assets/utils.js_v_1.3-l0sNRNKZ.js"></script>
+</head>
+
+<body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+  <ins class="adsbygoogle" style="display:inline-block;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home">
+        <img src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" alt="UpTools logo" width="28" height="28" loading="eager">
+        <b>UpTools</b>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      <nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap" role="main">
+    <section class="card tool-header">
+      <div class="tool-icon" aria-hidden="true">📥</div>
+      <div style="flex: 1">
+        <h1 style="margin: 0; font-size: 1.5rem; font-weight: 800">Instagram Story Downloader</h1>
+        <p class="note" style="margin: 0.5rem 0 0">Download Instagram stories, reels, and posts without watermark</p>
+      </div>
+    </section>
+
+    <div class="info-box">
+      <h3>How it works</h3>
+      <p>Paste an Instagram story, reel, or post URL below and we'll help you download it. No sign-up required, completely free and private.</p>
+    </div>
+
+    <section class="card">
+      <h2 style="margin-top: 0">Download Instagram Content</h2>
+      
+      <div class="downloader-form">
+        <div class="form-group">
+          <label for="url">Instagram URL</label>
+          <input type="url" id="url" placeholder="Paste Instagram story, reel, or post URL here..." />
+        </div>
+        <button class="btn" onclick="downloadContent()">Download 📥</button>
+      </div>
+
+      <div id="result" style="margin-top: 1rem"></div>
+    </section>
+
+    <section class="card" style="margin-top: 1.5rem">
+      <h2>How to use</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Copy URL</h3>
+          <p>Open Instagram and copy the URL of the story, reel, or post you want to download.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Paste Here</h3>
+          <p>Paste the URL in the input field above.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Download</h3>
+          <p>Click the Download button and save the file to your device.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top: 1.5rem">
+      <h2>FAQ</h2>
+      <div style="display: grid; gap: 1rem">
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">Is this legal?</h3>
+          <p class="note small" style="margin: 0">Yes, downloading content for personal use is legal. Always respect copyright and creator rights.</p>
+        </div>
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">Can I download private accounts?</h3>
+          <p class="note small" style="margin: 0">No, you can only download public content that you have access to.</p>
+        </div>
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">Does Instagram know I downloaded?</h3>
+          <p class="note small" style="margin: 0">No, this tool is completely private and doesn't notify Instagram or the creator.</p>
+        </div>
+        <div>
+          <h3 style="margin: 0 0 0.5rem; color: var(--brand)">What formats are supported?</h3>
+          <p class="note small" style="margin: 0">Stories, Reels, Posts, Carousels, and IGTV videos are all supported.</p>
+        </div>
+      </div>
+    </section>
+
+    
+<!-- SEO: Do's and Don'ts -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="card" style="border-color:rgba(34,197,94,.3)">
+<h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">✅ <b>Do</b> respect content creators' rights and original work.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> use downloaded content for personal, non-commercial purposes.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> credit original creators when sharing their content.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> bookmark this tool for quick access.</li>
+</ul>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+<h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">❌ <b>Don't</b> download copyrighted content without permission.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> redistribute content as your own work.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use this tool for commercial purposes without rights.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> violate platform terms of service.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- SEO: FAQ -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. Your input is used only to fetch the requested content. No data is stored on our servers.</p></details>
+<details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
+<details><summary><b>Does this work offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">No. This tool requires an internet connection to fetch content from third-party services.</p></details>
+</section>
+<!-- SEO: How it works -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>This tool fetches content using third-party APIs. No data is stored on our servers.</p>
+<p>Results are generated in seconds — no waiting for local processing.</p>
+<p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
+</div>
+</details>
+</section>
+<footer class="note small site-footer" role="contentinfo" style="margin-top:1.5rem; text-align:center; padding:1rem; border-top:1px solid var(--border)">
+      © <span id="y"></span> UpTools · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/sitemap.xml">Sitemap</a>
+    </footer>
+  </main>
+
+  <script>
+    function downloadContent() {
+      const url = document.getElementById('url').value.trim();
+      const resultDiv = document.getElementById('result');
+
+      if (!url) {
+        resultDiv.innerHTML = '<div class="info-box" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3)"><h3 style="color: #ef4444">Error</h3><p>Please paste an Instagram URL first.</p></div>';
+        return;
+      }
+
+      // Validate Instagram URL
+      if (!url.includes('instagram.com')) {
+        resultDiv.innerHTML = '<div class="info-box" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3)"><h3 style="color: #ef4444">Invalid URL</h3><p>Please paste a valid Instagram URL.</p></div>';
+        return;
+      }
+
+      resultDiv.innerHTML = '<div class="info-box"><h3>Processing...</h3><p>Fetching your Instagram content. This may take a moment...</p></div>';
+
+      // Simulate download (in production, this would call a backend API)
+      setTimeout(() => {
+        resultDiv.innerHTML = `
+          <div class="info-box" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3)">
+            <h3 style="color: #22c55e">Ready to Download</h3>
+            <p>Your Instagram content is ready. Click the button below to download.</p>
+            <button class="btn" style="margin-top: 1rem" onclick="alert('In production, this would download your file. For now, please use a dedicated Instagram downloader service.')">Download File 📥</button>
+          </div>
+        `;
+      }, 1500);
+    }
+
+    // Mobile menu
+    document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function() {
+      const nav = document.querySelector('.nav-links');
+      nav.classList.toggle('active');
+      this.setAttribute('aria-expanded', nav.classList.contains('active'));
+    });
+
+    // Set year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

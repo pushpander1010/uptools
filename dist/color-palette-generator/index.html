@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Color Palette Generator - HEX RGB HSL | UpTools</title>
+  <meta name="description" content="Generate beautiful color palettes instantly. Get complementary, analogous, triadic, split-complementary, and tetradic harmonies with HEX, RGB, HSL, and HSV values. Free online color palette generator." />
+  <!-- Open Graph -->
+  <meta property="og:image" content="https://www.uptools.in/assets/home.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Color Palette Generator - HEX RGB HSL | UpTools" />
+  <meta name="twitter:description" content="Color Palette Generator - HEX RGB HSL. Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/color-palette-generator/" rel="canonical"/>
+<meta name="keywords" content="color palette generator, color palette generator, online tool, free calculator, uptools" />
+
+  
+  <meta property="og:title" content="Color Palette Generator - HEX RGB HSL | UpTools" />
+  <meta property="og:description" content="Color Palette Generator - HEX RGB HSL. Free online tool by UpTools." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <link rel="stylesheet" href="/style.css?v=1.3.0" />
+  <style>
+    /* =========================================
+       Color Palette Generator – Premium Styles
+       ========================================= */
+    :root {
+      --bg:       #0b0f1a;
+      --surface:  #121a2c;
+      --surface2: #1a2540;
+      --accent:   #22d3ee;
+      --accent2:  #818cf8;
+      --accent3:  #f472b6;
+      --muted:    #64748b;
+      --text:     #e2e8f0;
+      --text-dim: #94a3b8;
+      --border:   rgba(34,211,238,.15);
+      --glow:     0 0 24px rgba(34,211,238,.25);
+      --radius:   14px;
+      --radius-sm:8px;
+      --trans:    all .25s cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ---------- typography ---------- */
+    .page-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 60%, var(--accent3) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: .5rem;
+    }
+    .page-subtitle { color: var(--text-dim); font-size: .95rem; }
+
+    /* ---------- main layout ---------- */
+    .tool-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .tool-hero {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ---------- control bar ---------- */
+    .control-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--glow);
+    }
+
+    .color-input-group {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .color-picker-wrap {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 16px rgba(34,211,238,.45);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .color-picker-wrap input[type="color"] {
+      position: absolute;
+      inset: -6px;
+      width: calc(100% + 12px);
+      height: calc(100% + 12px);
+      border: none;
+      cursor: pointer;
+      background: none;
+      padding: 0;
+    }
+
+    .hex-input {
+      font-family: 'Courier New', monospace;
+      font-size: 1.05rem;
+      font-weight: 700;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--accent);
+      padding: .55rem .9rem;
+      width: 120px;
+      letter-spacing: .05em;
+      transition: var(--trans);
+    }
+    .hex-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(34,211,238,.2);
+    }
+
+    .label-txt { font-size: .8rem; color: var(--text-dim); font-weight: 600; text-transform: uppercase; letter-spacing: .07em; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .65rem 1.4rem;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: .9rem;
+      transition: var(--trans);
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #0b0f1a;
+      box-shadow: 0 4px 20px rgba(34,211,238,.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(34,211,238,.5); }
+    .btn-secondary {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    /* ---------- section titles ---------- */
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    /* ---------- harmony palettes ---------- */
+    .palettes-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .palette-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      transition: var(--trans);
+      animation: fadeInUp .4s ease both;
+    }
+    .palette-card:hover { border-color: rgba(34,211,238,.35); box-shadow: 0 8px 32px rgba(0,0,0,.4); }
+
+    .palette-name {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 1rem;
+    }
+
+    .swatches-row {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+
+    .swatch {
+      flex: 1;
+      min-width: 80px;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--trans);
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0,0,0,.4);
+    }
+    .swatch:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 12px 32px rgba(0,0,0,.6); z-index: 2; }
+
+    .swatch-color {
+      height: 90px;
+      width: 100%;
+      position: relative;
+    }
+
+    .swatch-copy-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      font-size: 1.4rem;
+      transition: var(--trans);
+      text-shadow: 0 2px 8px rgba(0,0,0,.7);
+    }
+    .swatch:hover .swatch-copy-icon { opacity: 1; }
+
+    .swatch-info {
+      background: rgba(0,0,0,.55);
+      padding: .5rem .6rem;
+      text-align: center;
+    }
+    .swatch-hex {
+      font-family: 'Courier New', monospace;
+      font-size: .78rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .04em;
+      display: block;
+      margin-bottom: .35rem;
+    }
+
+    /* WCAG badges */
+    .wcag-badges {
+      display: flex;
+      gap: .25rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-size: .62rem;
+      font-weight: 800;
+      padding: .12rem .32rem;
+      border-radius: 4px;
+      letter-spacing: .05em;
+    }
+    .badge-pass { background: rgba(34,197,94,.25); color: #4ade80; border: 1px solid rgba(34,197,94,.4); }
+    .badge-fail { background: rgba(239,68,68,.15); color: #f87171; border: 1px solid rgba(239,68,68,.3); }
+
+    /* tooltip on hover */
+    .swatch-tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%) scale(.9);
+      transform-origin: bottom center;
+      background: #0d1424;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .75rem 1rem;
+      min-width: 160px;
+      text-align: left;
+      pointer-events: none;
+      opacity: 0;
+      transition: var(--trans);
+      z-index: 100;
+      box-shadow: 0 8px 32px rgba(0,0,0,.7);
+      white-space: nowrap;
+    }
+    .swatch:hover .swatch-tooltip {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+    .tooltip-row {
+      display: flex;
+      justify-content: space-between;
+      gap: .75rem;
+      font-size: .75rem;
+      line-height: 1.7;
+    }
+    .tooltip-label { color: var(--muted); font-weight: 600; }
+    .tooltip-val   { color: var(--text); font-family: 'Courier New', monospace; }
+
+    /* ---------- tints & shades ---------- */
+    .tints-row {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .shade-swatch {
+      flex: 1;
+      min-width: 64px;
+      border-radius: 10px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: var(--trans);
+      box-shadow: 0 2px 8px rgba(0,0,0,.35);
+    }
+    .shade-swatch:hover { transform: translateY(-4px) scale(1.04); box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+
+    .shade-color { height: 70px; }
+    .shade-info {
+      background: rgba(0,0,0,.5);
+      padding: .35rem .4rem;
+      text-align: center;
+    }
+    .shade-hex {
+      font-family: 'Courier New', monospace;
+      font-size: .68rem;
+      color: #fff;
+      display: block;
+      letter-spacing: .03em;
+    }
+    .shade-pct { font-size: .6rem; color: rgba(255,255,255,.55); }
+
+    /* ---------- format display ---------- */
+    .formats-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .formats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .format-item {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      cursor: pointer;
+      transition: var(--trans);
+      position: relative;
+      overflow: hidden;
+    }
+    .format-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: var(--trans);
+    }
+    .format-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .format-item:hover::before { opacity: .06; }
+
+    .format-label {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--accent);
+      margin-bottom: .4rem;
+      position: relative;
+    }
+    .format-value {
+      font-family: 'Courier New', monospace;
+      font-size: .92rem;
+      color: var(--text);
+      font-weight: 700;
+      position: relative;
+      word-break: break-all;
+    }
+    .format-copy-hint {
+      font-size: .68rem;
+      color: var(--muted);
+      margin-top: .25rem;
+      position: relative;
+    }
+
+    /* ---------- color preview large ---------- */
+    .color-preview-strip {
+      height: 8px;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      transition: var(--trans);
+    }
+
+    /* ---------- toast ---------- */
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #0b0f1a;
+      padding: .75rem 1.5rem;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: .9rem;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s, transform .3s;
+      white-space: nowrap;
+      box-shadow: 0 8px 32px rgba(34,211,238,.35);
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ---------- animations ---------- */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .palette-card:nth-child(1) { animation-delay: .05s; }
+    .palette-card:nth-child(2) { animation-delay: .1s; }
+    .palette-card:nth-child(3) { animation-delay: .15s; }
+    .palette-card:nth-child(4) { animation-delay: .2s; }
+    .palette-card:nth-child(5) { animation-delay: .25s; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    @media (max-width: 600px) {
+      .control-bar { flex-direction: column; align-items: stretch; }
+      .color-input-group { justify-content: center; }
+      .swatch-color { height: 70px; }
+      .swatches-row { gap: .5rem; }
+      .swatch { min-width: 60px; }
+    }
+
+    /* ---- breadcrumb ---- */
+    .breadcrumb { padding: .75rem 1rem; }
+    .breadcrumb-list { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem; font-size: .85rem; }
+    .breadcrumb-item { display: flex; align-items: center; }
+    .breadcrumb-item + .breadcrumb-item::before { content: '›'; margin-right: .4rem; color: var(--muted); }
+    .breadcrumb-item a { color: var(--accent); text-decoration: none; }
+    .breadcrumb-item a:hover { text-decoration: underline; }
+    .breadcrumb-item[aria-current="page"] { color: var(--text-dim); }
+
+    /* ---- header ---- */
+    .site { background: rgba(11,15,26,.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 200; }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: .85rem 1.2rem; display: flex; align-items: center; gap: 1rem; }
+    .brand { display: flex; align-items: center; gap: .5rem; text-decoration: none; color: var(--text); font-size: 1.1rem; }
+    .brand b { background: linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .nav-links { display: flex; gap: 1.25rem; margin-left: auto; }
+    .nav-links a { color: var(--text-dim); text-decoration: none; font-size: .9rem; transition: var(--trans); }
+    .nav-links a:hover { color: var(--accent); }
+    .mobile-menu-toggle { display: none; background: none; border: 1px solid var(--border); color: var(--text); padding: .35rem .7rem; border-radius: 6px; cursor: pointer; margin-left: auto; }
+    @media (max-width: 640px) {
+      .mobile-menu-toggle { display: block; }
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--border); padding: 1rem; gap: .75rem; }
+      .nav-links.open { display: flex; }
+    }
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <meta property="og:url" content="https://www.uptools.in/color-palette-generator/" />
+</head>
+<body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+
+<!-- ===== HEADER ===== -->
+<header class="site" role="banner">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="UpTools Home">
+      <img src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" alt="UpTools logo" width="28" height="28" loading="eager">
+      <b>UpTools</b>
+    </a>
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/#tools">Tools</a>
+      <a href="/games/">Games</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== BREADCRUMB ===== -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+      <span itemprop="name">Color Palette Generator</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<!-- ===== ADSENSE ===== -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<!-- ===== MAIN TOOL ===== -->
+<main role="main">
+  <div class="tool-container">
+
+    <!-- Hero -->
+    <div class="tool-hero">
+      <h1 class="page-title">Color Palette Generator</h1>
+      <p class="page-subtitle">Pick a base color and instantly generate beautiful harmony palettes — complementary, analogous, triadic &amp; more.</p>
+    </div>
+
+    <!-- Control Bar -->
+    <div class="control-bar">
+      <div class="color-input-group">
+        <div>
+          <div class="label-txt" style="margin-bottom:.3rem">Base Color</div>
+          <div class="color-picker-wrap" title="Click to pick color">
+            <input type="color" id="colorPicker" value="#22d3ee" aria-label="Base color picker">
+          </div>
+        </div>
+        <div>
+          <div class="label-txt" style="margin-bottom:.3rem">HEX Value</div>
+          <input type="text" class="hex-input" id="hexInput" value="#22d3ee" maxlength="7" placeholder="#rrggbb" aria-label="Hex color input" spellcheck="false">
+        </div>
+      </div>
+      <button class="btn btn-primary" id="randomBtn" title="Generate random palette">
+        🎲 Randomize
+      </button>
+      <button class="btn btn-secondary" id="generateBtn" title="Re-generate palettes">
+        ⚡ Generate
+      </button>
+    </div>
+
+    <!-- Color Preview Strip -->
+    <div class="color-preview-strip" id="previewStrip"></div>
+
+    <!-- Format Panel -->
+    <div class="section-title">🎨 Color Formats</div>
+    <div class="formats-card">
+      <div class="formats-grid" id="formatsGrid"></div>
+    </div>
+
+    <!-- Harmony Palettes -->
+    <div class="section-title">🌈 Harmony Palettes</div>
+    <div class="palettes-grid" id="palettesGrid"></div>
+
+    <!-- Tints & Shades -->
+    <div class="section-title">🔆 Tints &amp; Shades</div>
+    <div class="tints-row" id="tintsRow"></div>
+
+  </div>
+</main>
+
+<!-- ===== TOAST ===== -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- ===== FOOTER ===== -->
+
+<!-- SEO: Do's and Don'ts -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="card" style="border-color:rgba(34,197,94,.3)">
+<h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">✅ <b>Do</b> use this tool to save time on manual calculations.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> double-check your inputs for accuracy.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> share results with teammates using the Share feature.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> bookmark this tool for quick access.</li>
+</ul>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+<h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — this tool doesn't store anything.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use results as professional financial/legal/medical advice.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> forget to verify critical calculations with official tools.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> assume results are guarantees — they are estimates.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- SEO: FAQ -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
+<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+</section>
+<!-- SEO: How it works -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
+<p>Results update instantly as you type — no waiting for server responses.</p>
+<p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
+</div>
+</details>
+</section>
+<footer style="text-align:center; padding: 2rem 1rem; color: var(--muted); font-size: 0.85rem">
+  <nav style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:0.5rem">
+    <a href="/" style="color:var(--accent); text-decoration:none">UpTools</a>
+    <a href="/#tools" style="color:var(--accent); text-decoration:none">All Tools</a>
+    <a href="/games/" style="color:var(--accent); text-decoration:none">Games</a>
+    <a href="/about/" style="color:var(--accent); text-decoration:none">About</a>
+    <a href="/contact/" style="color:var(--accent); text-decoration:none">Contact</a>
+  </nav>
+  <div>© 2025 UpTools. Free tools for everyone.</div>
+</footer>
+
+<script>
+/* ============================================================
+   Color Palette Generator – Pure JS Color Engine
+   ============================================================ */
+
+// ─── Utility: clamp ───────────────────────────────────────────
+const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v));
+
+// ─── HEX ↔ RGB ────────────────────────────────────────────────
+function hexToRgb(hex) {
+  hex = hex.replace(/^#/, '');
+  if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+  const n = parseInt(hex, 16);
+  return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+}
+
+function rgbToHex({ r, g, b }) {
+  return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+}
+
+// ─── RGB ↔ HSL ────────────────────────────────────────────────
+function rgbToHsl({ r, g, b }) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h = 0, s = 0, l = (max + min) / 2;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      case b: h = ((r - g) / d + 4) / 6; break;
+    }
+  }
+  return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+}
+
+function hslToRgb({ h, s, l }) {
+  s /= 100; l /= 100;
+  const k = n => (n + h / 30) % 12;
+  const a = s * Math.min(l, 1 - l);
+  const f = n => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+  return {
+    r: Math.round(f(0) * 255),
+    g: Math.round(f(8) * 255),
+    b: Math.round(f(4) * 255)
+  };
+}
+
+// ─── RGB ↔ HSV ────────────────────────────────────────────────
+function rgbToHsv({ r, g, b }) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min;
+  let h = 0, s = max === 0 ? 0 : d / max, v = max;
+  if (max !== min) {
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      case b: h = ((r - g) / d + 4) / 6; break;
+    }
+  }
+  return { h: Math.round(h * 360), s: Math.round(s * 100), v: Math.round(v * 100) };
+}
+
+// ─── Rotate hue ───────────────────────────────────────────────
+function rotateHue(hsl, degrees) {
+  return { h: ((hsl.h + degrees) % 360 + 360) % 360, s: hsl.s, l: hsl.l };
+}
+
+function hslToHex(hsl) { return rgbToHex(hslToRgb(hsl)); }
+
+// ─── WCAG contrast ────────────────────────────────────────────
+function relativeLuminance({ r, g, b }) {
+  const sRGB = [r, g, b].map(c => {
+    c /= 255;
+    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  });
+  return 0.2126 * sRGB[0] + 0.7152 * sRGB[1] + 0.0722 * sRGB[2];
+}
+
+function contrastRatio(rgb1, rgb2) {
+  const l1 = relativeLuminance(rgb1), l2 = relativeLuminance(rgb2);
+  const lighter = Math.max(l1, l2), darker = Math.min(l1, l2);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+function wcagBadges(hexColor) {
+  const rgb = hexToRgb(hexColor);
+  const black = { r: 0,   g: 0,   b: 0   };
+  const white = { r: 255, g: 255, b: 255 };
+  const cr_black = contrastRatio(rgb, black);
+  const cr_white = contrastRatio(rgb, white);
+
+  const badge = (label, passes_aa, passes_aaa) => {
+    const cls = passes_aa ? 'badge-pass' : 'badge-fail';
+    const symbol = passes_aa ? '✓' : '✗';
+    const extra = passes_aaa ? 'AAA' : 'AA';
+    return `<span class="badge ${cls}">${label} ${symbol}${passes_aaa ? ' ★' : ''}</span>`;
+  };
+
+  return [
+    badge('⚫ AA',  cr_black >= 4.5, false),
+    badge('⚫ AAA', cr_black >= 7,   true),
+    badge('⚪ AA',  cr_white >= 4.5, false),
+    badge('⚪ AAA', cr_white >= 7,   true),
+  ].join('');
+}
+
+// ─── Harmony generators ───────────────────────────────────────
+function generateHarmonies(hex) {
+  const rgb = hexToRgb(hex);
+  const hsl = rgbToHsl(rgb);
+
+  const complementary = [
+    hex,
+    hslToHex(rotateHue(hsl, 180))
+  ];
+
+  const analogous = [
+    hslToHex(rotateHue(hsl, -30)),
+    hex,
+    hslToHex(rotateHue(hsl, 30))
+  ];
+
+  const triadic = [
+    hex,
+    hslToHex(rotateHue(hsl, 120)),
+    hslToHex(rotateHue(hsl, 240))
+  ];
+
+  const splitComplementary = [
+    hex,
+    hslToHex(rotateHue(hsl, 150)),
+    hslToHex(rotateHue(hsl, 210))
+  ];
+
+  const tetradic = [
+    hex,
+    hslToHex(rotateHue(hsl, 90)),
+    hslToHex(rotateHue(hsl, 180)),
+    hslToHex(rotateHue(hsl, 270))
+  ];
+
+  return [
+    { name: 'Complementary', desc: 'Opposite on color wheel', colors: complementary, icon: '↔' },
+    { name: 'Analogous',     desc: '3 adjacent colors',       colors: analogous,     icon: '〰' },
+    { name: 'Triadic',       desc: '3 colors × 120° apart',   colors: triadic,       icon: '△' },
+    { name: 'Split-Complementary', desc: 'Base + two near complement', colors: splitComplementary, icon: '⊻' },
+    { name: 'Tetradic / Square',   desc: '4 colors × 90° apart',      colors: tetradic,      icon: '□' },
+  ];
+}
+
+// ─── Tints & Shades ───────────────────────────────────────────
+function generateTints(hex) {
+  const rgb = hexToRgb(hex);
+  const hsl = rgbToHsl(rgb);
+  const steps = [];
+  for (let i = 10; i <= 90; i += 8) {
+    const l = Math.round(i);
+    steps.push({ hex: hslToHex({ h: hsl.h, s: hsl.s, l }), pct: l });
+  }
+  return steps;
+}
+
+// ─── Format strings ───────────────────────────────────────────
+function formatStrings(hex) {
+  const rgb = hexToRgb(hex);
+  const hsl = rgbToHsl(rgb);
+  const hsv = rgbToHsv(rgb);
+  return {
+    HEX: hex.toUpperCase(),
+    RGB: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`,
+    HSL: `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`,
+    HSV: `hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`
+  };
+}
+
+// ─── Build swatch element ─────────────────────────────────────
+function buildSwatch(hex) {
+  const rgb = hexToRgb(hex);
+  const hsl = rgbToHsl(rgb);
+  const hsv = rgbToHsv(rgb);
+
+  const el = document.createElement('div');
+  el.className = 'swatch';
+  el.title = `Click to copy ${hex}`;
+
+  el.innerHTML = `
+    <div class="swatch-color" style="background:${hex}">
+      <span class="swatch-copy-icon">📋</span>
+      <div class="swatch-tooltip">
+        <div class="tooltip-row"><span class="tooltip-label">HEX</span><span class="tooltip-val">${hex.toUpperCase()}</span></div>
+        <div class="tooltip-row"><span class="tooltip-label">RGB</span><span class="tooltip-val">${rgb.r}, ${rgb.g}, ${rgb.b}</span></div>
+        <div class="tooltip-row"><span class="tooltip-label">HSL</span><span class="tooltip-val">${hsl.h}° ${hsl.s}% ${hsl.l}%</span></div>
+        <div class="tooltip-row"><span class="tooltip-label">HSV</span><span class="tooltip-val">${hsv.h}° ${hsv.s}% ${hsv.v}%</span></div>
+      </div>
+    </div>
+    <div class="swatch-info">
+      <span class="swatch-hex">${hex.toUpperCase()}</span>
+      <div class="wcag-badges">${wcagBadges(hex)}</div>
+    </div>
+  `;
+
+  el.addEventListener('click', () => copyToClipboard(hex.toUpperCase()));
+  return el;
+}
+
+// ─── Render palettes ──────────────────────────────────────────
+function renderPalettes(hex) {
+  const grid = document.getElementById('palettesGrid');
+  grid.innerHTML = '';
+  const harmonies = generateHarmonies(hex);
+  harmonies.forEach(({ name, desc, colors, icon }) => {
+    const card = document.createElement('div');
+    card.className = 'palette-card';
+    const header = document.createElement('div');
+    header.className = 'palette-name';
+    header.textContent = `${icon} ${name} — ${desc}`;
+    const row = document.createElement('div');
+    row.className = 'swatches-row';
+    colors.forEach(c => row.appendChild(buildSwatch(c)));
+    card.appendChild(header);
+    card.appendChild(row);
+    grid.appendChild(card);
+  });
+}
+
+// ─── Render tints & shades ───────────────────────────────────
+function renderTints(hex) {
+  const row = document.getElementById('tintsRow');
+  row.innerHTML = '';
+  const steps = generateTints(hex);
+  steps.forEach(({ hex: h, pct }) => {
+    const sw = document.createElement('div');
+    sw.className = 'shade-swatch';
+    sw.title = `${h.toUpperCase()} (L${pct}%) — Click to copy`;
+    sw.innerHTML = `
+      <div class="shade-color" style="background:${h}"></div>
+      <div class="shade-info">
+        <span class="shade-hex">${h.toUpperCase()}</span>
+        <span class="shade-pct">L${pct}%</span>
+      </div>
+    `;
+    sw.addEventListener('click', () => copyToClipboard(h.toUpperCase()));
+    row.appendChild(sw);
+  });
+}
+
+// ─── Render format panel ──────────────────────────────────────
+function renderFormats(hex) {
+  const grid = document.getElementById('formatsGrid');
+  grid.innerHTML = '';
+  const fmts = formatStrings(hex);
+  Object.entries(fmts).forEach(([label, value]) => {
+    const item = document.createElement('div');
+    item.className = 'format-item';
+    item.innerHTML = `
+      <div class="format-label">${label}</div>
+      <div class="format-value">${value}</div>
+      <div class="format-copy-hint">Click to copy</div>
+    `;
+    item.addEventListener('click', () => copyToClipboard(value));
+    grid.appendChild(item);
+  });
+}
+
+// ─── Render preview strip ─────────────────────────────────────
+function renderStrip(hex) {
+  const hsl = rgbToHsl(hexToRgb(hex));
+  const stops = [];
+  for (let i = 0; i < 360; i += 30) {
+    stops.push(hslToHex({ h: i, s: hsl.s, l: hsl.l }));
+  }
+  document.getElementById('previewStrip').style.background =
+    `linear-gradient(to right, ${stops.join(', ')})`;
+}
+
+// ─── Master render ────────────────────────────────────────────
+function render(hex) {
+  renderStrip(hex);
+  renderFormats(hex);
+  renderPalettes(hex);
+  renderTints(hex);
+}
+
+// ─── Toast ────────────────────────────────────────────────────
+let toastTimer = null;
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast(`✓ Copied: ${text}`);
+  }).catch(() => {
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+    showToast(`✓ Copied: ${text}`);
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ─── Random hex ───────────────────────────────────────────────
+function randomHex() {
+  const h = Math.floor(Math.random() * 360);
+  const s = 60 + Math.floor(Math.random() * 30);
+  const l = 45 + Math.floor(Math.random() * 20);
+  return hslToHex({ h, s, l });
+}
+
+// ─── Sync inputs ──────────────────────────────────────────────
+const picker  = document.getElementById('colorPicker');
+const hexInput = document.getElementById('hexInput');
+
+function isValidHex(v) { return /^#[0-9a-fA-F]{6}$/.test(v); }
+
+function applyColor(hex) {
+  hex = hex.toLowerCase();
+  picker.value  = hex;
+  hexInput.value = hex;
+  render(hex);
+}
+
+picker.addEventListener('input', () => {
+  const hex = picker.value;
+  hexInput.value = hex;
+  render(hex);
+});
+
+hexInput.addEventListener('input', () => {
+  let v = hexInput.value.trim();
+  if (!v.startsWith('#')) v = '#' + v;
+  if (isValidHex(v)) {
+    picker.value = v;
+    render(v);
+  }
+});
+
+hexInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    let v = hexInput.value.trim();
+    if (!v.startsWith('#')) v = '#' + v;
+    if (isValidHex(v)) applyColor(v);
+  }
+});
+
+document.getElementById('randomBtn').addEventListener('click', () => {
+  const hex = randomHex();
+  applyColor(hex);
+  showToast('🎲 Random palette generated!');
+});
+
+document.getElementById('generateBtn').addEventListener('click', () => {
+  let v = hexInput.value.trim();
+  if (!v.startsWith('#')) v = '#' + v;
+  if (isValidHex(v)) { render(v); showToast('⚡ Palette updated!'); }
+});
+
+// ─── Mobile nav toggle ────────────────────────────────────────
+const toggle = document.querySelector('.mobile-menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+toggle.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', open);
+});
+
+// ─── Initial render ───────────────────────────────────────────
+render('#22d3ee');
+</script>
+
+<!-- JSON-LD Structured Data -->
+
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Color Palette Generator free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's completely free with no sign-ups required."}}, {"@type": "Question", "name": "Is Color Palette Generator private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All calculations run in your browser. No data is uploaded."}}, {"@type": "Question", "name": "Does Color Palette Generator work on mobile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All tools are mobile-responsive and work on any device."}}]}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.uptools.in/"}, {"@type": "ListItem", "position": 2, "name": "Color Palette Generator", "item": "https://www.uptools.in/color-palette-generator/"}]}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Color Palette Generator",
+  "url": "https://uptools.dev/color-palette-generator/",
+  "description": "Generate beautiful color palettes with complementary, analogous, triadic, split-complementary, and tetradic harmonies. Get HEX, RGB, HSL, and HSV values instantly.",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "creator": { "@type": "Organization", "name": "UpTools", "url": "https://uptools.dev" }
+}
+</script>
+
+</body>
+</html>

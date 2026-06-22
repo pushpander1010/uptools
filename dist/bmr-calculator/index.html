@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>BMR Calculator – Basal Metabolic Rate (3 Formulas) | UpTools</title>
+  <meta name="description" content="Free BMR calculator using Mifflin-St Jeor, Harris-Benedict & Katch-McArdle formulas. Find your Basal Metabolic Rate, see TDEE at every activity level. Imperial & metric."/>
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+<link href="https://www.uptools.in/bmr-calculator/" rel="canonical"/>
+<meta name="keywords" content="bmr calculator, bmr calculator, online tool, free calculator, uptools" />
+
+  
+  <meta property="og:title" content="BMR Calculator – Basal Metabolic Rate (3 Formulas) | UpTools" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="UpTools">
+  <meta property="og:url" content="https://www.uptools.in/bmr-calculator/" />
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="BMR Calculator – Basal Metabolic Rate (3 Formulas) | UpTools" />
+  <meta name="twitter:description" content="BMR Calculator – Basal Metabolic Rate (3 Formulas). Free online tool by UpTools." />
+  <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
+  <link rel="icon" type="image/svg+xml" href="/assets/uptools-logo-D0y93_iK.svg"/>
+  <link rel="stylesheet" href="/style.css?v=1.3.0"/>
+  <style>
+    :root{--accent:#f472b6;--accent-2:#fb923c;}
+    body{background:radial-gradient(1100px 600px at 10% -5%,#1a0210 0%,var(--bg) 50%) fixed;}
+    .wrap{max-width:840px;margin:0 auto;padding:1rem 1rem 3rem;}
+    .tool-hero{text-align:center;padding:1.5rem 0 1rem;}
+    .tool-hero h1{font-size:clamp(1.4rem,4vw,2.2rem);background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .unit-row{display:flex;gap:.5rem;justify-content:center;margin-bottom:1rem;}
+    .unit-btn{padding:.45rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-weight:700;cursor:pointer;transition:all .18s;}
+    .unit-btn.active{background:var(--accent);color:#0b0f1a;}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;}
+    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
+
+    @media(max-width:480px){.form-grid{grid-template-columns:1fr;}}
+    .field label{display:block;margin-bottom:.3rem;font-weight:700;color:var(--muted);font-size:.85rem;}
+    .field input,.field select{width:100%;padding:.6rem .75rem;border-radius:10px;background:#0a1224;border:1px solid var(--border);color:var(--text);font:inherit;}
+    .field input:focus{border-color:var(--accent);outline:none;}
+    .sex-row{display:flex;gap:.5rem;}
+    .sx-btn{flex:1;padding:.55rem;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-weight:700;cursor:pointer;transition:all .18s;}
+    .sx-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b0f1a;}
+    .calc-btn{width:100%;padding:.9rem;font-size:1.05rem;margin-top:.75rem;}
+    /* Results */
+    .res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin:1rem 0;}
+    .res-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem;text-align:center;box-shadow:var(--glow-soft);}
+    .res-card.best{border-color:var(--accent);box-shadow:0 0 18px rgba(244,114,182,.25);}
+    .res-val{font-size:1.8rem;font-weight:900;color:var(--accent);line-height:1.1;}
+    .res-name{font-size:.85rem;font-weight:700;margin:.25rem 0 .1rem;}
+    .res-desc{font-size:.75rem;color:var(--muted);}
+    /* Activity table */
+    .act-table{width:100%;border-collapse:collapse;font-size:.84rem;margin-top:.75rem;}
+    .act-table th{text-align:left;padding:.5rem .75rem;color:var(--muted);font-weight:700;border-bottom:1px solid var(--border);}
+    .act-table td{padding:.5rem .75rem;border-bottom:1px solid rgba(255,255,255,.04);}
+    .act-table td:last-child{color:var(--accent);font-weight:700;text-align:right;}
+    .act-table tr:last-child td{border-bottom:none;}
+  
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+</style>
+  <meta property="og:description" content="BMR Calculator – Basal Metabolic Rate (3 Formulas). Free online tool by UpTools." />
+</head>
+<body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+
+<header class="site" role="banner">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="UpTools Home">
+      <img src="data:image/svg+xml,%3csvg%20width='512'%20height='512'%20viewBox='0%200%20120%20120'%20xmlns='http://www.w3.org/2000/svg'%20role='img'%20aria-label='UpTools%20icon'%3e%3cdefs%3e%3clinearGradient%20id='ut-grad'%20x1='0'%20y1='0'%20x2='120'%20y2='120'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20offset='0'%20stop-color='%230EA5E9'%3e%3c/stop%3e%3cstop%20offset='0.5'%20stop-color='%2306B6D4'%3e%3c/stop%3e%3cstop%20offset='1'%20stop-color='%2322C55E'%3e%3c/stop%3e%3c/linearGradient%3e%3cfilter%20id='green-glow'%20x='-50%25'%20y='-50%25'%20width='200%25'%20height='200%25'%3e%3cfeDropShadow%20dx='0'%20dy='0'%20stdDeviation='3'%20flood-color='%2322C55E'%20flood-opacity='1'%3e%3c/feDropShadow%3e%3c/filter%3e%3c/defs%3e%3c!--%20Shield%20--%3e%3cpath%20d='M60%206%20L102%2024%20V60%20C102%2086%2085%20108%2060%20114%20C35%20108%2018%2086%2018%2060%20V24%20Z'%20fill='url(%23ut-grad)'%3e%3c/path%3e%3c!--%20AI%20Chip%20Icon%20--%3e%3cg%20stroke='white'%20stroke-width='2'%20fill='none'%20filter='url(%23green-glow)'%3e%3c!--%20Chip%20body%20--%3e%3crect%20x='40'%20y='40'%20width='40'%20height='40'%20rx='4'%20ry='4'%20fill='none'%3e%3c/rect%3e%3c!--%20Inner%20pattern%20--%3e%3cpath%20d='M50%2050h20v20H50z'%3e%3c/path%3e%3c!--%20Circuit%20lines%20--%3e%3cline%20x1='60'%20y1='40'%20x2='60'%20y2='34'%3e%3c/line%3e%3cline%20x1='60'%20y1='80'%20x2='60'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='60'%20x2='34'%20y2='60'%3e%3c/line%3e%3cline%20x1='80'%20y1='60'%20x2='86'%20y2='60'%3e%3c/line%3e%3c!--%20Extra%20small%20circuits%20--%3e%3cline%20x1='46'%20y1='40'%20x2='46'%20y2='34'%3e%3c/line%3e%3cline%20x1='74'%20y1='40'%20x2='74'%20y2='34'%3e%3c/line%3e%3cline%20x1='46'%20y1='80'%20x2='46'%20y2='86'%3e%3c/line%3e%3cline%20x1='74'%20y1='80'%20x2='74'%20y2='86'%3e%3c/line%3e%3cline%20x1='40'%20y1='46'%20x2='34'%20y2='46'%3e%3c/line%3e%3cline%20x1='40'%20y1='74'%20x2='34'%20y2='74'%3e%3c/line%3e%3cline%20x1='80'%20y1='46'%20x2='86'%20y2='46'%3e%3c/line%3e%3cline%20x1='80'%20y1='74'%20x2='86'%20y2='74'%3e%3c/line%3e%3c/g%3e%3c/svg%3e" alt="UpTools logo" width="28" height="28" loading="eager">
+      <b>UpTools</b>
+    </a>
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/#tools">Tools</a>
+      <a href="/games/">Games</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"/>
+    </li>
+    <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+      <span itemprop="name">BMR Calculator</span><meta itemprop="position" content="2"/>
+    </li>
+  </ol>
+</nav>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+
+<main role="main" class="wrap">
+  <div class="tool-hero">
+    <h1>🔥 BMR Calculator</h1>
+    <p>Mifflin-St Jeor · Harris-Benedict · Katch-McArdle · TDEE at every activity level</p>
+  </div>
+
+  <div class="unit-row">
+    <button class="unit-btn active" id="impBtn" onclick="setUnit('imperial')">Imperial (lbs, ft/in)</button>
+    <button class="unit-btn" id="metBtn" onclick="setUnit('metric')">Metric (kg, cm)</button>
+  </div>
+
+  <div class="card" style="padding:1.25rem;margin-bottom:1rem;">
+    <div class="form-grid">
+      <div class="field">
+        <label>Age (years)</label>
+        <input aria-label="Age (years)" id="age" type="number" min="10" max="100" value="30"/>
+      </div>
+      <div class="field">
+        <label>Sex</label>
+        <div class="sex-row">
+          <button class="sx-btn active" id="mBtn" onclick="setSex('male')">♂ Male</button>
+          <button class="sx-btn" id="fBtn" onclick="setSex('female')">♀ Female</button>
+        </div>
+      </div>
+      <div class="field" id="hImperial">
+        <label>Height</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem;">
+          <input aria-label="Sex" id="hFt" type="number" min="3" max="8" value="5" placeholder="ft"/>
+          <input aria-label="Sex" id="hIn" type="number" min="0" max="11" value="10" placeholder="in"/>
+        </div>
+      </div>
+      <div class="field" id="hMetric" style="display:none">
+        <label>Height (cm)</label>
+        <input aria-label="Height" id="hCm" type="number" min="100" max="250" value="178"/>
+      </div>
+      <div class="field">
+        <label id="wLabel">Weight (lbs)</label>
+        <input aria-label="Height (cm)" id="weight" type="number" min="50" max="500" value="170"/>
+      </div>
+      <div class="field">
+        <label>Body Fat % <span style="font-weight:400;color:var(--muted)">(optional — for Katch-McArdle)</span></label>
+        <input aria-label="Height (cm)" id="bf" type="number" min="1" max="70" step="0.1" placeholder="e.g. 20"/>
+      </div>
+    </div>
+    <button class="btn calc-btn" onclick="calculate()">🔥 Calculate BMR</button>
+  </div>
+
+  <div id="results" style="display:none;">
+    <h3 style="text-align:center;margin:0 0 .75rem;">Your BMR Results</h3>
+    <div class="res-grid" id="resGrid"></div>
+
+    <div class="card" style="padding:1rem;margin-top:1rem;">
+      <h3 style="margin:0 0 .5rem;">📊 TDEE at Each Activity Level <span style="font-size:.8rem;color:var(--muted)">(based on Mifflin-St Jeor)</span></h3>
+      <table class="act-table" id="actTable">
+        <thead><tr><th>Activity Level</th><th>Description</th><th>Daily Calories</th></tr></thead>
+        <tbody id="actBody"></tbody>
+      </table>
+    </div>
+
+    <div class="card" style="padding:1rem;margin-top:1rem;">
+      <h3 style="margin:0 0 .5rem;">📖 Which Formula Should I Use?</h3>
+      <p style="color:var(--muted);font-size:.88rem;line-height:1.7;">
+        <strong style="color:var(--text)">Mifflin-St Jeor</strong> is the most accurate for most people and is recommended by the American Dietetic Association.
+        <strong style="color:var(--text)">Harris-Benedict</strong> is an older formula, slightly less accurate.
+        <strong style="color:var(--text)">Katch-McArdle</strong> is the most accurate if you know your body fat %, as it accounts for lean mass.
+      </p>
+    </div>
+  </div>
+</main>
+
+
+<!-- SEO: Do's and Don'ts -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div class="card" style="border-color:rgba(34,197,94,.3)">
+<h3 style="color:#22c55e;margin-top:0;font-size:1rem">✅ Do's</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">✅ <b>Do</b> use this tool to save time on manual calculations.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> double-check your inputs for accuracy.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> share results with teammates using the Share feature.</li>
+<li style="padding:.35rem 0">✅ <b>Do</b> bookmark this tool for quick access.</li>
+</ul>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+<h3 style="color:#ef4444;margin-top:0;font-size:1rem">❌ Don'ts</h3>
+<ul style="list-style:none;padding:0;margin:0;color:#9aa4b2">
+<li style="padding:.35rem 0">❌ <b>Don't</b> enter sensitive personal data — this tool doesn't store anything.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> use results as professional financial/legal/medical advice.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> forget to verify critical calculations with official tools.</li>
+<li style="padding:.35rem 0">❌ <b>Don't</b> assume results are guarantees — they are estimates.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- SEO: FAQ -->
+<section class="card" style="margin-top:16px">
+<h2 style="margin-top:0">Frequently Asked Questions</h2>
+<details><summary><b>Is this tool free to use?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All UpTools calculators are completely free, with no sign-ups required.</p></details>
+<details><summary><b>Is my data private?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All calculations run locally in your browser. Nothing is uploaded to any server.</p></details>
+<details><summary><b>Does it work on mobile?</b></summary><p style="padding:6px 0;color:#9aa4b2">Yes. All tools are mobile-responsive and work on any device — phone, tablet, or desktop.</p></details>
+<details><summary><b>Can I use this offline?</b></summary><p style="padding:6px 0;color:#9aa4b2">Most tools work offline after the initial page load. No internet needed for calculations.</p></details>
+</section>
+<!-- SEO: How it works -->
+<section class="card" style="margin-top:16px">
+<details open>
+<summary style="cursor:pointer;font-weight:700;font-size:1.1rem;padding:4px 0">📐 How This Tool Works</summary>
+<div style="margin-top:8px;color:#9aa4b2">
+<p>This tool computes results entirely in your browser using JavaScript. No data is sent to any server, ensuring your privacy.</p>
+<p>Results update instantly as you type — no waiting for server responses.</p>
+<p style="margin-top:8px">Also try: <a href="/calculator/">Calculator</a> · <a href="/converter/">Converter</a> · <a href="/generator/">Generator</a></p>
+</div>
+</details>
+</section>
+<footer style="text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.85rem;">
+  <nav style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:.5rem;">
+    <a href="/" style="color:var(--accent);text-decoration:none">UpTools</a>
+    <a href="/tdee-calculator/" style="color:var(--accent);text-decoration:none">TDEE Calculator</a>
+    <a href="/bmi-calculator/" style="color:var(--accent);text-decoration:none">BMI Calculator</a>
+    <a href="/calorie-calculator/" style="color:var(--accent);text-decoration:none">Calorie Calculator</a>
+  </nav>
+  <div>© 2025 UpTools · Free tools for everyone.</div>
+</footer>
+
+<script>
+let unit='imperial', sex='male';
+const acts=[
+  {mult:1.2,name:'Sedentary',desc:'Little/no exercise, desk job'},
+  {mult:1.375,name:'Lightly Active',desc:'Light exercise 1-3 days/week'},
+  {mult:1.55,name:'Moderately Active',desc:'Moderate exercise 3-5 days/week'},
+  {mult:1.725,name:'Very Active',desc:'Hard exercise 6-7 days/week'},
+  {mult:1.9,name:'Extra Active',desc:'Very hard exercise or physical job'},
+];
+function setUnit(u){unit=u;document.getElementById('impBtn').classList.toggle('active',u==='imperial');document.getElementById('metBtn').classList.toggle('active',u==='metric');document.getElementById('hImperial').style.display=u==='imperial'?'':'none';document.getElementById('hMetric').style.display=u==='metric'?'':'none';document.getElementById('wLabel').textContent=u==='imperial'?'Weight (lbs)':'Weight (kg)';}
+function setSex(s){sex=s;document.getElementById('mBtn').classList.toggle('active',s==='male');document.getElementById('fBtn').classList.toggle('active',s==='female');}
+function getHcm(){if(unit==='metric')return parseFloat(document.getElementById('hCm').value)||178;const ft=parseFloat(document.getElementById('hFt').value)||5;const ins=parseFloat(document.getElementById('hIn').value)||10;return(ft*12+ins)*2.54;}
+function getWkg(){const w=parseFloat(document.getElementById('weight').value)||70;return unit==='imperial'?w*0.453592:w;}
+function calculate(){
+  const age=parseFloat(document.getElementById('age').value)||30;
+  const h=getHcm(),w=getWkg();
+  const bf=parseFloat(document.getElementById('bf').value);
+  // Mifflin-St Jeor
+  const msj=Math.round(10*w+6.25*h-5*age+(sex==='male'?5:-161));
+  // Harris-Benedict
+  const hb=Math.round(sex==='male'?(88.362+13.397*w+4.799*h-5.677*age):(447.593+9.247*w+3.098*h-4.330*age));
+  // Katch-McArdle (needs BF)
+  let km=null;
+  if(!isNaN(bf)&&bf>0){const lbm=w*(1-bf/100);km=Math.round(370+21.6*lbm);}
+
+  const cards=[
+    {name:'Mifflin-St Jeor',val:msj,desc:'Most accurate for general population',best:true},
+    {name:'Harris-Benedict',val:hb,desc:'Classic formula (1919, revised 1984)',best:false},
+    {name:'Katch-McArdle',val:km,desc:'Most accurate if body fat % is known',best:false},
+  ];
+  document.getElementById('resGrid').innerHTML=cards.map(c=>
+    c.val===null?`<div class="res-card"><div class="res-val" style="font-size:1.1rem;color:var(--muted)">Enter BF%</div><div class="res-name">${c.name}</div><div class="res-desc">${c.desc}</div></div>`
+    :`<div class="res-card${c.best?' best':''}"><div class="res-val">${c.val.toLocaleString()}</div><div class="res-name">${c.name}${c.best?' ✓':''}</div><div class="res-desc">${c.desc}</div></div>`
+  ).join('');
+
+  document.getElementById('actBody').innerHTML=acts.map(a=>
+    `<tr><td>${a.name}</td><td style="color:var(--muted);font-size:.8rem;">${a.desc}</td><td>${Math.round(msj*a.mult).toLocaleString()} cal</td></tr>`
+  ).join('');
+
+  document.getElementById('results').style.display='block';
+}
+document.querySelector('.mobile-menu-toggle')?.addEventListener('click',function(){const nav=document.querySelector('.nav-links');this.setAttribute('aria-expanded',nav.classList.toggle('active'));});
+</script>
+</body>
+</html>
