@@ -34,14 +34,18 @@
         <b>UpTools</b>
       </a>
       <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="/#tools">Tools</a>
-        <a href="/income-tax-tool/">Income Tax</a>
-        <a href="/emi-calculator/">EMI</a>
-        <a href="/gst-calculator/">GST</a>
-        <a href="/games/">Games</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
+      <nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
     </div>
   </header><main id="main" class="wrap" role="main"><nav class="note small" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Calculadora de punto de equilibrio</span></nav><section class="card hero" aria-labelledby="title"><div><h1 id="title">Calculadora de punto de equilibrio</h1><p class="note">Descubre cuántas ventas e ingresos necesitas para cubrir tus costos y alcanzar una meta de ganancia.</p><p class="note small" style="margin-top:10px">Idiomas: <a href="/break-even-calculator/">English</a> . <a href="/de/break-even-calculator/">Deutsch</a> . <a href="/fr/break-even-calculator/">Français</a></p></div></section><section class="grid" style="margin-top:16px"><section class="panel"><h2 style="margin-top:0">Datos</h2><div class="field"><label class="label" for="fixedCost">Costos fijos</label><input id="fixedCost" class="input" type="number" value="5000" min="0" step="0.01" /></div><div class="field"><label class="label" for="pricePerUnit">Precio de venta por unidad</label><input id="pricePerUnit" class="input" type="number" value="50" min="0" step="0.01" /></div><div class="field"><label class="label" for="variableCost">Costo variable por unidad</label><input id="variableCost" class="input" type="number" value="20" min="0" step="0.01" /></div><div class="field"><label class="label" for="targetProfit">Objetivo de ganancia</label><input id="targetProfit" class="input" type="number" value="2000" min="0" step="0.01" /></div></section><section class="panel"><h2 style="margin-top:0">Resultado</h2><div class="result" id="result" aria-live="polite"></div></section></section><footer class="note small site-footer" role="contentinfo">&copy; <span id="y"></span> UpTools</footer></main><script type="module">import { $, $$ } from "/scripts/utils.js"; const fmt=(v)=>new Intl.NumberFormat("es-ES",{maximumFractionDigits:2}).format(v); function calc(){const fixed=Number($("#fixedCost").value||0);const price=Number($("#pricePerUnit").value||0);const variable=Number($("#variableCost").value||0);const target=Number($("#targetProfit").value||0);const contribution=price-variable;if(price<=0||contribution<=0){$("#result").textContent="El precio de venta debe ser mayor que el costo variable.";return;}const breakEvenUnits=fixed/contribution;const breakEvenRevenue=breakEvenUnits*price;const targetUnits=(fixed+target)/contribution;$("#result").innerHTML=`<div><strong>Unidades de equilibrio:</strong> ${fmt(Math.ceil(breakEvenUnits))}</div><div class="note small" style="margin-top:6px"><strong>Ingresos de equilibrio:</strong> ${fmt(breakEvenRevenue)}</div><div class="note small" style="margin-top:6px"><strong>Margen por unidad:</strong> ${fmt(contribution)}</div><div class="note small" style="margin-top:6px"><strong>Unidades para la meta:</strong> ${fmt(Math.ceil(targetUnits))}</div>`;} $$("input").forEach((el)=>el.addEventListener("input",calc)); $("#y").textContent=new Date().getFullYear(); calc();</script><script src="/scripts/utils.js" type="module"></script></body></html>

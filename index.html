@@ -170,24 +170,84 @@
       text-decoration: none;
       font-weight: 900
     }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .75rem
+    .brand b {
+      transition: opacity 0.2s ease, max-width 0.3s ease;
+      overflow: hidden;
+      max-width: 0;
+      opacity: 0;
+      white-space: nowrap
+    }
+    .brand:hover b {
+      max-width: 200px;
+      opacity: 1
     }
 
+    .nav-links {
+      position: relative;
+      display: flex;
+      gap: .75rem;
+      align-items: center
+    }
     .nav-links a {
       color: var(--text);
       opacity: .9;
       text-decoration: none;
       padding: .25rem .4rem;
-      border-radius: .5rem
+      border-radius: .5rem;
+      white-space: nowrap
     }
-
     .nav-links a[aria-current="page"] {
       background: #182033;
       border: 1px solid var(--border)
+    }
+    .more-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap
+    }
+    .more-btn:hover {
+      background: rgba(255,255,255,0.12)
+    }
+    .more-btn .arrow {
+      font-size: 10px;
+      transition: transform 0.2s ease
+    }
+    .more-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 200px;
+      background: #0e1628;
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      padding: 6px 0;
+      z-index: 1000
+    }
+    .more-menu.open {
+      display: block
+    }
+    .more-menu a {
+      display: block;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none
+    }
+    .more-menu a:hover {
+      background: rgba(255,255,255,0.08)
     }
 
     /* Hero */
@@ -481,13 +541,17 @@
 </a>
 <button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
 <nav aria-label="Primary" class="nav-links">
-<a aria-current="page" href="/#tools">Tools</a>
-<a href="/income-tax-tool/">Income Tax</a>
-<a href="/emi-calculator/">EMI</a>
-<a href="/gst-calculator/">GST</a>
-<a href="/games/">Games</a>
-<a href="/about/">About</a>
-<a href="/contact/">Contact</a>
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
 </nav>
 </div>
 </header>

@@ -90,4 +90,33 @@ export function initMobileMenu() {
       toggle.setAttribute('aria-expanded', 'false');
     }
   });
+
+  // --- More dropdown behavior ---
+  const moreBtn = document.querySelector('.more-btn');
+  const moreMenu = document.querySelector('.more-menu');
+  if (!moreBtn || !moreMenu) return;
+
+  moreBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = moreMenu.classList.toggle('open');
+    moreBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!moreBtn.contains(e.target) && !moreMenu.contains(e.target)) {
+      moreMenu.classList.remove('open');
+      moreBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close more-menu when a menuitem is clicked
+  moreMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      moreMenu.classList.remove('open');
+      moreBtn.setAttribute('aria-expanded', 'false');
+      // Also close hamburger menu if open
+      navLinks.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
 }

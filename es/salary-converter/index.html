@@ -54,15 +54,19 @@
         <b>UpTools</b>
       </a>
       <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="/#tools">Tools</a>
-        <a href="/income-tax-tool/">Income Tax</a>
-        <a href="/emi-calculator/">EMI</a>
-        <a href="/gst-calculator/">GST</a>
-        <a href="/games/">Games</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
+      <nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
     </div>
   </header>
   <main id="main" class="wrap" role="main"><nav class="note small" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Calculadora de salario</span></nav><section class="card hero" aria-labelledby="title"><div><h1 id="title">Calculadora de salario</h1><p class="note">Convierte ingresos entre hora, día, semana, mes y año. Útil para comparar ofertas laborales, trabajo remoto y tarifas freelance.</p><p class="note small" style="margin-top:10px">Idiomas: <a href="/salary-converter/">English</a> . <a href="/de/salary-converter/">Deutsch</a> . <a href="/fr/salary-converter/">Français</a></p></div></section><section class="tool-grid" style="margin-top:16px"><section class="card-panel"><h2 style="margin-top:0">Datos</h2><div class="field"><label class="label" for="amount">Importe</label><input id="amount" class="input" type="number" value="25" min="0" step="0.01" /></div><div class="field"><label class="label" for="period">Periodo</label><select id="period" class="select"><option value="hourly" selected>Hora</option><option value="daily">Día</option><option value="weekly">Semana</option><option value="monthly">Mes</option><option value="annual">Año</option></select></div><div class="field"><label class="label" for="hoursPerDay">Horas por día</label><input id="hoursPerDay" class="input" type="number" value="8" min="0.1" step="0.1" /></div><div class="field"><label class="label" for="daysPerWeek">Días por semana</label><input id="daysPerWeek" class="input" type="number" value="5" min="0.1" step="0.1" /></div><div class="field"><label class="label" for="weeksPerYear">Semanas por año</label><input id="weeksPerYear" class="input" type="number" value="52" min="1" step="0.1" /></div></section><section class="card-panel"><h2 style="margin-top:0">Resultados</h2><div class="result-grid" id="results" aria-live="polite"></div></section></section><footer class="note small site-footer" role="contentinfo">&copy; <span id="y"></span> UpTools</footer></main>

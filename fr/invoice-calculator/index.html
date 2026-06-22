@@ -34,14 +34,18 @@
         <b>UpTools</b>
       </a>
       <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="/#tools">Tools</a>
-        <a href="/income-tax-tool/">Income Tax</a>
-        <a href="/emi-calculator/">EMI</a>
-        <a href="/gst-calculator/">GST</a>
-        <a href="/games/">Games</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
+      <nav aria-label="Primary" class="nav-links">
+<a href="/">Home</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
     </div>
   </header><main id="main" class="wrap" role="main"><nav class="note small" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Calculateur de facture</span></nav><section class="card hero" aria-labelledby="title"><div><h1 id="title">Calculateur de facture</h1><p class="note">Calculez le total d'une facture pour prestations, produits ou abonnements avec remise et taxe.</p><p class="note small" style="margin-top:10px">Langues : <a href="/invoice-calculator/">English</a> . <a href="/de/invoice-calculator/">Deutsch</a> . <a href="/es/invoice-calculator/">Español</a></p></div></section><section class="grid" style="margin-top:16px"><section class="panel"><h2 style="margin-top:0">Saisie</h2><div class="field"><label class="label" for="qty">Quantité</label><input id="qty" class="input" type="number" value="10" min="0" step="0.01" /></div><div class="field"><label class="label" for="rate">Tarif unitaire</label><input id="rate" class="input" type="number" value="75" min="0" step="0.01" /></div><div class="field"><label class="label" for="discount">Remise %</label><input id="discount" class="input" type="number" value="10" min="0" max="100" step="0.01" /></div><div class="field"><label class="label" for="tax">Taxe %</label><input id="tax" class="input" type="number" value="20" min="0" step="0.01" /></div></section><section class="panel"><h2 style="margin-top:0">Résultat</h2><div class="result" id="result" aria-live="polite"></div></section></section><footer class="note small site-footer" role="contentinfo">&copy; <span id="y"></span> UpTools</footer></main><script type="module">import { $, $$ } from "/scripts/utils.js"; const fmt=(v)=>new Intl.NumberFormat("fr-FR",{maximumFractionDigits:2}).format(v); function calc(){const qty=Number($("#qty").value||0);const rate=Number($("#rate").value||0);const discount=Number($("#discount").value||0);const tax=Number($("#tax").value||0);const subtotal=qty*rate;const discountAmount=subtotal*(discount/100);const afterDiscount=subtotal-discountAmount;const taxAmount=afterDiscount*(tax/100);const total=afterDiscount+taxAmount;$("#result").innerHTML=`<div><strong>Sous-total :</strong> ${fmt(subtotal)}</div><div class="note small" style="margin-top:6px"><strong>Remise :</strong> ${fmt(discountAmount)}</div><div class="note small" style="margin-top:6px"><strong>Taxe :</strong> ${fmt(taxAmount)}</div><div class="note small" style="margin-top:6px"><strong>Total :</strong> ${fmt(total)}</div>`;} $$("input").forEach((el)=>el.addEventListener("input",calc)); $("#y").textContent=new Date().getFullYear(); calc();</script><script src="/scripts/utils.js" type="module"></script></body></html>
