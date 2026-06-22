@@ -1,8 +1,7 @@
 {
-  "name": "income-tax",
+  "name": "uptools",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "dev:worker": "wrangler dev --local",
