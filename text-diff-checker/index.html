@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Text Diff Checker - Compare Text Differences | UpTools</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  <meta name="description" content="Compare two texts side by side with highlighted differences." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b1020" />
+  <link href="https://www.uptools.in/text-diff-checker/" rel="canonical"/>
+  <meta property="og:title" content="Text Diff Checker - Compare Text Differences | UpTools" />
+  <meta property="og:description" content="Compare two texts side by side with highlighted differences." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Text Diff Checker - Compare Text Differences","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
+  </script>
+  <style>
+    .tool-wrap { max-width: 900px; margin: 0 auto; padding: 12px; }
+    .tool-card { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; margin-bottom: 16px; }
+    .btn { background: #6366f1; color: white; border: none; padding: .6rem 1.2rem; border-radius: .5rem; cursor: pointer; font-size: 1rem; font-weight: 600; }
+    .btn:hover { background: #4f46e5; }
+    .input { width: 100%; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .6rem .8rem; font-size: 1rem; box-sizing: border-box; }
+    .output-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; min-height: 200px; white-space: pre-wrap; line-height: 1.6; font-size: .95rem; color: #e6edf3; max-height: 60vh; overflow-y: auto; }
+    .note { color: #9aa4b2; font-size: .85rem; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  </style>
+</head>
+<body>
+  <main class="tool-wrap">
+    <h1 style="font-size:1.5rem;margin-bottom:4px">🔍 Text Diff Checker - Compare Text Differences</h1>
+    <p class="note" style="margin-bottom:16px">Compare two texts side by side with highlighted differences.</p>
+    
+<section class="tool-card"><div class="grid">
+<div><label class="note">Original</label><textarea class="input" id="t1" rows="10" style="font-family:monospace;font-size:.85rem"></textarea></div>
+<div><label class="note">Modified</label><textarea class="input" id="t2" rows="10" style="font-family:monospace;font-size:.85rem"></textarea></div>
+</div>
+<div class="row" style="margin-top:12px"><button class="btn" onclick="diff()">Compare</button><button class="btn" style="background:#374151" onclick="document.getElementById('t1').value=document.getElementById('t2').value;document.getElementById('t2').value=''">Swap</button></div></section>
+<section class="tool-card"><h2 style="margin-top:0">Differences</h2><div id="stats" class="note"></div><div class="output-box" id="out" style="font-family:monospace;font-size:.85rem;white-space:pre-wrap"></div></section>
+<script>
+function diff(){const a=document.getElementById('t1').value.split('\n'),b=document.getElementById('t2').value.split('\n');let h='',add=0,rem=0;const mx=Math.max(a.length,b.length);for(let i=0;i<mx;i++){if(a[i]===b[i]){h+='<span style="color:#9aa4b2">  '+(a[i]||'')+'</span>\n';}else{if(a[i]!==undefined){h+='<span style="color:#ef4444;background:rgba(239,68,68,.15)">- '+a[i]+'</span>\n';rem++;}if(b[i]!==undefined){h+='<span style="color:#22c55e;background:rgba(34,197,94,.15)">+ '+b[i]+'</span>\n';add++;}}}document.getElementById('out').innerHTML=h;document.getElementById('stats').innerHTML='<span style="color:#22c55e">+'+add+'</span> | <span style="color:#ef4444">-'+rem+'</span>';}
+</script>
+    <footer style="margin-top:24px;padding:16px 0;text-align:center;border-top:1px solid #212a3a">
+      <p class="note">© <span id="y"></span> UpTools. Privacy-first utilities.</p>
+    </footer>
+  </main>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

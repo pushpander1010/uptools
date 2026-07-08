@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Pomodoro Timer - Focus Timer Online | UpTools</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  <meta name="description" content="Free Pomodoro timer with customizable focus and break intervals." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b1020" />
+  <link href="https://www.uptools.in/pomodoro-timer/" rel="canonical"/>
+  <meta property="og:title" content="Pomodoro Timer - Focus Timer Online | UpTools" />
+  <meta property="og:description" content="Free Pomodoro timer with customizable focus and break intervals." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Pomodoro Timer - Focus Timer Online","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
+  </script>
+  <style>
+    .tool-wrap { max-width: 900px; margin: 0 auto; padding: 12px; }
+    .tool-card { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; margin-bottom: 16px; }
+    .btn { background: #6366f1; color: white; border: none; padding: .6rem 1.2rem; border-radius: .5rem; cursor: pointer; font-size: 1rem; font-weight: 600; }
+    .btn:hover { background: #4f46e5; }
+    .input { width: 100%; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .6rem .8rem; font-size: 1rem; box-sizing: border-box; }
+    .output-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; min-height: 200px; white-space: pre-wrap; line-height: 1.6; font-size: .95rem; color: #e6edf3; max-height: 60vh; overflow-y: auto; }
+    .note { color: #9aa4b2; font-size: .85rem; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  </style>
+</head>
+<body>
+  <main class="tool-wrap">
+    <h1 style="font-size:1.5rem;margin-bottom:4px">🍅 Pomodoro Timer - Focus Timer Online</h1>
+    <p class="note" style="margin-bottom:16px">Free Pomodoro timer with customizable focus and break intervals.</p>
+    
+<section class="tool-card" style="text-align:center">
+  <div style="font-size:4rem;font-weight:700;color:#6366f1;margin:20px 0;font-variant-numeric:tabular-nums" id="timer">25:00</div>
+  <p class="note" style="font-size:1.1rem" id="label">Focus Time</p>
+  <div class="row" style="justify-content:center;margin-top:16px">
+    <button class="btn" id="start">▶️ Start</button>
+    <button class="btn" style="background:#374151" id="reset">🔄 Reset</button>
+  </div>
+  <div class="row" style="justify-content:center;margin-top:16px">
+    <button class="btn" style="background:#22c55e;font-size:.9rem" onclick="set(25,'Focus')">🎯 25m</button>
+    <button class="btn" style="background:#f59e0b;font-size:.9rem" onclick="set(5,'Short Break')">☕ 5m</button>
+    <button class="btn" style="background:#ef4444;font-size:.9rem" onclick="set(15,'Long Break')">🌴 15m</button>
+  </div>
+</section>
+<section class="tool-card"><h2 style="margin-top:0">Sessions: <span id="cnt">0</span></h2><div id="dots" class="row" style="justify-content:center"></div></section>
+<script>
+let t=1500,running=false,interval,cnt=0;
+function upd(){const m=Math.floor(t/60),s=t%60;document.getElementById('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');document.title=document.getElementById('timer').textContent+' - Pomodoro | UpTools';}
+function set(min,lbl){clearInterval(interval);running=false;t=min*60;document.getElementById('label').textContent=lbl;document.getElementById('start').textContent='▶️ Start';upd();}
+document.getElementById('start').addEventListener('click',()=>{if(running){clearInterval(interval);running=false;document.getElementById('start').textContent='▶️ Start';}else{running=true;document.getElementById('start').textContent='⏸️ Pause';interval=setInterval(()=>{t--;upd();if(t<=0){clearInterval(interval);running=false;cnt++;document.getElementById('cnt').textContent=cnt;document.getElementById('dots').innerHTML+='🍅';document.getElementById('start').textContent='▶️ Start';document.getElementById('label').textContent='Done! 🎉';if(Notification.permission==='granted')new Notification('Pomodoro',{body:'Session complete!'});}},1000);}});
+document.getElementById('reset').addEventListener('click',()=>set(25,'Focus'));
+if('Notification' in window&&Notification.permission==='default')Notification.requestPermission();
+upd();
+</script>
+    <footer style="margin-top:24px;padding:16px 0;text-align:center;border-top:1px solid #212a3a">
+      <p class="note">© <span id="y"></span> UpTools. Privacy-first utilities.</p>
+    </footer>
+  </main>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

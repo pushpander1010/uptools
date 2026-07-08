@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Percentage Calculator - 4 Modes | UpTools</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  <meta name="description" content="Calculate percentages, percentage change, and increase/decrease." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b1020" />
+  <link href="https://www.uptools.in/percentage-calculator-pro/" rel="canonical"/>
+  <meta property="og:title" content="Percentage Calculator - 4 Modes | UpTools" />
+  <meta property="og:description" content="Calculate percentages, percentage change, and increase/decrease." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Percentage Calculator - 4 Modes","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
+  </script>
+  <style>
+    .tool-wrap { max-width: 900px; margin: 0 auto; padding: 12px; }
+    .tool-card { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; margin-bottom: 16px; }
+    .btn { background: #6366f1; color: white; border: none; padding: .6rem 1.2rem; border-radius: .5rem; cursor: pointer; font-size: 1rem; font-weight: 600; }
+    .btn:hover { background: #4f46e5; }
+    .input { width: 100%; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .6rem .8rem; font-size: 1rem; box-sizing: border-box; }
+    .output-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; min-height: 200px; white-space: pre-wrap; line-height: 1.6; font-size: .95rem; color: #e6edf3; max-height: 60vh; overflow-y: auto; }
+    .note { color: #9aa4b2; font-size: .85rem; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  </style>
+</head>
+<body>
+  <main class="tool-wrap">
+    <h1 style="font-size:1.5rem;margin-bottom:4px">% Percentage Calculator - 4 Modes</h1>
+    <p class="note" style="margin-bottom:16px">Calculate percentages, percentage change, and increase/decrease.</p>
+    
+<section class="tool-card">
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <button class="btn" style="background:#6366f1" id="t1" onclick="show(1)">% of Number</button>
+    <button class="btn" style="background:#374151" id="t2" onclick="show(2)">What %</button>
+    <button class="btn" style="background:#374151" id="t3" onclick="show(3)">% Change</button>
+  </div>
+  <div id="c1"><div class="grid"><div><label class="note">What %</label><input class="input" id="a1" type="number"></div><div><label class="note">of</label><input class="input" id="b1" type="number"></div></div><div style="font-size:1.5rem;font-weight:700;color:#6366f1;margin-top:12px" id="r1">0</div></div>
+  <div id="c2" style="display:none"><div class="grid"><div><label class="note">is</label><input class="input" id="a2" type="number"></div><div><label class="note">of</label><input class="input" id="b2" type="number"></div></div><div style="font-size:1.5rem;font-weight:700;color:#6366f1;margin-top:12px" id="r2">0%</div></div>
+  <div id="c3" style="display:none"><div class="grid"><div><label class="note">From</label><input class="input" id="a3" type="number"></div><div><label class="note">To</label><input class="input" id="b3" type="number"></div></div><div style="font-size:1.5rem;font-weight:700;margin-top:12px" id="r3">0%</div></div>
+</section>
+<script>
+function show(n){[1,2,3].forEach(i=>{document.getElementById('c'+i).style.display=i===n?'block':'none';document.getElementById('t'+i).style.background=i===n?'#6366f1':'#374151';});}
+function c1(){document.getElementById('r1').textContent=(+document.getElementById('a1').value/100*(+document.getElementById('b1').value)).toFixed(2);}
+function c2(){document.getElementById('r2').textContent=(+document.getElementById('a2').value/(+document.getElementById('b2').value)*100).toFixed(2)+'%';}
+function c3(){const d=((+document.getElementById('b3').value-(+document.getElementById('a3').value))/(+document.getElementById('a3').value)*100);document.getElementById('r3').textContent=(d>=0?'+':'')+d.toFixed(2)+'%';document.getElementById('r3').style.color=d>=0?'#22c55e':'#ef4444';}
+['a1','b1'].forEach(id=>document.getElementById(id).addEventListener('input',c1));
+['a2','b2'].forEach(id=>document.getElementById(id).addEventListener('input',c2));
+['a3','b3'].forEach(id=>document.getElementById(id).addEventListener('input',c3));
+</script>
+    <footer style="margin-top:24px;padding:16px 0;text-align:center;border-top:1px solid #212a3a">
+      <p class="note">© <span id="y"></span> UpTools. Privacy-first utilities.</p>
+    </footer>
+  </main>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

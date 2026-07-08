@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>CSS Gradient Generator - Linear Radial Conic | UpTools</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  <meta name="description" content="Generate CSS gradients with live preview." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b1020" />
+  <link href="https://www.uptools.in/css-gradient-generator/" rel="canonical"/>
+  <meta property="og:title" content="CSS Gradient Generator - Linear Radial Conic | UpTools" />
+  <meta property="og:description" content="Generate CSS gradients with live preview." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"CSS Gradient Generator - Linear Radial Conic","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
+  </script>
+  <style>
+    .tool-wrap { max-width: 900px; margin: 0 auto; padding: 12px; }
+    .tool-card { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; margin-bottom: 16px; }
+    .btn { background: #6366f1; color: white; border: none; padding: .6rem 1.2rem; border-radius: .5rem; cursor: pointer; font-size: 1rem; font-weight: 600; }
+    .btn:hover { background: #4f46e5; }
+    .input { width: 100%; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .6rem .8rem; font-size: 1rem; box-sizing: border-box; }
+    .output-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; min-height: 200px; white-space: pre-wrap; line-height: 1.6; font-size: .95rem; color: #e6edf3; max-height: 60vh; overflow-y: auto; }
+    .note { color: #9aa4b2; font-size: .85rem; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  </style>
+</head>
+<body>
+  <main class="tool-wrap">
+    <h1 style="font-size:1.5rem;margin-bottom:4px">🎨 CSS Gradient Generator - Linear Radial Conic</h1>
+    <p class="note" style="margin-bottom:16px">Generate CSS gradients with live preview.</p>
+    
+<section class="tool-card">
+  <div class="grid">
+    <div><label class="note">Type</label><select class="input" id="type" onchange="gen()"><option value="linear">Linear</option><option value="radial">Radial</option><option value="conic">Conic</option></select></div>
+    <div><label class="note">Angle</label><input class="input" id="angle" type="number" value="90" min="0" max="360" oninput="gen()"></div>
+  </div>
+  <div style="margin-top:12px"><label class="note">Colors</label><div id="colors" class="row" style="margin-top:4px"><input type="color" value="#6366f1" class="clr" onchange="gen()" style="width:50px;height:40px;border:none;border-radius:8px"><input type="color" value="#ec4899" class="clr" onchange="gen()" style="width:50px;height:40px;border:none;border-radius:8px"></div>
+  <div class="row" style="margin-top:8px"><button class="btn" style="background:#374151;font-size:.8rem" onclick="addClr()">+ Add</button></div></div>
+</section>
+<section class="tool-card"><h2 style="margin-top:0">Preview</h2><div id="prev" style="height:200px;border-radius:12px"></div></section>
+<section class="tool-card"><h2 style="margin-top:0">CSS</h2><div class="output-box" id="css" style="font-family:monospace;font-size:.9rem"></div><button class="btn" style="background:#374151;margin-top:8px" onclick="navigator.clipboard.writeText(document.getElementById('css').textContent)">Copy</button></section>
+<script>
+function gen(){const t=document.getElementById('type').value,a=document.getElementById('angle').value,s=Array.from(document.querySelectorAll('.clr')).map(e=>e.value);let c;if(t==='linear')c='background: linear-gradient('+a+'deg, '+s.join(', ')+');';else if(t==='radial')c='background: radial-gradient(circle, '+s.join(', ')+');';else c='background: conic-gradient('+s.join(', ')+');';document.getElementById('prev').style.cssText=c;document.getElementById('css').textContent=c;}
+function addClr(){const i=document.createElement('input');i.type='color';i.value='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');i.className='clr';i.style.cssText='width:50px;height:40px;border:none;border-radius:8px';i.onchange=gen;document.getElementById('colors').appendChild(i);gen();}
+</script>
+    <footer style="margin-top:24px;padding:16px 0;text-align:center;border-top:1px solid #212a3a">
+      <p class="note">© <span id="y"></span> UpTools. Privacy-first utilities.</p>
+    </footer>
+  </main>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>QR Code Generator - Create QR Codes Online | UpTools</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  <meta name="description" content="Generate QR codes for text, URLs, WiFi, email, phone, and vCard. Download as PNG or SVG." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b1020" />
+  <link href="https://www.uptools.in/qr-code-generator-pro/" rel="canonical"/>
+  <meta property="og:title" content="QR Code Generator - Create QR Codes Online | UpTools" />
+  <meta property="og:description" content="Generate QR codes for text, URLs, WiFi, email, phone, and vCard. Download as PNG or SVG." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <meta property="og:url" content="https://www.uptools.in/qr-code-generator-pro/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"QR Code Generator - Create QR Codes Online","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
+  </script>
+  <style>
+    .tool-wrap { max-width: 900px; margin: 0 auto; padding: 12px; }
+    .tool-card { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; margin-bottom: 16px; }
+    .btn { background: #6366f1; color: white; border: none; padding: .6rem 1.2rem; border-radius: .5rem; cursor: pointer; font-size: 1rem; font-weight: 600; }
+    .btn:hover { background: #4f46e5; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .input { width: 100%; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .6rem .8rem; font-size: 1rem; box-sizing: border-box; }
+    .output-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; min-height: 200px; white-space: pre-wrap; line-height: 1.6; font-size: .95rem; color: #e6edf3; max-height: 60vh; overflow-y: auto; }
+    .note { color: #9aa4b2; font-size: .85rem; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .drag-zone { border: 2px dashed #212a3a; border-radius: .75rem; padding: 2rem; text-align: center; color: #9aa4b2; cursor: pointer; transition: border-color .2s; }
+    .drag-zone:hover, .drag-zone.dragover { border-color: #6366f1; color: #e6edf3; }
+    .file-list { margin-top: 12px; }
+    .file-item { display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #0e1628; border-radius: .5rem; margin-bottom: 8px; }
+    .badge { display: inline-block; background: #6366f1; color: white; padding: 2px 8px; border-radius: 12px; font-size: .75rem; font-weight: 600; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+    .option-card { background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; padding: 12px; cursor: pointer; transition: border-color .2s; }
+    .option-card:hover { border-color: #6366f1; }
+    .option-card.active { border-color: #6366f1; background: #1e1b4b; }
+  </style>
+</head>
+<body>
+  <main class="tool-wrap">
+    <h1 style="font-size:1.5rem;margin-bottom:4px">📱 QR Code Generator - Create QR Codes Online</h1>
+    <p class="note" style="margin-bottom:16px">Generate QR codes for text, URLs, WiFi, email, phone, and vCard. Download as PNG or SVG.</p>
+    
+    
+    <section class="tool-card">
+      <h2 style="margin-top:0;font-size:1.1rem">QR Code Generator</h2>
+      <div class="grid">
+        <div>
+          <label class="note">Type</label>
+          <select class="input" id="qrType" style="margin-top:4px">
+            <option value="text">Text</option>
+            <option value="url">URL</option>
+            <option value="wifi">WiFi</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone</option>
+            <option value="sms">SMS</option>
+            <option value="vcard">vCard</option>
+          </select>
+        </div>
+        <div>
+          <label class="note">Size</label>
+          <input class="input" id="qrSize" type="number" value="300" min="100" max="1000" style="margin-top:4px">
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <label class="note">Content</label>
+        <textarea class="input" id="qrContent" rows="3" placeholder="Enter text or URL..." style="margin-top:4px"></textarea>
+      </div>
+      <div id="wifiFields" style="display:none;margin-top:12px">
+        <div class="grid">
+          <div><label class="note">SSID</label><input class="input" id="wifiSsid" placeholder="Network name" style="margin-top:4px"></div>
+          <div><label class="note">Password</label><input class="input" id="wifiPass" placeholder="Password" style="margin-top:4px"></div>
+        </div>
+      </div>
+      <div id="emailFields" style="display:none;margin-top:12px">
+        <div class="grid">
+          <div><label class="note">To</label><input class="input" id="emailTo" placeholder="email@example.com" style="margin-top:4px"></div>
+          <div><label class="note">Subject</label><input class="input" id="emailSubject" placeholder="Subject" style="margin-top:4px"></div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn" id="generateBtn">✨ Generate QR Code</button>
+        <button class="btn" style="background:#374151" id="downloadPng">⬇️ PNG</button>
+        <button class="btn" style="background:#374151" id="downloadSvg">⬇️ SVG</button>
+      </div>
+    </section>
+    <section class="tool-card" style="text-align:center">
+      <h2 style="margin-top:0;font-size:1.1rem">QR Code</h2>
+      <canvas id="qrCanvas" style="border-radius:8px"></canvas>
+      <div id="status" class="note" style="margin-top:8px"></div>
+    </section>
+    <script type="module">
+      import QRCoder from 'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/+esm';
+      
+      const qrType = document.getElementById('qrType');
+      const qrContent = document.getElementById('qrContent');
+      const qrSize = document.getElementById('qrSize');
+      const canvas = document.getElementById('qrCanvas');
+      const ctx = canvas.getContext('2d');
+      const status = document.getElementById('status');
+      
+      qrType.addEventListener('change', () => {
+        const t = qrType.value;
+        document.getElementById('wifiFields').style.display = t === 'wifi' ? 'block' : 'none';
+        document.getElementById('emailFields').style.display = t === 'email' ? 'block' : 'none';
+      });
+      
+      function getContent() {
+        const t = qrType.value;
+        if (t === 'url') return qrContent.value;
+        if (t === 'wifi') return 'WIFI:T:WPA;S:' + document.getElementById('wifiSsid').value + ';P:' + document.getElementById('wifiPass').value + ';;';
+        if (t === 'email') return 'mailto:' + document.getElementById('emailTo').value + '?subject=' + document.getElementById('emailSubject').value;
+        if (t === 'phone') return 'tel:' + qrContent.value;
+        if (t === 'sms') return 'sms:' + qrContent.value;
+        return qrContent.value;
+      }
+      
+      function generate() {
+        const content = getContent();
+        if (!content) { status.textContent = 'Enter content first'; return; }
+        const qr = QRCoder(0, 'M');
+        qr.addData(content);
+        qr.make();
+        const size = parseInt(qrSize.value) || 300;
+        canvas.width = size;
+        canvas.height = size;
+        const cellSize = size / qr.getModuleCount();
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, size, size);
+        ctx.fillStyle = '#000000';
+        for (let r = 0; r < qr.getModuleCount(); r++) {
+          for (let c = 0; c < qr.getModuleCount(); c++) {
+            if (qr.isDark(r, c)) {
+              ctx.fillRect(c * cellSize, r * cellSize, cellSize + 0.5, cellSize + 0.5);
+            }
+          }
+        }
+        status.textContent = 'Generated!';
+      }
+      
+      document.getElementById('generateBtn').addEventListener('click', generate);
+      
+      document.getElementById('downloadPng').addEventListener('click', () => {
+        const a = document.createElement('a');
+        a.download = 'qrcode.png';
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+      });
+      
+      document.getElementById('downloadSvg').addEventListener('click', () => {
+        const content = getContent();
+        if (!content) return;
+        const qr = QRCoder(0, 'M');
+        qr.addData(content);
+        qr.make();
+        let svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + qr.getModuleCount() + ' ' + qr.getModuleCount() + '">';
+        for (let r = 0; r < qr.getModuleCount(); r++) {
+          for (let c = 0; c < qr.getModuleCount(); c++) {
+            if (qr.isDark(r, c)) svg += '<rect x="' + c + '" y="' + r + '" width="1" height="1" fill="black"/>';
+          }
+        }
+        svg += '</svg>';
+        const blob = new Blob([svg], { type: 'image/svg+xml' });
+        const a = document.createElement('a');
+        a.download = 'qrcode.svg';
+        a.href = URL.createObjectURL(blob);
+        a.click();
+      });
+      
+      qrContent.value = 'https://www.uptools.in';
+      generate();
+    </script>
+
+    
+    <section class="tool-card" style="margin-top:16px">
+      <h2 style="margin-top:0;font-size:1.1rem">How It Works</h2>
+      <p class="note">1. Upload or select your files<br>2. Configure options<br>3. Process and download</p>
+    </section>
+    
+    <section class="tool-card" style="margin-top:16px">
+      <h2 style="margin-top:0;font-size:1.1rem">FAQ</h2>
+      <details><summary><b>Is this tool free?</b></summary><p class="note" style="padding:6px 0">Yes, completely free with no sign-up required.</p></details>
+      <details><summary><b>Is my data private?</b></summary><p class="note" style="padding:6px 0">Yes. All processing happens in your browser. Files are never uploaded to our servers.</p></details>
+      <details><summary><b>Does it work on mobile?</b></summary><p class="note" style="padding:6px 0">Yes. All tools are mobile-responsive.</p></details>
+    </section>
+    
+    <footer style="margin-top:24px;padding:16px 0;text-align:center;border-top:1px solid #212a3a">
+      <p class="note">© <span id="y"></span> UpTools. Privacy-first utilities.</p>
+    </footer>
+  </main>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

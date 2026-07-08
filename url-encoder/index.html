@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>URL Encoder Decoder - Encode Decode URLs | UpTools</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  <meta name="description" content="Encode and decode URLs, query strings, and Base64." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b1020" />
+  <link href="https://www.uptools.in/url-encoder/" rel="canonical"/>
+  <meta property="og:title" content="URL Encoder Decoder - Encode Decode URLs | UpTools" />
+  <meta property="og:description" content="Encode and decode URLs, query strings, and Base64." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"URL Encoder Decoder - Encode Decode URLs","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
+  </script>
+  <style>
+    .tool-wrap { max-width: 900px; margin: 0 auto; padding: 12px; }
+    .tool-card { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; margin-bottom: 16px; }
+    .btn { background: #6366f1; color: white; border: none; padding: .6rem 1.2rem; border-radius: .5rem; cursor: pointer; font-size: 1rem; font-weight: 600; }
+    .btn:hover { background: #4f46e5; }
+    .input { width: 100%; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .6rem .8rem; font-size: 1rem; box-sizing: border-box; }
+    .output-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; min-height: 200px; white-space: pre-wrap; line-height: 1.6; font-size: .95rem; color: #e6edf3; max-height: 60vh; overflow-y: auto; }
+    .note { color: #9aa4b2; font-size: .85rem; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  </style>
+</head>
+<body>
+  <main class="tool-wrap">
+    <h1 style="font-size:1.5rem;margin-bottom:4px">🔗 URL Encoder Decoder - Encode Decode URLs</h1>
+    <p class="note" style="margin-bottom:16px">Encode and decode URLs, query strings, and Base64.</p>
+    
+<section class="tool-card">
+  <textarea class="input" id="inp" rows="4" placeholder="Enter URL or encoded string..."></textarea>
+  <div class="row" style="margin-top:12px">
+    <button class="btn" onclick="document.getElementById('out').textContent=encodeURIComponent(document.getElementById('inp').value)">Encode</button>
+    <button class="btn" style="background:#374151" onclick="document.getElementById('out').textContent=decodeURIComponent(document.getElementById('inp').value)">Decode</button>
+    <button class="btn" style="background:#374151" onclick="document.getElementById('out').textContent=btoa(document.getElementById('inp').value)">Base64</button>
+    <button class="btn" style="background:#374151" onclick="document.getElementById('out').textContent=atob(document.getElementById('inp').value)">UnBase64</button>
+    <button class="btn" style="background:#374151" onclick="navigator.clipboard.writeText(document.getElementById('out').textContent)">Copy</button>
+  </div>
+</section>
+<section class="tool-card"><h2 style="margin-top:0">Result</h2><div class="output-box" id="out"></div></section>
+    <footer style="margin-top:24px;padding:16px 0;text-align:center;border-top:1px solid #212a3a">
+      <p class="note">© <span id="y"></span> UpTools. Privacy-first utilities.</p>
+    </footer>
+  </main>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

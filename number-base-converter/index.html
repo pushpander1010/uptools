@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Number Base Converter - Binary Decimal Hex Octal | UpTools</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
+  <meta name="description" content="Convert between binary, decimal, octal, and hexadecimal." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b1020" />
+  <link href="https://www.uptools.in/number-base-converter/" rel="canonical"/>
+  <meta property="og:title" content="Number Base Converter - Binary Decimal Hex Octal | UpTools" />
+  <meta property="og:description" content="Convert between binary, decimal, octal, and hexadecimal." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools">
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Number Base Converter - Binary Decimal Hex Octal","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
+  </script>
+  <style>
+    .tool-wrap { max-width: 900px; margin: 0 auto; padding: 12px; }
+    .tool-card { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; margin-bottom: 16px; }
+    .btn { background: #6366f1; color: white; border: none; padding: .6rem 1.2rem; border-radius: .5rem; cursor: pointer; font-size: 1rem; font-weight: 600; }
+    .btn:hover { background: #4f46e5; }
+    .input { width: 100%; background: #0e1628; border: 1px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .6rem .8rem; font-size: 1rem; box-sizing: border-box; }
+    .output-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; min-height: 200px; white-space: pre-wrap; line-height: 1.6; font-size: .95rem; color: #e6edf3; max-height: 60vh; overflow-y: auto; }
+    .note { color: #9aa4b2; font-size: .85rem; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  </style>
+</head>
+<body>
+  <main class="tool-wrap">
+    <h1 style="font-size:1.5rem;margin-bottom:4px">🔢 Number Base Converter - Binary Decimal Hex Octal</h1>
+    <p class="note" style="margin-bottom:16px">Convert between binary, decimal, octal, and hexadecimal.</p>
+    
+<section class="tool-card">
+  <div class="grid">
+    <div><label class="note">Number</label><input class="input" id="num" placeholder="1010" style="margin-top:4px;font-family:monospace"></div>
+    <div><label class="note">From</label><select class="input" id="from"><option value="10">Decimal</option><option value="2">Binary</option><option value="8">Octal</option><option value="16">Hex</option></select></div>
+    <div><label class="note">To</label><select class="input" id="to"><option value="2">Binary</option><option value="8">Octal</option><option value="10">Decimal</option><option value="16">Hex</option></select></div>
+  </div>
+  <button class="btn" onclick="convert()" style="margin-top:12px">Convert</button>
+</section>
+<section class="tool-card"><h2 style="margin-top:0">Result</h2><div style="font-size:2rem;font-weight:700;color:#6366f1;font-family:monospace;word-break:break-all" id="res">-</div></section>
+<script>
+function convert(){try{const n=parseInt(document.getElementById('num').value,parseInt(document.getElementById('from').value));document.getElementById('res').textContent=n.toString(parseInt(document.getElementById('to').value)).toUpperCase();}catch(e){document.getElementById('res').textContent='Error';}}
+document.getElementById('num').addEventListener('input',convert);
+</script>
+    <footer style="margin-top:24px;padding:16px 0;text-align:center;border-top:1px solid #212a3a">
+      <p class="note">© <span id="y"></span> UpTools. Privacy-first utilities.</p>
+    </footer>
+  </main>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
