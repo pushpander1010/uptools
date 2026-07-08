@@ -658,6 +658,22 @@
 
       if (!text) { toast('Enter some text first'); input.focus(); return; }
 
+      // Input validation
+      const MAX_CHARS = 30000;
+      if (text.length > MAX_CHARS) {
+        toast(`Input too large (${text.length.toLocaleString()} chars). Max is ${MAX_CHARS.toLocaleString()}.`);
+        input.focus();
+        return;
+      }
+
+      // Content warning check
+      const lowerText = text.toLowerCase();
+      const blockedTerms = ['hack', 'exploit', 'bypass security', 'fake id', 'phishing', 'scam'];
+      if (blockedTerms.some(term => lowerText.includes(term))) {
+        toast('Input contains restricted content. Please review our usage policy.');
+        return;
+      }
+
       output.textContent = '';
       stopBtn.disabled = false;
       status.textContent = 'Running…';

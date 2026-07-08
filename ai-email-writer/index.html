@@ -318,6 +318,28 @@ Make it natural, ${tone}, and ready to send. Do not use placeholder brackets —
     async function generate() {
       const context = document.getElementById('context').value.trim();
       if (!context) { document.getElementById('status').textContent = 'Please describe what the email is about.'; document.getElementById('context').focus(); return; }
+
+      // Input validation
+      const MAX_CHARS = 20000;
+      if (context.length > MAX_CHARS) {
+        document.getElementById('status').textContent = `Input too large (${context.length.toLocaleString()} chars). Max is ${MAX_CHARS.toLocaleString()}.`;
+        return;
+      }
+
+      // Phishing/scam prevention
+      const lowerCtx = context.toLowerCase();
+      const phishingTerms = [
+        'verify your account', 'confirm your password', 'update your payment',
+        'suspended account', 'unauthorized access', 'click here immediately',
+        'wire transfer', 'send money', 'gift card', 'bitcoin address',
+        'social security', 'credit card number', 'bank account number',
+        'phishing', 'scam', 'impersonate', 'pretend to be'
+      ];
+      if (phishingTerms.some(term => lowerCtx.includes(term))) {
+        document.getElementById('status').textContent = 'This request may be used for phishing. Please use this tool for legitimate purposes only.';
+        return;
+      }
+
       const out = document.getElementById('outputBox');
       out.textContent = '';
       document.getElementById('status').textContent = 'Writing email…';

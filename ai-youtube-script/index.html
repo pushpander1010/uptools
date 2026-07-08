@@ -313,7 +313,22 @@ Use natural, conversational language. Add pattern interrupts for retention.`;
 
     async function generate() {
       const topic = document.getElementById('topic').value.trim();
-      if (!topic) { document.getElementById('status').textContent = 'Please enter a video topic.'; document.getElementById('topic').focus(); return; }
+      if (!topic) {
+      // --- GUARDRAILS: Input validation ---
+      const MAX_INPUT = 20000;
+      if (input.length > MAX_INPUT) {
+        toast('Input too large (' + input.length.toLocaleString() + ' chars). Max is ' + MAX_INPUT.toLocaleString() + '.');
+        return;
+      }
+      
+      // Content filter
+      const lowerInput = input.toLowerCase();
+      const blockedTerms = ['hack', 'exploit', 'bypass security', 'fake id', 'phishing', 'scam', 'malware', 'illegal'];
+      if (blockedTerms.some(term => lowerInput.includes(term))) {
+        toast('Input contains restricted content. Please review our usage policy.');
+        return;
+      }
+ document.getElementById('status').textContent = 'Please enter a video topic.'; document.getElementById('topic').focus(); return; }
       const out = document.getElementById('outputBox');
       out.textContent = '';
       document.getElementById('status').textContent = 'Writing script…';

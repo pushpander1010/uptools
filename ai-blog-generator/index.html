@@ -281,6 +281,21 @@ ${keywords ? '- Naturally incorporate these keywords: ' + keywords : ''}
     async function generate() {
       const topic = document.getElementById('topic').value.trim();
       if (!topic) { document.getElementById('status').textContent = 'Please enter a blog topic.'; document.getElementById('topic').focus(); return; }
+
+      // Input validation
+      if (topic.length > 5000) {
+        document.getElementById('status').textContent = 'Topic too long. Please keep it under 5000 characters.';
+        return;
+      }
+
+      // Content filter
+      const lowerTopic = topic.toLowerCase();
+      const blockedTopics = ['how to hack', 'exploit', 'bypass security', 'illegal', 'malware', 'phishing kit'];
+      if (blockedTopics.some(term => lowerTopic.includes(term))) {
+        document.getElementById('status').textContent = 'This topic may violate our usage policy. Please choose a different topic.';
+        return;
+      }
+
       const out = document.getElementById('outputBox');
       out.textContent = '';
       document.getElementById('status').textContent = 'Generating…';

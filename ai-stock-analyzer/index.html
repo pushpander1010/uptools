@@ -1254,6 +1254,25 @@ User question: ${prompt}` }
       const question = chatInput?.value?.trim();
       if(!question) return;
       if(!currentContext){ toast('Run analysis first.'); return; }
+
+      // Input validation
+      if (question.length > 5000) {
+        toast('Question too long. Please keep it under 5000 characters.');
+        return;
+      }
+
+      // Prevent asking for specific investment advice
+      const lowerQ = question.toLowerCase();
+      const adviceTerms = [
+        'should i buy', 'should i sell', 'should i invest',
+        'what should i do with my money', 'financial advice',
+        'guaranteed return', 'risk free', 'no risk'
+      ];
+      if (adviceTerms.some(term => lowerQ.includes(term))) {
+        toast('This tool provides analysis only, not financial advice. Please consult a licensed financial advisor for investment decisions.');
+        return;
+      }
+
       addUserMessage(question);
       if(chatInput) chatInput.value = '';
       try {

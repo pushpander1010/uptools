@@ -323,7 +323,22 @@ Be specific with numbers in ${currency}. Make advice practical and actionable.`;
     }
 
     async function generate() {
-      if (!num('salary')) { document.getElementById('status').textContent = 'Please enter your monthly income.'; document.getElementById('salary').focus(); return; }
+      if (!num('salary')) {
+      // --- GUARDRAILS: Input validation ---
+      const MAX_INPUT = 20000;
+      if (input.length > MAX_INPUT) {
+        toast('Input too large (' + input.length.toLocaleString() + ' chars). Max is ' + MAX_INPUT.toLocaleString() + '.');
+        return;
+      }
+      
+      // Content filter
+      const lowerInput = input.toLowerCase();
+      const blockedTerms = ['hack', 'exploit', 'bypass security', 'fake id', 'phishing', 'scam', 'malware', 'illegal'];
+      if (blockedTerms.some(term => lowerInput.includes(term))) {
+        toast('Input contains restricted content. Please review our usage policy.');
+        return;
+      }
+ document.getElementById('status').textContent = 'Please enter your monthly income.'; document.getElementById('salary').focus(); return; }
       const out = document.getElementById('outputBox');
       out.textContent = '';
       document.getElementById('status').textContent = 'Analyzing your budget…';

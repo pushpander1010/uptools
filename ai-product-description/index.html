@@ -336,6 +336,21 @@ Make it persuasive, benefit-focused (not just feature-focused), and ready to pub
       const name = document.getElementById('product-name').value.trim();
       const features = document.getElementById('features').value.trim();
       if (!name || !features) {
+      // --- GUARDRAILS: Input validation ---
+      const MAX_INPUT = 20000;
+      if (input.length > MAX_INPUT) {
+        toast('Input too large (' + input.length.toLocaleString() + ' chars). Max is ' + MAX_INPUT.toLocaleString() + '.');
+        return;
+      }
+      
+      // Content filter
+      const lowerInput = input.toLowerCase();
+      const blockedTerms = ['hack', 'exploit', 'bypass security', 'fake id', 'phishing', 'scam', 'malware', 'illegal'];
+      if (blockedTerms.some(term => lowerInput.includes(term))) {
+        toast('Input contains restricted content. Please review our usage policy.');
+        return;
+      }
+
         document.getElementById('status').textContent = 'Please enter product name and features.';
         if (!name) document.getElementById('product-name').focus(); else document.getElementById('features').focus();
         return;

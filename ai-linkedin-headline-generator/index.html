@@ -209,6 +209,21 @@ Requirements:
     }
     async function generate() {
       if (!$("#role").value.trim()) {
+      // --- GUARDRAILS: Input validation ---
+      const MAX_INPUT = 20000;
+      if (input.length > MAX_INPUT) {
+        toast('Input too large (' + input.length.toLocaleString() + ' chars). Max is ' + MAX_INPUT.toLocaleString() + '.');
+        return;
+      }
+      
+      // Content filter
+      const lowerInput = input.toLowerCase();
+      const blockedTerms = ['hack', 'exploit', 'bypass security', 'fake id', 'phishing', 'scam', 'malware', 'illegal'];
+      if (blockedTerms.some(term => lowerInput.includes(term))) {
+        toast('Input contains restricted content. Please review our usage policy.');
+        return;
+      }
+
         $("#status").textContent = "Add a role first.";
         $("#role").focus();
         return;

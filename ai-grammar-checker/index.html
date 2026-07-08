@@ -250,6 +250,14 @@
     async function checkGrammar() {
       const text = inputText.value.trim();
       if (!text) { status.textContent = 'Please enter some text first.'; return; }
+
+      // Input validation
+      const MAX_CHARS = 30000;
+      if (text.length > MAX_CHARS) {
+        status.textContent = `Input too large (${text.length.toLocaleString()} chars). Max is ${MAX_CHARS.toLocaleString()}.`;
+        return;
+      }
+
       outputBox.textContent = '';
       status.textContent = 'Checking…';
       document.getElementById('checkBtn').disabled = true;

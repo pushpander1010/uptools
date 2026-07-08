@@ -302,6 +302,25 @@ Tone: ${tone}. Do not use placeholder brackets — use the details provided.`;
     async function generate() {
       const jobTitle = document.getElementById('jobTitle').value.trim();
       if (!jobTitle) { document.getElementById('status').textContent = 'Please enter the job title.'; return; }
+
+      // Input validation
+      if (jobTitle.length > 500) {
+        document.getElementById('status').textContent = 'Job title too long. Please keep it under 500 characters.';
+        return;
+      }
+
+      // Get all input values for validation
+      const company = document.getElementById('company')?.value?.trim() || '';
+      const experience = document.getElementById('experience')?.value?.trim() || '';
+      const allInput = `${jobTitle} ${company} ${experience}`.toLowerCase();
+
+      // Authenticity check - prevent generating fake credentials
+      const fakeTerms = ['fake resume', 'lie about', 'fabricate', 'made up experience', 'not really'];
+      if (fakeTerms.some(term => allInput.includes(term))) {
+        document.getElementById('status').textContent = 'Please be honest in your applications. This tool helps you present your real experience effectively.';
+        return;
+      }
+
       const out = document.getElementById('outputBox');
       out.textContent = '';
       document.getElementById('status').textContent = 'Writing…';

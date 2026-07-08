@@ -299,7 +299,22 @@ Caption 2:
 
     async function generate() {
       const desc = document.getElementById('description').value.trim();
-      if (!desc) { document.getElementById('status').textContent = 'Please describe your photo or post.'; document.getElementById('description').focus(); return; }
+      if (!desc) {
+      // --- GUARDRAILS: Input validation ---
+      const MAX_INPUT = 20000;
+      if (input.length > MAX_INPUT) {
+        toast('Input too large (' + input.length.toLocaleString() + ' chars). Max is ' + MAX_INPUT.toLocaleString() + '.');
+        return;
+      }
+      
+      // Content filter
+      const lowerInput = input.toLowerCase();
+      const blockedTerms = ['hack', 'exploit', 'bypass security', 'fake id', 'phishing', 'scam', 'malware', 'illegal'];
+      if (blockedTerms.some(term => lowerInput.includes(term))) {
+        toast('Input contains restricted content. Please review our usage policy.');
+        return;
+      }
+ document.getElementById('status').textContent = 'Please describe your photo or post.'; document.getElementById('description').focus(); return; }
       const out = document.getElementById('outputBox');
       out.textContent = '';
       document.getElementById('status').textContent = 'Generating captions…';

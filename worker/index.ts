@@ -20,6 +20,84 @@ const TOGETHER_MODEL = "meta-llama/Meta-Llama-3-8B-Instruct-Lite";
 
 const enc = new TextEncoder();
 
+// --- GUARDRAILS: Content filtering & rate limiting ---
+const BLOCKED_PATTERNS = [
+  // Harmful content
+  /\b(how to (make|build|create) (a )?(bomb|explosive|weapon|gun|rifle|firearm))\b/i,
+  /\b(how to (kill|murder|assassinate|harm) (someone|people|person|anyone))\b/i,
+  /\b(suicide|self-harm|kill yourself)\b/i,
+  /\b(child (abuse|exploitation|pornography|material))\b/i,
+  /\b(human trafficking|sex trafficking)\b/i,
+  // Illegal activities
+  /\b(how to (hack|crack|phish|steal) (a )?(website|account|password|credit card|bank))\b/i,
+  /\b(dark web (marketplace|drug|weapon|hitman))\b/i,
+  /\b(money laundering|tax evasion fraud)\b/i,
+  /\b(create|generate) (fake|fraudulent) (documents?|id|passport|license|certificate))\b/i,
+  // Hate speech
+  /\b(kill all|exterminate|genocide) (jews?|muslims?|christians?|blacks?|whites?|asians?|hispanics?|lgbtq?)\b/i,
+  // Dangerous instructions
+  /\b(poison (someone|people|food|water))\b/i,
+  /\b(make|cook|synthesize) (meth|cocaine|heroin|drugs?|fentanyl|lsd|mdma)\b/i,
+];
+
+const MAX_INPUT_CHARS = 50000; // 50K chars max input
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX = 20; // 20 requests per minute per IP
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+interface GuardrailResult {
+  blocked: boolean;
+  reason?: string;
+}
+
+async function runGuardrails(messages: any[], req: Request): Promise<GuardrailResult> {
+  // 1. Input length check
+  const totalChars = messages.reduce((sum, m) => sum + (m.content?.length || 0), 0);
+  if (totalChars > MAX_INPUT_CHARS) {
+    return { blocked: true, reason: `Input too large (${totalChars} chars). Maximum is ${MAX_INPUT_CHARS}.` };
+  }
+
+  // 2. Content filtering
+  const allText = messages.map(m => m.content || '').join(' ');
+  for (const pattern of BLOCKED_PATTERNS) {
+    if (pattern.test(allText)) {
+      return { blocked: true, reason: 'Request blocked: content violates usage policy.' };
+    }
+  }
+
+  // 3. Rate limiting (per IP)
+  const ip = req.headers.get('cf-connecting-ip') || req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+
+  if (entry && now < entry.resetAt) {
+    entry.count++;
+    if (entry.count > RATE_LIMIT_MAX) {
+      return { blocked: true, reason: 'Rate limit exceeded. Please wait before trying again.' };
+    }
+  } else {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+  }
+
+  // 4. Prompt injection detection
+  const injectionPatterns = [
+    /ignore (all |every |any )?(previous|prior|above|earlier) (instructions?|prompts?|rules?|guidelines?)/i,
+    /you are (now|now )?(a |an )?(unrestricted|uncensored|jailbroken)/i,
+    /bypass (all |every |any )?(safety|content|moderation|filter)/i,
+    /act as (if|though) (you have no|there are no) (rules?|restrictions?|limits?)/i,
+    / DAN (mode|prompt)|do anything now/i,
+    /ignore (your |all )?(safety|content|moderation) (guidelines?|rules?|policies?)/i,
+  ];
+
+  for (const pattern of injectionPatterns) {
+    if (pattern.test(allText)) {
+      return { blocked: true, reason: 'Request blocked: prompt injection detected.' };
+    }
+  }
+
+  return { blocked: false };
+}
+
 export default {
   async fetch(req: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
     const url = new URL(req.url);
@@ -74,6 +152,12 @@ export default {
       if (!messages?.length) return json({ error: "messages[] required" }, 400, cors);
       if (!env.TOGETHER_API_KEY) return json({ error: "TOGETHER_API_KEY missing" }, 500, cors);
 
+      // --- GUARDRAILS: Content filtering & rate limiting ---
+      const guardrailResult = await runGuardrails(messages, req);
+      if (guardrailResult.blocked) {
+        return json({ error: guardrailResult.reason }, 403, cors);
+      }
+
       const payload = {
         model: TOGETHER_MODEL,
         messages,
@@ -81,6 +165,7 @@ export default {
         stream,
         max_tokens: 4096,
       };
+
 
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 25000);
