@@ -23,21 +23,21 @@ const enc = new TextEncoder();
 // --- GUARDRAILS: Content filtering & rate limiting ---
 const BLOCKED_PATTERNS = [
   // Harmful content
-  /\b(how to (make|build|create) (a )?(bomb|explosive|weapon|gun|rifle|firearm))\b/i,
-  /\b(how to (kill|murder|assassinate|harm) (someone|people|person|anyone))\b/i,
-  /\b(suicide|self-harm|kill yourself)\b/i,
-  /\b(child (abuse|exploitation|pornography|material))\b/i,
-  /\b(human trafficking|sex trafficking)\b/i,
+  /how to (make|build|create).*(bomb|explosive|weapon|gun|rifle|firearm)/i,
+  /how to (kill|murder|assassinate|harm).*(someone|people|person|anyone)/i,
+  /(suicide|self-harm|kill yourself)/i,
+  /(child abuse|child exploitation|child pornography|child material)/i,
+  /(human trafficking|sex trafficking)/i,
   // Illegal activities
-  /\b(how to (hack|crack|phish|steal) (a )?(website|account|password|credit card|bank))\b/i,
-  /\b(dark web (marketplace|drug|weapon|hitman))\b/i,
-  /\b(money laundering|tax evasion fraud)\b/i,
-  /\b(create|generate) (fake|fraudulent) (documents?|id|passport|license|certificate))\b/i,
+  /how to (hack|crack|phish|steal).*(website|account|password|credit card|bank)/i,
+  /dark web.*(marketplace|drug|weapon|hitman)/i,
+  /(money laundering|tax evasion|fraud)/i,
+  /(create|generate).*(fake|fraudulent).*(documents|id|passport|license|certificate)/i,
   // Hate speech
-  /\b(kill all|exterminate|genocide) (jews?|muslims?|christians?|blacks?|whites?|asians?|hispanics?|lgbtq?)\b/i,
+  /(kill all|exterminate|genocide).*(jews|muslims|christians|blacks|whites|asians|hispanics|lgbtq)/i,
   // Dangerous instructions
-  /\b(poison (someone|people|food|water))\b/i,
-  /\b(make|cook|synthesize) (meth|cocaine|heroin|drugs?|fentanyl|lsd|mdma)\b/i,
+  /poison.*(someone|people|food|water)/i,
+  /(make|cook|synthesize).*(meth|cocaine|heroin|drugs|fentanyl|lsd|mdma)/i,
 ];
 
 const MAX_INPUT_CHARS = 50000; // 50K chars max input
