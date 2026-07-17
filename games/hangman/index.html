@@ -70,15 +70,12 @@
         stroke-dasharray: 100;
         stroke-dashoffset: 100;
       }
-      .body-part.visible {
-        animation-fill-mode: forwards;
-      }
-      .body-part.head { animation: drawHead 0.5s ease-out forwards; }
-      .body-part.body { animation: drawLine 0.4s ease-out forwards; }
-      .body-part.larm { animation: drawLine 0.4s ease-out forwards; }
-      .body-part.rarm { animation: drawLine 0.4s ease-out forwards; }
-      .body-part.lleg { animation: drawLine 0.4s ease-out forwards; }
-      .body-part.rleg { animation: drawLine 0.4s ease-out forwards; }
+      .body-part.visible.head { animation: drawHead 0.5s ease-out forwards; }
+      .body-part.visible.body { animation: drawLine 0.4s ease-out forwards; }
+      .body-part.visible.larm { animation: drawLine 0.4s ease-out forwards; }
+      .body-part.visible.rarm { animation: drawLine 0.4s ease-out forwards; }
+      .body-part.visible.lleg { animation: drawLine 0.4s ease-out forwards; }
+      .body-part.visible.rleg { animation: drawLine 0.4s ease-out forwards; }
 
       .skip-link {
         position: absolute;
@@ -102,7 +99,9 @@
   <a href="#main" class="sr-only skip-link">Skip to content</a>
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <div style="display:flex;justify-content:center;width:100%;overflow:hidden">
+    <ins class="adsbygoogle" style="display:block;width:100%;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  </div>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
     <!-- Header -->

@@ -26,7 +26,10 @@
   <style>
     body { --accent: #00e5a0; }
     .game-wrap { max-width: 640px; margin: 0 auto; }
-    .scrambled { font-size: 2.5rem; font-weight: 900; letter-spacing: .2em; text-align: center; color: #00e5a0; padding: 1rem; background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; margin: 12px 0; text-transform: uppercase; }
+    .scrambled { font-size: 2.5rem; font-weight: 900; letter-spacing: .2em; text-align: center; color: #00e5a0; padding: 1rem; background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; margin: 12px 0; text-transform: uppercase; overflow-wrap: anywhere; word-break: break-word; }
+    @media (max-width: 480px) {
+      .scrambled { font-size: 1.8rem; letter-spacing: .12em; }
+    }
     .answer-input { width: 100%; background: #0e1628; border: 2px solid #212a3a; border-radius: .5rem; color: #e6edf3; padding: .75rem; font-size: 1.3rem; text-align: center; text-transform: uppercase; letter-spacing: .1em; min-height: 48px; }
     .answer-input:focus { border-color: #00e5a0; outline: none; }
     .score-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
@@ -121,7 +124,9 @@
   <a href="#main" class="sr-only skip-link">Skip to content</a>
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <div style="display:flex;justify-content:center;width:100%;overflow:hidden">
+    <ins class="adsbygoogle" style="display:block;width:100%;max-width:500px;height:50px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  </div>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
     <!-- Header -->
