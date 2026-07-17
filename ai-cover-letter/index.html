@@ -333,7 +333,7 @@ Tone: ${tone}. Do not use placeholder brackets — use the details provided.`;
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             provider: 'together',
-            model: 'mistralai/Mistral-Small-24B-Instruct-2501',
+            model: 'meta-llama/Llama-3.3-70B-Instruct-Turbo',
             stream: true,
             temperature: 0.65,
             messages: [

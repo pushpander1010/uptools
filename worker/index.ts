@@ -16,7 +16,9 @@ export interface Env {
 }
 
 const TOGETHER_BASE = "https://api.together.xyz/v1";
-const TOGETHER_MODEL = "meta-llama/Meta-Llama-3-8B-Instruct-Lite";
+// Default chat model — a valid, generally-available Together model.
+// Frontends may override via body.model (e.g. meta-llama/Llama-3.3-70B-Instruct-Turbo).
+const TOGETHER_MODEL = "meta-llama/Llama-3.3-70B-Instruct-Turbo";
 
 const enc = new TextEncoder();
 
@@ -131,7 +133,7 @@ export default {
       return serveSite(req, env);
     }
 
-    // --- /ai: Together AI proxy (mistralai/Mistral-Small-24B-Instruct-2501) ---
+    // --- /ai: Together AI proxy (meta-llama/Llama-3.3-70B-Instruct-Turbo) ---
     try {
       if (req.method === "OPTIONS") return corsPreflight(req, env);
       const cors = corsHeaders(req, env);
@@ -164,7 +166,7 @@ export default {
       }
 
       const payload = {
-        model: TOGETHER_MODEL,
+        model: body.model || TOGETHER_MODEL,
         messages,
         temperature,
         stream,

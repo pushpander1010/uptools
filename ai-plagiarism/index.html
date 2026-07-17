@@ -79,7 +79,7 @@
           },
           {
             "@type": "Question",
-            "name": "Which AI models are available?", "acceptedAnswer": { "@type": "Answer", "text": "Mistral Small (mistralai/Mistral-Small-24B-Instruct-2501) via Together AI." }
+            "name": "Which AI models are available?", "acceptedAnswer": { "@type": "Answer", "text": "Mistral Small (meta-llama/Llama-3.3-70B-Instruct-Turbo) via Together AI." }
           }
         ]
       }
@@ -650,14 +650,14 @@
     const kpiFlesch = byId('kpiFlesch');
     const kpiNgram = byId('kpiNgram');
     const providerSel = { value: 'together', addEventListener: () => {} };
-    const modelSel = { value: 'mistralai/Mistral-Small-24B-Instruct-2501' };
+    const modelSel = { value: 'meta-llama/Llama-3.3-70B-Instruct-Turbo' };
     const runBtn = byId('runBtn');
     const stopBtn = byId('stopBtn');
 
     // Provider & Models
     // Provider & Model: Together AI / Mistral Small (fixed)
     const PROVIDER = 'together';
-    const MODEL = 'mistralai/Mistral-Small-24B-Instruct-2501';
+    const MODEL = 'meta-llama/Llama-3.3-70B-Instruct-Turbo';
     const CFG_KEY = 'plagiarism:cfg';
 
     // Counts

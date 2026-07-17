@@ -493,7 +493,7 @@
 
     // NEW: Provider + model (hardcoded to Together AI / Mistral Small)
     const providerSel = { value: 'together', addEventListener: () => {} };
-    const modelSel = { value: 'mistralai/Mistral-Small-24B-Instruct-2501' };
+    const modelSel = { value: 'meta-llama/Llama-3.3-70B-Instruct-Turbo' };
 
     // Footer year
     byId('y').textContent = new Date().getFullYear();
@@ -595,7 +595,7 @@
 
     // ---- Provider & model: Together AI / Mistral Small (fixed) ----
     const PROVIDER = 'together';
-    const MODEL = 'mistralai/Mistral-Small-24B-Instruct-2501';
+    const MODEL = 'meta-llama/Llama-3.3-70B-Instruct-Turbo';
 
     // Config (endpoint fixed to /ai)
     const CFG_KEY = 'ai-writer:cfg';
