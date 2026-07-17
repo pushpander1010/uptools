@@ -525,7 +525,7 @@
 </div>
 <section class="game-wrap">
 <div class="game-container" id="gameContainer">
-<div class="panel">
+<div class="panel" id="homePanel">
 <button class="fullscreen-btn" id="fullscreenBtn" title="Enter Fullscreen">⛶ Fullscreen</button>
 <!-- HUD -->
 <div aria-live="polite" class="hud">
@@ -819,7 +819,7 @@
         const startBtn = $("#startBtn"), joinBtn = $("#joinBtn"), copyInvite = $("#copyInvite");
         const toggleSound = $("#toggleSound"), toggleHaptics = $("#toggleHaptics"), resetStats = $("#resetStats");
         const statusHome = $("#homeStatus");
-        const playScreen = $("#playScreen"), home = document.querySelector("main");
+        const playScreen = $("#playScreen"), home = document.getElementById("homePanel");
         const qs = $("#qs"), prevBtn = $("#prevBtn"), nextBtn = $("#nextBtn"), prog = $("#psProg"), psBack = $("#psBack"), psShare = $("#psShare");
 
         // ---------------------------
