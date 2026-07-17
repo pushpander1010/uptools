@@ -27,7 +27,6 @@
   <meta property="og:url" content="https://www.uptools.in/games/snake/" />
   <meta property="og:site_name" content="UpTools" />
   <link rel="canonical" href="https://www.uptools.in/games/snake/" />
-  <link rel="stylesheet" href="/style.css?v=1.2.0" />
 
   <style>
     /* Page theme (keeps your central CSS; only accents here) */
@@ -402,7 +401,7 @@
         font-size: 1.2rem !important;
       }
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -418,6 +417,8 @@
     }
 
 </style>
+
+  <link rel="stylesheet" href="/style.css?v=1.2.0">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -445,7 +446,6 @@
 </nav>
 </div>
 </header>
-
 
   <!-- small fixed -->
   <ins class="adsbygoogle"
@@ -593,67 +593,67 @@
         return audioCtx;
       };
       const soundEnabled = () => document.getElementById('sound').checked;
-      
+
       // Apple eating sound: short bright chirp with harmonic richness
       const playEatSound = () => {
         if (!soundEnabled()) return;
         try {
           const ctx = getAudioCtx();
           const now = ctx.currentTime;
-          
+
           // Two oscillators for a rich "chirp"
           const osc1 = ctx.createOscillator();
           const osc2 = ctx.createOscillator();
           const gain = ctx.createGain();
-          
+
           osc1.type = 'triangle';
           osc1.frequency.setValueAtTime(880, now);
           osc1.frequency.exponentialRampToValueAtTime(1320, now + 0.06);
-          
+
           osc2.type = 'sine';
           osc2.frequency.setValueAtTime(1320, now);
           osc2.frequency.exponentialRampToValueAtTime(1760, now + 0.06);
-          
+
           gain.gain.setValueAtTime(0.04, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
-          
+
           osc1.connect(gain);
           osc2.connect(gain);
           gain.connect(ctx.destination);
-          
+
           osc1.start(now);
           osc2.start(now);
           osc1.stop(now + 0.12);
           osc2.stop(now + 0.12);
         } catch(e) { /* silently fail */ }
       };
-      
+
       // Game over sound: descending sad tone
       const playGameOverSound = () => {
         if (!soundEnabled()) return;
         try {
           const ctx = getAudioCtx();
           const now = ctx.currentTime;
-          
+
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
-          
+
           osc.type = 'sawtooth';
           osc.frequency.setValueAtTime(400, now);
           osc.frequency.exponentialRampToValueAtTime(80, now + 0.35);
-          
+
           gain.gain.setValueAtTime(0.05, now);
           gain.gain.linearRampToValueAtTime(0.03, now + 0.15);
           gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-          
+
           osc.connect(gain);
           gain.connect(ctx.destination);
-          
+
           osc.start(now);
           osc.stop(now + 0.4);
         } catch(e) { /* silently fail */ }
       };
-      
+
       // Generic beep (backward compatible)
       const beep = (type="square", freq=440, ms=80, gain=0.02) => {
         if (!soundEnabled()) return;
@@ -993,13 +993,13 @@
           if (d==="left") setDir(-1,0);
           if (d==="right") setDir(1,0);
         });
-        
+
         // Add touch feedback for better mobile UX
         btn.addEventListener("touchstart", (e) => {
           e.preventDefault();
           btn.style.transform = "scale(0.92)";
         }, { passive: false });
-        
+
         btn.addEventListener("touchend", (e) => {
           e.preventDefault();
           btn.style.transform = "";
@@ -1044,45 +1044,45 @@
       function enterFullscreen() {
         isFullscreen = true;
         document.body.classList.add('fullscreen-mode');
-        
+
         // Create exit button
         exitFullscreenBtn = document.createElement('button');
         exitFullscreenBtn.className = 'exit-fullscreen-btn';
         exitFullscreenBtn.innerHTML = '⛶ Exit Fullscreen';
         exitFullscreenBtn.onclick = exitFullscreen;
         document.body.appendChild(exitFullscreenBtn);
-        
+
         // Hide header and other elements
         const header = document.querySelector('header');
         const container = document.querySelector('.container');
         if (header) header.style.display = 'none';
-        
+
         // Move game to fullscreen container
         const gameWrap = document.querySelector('.game-wrap');
         document.body.appendChild(gameWrap);
-        
+
         fullscreenBtn.style.display = 'none';
       }
 
       function exitFullscreen() {
         isFullscreen = false;
         document.body.classList.remove('fullscreen-mode');
-        
+
         // Remove exit button
         if (exitFullscreenBtn) {
           exitFullscreenBtn.remove();
           exitFullscreenBtn = null;
         }
-        
+
         // Show header and other elements
         const header = document.querySelector('header');
         const container = document.querySelector('.container');
         if (header) header.style.display = '';
-        
+
         // Move game back to container
         const gameWrap = document.querySelector('.game-wrap');
         container.appendChild(gameWrap);
-        
+
         fullscreenBtn.style.display = 'block';
       }
 
@@ -1105,5 +1105,4 @@
   </script>
 </body>
 </html>
-
 

@@ -39,8 +39,7 @@
   <meta name="twitter:description" content="Estimate originality %, highlight risky lines, and paraphrase instantly. Powered by Mistral Small. No sign-ups." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/og/ai-plagiarism-checker.png" />
 <!-- Load main stylesheet as normal (avoid FOUC->CLS), keep preload for speed -->
-<link as="style" href="/style.css" rel="preload"/>
-<link href="/style.css" rel="stylesheet"/>
+
 <!-- Utils -->
 <link href="/scripts/utils.js" rel="modulepreload"/>
 <!-- Structured Data -->
@@ -372,7 +371,7 @@
       outline: 2px solid #3b82f6;
       outline-offset: 2px;
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -389,11 +388,13 @@
 
 </style>
 </link>  
-  
+
   <meta property="og:title" content="Free AI Plagiarism Checker &amp; Paraphrasing Tool (Originality %) | UpTools" />
   <meta property="og:description" content="Estimate originality %, highlight risky lines, and paraphrase instantly. Powered by Mistral Small. No sign-ups." />
   <meta property="og:url" content="https://www.uptools.in/ai-plagiarism/" />
   <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -659,7 +660,6 @@
     const MODEL = 'mistralai/Mistral-Small-24B-Instruct-2501';
     const CFG_KEY = 'plagiarism:cfg';
 
-
     // Counts
     function counts(text) {
       const words = (text.trim().match(/\b[\w''-]+\b/gu) || []).length;
@@ -694,7 +694,7 @@
         toast('Input too large (' + input.length.toLocaleString() + ' chars). Max is ' + MAX_INPUT.toLocaleString() + '.');
         return;
       }
-      
+
       // Content filter
       const lowerInput = input.toLowerCase();
       const blockedTerms = ['hack', 'exploit', 'bypass security', 'fake id', 'phishing', 'scam', 'malware', 'illegal'];

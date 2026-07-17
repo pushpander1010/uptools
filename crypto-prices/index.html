@@ -28,9 +28,7 @@
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
 <!-- Common CSS (production) -->
-<link as="style" href="/style.css?v=1.1.0" rel="preload"/>
-<link href="/style.css?v=1.1.0" media="print" onload="this.media='all'" rel="stylesheet"/>
-<noscript><link href="/style.css?v=1.1.0" rel="stylesheet"/></noscript>
+
 <!-- Page-specific critical tweaks (golden neon dark) -->
 <style>
     :root{
@@ -138,7 +136,7 @@
       .table-wrap{ max-height: 62vh; }
       .pill-input input{ width:130px; }
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -190,10 +188,12 @@
     ]
   }
   </script>
-  
+
   <meta property="og:description" content="Real-time cryptocurrency prices, market cap, dominance, and top gainers/losers. Watchlist, search, filters &amp;amp; auto-refresh." />
   <meta property="og:url" content="https://www.uptools.in/crypto-prices/" />
   <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="/style.css?v=1.1.0">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>

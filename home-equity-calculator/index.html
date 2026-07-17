@@ -8,8 +8,7 @@
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Free home equity calculator. Calculate how much equity you have in your home and track equity growth over time.">
-  
-  
+
   <meta property="og:title" content="Home Equity Calculator - Calculate Your Home Equity | UpTools" />
   <meta property="og:description" content="Home Equity Calculator - Calculate Your Home Equity. Free online tool by UpTools." />
   <meta property="og:type" content="website">
@@ -20,12 +19,7 @@
   <meta name="twitter:title" content="Home Equity Calculator - Calculate Your Home Equity | UpTools" />
   <meta name="twitter:description" content="Home Equity Calculator - Calculate Your Home Equity. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-  
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
-  
-  
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,15 +56,15 @@
 <script type="application/ld+json">
   {"@context": "https://schema.org","@type": "SoftwareApplication","name": "Home Equity Calculator","applicationCategory": "FinanceApplication","offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},"operatingSystem": "Any","description": "Calculate home equity and track equity growth over time."}
   </script>
-  
+
   <script type="application/ld+json">
   {"@context": "https://schema.org","@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://www.uptools.in/"},{"@type": "ListItem","position": 2,"name": "Home Equity Calculator","item": "https://www.uptools.in/home-equity-calculator/"}]}
   </script>
-  
+
   <script type="application/ld+json">
   {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "What is home equity?","acceptedAnswer": {"@type": "Answer","text": "Home equity is the portion of your home that you own outright. It's calculated as: Current Home Value - Outstanding Mortgage Balance. For example, if your home is worth $400K and you owe $250K, you have $150K in equity."}},{"@type": "Question","name": "How do I build home equity?","acceptedAnswer": {"@type": "Answer","text": "Build equity by: 1) Making mortgage payments (reduces loan balance), 2) Home appreciation (increases value), 3) Making extra principal payments, 4) Home improvements that increase value."}},{"@type": "Question","name": "What is a good amount of home equity?","acceptedAnswer": {"@type": "Answer","text": "20% equity is the minimum to avoid PMI. 50%+ equity provides financial flexibility. Most lenders allow borrowing up to 80-85% of home value, so maintaining 15-20% equity is recommended."}}]}
   </script>
-  
+
   <style>
     .calc-grid { display: grid; gap: 1.5rem; max-width: 42rem; margin: 0 auto; }
     .input-group { display: flex; flex-direction: column; gap: .5rem; }
@@ -142,12 +136,13 @@
 <link href="https://www.uptools.in/home-equity-calculator/" rel="canonical"/>
 <meta name="keywords" content="home equity calculator, home equity calculator, online tool, free calculator, uptools" />
 
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  
+
   <a href="#main" class="sr-only skip-link">Skip to content</a>
-  
+
     <!-- Header -->
   <header class="site" role="banner">
 <div class="header-inner">
@@ -171,48 +166,48 @@
 </nav>
 </div>
 </header>
-  
+
   <main id="main" class="wrap" role="main">
     <h1>Home Equity Calculator</h1>
     <p class="lead">Calculate how much equity you have in your home and track equity growth over time.</p>
-    
+
     <ins class="adsbygoogle"
-         style="display:block"
+         style="display:block;min-height:250px"
          data-ad-client="ca-pub-6216304334889617"
          data-ad-slot="1234567890"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
-    
+
     <div class="calc-grid">
       <div class="input-group">
         <label for="home-value">Current Home Value ($)</label>
         <input type="number" id="home-value" value="400000" min="0" step="5000">
       </div>
-      
+
       <div class="input-group">
         <label for="mortgage-balance">Outstanding Mortgage Balance ($)</label>
         <input type="number" id="mortgage-balance" value="250000" min="0" step="1000">
       </div>
-      
+
       <div class="input-group">
         <label for="other-liens">Other Liens/Loans Against Property ($)</label>
         <input type="number" id="other-liens" value="0" min="0" step="1000">
         <small style="opacity:.7;">HELOC, second mortgage, etc.</small>
       </div>
-      
+
       <button class="btn-calc" onclick="calculate()">Calculate Home Equity</button>
-      
+
       <div id="result" class="result-card" style="display:none;">
         <h2>Your Home Equity</h2>
         <div class="result-main" id="equity-amount">$0</div>
         <p style="opacity:.8;">Total equity in your home</p>
-        
+
         <div class="equity-bar">
           <div class="equity-fill" id="equity-bar" style="width: 0%">
             <span id="equity-percent">0%</span>
           </div>
         </div>
-        
+
         <div class="breakdown">
           <div class="breakdown-item">
             <span class="breakdown-label">Home Value</span>
@@ -233,39 +228,38 @@
         </div>
       </div>
     </div>
-    
+
     <ins class="adsbygoogle"
-         style="display:block; margin: 3rem 0;"
+         style="display:block; margin: 3rem 0;min-height:250px"
          data-ad-client="ca-pub-6216304334889617"
          data-ad-slot="1234567891"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
-    
+
     <section aria-labelledby="faq-heading">
       <h2 id="faq-heading">Frequently Asked Questions</h2>
-      
+
       <details>
         <summary>What is home equity?</summary>
         <p>Home equity is the portion of your home that you own outright. It's calculated as: Current Home Value - Outstanding Mortgage Balance. For example, if your home is worth $400K and you owe $250K, you have $150K in equity.</p>
       </details>
-      
+
       <details>
         <summary>How do I build home equity?</summary>
         <p>Build equity by: 1) Making mortgage payments (reduces loan balance), 2) Home appreciation (increases value), 3) Making extra principal payments, 4) Home improvements that increase value.</p>
       </details>
-      
+
       <details>
         <summary>What is a good amount of home equity?</summary>
         <p>20% equity is the minimum to avoid PMI. 50%+ equity provides financial flexibility. Most lenders allow borrowing up to 80-85% of home value, so maintaining 15-20% equity is recommended.</p>
       </details>
     </section>
-    
+
     <nav aria-label="Breadcrumb" class="breadcrumb">
       <a href="/">Home</a> / <span>Home Equity Calculator</span>
     </nav>
   </main>
-  
-  
+
 <!-- SEO: Do's and Don'ts -->
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
@@ -312,38 +306,38 @@
 <footer class="note small site-footer" role="contentinfo">
     <p>&copy; 2025 UpTools. Free online tools for everyone.</p>
   </footer>
-  
+
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
     function calculate() {
       const homeValue = parseFloat(document.getElementById('home-value').value) || 0;
       const mortgageBalance = parseFloat(document.getElementById('mortgage-balance').value) || 0;
       const otherLiens = parseFloat(document.getElementById('other-liens').value) || 0;
-      
+
       const totalDebt = mortgageBalance + otherLiens;
       const equity = homeValue - totalDebt;
       const equityPercent = homeValue > 0 ? (equity / homeValue) * 100 : 0;
-      
+
       // Calculate available to borrow (80% LTV - current debt)
       const maxLTV = homeValue * 0.80;
       const availableBorrow = Math.max(0, maxLTV - totalDebt);
-      
+
       // Display results
       document.getElementById('equity-amount').textContent = '$' + equity.toLocaleString('en-US', {maximumFractionDigits: 0});
       document.getElementById('value-display').textContent = '$' + homeValue.toLocaleString('en-US', {maximumFractionDigits: 0});
       document.getElementById('debt-display').textContent = '$' + totalDebt.toLocaleString('en-US', {maximumFractionDigits: 0});
       document.getElementById('equity-pct-display').textContent = equityPercent.toFixed(1) + '%';
       document.getElementById('available-borrow').textContent = '$' + availableBorrow.toLocaleString('en-US', {maximumFractionDigits: 0});
-      
+
       // Update equity bar
       const barWidth = Math.min(100, Math.max(0, equityPercent));
       document.getElementById('equity-bar').style.width = barWidth + '%';
       document.getElementById('equity-percent').textContent = equityPercent.toFixed(1) + '%';
-      
+
       document.getElementById('result').style.display = 'block';
       document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-    
+
     (adsbygoogle = window.adsbygoogle || []).push({});
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>

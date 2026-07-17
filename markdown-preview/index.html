@@ -13,9 +13,7 @@
   <meta property="og:description" content="Write Markdown and see rendered output in real-time." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="UpTools">
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Markdown Preview - Live Markdown Editor","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
@@ -30,12 +28,14 @@
     .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
   </style>
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <main class="tool-wrap">
     <h1 style="font-size:1.5rem;margin-bottom:4px">📝 Markdown Preview - Live Markdown Editor</h1>
     <p class="note" style="margin-bottom:16px">Write Markdown and see rendered output in real-time.</p>
-    
+
 <section class="tool-card"><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
 <div><label class="note">Markdown</label><textarea class="input" id="md" rows="15" oninput="render()" style="font-family:monospace;font-size:.85rem"># Hello\n\nThis is **bold** and *italic*.\n\n- Item 1\n- Item 2\n\n> Blockquote\n\n```js\nconsole.log("Hi");\n```</textarea></div>
 <div><label class="note">Preview</label><div id="prev" class="output-box" style="min-height:350px"></div></div>

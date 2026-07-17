@@ -17,9 +17,8 @@
   <meta name="twitter:description" content="Simon Says - Free Online Game. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
 
-  <link rel="stylesheet" href="/style.css">
   <script src="/games/fullscreen-utils.js" defer></script>
-  
+
   <style>
     :root {
       --accent: #5f27cd;
@@ -115,17 +114,17 @@
     .red.active { box-shadow: 0 0 35px #ff4757, inset 0 0 10px rgba(255,255,255,0.5); }
     .red:active { box-shadow: 0 0 35px #ff4757, inset 0 0 10px rgba(255,255,255,0.5); }
     .red.touch-active { box-shadow: 0 0 35px #ff4757, inset 0 0 10px rgba(255,255,255,0.5); }
-    
+
     .blue { background: radial-gradient(circle at center, #70a1ff 0%, #1e90ff 100%); }
     .blue.active { box-shadow: 0 0 35px #1e90ff, inset 0 0 10px rgba(255,255,255,0.5); }
     .blue:active { box-shadow: 0 0 35px #1e90ff, inset 0 0 10px rgba(255,255,255,0.5); }
     .blue.touch-active { box-shadow: 0 0 35px #1e90ff, inset 0 0 10px rgba(255,255,255,0.5); }
-    
+
     .green { background: radial-gradient(circle at center, #2ed573 0%, #26af56 100%); }
     .green.active { box-shadow: 0 0 35px #2ed573, inset 0 0 10px rgba(255,255,255,0.5); }
     .green:active { box-shadow: 0 0 35px #2ed573, inset 0 0 10px rgba(255,255,255,0.5); }
     .green.touch-active { box-shadow: 0 0 35px #2ed573, inset 0 0 10px rgba(255,255,255,0.5); }
-    
+
     .yellow { background: radial-gradient(circle at center, #eccc68 0%, #ffa502 100%); }
     .yellow.active { box-shadow: 0 0 35px #ffa502, inset 0 0 10px rgba(255,255,255,0.5); }
     .yellow:active { box-shadow: 0 0 35px #ffa502, inset 0 0 10px rgba(255,255,255,0.5); }
@@ -162,7 +161,7 @@
       min-height: 25px; 
       font-weight: 600;
     }
-  
+
     .controls { 
       margin: 1.5rem 0; 
       display: flex;
@@ -217,6 +216,8 @@
   <meta property="og:url" content="https://www.uptools.in/games/simon-says/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="UpTools">
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -259,7 +260,7 @@
         </div>
       </div>
       <div class="message" id="message">Click Start to begin!</div>
-    
+
     <div class="simon-board">
       <button class="simon-button red" data-color="red" aria-label="Red tile"></button>
       <button class="simon-button blue" data-color="blue" aria-label="Blue tile"></button>
@@ -273,12 +274,12 @@
         <button id="overlayBtn" class="btn" style="min-height: 44px; padding: 10px 24px; font-size: 16px;">Try Again</button>
       </div>
     </div>
-    
+
     <div class="controls">
       <button class="btn" id="startBtn">Start Game</button>
       <button class="btn secondary" id="resetBtn">Reset</button>
     </div>
-    
+
     <div style="margin-top: 20px;">
       <a href="/games/" class="btn secondary">← Back to Games</a>
     </div>
@@ -292,14 +293,14 @@
         this.score = 0;
         this.isPlaying = false;
         this.isShowingSequence = false;
-        
+
         this.buttons = document.querySelectorAll('.simon-button');
         this.scoreElement = document.getElementById('score');
         this.bestScoreElement = document.getElementById('bestScore');
         this.messageElement = document.getElementById('message');
         this.startBtn = document.getElementById('startBtn');
         this.resetBtn = document.getElementById('resetBtn');
-        
+
         this.audioCtx = null;
         // Musical tones: C4, E4, G4, C5 (sine waves)
         this.tones = {
@@ -334,11 +335,11 @@
           this.bestScoreElement.textContent = this.bestScore;
         }
       }
-      
+
       bindEvents() {
         this.startBtn.addEventListener('click', () => this.startGame());
         this.resetBtn.addEventListener('click', () => this.resetGame());
-        
+
         this.buttons.forEach(button => {
           button.addEventListener('click', (e) => {
             if (this.isPlaying && !this.isShowingSequence) {
@@ -363,7 +364,7 @@
           }, { passive: true });
         });
       }
-      
+
       playTone(color) {
         try {
           this.audioCtx = this.audioCtx || new (window.AudioContext || window.webkitAudioContext)();
@@ -385,12 +386,12 @@
       startGame() {
         const overlay = document.getElementById('gameOverlay');
         if (overlay) overlay.style.display = 'none';
-        
+
         // Resume AudioContext after user gesture
         if (this.audioCtx && this.audioCtx.state === 'suspended') {
           this.audioCtx.resume();
         }
-        
+
         this.isPlaying = true;
         this.sequence = [];
         this.playerSequence = [];
@@ -398,7 +399,7 @@
         this.updateScore();
         this.nextRound();
       }
-      
+
       resetGame() {
         const overlay = document.getElementById('gameOverlay');
         if (overlay) overlay.style.display = 'none';
@@ -411,35 +412,35 @@
         this.updateScore();
         this.messageElement.textContent = 'Click Start to begin!';
       }
-      
+
       nextRound() {
         this.playerSequence = [];
         this.addToSequence();
         this.showSequence();
       }
-      
+
       addToSequence() {
         const colors = ['red', 'blue', 'green', 'yellow'];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
         this.sequence.push(randomColor);
       }
-      
+
       async showSequence() {
         this.isShowingSequence = true;
         this.messageElement.textContent = 'Watch the sequence...';
-        
+
         await this.delay(1000);
-        
+
         for (let i = 0; i < this.sequence.length; i++) {
           await this.delay(600);
           this.flashButton(this.sequence[i]);
           await this.delay(400);
         }
-        
+
         this.isShowingSequence = false;
         this.messageElement.textContent = 'Your turn! Repeat the sequence.';
       }
-      
+
       flashButton(color) {
         const button = document.querySelector(`[data-color="${color}"]`);
         if (!button) return;
@@ -449,18 +450,18 @@
           button.classList.remove('active');
         }, 300);
       }
-      
+
       handlePlayerInput(color) {
         this.playerSequence.push(color);
         this.flashButton(color);
-        
+
         const currentIndex = this.playerSequence.length - 1;
-        
+
         if (this.playerSequence[currentIndex] !== this.sequence[currentIndex]) {
           this.gameOver();
           return;
         }
-        
+
         if (this.playerSequence.length === this.sequence.length) {
           this.score++;
           this.updateScore();
@@ -468,11 +469,11 @@
           setTimeout(() => this.nextRound(), 1200);
         }
       }
-      
+
       gameOver() {
         this.isPlaying = false;
         this.messageElement.textContent = `Game Over! Final Score: ${this.score}`;
-        
+
         // Update best score
         if (this.score > this.bestScore) {
           this.bestScore = this.score;
@@ -502,16 +503,16 @@
           });
         }, 500);
       }
-      
+
       updateScore() {
         this.scoreElement.textContent = this.score;
       }
-      
+
       delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
     }
-    
+
     function showOverlay(title, message, buttonText, callback) {
       const overlay = document.getElementById('gameOverlay');
       const overlayTitle = document.getElementById('overlayTitle');

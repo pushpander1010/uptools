@@ -111,11 +111,7 @@
     }
   </style>
 <!-- 2) Load full stylesheet without blocking first paint -->
-<link as="style" href="/style.css?v=1.2.0" rel="preload"/>
-<link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
-<noscript>
-<link href="/style.css?v=1.2.0" rel="stylesheet"/>
-</noscript>
+
 <!-- 3) Page-scoped extras that were previously outside a <style> tag -->
 <style>
     /* Compact controls & grid */
@@ -198,7 +194,7 @@
       font-size: 12px;
       color: var(--muted);
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -237,13 +233,15 @@
     {"@type":"Question","name":"Does this include TDS?","acceptedAnswer":{"@type":"Answer","text":"You can simulate TDS (with/without PAN) and thresholds for seniors/non-seniors. Actual TDS depends on bank and tax rules; consult your bank and tax advisor."}}
   ]}</script>
 </link></link>  
-  
+
 <meta name="keywords" content="fd calculator, fd calculator, online tool, free calculator, uptools" />
 
   <meta property="og:title" content="FD Interest Calculator (India) - Maturity, Interest, Payouts &amp; TDS | UpTools" />
   <meta property="og:description" content="Calculate FD maturity, interest, APY, and optional TDS. Cumulative or monthly/quarterly payouts. Partial tenures supported. Shareable link." />
   <meta property="og:url" content="https://www.uptools.in/fd-calculator/" />
   <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="/style.css?v=1.2.0">
 </head>
 <body>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>

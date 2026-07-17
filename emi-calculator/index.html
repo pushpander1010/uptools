@@ -90,11 +90,7 @@
     }
   </style>
 <!-- 2) Load full stylesheet without blocking first paint -->
-<link as="style" href="/style.css?v=1.2.0" rel="preload"/>
-<link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
-<noscript>
-<link href="/style.css?v=1.2.0" rel="stylesheet"/>
-</noscript>
+
 <style>
     :root {
       --accent: #c4b5fd;
@@ -183,10 +179,12 @@
   "tool":{"@type":"HowToTool","name":"UpTools EMI Calculator","url":"https://www.uptools.in/emi-calculator/"},
   "publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
-  
+
   <meta property="og:description" content="Calculate EMI for all loan types instantly. Get monthly EMI, total interest, amortization schedule with prepayment options. Compare loans &amp;amp; export results. Updated for 2025." />
   <meta property="og:url" content="https://www.uptools.in/emi-calculator/" />
   <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="/style.css?v=1.2.0">
 </head>
 <body>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>

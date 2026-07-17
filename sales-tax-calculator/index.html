@@ -8,8 +8,7 @@
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Calculate sales tax for all 50 US states. Add or remove sales tax from prices. Includes state and local tax rates for accurate calculations.">
-  
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content="US Sales Tax Calculator - State by State Tax Rates | UpTools" />
   <meta property="og:description" content="US Sales Tax Calculator - State by State Tax Rates. Free online tool by UpTools." />
@@ -21,14 +20,11 @@
   <meta name="twitter:title" content="US Sales Tax Calculator - State by State Tax Rates | UpTools" />
   <meta name="twitter:description" content="US Sales Tax Calculator - State by State Tax Rates. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-  
+
   <!-- Preload CSS -->
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
-  
+
   <!-- JSON-LD -->
-  
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -76,7 +72,7 @@
     "operatingSystem": "Web"
   }
   </script>
-  
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -94,7 +90,7 @@
     }]
   }
   </script>
-  
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -116,7 +112,7 @@
     }]
   }
   </script>
-  
+
   <style>
     .calc-grid {
       display: grid;
@@ -208,12 +204,13 @@
 <link href="https://www.uptools.in/sales-tax-calculator/" rel="canonical"/>
 <meta name="keywords" content="sales tax calculator, sales tax calculator, online tool, free calculator, uptools" />
 
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  
+
   <a href="#main" class="sr-only skip-link">Skip to content</a>
-  
+
     <!-- Header -->
   <header class="site" role="banner">
 <div class="header-inner">
@@ -237,26 +234,26 @@
 </nav>
 </div>
 </header>
-  
+
   <main id="main" class="wrap" role="main">
     <section class="card">
       <h1>🧾 US Sales Tax Calculator</h1>
       <p class="note">Calculate sales tax for all 50 US states with accurate state and local rates.</p>
-      
+
       <!-- Ad Slot -->
       <ins class="adsbygoogle"
-           style="display:block;margin:1rem 0"
+           style="display:block;margin:1rem 0;min-height:250px"
            data-ad-client="ca-pub-6216304334889617"
            data-ad-slot="9810172647"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      
+
       <div class="mode-toggle">
         <button class="mode-btn active" id="addMode">Add Tax to Price</button>
         <button class="mode-btn" id="removeMode">Remove Tax from Price</button>
       </div>
-      
+
       <div class="calc-grid">
         <div class="input-group">
           <label for="state">Select State</label>
@@ -314,13 +311,13 @@
             <option value="4.0">Wyoming - 4.0%</option>
           </select>
         </div>
-        
+
         <div class="input-group">
           <label for="amount">Amount ($)</label>
           <input type="number" id="amount" placeholder="0.00" step="0.01" min="0" value="100">
         </div>
       </div>
-      
+
       <div class="result-card">
         <div class="result-row">
           <span class="result-label">Tax Rate</span>
@@ -336,35 +333,34 @@
         </div>
       </div>
     </section>
-    
+
     <!-- FAQ Section -->
     <section class="card" style="margin-top:1.5rem">
       <h2>❓ Frequently Asked Questions</h2>
-      
+
       <details style="margin:1rem 0">
         <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">Which US states have no sales tax?</summary>
         <p class="note" style="margin-top:0.5rem">Five US states have no state sales tax: Alaska, Delaware, Montana, New Hampshire, and Oregon. However, Alaska allows local sales taxes.</p>
       </details>
-      
+
       <details style="margin:1rem 0">
         <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">How do I calculate sales tax?</summary>
         <p class="note" style="margin-top:0.5rem">To calculate sales tax, multiply the price by the tax rate (as a decimal). For example, $100 × 0.0725 = $7.25 tax. Add this to the original price for the total.</p>
       </details>
-      
+
       <details style="margin:1rem 0">
         <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">Do local taxes apply on top of state sales tax?</summary>
         <p class="note" style="margin-top:0.5rem">Yes, many cities and counties add local sales taxes on top of the state rate. This calculator shows state rates only. Check your local government website for combined rates.</p>
       </details>
     </section>
-    
+
     <!-- Breadcrumb -->
     <nav aria-label="Breadcrumb" style="margin-top:1.5rem">
       <p class="note small">
         <a href="/">Home</a> → <span>Sales Tax Calculator</span>
       </p>
     </nav>
-    
-    
+
 <!-- SEO: Do's and Don'ts -->
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
@@ -412,11 +408,11 @@
       © <span id="y"></span> UpTools · <a href="/about/">About</a> · <a href="/contact/">Contact</a>
     </footer>
   </main>
-  
+
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
     document.getElementById('y').textContent = new Date().getFullYear();
-    
+
     const state = document.getElementById('state');
     const amount = document.getElementById('amount');
     const addMode = document.getElementById('addMode');
@@ -424,15 +420,15 @@
     const taxRateEl = document.getElementById('taxRate');
     const taxAmountEl = document.getElementById('taxAmount');
     const totalAmountEl = document.getElementById('totalAmount');
-    
+
     let mode = 'add';
-    
+
     function calculate() {
       const rate = parseFloat(state.value) || 0;
       const amt = parseFloat(amount.value) || 0;
-      
+
       let taxAmount, total;
-      
+
       if (mode === 'add') {
         taxAmount = amt * (rate / 100);
         total = amt + taxAmount;
@@ -442,29 +438,29 @@
         taxAmount = amt - original;
         total = original;
       }
-      
+
       taxRateEl.textContent = `${rate.toFixed(2)}%`;
       taxAmountEl.textContent = `$${taxAmount.toFixed(2)}`;
       totalAmountEl.textContent = `$${total.toFixed(2)}`;
     }
-    
+
     addMode.addEventListener('click', () => {
       mode = 'add';
       addMode.classList.add('active');
       removeMode.classList.remove('active');
       calculate();
     });
-    
+
     removeMode.addEventListener('click', () => {
       mode = 'remove';
       removeMode.classList.add('active');
       addMode.classList.remove('active');
       calculate();
     });
-    
+
     state.addEventListener('change', calculate);
     amount.addEventListener('input', calculate);
-    
+
     calculate();
   </script>
 </body>

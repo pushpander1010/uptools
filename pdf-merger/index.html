@@ -15,9 +15,7 @@
   <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/pdf-merger/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"PDF Merger - Merge Multiple PDF Files Online","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
@@ -38,13 +36,14 @@
     .file-item { display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #0e1628; border-radius: .5rem; margin-bottom: 8px; }
     .badge { display: inline-block; background: #6366f1; color: white; padding: 2px 8px; border-radius: 12px; font-size: .75rem; font-weight: 600; }
   </style>
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <main class="tool-wrap">
     <h1 style="font-size:1.5rem;margin-bottom:4px">📄 PDF Merger - Merge Multiple PDF Files Online</h1>
     <p class="note" style="margin-bottom:16px">Merge multiple PDF files into one document. Free, fast, and private - no upload needed.</p>
-    
-    
+
     <section class="tool-card">
       <h2 style="margin-top:0;font-size:1.1rem">Upload PDF Files</h2>
       <div class="drag-zone" id="dropZone">
@@ -77,9 +76,9 @@
       const outputSection = document.getElementById('outputSection');
       const output = document.getElementById('output');
       const downloadBtn = document.getElementById('downloadBtn');
-      
+
       let files = [];
-      
+
       dropZone.addEventListener('click', () => fileInput.click());
       dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
       dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
@@ -89,53 +88,53 @@
         addFiles(Array.from(e.dataTransfer.files).filter(f => f.type === 'application/pdf'));
       });
       fileInput.addEventListener('change', (e) => addFiles(Array.from(e.target.files)));
-      
+
       function addFiles(newFiles) {
         files = [...files, ...newFiles];
         renderFiles();
       }
-      
+
       function renderFiles() {
         fileList.innerHTML = files.map((f, i) => 
           '<div class="file-item"><span>' + f.name + ' (' + (f.size/1024).toFixed(1) + ' KB)</span><button onclick="removeFile(' + i + ')" style="background:none;border:none;color:#ef4444;cursor:pointer">✕</button></div>'
         ).join('');
         mergeBtn.disabled = files.length < 2;
       }
-      
+
       window.removeFile = (i) => { files.splice(i, 1); renderFiles(); };
-      
+
       clearBtn.addEventListener('click', () => { files = []; renderFiles(); });
-      
+
       mergeBtn.addEventListener('click', async () => {
         status.textContent = 'Merging PDFs...';
         mergeBtn.disabled = true;
-        
+
         try {
           // Dynamic import of pdf-lib
           const { PDFDocument } = await import('https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/+esm');
           const mergedPdf = await PDFDocument.create();
-          
+
           for (const file of files) {
             const arrayBuffer = await file.arrayBuffer();
             const pdf = await PDFDocument.load(arrayBuffer);
             const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
             pages.forEach(page => mergedPdf.addPage(page));
           }
-          
+
           const mergedBytes = await mergedPdf.save();
           const blob = new Blob([mergedBytes], { type: 'application/pdf' });
           const url = URL.createObjectURL(blob);
-          
+
           output.innerHTML = '<p>✅ Successfully merged ' + files.length + ' PDFs</p><p>Total pages: ' + mergedPdf.getPageCount() + '</p>';
           outputSection.style.display = 'block';
-          
+
           downloadBtn.onclick = () => {
             const a = document.createElement('a');
             a.href = url;
             a.download = 'merged.pdf';
             a.click();
           };
-          
+
           status.textContent = 'Done!';
         } catch (e) {
           status.textContent = 'Error: ' + e.message;
@@ -145,19 +144,18 @@
       });
     </script>
 
-    
     <section class="tool-card" style="margin-top:16px">
       <h2 style="margin-top:0;font-size:1.1rem">How It Works</h2>
       <p class="note">1. Upload or select your files<br>2. Configure options<br>3. Process and download</p>
     </section>
-    
+
     <section class="tool-card" style="margin-top:16px">
       <h2 style="margin-top:0;font-size:1.1rem">FAQ</h2>
       <details><summary><b>Is this tool free?</b></summary><p class="note" style="padding:6px 0">Yes, completely free with no sign-up required.</p></details>
       <details><summary><b>Is my data private?</b></summary><p class="note" style="padding:6px 0">Yes. All processing happens in your browser. Files are never uploaded to our servers.</p></details>
       <details><summary><b>Does it work on mobile?</b></summary><p class="note" style="padding:6px 0">Yes. All tools are mobile-responsive.</p></details>
     </section>
-    
+
     <footer style="margin-top:24px;padding:16px 0;text-align:center;border-top:1px solid #212a3a">
       <p class="note">© <span id="y"></span> UpTools. Privacy-first utilities.</p>
     </footer>

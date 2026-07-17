@@ -12,7 +12,6 @@
 <link href="https://www.uptools.in/sleep-calculator/" rel="canonical"/>
 <meta name="keywords" content="sleep calculator, sleep calculator, online tool, free calculator, uptools" />
 
-  
   <meta property="og:title" content="Sleep Calculator - Sleep Cycles & Wake Times | UpTools" />
   <meta property="og:description" content="Sleep Calculator - Sleep Cycles & Wake Times. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
@@ -23,8 +22,7 @@
   <meta name="twitter:title" content="Sleep Calculator - Sleep Cycles & Wake Times | UpTools" />
   <meta name="twitter:description" content="Sleep Calculator - Sleep Cycles & Wake Times. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-  <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+
   <style>
     :root { --bg: #0f1419; --surface: #121826; --text: #e6edf3; --muted: #9aa4b2; --brand: #7aa2ff; --accent: #ff6b6b; --radius: .75rem; --border: #212a3a }
     body { margin: 0; font: 400 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: var(--bg); color: var(--text) }
@@ -65,8 +63,6 @@
     }
 
 </style>
-  
-
 
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Sleep Calculator free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's completely free with no sign-ups required."}}, {"@type": "Question", "name": "Is Sleep Calculator private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All calculations run in your browser. No data is uploaded."}}, {"@type": "Question", "name": "Does Sleep Calculator work on mobile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All tools are mobile-responsive and work on any device."}}]}
@@ -117,6 +113,8 @@
     "offers": { "@type": "Offer", "price": "0" }
   }
   </script>
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -158,17 +156,17 @@
     <article class="card">
       <h1>😴 Sleep Calculator</h1>
       <p class="note">Calculate optimal sleep cycles and wake times for better sleep quality.</p>
-      
+
       <label for="bedtime" style="display: block; margin-top: 1.5rem; font-weight: 600;">Bedtime:</label>
       <input type="time" id="bedtime">
-      
+
       <button class="btn" onclick="calculateSleep()" style="margin-top: 1rem;">😴 Calculate</button>
-      
+
       <div id="result" style="display: none; margin-top: 1.5rem;">
         <h2>Optimal Wake Times</h2>
         <div class="result" id="result-content"></div>
       </div>
-      
+
       <h2 style="margin-top: 2rem;">Features</h2>
       <ul style="line-height: 2;">
         <li>✅ Calculate sleep cycles</li>
@@ -178,7 +176,7 @@
         <li>✅ Science-based approach</li>
       </ul>
     </article>
-    
+
 <!-- SEO: Do's and Don'ts -->
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
@@ -234,11 +232,11 @@
         alert('Please select bedtime');
         return;
       }
-      
+
       const [hours, minutes] = bedtime.split(':').map(Number);
       const bedtimeMs = (hours * 60 + minutes) * 60000;
       const cycleDuration = 90 * 60000;
-      
+
       let html = '';
       for (let i = 1; i <= 6; i++) {
         const wakeTimeMs = bedtimeMs + (i * cycleDuration);
@@ -246,7 +244,7 @@
         const wakeMinutes = Math.floor((wakeTimeMs / 60000) % 60);
         html += `<div class="result-row"><span class="result-label">${i} cycles (${i * 90} min):</span><span class="result-value">${String(wakeHours).padStart(2, '0')}:${String(wakeMinutes).padStart(2, '0')}</span></div>`;
       }
-      
+
       document.getElementById('result-content').innerHTML = html;
       document.getElementById('result').style.display = 'block';
     }

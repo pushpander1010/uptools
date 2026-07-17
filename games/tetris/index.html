@@ -20,11 +20,9 @@
   <meta name="keywords" content="tetris game,block puzzle,online tetris,free tetris,puzzle game,classic game,brain game" />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <link rel="canonical" href="https://www.uptools.in/games/tetris/" />
-  
+
   <!-- Global CSS -->
-  <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
-  
+
   <!-- Fullscreen utilities -->
   <script src="/games/fullscreen-utils.js" defer></script>
 
@@ -50,7 +48,7 @@
     .game-container { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; align-items: start; }
     .game-board { width: 300px; height: 600px; border: 2px solid var(--border); background: #000; position: relative; margin: 0 auto; display: grid; grid-template-columns: repeat(10, 1fr); grid-template-rows: repeat(20, 1fr); }
     .game-cell { border: 1px solid #111; }
-    
+
     .next-piece { width: 120px; height: 120px; border: 2px solid var(--border); background: #000; margin: 1rem 0; position: relative; }
     .next-cell { position: absolute; width: 24px; height: 24px; border: 1px solid #333; }
 
@@ -192,25 +190,25 @@
         width: min(70vmin, 300px) !important;
         height: min(70vmin, 600px) !important;
       }
-      
+
       .fullscreen-mode .game-cell {
         width: calc(min(70vmin, 300px) / 10) !important;
         height: calc(min(70vmin, 600px) / 20) !important;
       }
-      
+
       .fullscreen-mode .controls {
         grid-template-columns: repeat(3, 1fr) !important;
         gap: 0.5rem !important;
         max-width: min(70vmin, 300px) !important;
       }
-      
+
       .fullscreen-mode .control-btn {
         padding: 0.75rem !important;
         font-size: 1.2rem !important;
         min-height: 50px !important;
       }
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -231,6 +229,8 @@
   <meta property="og:url" content="https://www.uptools.in/games/tetris/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="UpTools">
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
 </head>
 
 <body>
@@ -271,7 +271,7 @@
             <button class="btn" onclick="startGame()">Play Again</button>
           </div>
         </div>
-        
+
         <div style="text-align: center; margin-top: 1rem">
           <button id="startBtn" class="btn" onclick="startGame()">🎮 Start Game</button>
           <button id="pauseBtn" class="btn secondary" onclick="pauseGame()" disabled>⏸️ Pause</button>
@@ -419,11 +419,11 @@
     function initGame() {
       // Create empty board
       gameState.board = Array(BOARD_HEIGHT).fill().map(() => Array(BOARD_WIDTH).fill(0));
-      
+
       // Create board cells
       const gameBoard = document.getElementById('gameBoard');
       gameBoard.innerHTML = '<div class="game-over" id="gameOver"><h2>Game Over!</h2><p>Score: <span id="finalScore">0</span></p><button class="btn" onclick="startGame()">Play Again</button></div>';
-      
+
       for (let y = 0; y < BOARD_HEIGHT; y++) {
         for (let x = 0; x < BOARD_WIDTH; x++) {
           const cell = document.createElement('div');
@@ -460,10 +460,10 @@
     // Pause game
     function pauseGame() {
       if (!gameState.gameRunning) return;
-      
+
       gameState.gamePaused = !gameState.gamePaused;
       const pauseBtn = document.getElementById('pauseBtn');
-      
+
       if (gameState.gamePaused) {
         clearInterval(gameState.dropTimer);
         pauseBtn.textContent = '▶️ Resume';
@@ -478,10 +478,10 @@
       if (!gameState.nextPiece) {
         gameState.nextPiece = createRandomPiece();
       }
-      
+
       gameState.currentPiece = gameState.nextPiece;
       gameState.nextPiece = createRandomPiece();
-      
+
       // Position at top center
       gameState.currentPiece.x = Math.floor(BOARD_WIDTH / 2) - Math.floor(gameState.currentPiece.shape[0].length / 2);
       gameState.currentPiece.y = 0;
@@ -501,7 +501,7 @@
       const pieceTypes = Object.keys(PIECES);
       const randomType = pieceTypes[Math.floor(Math.random() * pieceTypes.length)];
       const piece = PIECES[randomType];
-      
+
       return {
         shape: piece.shape.map(row => [...row]),
         color: piece.color,
@@ -530,10 +530,10 @@
 
       const rotated = rotateMatrix(gameState.currentPiece.shape);
       const originalShape = gameState.currentPiece.shape;
-      
+
       // Try rotation
       gameState.currentPiece.shape = rotated;
-      
+
       if (checkCollision(gameState.currentPiece, 0, 0)) {
         // Revert
         gameState.currentPiece.shape = originalShape;
@@ -584,10 +584,10 @@
         gameState.score += linesCleared * 100 * gameState.level;
         gameState.level = Math.floor(gameState.lines / 10) + 1;
         gameState.dropInterval = Math.max(100, 1000 - (gameState.level - 1) * 100);
-        
+
         updateDisplay();
         redrawBoard();
-        
+
         // Restart timer with new interval
         clearInterval(gameState.dropTimer);
         startDropTimer();
@@ -603,11 +603,11 @@
           if (piece.shape[y][x]) {
             const newX = piece.x + x + dx;
             const newY = piece.y + y + dy;
-            
+
             if (newX < 0 || newX >= BOARD_WIDTH || newY >= BOARD_HEIGHT) {
               return true;
             }
-            
+
             if (newY >= 0 && gameState.board[newY][newX]) {
               return true;
             }
@@ -620,7 +620,7 @@
     // Clear completed lines
     function clearLines() {
       let linesCleared = 0;
-      
+
       for (let y = BOARD_HEIGHT - 1; y >= 0; y--) {
         if (gameState.board[y].every(cell => cell !== 0)) {
           gameState.board.splice(y, 1);
@@ -629,7 +629,7 @@
           y++; // Check same line again
         }
       }
-      
+
       return linesCleared;
     }
 
@@ -674,7 +674,7 @@
     // Redraw entire board
     function redrawBoard() {
       clearBoard();
-      
+
       // Draw locked pieces
       for (let y = 0; y < BOARD_HEIGHT; y++) {
         for (let x = 0; x < BOARD_WIDTH; x++) {
@@ -686,7 +686,7 @@
           }
         }
       }
-      
+
       // Draw current piece
       if (gameState.currentPiece) {
         drawPiece(gameState.currentPiece);
@@ -709,13 +709,13 @@
     function drawNextPiece() {
       const nextPieceContainer = document.getElementById('nextPiece');
       nextPieceContainer.innerHTML = '';
-      
+
       if (!gameState.nextPiece) return;
-      
+
       const piece = gameState.nextPiece;
       const containerWidth = nextPieceContainer.offsetWidth || 120;
       const cellSize = Math.floor(containerWidth / 5);
-      
+
       for (let y = 0; y < piece.shape.length; y++) {
         for (let x = 0; x < piece.shape[y].length; x++) {
           if (piece.shape[y][x]) {
@@ -738,13 +738,13 @@
       const rows = matrix.length;
       const cols = matrix[0].length;
       const rotated = Array(cols).fill().map(() => Array(rows).fill(0));
-      
+
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
           rotated[x][rows - 1 - y] = matrix[y][x];
         }
       }
-      
+
       return rotated;
     }
 
@@ -761,12 +761,12 @@
     function endGame() {
       gameState.gameRunning = false;
       clearInterval(gameState.dropTimer);
-      
+
       document.getElementById('finalScore').textContent = gameState.score;
       document.getElementById('gameOver').style.display = 'block';
       document.getElementById('startBtn').disabled = false;
       document.getElementById('pauseBtn').disabled = true;
-      
+
       saveHighScore(gameState.score);
       loadHighScores();
     }
@@ -790,7 +790,7 @@
     function loadHighScores() {
       const highScores = JSON.parse(localStorage.getItem('tetrisHighScores') || '[]');
       const container = document.getElementById('highScores');
-      
+
       if (highScores.length === 0) {
         container.innerHTML = '<div>No high scores yet!</div>';
       } else {
@@ -804,7 +804,7 @@
     function setupEventListeners() {
       document.addEventListener('keydown', (e) => {
         if (!gameState.gameRunning || gameState.gamePaused) return;
-        
+
         switch(e.key.toLowerCase()) {
           case 'a':
           case 'arrowleft':
@@ -840,13 +840,13 @@
       // Mobile menu setup
       const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
       const navLinks = document.querySelector('.nav-links');
-      
+
       if (mobileMenuToggle && navLinks) {
         mobileMenuToggle.addEventListener('click', () => {
           const isActive = navLinks.classList.contains('active');
           navLinks.classList.toggle('active');
           mobileMenuToggle.setAttribute('aria-expanded', !isActive);
-          
+
           const menuIcon = mobileMenuToggle.querySelector('.menu-icon');
           if (menuIcon) {
             menuIcon.textContent = isActive ? '☰' : '✕';

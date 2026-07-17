@@ -13,9 +13,7 @@
   <meta property="og:description" content="Generate SHA-1, SHA-256, SHA-384, SHA-512 hashes from any text." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="UpTools">
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Hash Generator - SHA256 SHA512 MD5 Online","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
@@ -30,12 +28,14 @@
     .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
   </style>
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <main class="tool-wrap">
     <h1 style="font-size:1.5rem;margin-bottom:4px">🔐 Hash Generator - SHA256 SHA512 MD5 Online</h1>
     <p class="note" style="margin-bottom:16px">Generate SHA-1, SHA-256, SHA-384, SHA-512 hashes from any text.</p>
-    
+
 <section class="tool-card">
   <textarea class="input" id="inp" rows="3" placeholder="Enter text to hash..."></textarea>
   <button class="btn" onclick="gen()" style="margin-top:12px">Generate Hashes</button>

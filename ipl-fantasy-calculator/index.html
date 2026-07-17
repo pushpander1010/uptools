@@ -8,8 +8,7 @@
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Calculate IPL fantasy cricket points for Dream11, MyTeam11, and fantasy leagues. Track batting, bowling, fielding points with accurate scoring rules.">
-  
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content="IPL Fantasy Points Calculator - Dream11 & Fantasy League | UpTools" />
   <meta property="og:description" content="IPL Fantasy Points Calculator - Dream11 & Fantasy League. Free online tool by UpTools." />
@@ -21,14 +20,11 @@
   <meta name="twitter:title" content="IPL Fantasy Points Calculator - Dream11 & Fantasy League | UpTools" />
   <meta name="twitter:description" content="IPL Fantasy Points Calculator - Dream11 & Fantasy League. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-  
+
   <!-- Preload CSS -->
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
-  
+
   <!-- JSON-LD -->
-  
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -76,7 +72,7 @@
     "operatingSystem": "Web"
   }
   </script>
-  
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -94,7 +90,7 @@
     }]
   }
   </script>
-  
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -116,7 +112,7 @@
     }]
   }
   </script>
-  
+
   <style>
     :root {
       --bg1: #0a0b0f;
@@ -188,7 +184,7 @@
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
     .note { color: var(--muted); font-size: .9rem; }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -208,12 +204,13 @@
 <link href="https://www.uptools.in/ipl-fantasy-calculator/" rel="canonical"/>
 <meta name="keywords" content="ipl fantasy calculator, ipl fantasy calculator, online tool, free calculator, uptools" />
 
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  
+
   <a href="#main" class="sr-only skip-link">Skip to content</a>
-  
+
     <!-- Header -->
   <header class="site" role="banner">
 <div class="header-inner">
@@ -237,26 +234,26 @@
 </nav>
 </div>
 </header>
-  
+
   <main id="main" class="wrap" role="main">
     <div class="tool-header">
       <div class="tool-icon" aria-hidden="true">⭐</div>
       <h1>IPL Fantasy Points Calculator</h1>
     </div>
-    
+
     <section class="card">
       <p class="note">Calculate fantasy cricket points for Dream11, MyTeam11, and other fantasy leagues using official scoring rules.</p>
-      
+
       <!-- Ad Slot -->
       <ins class="adsbygoogle"
-           style="display:block;margin:1rem 0"
+           style="display:block;margin:1rem 0;min-height:250px"
            data-ad-client="ca-pub-6216304334889617"
            data-ad-slot="9810172647"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
-    
+
     <div class="grid-2">
       <section class="card">
         <h2 class="section-title">🏏 Batting Stats</h2>
@@ -279,7 +276,7 @@
           </div>
         </div>
       </section>
-      
+
       <section class="card">
         <h2 class="section-title">🎯 Bowling Stats</h2>
         <div class="inputs">
@@ -302,7 +299,7 @@
         </div>
       </section>
     </div>
-    
+
     <section class="card">
       <h2 class="section-title">🧤 Fielding Stats</h2>
       <div class="inputs">
@@ -319,13 +316,13 @@
           <input type="number" id="stumpings" class="input" placeholder="0" min="0" value="0">
         </div>
       </div>
-      
+
       <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
         <button id="calc" class="btn" type="button">Calculate Points</button>
         <button id="reset" class="btn secondary" type="button">Reset</button>
       </div>
     </section>
-    
+
     <div class="result-card" id="results" style="display:none">
       <div class="result-row">
         <span class="result-label">Batting Points</span>
@@ -348,11 +345,11 @@
         <span class="result-value large" id="totalPts">0</span>
       </div>
     </div>
-    
+
     <!-- FAQ Section -->
     <section class="card">
       <h2>❓ Fantasy Points Scoring Rules</h2>
-      
+
       <details style="margin:1rem 0">
         <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">Batting Points</summary>
         <p class="note" style="margin-top:0.5rem">
@@ -364,7 +361,7 @@
           • Strike rate bonus: +6 pts (SR 170-200), +4 pts (SR 150-170), +2 pts (SR 130-150)
         </p>
       </details>
-      
+
       <details style="margin:1rem 0">
         <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">Bowling Points</summary>
         <p class="note" style="margin-top:0.5rem">
@@ -376,7 +373,7 @@
           • Economy rate bonus: +6 pts (ER 5-6), +4 pts (ER 6-7), +2 pts (ER 7-8)
         </p>
       </details>
-      
+
       <details style="margin:1rem 0">
         <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">Fielding Points</summary>
         <p class="note" style="margin-top:0.5rem">
@@ -387,15 +384,14 @@
         </p>
       </details>
     </section>
-    
+
     <!-- Breadcrumb -->
     <nav aria-label="Breadcrumb" style="margin-top:1.5rem">
       <p class="note small">
         <a href="/">Home</a> → <span>IPL Fantasy Calculator</span>
       </p>
     </nav>
-    
-    
+
 <!-- SEO: Do's and Don'ts -->
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
@@ -443,11 +439,11 @@
       © <span id="y"></span> UpTools · <a href="/about/">About</a> · <a href="/contact/">Contact</a>
     </footer>
   </main>
-  
+
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
     document.getElementById('y').textContent = new Date().getFullYear();
-    
+
     const inputs = {
       runs: document.getElementById('runs'),
       fours: document.getElementById('fours'),
@@ -461,14 +457,14 @@
       runouts: document.getElementById('runouts'),
       stumpings: document.getElementById('stumpings')
     };
-    
+
     const results = document.getElementById('results');
     const battingPtsEl = document.getElementById('battingPts');
     const bowlingPtsEl = document.getElementById('bowlingPts');
     const fieldingPtsEl = document.getElementById('fieldingPts');
     const bonusPtsEl = document.getElementById('bonusPts');
     const totalPtsEl = document.getElementById('totalPts');
-    
+
     function calculate() {
       const runs = parseInt(inputs.runs.value) || 0;
       const fours = parseInt(inputs.fours.value) || 0;
@@ -481,15 +477,15 @@
       const catches = parseInt(inputs.catches.value) || 0;
       const runouts = parseInt(inputs.runouts.value) || 0;
       const stumpings = parseInt(inputs.stumpings.value) || 0;
-      
+
       // Batting points
       let battingPts = runs + fours + (sixes * 2);
       let bonusPts = 0;
-      
+
       // Batting milestones
       if (runs >= 100) bonusPts += 16;
       else if (runs >= 50) bonusPts += 8;
-      
+
       // Strike rate bonus (min 10 balls)
       if (balls >= 10) {
         const sr = (runs / balls) * 100;
@@ -497,15 +493,15 @@
         else if (sr >= 150) bonusPts += 4;
         else if (sr >= 130) bonusPts += 2;
       }
-      
+
       // Bowling points
       let bowlingPts = (wickets * 25) + (maidens * 12);
-      
+
       // Bowling milestones
       if (wickets >= 5) bonusPts += 24;
       else if (wickets >= 4) bonusPts += 16;
       else if (wickets >= 3) bonusPts += 8;
-      
+
       // Economy rate bonus (min 2 overs)
       if (oversBowled >= 2) {
         const er = runsConceded / oversBowled;
@@ -513,29 +509,29 @@
         else if (er <= 6) bonusPts += 4;
         else if (er <= 7) bonusPts += 2;
       }
-      
+
       // Fielding points
       let fieldingPts = (catches * 8) + (stumpings * 12) + (runouts * 6);
-      
+
       // Fielding bonus
       if (catches >= 3) bonusPts += 4;
-      
+
       const totalPts = battingPts + bowlingPts + fieldingPts + bonusPts;
-      
+
       battingPtsEl.textContent = battingPts;
       bowlingPtsEl.textContent = bowlingPts;
       fieldingPtsEl.textContent = fieldingPts;
       bonusPtsEl.textContent = bonusPts;
       totalPtsEl.textContent = totalPts;
-      
+
       results.style.display = 'block';
     }
-    
+
     function reset() {
       Object.values(inputs).forEach(input => input.value = '0');
       results.style.display = 'none';
     }
-    
+
     document.getElementById('calc').addEventListener('click', calculate);
     document.getElementById('reset').addEventListener('click', reset);
   </script>

@@ -8,8 +8,7 @@
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Calculate VAT for all European countries. Add or remove VAT from prices. Includes standard, reduced, and super-reduced rates for EU member states.">
-  
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content="VAT Calculator - European Value Added Tax Calculator | UpTools" />
   <meta property="og:description" content="VAT Calculator - European Value Added Tax Calculator. Free online tool by UpTools." />
@@ -21,14 +20,11 @@
   <meta name="twitter:title" content="VAT Calculator - European Value Added Tax Calculator | UpTools" />
   <meta name="twitter:description" content="VAT Calculator - European Value Added Tax Calculator. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-  
+
   <!-- Preload CSS -->
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
-  
+
   <!-- JSON-LD -->
-  
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -76,7 +72,7 @@
     "operatingSystem": "Web"
   }
   </script>
-  
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -94,7 +90,7 @@
     }]
   }
   </script>
-  
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -116,7 +112,7 @@
     }]
   }
   </script>
-  
+
   <style>
     .calc-grid {
       display: grid;
@@ -208,12 +204,13 @@
 <link href="https://www.uptools.in/vat-calculator/" rel="canonical"/>
 <meta name="keywords" content="vat calculator, vat calculator, online tool, free calculator, uptools" />
 
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  
+
   <a href="#main" class="sr-only skip-link">Skip to content</a>
-  
+
     <!-- Header -->
   <header class="site" role="banner">
 <div class="header-inner">
@@ -237,26 +234,26 @@
 </nav>
 </div>
 </header>
-  
+
   <main id="main" class="wrap" role="main">
     <section class="card">
       <h1>🇪🇺 VAT Calculator</h1>
       <p class="note">Calculate Value Added Tax for European countries. Add or remove VAT from prices instantly.</p>
-      
+
       <!-- Ad Slot -->
       <ins class="adsbygoogle"
-           style="display:block;margin:1rem 0"
+           style="display:block;margin:1rem 0;min-height:250px"
            data-ad-client="ca-pub-6216304334889617"
            data-ad-slot="9810172647"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      
+
       <div class="mode-toggle">
         <button class="mode-btn active" id="addMode">Add VAT to Price</button>
         <button class="mode-btn" id="removeMode">Remove VAT from Price</button>
       </div>
-      
+
       <div class="calc-grid">
         <div class="input-group">
           <label for="country">Select Country</label>
@@ -298,13 +295,13 @@
             <option value="15">New Zealand (GST) - 15%</option>
           </select>
         </div>
-        
+
         <div class="input-group">
           <label for="amount">Amount</label>
           <input type="number" id="amount" placeholder="0.00" step="0.01" min="0" value="100">
         </div>
       </div>
-      
+
       <div class="result-card">
         <div class="result-row">
           <span class="result-label">VAT Rate</span>
@@ -324,35 +321,34 @@
         </div>
       </div>
     </section>
-    
+
     <!-- FAQ Section -->
     <section class="card" style="margin-top:1.5rem">
       <h2>❓ Frequently Asked Questions</h2>
-      
+
       <details style="margin:1rem 0">
         <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">What is VAT?</summary>
         <p class="note" style="margin-top:0.5rem">VAT (Value Added Tax) is a consumption tax applied to goods and services in the European Union and many other countries. It's collected at each stage of production and distribution.</p>
       </details>
-      
+
       <details style="margin:1rem 0">
         <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">How do I calculate VAT?</summary>
         <p class="note" style="margin-top:0.5rem">To add VAT, multiply the net price by the VAT rate and add to the original. To remove VAT from a gross price, divide by (1 + VAT rate). For example, €100 with 20% VAT = €100 × 1.20 = €120.</p>
       </details>
-      
+
       <details style="margin:1rem 0">
         <summary style="cursor:pointer;font-weight:700;padding:0.5rem 0">Which European country has the highest VAT rate?</summary>
         <p class="note" style="margin-top:0.5rem">Hungary has the highest standard VAT rate in Europe at 27%, followed by Denmark, Sweden, Norway, and Croatia at 25%.</p>
       </details>
     </section>
-    
+
     <!-- Breadcrumb -->
     <nav aria-label="Breadcrumb" style="margin-top:1.5rem">
       <p class="note small">
         <a href="/">Home</a> → <span>VAT Calculator</span>
       </p>
     </nav>
-    
-    
+
 <!-- SEO: Do's and Don'ts -->
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
@@ -400,11 +396,11 @@
       © <span id="y"></span> UpTools · <a href="/about/">About</a> · <a href="/contact/">Contact</a>
     </footer>
   </main>
-  
+
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
     document.getElementById('y').textContent = new Date().getFullYear();
-    
+
     const country = document.getElementById('country');
     const amount = document.getElementById('amount');
     const addMode = document.getElementById('addMode');
@@ -413,15 +409,15 @@
     const vatAmountEl = document.getElementById('vatAmount');
     const netAmountEl = document.getElementById('netAmount');
     const grossAmountEl = document.getElementById('grossAmount');
-    
+
     let mode = 'add';
-    
+
     function calculate() {
       const rate = parseFloat(country.value) || 0;
       const amt = parseFloat(amount.value) || 0;
-      
+
       let vatAmount, netAmount, grossAmount;
-      
+
       if (mode === 'add') {
         netAmount = amt;
         vatAmount = amt * (rate / 100);
@@ -431,30 +427,30 @@
         netAmount = amt / (1 + rate / 100);
         vatAmount = amt - netAmount;
       }
-      
+
       vatRateEl.textContent = `${rate.toFixed(0)}%`;
       vatAmountEl.textContent = `€${vatAmount.toFixed(2)}`;
       netAmountEl.textContent = `€${netAmount.toFixed(2)}`;
       grossAmountEl.textContent = `€${grossAmount.toFixed(2)}`;
     }
-    
+
     addMode.addEventListener('click', () => {
       mode = 'add';
       addMode.classList.add('active');
       removeMode.classList.remove('active');
       calculate();
     });
-    
+
     removeMode.addEventListener('click', () => {
       mode = 'remove';
       removeMode.classList.add('active');
       addMode.classList.remove('active');
       calculate();
     });
-    
+
     country.addEventListener('change', calculate);
     amount.addEventListener('input', calculate);
-    
+
     calculate();
   </script>
 </body>

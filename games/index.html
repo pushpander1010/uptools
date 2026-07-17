@@ -11,7 +11,6 @@
   <meta name="theme-color" content="#0f1419" />
 <link href="https://www.uptools.in/games/" rel="canonical"/>
 
-
   <meta property="og:title" content="Free Online Games - UpTools" />
   <meta property="og:description" content="Free Online Games (No Sign-up) - Snake, 2048, Hangman, Typing Test & More. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
@@ -23,13 +22,9 @@
   <meta name="twitter:title" content="games" />
   <meta name="twitter:description" content="Free Online Games (No Sign-up) - Snake, 2048, Hangman, Typing Test & More. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-  
 
-  
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
-
-  <link rel="stylesheet" href="/style.css?v=1.2.0" />
 
   <style>
     /* ---------- Page accent (keeps global CSS intact) ---------- */
@@ -377,7 +372,7 @@
     .site-footer {
       margin-top: 2rem
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -430,6 +425,7 @@
   }
   </script>
 
+  <link rel="stylesheet" href="/style.css?v=1.2.0">
 </head>
 
 <body>
@@ -445,7 +441,6 @@
   </script>
 
   <div class="neon-canvas" aria-hidden="true" id="neonCanvas"></div>
-
 
   <header class="site" role="banner">
     <div class="header-inner">
@@ -473,7 +468,6 @@
       <p class="sub">Instant play. No sign-ups. Mobile-friendly. Ad-light.</p>
     </section>
 
-
     <section class="controls-bar" aria-label="Search and filters">
       <div class="search" role="search">
         <span aria-hidden="true">🔎</span>
@@ -496,19 +490,16 @@
       </div>
     </section>
 
-
     <section class="section" id="recentSec" hidden>
       <h2>⏱️ Continue Playing</h2>
       <div class="games-grid" id="recentGrid" role="region" aria-live="polite"></div>
       <p class="small">Tip: Your last played games are saved on this device only.</p>
     </section>
 
-
     <section class="section" id="favSec" hidden>
       <h2>⭐ Your Favourites</h2>
       <div class="games-grid" id="favGrid" role="region" aria-live="polite"></div>
     </section>
-
 
     <section class="section">
       <h2>🕹️ All Games</h2>
@@ -890,13 +881,13 @@
     function setupMobileMenu() {
       const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
       const navLinks = document.querySelector('.nav-links');
-      
+
       if (mobileMenuToggle && navLinks) {
         mobileMenuToggle.addEventListener('click', () => {
           const isActive = navLinks.classList.contains('active');
           navLinks.classList.toggle('active');
           mobileMenuToggle.setAttribute('aria-expanded', !isActive);
-          
+
           const menuIcon = mobileMenuToggle.querySelector('.menu-icon');
           if (menuIcon) {
             menuIcon.textContent = isActive ? '☰' : '✕';

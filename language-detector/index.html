@@ -12,7 +12,6 @@
 <link href="https://www.uptools.in/language-detector/" rel="canonical"/>
 <meta name="keywords" content="language detector, language detector, online tool, free calculator, uptools" />
 
-  
   <meta property="og:title" content="Language Detector - Identify Text Language | UpTools" />
   <meta property="og:description" content="Language Detector - Identify Text Language. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
@@ -23,8 +22,7 @@
   <meta name="twitter:title" content="Language Detector - Identify Text Language | UpTools" />
   <meta name="twitter:description" content="Language Detector - Identify Text Language. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-  <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+
   <style>
     :root {
       --bg: #0f1419;
@@ -74,7 +72,6 @@
     }
 
 </style>
-  
 
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Language Detector free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's completely free with no sign-ups required."}}, {"@type": "Question", "name": "Is Language Detector private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All calculations run in your browser. No data is uploaded."}}, {"@type": "Question", "name": "Does Language Detector work on mobile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All tools are mobile-responsive and work on any device."}}]}
@@ -92,6 +89,8 @@
     "offers": { "@type": "Offer", "price": "0" }
   }
   </script>
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -133,17 +132,17 @@
     <article class="card">
       <h1>🌐 Language Detector</h1>
       <p class="note">Automatically detect language from text. Supports 50+ languages with confidence scores. Instant results, no sign-up required.</p>
-      
+
       <label for="text-input" style="display: block; margin-top: 1.5rem; font-weight: 600;">Enter text to detect language:</label>
       <textarea id="text-input" placeholder="Paste text here... (e.g., 'Bonjour, comment allez-vous?')"></textarea>
-      
+
       <button class="btn" onclick="detectLanguage()" style="margin-top: 1rem;">🔍 Detect Language</button>
-      
+
       <div id="result" style="display: none; margin-top: 1.5rem;">
         <h2>Detection Results</h2>
         <div class="result" id="result-content"></div>
       </div>
-      
+
       <h2 style="margin-top: 2rem;">Features</h2>
       <ul style="line-height: 2;">
         <li>✅ Detect 50+ languages automatically</li>
@@ -153,7 +152,7 @@
         <li>✅ Privacy-first, no data stored</li>
       </ul>
     </article>
-    
+
 <!-- SEO: Do's and Don'ts -->
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
@@ -209,7 +208,7 @@
         alert('Please enter some text to detect');
         return;
       }
-      
+
       // Simple language detection based on character patterns
       const languages = {
         'English': /[a-z]/gi,
@@ -227,31 +226,31 @@
         'Thai': /[\u0E00-\u0E7F]/g,
         'Hindi': /[\u0900-\u097F]/g,
       };
-      
+
       const results = {};
       for (const [lang, pattern] of Object.entries(languages)) {
         const matches = text.match(pattern) || [];
         results[lang] = (matches.length / text.length) * 100;
       }
-      
+
       const sorted = Object.entries(results)
         .sort((a, b) => b[1] - a[1])
         .filter(([_, score]) => score > 0)
         .slice(0, 5);
-      
+
       let html = '';
       sorted.forEach(([lang, score]) => {
         html += `<div class="result-item"><span class="lang-name">${lang}</span><span class="confidence">${score.toFixed(1)}%</span></div>`;
       });
-      
+
       if (sorted.length === 0) {
         html = '<p style="color: var(--muted);">Could not detect language. Try with more text.</p>';
       }
-      
+
       document.getElementById('result-content').innerHTML = html;
       document.getElementById('result').style.display = 'block';
     }
-    
+
     document.getElementById('text-input').addEventListener('keypress', (e) => {
       if (e.key === 'Enter' && e.ctrlKey) detectLanguage();
     });

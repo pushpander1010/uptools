@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
   <title>Wheel of Names - Free Random Name Picker & Spinner | UpTools Games</title>
-  
+
   <!-- SEO -->
   <meta name="description" content="Spin a custom wheel of names to pick a random winner! Free, fast, and highly customizable. Perfect for classroom raffles, giveaways, or decision-making." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
@@ -28,7 +28,7 @@
   <meta name="twitter:description" content="Spin the wheel of names online. Fully customizable, interactive, with animations and sound effects." />
 
   <!-- Common CSS -->
-  <link rel="stylesheet" href="/style.css?v=1.3.0" />
+
   <script src="/games/fullscreen-utils.js" defer></script>
 
   <!-- Structured Data -->
@@ -393,7 +393,7 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -446,6 +446,8 @@
       }
     }
 </style>
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
 </head>
 
 <body>
@@ -521,7 +523,7 @@
         <!-- Customizations -->
         <div class="card" style="display:flex; flex-direction:column; gap:12px;">
           <h2 style="margin:0;">⚙️ Customizations</h2>
-          
+
           <div class="setting-row">
             <div>
               <div class="setting-label">Sound Effects</div>
@@ -562,7 +564,7 @@
       </section>
     </div>
     </div>
- 
+
     <!-- Educational section -->
     <section class="card" style="margin-top: 16px;">
       <h2 style="margin-top:0;">🎥 The math and probability of spinners</h2>
@@ -632,7 +634,7 @@
     const chkRemove = $("#chkRemove");
     const rngDuration = $("#rngDuration");
     const spinDurVal = $("#spinDurVal");
-    
+
     // Modal & Confetti
     const winnerModal = $("#winnerModal");
     const winnerNameDisplay = $("#winnerNameDisplay");
@@ -823,7 +825,7 @@
         ctx.fillStyle = "#ffffff";
         ctx.shadowColor = "rgba(0,0,0,0.5)";
         ctx.shadowBlur = 4;
-        
+
         // Scale font size according to slice sizes and canvas size
         let fontSize = Math.min(size / 20, Math.max(12, Math.floor(400 / names.length)));
         ctx.font = `bold ${fontSize}px system-ui, sans-serif`;
@@ -876,10 +878,10 @@
       // Random speed and extra cycles
       initialSpinVelocity = 0.4 + Math.random() * 0.25; // Speed multiplier
       targetSpinTime = parseInt(rngDuration.value, 10) * 1000;
-      
+
       lastTickAngle = currentAngle;
       spinStartTimestamp = performance.now();
-      
+
       requestAnimationFrame(animateSpin);
     }
 
@@ -890,13 +892,13 @@
 
       // Deceleration easing curve (easeOutQuart)
       const easeFactor = 1 - Math.pow(1 - progress, 4);
-      
+
       // Update angle based on ease out progress
       currentAngle = (currentAngle + (initialSpinVelocity * Math.pow(1 - progress, 3))) % (2 * Math.PI);
 
       // Web Audio peg tick ticker simulation
       const sliceAngle = (2 * Math.PI) / names.length;
-      
+
       // Peg position is at 270 deg (top pointer) => -Math.PI/2 radians
       // Calculate how many times slices passed the pointer peg
       const currentTickIndex = Math.floor((currentAngle - Math.PI/2) / sliceAngle);
@@ -915,13 +917,13 @@
         // Spin finished
         isSpinning = false;
         spinBtn.disabled = false;
-        
+
         // Find winner based on pointing top position (270 degrees)
         // Point is opposite to rotation angle
         const winningAngle = (1.5 * Math.PI - currentAngle + 2 * Math.PI) % (2 * Math.PI);
         const sliceAngle = (2 * Math.PI) / names.length;
         const winnerIndex = Math.floor(winningAngle / sliceAngle) % names.length;
-        
+
         const winnerName = names[winnerIndex];
         showWinner(winnerName);
       }
@@ -1046,7 +1048,7 @@
 
     // Wire listeners
     namesInput.addEventListener("input", parseInput);
-    
+
     spinBtn.onclick = startSpin;
     spinCenterBtn.onclick = startSpin;
 

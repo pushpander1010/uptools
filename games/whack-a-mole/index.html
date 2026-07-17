@@ -16,11 +16,11 @@
 
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
   <link rel="canonical" href="https://www.uptools.in/games/whack-a-mole/" />
-  
+
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
-  <link rel="stylesheet" href="/style.css?v=1.2.0">
+
   <script src="/games/fullscreen-utils.js" defer></script>
-  
+
   <style>
     body {
       --accent: #ff6b6b;
@@ -222,15 +222,15 @@
         margin: 1rem;
         padding: 1rem;
       }
-      
+
       .game-board {
         gap: 0.5rem;
       }
-      
+
       .mole {
         font-size: 2rem;
       }
-      
+
       .control-btn {
         padding: 0.75rem 1.5rem;
         font-size: 0.9rem;
@@ -281,17 +281,17 @@
       .fullscreen-mode .game-container {
         padding: 1rem !important;
       }
-      
+
       .fullscreen-mode .game-board {
         max-width: min(85vmin, 400px) !important;
         gap: min(3vmin, 0.75rem) !important;
       }
-      
+
       .fullscreen-mode .mole {
         font-size: min(10vmin, 3rem) !important;
       }
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -312,6 +312,8 @@
   <meta property="og:url" content="https://www.uptools.in/games/whack-a-mole/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="UpTools">
+
+  <link rel="stylesheet" href="/style.css?v=1.2.0">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -500,13 +502,13 @@
         this.moleTimer = null;
         this.gameTimer = null;
         this.activeMoles = new Set();
-        
+
         this.difficulties = {
           easy: { minTime: 1000, maxTime: 2000, moleLife: 1500 },
           medium: { minTime: 600, maxTime: 1200, moleLife: 1000 },
           hard: { minTime: 300, maxTime: 800, moleLife: 700 }
         };
-        
+
         this.init();
       }
 
@@ -560,10 +562,10 @@
         this.hits = 0;
         this.misses = 0;
         this.timeLeft = this.gameTime;
-        
+
         this.updateDisplay();
         this.updateControls();
-        
+
         // Start timers
         this.startGameTimer();
         this.spawnMole();
@@ -574,7 +576,7 @@
           if (!this.isPaused) {
             this.timeLeft--;
             this.updateDisplay();
-            
+
             if (this.timeLeft <= 0) {
               this.endGame();
             }
@@ -584,16 +586,16 @@
 
       spawnMole() {
         if (!this.isPlaying || this.isPaused) return;
-        
+
         const config = this.difficulties[this.difficulty];
         const availableHoles = [...document.querySelectorAll('.hole')]
           .filter(hole => !hole.classList.contains('active'));
-        
+
         if (availableHoles.length > 0) {
           const randomHole = availableHoles[Math.floor(Math.random() * availableHoles.length)];
           this.showMole(randomHole);
         }
-        
+
         // Schedule next mole
         const nextSpawnTime = Math.random() * (config.maxTime - config.minTime) + config.minTime;
         this.moleTimer = setTimeout(() => this.spawnMole(), nextSpawnTime);
@@ -604,7 +606,7 @@
         hole.classList.add('active');
         this.activeMoles.add(holeIndex);
         sounds.playPop();
-        
+
         // Hide mole after some time
         const config = this.difficulties[this.difficulty];
         setTimeout(() => {
@@ -630,7 +632,7 @@
           this.hits++;
           this.score += this.getScoreForDifficulty();
           sounds.playWhack();
-          
+
           // Remove hit animation
           setTimeout(() => hole.classList.remove('hit'), 300);
         } else {
@@ -638,7 +640,7 @@
           this.misses++;
           sounds.playMiss();
         }
-        
+
         this.updateDisplay();
       }
 
@@ -655,16 +657,16 @@
       endGame() {
         this.isPlaying = false;
         this.isPaused = false;
-        
+
         // Clear timers
         clearTimeout(this.moleTimer);
         clearInterval(this.gameTimer);
-        
+
         // Hide all moles
         document.querySelectorAll('.hole').forEach(hole => {
           hole.classList.remove('active');
         });
-        
+
         this.activeMoles.clear();
         this.updateControls();
         this.showGameOver();
@@ -673,7 +675,7 @@
 
       showGameOver() {
         const accuracy = this.hits + this.misses > 0 ? Math.round((this.hits / (this.hits + this.misses)) * 100) : 0;
-        
+
         document.getElementById('finalScore').textContent = this.score;
         document.getElementById('gameOverMessage').textContent = this.getGameOverMessage();
         document.getElementById('gameOverStats').innerHTML = `
@@ -681,7 +683,7 @@
           <p>Accuracy: ${accuracy}%</p>
           <p>Difficulty: ${this.difficulty.charAt(0).toUpperCase() + this.difficulty.slice(1)}</p>
         `;
-        
+
         document.getElementById('gameOver').classList.add('show');
       }
 
@@ -704,16 +706,16 @@
         this.hits = 0;
         this.misses = 0;
         this.timeLeft = this.gameTime;
-        
+
         // Clear timers
         clearTimeout(this.moleTimer);
         clearInterval(this.gameTimer);
-        
+
         // Hide all moles
         document.querySelectorAll('.hole').forEach(hole => {
           hole.classList.remove('active', 'hit');
         });
-        
+
         this.activeMoles.clear();
         this.updateDisplay();
         this.updateControls();
@@ -725,7 +727,7 @@
         document.getElementById('timeLeft').textContent = this.timeLeft;
         document.getElementById('hits').textContent = this.hits;
         document.getElementById('misses').textContent = this.misses;
-        
+
         // Update progress bar
         const progress = ((this.gameTime - this.timeLeft) / this.gameTime) * 100;
         document.getElementById('timeProgress').style.width = progress + '%';
@@ -734,11 +736,11 @@
       updateControls() {
         const startBtn = document.getElementById('startBtn');
         const pauseBtn = document.getElementById('pauseBtn');
-        
+
         startBtn.disabled = this.isPlaying;
         pauseBtn.disabled = !this.isPlaying;
         pauseBtn.textContent = this.isPaused ? 'Resume' : 'Pause';
-        
+
         // Disable difficulty buttons during game
         document.querySelectorAll('.difficulty-btn').forEach(btn => {
           btn.disabled = this.isPlaying;
@@ -759,7 +761,7 @@
     let fullscreenManager = null;
     document.addEventListener('DOMContentLoaded', () => {
       new WhackAMole();
-      
+
       if (typeof FullscreenManager !== 'undefined') {
         fullscreenManager = new FullscreenManager(
           document.querySelector('.game-container'),

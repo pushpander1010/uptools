@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="Ping Pong Game Online - Play Pong Free | UpTools Games" />
   <meta name="twitter:description" content="Ping Pong Game Online - Play Pong Free. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-  <link rel="stylesheet" href="/style.css?v=1.3.0" />
+
   <script src="/games/fullscreen-utils.js" defer></script>
   <style>
     body { --accent: #00e5ff; }
@@ -113,6 +113,8 @@
       #touchControls button { width: 56px !important; height: 42px !important; font-size: 1.2rem !important; }
     }
 </style>
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -359,7 +361,7 @@
         // Player 1 (Left) - W/S keys
         if (state.keys['w'] && p.y > 0) p.y -= speed;
         if (state.keys['s'] && p.y < H - PADDLE_H) p.y += speed;
-        
+
         // Player 2 (Right) - ArrowUp / ArrowDown keys
         if (state.keys['arrowup'] && ai.y > 0) ai.y -= speed;
         if (state.keys['arrowdown'] && ai.y < H - PADDLE_H) ai.y += speed;
@@ -519,11 +521,11 @@
       draw();
       ctx.fillStyle = 'rgba(5,13,26,.75)';
       ctx.fillRect(0, 0, W, H);
-      
+
       let winnerText = '';
       let winnerColor = '#ff6b6b';
       let playerWon = false;
-      
+
       if (gameMode === 'ai') {
         playerWon = winner === 'Player 1';
         winnerText = playerWon ? '🎉 You Win!' : '💀 AI Wins!';
@@ -533,7 +535,7 @@
         winnerText = winner === 'Player 1' ? '🎉 Player 1 Wins!' : '🎉 Player 2 Wins!';
         winnerColor = winner === 'Player 1' ? '#00e5ff' : '#ff6b6b';
       }
-      
+
       playGameOver(playerWon);
 
       ctx.fillStyle = winnerColor;
@@ -551,13 +553,13 @@
       gameMode = mode;
       document.getElementById('mode-ai').className = mode === 'ai' ? 'btn' : 'btn secondary';
       document.getElementById('mode-local').className = mode === 'local' ? 'btn' : 'btn secondary';
-      
+
       document.getElementById('diff-section').style.display = mode === 'ai' ? 'flex' : 'none';
       document.getElementById('controls-hint-ai').style.display = mode === 'ai' ? 'flex' : 'none';
       document.getElementById('controls-hint-local').style.display = mode === 'local' ? 'flex' : 'none';
-      
+
       updateTouchControlsDisplay();
-      
+
       // Update instructions
       const note = document.querySelector('.note');
       if (note) {
@@ -567,7 +569,7 @@
           note.textContent = '2 Players local Pong. First to 7 wins! Player 1 uses W/S. Player 2 uses Arrow keys.';
         }
       }
-      
+
       if (gameRunning) {
         endGame('Player 1'); // force reset
       }
@@ -625,7 +627,7 @@
       touchUp1 = false; 
       state.keys['w'] = false; 
     });
-    
+
     document.getElementById('touchDown1').addEventListener('touchstart', e => { 
       e.preventDefault(); 
       touchDown1 = true; 
@@ -645,7 +647,7 @@
       touchUp2 = false; 
       state.keys['arrowup'] = false; 
     });
-    
+
     document.getElementById('touchDown2').addEventListener('touchstart', e => { 
       e.preventDefault(); 
       touchDown2 = true; 
@@ -667,7 +669,7 @@
         canvas.setPointerCapture(e.pointerId);
         e.preventDefault();
         updatePaddleFromPointer(e);
-        
+
         // Initialize audio context on first touch (browser policy)
         initAudio();
       }

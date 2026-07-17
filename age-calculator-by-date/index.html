@@ -12,7 +12,6 @@
 <link href="https://www.uptools.in/age-calculator-by-date/" rel="canonical"/>
 <meta name="keywords" content="age calculator by date, age calculator by date, online tool, free calculator, uptools" />
 
-  
   <meta property="og:title" content="Age Calculator - Calculate Exact Age by Date | UpTools" />
   <meta property="og:description" content="Age Calculator - Calculate Exact Age by Date. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
@@ -23,8 +22,7 @@
   <meta name="twitter:title" content="Age Calculator - Calculate Exact Age by Date | UpTools" />
   <meta name="twitter:description" content="Age Calculator - Calculate Exact Age by Date. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-  <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+
   <style>
     :root {
       --bg: #0f1419;
@@ -74,8 +72,6 @@
     }
 
 </style>
-  
-
 
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Age Calculator By Date free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's completely free with no sign-ups required."}}, {"@type": "Question", "name": "Is Age Calculator By Date private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All calculations run in your browser. No data is uploaded."}}, {"@type": "Question", "name": "Does Age Calculator By Date work on mobile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All tools are mobile-responsive and work on any device."}}]}
@@ -126,6 +122,8 @@
     "offers": { "@type": "Offer", "price": "0" }
   }
   </script>
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -167,17 +165,17 @@
     <article class="card">
       <h1>🎂 Age Calculator by Date</h1>
       <p class="note">Calculate your exact age in years, months, and days. Find zodiac sign and days until next birthday.</p>
-      
+
       <label for="dob" style="display: block; margin-top: 1.5rem; font-weight: 600;">Date of Birth:</label>
       <input type="date" id="dob">
-      
+
       <button class="btn" onclick="calculateAge()" style="margin-top: 1rem;">🎂 Calculate Age</button>
-      
+
       <div id="result" style="display: none; margin-top: 1.5rem;">
         <h2>Your Age</h2>
         <div class="result" id="result-content"></div>
       </div>
-      
+
       <h2 style="margin-top: 2rem;">Features</h2>
       <ul style="line-height: 2;">
         <li>✅ Calculate exact age</li>
@@ -187,7 +185,7 @@
         <li>✅ Total days lived</li>
       </ul>
     </article>
-    
+
 <!-- SEO: Do's and Don'ts -->
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
@@ -252,46 +250,46 @@
         { name: 'Scorpio', start: [10, 23], end: [11, 21] },
         { name: 'Sagittarius', start: [11, 22], end: [12, 21] }
       ];
-      
+
       for (let sign of zodiacSigns) {
         if ((month === sign.start[0] && day >= sign.start[1]) || (month === sign.end[0] && day <= sign.end[1])) {
           return sign.name;
         }
       }
     }
-    
+
     function calculateAge() {
       const dob = new Date(document.getElementById('dob').value);
       if (!dob || isNaN(dob)) {
         alert('Please select a date');
         return;
       }
-      
+
       const today = new Date();
       let years = today.getFullYear() - dob.getFullYear();
       let months = today.getMonth() - dob.getMonth();
       let days = today.getDate() - dob.getDate();
-      
+
       if (days < 0) {
         months--;
         days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
       }
-      
+
       if (months < 0) {
         years--;
         months += 12;
       }
-      
+
       const totalDays = Math.floor((today - dob) / (1000 * 60 * 60 * 24));
-      
+
       const nextBday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
       if (nextBday < today) {
         nextBday.setFullYear(today.getFullYear() + 1);
       }
       const daysUntilBday = Math.ceil((nextBday - today) / (1000 * 60 * 60 * 24));
-      
+
       const zodiac = getZodiac(dob.getMonth() + 1, dob.getDate());
-      
+
       let html = `
         <div class="result-row">
           <span class="result-label">Age:</span>
@@ -310,7 +308,7 @@
           <span class="result-value">${daysUntilBday}</span>
         </div>
       `;
-      
+
       document.getElementById('result-content').innerHTML = html;
       document.getElementById('result').style.display = 'block';
     }

@@ -55,9 +55,7 @@
 
 </style>
 <!-- 2) Load full stylesheet without blocking first paint -->
-<link as="style" href="/style.css?v=1.2.0" rel="preload"/>
-<link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
-<noscript><link href="/style.css?v=1.2.0" rel="stylesheet"/></noscript>
+
 <!-- Breadcrumbs -->
 <script type="application/ld+json">
   {
@@ -103,12 +101,13 @@
     ]
   }
   </script>
-  
 
   <meta property="og:title" content="PAN &amp; GSTIN Validator (India) - Pattern, Category, Surname Initial &amp; GSTIN Checksum | UpTools" />
   <meta property="og:description" content="Validate PAN format, detect category, check surname initial; validate GSTIN format &amp;amp; checksum and compare embedded PAN. Bulk mode, mask/unmask, QR link. No data leaves your browser." />
   <meta property="og:url" content="https://www.uptools.in/pan-validator/" />
   <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="/style.css?v=1.2.0">
 </head>
 <body>
 <!-- small fixed -->

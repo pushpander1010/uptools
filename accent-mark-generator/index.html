@@ -12,7 +12,6 @@
 <link href="https://www.uptools.in/accent-mark-generator/" rel="canonical"/>
 <meta name="keywords" content="accent mark generator, accent mark generator, online tool, free calculator, uptools" />
 
-  
   <meta property="og:title" content="Accent Mark Generator - Add Diacritics to Text | UpTools" />
   <meta property="og:description" content="Accent Mark Generator - Add Diacritics to Text. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
@@ -23,8 +22,7 @@
   <meta name="twitter:title" content="Accent Mark Generator - Add Diacritics to Text | UpTools" />
   <meta name="twitter:description" content="Accent Mark Generator - Add Diacritics to Text. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-  <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+
   <style>
     :root {
       --bg: #0f1419;
@@ -73,7 +71,6 @@
     }
 
 </style>
-  
 
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Accent Mark Generator free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's completely free with no sign-ups required."}}, {"@type": "Question", "name": "Is Accent Mark Generator private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All calculations run in your browser. No data is uploaded."}}, {"@type": "Question", "name": "Does Accent Mark Generator work on mobile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All tools are mobile-responsive and work on any device."}}]}
@@ -91,6 +88,8 @@
     "offers": { "@type": "Offer", "price": "0" }
   }
   </script>
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -132,10 +131,10 @@
     <article class="card">
       <h1>🎨 Accent Mark Generator</h1>
       <p class="note">Add accent marks and diacritics to text. Supports 100+ languages. Copy accented text instantly.</p>
-      
+
       <label for="text-input" style="display: block; margin-top: 1.5rem; font-weight: 600;">Enter text:</label>
       <textarea id="text-input" placeholder="Type text to add accents..."></textarea>
-      
+
       <h2 style="margin-top: 1.5rem;">Quick Accents</h2>
       <div class="accent-grid">
         <div class="accent-item" onclick="addAccent('á')">á (acute)</div>
@@ -151,13 +150,13 @@
         <div class="accent-item" onclick="addAccent('ë')">ë (diaeresis)</div>
         <div class="accent-item" onclick="addAccent('ñ')">ñ (tilde)</div>
       </div>
-      
+
       <div id="result" style="display: none; margin-top: 1.5rem;">
         <h2>Result</h2>
         <div class="result" id="result-content"></div>
         <button class="btn" onclick="copyResult()" style="margin-top: 1rem;">📋 Copy</button>
       </div>
-      
+
       <h2 style="margin-top: 2rem;">Features</h2>
       <ul style="line-height: 2;">
         <li>✅ Add accent marks to text</li>
@@ -167,7 +166,7 @@
         <li>✅ Works with any text</li>
       </ul>
     </article>
-    
+
 <!-- SEO: Do's and Don'ts -->
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
@@ -222,16 +221,16 @@
       const start = textarea.selectionStart;
       const end = textarea.selectionEnd;
       const text = textarea.value;
-      
+
       if (start === end) {
         textarea.value = text + accent;
       } else {
         textarea.value = text.substring(0, start) + accent + text.substring(end);
       }
-      
+
       textarea.focus();
     }
-    
+
     function copyResult() {
       const result = document.getElementById('result-content').textContent;
       navigator.clipboard.writeText(result).then(() => {

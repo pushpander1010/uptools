@@ -15,9 +15,7 @@
   <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/qr-code-generator-pro/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"QR Code Generator - Create QR Codes Online","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
@@ -41,13 +39,14 @@
     .option-card:hover { border-color: #6366f1; }
     .option-card.active { border-color: #6366f1; background: #1e1b4b; }
   </style>
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <main class="tool-wrap">
     <h1 style="font-size:1.5rem;margin-bottom:4px">📱 QR Code Generator - Create QR Codes Online</h1>
     <p class="note" style="margin-bottom:16px">Generate QR codes for text, URLs, WiFi, email, phone, and vCard. Download as PNG or SVG.</p>
-    
-    
+
     <section class="tool-card">
       <h2 style="margin-top:0;font-size:1.1rem">QR Code Generator</h2>
       <div class="grid">
@@ -97,20 +96,20 @@
     </section>
     <script type="module">
       import QRCoder from 'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/+esm';
-      
+
       const qrType = document.getElementById('qrType');
       const qrContent = document.getElementById('qrContent');
       const qrSize = document.getElementById('qrSize');
       const canvas = document.getElementById('qrCanvas');
       const ctx = canvas.getContext('2d');
       const status = document.getElementById('status');
-      
+
       qrType.addEventListener('change', () => {
         const t = qrType.value;
         document.getElementById('wifiFields').style.display = t === 'wifi' ? 'block' : 'none';
         document.getElementById('emailFields').style.display = t === 'email' ? 'block' : 'none';
       });
-      
+
       function getContent() {
         const t = qrType.value;
         if (t === 'url') return qrContent.value;
@@ -120,7 +119,7 @@
         if (t === 'sms') return 'sms:' + qrContent.value;
         return qrContent.value;
       }
-      
+
       function generate() {
         const content = getContent();
         if (!content) { status.textContent = 'Enter content first'; return; }
@@ -143,16 +142,16 @@
         }
         status.textContent = 'Generated!';
       }
-      
+
       document.getElementById('generateBtn').addEventListener('click', generate);
-      
+
       document.getElementById('downloadPng').addEventListener('click', () => {
         const a = document.createElement('a');
         a.download = 'qrcode.png';
         a.href = canvas.toDataURL('image/png');
         a.click();
       });
-      
+
       document.getElementById('downloadSvg').addEventListener('click', () => {
         const content = getContent();
         if (!content) return;
@@ -172,24 +171,23 @@
         a.href = URL.createObjectURL(blob);
         a.click();
       });
-      
+
       qrContent.value = 'https://www.uptools.in';
       generate();
     </script>
 
-    
     <section class="tool-card" style="margin-top:16px">
       <h2 style="margin-top:0;font-size:1.1rem">How It Works</h2>
       <p class="note">1. Upload or select your files<br>2. Configure options<br>3. Process and download</p>
     </section>
-    
+
     <section class="tool-card" style="margin-top:16px">
       <h2 style="margin-top:0;font-size:1.1rem">FAQ</h2>
       <details><summary><b>Is this tool free?</b></summary><p class="note" style="padding:6px 0">Yes, completely free with no sign-up required.</p></details>
       <details><summary><b>Is my data private?</b></summary><p class="note" style="padding:6px 0">Yes. All processing happens in your browser. Files are never uploaded to our servers.</p></details>
       <details><summary><b>Does it work on mobile?</b></summary><p class="note" style="padding:6px 0">Yes. All tools are mobile-responsive.</p></details>
     </section>
-    
+
     <footer style="margin-top:24px;padding:16px 0;text-align:center;border-top:1px solid #212a3a">
       <p class="note">© <span id="y"></span> UpTools. Privacy-first utilities.</p>
     </footer>

@@ -8,25 +8,19 @@
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Free investment return calculator. Calculate ROI, compound interest, and future value of your investments. See how your money grows over time with detailed projections.">
-  
-  
+
   <meta property="og:title" content="Investment Return Calculator - ROI & Compound Interest | UpTools" />
   <meta property="og:description" content="Investment Return Calculator - ROI & Compound Interest. Free online tool by UpTools." />
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/investment-return-calculator/" />
   <meta property="og:image" content="https://www.uptools.in/assets/og/investment-return-calculator.png">
-  
+
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
   <meta name="twitter:title" content="Investment Return Calculator - ROI & Compound Interest">
   <meta name="twitter:description" content="Calculate how your investments grow with compound interest over time.">
-  
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
-  
-  
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -75,7 +69,7 @@
     "description": "Calculate investment returns with compound interest. See detailed projections of how your money grows over time."
   }
   </script>
-  
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -93,7 +87,7 @@
     }]
   }
   </script>
-  
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -129,7 +123,7 @@
     }]
   }
   </script>
-  
+
   <style>
     .calc-grid { display: grid; gap: 1.5rem; max-width: 42rem; margin: 0 auto; }
     .input-group { display: flex; flex-direction: column; gap: .5rem; }
@@ -214,12 +208,13 @@
 <link href="https://www.uptools.in/investment-return-calculator/" rel="canonical"/>
 <meta name="keywords" content="investment return calculator, investment return calculator, online tool, free calculator, uptools" />
 
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  
+
   <a href="#main" class="sr-only skip-link">Skip to content</a>
-  
+
     <!-- Header -->
   <header class="site" role="banner">
 <div class="header-inner">
@@ -243,39 +238,39 @@
 </nav>
 </div>
 </header>
-  
+
   <main id="main" class="wrap" role="main">
     <h1>Investment Return Calculator</h1>
     <p class="lead">Calculate your investment returns with compound interest. See how your money grows over time.</p>
-    
+
     <ins class="adsbygoogle"
-         style="display:block"
+         style="display:block;min-height:250px"
          data-ad-client="ca-pub-6216304334889617"
          data-ad-slot="1234567890"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
-    
+
     <div class="calc-grid">
       <div class="input-group">
         <label for="initial-investment">Initial Investment ($)</label>
         <input type="number" id="initial-investment" value="10000" min="0" step="100">
       </div>
-      
+
       <div class="input-group">
         <label for="monthly-contribution">Monthly Contribution ($)</label>
         <input type="number" id="monthly-contribution" value="500" min="0" step="50">
       </div>
-      
+
       <div class="input-group">
         <label for="annual-return">Expected Annual Return (%)</label>
         <input type="number" id="annual-return" value="8" min="0" max="50" step="0.1">
       </div>
-      
+
       <div class="input-group">
         <label for="years">Investment Period (Years)</label>
         <input type="number" id="years" value="20" min="1" max="50">
       </div>
-      
+
       <div class="input-group">
         <label for="compound-frequency">Compounding Frequency</label>
         <select id="compound-frequency">
@@ -286,14 +281,14 @@
           <option value="1">Annually</option>
         </select>
       </div>
-      
+
       <button class="btn-calc" onclick="calculate()">Calculate Returns</button>
-      
+
       <div id="result" class="result-card" style="display:none;">
         <h2>Investment Growth</h2>
         <div class="result-main" id="final-value">$0</div>
         <p style="opacity:.8;">Final investment value</p>
-        
+
         <div class="breakdown">
           <div class="breakdown-item">
             <span class="breakdown-label">Total Contributions</span>
@@ -308,48 +303,47 @@
             <span class="breakdown-value" id="roi-percent">0%</span>
           </div>
         </div>
-        
+
         <div class="growth-chart" id="growth-chart"></div>
       </div>
     </div>
-    
+
     <ins class="adsbygoogle"
-         style="display:block; margin: 3rem 0;"
+         style="display:block; margin: 3rem 0;min-height:250px"
          data-ad-client="ca-pub-6216304334889617"
          data-ad-slot="1234567891"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
-    
+
     <section aria-labelledby="faq-heading">
       <h2 id="faq-heading">Frequently Asked Questions</h2>
-      
+
       <details>
         <summary>What is compound interest?</summary>
         <p>Compound interest is interest calculated on both the initial principal and the accumulated interest from previous periods. It's "interest on interest" and causes your investment to grow exponentially over time.</p>
       </details>
-      
+
       <details>
         <summary>What is a good ROI for investments?</summary>
         <p>The S&P 500 has historically returned about 10% annually. A "good" ROI depends on your investment type: stocks (8-12%), bonds (4-6%), real estate (8-10%). Higher returns typically come with higher risk.</p>
       </details>
-      
+
       <details>
         <summary>How often should investments compound?</summary>
         <p>More frequent compounding leads to higher returns. Daily compounding is best, followed by monthly, quarterly, and annually. Many savings accounts compound daily, while bonds typically compound semi-annually.</p>
       </details>
-      
+
       <details>
         <summary>Should I include monthly contributions in my investment calculation?</summary>
         <p>Yes! Regular monthly contributions significantly boost your investment growth through dollar-cost averaging. Even small monthly additions can dramatically increase your final balance over time.</p>
       </details>
     </section>
-    
+
     <nav aria-label="Breadcrumb" class="breadcrumb">
       <a href="/">Home</a> / <span>Investment Return Calculator</span>
     </nav>
   </main>
-  
-  
+
 <!-- SEO: Do's and Don'ts -->
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
@@ -396,7 +390,7 @@
 <footer class="note small site-footer" role="contentinfo">
     <p>&copy; 2025 UpTools. Free online tools for everyone.</p>
   </footer>
-  
+
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
     function calculate() {
@@ -405,21 +399,21 @@
       const rate = parseFloat(document.getElementById('annual-return').value) / 100 || 0;
       const years = parseInt(document.getElementById('years').value) || 1;
       const frequency = parseInt(document.getElementById('compound-frequency').value) || 12;
-      
+
       // Calculate compound interest with monthly contributions
       const ratePerPeriod = rate / frequency;
       const totalPeriods = years * frequency;
       const periodsPerYear = frequency;
       const contributionPerPeriod = monthly * (12 / frequency);
-      
+
       let balance = initial;
       let totalContributions = initial;
       const yearlyData = [];
-      
+
       for (let period = 1; period <= totalPeriods; period++) {
         balance = balance * (1 + ratePerPeriod) + contributionPerPeriod;
         totalContributions += contributionPerPeriod;
-        
+
         // Store yearly snapshots
         if (period % periodsPerYear === 0) {
           yearlyData.push({
@@ -430,17 +424,17 @@
           });
         }
       }
-      
+
       const finalValue = balance;
       const totalInterest = finalValue - totalContributions;
       const roi = ((finalValue - totalContributions) / totalContributions) * 100;
-      
+
       // Display results
       document.getElementById('final-value').textContent = '$' + finalValue.toLocaleString('en-US', {maximumFractionDigits: 0});
       document.getElementById('total-contributions').textContent = '$' + totalContributions.toLocaleString('en-US', {maximumFractionDigits: 0});
       document.getElementById('total-interest').textContent = '$' + totalInterest.toLocaleString('en-US', {maximumFractionDigits: 0});
       document.getElementById('roi-percent').textContent = roi.toFixed(1) + '%';
-      
+
       // Display year-by-year breakdown
       let chartHTML = '<div class="year-row header"><div>Year</div><div>Balance</div><div>Contributions</div><div>Interest</div></div>';
       yearlyData.forEach(data => {
@@ -452,11 +446,11 @@
         </div>`;
       });
       document.getElementById('growth-chart').innerHTML = chartHTML;
-      
+
       document.getElementById('result').style.display = 'block';
       document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-    
+
     // Initialize ads
     (adsbygoogle = window.adsbygoogle || []).push({});
     (adsbygoogle = window.adsbygoogle || []).push({});

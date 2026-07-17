@@ -28,8 +28,7 @@
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
 <!-- Global CSS -->
-<link as="style" href="/style.css?v=1.3.0" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="/style.css?v=1.3.0" rel="stylesheet"/></noscript>
+
 <script src="/scripts/utils.js?v=1.3.0" type="module"></script>
 <!-- Critical CSS -->
 <style>
@@ -92,7 +91,7 @@
       .caption-creator { grid-template-columns: 1fr !important; }
       .tone-selector { grid-template-columns: repeat(2, 1fr); }
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -108,11 +107,12 @@
     }
 
 </style>
-  
-  
+
   <meta property="og:description" content="Generate engaging Instagram captions instantly. 500+ templates, AI-powered suggestions, hashtag recommendations for all content types." />
   <meta property="og:url" content="https://www.uptools.in/instagram-caption-generator/" />
   <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
 </head>
 <body>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
@@ -473,7 +473,7 @@
 
     function toggleHashtag(hashtagElement) {
       const hashtag = hashtagElement.dataset.hashtag;
-      
+
       if (selectedHashtags.has(hashtag)) {
         selectedHashtags.delete(hashtag);
         hashtagElement.classList.remove('selected');
@@ -481,7 +481,7 @@
         selectedHashtags.add(hashtag);
         hashtagElement.classList.add('selected');
       }
-      
+
       updateSelectedCount();
     }
 
@@ -497,7 +497,7 @@
 
       const hashtagString = Array.from(selectedHashtags).join(' ');
       const currentCaption = captionOutput.value;
-      
+
       if (currentCaption) {
         captionOutput.value = currentCaption + '\n\n' + hashtagString;
       } else {
@@ -506,7 +506,7 @@
 
       updateCharCounter();
       updatePreview();
-      
+
       selectedHashtags.clear();
       document.querySelectorAll('.hashtag-tag.selected').forEach(tag => {
         tag.classList.remove('selected');
@@ -565,7 +565,7 @@
       const originalText = copyBtn.textContent;
       copyBtn.textContent = '✅ Copied!';
       copyBtn.style.background = '#4CAF50';
-      
+
       setTimeout(() => {
         copyBtn.textContent = originalText;
         copyBtn.style.background = '';
@@ -576,13 +576,13 @@
     function setupMobileMenu() {
       const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
       const navLinks = document.querySelector('.nav-links');
-      
+
       if (mobileMenuToggle && navLinks) {
         mobileMenuToggle.addEventListener('click', () => {
           const isActive = navLinks.classList.contains('active');
           navLinks.classList.toggle('active');
           mobileMenuToggle.setAttribute('aria-expanded', !isActive);
-          
+
           const menuIcon = mobileMenuToggle.querySelector('.menu-icon');
           if (menuIcon) {
             menuIcon.textContent = isActive ? '☰' : '✕';

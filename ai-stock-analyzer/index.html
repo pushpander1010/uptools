@@ -30,9 +30,7 @@
   <meta name="twitter:description" content="Analyze any ticker across major markets. Real quotes &amp; charts, support/resistance, technical + fundamental snapshot, news sentiment, and Buy/Hold/Sell verdict. Free." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/og/ai-stock-analyzer.png" />
 <!-- CSS (shared) -->
-<link as="style" href="/style.css" rel="preload"/>
-<link href="/style.css" media="print" onload="this.media='all'" rel="stylesheet"/>
-<noscript><link href="/style.css" rel="stylesheet"/></noscript>
+
 <!-- Structured Data -->
 <script type="application/ld+json">
   {
@@ -97,7 +95,7 @@
     .msg.ai { color:#eaf4ff } .msg.user{ color:#cfe7ff }
     .row-inline{ display:flex; gap:8px; flex-wrap:wrap; align-items:center }
     .nowrap{ white-space:nowrap }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -113,12 +111,13 @@
     }
 
 </style>
-  
 
   <meta property="og:description" content="Analyze any ticker across major markets. Real quotes &amp;amp; charts, support/resistance, technical + fundamental snapshot, news sentiment, and Buy/Hold/Sell verdict. Free." />
   <meta property="og:url" content="https://www.uptools.in/ai-stock-analyzer/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="UpTools">
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body style="--accent:#22D3EE;--bg1:#0b0f1a;--bg2:#121a2f">
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -395,7 +394,6 @@
     const range = $('#range');
     const interval = $('#interval');
     const go = $('#go');
-
 
     const analysisStatus = $('#analysisStatus');
 

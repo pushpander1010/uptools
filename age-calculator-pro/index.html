@@ -15,9 +15,7 @@
   <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/age-calculator-pro/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Age Calculator - Calculate Exact Age Online","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
@@ -41,13 +39,14 @@
     .option-card:hover { border-color: #6366f1; }
     .option-card.active { border-color: #6366f1; background: #1e1b4b; }
   </style>
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <main class="tool-wrap">
     <h1 style="font-size:1.5rem;margin-bottom:4px">🎂 Age Calculator - Calculate Exact Age Online</h1>
     <p class="note" style="margin-bottom:16px">Calculate your exact age in years, months, days, hours, and minutes. Find your next birthday.</p>
-    
-    
+
     <section class="tool-card">
       <h2 style="margin-top:0;font-size:1.1rem">Age Calculator</h2>
       <div class="grid">
@@ -91,59 +90,58 @@
     </section>
     <script>
       document.getElementById('targetDate').valueAsDate = new Date();
-      
+
       document.getElementById('calculateBtn').addEventListener('click', () => {
         const dob = new Date(document.getElementById('dob').value);
         const target = new Date(document.getElementById('targetDate').value);
         if (!dob || isNaN(dob)) { alert('Please enter your date of birth'); return; }
-        
+
         let years = target.getFullYear() - dob.getFullYear();
         let months = target.getMonth() - dob.getMonth();
         let days = target.getDate() - dob.getDate();
-        
+
         if (days < 0) { months--; days += new Date(target.getFullYear(), target.getMonth(), 0).getDate(); }
         if (months < 0) { years--; months += 12; }
-        
+
         const totalDays = Math.floor((target - dob) / (1000 * 60 * 60 * 24));
-        
+
         document.getElementById('years').textContent = years;
         document.getElementById('months').textContent = months;
         document.getElementById('days').textContent = days;
         document.getElementById('totalDays').textContent = totalDays.toLocaleString();
-        
+
         // Next birthday
         let nextBday = new Date(target.getFullYear(), dob.getMonth(), dob.getDate());
         if (nextBday <= target) nextBday.setFullYear(nextBday.getFullYear() + 1);
         const daysUntilBday = Math.ceil((nextBday - target) / (1000 * 60 * 60 * 24));
         document.getElementById('nextBirthday').textContent = '🎂 Next birthday in ' + daysUntilBday + ' days (' + nextBday.toLocaleDateString() + ')';
-        
+
         // Day of birth
         const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         document.getElementById('dayOfBirth').textContent = '📅 You were born on a ' + dayNames[dob.getDay()];
-        
+
         // Hours and minutes
         const totalHours = Math.floor(totalDays * 24);
         const totalMinutes = Math.floor(totalHours * 60);
         document.getElementById('totalHours').textContent = '⏱️ You have lived for ' + totalHours.toLocaleString() + ' hours';
         document.getElementById('totalMinutes').textContent = '⏰ That's ' + totalMinutes.toLocaleString() + ' minutes';
-        
+
         document.getElementById('results').style.display = 'block';
       });
     </script>
 
-    
     <section class="tool-card" style="margin-top:16px">
       <h2 style="margin-top:0;font-size:1.1rem">How It Works</h2>
       <p class="note">1. Upload or select your files<br>2. Configure options<br>3. Process and download</p>
     </section>
-    
+
     <section class="tool-card" style="margin-top:16px">
       <h2 style="margin-top:0;font-size:1.1rem">FAQ</h2>
       <details><summary><b>Is this tool free?</b></summary><p class="note" style="padding:6px 0">Yes, completely free with no sign-up required.</p></details>
       <details><summary><b>Is my data private?</b></summary><p class="note" style="padding:6px 0">Yes. All processing happens in your browser. Files are never uploaded to our servers.</p></details>
       <details><summary><b>Does it work on mobile?</b></summary><p class="note" style="padding:6px 0">Yes. All tools are mobile-responsive.</p></details>
     </section>
-    
+
     <footer style="margin-top:24px;padding:16px 0;text-align:center;border-top:1px solid #212a3a">
       <p class="note">© <span id="y"></span> UpTools. Privacy-first utilities.</p>
     </footer>

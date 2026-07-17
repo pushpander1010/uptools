@@ -15,9 +15,7 @@
   <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/unit-converter-pro/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Unit Converter - Convert Units Online","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
@@ -41,13 +39,14 @@
     .option-card:hover { border-color: #6366f1; }
     .option-card.active { border-color: #6366f1; background: #1e1b4b; }
   </style>
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <main class="tool-wrap">
     <h1 style="font-size:1.5rem;margin-bottom:4px">🔄 Unit Converter - Convert Units Online</h1>
     <p class="note" style="margin-bottom:16px">Convert between units of length, weight, temperature, volume, area, speed, data, and time.</p>
-    
-    
+
     <section class="tool-card">
       <h2 style="margin-top:0;font-size:1.1rem">Unit Converter</h2>
       <div class="grid">
@@ -104,7 +103,7 @@
         data: { 'Byte': 1, 'KB': 1024, 'MB': 1048576, 'GB': 1073741824, 'TB': 1099511627776 },
         time: { 'Second': 1, 'Millisecond': 0.001, 'Minute': 60, 'Hour': 3600, 'Day': 86400, 'Week': 604800 }
       };
-      
+
       const category = document.getElementById('category');
       const fromUnit = document.getElementById('fromUnit');
       const toUnit = document.getElementById('toUnit');
@@ -112,7 +111,7 @@
       const result = document.getElementById('result');
       const formula = document.getElementById('formula');
       const allConversions = document.getElementById('allConversions');
-      
+
       function populateUnits() {
         const cat = category.value;
         fromUnit.innerHTML = '';
@@ -124,24 +123,24 @@
         if (units[cat].length > 1) toUnit.selectedIndex = 1;
         convert();
       }
-      
+
       function convert() {
         const cat = category.value;
         const val = parseFloat(value.value) || 0;
         const from = fromUnit.value;
         const to = toUnit.value;
-        
+
         if (cat === 'temperature') {
           let celsius;
           if (from === 'Celsius') celsius = val;
           else if (from === 'Fahrenheit') celsius = (val - 32) * 5/9;
           else celsius = val - 273.15;
-          
+
           let res;
           if (to === 'Celsius') res = celsius;
           else if (to === 'Fahrenheit') res = celsius * 9/5 + 32;
           else res = celsius + 273.15;
-          
+
           result.textContent = res.toFixed(4);
           formula.textContent = val + ' ' + from + ' = ' + res.toFixed(4) + ' ' + to;
         } else {
@@ -151,7 +150,7 @@
           result.textContent = res.toFixed(6);
           formula.textContent = val + ' ' + from + ' = ' + res.toFixed(6) + ' ' + to;
         }
-        
+
         // All conversions
         let html = '<div style="margin-bottom:8px;color:#6366f1;font-weight:600">1 ' + from + ' =</div>';
         Object.keys(units[cat]).forEach(u => {
@@ -166,37 +165,36 @@
         });
         allConversions.innerHTML = html;
       }
-      
+
       category.addEventListener('change', populateUnits);
       [value, fromUnit, toUnit].forEach(el => el.addEventListener('input', convert));
-      
+
       document.getElementById('swapBtn').addEventListener('click', () => {
         const temp = fromUnit.value;
         fromUnit.value = toUnit.value;
         toUnit.value = temp;
         convert();
       });
-      
+
       document.getElementById('copyBtn').addEventListener('click', () => {
         navigator.clipboard.writeText(result.textContent + ' ' + toUnit.value);
       });
-      
+
       populateUnits();
     </script>
 
-    
     <section class="tool-card" style="margin-top:16px">
       <h2 style="margin-top:0;font-size:1.1rem">How It Works</h2>
       <p class="note">1. Upload or select your files<br>2. Configure options<br>3. Process and download</p>
     </section>
-    
+
     <section class="tool-card" style="margin-top:16px">
       <h2 style="margin-top:0;font-size:1.1rem">FAQ</h2>
       <details><summary><b>Is this tool free?</b></summary><p class="note" style="padding:6px 0">Yes, completely free with no sign-up required.</p></details>
       <details><summary><b>Is my data private?</b></summary><p class="note" style="padding:6px 0">Yes. All processing happens in your browser. Files are never uploaded to our servers.</p></details>
       <details><summary><b>Does it work on mobile?</b></summary><p class="note" style="padding:6px 0">Yes. All tools are mobile-responsive.</p></details>
     </section>
-    
+
     <footer style="margin-top:24px;padding:16px 0;text-align:center;border-top:1px solid #212a3a">
       <p class="note">© <span id="y"></span> UpTools. Privacy-first utilities.</p>
     </footer>

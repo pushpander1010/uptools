@@ -15,9 +15,7 @@
   <meta property="og:site_name" content="UpTools">
   <meta property="og:url" content="https://www.uptools.in/pdf-splitter/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"PDF Splitter - Split PDF Files Online","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
@@ -41,13 +39,14 @@
     .option-card:hover { border-color: #6366f1; }
     .option-card.active { border-color: #6366f1; background: #1e1b4b; }
   </style>
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <main class="tool-wrap">
     <h1 style="font-size:1.5rem;margin-bottom:4px">✂️ PDF Splitter - Split PDF Files Online</h1>
     <p class="note" style="margin-bottom:16px">Split PDF files by page range, extract pages, or create separate documents. Free and private.</p>
-    
-    
+
     <section class="tool-card">
       <h2 style="margin-top:0;font-size:1.1rem">Upload PDF File</h2>
       <div class="drag-zone" id="dropZone">
@@ -98,7 +97,7 @@
       const pageRange = document.getElementById('pageRange');
       let pdfFile = null;
       let pdfDoc = null;
-      
+
       dropZone.addEventListener('click', () => fileInput.click());
       dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
       dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
@@ -108,7 +107,7 @@
         if (file) loadFile(file);
       });
       fileInput.addEventListener('change', (e) => { if (e.target.files[0]) loadFile(e.target.files[0]); });
-      
+
       async function loadFile(file) {
         pdfFile = file;
         const { PDFDocument } = await import('https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/+esm');
@@ -118,20 +117,20 @@
         splitBtn.disabled = false;
         pageRange.placeholder = 'e.g., 1-' + pdfDoc.getPageCount();
       }
-      
+
       document.querySelectorAll('.option-card').forEach(card => {
         card.addEventListener('click', () => {
           document.querySelectorAll('.option-card').forEach(c => c.classList.remove('active'));
           card.classList.add('active');
         });
       });
-      
+
       clearBtn.addEventListener('click', () => {
         pdfFile = null; pdfDoc = null;
         fileInfo.textContent = ''; splitBtn.disabled = true;
         outputSection.style.display = 'none';
       });
-      
+
       splitBtn.addEventListener('click', async () => {
         if (!pdfDoc) return;
         status.textContent = 'Splitting PDF...';
@@ -149,7 +148,7 @@
           } else {
             for (let i = 0; i < pdfDoc.getPageCount(); i++) pages.push([i]);
           }
-          
+
           downloads.innerHTML = '';
           for (let i = 0; i < pages.length; i++) {
             const newPdf = await PDFDocument.create();
@@ -175,7 +174,7 @@
           splitBtn.disabled = false;
         }
       });
-      
+
       function parseRange(str, max) {
         const pages = [];
         str.split(',').forEach(part => {
@@ -187,19 +186,18 @@
       }
     </script>
 
-    
     <section class="tool-card" style="margin-top:16px">
       <h2 style="margin-top:0;font-size:1.1rem">How It Works</h2>
       <p class="note">1. Upload or select your files<br>2. Configure options<br>3. Process and download</p>
     </section>
-    
+
     <section class="tool-card" style="margin-top:16px">
       <h2 style="margin-top:0;font-size:1.1rem">FAQ</h2>
       <details><summary><b>Is this tool free?</b></summary><p class="note" style="padding:6px 0">Yes, completely free with no sign-up required.</p></details>
       <details><summary><b>Is my data private?</b></summary><p class="note" style="padding:6px 0">Yes. All processing happens in your browser. Files are never uploaded to our servers.</p></details>
       <details><summary><b>Does it work on mobile?</b></summary><p class="note" style="padding:6px 0">Yes. All tools are mobile-responsive.</p></details>
     </section>
-    
+
     <footer style="margin-top:24px;padding:16px 0;text-align:center;border-top:1px solid #212a3a">
       <p class="note">© <span id="y"></span> UpTools. Privacy-first utilities.</p>
     </footer>

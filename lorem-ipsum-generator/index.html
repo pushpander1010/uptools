@@ -13,9 +13,7 @@
   <meta property="og:description" content="Generate Lorem Ipsum placeholder text. Customizable paragraphs." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="UpTools">
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Lorem Ipsum Generator - Placeholder Text","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
@@ -30,12 +28,14 @@
     .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
   </style>
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <main class="tool-wrap">
     <h1 style="font-size:1.5rem;margin-bottom:4px">📝 Lorem Ipsum Generator - Placeholder Text</h1>
     <p class="note" style="margin-bottom:16px">Generate Lorem Ipsum placeholder text. Customizable paragraphs.</p>
-    
+
 <section class="tool-card">
   <div class="grid">
     <div><label class="note">Type</label><select class="input" id="type"><option value="p">Paragraphs</option><option value="s">Sentences</option><option value="w">Words</option></select></div>

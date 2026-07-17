@@ -28,8 +28,7 @@
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
 <!-- Global CSS -->
-<link as="style" href="/style.css?v=1.3.0" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="/style.css?v=1.3.0" rel="stylesheet"/></noscript>
+
 <script src="/scripts/utils.js?v=1.3.0" type="module"></script>
 <!-- Critical CSS -->
 <style>
@@ -89,7 +88,7 @@
       .style-selector { grid-template-columns: repeat(2, 1fr); }
       .username-card { flex-direction: column; align-items: flex-start; gap: .5rem; }
     }
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -105,11 +104,12 @@
     }
 
 </style>
-  
-  
+
   <meta property="og:description" content="Generate unique Instagram usernames instantly. 1000+ creative handle ideas and personalized suggestions for all account types." />
   <meta property="og:url" content="https://www.uptools.in/instagram-username-generator/" />
   <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
 </head>
 <body>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
@@ -445,11 +445,11 @@
 
       // Clear previous results
       generatedUsernames = [];
-      
+
       // Generate new usernames
       const usernames = createUsernames(name, category, currentStyle, 12);
       generatedUsernames = usernames;
-      
+
       displayUsernames(usernames);
       enableBulkActions();
     }
@@ -463,7 +463,7 @@
 
       const moreUsernames = createUsernames(name, category, currentStyle, 8);
       generatedUsernames = [...generatedUsernames, ...moreUsernames];
-      
+
       displayUsernames(generatedUsernames);
     }
 
@@ -507,7 +507,7 @@
         username = username.replace(/[^a-z0-9._]/g, '');
         username = username.replace(/^[._]|[._]$/g, '');
         username = username.replace(/[._]{2,}/g, '.');
-        
+
         if (username.length >= 3 && username.length <= 30) {
           usernames.add(username);
         }
@@ -565,7 +565,7 @@
       if (generatedUsernames.length === 0) return;
 
       const allUsernames = generatedUsernames.map(u => `@${u}`).join('\n');
-      
+
       try {
         await navigator.clipboard.writeText(allUsernames);
         showCopyFeedback(`${generatedUsernames.length} usernames copied!`);
@@ -597,9 +597,9 @@
         z-index: 1000;
         font-weight: 600;
       `;
-      
+
       document.body.appendChild(notification);
-      
+
       setTimeout(() => {
         document.body.removeChild(notification);
       }, 2000);
@@ -635,13 +635,13 @@
     function setupMobileMenu() {
       const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
       const navLinks = document.querySelector('.nav-links');
-      
+
       if (mobileMenuToggle && navLinks) {
         mobileMenuToggle.addEventListener('click', () => {
           const isActive = navLinks.classList.contains('active');
           navLinks.classList.toggle('active');
           mobileMenuToggle.setAttribute('aria-expanded', !isActive);
-          
+
           const menuIcon = mobileMenuToggle.querySelector('.menu-icon');
           if (menuIcon) {
             menuIcon.textContent = isActive ? '☰' : '✕';

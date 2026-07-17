@@ -13,9 +13,7 @@
   <meta property="og:description" content="Write HTML and see live preview instantly." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="UpTools">
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"HTML Preview - Live HTML Editor","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
@@ -30,12 +28,14 @@
     .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
   </style>
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <main class="tool-wrap">
     <h1 style="font-size:1.5rem;margin-bottom:4px">🌐 HTML Preview - Live HTML Editor</h1>
     <p class="note" style="margin-bottom:16px">Write HTML and see live preview instantly.</p>
-    
+
 <section class="tool-card"><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
 <div><label class="note">HTML</label><textarea class="input" id="html" rows="15" oninput="run()" style="font-family:monospace;font-size:.85rem">&lt;h1 style="color:#6366f1"&gt;Hello UpTools!&lt;/h1&gt;&lt;p&gt;Edit this HTML.&lt;/p&gt;&lt;button onclick="alert('Hi!')"&gt;Click&lt;/button&gt;</textarea></div>
 <div><label class="note">Preview</label><iframe id="prev" style="width:100%;height:100%;min-height:350px;border:1px solid #212a3a;border-radius:.5rem;background:white"></iframe></div>

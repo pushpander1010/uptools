@@ -85,13 +85,12 @@
 
 </style>
 <!-- 2) Load full stylesheet without blocking first paint -->
-<link as="style" href="/style.css?v=1.2.0" rel="preload"/>
-<link href="/style.css?v=1.2.0" media="print" onload="this.media='all'" rel="stylesheet"/>
-<noscript><link href="/style.css?v=1.2.0" rel="stylesheet"/></noscript>
-  
+
   <meta property="og:description" content="Calculate income tax for FY 2025-26 instantly. Compare New vs Old Regime with 80C, 80D, NPS, HRA. Get monthly TDS breakdown &amp;amp; tax-saving recommendations." />
   <meta property="og:url" content="https://www.uptools.in/income-tax-tool/" />
   <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="/style.css?v=1.2.0">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -679,7 +678,7 @@
         const hraRecv = parseInt(document.getElementById('hraRecv').value) || 0;
         const rentPaid = parseInt(document.getElementById('rentPaid').value) || 0;
         const isMetro = document.getElementById('isMetro').checked;
-        
+
         if (basic && hraRecv && rentPaid) {
           const metroPercent = isMetro ? 0.5 : 0.4;
           const hraExempt = Math.min(
@@ -709,14 +708,14 @@
         const sec80d = parseInt(document.getElementById('sec80d').value) || 0;
         const nps1b = Math.min(parseInt(document.getElementById('nps1b').value) || 0, 50000);
         const homeLoan = Math.min(parseInt(document.getElementById('homeLoanInt').value) || 0, 200000);
-        
+
         // Calculate HRA exemption
         const basic = parseInt(document.getElementById('basic').value) || 0;
         const hraRecv = parseInt(document.getElementById('hraRecv').value) || 0;
         const rentPaid = parseInt(document.getElementById('rentPaid').value) || 0;
         const isMetro = document.getElementById('isMetro').checked;
         let hraExempt = 0;
-        
+
         if (basic && hraRecv && rentPaid) {
           const metroPercent = isMetro ? 0.5 : 0.4;
           hraExempt = Math.max(0, Math.min(

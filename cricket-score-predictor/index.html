@@ -13,8 +13,6 @@
 <link href="https://www.uptools.in/cricket-score-predictor/" rel="canonical"/>
   <meta name="keywords" content="cricket score predictor, win probability calculator, match outcome predictor, cricket winning chance, duckworth lewis, par score, projected score" />
 
-  
-
   <meta property="og:title" content="Cricket Score Predictor - Win Probability & Match Outcome | UpTools" />
   <meta property="og:description" content="Cricket Score Predictor - Win Probability & Match Outcome. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
@@ -28,9 +26,6 @@
   <meta name="twitter:title" content="Cricket Score Predictor - Win Probability & Match Outcome | UpTools" />
   <meta name="twitter:description" content="Cricket Score Predictor - Win Probability & Match Outcome. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-
-  <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
 
   <style>
     :root{
@@ -121,7 +116,7 @@
     .faqitem{margin-bottom:12px;}
     .faqitem h3{font-size:.95rem;margin:0 0 4px;}
     .faqitem p{margin:0;color:var(--muted);font-size:.9rem;}
-  
+
     .skip-link {
       position: absolute;
       top: -40px;
@@ -153,6 +148,8 @@
       ]}
     }
   </script>
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
@@ -249,7 +246,6 @@
     </section>
   </main>
 
-  
 <!-- SEO: Do's and Don'ts -->
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
@@ -330,15 +326,15 @@
       const remBalls = Math.round(remOvers * 6);
       const wicketsRem = 10 - wkts;
       const currentRR = runs / overs;
-      
+
       const avgScores = { 20: 160, 50: 280 };
       const avgRR = avgScores[totalOvers] / totalOvers;
-      
+
       let projScore = currentRR * totalOvers;
       if (wktsRem >= 7) projScore *= 1.08;
       else if (wktsRem <= 3) projScore *= 0.92;
       projScore = Math.round(projScore);
-      
+
       const parScore = Math.round(avgRR * (overs + remOvers * 0.9));
       const winChance = Math.min(99, Math.max(1, Math.round(50 + (runs - parScore) * 0.4 + (wktsRem - 3) * 3)));
 
@@ -355,7 +351,7 @@
         const chaseRR = remOvers > 0 ? need / remOvers : 999;
         const chaseProb = Math.min(99, Math.max(1, Math.round(100 - chaseRR * 6)));
         const chaseWin = chaseRR <= currentRR ? 85 : Math.max(5, 100 - (chaseRR - currentRR) * 15);
-        
+
         html += `<div class="row"><span>Target</span><span class="amount">${fmt(target)}</span></div>`;
         html += `<div class="row"><span>Needed</span><span class="amount">${fmt(need)}</span></div>`;
         html += `<div class="row"><span>Req. Run Rate</span><span class="amount ${chaseRR < currentRR && chaseRR < 10 ? 'green' : chaseRR > 12 ? 'red' : 'orange'}">${fmt2(chaseRR)}</span></div>`;

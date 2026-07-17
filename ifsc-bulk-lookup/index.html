@@ -8,8 +8,7 @@
   <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Bulk IFSC code lookup tool. Search multiple IFSC codes at once. Download results as CSV. Find bank branch details instantly.">
-  
-  
+
   <meta property="og:title" content="IFSC Bulk Lookup - Search Multiple IFSC Codes | UpTools" />
   <meta property="og:description" content="IFSC Bulk Lookup - Search Multiple IFSC Codes. Free online tool by UpTools." />
   <meta property="og:type" content="website">
@@ -20,11 +19,7 @@
   <meta name="twitter:title" content="IFSC Bulk Lookup - Search Multiple IFSC Codes | UpTools" />
   <meta name="twitter:description" content="IFSC Bulk Lookup - Search Multiple IFSC Codes. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-  
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
-  
+
   <style>
     .input-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin: 2rem 0; }
     textarea { width: 100%; min-height: 150px; padding: 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: monospace; font-size: 0.9rem; }
@@ -56,8 +51,6 @@
     }
 
 </style>
-  
-  
 
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Ifsc Bulk Lookup free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's completely free with no sign-ups required."}}, {"@type": "Question", "name": "Is Ifsc Bulk Lookup private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All calculations run in your browser. No data is uploaded."}}, {"@type": "Question", "name": "Does Ifsc Bulk Lookup work on mobile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All tools are mobile-responsive and work on any device."}}]}
@@ -72,12 +65,13 @@
 <link href="https://www.uptools.in/ifsc-bulk-lookup/" rel="canonical"/>
 <meta name="keywords" content="ifsc bulk lookup, ifsc bulk lookup, online tool, free calculator, uptools" />
 
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-  
+
   <a href="#main" class="sr-only skip-link">Skip to content</a>
-  
+
     <!-- Header -->
   <header class="site" role="banner">
 <div class="header-inner">
@@ -101,29 +95,29 @@
 </nav>
 </div>
 </header>
-  
+
   <main id="main" class="wrap" role="main">
     <h1>🏦 IFSC Bulk Lookup</h1>
     <p class="lead">Search multiple IFSC codes at once. Get bank branch details instantly. Download results as CSV.</p>
-    
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    
+
+    <ins class="adsbygoogle" style="display:block;min-height:250px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+
     <div class="input-section">
       <h2>Bulk IFSC Lookup</h2>
       <label for="ifscList" style="display: block; margin-bottom: 1rem; font-weight: 600;">Enter IFSC Codes (one per line):</label>
       <textarea id="ifscList" placeholder="SBIN0001234&#10;HDFC0000001&#10;ICIC0000001&#10;AXIS0000001"></textarea>
-      
+
       <div style="margin-top: 1rem;">
         <button class="btn" onclick="lookupIFSC()">🔍 Search</button>
         <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
         <button class="btn btn-secondary" onclick="downloadCSV()">📥 Download CSV</button>
       </div>
-      
+
       <div class="info-box">
         <strong>💡 Tip:</strong> Paste one IFSC code per line. Results will show bank name, branch, city, and address.
       </div>
     </div>
-    
+
     <div id="results" style="display: none;">
       <h2>Results</h2>
       <table class="results-table">
@@ -140,9 +134,9 @@
         </tbody>
       </table>
     </div>
-    
-    <ins class="adsbygoogle" style="display:block; margin: 2rem 0;" data-ad-client="ca-pub-6216304334889617" data-ad-slot="1234567891" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    
+
+    <ins class="adsbygoogle" style="display:block; margin: 2rem 0;min-height:250px" data-ad-client="ca-pub-6216304334889617" data-ad-slot="1234567891" data-ad-format="auto" data-full-width-responsive="true"></ins>
+
     <h2>How to Use</h2>
     <ol style="line-height: 2;">
       <li>Enter IFSC codes in the text area (one per line)</li>
@@ -150,7 +144,7 @@
       <li>View results with bank details</li>
       <li>Download results as CSV file</li>
     </ol>
-    
+
     <h2>Features</h2>
     <ul style="line-height: 2;">
       <li>✅ Search unlimited IFSC codes at once</li>
@@ -160,7 +154,7 @@
       <li>✅ 100% accurate data</li>
       <li>✅ No registration required</li>
     </ul>
-    
+
     <h2>Frequently Asked Questions</h2>
     <details>
       <summary>What is an IFSC code?</summary>
@@ -174,13 +168,12 @@
       <summary>Can I download the results?</summary>
       <p>Yes, click the "Download CSV" button to export results as a spreadsheet file.</p>
     </details>
-    
+
     <nav aria-label="Breadcrumb" class="breadcrumb" style="margin-top: 2rem;">
       <a href="/">Home</a> / <a href="/#tools">Tools</a> / <span>IFSC Bulk Lookup</span>
     </nav>
   </main>
-  
-  
+
 <!-- SEO: Do's and Don'ts -->
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
@@ -227,7 +220,7 @@
 <footer class="note small site-footer" role="contentinfo">
     <p>&copy; 2026 UpTools. Free online tools for everyone.</p>
   </footer>
-  
+
   <script src="/scripts/utils.js" type="module"></script>
   <script defer>
     // Sample IFSC database
@@ -237,16 +230,16 @@
       'ICIC0000001': { bank: 'ICICI Bank', branch: 'Bangalore', city: 'Bangalore', address: 'Whitefield, Bangalore' },
       'AXIS0000001': { bank: 'Axis Bank', branch: 'Pune', city: 'Pune', address: 'Hinjewadi, Pune' }
     };
-    
+
     function lookupIFSC() {
       const input = document.getElementById('ifscList').value;
       const codes = input.split('\n').filter(c => c.trim());
-      
+
       if (codes.length === 0) {
         alert('Please enter at least one IFSC code');
         return;
       }
-      
+
       let html = '';
       codes.forEach(code => {
         const trimmed = code.trim().toUpperCase();
@@ -269,29 +262,29 @@
           </tr>`;
         }
       });
-      
+
       document.getElementById('resultsBody').innerHTML = html;
       document.getElementById('results').style.display = 'block';
     }
-    
+
     function clearAll() {
       document.getElementById('ifscList').value = '';
       document.getElementById('results').style.display = 'none';
     }
-    
+
     function downloadCSV() {
       const rows = document.querySelectorAll('.results-table tbody tr');
       if (rows.length === 0) {
         alert('No results to download. Search first.');
         return;
       }
-      
+
       let csv = 'IFSC Code,Bank Name,Branch,City,Status\n';
       rows.forEach(row => {
         const cells = row.querySelectorAll('td');
         csv += `${cells[0].textContent},${cells[1].textContent},${cells[2].textContent},${cells[3].textContent},${cells[4].textContent}\n`;
       });
-      
+
       const blob = new Blob([csv], { type: 'text/csv' });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -299,7 +292,7 @@
       a.download = 'ifsc-lookup-results.csv';
       a.click();
     }
-    
+
     (adsbygoogle = window.adsbygoogle || []).push({});
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>

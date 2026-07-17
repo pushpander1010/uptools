@@ -27,9 +27,6 @@
   <meta name="twitter:title" content="LinkedIn Profile Strength Analyzer | UpTools" />
   <meta name="twitter:description" content="Analyze and optimize your LinkedIn profile strength. Free online tool." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/og/linkedin-profile-analyzer.png" />
-  
-  <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
 
   <style>
     :root {
@@ -149,10 +146,12 @@
     {"@type":"HowToStep","position":4,"name":"Implement changes","text":"Update your LinkedIn profile based on the suggestions to boost your score."}
   ],"totalTime":"PT5M","tool":{"@type":"HowToTool","name":"UpTools LinkedIn Profile Analyzer","url":"https://www.uptools.in/linkedin-profile-analyzer/"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}
   </script>
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
-  
+
   <!-- Header -->
   <header class="site" role="banner">
 <div class="header-inner">
@@ -203,7 +202,7 @@
     <article class="card">
       <h2 style="margin-top: 0;">📊 Enter Your Profile Details</h2>
       <p class="note" style="margin-bottom: 1.5rem;">Fill in the fields below to get your profile strength score and personalized improvement suggestions.</p>
-      
+
       <div class="form-group">
         <label for="headline">Headline</label>
         <input type="text" id="headline" placeholder="e.g., Senior Software Engineer at Google | React & Node.js Expert" />
@@ -470,12 +469,12 @@
 
     // Display results
     document.getElementById('results').classList.add('visible');
-    
+
     const scoreEl = document.getElementById('scoreValue');
     const scoreLabel = document.getElementById('scoreLabel');
     const scoreFill = document.getElementById('scoreFill');
     const scoreSummary = document.getElementById('scoreSummary');
-    
+
     // Animate score
     let currentScore = 0;
     const targetScore = Math.min(100, totalScore);
@@ -489,7 +488,7 @@
       }
     };
     animateScore();
-    
+
     scoreLabel.textContent = totalScore >= 80 ? '🏆 Strong Profile!' : totalScore >= 60 ? '👍 Good Profile' : totalScore >= 40 ? '📈 Needs Improvement' : '⚠️ Weak Profile';
     scoreSummary.textContent = totalScore >= 80 ? 'Your profile is well-optimized. Keep it updated!' : totalScore >= 60 ? 'Your profile is decent. Focus on the suggestions below to improve.' : totalScore >= 40 ? 'Your profile needs work. Follow the tips below to boost your score.' : 'Your profile needs significant improvement. Start with the basics.';
 
@@ -514,7 +513,7 @@
     // Suggestions
     const suggestionsEl = document.getElementById('suggestions');
     const weakSections = sections.filter(s => (s.score / s.max) < 0.8).sort((a, b) => (a.score / a.max) - (b.score / b.max));
-    
+
     if (weakSections.length === 0) {
       suggestionsEl.innerHTML = '<div class="tip"><h3>🎉 Profile is Well Optimized!</h3><p>Your profile scores well across all sections. Keep it updated and continue engaging with your network.</p></div>';
     } else {

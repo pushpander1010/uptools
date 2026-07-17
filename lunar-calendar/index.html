@@ -12,7 +12,6 @@
 <link href="https://www.uptools.in/lunar-calendar/" rel="canonical"/>
 <meta name="keywords" content="lunar calendar, lunar calendar, online tool, free calculator, uptools" />
 
-  
   <meta property="og:title" content="Lunar Calendar - Moon Phases & Zodiac | UpTools" />
   <meta property="og:description" content="Lunar Calendar - Moon Phases & Zodiac. Free online tool by UpTools." />
   <meta property="og:type" content="website" />
@@ -23,8 +22,7 @@
   <meta name="twitter:title" content="Lunar Calendar - Moon Phases & Zodiac | UpTools" />
   <meta name="twitter:description" content="Lunar Calendar - Moon Phases & Zodiac. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
-  <link rel="preload" href="/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/style.css?v=1.3.0"></noscript>
+
   <style>
     :root {
       --bg: #0f1419;
@@ -71,7 +69,6 @@
     }
 
 </style>
-  
 
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Lunar Calendar free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's completely free with no sign-ups required."}}, {"@type": "Question", "name": "Is Lunar Calendar private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All calculations run in your browser. No data is uploaded."}}, {"@type": "Question", "name": "Does Lunar Calendar work on mobile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All tools are mobile-responsive and work on any device."}}]}
@@ -89,6 +86,8 @@
     "offers": { "@type": "Offer", "price": "0" }
   }
   </script>
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>
@@ -130,18 +129,18 @@
     <article class="card">
       <h1>🌙 Lunar Calendar</h1>
       <p class="note">View lunar calendar with moon phases, lunar dates, and zodiac information. Track moon cycles.</p>
-      
+
       <label for="date-input" style="display: block; margin-top: 1.5rem; font-weight: 600;">Select Date:</label>
       <input type="date" id="date-input">
-      
+
       <button class="btn" onclick="getMoonPhase()" style="margin-top: 1rem;">🌙 Get Moon Phase</button>
-      
+
       <div id="result" style="display: none; margin-top: 1.5rem;">
         <h2>Moon Phase Information</h2>
         <div class="moon-display" id="moon-emoji"></div>
         <div class="result" id="result-content"></div>
       </div>
-      
+
       <h2 style="margin-top: 2rem;">Features</h2>
       <ul style="line-height: 2;">
         <li>✅ View moon phases for any date</li>
@@ -151,7 +150,7 @@
         <li>✅ Historical moon data</li>
       </ul>
     </article>
-    
+
 <!-- SEO: Do's and Don'ts -->
 <section class="card" style="margin-top:16px">
 <h2 style="margin-top:0">✅ Do's and ❌ Don'ts</h2>
@@ -207,17 +206,17 @@
         alert('Please select a date');
         return;
       }
-      
+
       const date = new Date(dateInput);
       const knownNewMoon = new Date(2000, 0, 6);
       const lunarCycle = 29.53058867;
-      
+
       const diff = (date - knownNewMoon) / (1000 * 60 * 60 * 24);
       const phase = (diff % lunarCycle) / lunarCycle;
-      
+
       let phaseName = '';
       let emoji = '';
-      
+
       if (phase < 0.125) { phaseName = 'New Moon'; emoji = '🌑'; }
       else if (phase < 0.25) { phaseName = 'Waxing Crescent'; emoji = '🌒'; }
       else if (phase < 0.375) { phaseName = 'First Quarter'; emoji = '🌓'; }
@@ -226,7 +225,7 @@
       else if (phase < 0.75) { phaseName = 'Waning Gibbous'; emoji = '🌖'; }
       else if (phase < 0.875) { phaseName = 'Last Quarter'; emoji = '🌗'; }
       else { phaseName = 'Waning Crescent'; emoji = '🌘'; }
-      
+
       document.getElementById('moon-emoji').textContent = emoji;
       document.getElementById('result-content').innerHTML = `
         <div style="padding: 1rem; text-align: center;">
