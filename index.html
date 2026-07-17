@@ -4,17 +4,17 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>UpTools - Free Online Calculators, Converters &amp; Mini Games</title>
-<meta content="Fast, privacy-first tools for everyday tasks: Income Tax, GST, EMI, Currency Converter, Instagram Bio Generator, Social Media Tools, AI Writing, JSON Formatter, and mini games. No sign-ups, no bloat." name="description"/>
+<title>UpTools - Free Online Games & Tools: Calculators, Converters, AI & 24+ Mini Games</title>
+<meta content="UpTools is the home for free online games and everyday tools. Play 24+ instant mini-games (Snake, 2048, Tetris, Pac-Man, Typing Test) and use calculators, converters, AI writers and 300+ utilities. No sign-ups, privacy-first, mobile-friendly." name="description"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="#0f1419" name="theme-color"/>
-<meta content="income tax calculator,gst calculator,emi calculator,currency converter,instagram bio generator,social media tools,ai writing,ai blog generator,ai youtube script,ai email writer,ai caption generator,ai budget planner,ai business name generator,ai product description generator,crypto prices,json formatter,age calculator,ai tools,india tools,uptools,ai name generator,ai joke generator,grammar checker,cover letter generator,fifa world cup 2026,world cup countdown,world cup groups,world cup schedule,world cup golden boot,world cup bracket,world cup venues,fifa 2026 predictions" name="keywords"/>
+<meta content="online games,free games,play games,snake game,2048,tetris,pac-man,typing test,hangman,quiz,browser games,no download games,income tax calculator,gst calculator,emi calculator,currency converter,instagram bio generator,ai writing,ai blog generator,ai tools,json formatter,age calculator, calculators, converters, uptools, mini games, puzzle games" name="keywords"/>
 <!-- Canonical & Icons -->
 <link href="https://www.uptools.in/" rel="canonical"/>
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
 <!-- Open Graph -->
-<meta content="UpTools - Free Online Calculators, Converters &amp; Mini Games" property="og:title"/>
+<meta content="UpTools - Free Online Games & Tools (Calculators, Converters, AI & 24+ Mini Games)" property="og:title"/>
 <meta content="Fast, privacy-first tools: Tax calculators, Instagram bio generator, social media tools, AI writing, and more. No sign-ups required." property="og:description"/>
 <meta content="website" property="og:type"/>
 <meta content="https://www.uptools.in/" property="og:url"/>
@@ -23,7 +23,7 @@
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="summary_large_image" name="twitter:card"/>
-  <meta name="twitter:title" content="UpTools - Free Online Calculators, Converters &amp; Mini Games" />
+  <meta content="UpTools - Free Online Games & Tools (Calculators, Converters, AI & 24+ Mini Games)" name="twitter:title"/>
   <meta name="twitter:description" content="Fast, privacy-first tools: Tax calculators, Instagram bio generator, social media tools, AI writing, and more. No sign-ups required." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/og/home.png" />
 <!-- Preconnects -->
@@ -262,6 +262,42 @@
     .hero-logo {
       width: 48px;
       height: 48px
+    }
+
+    /* Games rail */
+    .games-rail {
+      border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
+      box-shadow: 0 0 0 1px color-mix(in oklab, var(--accent) 18%, transparent), 0 10px 30px color-mix(in oklab, var(--accent) 12%, transparent)
+    }
+    .games-rail-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+    .game-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem
+    }
+    .game-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .5rem .8rem;
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--accent) 10%, #121a2c);
+      border: 1px solid color-mix(in oklab, var(--accent) 35%, var(--border));
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .12s ease, background .15s ease, border-color .15s ease
+    }
+    .game-chip:hover {
+      transform: translateY(-2px);
+      background: color-mix(in oklab, var(--accent) 22%, #121a2c);
+      border-color: var(--accent)
     }
 
     h1 {
@@ -539,16 +575,16 @@
 <img alt="UpTools logo" height="28" loading="eager" src="/assets/logo/uptools-logo.svg" width="28"/>
 <b>UpTools</b>
 </a>
-<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">☰</button>
 <nav aria-label="Primary" class="nav-links">
-<a href="/">Home</a>
-<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<a href="/" class="nav-home">Home</a>
+<a href="/games/" class="nav-games">Games</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">Tools <span class="arrow">▼</span></button>
 <div class="more-menu" role="menu">
-<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/#tools">All Tools</a>
 <a role="menuitem" href="/income-tax-tool/">Income Tax</a>
 <a role="menuitem" href="/emi-calculator/">EMI</a>
 <a role="menuitem" href="/gst-calculator/">GST</a>
-<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/ai-writer/">AI Tools</a>
 <a role="menuitem" href="/about/">About</a>
 <a role="menuitem" href="/contact/">Contact</a>
 </div>
@@ -560,14 +596,34 @@
 <section aria-labelledby="hero-title" class="card hero">
 <img alt="UpTools compact logo" class="hero-logo" height="48" loading="eager" src="/assets/logo/uptools-logo.svg" width="48"/>
 <div>
-<h1 id="hero-title">Your everyday toolkit.</h1>
-<p class="note" style="margin:0">Calculators, converters, formatters &amp; games — fast, privacy-first, no
-          sign-ups.</p>
+<h1 id="hero-title">Games &amp; Tools — all in one place.</h1>
+<p class="note" style="margin:0">UpTools is your hub for <b style="color:var(--text)">free online games</b> and <b style="color:var(--text)">everyday tools</b> — calculators, converters, AI helpers and 24+ instant mini-games. No sign-ups, no bloat.</p>
 <div class="chips" style="margin-top:10px">
+<a class="chip" href="/games/" style="border-color:var(--accent);color:var(--text)">🎮 Play Games</a>
 <span class="pill">⚡ Loads fast</span>
 <span class="pill">🕵️ Privacy-first</span>
 <a class="chip" href="/sitemap.xml" title="Explore everything">Sitemap</a>
 </div>
+</div>
+</section>
+<!-- Games rail -->
+<section aria-labelledby="games-rail" class="card games-rail">
+<div class="games-rail-head">
+<h2 id="games-rail" style="margin:0">🎮 Free Mini Games</h2>
+<a class="btn" href="/games/">Play all 24+ games →</a>
+</div>
+<p class="note small" style="margin:.35rem 0 .75rem">Instant browser games. No download, no sign-up — just click and play.</p>
+<div class="game-chips">
+<a class="game-chip" href="/games/snake/">🐍 Snake</a>
+<a class="game-chip" href="/games/2048/">🔢 2048</a>
+<a class="game-chip" href="/games/tetris/">🧱 Tetris</a>
+<a class="game-chip" href="/games/pac-man/">👾 Pac-Man</a>
+<a class="game-chip" href="/games/typing-speed/">⌨️ Typing Test</a>
+<a class="game-chip" href="/games/hangman/">🪢 Hangman</a>
+<a class="game-chip" href="/games/quiz-trivia/">🧠 Quiz</a>
+<a class="game-chip" href="/games/tic-tac-toe/">⭕ Tic-Tac-Toe</a>
+<a class="game-chip" href="/games/memory-match/">🃏 Memory</a>
+<a class="game-chip" href="/games/flappy-bird/">🐦 Flappy Bird</a>
 </div>
 </section>
 <!-- Search + tags -->
@@ -772,6 +828,10 @@
         cricket: { label: "Cricket", icon: "🏏", desc: "Cricket calculators & stats" },
         sports: { label: "Sports", icon: "⚽", desc: "Sports calculators & trackers" },
         fifa: { label: "FIFA WC 2026", icon: "🏆", desc: "FIFA World Cup 2026 tools & calculators" },
+        india: { label: "India", icon: "🇮🇳", desc: "India-specific tools & calculators" },
+        education: { label: "Education", icon: "🎓", desc: "GPA, grades & academic tools" },
+        downloader: { label: "Downloaders", icon: "⬇️", desc: "Video & content downloaders" },
+        tools: { label: "Utilities", icon: "🧰", desc: "Converters, timers & helpers" },
       };
 
       // ---- Tools (assign categories with `cats`) ----
@@ -833,6 +893,7 @@
         { slug: "exif-tool", title: "EXIF Tool", icon: "🕵️", desc: "Inspect, clean or embed photo metadata.", href: "/exif-tool/", tags: ["images","security"], cats: ["all","images","security"] },
         { slug: "ip-address", title: "IP Address & ISP Lookup", icon: "🌐", desc: "See your public IP, ISP and DNS speed tests.", href: "/ip-address/", tags: ["networking","security"], cats: ["all","networking","security"] },
         { slug: "wifi-router", title: "WiFi Router Tools", icon: "📡", desc: "Find default passwords, Wi-Fi QR & vendors.", href: "/wifi-router/", tags: ["wifi","networking"], cats: ["all","wifi","networking"] },
+        { slug: "speed-test", title: "Internet Speed Test", icon: "⚡", desc: "Measure download, upload speed & ping.", href: "/speed-test/", tags: ["networking","wifi"], cats: ["all","networking","wifi"] },
         { slug: "domain-finder", title: "Domain Name Finder", icon: "🔍", desc: "Discover available domains instantly.", href: "/domain-finder/", tags: ["networking","dev"], cats: ["all","networking","dev"] },
         { slug: "whatsapp-chat", title: "WhatsApp Click-to-Chat", icon: "💬", desc: "Open chats without saving numbers.", href: "/whatsapp-chat/", tags: ["whatsapp","networking"], cats: ["all","whatsapp","networking"] },
         { slug: "whatsapp-stickers", title: "WhatsApp Sticker Maker", icon: "🧩", desc: "Design and export sticker packs.", href: "/whatsapp-stickers/", tags: ["whatsapp","images"], cats: ["all","whatsapp","images"] },
@@ -1027,6 +1088,72 @@
         { slug: "tennis-score-tracker", title: "Tennis Score Tracker", icon: "🎾", desc: "Track live tennis match scores, sets, games, and points in real-time.", href: "/tennis-score-tracker/", tags: ["sports","tennis"], cats: ["all","sports"] },
         { slug: "golf-handicap-calculator", title: "Golf Handicap Calculator", icon: "⛳", desc: "Calculate your golf handicap index, course handicap, and net score.", href: "/golf-handicap-calculator/", tags: ["sports","golf"], cats: ["all","sports"] },
         { slug: "fantasy-sports-calculator", title: "Fantasy Sports Calculator", icon: "⭐", desc: "Calculate fantasy points for cricket, football, basketball and more. Dream11 points.", href: "/fantasy-sports-calculator/", tags: ["sports","fantasy"], cats: ["all","sports"] },
+        // ── Finance (India) ──
+        { slug: "amortization-calculator", title: "Amortization Calculator", icon: "📋", desc: "Loan payment schedule & amortization table.", href: "/amortization-calculator/", tags: ["finance"], cats: ["all","finance"] },
+        { slug: "compound-interest-calculator", title: "Compound Interest Calculator", icon: "📈", desc: "See how your investments grow over time.", href: "/compound-interest-calculator/", tags: ["finance"], cats: ["all","finance"] },
+        { slug: "ctc-salary-calculator", title: "CTC to In-Hand Salary", icon: "💰", desc: "Calculate take-home salary from CTC.", href: "/ctc-salary-calculator/", tags: ["finance","india"], cats: ["all","finance","india"] },
+        { slug: "epf-calculator", title: "EPF Calculator", icon: "🏦", desc: "Employee Provident Fund maturity estimate.", href: "/epf-calculator/", tags: ["finance","india"], cats: ["all","finance","india"] },
+        { slug: "gratuity-calculator", title: "Gratuity Calculator", icon: "🎁", desc: "Calculate gratuity amount for employees.", href: "/gratuity-calculator/", tags: ["finance","india"], cats: ["all","finance","india"] },
+        { slug: "hra-calculator", title: "HRA Exemption Calculator", icon: "🏠", desc: "Calculate House Rent Allowance exemption.", href: "/hra-calculator/", tags: ["finance","india"], cats: ["all","finance","india"] },
+        { slug: "ltv-calculator", title: "LTV Calculator", icon: "🏠", desc: "Loan to Value ratio for home loans.", href: "/ltv-calculator/", tags: ["finance"], cats: ["all","finance"] },
+        { slug: "nps-calculator", title: "NPS Calculator", icon: "🧓", desc: "National Pension Scheme retirement corpus.", href: "/nps-calculator/", tags: ["finance","india"], cats: ["all","finance","india"] },
+        { slug: "post-office-rd-calculator", title: "Post Office RD Calculator", icon: "📮", desc: "Recurring deposit maturity calculator.", href: "/post-office-rd-calculator/", tags: ["finance","india"], cats: ["all","finance","india"] },
+        { slug: "ppf-calculator", title: "PPF Calculator", icon: "🏦", desc: "Public Provident Fund maturity & returns.", href: "/ppf-calculator/", tags: ["finance","india"], cats: ["all","finance","india"] },
+        { slug: "salary-hike-calculator", title: "Salary Hike Calculator", icon: "💸", desc: "New salary after raise or increment.", href: "/salary-hike-calculator/", tags: ["finance"], cats: ["all","finance"] },
+        { slug: "sip-step-up-calculator", title: "SIP Step-Up Calculator", icon: "📊", desc: "SIP with annual increment projection.", href: "/sip-step-up-calculator/", tags: ["finance","india"], cats: ["all","finance","india"] },
+        { slug: "tds-calculator", title: "TDS Calculator", icon: "📑", desc: "TDS on salary, rent & interest.", href: "/tds-calculator/", tags: ["finance","india"], cats: ["all","finance","india"] },
+        { slug: "upi-qr-generator", title: "UPI QR Code Generator", icon: "📲", desc: "Generate UPI QR codes for payments.", href: "/upi-qr-generator/", tags: ["finance","india"], cats: ["all","finance","india"] },
+        { slug: "upi-validator", title: "UPI ID Validator", icon: "✅", desc: "Validate UPI ID format & VPA.", href: "/upi-validator/", tags: ["finance","india"], cats: ["all","finance","india"] },
+        { slug: "aadhaar-validator", title: "Aadhaar Number Validator", icon: "🇮🇳", desc: "Validate Aadhaar number format.", href: "/aadhaar-validator/", tags: ["india","tools"], cats: ["all","india"] },
+        // ── Health ──
+        { slug: "bmr-calculator", title: "BMR Calculator", icon: "🔥", desc: "Basal metabolic rate with 3 formulas.", href: "/bmr-calculator/", tags: ["health"], cats: ["all","health"] },
+        { slug: "body-frame-size", title: "Body Frame Size Calculator", icon: "🦴", desc: "Determine small, medium or large frame.", href: "/body-frame-size/", tags: ["health"], cats: ["all","health"] },
+        { slug: "tdee-calculator", title: "TDEE Calculator", icon: "🏋️", desc: "Total daily energy expenditure & macros.", href: "/tdee-calculator/", tags: ["health"], cats: ["all","health"] },
+        // ── Developer ──
+        { slug: "cron-expression-generator", title: "Cron Expression Generator", icon: "⏰", desc: "Build cron job schedules visually.", href: "/cron-expression-generator/", tags: ["dev"], cats: ["all","dev"] },
+        { slug: "css-gradient-generator", title: "CSS Gradient Generator", icon: "🎨", desc: "Linear, radial & conic CSS gradients.", href: "/css-gradient-generator/", tags: ["dev"], cats: ["all","dev"] },
+        { slug: "diff-checker", title: "Text Diff Checker", icon: "🔍", desc: "Compare two texts side by side.", href: "/diff-checker/", tags: ["dev","text"], cats: ["all","dev","text"] },
+        { slug: "hash-generator", title: "Hash Generator", icon: "#️⃣", desc: "SHA256, SHA512, MD5 hash online.", href: "/hash-generator/", tags: ["dev","security"], cats: ["all","dev","security"] },
+        { slug: "html-preview", title: "HTML Preview", icon: "🌐", desc: "Live HTML editor & preview.", href: "/html-preview/", tags: ["dev"], cats: ["all","dev"] },
+        { slug: "markdown-preview", title: "Markdown Preview", icon: "📝", desc: "Live markdown editor & renderer.", href: "/markdown-preview/", tags: ["dev","text"], cats: ["all","dev","text"] },
+        { slug: "regex-tester", title: "Regex Tester", icon: "🧪", desc: "Test regular expressions online.", href: "/regex-tester/", tags: ["dev"], cats: ["all","dev"] },
+        { slug: "string-builder", title: "String Builder", icon: "🔧", desc: "Transform & manipulate text strings.", href: "/string-builder/", tags: ["dev","text"], cats: ["all","dev","text"] },
+        { slug: "subnet-calculator", title: "Subnet Calculator", icon: "🌐", desc: "IP CIDR subnet mask calculator.", href: "/subnet-calculator/", tags: ["dev","networking"], cats: ["all","dev","networking"] },
+        { slug: "url-encoder", title: "URL Encoder/Decoder", icon: "🔗", desc: "Encode & decode URLs instantly.", href: "/url-encoder/", tags: ["dev"], cats: ["all","dev"] },
+        { slug: "favicon-generator", title: "Favicon Generator", icon: "🎨", desc: "Create favicons from text or emoji.", href: "/favicon-generator/", tags: ["dev","images"], cats: ["all","dev","images"] },
+        { slug: "json-formatter-online", title: "JSON Formatter", icon: "{ }", desc: "Format, beautify & validate JSON.", href: "/json-formatter-online/", tags: ["dev"], cats: ["all","dev"] },
+        { slug: "json-formatter-pro", title: "JSON Formatter Pro", icon: "📋", desc: "Format, validate & minify JSON.", href: "/json-formatter-pro/", tags: ["dev"], cats: ["all","dev"] },
+        // ── Text & Generators ──
+        { slug: "ascii-art-generator", title: "ASCII Art Generator", icon: "🎨", desc: "Convert text to ASCII art.", href: "/ascii-art-generator/", tags: ["text","fun"], cats: ["all","text","fun"] },
+        { slug: "lorem-ipsum-generator", title: "Lorem Ipsum Generator", icon: "📄", desc: "Generate placeholder text for designs.", href: "/lorem-ipsum-generator/", tags: ["text"], cats: ["all","text"] },
+        { slug: "password-generator-pro", title: "Password Generator", icon: "🔐", desc: "Generate strong, secure passwords.", href: "/password-generator-pro/", tags: ["security"], cats: ["all","security"] },
+        { slug: "random-number-generator", title: "Random Number Generator", icon: "🎲", desc: "Cryptographically secure random numbers.", href: "/random-number-generator/", tags: ["text","fun"], cats: ["all","text","fun"] },
+        { slug: "random-password-generator", title: "Random Password Generator", icon: "🔑", desc: "Instant random passwords.", href: "/random-password-generator/", tags: ["security"], cats: ["all","security"] },
+        { slug: "uuid-generator-pro", title: "UUID Generator", icon: "🆔", desc: "Generate UUIDs & GUIDs online.", href: "/uuid-generator-pro/", tags: ["dev"], cats: ["all","dev"] },
+        { slug: "word-counter-enhanced", title: "Word Counter", icon: "📊", desc: "Words, characters & reading time.", href: "/word-counter-enhanced/", tags: ["text"], cats: ["all","text"] },
+        { slug: "word-counter-plus", title: "Advanced Word Counter", icon: "📝", desc: "Detailed word & character analysis.", href: "/word-counter-plus/", tags: ["text"], cats: ["all","text"] },
+        // ── Images ──
+        { slug: "color-palette-generator", title: "Color Palette Generator", icon: "🎨", desc: "Generate HEX, RGB, HSL color palettes.", href: "/color-palette-generator/", tags: ["images"], cats: ["all","images"] },
+        { slug: "color-palette-generator-pro", title: "Color Palette Pro", icon: "🌈", desc: "Create beautiful color schemes.", href: "/color-palette-generator-pro/", tags: ["images"], cats: ["all","images"] },
+        { slug: "image-compressor", title: "Image Compressor", icon: "📦", desc: "Reduce image size in browser.", href: "/image-compressor/", tags: ["images"], cats: ["all","images"] },
+        { slug: "image-resizer", title: "Image Resizer", icon: "🖼️", desc: "Resize photos online.", href: "/image-resizer/", tags: ["images"], cats: ["all","images"] },
+        // ── Utilities ──
+        { slug: "age-calculator-pro", title: "Age Calculator Pro", icon: "🎂", desc: "Exact age in years, months, days.", href: "/age-calculator-pro/", tags: ["tools"], cats: ["all","tools"] },
+        { slug: "percentage-calculator-pro", title: "Percentage Calculator", icon: "%", desc: "4 modes: %, fraction, increase, decrease.", href: "/percentage-calculator-pro/", tags: ["tools"], cats: ["all","tools"] },
+        { slug: "pomodoro-timer", title: "Pomodoro Timer", icon: "🍅", desc: "Focus timer with work & break cycles.", href: "/pomodoro-timer/", tags: ["tools","fun"], cats: ["all","tools","fun"] },
+        { slug: "stopwatch-timer", title: "Stopwatch & Timer", icon: "⏱️", desc: "Online stopwatch and countdown timer.", href: "/stopwatch-timer/", tags: ["tools"], cats: ["all","tools"] },
+        { slug: "random-choice-generator", title: "Random Choice Generator", icon: "🎰", desc: "Decision maker — pick randomly.", href: "/random-choice-generator/", tags: ["tools","fun"], cats: ["all","tools","fun"] },
+        { slug: "scientific-calculator", title: "Scientific Calculator", icon: "🧮", desc: "Full-featured scientific calculator.", href: "/scientific-calculator/", tags: ["tools"], cats: ["all","tools"] },
+        { slug: "text-diff-checker", title: "Text Diff Checker", icon: "📝", desc: "Compare text differences side by side.", href: "/text-diff-checker/", tags: ["tools","dev"], cats: ["all","tools","dev"] },
+        { slug: "tip-calculator-pro", title: "Tip Calculator", icon: "💵", desc: "Calculate tips & split bills.", href: "/tip-calculator-pro/", tags: ["tools"], cats: ["all","tools"] },
+        { slug: "unit-converter-pro", title: "Unit Converter", icon: "🔄", desc: "Convert any unit online.", href: "/unit-converter-pro/", tags: ["tools"], cats: ["all","tools"] },
+        { slug: "qr-code-generator-pro", title: "QR Code Generator", icon: "📱", desc: "Create QR codes for any content.", href: "/qr-code-generator-pro/", tags: ["tools","images"], cats: ["all","tools","images"] },
+        { slug: "pdf-merger", title: "PDF Merger", icon: "📑", desc: "Merge multiple PDF files online.", href: "/pdf-merger/", tags: ["tools"], cats: ["all","tools"] },
+        { slug: "pdf-splitter", title: "PDF Splitter", icon: "✂️", desc: "Split PDF files into pages.", href: "/pdf-splitter/", tags: ["tools"], cats: ["all","tools"] },
+        // ── Education ──
+        { slug: "gpa-calculator", title: "GPA Calculator", icon: "🎓", desc: "Weighted & unweighted GPA on 4.0/5.0.", href: "/gpa-calculator/", tags: ["education"], cats: ["all","education"] },
+        // ── Downloaders ──
+        { slug: "youtube-shorts-downloader", title: "YouTube Shorts Downloader", icon: "📱", desc: "Download YouTube Shorts free.", href: "/youtube-shorts-downloader/", tags: ["social","downloader"], cats: ["all","social","downloader"] },
       ];
 
       // ---- Elements ----

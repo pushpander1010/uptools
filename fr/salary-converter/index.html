@@ -48,27 +48,27 @@
   <a href="#main" class="sr-only skip-link">Skip to content</a>
     <!-- Header -->
   <header class="site" role="banner">
-    <div class="header-inner">
-      <a class="brand" href="/" aria-label="UpTools Home">
-        <img src="/assets/logo/uptools-logo.svg" alt="UpTools logo" width="28" height="28" loading="eager">
-        <b>UpTools</b>
-      </a>
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-      <nav aria-label="Primary" class="nav-links">
-<a href="/">Home</a>
-<button class="more-btn" aria-expanded="false" aria-haspopup="true">More <span class="arrow">▼</span></button>
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="/assets/logo/uptools-logo.svg" width="28"/>
+<b>UpTools</b>
+</a>
+<nav aria-label="Primary" class="nav-links">
+<a href="/" class="nav-home">Home</a>
+<a href="/games/" class="nav-games">Games</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">Tools <span class="arrow">▼</span></button>
 <div class="more-menu" role="menu">
-<a role="menuitem" href="/#tools">Tools</a>
+<a role="menuitem" href="/#tools">All Tools</a>
 <a role="menuitem" href="/income-tax-tool/">Income Tax</a>
 <a role="menuitem" href="/emi-calculator/">EMI</a>
 <a role="menuitem" href="/gst-calculator/">GST</a>
-<a role="menuitem" href="/games/">Games</a>
+<a role="menuitem" href="/ai-writer/">AI Tools</a>
 <a role="menuitem" href="/about/">About</a>
 <a role="menuitem" href="/contact/">Contact</a>
 </div>
 </nav>
-    </div>
-  </header>
+</div>
+</header>
   <main id="main" class="wrap" role="main"><nav class="note small" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Convertisseur de salaire</span></nav><section class="card hero" aria-labelledby="title"><div><h1 id="title">Convertisseur de salaire</h1><p class="note">Convertissez un revenu entre heure, jour, semaine, mois et année. Pratique pour comparer des offres, du freelance et du télétravail.</p><p class="note small" style="margin-top:10px">Langues : <a href="/salary-converter/">English</a> . <a href="/de/salary-converter/">Deutsch</a> . <a href="/es/salary-converter/">Español</a></p></div></section><section class="tool-grid" style="margin-top:16px"><section class="card-panel"><h2 style="margin-top:0">Saisie</h2><div class="field"><label class="label" for="amount">Montant</label><input id="amount" class="input" type="number" value="25" min="0" step="0.01" /></div><div class="field"><label class="label" for="period">Période</label><select id="period" class="select"><option value="hourly" selected>Heure</option><option value="daily">Jour</option><option value="weekly">Semaine</option><option value="monthly">Mois</option><option value="annual">Année</option></select></div><div class="field"><label class="label" for="hoursPerDay">Heures par jour</label><input id="hoursPerDay" class="input" type="number" value="8" min="0.1" step="0.1" /></div><div class="field"><label class="label" for="daysPerWeek">Jours par semaine</label><input id="daysPerWeek" class="input" type="number" value="5" min="0.1" step="0.1" /></div><div class="field"><label class="label" for="weeksPerYear">Semaines par an</label><input id="weeksPerYear" class="input" type="number" value="52" min="1" step="0.1" /></div></section><section class="card-panel"><h2 style="margin-top:0">Résultats</h2><div class="result-grid" id="results" aria-live="polite"></div></section></section><footer class="note small site-footer" role="contentinfo">&copy; <span id="y"></span> UpTools</footer></main>
   <script type="module">import { $, $$ } from "/scripts/utils.js"; const fmt=(v)=>new Intl.NumberFormat("fr-FR",{maximumFractionDigits:2}).format(v); function calculate(){const amount=Number($("#amount").value||0);const period=$("#period").value;const hoursPerDay=Number($("#hoursPerDay").value||0);const daysPerWeek=Number($("#daysPerWeek").value||0);const weeksPerYear=Number($("#weeksPerYear").value||0);if(amount<0||hoursPerDay<=0||daysPerWeek<=0||weeksPerYear<=0){$("#results").innerHTML='<div class="result-box">Saisissez des valeurs de travail positives.</div>';return;}const hoursPerWeek=hoursPerDay*daysPerWeek;const annualHours=hoursPerWeek*weeksPerYear;const annual=period==="hourly"?amount*annualHours:period==="daily"?amount*daysPerWeek*weeksPerYear:period==="weekly"?amount*weeksPerYear:period==="monthly"?amount*12:amount;const hourly=annualHours>0?annual/annualHours:0;const daily=hourly*hoursPerDay;const weekly=daily*daysPerWeek;const monthly=annual/12;const rows=[["Horaire",hourly],["Journalier",daily],["Hebdomadaire",weekly],["Mensuel",monthly],["Annuel",annual]];$("#results").innerHTML=rows.map(([l,v])=>`<div class="result-box"><strong>${l}</strong><div style="margin-top:8px;font-size:1.2rem">${fmt(v)}</div></div>`).join("");} $$("input, select").forEach((el)=>el.addEventListener("input",calculate)); $("#y").textContent=new Date().getFullYear(); calculate();</script>
   <script src="/scripts/utils.js" type="module"></script>

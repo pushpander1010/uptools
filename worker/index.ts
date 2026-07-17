@@ -121,6 +121,11 @@ export default {
       return handleNewsProxy(req, env);
     }
 
+    // --- Speed test upload endpoint (for WiFi Analyzer app) ---
+    if (url.pathname === "/speedtest/upload") {
+      return handleSpeedTestUpload(req);
+    }
+
     // --- Serve your site (everything except /ai) ---
     if (url.pathname !== "/ai") {
       return serveSite(req, env);
@@ -353,6 +358,47 @@ function financeCorsHeaders(req: Request, env: Env): Record<string, string> {
     "Access-Control-Allow-Headers": "*",
     "Access-Control-Expose-Headers": "Content-Type,Cache-Control,X-Proxy-Cache,X-Proxy-Host",
   };
+}
+
+async function handleSpeedTestUpload(req: Request): Promise<Response> {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Content-Length",
+    "Content-Type": "application/json",
+  };
+
+  if (req.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers });
+  }
+
+  if (req.method !== "POST") {
+    return new Response(JSON.stringify({ error: "POST only" }), {
+      status: 405,
+      headers,
+    });
+  }
+
+  // Read and discard the body — just measuring how fast the client can send
+  const reader = req.body?.getReader();
+  if (!reader) {
+    return new Response(JSON.stringify({ error: "No body" }), {
+      status: 400,
+      headers,
+    });
+  }
+
+  let received = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    received += value.byteLength;
+  }
+
+  return new Response(JSON.stringify({ ok: true, bytes: received }), {
+    status: 200,
+    headers,
+  });
 }
 
 async function handleFinanceProxy(req: Request, env: Env): Promise<Response> {
