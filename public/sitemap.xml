@@ -295,6 +295,18 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.uptools.in/cgpa-calculator/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.uptools.in/character-counter/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.uptools.in/college-course-finder/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>yearly</changefreq>
@@ -415,6 +427,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.uptools.in/date-calculator/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.uptools.in/days-between-dates/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>yearly</changefreq>
@@ -451,6 +469,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.uptools.in/dice-roller/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.uptools.in/diff-checker/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>yearly</changefreq>
@@ -458,6 +482,12 @@
   </url>
   <url>
     <loc>https://www.uptools.in/domain-finder/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.uptools.in/electricity-bill-calculator/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -667,6 +697,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.uptools.in/fuel-cost-calculator/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.uptools.in/games/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
@@ -842,6 +878,12 @@
   </url>
   <url>
     <loc>https://www.uptools.in/gst-calculator/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.uptools.in/gst-invoice-generator/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1099,6 +1141,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.uptools.in/json-to-csv-converter/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.uptools.in/language-detector/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>yearly</changefreq>
@@ -1118,6 +1166,12 @@
   </url>
   <url>
     <loc>https://www.uptools.in/linkedin-video-downloader/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.uptools.in/loan-comparison-calculator/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -1232,6 +1286,12 @@
   </url>
   <url>
     <loc>https://www.uptools.in/pan-validator/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.uptools.in/passphrase-generator/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -1844,6 +1904,12 @@
   </url>
   <url>
     <loc>https://www.uptools.in/word-counter/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.uptools.in/word-frequency-counter/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
