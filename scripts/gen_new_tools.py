@@ -96,6 +96,7 @@ def page(slug, icon, title, desc, keywords, cat_label, cat_slug, body_html, js, 
     .brand {{ display:inline-flex; align-items:center; gap:.6rem; color:var(--text); text-decoration:none; font-weight:900 }}
     .nav-links {{ display:flex; flex-wrap:wrap; gap:.75rem }}
     .nav-links a {{ color:var(--text); opacity:.9; text-decoration:none; padding:.25rem .4rem; border-radius:.5rem }}
+    .more-btn { background:#1a2236; color:var(--text); border:1px solid var(--border); padding:.4rem .6rem; border-radius:.5rem; cursor:pointer; font:inherit; font-weight:700 }
     .note {{ color:var(--muted); font-size:.9rem }}
     .btn {{ display:inline-flex; align-items:center; gap:.5rem; padding:.6rem .9rem; border-radius:var(--radius); background:var(--accent); color:#000; border:0; font-weight:800; text-decoration:none; cursor:pointer }}
     input,select,textarea {{ width:100%; padding:12px; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg); color:var(--text); font-family:inherit; font-size:14px }}
