@@ -349,9 +349,9 @@
 <button class="btn sm" id="toTop" style="float:right">↑ Top</button>
 </footer>
 </main>
-<!-- Minimal shared utilities + HNCKER data render -->
-<script type="module">
-    import { $ } from '/scripts/utils.js';
+<!-- Minimal self-contained render (no external imports; /scripts is not deployed) -->
+<script>
+    const $ = (s) => document.querySelector(s);
 
     // Footer year
     const y = $('#y'); if (y) y.textContent = new Date().getFullYear();
