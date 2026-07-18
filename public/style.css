@@ -362,3 +362,7 @@ footer a:hover{ text-shadow: 0 0 6px color-mix(in oklab, var(--accent) 65%, tran
   .nav-links a::after{ transition:none; }
   .brand:hover{ transform:none; }
 }
+
+/* Hide unfilled AdSense units so they don't render as blank white boxes on the dark theme */
+ins.adsbygoogle { background: transparent !important; }
+ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
