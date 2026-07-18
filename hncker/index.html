@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<!-- Performance-first, production-safe -->
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="IE=edge" http-equiv="x-ua-compatible"/>
+<meta content="dark light" name="color-scheme"/>
+<title>HNCKER - Apps, Instagram & Videos | WiFi Analyzer &amp; NetShield by UpTools</title>
+<meta content="Follow HNCKER: our Instagram channel, latest tech videos (with thumbnails &amp; titles), and free Android apps you can download - WiFi Analyzer (com.wifi_analyzer) and NetShield ad-blocker (com.hncker.adblocker). No-nonsense tools built by UpTools." name="description"/>
+<meta content="HNCKER, HNCKER instagram, HNCKER videos, WiFi Analyzer app, NetShield app, ad blocker android, wifi analyzer android, uptools apps, download apk, free android tools" name="keywords"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta content="#0b0f1a" name="theme-color"/>
+<link href="https://www.uptools.in/hncker/" rel="canonical"/>
+<link href="https://www.uptools.in/hncker/" hreflang="en-IN" rel="alternate"/>
+<link href="https://www.uptools.in/hncker/" hreflang="x-default" rel="alternate"/>
+<!-- Favicons -->
+<link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
+<link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
+<link color="#22d3ee" href="/assets/logo/uptools-logo.svg" rel="mask-icon"/>
+<!-- Open Graph / Twitter -->
+<meta content="website" property="og:type"/>
+<meta content="en_IN" property="og:locale"/>
+<meta content="HNCKER - Apps, Instagram &amp; Videos" property="og:title"/>
+<meta content="Follow HNCKER on Instagram, watch our latest tech videos, and download free Android apps: WiFi Analyzer &amp; NetShield ad-blocker." property="og:description"/>
+<meta content="https://www.uptools.in/hncker/" property="og:url"/>
+<meta content="UpTools" property="og:site_name"/>
+<meta content="https://www.uptools.in/assets/og/default.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="HNCKER - Apps, Instagram &amp; Videos" name="twitter:title"/>
+<meta content="Follow HNCKER, watch our videos, and download free Android apps: WiFi Analyzer &amp; NetShield." name="twitter:description"/>
+<meta content="https://www.uptools.in/assets/og/default.png" name="twitter:image"/>
+<meta content="UpTools" name="author"/>
+<!-- Third-party hints -->
+<link crossorigin="" href="https://pagead2.googlesyndication.com" rel="preconnect"/>
+<link href="//pagead2.googlesyndication.com" rel="dns-prefetch"/>
+<link crossorigin="" href="https://www.youtube-nocookie.com" rel="preconnect"/>
+<!-- Structured Data -->
+<script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    "name":"HNCKER - Apps, Instagram & Videos",
+    "url":"https://www.uptools.in/hncker/",
+    "description":"Follow HNCKER on Instagram, watch our tech videos, and download free Android apps (WiFi Analyzer, NetShield ad-blocker).",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},
+        {"@type":"ListItem","position":2,"name":"HNCKER","item":"https://www.uptools.in/hncker/"}
+      ]
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"UpTools",
+      "url":"https://www.uptools.in/",
+      "logo":{"@type":"ImageObject","url":"https://www.uptools.in/assets/logo/uptools-logo.svg"},
+      "sameAs":[
+        "https://www.instagram.com/hncker",
+        "https://www.youtube.com/@hncker",
+        "https://github.com/uptools"
+      ]
+    }
+  }
+  </script>
+<style>
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+    /* HNCKER accent */
+    :root { --accent: #f43f5e; --accent-2: #fb923c; }
+    /* Instagram CTA */
+    .ig-cta {
+      display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+      background:
+        linear-gradient(135deg, color-mix(in oklab, #e1306c 18%, #121a2c), #121a2c 55%),
+        radial-gradient(600px 200px at 100% 0%, color-mix(in oklab, #f77737 22%, transparent), transparent);
+    }
+    .ig-handle {
+      font-weight:900; font-size:clamp(22px,4vw,34px);
+      background:linear-gradient(92deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:none; letter-spacing:-.02em;
+    }
+    .ig-stat { display:flex; gap:18px; flex-wrap:wrap; margin-top:6px; }
+    .ig-stat b { font-size:18px; }
+    .ig-stat span { color:var(--muted); font-size:13px; display:block; }
+    /* Video grid */
+    .video-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px;
+    }
+    .video-card {
+      display:flex; flex-direction:column; text-decoration:none; color:var(--text);
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      overflow:hidden; box-shadow:var(--glow-soft);
+      transition:transform .14s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+    .video-card:hover { transform:translateY(-3px); border-color:var(--accent); box-shadow:var(--glow); }
+    .video-thumb {
+      position:relative; aspect-ratio:16/9; background:
+        linear-gradient(135deg, color-mix(in oklab, var(--accent) 25%, #0d1626), #0d1626);
+      display:grid; place-items:center;
+    }
+    .video-thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .video-thumb .play {
+      position:relative; z-index:2; width:54px; height:54px; border-radius:50%;
+      background:color-mix(in oklab, var(--accent) 80%, #000); color:#fff;
+      display:grid; place-items:center; font-size:20px; box-shadow:var(--glow);
+    }
+    .video-meta { padding:12px 14px; }
+    .video-title { font-weight:800; font-size:15px; line-height:1.35; }
+    .video-sub { color:var(--muted); font-size:12.5px; margin-top:4px; }
+    /* App cards */
+    .app-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; }
+    .app-card { display:flex; flex-direction:column; gap:10px; }
+    .app-head { display:flex; align-items:center; gap:12px; }
+    .app-icon {
+      width:56px; height:56px; border-radius:14px; flex:none; display:grid; place-items:center;
+      font-size:26px; box-shadow:var(--glow-soft);
+    }
+    .app-icon.wifi { background:linear-gradient(135deg,#06b6d4,#3b82f6); }
+    .app-icon.shield { background:linear-gradient(135deg,#f43f5e,#fb923c); }
+    .app-name { margin:0; font-size:18px; }
+    .app-pkg { color:var(--muted); font-size:12px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .app-feats { list-style:none; padding:0; margin:6px 0; display:grid; gap:6px; }
+    .app-feats li { display:flex; gap:8px; align-items:flex-start; font-size:13.5px; color:var(--muted); }
+    .app-feats li::before { content:"✓"; color:var(--accent); font-weight:900; }
+    .app-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:auto; }
+    .store-badge {
+      display:inline-flex; align-items:center; gap:8px; padding:.55rem .85rem; border-radius:var(--radius);
+      background:#0d1626; border:1px solid var(--border); color:var(--text); text-decoration:none; font-weight:700; font-size:13px;
+    }
+    .store-badge:hover { border-color:var(--accent); }
+    .store-badge small { display:block; color:var(--muted); font-weight:500; font-size:11px; }
+    .empty-note { color:var(--muted); font-size:13px; padding:10px 0; }
+  </style>
+  <link rel="stylesheet" href="/style.css?v=1.2.0">
+</head>
+<body>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617"></script>
+<!-- small fixed -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" style="display:inline-block;max-width:500px;height:50px"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<a class="sr-only skip-link" href="#main">Skip to content</a>
+<!-- Header -->
+<header class="site" role="banner">
+<div class="header-inner">
+<a aria-label="UpTools Home" class="brand" href="/">
+<img alt="UpTools logo" height="28" loading="eager" src="/assets/logo/uptools-logo.svg" width="28"/>
+<b>UpTools</b>
+</a>
+<nav aria-label="Primary" class="nav-links">
+<a href="/" class="nav-home">Home</a>
+<a href="/games/" class="nav-games">Games</a>
+<button class="more-btn" aria-expanded="false" aria-haspopup="true">Tools <span class="arrow">▼</span></button>
+<div class="more-menu" role="menu">
+<a role="menuitem" href="/#tools">All Tools</a>
+<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
+<a role="menuitem" href="/emi-calculator/">EMI</a>
+<a role="menuitem" href="/gst-calculator/">GST</a>
+<a role="menuitem" href="/ai-writer/">AI Tools</a>
+<a role="menuitem" href="/hncker/">HNCKER</a>
+<a role="menuitem" href="/about/">About</a>
+<a role="menuitem" href="/contact/">Contact</a>
+</div>
+</nav>
+</div>
+</header>
+<main role="main" class="wrap container" id="main">
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="note small" style="margin-bottom:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;position:sticky;top:0.25rem;z-index:10;backdrop-filter:saturate(120%) blur(6px);-webkit-backdrop-filter:saturate(120%) blur(6px)">
+<div><a href="/">Home</a> › <span aria-current="page">HNCKER</span></div>
+<div aria-label="On-page navigation" class="chips">
+<a class="chip" href="#instagram">Instagram</a>
+<a class="chip" href="#videos">Videos</a>
+<a class="chip" href="#apps">Apps</a>
+</div>
+</nav>
+<!-- Hero -->
+<section class="card hero">
+<span aria-label="HNCKER" class="hero-logo-text" style="display:inline-grid;place-items:center;width:44px;height:44px;border-radius:10px;
+                   background:linear-gradient(135deg,#f43f5e,#fb923c);
+                   font-weight:900;color:#1a0608;font-size:15px;letter-spacing:.5px;
+                   box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),var(--glow-soft)">HN</span>
+<div>
+<h1>HNCKER</h1>
+<p class="note speakable-summary">No-nonsense tech, apps &amp; videos by the UpTools team.
+          <span class="pill">📱 2 Android apps</span>
+<span class="pill">🎬 Weekly videos</span>
+<span class="pill">📸 Instagram channel</span>
+</p>
+</div>
+</section>
+
+<!-- Instagram channel -->
+<section class="card ig-cta" id="instagram">
+<div style="flex:1 1 320px">
+<h2 style="margin-top:0">Follow us on Instagram</h2>
+<div class="ig-handle">@hncker</div>
+<p class="note">Daily tech tips, app builds, behind-the-scenes, and quick wins. Tap to open our channel.</p>
+<div class="ig-stat">
+<div><b>9.1K</b><span>followers</span></div>
+<div><b>Cyber / AI</b><span>niche</span></div>
+<div><b>Weekly</b><span>posts</span></div>
+</div>
+</div>
+<a class="btn" style="background:linear-gradient(92deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);color:#fff;font-weight:900" href="https://www.instagram.com/hncker" rel="noopener" target="_blank">Open Instagram ↗</a>
+</section>
+
+<!-- Videos -->
+<section class="card" id="videos">
+<div class="toolbar" style="justify-content:space-between;gap:12px;display:flex;align-items:center;flex-wrap:wrap">
+<h2 style="margin:0">Latest Videos</h2>
+<a class="chip" href="https://www.youtube.com/@hncker" rel="noopener" target="_blank">All on YouTube ↗</a>
+</div>
+<p class="note">Our newest builds, walkthroughs and app reviews. Tap any thumbnail to watch.</p>
+<div class="video-grid" id="videoGrid" aria-live="polite">
+<!-- video cards injected from HNCKER_VIDEOS (see script at bottom) -->
+</div>
+<p class="empty-note" id="videoEmpty" style="display:none">Videos coming soon — add entries to <code>HNCKER_VIDEOS</code> in the page script.</p>
+</section>
+
+<!-- Apps / APK download -->
+<section class="card" id="apps">
+<h2>Our Android Apps</h2>
+<p class="note">Free, lightweight, privacy-first. Download the APKs directly or get them on Google Play.</p>
+<div class="app-grid">
+
+<!-- WiFi Analyzer -->
+<div class="card app-card">
+<div class="app-head">
+<div class="app-icon wifi" aria-hidden="true">📶</div>
+<div>
+<h3 class="app-name">WiFi Analyzer</h3>
+<div class="app-pkg">com.wifi_analyzer</div>
+</div>
+</div>
+<p class="note" style="margin:0">Scan networks, find the best channel, test speed, and see connected devices — all in a clean neon dashboard.</p>
+<ul class="app-feats">
+<li>Live WiFi scanner &amp; channel graph</li>
+<li>Speed test + signal strength</li>
+<li>Saved networks &amp; device list</li>
+<li>No account, works offline</li>
+</ul>
+<div class="app-actions">
+<a class="btn" href="/assets/apks/wifi-analyzer.apk" download>⬇ Download APK</a>
+<a class="store-badge" href="https://play.google.com/store/apps/details?id=com.wifi_analyzer" rel="noopener" target="_blank">▷ <span>Google Play<small>com.wifi_analyzer</small></span></a>
+</div>
+</div>
+
+<!-- NetShield -->
+<div class="card app-card">
+<div class="app-head">
+<div class="app-icon shield" aria-hidden="true">🛡️</div>
+<div>
+<h3 class="app-name">NetShield</h3>
+<div class="app-pkg">com.hncker.adblocker</div>
+</div>
+</div>
+<p class="note" style="margin:0">A no-root local-VPN ad &amp; tracker blocker. Stops ads system-wide and shows what's being blocked.</p>
+<ul class="app-feats">
+<li>System-wide ad &amp; tracker blocking</li>
+<li>Local VPN — no root required</li>
+<li>Live block stats &amp; logs</li>
+<li>Privacy-first, no data sold</li>
+</ul>
+<div class="app-actions">
+<a class="btn" href="/assets/apks/netshield.apk" download>⬇ Download APK</a>
+<a class="store-badge" href="https://play.google.com/store/apps/details?id=com.hncker.adblocker" rel="noopener" target="_blank">▷ <span>Google Play<small>com.hncker.adblocker</small></span></a>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- Secondary ad slot -->
+<section aria-label="Sponsored" class="ad-wrap card" id="adMid" style="min-height:140px"></section>
+<!-- Footer -->
+<footer class="note small site-footer">
+      © <span id="y"></span> UpTools . <a href="/sitemap.xml">Sitemap</a> . <a href="/contact/">Contact</a>
+<span class="muted">.</span>
+<button aria-label="Copy page link" class="btn sm secondary" id="copyLink" type="button">Copy Link</button>
+<button class="btn sm" id="toTop" style="float:right">↑ Top</button>
+</footer>
+</main>
+<!-- Minimal shared utilities + HNCKER data render -->
+<script type="module">
+    import { $ } from '/scripts/utils.js';
+
+    // Footer year
+    const y = $('#y'); if (y) y.textContent = new Date().getFullYear();
+    $('#toTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    $('#copyLink').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(location.href); $('#copyLink').textContent = 'Copied!';
+        setTimeout(() => $('#copyLink').textContent = 'Copy Link', 1200); } catch { alert(location.href); }
+    });
+
+    // ---- EDIT THIS: your YouTube videos (id = 11-char video ID) ----
+    const HNCKER_VIDEOS = [
+      // { id: 'dQw4w9WgXcQ', title: 'We built WiFi Analyzer — full walkthrough', sub: 'App build · 8:24' },
+      // { id: 'VIDEO_ID_2',  title: 'NetShield: block ads without root',        sub: 'Tutorial · 6:10' },
+      // { id: 'VIDEO_ID_3',  title: 'Top 5 Android tools you actually need',    sub: 'Roundup · 11:02' },
+    ];
+
+    const grid = $('#videoGrid');
+    const empty = $('#videoEmpty');
+    if (HNCKER_VIDEOS.length) {
+      grid.innerHTML = HNCKER_VIDEOS.map(v => `
+        <a class="video-card" href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">
+          <div class="video-thumb">
+            <img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${v.title} thumbnail" loading="lazy"
+                 onerror="this.style.display='none'"/>
+            <span class="play" aria-hidden="true">▶</span>
+          </div>
+          <div class="video-meta">
+            <div class="video-title">${v.title}</div>
+            <div class="video-sub">${v.sub || 'Watch on YouTube'}</div>
+          </div>
+        </a>`).join('');
+    } else if (empty) { empty.style.display = 'block'; }
+  </script>
+</body>
+</html>
