@@ -38,16 +38,7 @@
 <nav aria-label="Primary" class="nav-links">
 <a href="/" class="nav-home">Home</a>
 <a href="/games/" class="nav-games">Games</a>
-<button class="more-btn" aria-expanded="false" aria-haspopup="true">Tools <span class="arrow">▼</span></button>
-<div class="more-menu" role="menu">
-<a role="menuitem" href="/#tools">All Tools</a>
-<a role="menuitem" href="/income-tax-tool/">Income Tax</a>
-<a role="menuitem" href="/emi-calculator/">EMI</a>
-<a role="menuitem" href="/gst-calculator/">GST</a>
-<a role="menuitem" href="/ai-writer/">AI Tools</a>
-<a role="menuitem" href="/about/">About</a>
-<a role="menuitem" href="/contact/">Contact</a>
-</div>
+<a href="/hncker/" class="nav-hncker">HNCKER</a>
 </nav>
 </div>
 </header><main id="main" class="wrap" role="main"><nav class="note small" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Rechnungsrechner</span></nav><section class="card hero" aria-labelledby="title"><div><h1 id="title">Rechnungsrechner</h1><p class="note">Berechne Rechnungsbeträge für Kundenprojekte, Dienstleistungen oder Produktverkäufe mit Rabatt und Steuer.</p><p class="note small" style="margin-top:10px">Sprachen: <a href="/invoice-calculator/">English</a> . <a href="/fr/invoice-calculator/">Français</a> . <a href="/es/invoice-calculator/">Español</a></p></div></section><section class="grid" style="margin-top:16px"><section class="panel"><h2 style="margin-top:0">Eingaben</h2><div class="field"><label class="label" for="qty">Menge</label><input id="qty" class="input" type="number" value="10" min="0" step="0.01" /></div><div class="field"><label class="label" for="rate">Preis pro Einheit</label><input id="rate" class="input" type="number" value="75" min="0" step="0.01" /></div><div class="field"><label class="label" for="discount">Rabatt %</label><input id="discount" class="input" type="number" value="10" min="0" max="100" step="0.01" /></div><div class="field"><label class="label" for="tax">Steuer %</label><input id="tax" class="input" type="number" value="20" min="0" step="0.01" /></div></section><section class="panel"><h2 style="margin-top:0">Ergebnis</h2><div class="result" id="result" aria-live="polite"></div></section></section><footer class="note small site-footer" role="contentinfo">&copy; <span id="y"></span> UpTools</footer></main><script type="module">import { $, $$ } from "/scripts/utils.js"; const fmt=(v)=>new Intl.NumberFormat("de-DE",{maximumFractionDigits:2}).format(v); function calc(){const qty=Number($("#qty").value||0);const rate=Number($("#rate").value||0);const discount=Number($("#discount").value||0);const tax=Number($("#tax").value||0);const subtotal=qty*rate;const discountAmount=subtotal*(discount/100);const afterDiscount=subtotal-discountAmount;const taxAmount=afterDiscount*(tax/100);const total=afterDiscount+taxAmount;$("#result").innerHTML=`<div><strong>Zwischensumme:</strong> ${fmt(subtotal)}</div><div class="note small" style="margin-top:6px"><strong>Rabatt:</strong> ${fmt(discountAmount)}</div><div class="note small" style="margin-top:6px"><strong>Steuer:</strong> ${fmt(taxAmount)}</div><div class="note small" style="margin-top:6px"><strong>Gesamt:</strong> ${fmt(total)}</div>`;} $$("input").forEach((el)=>el.addEventListener("input",calc)); $("#y").textContent=new Date().getFullYear(); calc();</script><script src="/scripts/utils.js" type="module"></script></body></html>
