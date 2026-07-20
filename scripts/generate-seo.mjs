@@ -78,6 +78,7 @@ const entries = paths.map(path => {
 const robots = `User-agent: *
 Allow: /
 Sitemap: ${sitemapLoc}
+LLMs.txt: ${siteUrl}/llms.txt
 `;
 await writeFile(resolve(outDir, 'robots.txt'), robots, 'utf8');
 
