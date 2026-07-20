@@ -413,8 +413,8 @@
       "Every moment is a fresh beginning. Act as if what you do makes a difference. It does. The only impossible journey is the one you never begin."
     ];
 
-    let duration = 60;
-    let timeLeft = 60;
+    let duration = 30;
+    let timeLeft = 30;
     let timerInterval = null;
     let testStarted = false;
     let testFinished = false;
@@ -424,6 +424,8 @@
     let startTime = null;
     let lastLength = 0;
     let lastWordCount = 0;
+    let typedCharsTotal = 0;   // cumulative chars typed across all text segments
+    let errorsCompleted = 0;   // errors locked in from already-finished segments
 
     const textDisplay = document.getElementById('textDisplay');
     const typingInput = document.getElementById('typingInput');
@@ -457,14 +459,16 @@
       }
     }
 
-    function calcWPM(typed, elapsedSeconds) {
-      const words = typed.trim().split(/\s+/).filter(Boolean).length;
-      return elapsedSeconds > 0 ? Math.round((words / elapsedSeconds) * 60) : 0;
+    function calcWPM(charsTyped, errCount, elapsedSeconds) {
+      if (elapsedSeconds <= 0) return 0;
+      const grossWords = charsTyped / 5;
+      const net = grossWords - errCount;
+      return Math.max(0, Math.round((net / elapsedSeconds) * 60));
     }
 
-    function calcAccuracy(typed) {
-      if (totalTyped === 0) return 100;
-      return Math.round(((totalTyped - errors) / totalTyped) * 100);
+    function calcAccuracy(charsTyped, errCount) {
+      if (charsTyped === 0) return 100;
+      return Math.max(0, Math.round(((charsTyped - errCount) / charsTyped) * 100));
     }
 
     // Initialize sound context on first user interaction
@@ -500,18 +504,30 @@
       typingInput.disabled = true;
 
       const elapsedSeconds = (Date.now() - startTime) / 1000;
-      const wpm = calcWPM(typingInput.value, elapsedSeconds);
-      const acc = calcAccuracy(typingInput.value);
+      const segChars = typingInput.value.length;
+      const segErrors = countErrors(typingInput.value);
+      const totalChars = typedCharsTotal + segChars;
+      const totalErrors = errorsCompleted + segErrors;
+      const wpm = calcWPM(totalChars, totalErrors, elapsedSeconds);
+      const acc = calcAccuracy(totalChars, totalErrors);
 
       document.getElementById('finalWpm').textContent = wpm;
       document.getElementById('finalAcc').textContent = acc + '%';
-      document.getElementById('finalErr').textContent = errors;
-      document.getElementById('finalChars').textContent = totalTyped;
+      document.getElementById('finalErr').textContent = totalErrors;
+      document.getElementById('finalChars').textContent = totalChars;
 
       resultBox.style.display = 'block';
       mainControls.style.display = 'none';
       sounds.playTimerEnd();
       sounds.playWin();
+    }
+
+    function countErrors(typed) {
+      let e = 0;
+      for (let i = 0; i < typed.length; i++) {
+        if (typed[i] !== currentText[i]) e++;
+      }
+      return e;
     }
 
     function resetTest() {
@@ -521,8 +537,9 @@
       timeLeft = duration;
       errors = 0;
       totalTyped = 0;
+      typedCharsTotal = 0;
+      errorsCompleted = 0;
       lastLength = 0;
-      lastWordCount = 0;
       startTime = null;
 
       currentText = pickText();
@@ -572,26 +589,27 @@
       renderText(typed);
       totalTyped = typed.length;
 
-      // Count errors
-      let e = 0;
-      for (let i = 0; i < typed.length; i++) {
-        if (typed[i] !== currentText[i]) e++;
-      }
-      errors = e;
-      errVal.textContent = errors;
+      // Segment-local error count (only counts vs current text segment)
+      const segErrors = countErrors(typed);
+      const totalChars = typedCharsTotal + typed.length;
+      const totalErrors = errorsCompleted + segErrors;
+      errors = totalErrors;
+      errVal.textContent = totalErrors;
 
-      const acc = calcAccuracy(typed);
+      const acc = calcAccuracy(totalChars, totalErrors);
       accVal.textContent = acc + '%';
 
-      // Calculate WPM in real-time
+      // Calculate WPM in real-time (cumulative characters across all segments)
       if (testStarted && startTime) {
         const elapsedSeconds = (Date.now() - startTime) / 1000;
-        const wpm = calcWPM(typed, elapsedSeconds);
+        const wpm = calcWPM(totalChars, totalErrors, elapsedSeconds);
         wpmVal.textContent = wpm;
       }
 
-      // Auto-advance if text complete
+      // Auto-advance if text complete: lock in this segment's stats
       if (typed.length >= currentText.length) {
+        typedCharsTotal += typed.length;
+        errorsCompleted += segErrors;
         currentText = pickText();
         typingInput.value = '';
         lastLength = 0;
