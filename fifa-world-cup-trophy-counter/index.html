@@ -292,7 +292,7 @@
         "@type":"WebApplication",
         "name":"FIFA World Cup Trophy History",
         "url":"https://www.uptools.in/fifa-world-cup-trophy-counter/",
-        "description":"Complete FIFA World Cup winners list from 1930 to 2022. Every tournament host, winner, runner-up, score, and championship stats.",
+        "description":"Complete FIFA World Cup winners list from 1930 to 2026. Every tournament host, winner, runner-up, score, and championship stats. Spain are the 2026 champions.",
         "applicationCategory":"Sports",
         "operatingSystem":"All",
         "browserRequirements":"HTML5",
@@ -307,14 +307,15 @@
       },
       {
         "@type":"FAQPage",
-        "mainEntity":[
+        {"@type":"FAQPage","mainEntity":[
           {"@type":"Question","name":"Which country has won the most FIFA World Cups?","acceptedAnswer":{"@type":"Answer","text":"Brazil holds the record with 5 World Cup titles (1958, 1962, 1970, 1994, 2002)."}},
           {"@type":"Question","name":"How many World Cups has Germany won?","acceptedAnswer":{"@type":"Answer","text":"Germany has won 4 World Cups (1954, 1974, 1990, 2014)."}},
+          {"@type":"Question","name":"Who won the 2026 FIFA World Cup?","acceptedAnswer":{"@type":"Answer","text":"Spain won the 2026 FIFA World Cup, defeating Argentina 1-0 in the Final at MetLife Stadium, New Jersey. It was Spain's second title (after 2010). Kylian Mbappé of France won the Golden Boot with 10 goals."}},
           {"@type":"Question","name":"Who won the 2022 FIFA World Cup?","acceptedAnswer":{"@type":"Answer","text":"Argentina won the 2022 FIFA World Cup, defeating France 3-3 (4-2 on penalties)."}},
           {"@type":"Question","name":"When did the first FIFA World Cup take place?","acceptedAnswer":{"@type":"Answer","text":"The first FIFA World Cup was held in 1930 in Uruguay, won by Uruguay."}},
-          {"@type":"Question","name":"How many countries have won the World Cup?","acceptedAnswer":{"@type":"Answer","text":"Eight countries: Brazil (5), Germany (4), Italy (4), Argentina (3), France (2), Uruguay (2), England (1), Spain (1)."}},
+          {"@type":"Question","name":"How many countries have won the World Cup?","acceptedAnswer":{"@type":"Answer","text":"Nine countries: Brazil (5), Germany (4), Italy (4), Argentina (3), France (2), Uruguay (2), England (1), Spain (2)."}},
           {"@type":"Question","name":"Has any team won back-to-back World Cups?","acceptedAnswer":{"@type":"Answer","text":"Yes, Italy (1934, 1938) and Brazil (1958, 1962)."}}
-        ]
+        ]}
       }
     ]
   }
@@ -344,7 +345,8 @@
     {year:2010,host:"South Africa",winner:"Spain",runnerUp:"Netherlands",score:"1–0",flagWinner:"🇪🇸",flagRunner:"🇳🇱",flagHost:"🇿🇦"},
     {year:2014,host:"Brazil",winner:"Germany",runnerUp:"Argentina",score:"1–0",flagWinner:"🇩🇪",flagRunner:"🇦🇷",flagHost:"🇧🇷"},
     {year:2018,host:"Russia",winner:"France",runnerUp:"Croatia",score:"4–2",flagWinner:"🇫🇷",flagRunner:"🇭🇷",flagHost:"🇷🇺"},
-    {year:2022,host:"Qatar",winner:"Argentina",runnerUp:"France",score:"3–3 (4–2 p)",flagWinner:"🇦🇷",flagRunner:"🇫🇷",flagHost:"🇶🇦"}
+    {year:2022,host:"Qatar",winner:"Argentina",runnerUp:"France",score:"3–3 (4–2 p)",flagWinner:"🇦🇷",flagRunner:"🇫🇷",flagHost:"🇶🇦"},
+    {year:2026,host:"USA/Canada/Mexico",winner:"Spain",runnerUp:"Argentina",score:"1–0",flagWinner:"🇪🇸",flagRunner:"🇦🇷",flagHost:"🇺🇸🇨🇦🇲🇽"}
   ];
 
   // Normalize team names for matching (West Germany → Germany)
