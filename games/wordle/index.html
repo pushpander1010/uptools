@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Wordle - Daily Word Guess Game Online | UpTools Games</title>
+  <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
+  <meta name="description" content="Play Wordle free online. Guess the 5-letter word in 6 tries with color hints. A daily brain teaser for word lovers — no sign-up." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
+  <link rel="canonical" href="https://www.uptools.in/games/wordle/" />
+  <meta property="og:title" content="Wordle - Daily Word Guess Game Online | UpTools Games" />
+  <meta property="og:description" content="Play Wordle free online. Guess the 5-letter word in 6 tries with color hints. A daily brain teaser for word lovers — no sign-up." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="UpTools" />
+  <meta property="og:url" content="https://www.uptools.in/games/wordle/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wordle - Daily Word Guess Game Online | UpTools Games" />
+  <meta name="twitter:description" content="Play Wordle free online. Guess the 5-letter word in 6 tries with color hints. A daily brain teaser for word lovers — no sign-up." />
+
+  <link rel="stylesheet" href="/style.css?v=1.3.0">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
+  <script src="/games/fullscreen-utils.js" defer></script>
+  <style>
+    body { --accent: #10b981; }
+    .game-wrap { max-width: 760px; margin: 0 auto; padding: 0 14px 48px; }
+    .panel { background: var(--card); border: 1px solid var(--cardBorder); border-radius: var(--radius); padding: 18px; margin: 14px 0; }
+    .tool-header { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:14px 0 4px; }
+    .back-btn { background: rgba(255,255,255,.05); border:1px solid var(--cardBorder); color: var(--text); border-radius:8px; padding:6px 12px; cursor:pointer; font-weight:600; }
+    .back-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .badge { font-size:.72rem; padding:.2rem .5rem; border:1px solid var(--cardBorder); border-radius:999px; color:var(--muted); }
+    .h1 { font-size:1.8rem; margin:0; }
+    .muted { color: var(--muted); }
+    .btn { background: var(--accent); color:#06121f; border:none; border-radius:10px; padding:10px 18px; font-weight:800; cursor:pointer; font-size:1rem; }
+    .btn:active { transform: scale(.97); }
+    .btn.alt { background: rgba(255,255,255,.06); color: var(--text); border:1px solid var(--cardBorder); }
+    .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .stats { display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); }
+    .stat { background:#0d1626; border:1px solid #212a3a; border-radius:10px; padding:12px; text-align:center; }
+    .stat b { display:block; font-size:1.5rem; color: var(--accent); }
+    .stat span { font-size:.75rem; color: var(--muted); }
+    .center { text-align:center; }
+    canvas { max-width:100%; width:100%; height:auto; display:block; background:#0a1322; border-radius:12px; border:1px solid var(--cardBorder); touch-action:none; }
+    .grid-board { display:grid; gap:6px; justify-content:center; margin:14px auto; }
+    .cell { aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:1.6rem; font-weight:900; background:#0d1626; border:1px solid #212a3a; border-radius:8px; cursor:pointer; user-select:none; }
+    .cell:hover { border-color: var(--accent); }
+    @media (max-width:520px) { .h1 { font-size:1.4rem; } }
+  </style>
+</head>
+<body>
+  <a href="#main" class="sr-only skip-link">Skip to content</a>
+  <header class="site" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="UpTools Home"><img alt="UpTools logo" height="28" loading="eager" src="/assets/logo/uptools-logo.svg" width="28"/><b>UpTools</b></a>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/games/" aria-current="page">Games</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- AdSense -->
+  <ins class="adsbygoogle" style="display:inline-block;width:100%;max-width:500px;height:50px;margin:0 auto" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <main id="main" class="wrap">
+  <div class="game-wrap">
+    <div class="tool-header"><button class="back-btn" onclick="location.href='/games/'">← Games</button><h1 class="h1">🔤 Wordle</h1><span class="badge">6 guesses</span></div>
+    <p class="muted">Guess the 5-letter word. Green = right letter & spot, yellow = right letter wrong spot, gray = not in word.</p>
+    <div class="panel center">
+      <div id="wdBoard" class="grid-board" style="grid-template-columns:repeat(5,1fr);max-width:320px"></div>
+      <input id="wdInput" maxlength="5" autocomplete="off" spellcheck="false" placeholder="type a word + Enter" style="margin-top:12px;text-align:center;text-transform:uppercase;font-size:1.2rem;padding:10px;border-radius:10px;border:1px solid var(--cardBorder);background:#0d1626;color:var(--text);width:100%;max-width:320px;letter-spacing:4px" />
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="wdTries">–</b><span>This game</span></div>
+      <div class="stat"><b id="wdPlayed">0</b><span>Played</span></div>
+      <div class="stat"><b id="wdWins">0</b><span>Wins</span></div>
+    </div>
+    <p class="muted center" id="wdMsg"></p>
+  </div>
+  <script>
+  (()=>{
+    const WORDS=['apple','brain','crane','dream','eagle','flame','grape','heart','ivory','juice','knock','lemon','money','night','ocean','peace','queen','river','stone','tiger','ultra','vivid','water','xenon','yield','zebra','smile','cloud','light','train'];
+    const ANS=['crane','flame','stone','tiger','river','ocean','smile','light','train','dream','heart','money','night','peace','queen'];
+    const board=document.getElementById('wdBoard'),inp=document.getElementById('wdInput');
+    let answer=ANS[Math.floor(Math.random()*ANS.length)],row=0,won=false;
+    let played=+localStorage.getItem('wd_played')||0, wins=+localStorage.getItem('wd_wins')||0;
+    document.getElementById('wdPlayed').textContent=played;document.getElementById('wdWins').textContent=wins;
+    function newRow(){const r=document.createElement('div');r.style.display='contents';for(let i=0;i<5;i++){const c=document.createElement('div');c.className='cell';c.style.fontSize='1.4rem';r.appendChild(c);}board.appendChild(r);}
+    for(let i=0;i<6;i++)newRow();
+    function color(guess){const res=Array(5).fill('gray');const a=answer.split('');const g=guess.split('');const used=[false,false,false,false,false];
+      for(let i=0;i<5;i++)if(g[i]===a[i]){res[i]='green';used[i]=true;}
+      for(let i=0;i<5;i++)if(res[i]!=='green'){for(let j=0;j<5;j++)if(!used[j]&&g[i]===a[j]){res[i]='yellow';used[j]=true;break;}}
+      return res;}
+    inp.addEventListener('keydown',e=>{
+      if(won||row>=6)return;
+      if(e.key==='Enter'){const v=inp.value.toLowerCase();if(v.length!==5){msg('5 letters required.');return;}if(!WORDS.includes(v)&&!ANS.includes(v)){msg('Not in word list.');return;}
+        const cells=board.children[row].children;const res=color(v);
+        for(let i=0;i<5;i++){cells[i].textContent=v[i];cells[i].style.background=res[i]==='green'?'#15803d':res[i]==='yellow'?'#ca8a04':'#334155';}
+        row++;inp.value='';
+        if(v===answer){won=true;played++;wins++;localStorage.setItem('wd_played',played);localStorage.setItem('wd_wins',wins);document.getElementById('wdPlayed').textContent=played;document.getElementById('wdWins').textContent=wins;document.getElementById('wdTries').textContent=row;msg('You got it in '+row+'! The word was '+answer+'.');return;}
+        if(row>=6){played++;localStorage.setItem('wd_played',played);document.getElementById('wdPlayed').textContent=played;document.getElementById('wdTries').textContent='–';msg('Out of guesses! The word was '+answer+'.');}
+      }
+    });
+    function msg(t){document.getElementById('wdMsg').textContent=t;}
+    inp.focus();
+  })();
+  </script>
+
+  </main>
+  <footer class="note small site-footer" style="text-align:center;padding:20px;color:var(--muted)">© <span id="y"></span> UpTools · <a href="/games/">All Games</a></footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
