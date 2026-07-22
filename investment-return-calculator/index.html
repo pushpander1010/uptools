@@ -124,86 +124,7 @@
   }
   </script>
 
-  <style>
-    .calc-grid { display: grid; gap: 1.5rem; max-width: 42rem; margin: 0 auto; }
-    .input-group { display: flex; flex-direction: column; gap: .5rem; }
-    .input-group label { font-weight: 500; color: var(--text); }
-    .input-group input, .input-group select { 
-      padding: .75rem; 
-      border: 1px solid rgba(122,162,255,.3); 
-      border-radius: var(--radius); 
-      background: var(--surface); 
-      color: var(--text); 
-      font-size: 1rem;
-    }
-    .input-group input:focus, .input-group select:focus {
-      outline: none;
-      border-color: var(--brand);
-      box-shadow: 0 0 0 3px rgba(122,162,255,.1);
-    }
-    .btn-calc {
-      padding: 1rem 2rem;
-      background: linear-gradient(135deg, var(--brand), #5a82df);
-      color: white;
-      border: none;
-      border-radius: var(--radius);
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn-calc:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(122,162,255,.3); }
-    .result-card {
-      background: linear-gradient(135deg, rgba(122,162,255,.1), rgba(90,130,223,.1));
-      border: 1px solid rgba(122,162,255,.3);
-      border-radius: var(--radius);
-      padding: 2rem;
-      margin-top: 2rem;
-    }
-    .result-main { font-size: 3rem; font-weight: 700; color: var(--brand); margin: 1rem 0; }
-    .breakdown { display: grid; gap: 1rem; margin-top: 1.5rem; }
-    .breakdown-item { display: flex; justify-content: space-between; padding: .75rem; background: rgba(122,162,255,.05); border-radius: .5rem; }
-    .breakdown-label { color: var(--text); opacity: .8; }
-    .breakdown-value { font-weight: 600; color: var(--brand); }
-    .growth-chart {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      background: rgba(122,162,255,.05);
-      border-radius: var(--radius);
-      max-height: 300px;
-      overflow-y: auto;
-    }
-    .year-row {
-      display: grid;
-      grid-template-columns: 1fr 2fr 2fr 2fr;
-      gap: 1rem;
-      padding: .5rem;
-      border-bottom: 1px solid rgba(122,162,255,.1);
-    }
-    .year-row.header {
-      font-weight: 600;
-      position: sticky;
-      top: 0;
-      background: var(--surface);
-      z-index: 1;
-    }
-      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <link href="https://www.uptools.in/investment-return-calculator/" rel="canonical"/>
 <meta name="keywords" content="investment return calculator, investment return calculator, online tool, free calculator, uptools" />
@@ -218,6 +139,7 @@
   gtag('js', new Date());
   gtag('config', 'G-NN3GDL1LEJ');
 </script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>

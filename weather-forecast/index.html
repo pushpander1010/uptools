@@ -7,7 +7,7 @@
 <meta name="description" content="Free 7-day weather forecast for any city worldwide. Hourly temperatures, wind, humidity, and precipitation. Powered by Open-Meteo API."/>
 <meta name="keywords" content="weather forecast, 7 day weather, hourly weather, weather by city, temperature, wind speed, precipitation, free weather tool"/>
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large"/>
-<meta name="theme-color" content="#0a0a12"/>
+<meta name="theme-color" content="#08080f"/>
 <link rel="canonical" href="https://www.uptools.in/weather-forecast/"/>
 <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg"/>
 <link rel="apple-touch-icon" href="/assets/logo/uptools-logo.svg"/>
@@ -25,73 +25,12 @@
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-6216304334889617",enable_page_level_ads:true});</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NN3GDL1LEJ"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NN3GDL1LEJ');</script>
-<style>
-:root{--bg1:#0e0e18;--bg2:#0a0a12;--ink:#e8e8f0;--muted:#a0a0b8;--cyan:#818cf8;--cyan-2:#6366f1;--blue:#a78bfa;--green:#34d399;--red:#f87171;--orange:#fbbf24;--line:rgba(255,255,255,.12);--card:rgba(255,255,255,.06);--surface:rgba(18,18,32,0.92);--radius:.75rem}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;line-height:1.5}
-.container{max-width:900px;margin:0 auto;padding:20px 16px}
-.tool-header{text-align:center;margin-bottom:24px}
-.tool-header .icon{font-size:3rem;margin-bottom:8px}
-.tool-header h1{font-size:1.6rem;font-weight:700;margin-bottom:4px}
-.tool-header p{color:var(--muted);font-size:.95rem}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:16px}
-.input-group{display:flex;gap:8px;margin-bottom:12px}
-.input-group input{flex:1;background:rgba(10,10,18,0.95);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:12px 14px;font-size:1rem;outline:none;transition:border .2s}
-.input-group input:focus{border-color:var(--cyan)}
-.btn{background:linear-gradient(135deg,var(--cyan),var(--blue));color:#000;border:none;padding:12px 20px;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:600;transition:opacity .2s}
-.btn:hover{opacity:.85}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.btn-sm{padding:8px 14px;font-size:.85rem}
-.btn-outline{background:transparent;border:1px solid var(--line);color:var(--ink)}
-.current{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;margin:16px 0}
-@media(max-width:600px){.current{grid-template-columns:1fr;text-align:center}}
-.current .temp{font-size:3.5rem;font-weight:700}
-.current .desc{font-size:1.1rem;color:var(--muted);margin-top:4px}
-.current .details{display:grid;gap:8px}
-.current .detail-item{display:flex;align-items:center;gap:8px;font-size:.9rem}
-.current .detail-item span:first-child{color:var(--muted)}
-.hourly-scroll{display:flex;gap:10px;overflow-x:auto;padding:8px 0;scrollbar-width:thin}
-.hourly-scroll::-webkit-scrollbar{height:6px}
-.hourly-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
-.hour-card{flex:0 0 auto;text-align:center;padding:10px 14px;background:var(--bg1);border:1px solid var(--line);border-radius:10px;min-width:70px}
-.hour-card .time{font-size:.75rem;color:var(--muted)}
-.hour-card .h-icon{font-size:1.3rem;margin:4px 0}
-.hour-card .h-temp{font-size:1rem;font-weight:600}
-.daily-grid{display:grid;gap:8px}
-.day-card{display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center;padding:12px 16px;background:var(--bg1);border:1px solid var(--line);border-radius:10px}
-.day-card .day-name{font-weight:600;min-width:80px}
-.day-card .day-icon{font-size:1.3rem;text-align:center;min-width:30px}
-.day-card .day-temps{display:flex;gap:8px;font-size:.9rem}
-.day-card .day-temps .high{font-weight:600}
-.day-card .day-temps .low{color:var(--muted)}
-.day-card .day-precip{color:var(--cyan);font-size:.85rem}
-.recent-cities{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.chip{padding:4px 10px;border-radius:99px;font-size:.8rem;cursor:pointer;background:rgba(20,20,35,0.9);border:1px solid var(--line);color:var(--ink);transition:all .2s}
-.chip:hover{border-color:var(--cyan);color:var(--cyan)}
-.loading{text-align:center;padding:40px;color:var(--muted)}
-.loading .spinner{display:inline-block;width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.error-msg{background:rgba(255,82,82,.1);border:1px solid rgba(255,82,82,.2);border-radius:8px;padding:12px;color:var(--red);text-align:center;margin:12px 0}
-.unit-toggle{display:inline-flex;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
-.unit-btn{padding:6px 14px;cursor:pointer;font-size:.85rem;background:var(--bg1);color:var(--muted);border:none;transition:all .2s}
-.unit-btn.active{background:var(--cyan);color:#000;font-weight:600}
-.section-title{font-size:1.1rem;font-weight:700;margin:20px 0 12px}
-.dos-donts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:600px){.dos-donts{grid-template-columns:1fr}}
-.dos{padding:16px;border-radius:12px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.2)}
-.donts{padding:16px;border-radius:12px;background:rgba(255,82,82,.08);border:1px solid rgba(255,82,82,.2)}
-.dos h3{color:var(--green);margin-bottom:8px}
-.donts h3{color:var(--red);margin-bottom:8px}
-.dos li,.donts li{color:var(--muted);font-size:.85rem;margin-bottom:4px}
-details{margin:8px 0}details summary{cursor:pointer;font-weight:600;padding:8px 0}
-details p{color:var(--muted);font-size:.9rem;padding-left:12px}
-.related{text-align:center;margin:24px 0}.related a{color:var(--cyan);text-decoration:none;margin:0 8px;font-size:.9rem}.related a:hover{text-decoration:underline}
-footer{text-align:center;padding:24px 0;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:24px}
-</style>
+
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"UpTools Weather Forecast","applicationCategory":"WeatherApplication","operatingSystem":"Any","url":"https://www.uptools.in/weather-forecast/","description":"Free 7-day weather forecast for any city worldwide with hourly data.","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},{"@type":"ListItem","position":2,"name":"Weather Forecast","item":"https://www.uptools.in/weather-forecast/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where does weather data come from?","acceptedAnswer":{"@type":"Answer","text":"Weather data is fetched from Open-Meteo, a free open-source weather API powered by national weather services worldwide."}},{"@type":"Question","name":"Is this tool free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free with no API key required. Open-Meteo provides free non-commercial weather data."}},{"@type":"Question","name":"How accurate is the forecast?","acceptedAnswer":{"@type":"Answer","text":"Forecasts are based on ECMWF and NOAA models. Accuracy decreases beyond 3-5 days. Use for planning, not critical decisions."}},{"@type":"Question","name":"Can I use it on mobile?","acceptedAnswer":{"@type":"Answer","text":"Yes, the tool is fully responsive and works great on mobile browsers."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Check Weather","step":[{"@type":"HowToStep","name":"Enter City","text":"Type a city name in the search box or click the location button for auto-detection."},{"@type":"HowToStep","name":"View Forecast","text":"See current conditions, 7-day forecast, and hourly breakdown instantly."},{"@type":"HowToStep","name":"Toggle Units","text":"Switch between Celsius and Fahrenheit using the unit toggle button."}]}</script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body>
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>

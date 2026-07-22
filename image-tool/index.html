@@ -9,7 +9,7 @@
 
 <meta content="image tool, image tool, online tool, free calculator, uptools" name="keywords"/>
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-<meta content="#0b0f1a" name="theme-color"/>
+<meta content="#08080f" name="theme-color"/>
 <link href="https://www.uptools.in/image-tool/" rel="canonical"/>
 <meta content="Image Tool - Background Remover, Eraser &amp; Filters" property="og:title"/>
 <meta content="Edit images in your browser: remove background, erase, grayscale &amp; color-correct, then export PNG/WebP/JPG." property="og:description"/>
@@ -23,114 +23,7 @@
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180"/>
 
-<style>
-    :root{
-      --content-w:1200px;
-      --stage-vh:56vh; /* ↓ smaller stage height */
-    }
 
-    /* Keep page within viewport; internal scrolling for side panels */
-    html,body{height:100%}
-    main.wrap{min-height:calc(100dvh - 64px)} /* header ≈64px; adjust if needed */
-
-    .tool-grid{
-      display:grid; gap:12px;
-      grid-template-columns:320px minmax(0,1fr) 320px;
-      align-items:stretch;
-    }
-    @media (max-width:1080px){
-      .tool-grid{grid-template-columns:1fr}
-    }
-
-    /* Side panels scroll internally on desktop so page doesn't */
-    @media (min-width:1081px){
-      aside.card.controls,
-      aside.card[aria-label="Learn"]{
-        max-height:calc(100dvh - 180px); /* header + header-strip space */
-        overflow:auto; overscroll-behavior:contain;
-      }
-    }
-
-    /* Stage smaller but comfy */
-    #stage.card{
-      display:grid; place-items:center; padding:0;
-      min-height:400px; /* ↓ from 520 */
-      overflow:hidden
-    }
-    .stage-inner{width:100%; height:100%; display:grid; place-items:center; position:relative}
-
-    #stage[data-bg="transparent"] .stage-inner{
-      background:conic-gradient(#0000 90deg,#1b2236 0) 0 0/32px 32px,
-                 conic-gradient(#0000 90deg,#0e1630 0) 16px 16px/32px 32px
-    }
-    #stage[data-bg="white"] .stage-inner{background:#fff}
-    #stage[data-bg="black"] .stage-inner{background:#000}
-
-    #canvas{
-      max-width:100%;
-      max-height:var(--stage-vh);
-      display:block;
-      background-color:transparent;
-      border-radius:10px
-    }
-    @media (max-width:768px){
-      #canvas{max-height:50vh} /* tighter on mobile */
-    }
-
-    .controls .row{border:0; padding:0}
-
-    .bg-toggle{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
-    .bg-toggle .chip input{accent-color:#22d3ee}
-
-    .ctrl{display:grid; gap:6px; margin:6px 0}
-    .ctrl input[type="range"]{width:100%}
-
-    .stage-bar{
-      position:sticky; bottom:0; inset-inline:0;
-      display:flex; flex-wrap:wrap; gap:6px; justify-content:center;
-      background: color-mix(in oklab,#0b1326 82%,transparent);
-      padding:8px; border-top:1px solid var(--border)
-    }
-
-    .drop{
-      display:grid; place-items:center; text-align:center; gap:8px;
-      padding:14px; border:1px dashed var(--border); border-radius:12px; background:#0b1326
-    }
-    .drop.dragover{border-style:solid; box-shadow:var(--glow)}
-
-    /* Collapsible sections to cut height */
-    .fold{border:1px solid var(--border); border-radius:10px; background:#0b1326; padding:4px 8px}
-    .fold + .fold{margin-top:8px}
-    .fold>summary{
-      cursor:pointer; list-style:none; font-weight:700; padding:6px 2px; display:flex; align-items:center; gap:8px
-    }
-    .fold>summary::-webkit-details-marker{display:none}
-    .fold .content{padding:6px 2px 8px}
-
-    .video-wrap{position:relative; width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#0b1326; border:1px solid var(--border); box-shadow:var(--glow-soft)}
-    .video-wrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0; display:block}
-
-    .txt-logo{display:inline-grid; place-items:center; font-weight:900; width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#06121a; box-shadow:inset 0 0 0 1px rgba(255,255,255,.25); font-size:12px}
-
-    .sep{height:1px; background:color-mix(in oklab,var(--accent) 25%, #243); margin:8px 0}
-    /* compact headings inside controls */
-    .controls h2{margin:6px 0}
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
 
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Image Tool free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's completely free with no sign-ups required."}}, {"@type": "Question", "name": "Is Image Tool private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All calculations run in your browser. No data is uploaded."}}, {"@type": "Question", "name": "Does Image Tool work on mobile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All tools are mobile-responsive and work on any device."}}]}

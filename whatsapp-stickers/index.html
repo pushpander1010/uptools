@@ -10,7 +10,7 @@
 <title>WhatsApp Sticker Maker (Free, No Sign-up) | UpTools</title>
 <meta content="Make WhatsApp stickers in your browser: upload, zoom/pan, rotate, rounded corners, padding, text/emoji, simple background removal, and export as 512×512" name="description"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
-<meta content="#0a0a12" name="theme-color"/>
+<meta content="#08080f" name="theme-color"/>
 <link href="https://www.uptools.in/whatsapp-stickers/" rel="canonical"/>
 <meta content="whatsapp sticker maker,create whatsapp sticker,webp sticker,whatsapp web sticker,transparent sticker,sticker pack zip,free sticker tool,uptools" name="keywords"/>
 <!-- Canonical + hreflang (use your final URL path) -->
@@ -80,95 +80,7 @@
   </script>
 <!-- Common CSS -->
 
-<style>
-    :root{
-      --vh:100svh; --hdr:0px; --ftr:0px; --gap:16px; --sticky-top:12px;
-      --content-max:1200px; --stage-size:512px;
-    }
-    html,body{height:100%;overflow-x:hidden;background:var(--bg,#0b1020);color:var(--ink,#e6f1ff)}
-    *{box-sizing:border-box}
 
-    /* Header */
-    header.site{position:sticky;top:0;z-index:10;backdrop-filter:saturate(140%) blur(6px)}
-    .header-inner{max-width:var(--content-max);margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
-
-    /* Workspace grid */
-    main.workspace{max-width:var(--content-max);margin:12px auto;padding:0 16px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--gap);align-items:start;min-height:calc(var(--vh) - var(--hdr) - 24px)}
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    @media (max-width:960px){
-      main.workspace{grid-template-columns:1fr}
-    }
-
-    /* Left: editor (sticky) */
-    .editor{position:sticky;top:calc(var(--sticky-top) + var(--hdr));align-self:start;display:grid;grid-template-rows:auto 1fr auto;gap:10px;max-height:calc(var(--vh) - var(--hdr) - var(--sticky-top))}
-    .editor .card{padding:10px 12px}
-    .editor-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border,rgba(255,255,255,.08));border-radius:12px;background:rgba(16,24,48,.65);box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    .title{display:flex;align-items:center;gap:10px;font-weight:700}
-    .title small{color:var(--muted,#9aa7bd);font-weight:600}
-    .view-tools{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto}
-    .btn{appearance:none;border:1px solid var(--border,rgba(255,255,255,.08));background:#1b2344;color:#e6f1ff;padding:.52rem .8rem;border-radius:10px;cursor:pointer;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    .btn.secondary{background:transparent}
-    .btn:active{transform:translateY(1px)}
-
-    .stage-shell{border:1px solid var(--border,rgba(255,255,255,.08));border-radius:12px;background:#0f1731;box-shadow:0 10px 30px rgba(0,0,0,.35);display:grid;place-items:center;width:var(--stage-size);height:var(--stage-size);margin:0 auto;overflow:hidden}
-    canvas#stage{width:100%;height:100%;display:block;background:transparent;image-rendering:crisp-edges;cursor:grab}
-    canvas#stage:active{cursor:grabbing}
-    .editor-io{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-
-    /* Right: tools (desktop), collapsible on mobile) */
-    .tools{border:1px solid var(--border,rgba(255,255,255,.08));border-radius:12px;background:rgba(16,24,48,.55);box-shadow:0 10px 30px rgba(0,0,0,.35);max-height:calc(var(--vh) - var(--hdr) - var(--sticky-top));overflow:auto;padding:12px;transition:max-height .3s ease,padding .2s ease,border-width .2s ease}
-    .tools.collapsed{max-height:0;padding:0;border-width:0;overflow:hidden}
-    .section{display:grid;gap:8px;margin-bottom:12px}
-    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .row>label{color:var(--muted,#9aa7bd);font-size:.92rem;min-width:90px}
-    .note{color:var(--muted,#9aa7bd);font-size:.85rem}
-    input[type="range"]{width:100%}
-    input[type="color"],input[type="text"]{padding:6px 10px;border-radius:8px;border:1px solid var(--border,rgba(255,255,255,.08));background:#0b1020;color:#e6f1ff}
-
-    /* Thumbs */
-    .thumbs{display:flex;gap:10px;overflow:auto;padding-top:8px}
-    .t{display:grid;justify-items:center;gap:4px;border:1px solid var(--border,rgba(255,255,255,.08));border-radius:10px;padding:6px;background:#0f1731;cursor:pointer}
-    .t img{width:64px;height:64px;display:block}
-    .t small{color:var(--muted,#9aa7bd);font-size:.78rem}
-
-    /* YouTube fixed size → no CLS */
-    .yt-wrap{border:1px solid var(--border,rgba(255,255,255,.08));border-radius:12px;overflow:hidden;background:#0f1731;width:560px;height:315px;max-width:100%;margin:6px 0 0}
-    .yt-wrap iframe{width:100%;height:100%;border:0;display:block}
-
-    /* Mobile sizing */
-    @media (max-width:960px){
-      .editor{top:var(--sticky-top)}
-      .stage-shell{width:min(92vw,560px);height:min(92vw,560px)}
-    }
-
-    /* Sticky mobile controls bar */
-    .mobile-bar{position:sticky;top:calc(var(--hdr) + 8px);z-index:9;display:none;gap:8px;justify-content:center;margin-bottom:8px}
-    @media (max-width:960px){ .mobile-bar{display:flex} }
-
-    /* Floating toggle (optional, bottom-right on mobile) */
-    .fab{position:fixed;right:14px;bottom:14px;display:none;z-index:12}
-    @media (max-width:960px){ .fab{display:block} }
-
-    /* Breadcrumbs */
-    .breadcrumbs{max-width:var(--content-max);margin:6px auto 0;padding:0 16px;font-size:.9rem;color:var(--muted,#9aa7bd)}
-    .breadcrumbs a{color:inherit;text-decoration:underline;text-underline-offset:.15em}
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
 <!-- ZIP lib -->
 <script defer="" src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 
@@ -189,6 +101,7 @@
   gtag('js', new Date());
   gtag('config', 'G-NN3GDL1LEJ');
 </script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body>
   <a href="#main" class="sr-only skip-link">Skip to content</a>

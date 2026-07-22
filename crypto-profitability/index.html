@@ -10,7 +10,7 @@
 <meta content="Calculate crypto mining profits in INR &amp; USD. Supports BTC, LTC, ETC, RVN, XMR, KAS. Enter hashrate, power (W), electricity cost, pool fee, uptime, and" name="description"/>
 <meta content="crypto mining calculator, bitcoin mining profitability, btc mining calculator, mining roi, hashrate to earnings, electricity cost mining, ethereum classic mining, ravencoin mining, monero mining, kaspa mining, litecoin mining, mining profit india, btc price in inr" name="keywords"/>
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-<meta content="#0b0f1a" name="theme-color"/>
+<meta content="#08080f" name="theme-color"/>
 <link href="https://www.uptools.in/crypto-profitability/" rel="canonical"/>
 
 <!-- Social -->
@@ -30,78 +30,7 @@
 <!-- Common CSS -->
 
 <!-- Page theme: Golden Neon Dark -->
-<style>
-    :root{
-      --accent:#f4c43a;      /* golden */
-      --accent-2:#f59e0b;    /* amber */
-      --bg1:#0b0f1a;
-      --bg2:#111428;
-      --content-w:1100px;
-    }
-    body{
-      background:
-        radial-gradient(880px 520px at 10% -10%, rgba(245, 158, 11, .08) 0%, transparent 50%),
-        radial-gradient(900px 600px at 110% 10%, rgba(244, 196, 58, .08) 0%, transparent 45%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
-    }
-    /* Layout: left inputs sticky, right results; aim to fit in one viewport on desktop */
-    .grid2{
-      display:grid; gap:12px;
-      grid-template-columns: 1fr 1fr;
-      align-items:start;
-    }
-    .sticky-panel{ position:sticky; top:72px; }
-    .hero-miner{
-      display:grid; grid-template-columns: 48px 1fr; gap:12px; align-items:center;
-      padding:12px; border-radius:12px; background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft);
-      margin:12px 0;
-    }
-    .ico{
-      width:40px; height:40px; display:grid; place-items:center; border-radius:10px; color:#141414;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.25), var(--glow-soft);
-      font-weight:900;
-    }
-    .row2{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
-    .units{ display:flex; gap:8px; align-items:center; }
-    .suffix{ color:var(--muted); font-size:12px; }
-    .note-inline{ color:var(--muted); font-size:12px; margin-top:4px; }
-    .kpis{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-    .kpi{ padding:10px 12px; border-radius:10px; background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft); }
-    .kpi .lab{ color:var(--muted); font-size:12px; }
-    .kpi .val{ font-weight:900; font-variant-numeric:tabular-nums; }
-    .badge{ font-size:12px; padding:3px 8px; border-radius:999px; border:1px solid var(--border); background:#0b1326; }
-    .yt-wrap{ width:100%; max-width:560px; height:315px; border-radius:12px; overflow:hidden; border:1px solid var(--border); box-shadow: var(--glow-soft); }
-    .yt-wrap iframe{ width:100%; height:100%; display:block; }
-    .help{ display:grid; gap:10px; }
-    .result-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
-    .result-box .lab{ color:var(--muted); font-size:12px; }
-    .result-box .val{ font-weight:900; font-variant-numeric:tabular-nums; }
-    .divider-hr{ height:1px; background: color-mix(in oklab, var(--accent) 25%, #243); margin:10px 0; }
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
 
-    @media (max-width: 920px){
-      .grid2{ grid-template-columns: 1fr; }
-      .sticky-panel{ position:static; }
-      .kpis{ grid-template-columns:repeat(2,1fr); }
-      .result-grid{ grid-template-columns:1fr; }
-    }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
 <!-- Structured Data -->
 
 <script type="application/ld+json">

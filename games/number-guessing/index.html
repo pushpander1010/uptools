@@ -15,7 +15,7 @@
   <title>Number Guessing Game - Start, Guess, Win! | UpTools</title>
   <meta name="description" content="Super clear Number Guessing game. 1) Pick difficulty, 2) Press Start, 3) Type a number & hit Guess. Smart hints, midpoint button, streaks & shareable" />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta name="theme-color" content="#0f1419" />
+  <meta name="theme-color" content="#08080f" />
 
   <link rel="canonical" href="https://www.uptools.in/games/number-guessing/" />
   <meta property="og:title" content="Number Guessing Game - Start, Guess, Win! | UpTools" />
@@ -38,146 +38,7 @@
   <script src="/games/fullscreen-utils.js" defer></script>
 
   <!-- Page accent + compact, onboarding-first tweaks -->
-  <style>
-    :root{ --accent:#ff9800; --bg1:#0f1419; --bg2:#1a1f2e; --content-w:980px; }
-    .game-container{ max-width:760px; margin:0 auto; position:relative; }
-    .compact{ padding:18px; }
-    .game-stats{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin:12px 0; padding:12px; background:var(--card); border:1px solid var(--cardBorder); border-radius:var(--radius); }
-    .stat-item{ text-align:center; min-width:110px; }
-    .stat-value{ font-size:1.5rem; font-weight:700; color:var(--accent); }
-    .stat-label{ font-size:12px; color:var(--muted); }
-    .difficulty-selector{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:10px 0 4px; }
-    .difficulty-btn{ padding:6px 10px; border:1px solid var(--cardBorder); background:var(--card); color:var(--text); border-radius:8px; cursor:pointer; transition:border-color .2s, transform .15s; }
-    .difficulty-btn:hover{ border-color:var(--accent); transform:translateY(-1px); }
-    .difficulty-btn.active{ background:var(--accent); color:#fff; border-color:var(--accent); }
-    .game-area{ background:var(--card); border:1px solid var(--cardBorder); border-radius:var(--radius); padding:20px; margin:16px 0; }
-    .guess-input{ display:flex; gap:10px; justify-content:center; align-items:center; margin:14px 0; flex-wrap:wrap; }
-    .guess-input input{ padding:10px 12px; border:1px solid var(--cardBorder); border-radius:8px; background:var(--bg); color:var(--text); font-size:18px; width:140px; text-align:center; }
-    .btn-game{ padding:10px 16px; border:0; border-radius:8px; background:var(--accent); color:#fff; font-weight:700; cursor:pointer; transition:transform .15s, box-shadow .15s, opacity .15s; }
-    .btn-game:hover{ transform:translateY(-1px); box-shadow:var(--shadow-hover); }
-    .btn-secondary{ background:rgba(255,255,255,.08); border:1px solid var(--cardBorder); color:var(--text); }
-    .btn-ghost{ background:transparent; border:1px dashed var(--cardBorder); color:var(--text); }
-    .btn-game:disabled{ opacity:.6; cursor:not-allowed; }
-    .range-display{ color:var(--muted); font-size:13px; margin:6px 0; }
-    .hint-area{ background:var(--bg); border:1px solid var(--cardBorder); border-radius:8px; padding:10px; margin-top:10px; }
-    .hint-title{ color:var(--accent); font-weight:700; margin-bottom:6px; }
-    .hint-text{ color:var(--muted); font-size:13px; }
-    .guess-history{ max-height:280px; overflow:auto; margin:12px 0; }
-    .guess-item{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:8px 10px; margin:6px 0; background:var(--bg); border:1px solid var(--cardBorder); border-radius:8px; }
-    .guess-feedback{ padding:2px 10px; border-radius:999px; font-size:12px; font-weight:700; }
-    .feedback-high{ background:#ef4444; color:#fff; } .feedback-low{ background:#06b6d4; color:#00131a; } .feedback-hot{ background:#f59e0b; color:#1a0e00; } .feedback-correct{ background:var(--accent); color:#0b1020; }
-    .toolbar{ display:flex; align-items:center; gap:8px; }
-    .spacer{ flex:1; }
-    .more>summary{ list-style:none; cursor:pointer; } .more>summary::-webkit-details-marker{ display:none; }
-    .more .menu{ margin-top:8px; display:grid; gap:6px; }
-    .pill-inline{ display:flex; gap:6px; flex-wrap:wrap; align-items:center; font-size:12px; color:var(--muted); }
-    .pill-inline .pill{ padding:4px 8px; }
-    .sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
-
-    /* Onboarding strip */
-    .steps{ display:flex; gap:8px; flex-wrap:wrap; margin:8px 0 0; }
-    .step{ display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border:1px solid var(--cardBorder); border-radius:999px; background:var(--bg); font-size:12px; }
-    .start-pulse{ position:relative; }
-    .start-pulse::after{
-      content:""; position:absolute; inset:-6px; border-radius:12px;
-      box-shadow:0 0 0 0 rgba(255,152,0,.35);
-      animation:pulse 1.2s infinite;
-    }
-    @keyframes pulse{ 0%{box-shadow:0 0 0 0 rgba(255,152,0,.35)} 70%{box-shadow:0 0 0 12px rgba(255,152,0,0)} 100%{box-shadow:0 0 0 0 rgba(255,152,0,0)} }
-
-    /* Simple progress bar of narrowed range */
-    .window-bar{ height:8px; background:var(--cardBorder); border-radius:4px; overflow:hidden; margin:8px 0 0; }
-    .window-fill{ height:100%; width:100%; background:var(--accent); transition:width .2s linear; }
-
-    /* Dialog Overlays */
-    .dialog {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(15, 20, 25, .92);
-      z-index: 50;
-    }
-
-    .dialog[open] {
-      display: flex;
-    }
-
-    .dialog-card {
-      background: var(--card);
-      border: 2px solid var(--accent);
-      border-radius: 12px;
-      padding: 24px;
-      width: min(420px, 92%);
-      text-align: center;
-    }
-
-    .fullscreen-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(0,0,0,0.2);
-      border: 1px solid var(--cardBorder);
-      color: var(--text);
-      padding: 6px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    #gameContainer.fullscreen-mode {
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: center !important;
-      background: var(--bg) !important;
-      max-width: 100vw !important;
-      max-height: 100vh !important;
-      box-sizing: border-box;
-      padding: 20px !important;
-      overflow-y: auto !important;
-    }
-
-    #gameContainer.fullscreen-mode > .card {
-      width: 100%;
-      max-width: 760px;
-      margin: 0;
-    }
-
-    /* Touch feedback on buttons */
-    .btn-game:active {
-      transform: scale(0.95) !important;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3) !important;
-      transition: transform 0.05s, box-shadow 0.05s !important;
-    }
-    .difficulty-btn:active {
-      transform: scale(0.95) !important;
-    }
-    .fullscreen-btn:active {
-      transform: scale(0.92) !important;
-      background: rgba(0,0,0,0.4) !important;
-    }
-    .guess-input input:focus {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
 
   <!-- Structured data -->
   <script type="application/ld+json">

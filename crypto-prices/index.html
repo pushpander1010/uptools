@@ -10,7 +10,7 @@
 <meta content="Track live cryptocurrency prices in INR &amp; USD: Bitcoin (BTC), Ethereum (ETH), Solana (SOL), XRP, and 10,000+ coins. See market cap, volume, dominance, top" name="description"/>
 <meta content="crypto prices, live crypto prices, Bitcoin price, BTC price in INR, BTC price today, Ethereum price, ETH price today, crypto market cap, top gainers, crypto losers, cryptocurrency prices India, bitcoin price INR, btc to inr, btc price, ethereum price in inr" name="keywords"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
-<meta content="#0b0f1a" name="theme-color"/>
+<meta content="#08080f" name="theme-color"/>
 <link href="https://www.uptools.in/crypto-prices/" rel="canonical"/>
 
 <!-- OG/Twitter -->
@@ -30,128 +30,7 @@
 <!-- Common CSS (production) -->
 
 <!-- Page-specific critical tweaks (golden neon dark) -->
-<style>
-    :root{
-      --accent:#f4c43a;      /* golden neon */
-      --accent-2:#f59e0b;    /* warm amber */
-      --bg1:#0b0f1a;
-      --bg2:#111428;
-      --content-w:1100px;
-    }
-    body{
-      background:
-        radial-gradient(900px 500px at 10% -10%, rgba(245, 158, 11, .08) 0%, transparent 50%),
-        radial-gradient(900px 600px at 110% 10%, rgba(244, 196, 58, .08) 0%, transparent 45%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
-    }
-    /* Compact hero & control bar fits above the fold */
-    .market-hero{
-      display:grid; grid-template-columns: 48px 1fr; gap:12px; align-items:center;
-      padding:12px; border-radius:12px; background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft);
-      margin:12px 0;
-    }
-    .market-ico{ width:40px; height:40px; display:grid; place-items:center; border-radius:10px; color:#141414;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.25), var(--glow-soft);
-      font-weight:900;
-    }
-    .controls{
-      display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between; margin:8px 0 0;
-    }
-    .controls .group{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
-    .pill-input{
-      display:flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px;
-      background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft);
-    }
-    .pill-input input{
-      background:transparent; border:0; outline:none; color:var(--text); width:180px;
-    }
-    .toggle{
-      display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; cursor:pointer;
-      background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft); font-size:12px;
-    }
-    .toggle input{ accent-color: var(--accent); }
-    .currency-select{ min-width:110px; }
-    /* Market grid/table */
-    .panel{
-      display:grid; grid-template-columns: 1fr; gap:12px;
-      grid-template-rows:auto 1fr; min-height:min(68vh, 800px);
-    }
-    .table-wrap{
-      overflow:auto; border:1px solid var(--border); border-radius:12px; background:#0a1224; box-shadow: var(--glow-soft);
-      max-height: min(72vh, 900px);
-    }
-    table.market{
-      width:100%; border-collapse:separate; border-spacing:0; font-variant-numeric:tabular-nums; font-size:14px;
-    }
-    .market th, .market td{
-      padding:10px 12px; border-bottom:1px solid color-mix(in oklab, var(--accent) 20%, #243);
-      white-space:nowrap; vertical-align:middle;
-    }
-    .market th{
-      position:sticky; top:0; background:#0b1326; z-index:1; text-align:left; font-weight:800;
-    }
-    .market tr{ height:56px; }
-    .sym{
-      display:flex; align-items:center; gap:10px;
-    }
-    .sym img{
-      width:24px; height:24px; border-radius:50%; flex:0 0 auto;
-    }
-    .chg-pos{ color:#34d399; }
-    .chg-neg{ color:#f87171; }
-    .spark{
-      width:120px; height:32px; display:block; background:linear-gradient(180deg,#0b1a34,#0f1f3a);
-      border-radius:8px; border:1px solid var(--border);
-    }
-    .badge{ font-size:12px; padding:3px 8px; border-radius:999px; border:1px solid var(--border); background:#0b1326; }
-    .tabbar{ display:flex; gap:8px; flex-wrap:wrap; }
-    .tabbar .chip[aria-selected="true"]{ color:#141414; background:linear-gradient(135deg,var(--accent),var(--accent-2)); border-color:transparent; font-weight:900; }
-    /* Skeleton for first load */
-    .skeleton{
-      --sk:#0f1d38;
-      background: linear-gradient(90deg, var(--sk) 25%, #122448 37%, var(--sk) 63%);
-      background-size: 400% 100%;
-      animation: sh 1.2s ease-in-out infinite;
-      border-radius:10px;
-    }
-    @keyframes sh{ 0%{background-position: 100% 0;} 100%{background-position: 0 0;} }
-    .mini-kpis{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
-    .kpi{ padding:10px 12px; border-radius:10px; background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft); }
-    .kpi .lab{ color:var(--muted); font-size:12px; }
-    .kpi .val{ font-weight:900; font-variant-numeric:tabular-nums; }
-    /* Video box with fixed dimensions to avoid CLS */
-    .video-box{ display:grid; grid-template-columns: 1fr; gap:8px; }
-    .yt-wrap{ width:100%; max-width: 560px; height:315px; border-radius:12px; overflow:hidden; border:1px solid var(--border); box-shadow: var(--glow-soft); }
-    .yt-wrap iframe{ width:100%; height:100%; display:block; }
-    /* Backlinks grid */
-    .links-grid{ display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
-    .links-grid a{ display:flex; align-items:center; gap:10px; padding:12px; border-radius:10px; background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft); text-decoration:none; color:var(--text); }
-    .links-grid .txt-logo{ font-weight:900; letter-spacing:.5px; padding:6px 10px; border-radius:8px; background:#111b34; border:1px solid var(--border); }
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
 
-    @media (max-width: 780px){
-      .mini-kpis{ grid-template-columns:repeat(2,1fr); }
-      .panel{ min-height:auto; }
-      .table-wrap{ max-height: 62vh; }
-      .pill-input input{ width:130px; }
-    }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
 <!-- Structured Data (SoftwareApplication + WebPage + Breadcrumbs + FAQ) -->
 <script type="application/ld+json">
   {

@@ -40,67 +40,7 @@
     }
   }
   </script>
-  <style>
-    :root{--bg1:#0e0e18;--bg2:#0a0a12;--ink:#e8e8f0;--muted:#a0a0b8;--cyan:#818cf8;--green:#34d399}
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg1);color:var(--ink);line-height:1.6;min-height:100vh}
-    a{color:var(--cyan);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .header{background:var(--bg2);border-bottom:1px solid rgba(0,229,255,0.12);padding:0 1.5rem;height:60px;display:flex;align-items:center;justify-content:space-between}
-    .header .logo{display:flex;align-items:center;gap:.6rem}
-    .header .logo img{height:34px;width:auto}
-    .header .logo span{font-size:1.2rem;font-weight:600;color:var(--ink)}
-    .header nav{display:flex;gap:1.5rem}
-    .header nav a{color:var(--muted);font-size:.9rem}
-    .header nav a:hover{color:var(--cyan);text-decoration:none}
-    .container{max-width:1120px;margin:0 auto;padding:2rem 1.5rem 3rem}
-    .hero{text-align:center;margin-bottom:2.5rem}
-    .hero h1{font-size:2rem;color:var(--ink);margin-bottom:.5rem}
-    .hero h1 span{color:var(--cyan)}
-    .hero p{color:var(--muted);max-width:640px;margin:0 auto;font-size:1rem}
-    .card{background:var(--bg2);border:1px solid rgba(0,229,255,0.1);border-radius:12px;padding:1.75rem;margin-bottom:2rem}
-    .card h2{font-size:1.25rem;margin-bottom:1rem;color:var(--cyan)}
-    .converter-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
-    .converter-grid label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:.35rem}
-    .converter-grid select{width:100%;padding:.65rem .75rem;background:var(--bg1);color:var(--ink);border:1px solid rgba(255,255,255,0.1);border-radius:8px;font-size:.95rem;cursor:pointer}
-    .converter-grid select:focus{border-color:var(--cyan);outline:none}
-    .quick-btns{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}
-    .quick-btns button{background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);color:var(--cyan);padding:.4rem .9rem;border-radius:20px;font-size:.8rem;cursor:pointer;transition:all .2s}
-    .quick-btns button:hover,.quick-btns button.active{background:rgba(0,229,255,0.18);border-color:var(--cyan)}
-    .table-wrap{overflow-x:auto}
-    table{width:100%;border-collapse:collapse;font-size:.9rem}
-    th,td{padding:.55rem .7rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.06)}
-    th{background:rgba(0,229,255,0.06);color:var(--cyan);font-weight:600;white-space:nowrap}
-    td{color:var(--ink)}
-    tr:hover td{background:rgba(0,229,255,0.03)}
-    .tag{display:inline-block;font-size:.7rem;background:rgba(0,230,118,0.12);color:var(--green);padding:.15rem .5rem;border-radius:10px;font-weight:600}
-    .compare-chart{margin-top:1rem}
-    .compare-row{display:grid;grid-template-columns:160px repeat(6,1fr);gap:0;border-bottom:1px solid rgba(255,255,255,0.05)}
-    .compare-row.header-row{background:rgba(0,229,255,0.06);font-weight:600;color:var(--cyan)}
-    .compare-cell{padding:.5rem .6rem;font-size:.8rem}
-    .compare-cell:first-child{color:var(--muted)}
-    .faq-item{margin-bottom:1rem}
-    .faq-item h4{color:var(--ink);font-size:.95rem;margin-bottom:.2rem;cursor:pointer}
-    .faq-item h4::before{content:"▸ ";color:var(--cyan)}
-    .faq-item p{color:var(--muted);font-size:.9rem;padding-left:1.2rem}
-    .dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-    .do-box,.dont-box{padding:1rem 1.25rem;border-radius:8px}
-    .do-box{background:rgba(0,230,118,0.06);border-left:3px solid var(--green)}
-    .dont-box{background:rgba(255,70,70,0.06);border-left:3px solid #ff4646}
-    .do-box h4,.dont-box h4{margin-bottom:.35rem}
-    .do-box ul,.dont-box ul{font-size:.88rem;padding-left:1.2rem;color:var(--muted)}
-    .do-box li,.dont-box li{margin-bottom:.2rem}
-    .how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-    .step{text-align:center;padding:1rem}
-    .step .num{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:rgba(0,229,255,0.1);color:var(--cyan);font-weight:700;margin-bottom:.5rem}
-    .step h4{font-size:.9rem;margin-bottom:.25rem}
-    .step p{font-size:.82rem;color:var(--muted)}
-    .related{display:flex;flex-wrap:wrap;gap:.75rem}
-    .related a{background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.12);padding:.45rem 1rem;border-radius:8px;font-size:.85rem;color:var(--ink)}
-    .related a:hover{border-color:var(--cyan);text-decoration:none}
-    .footer{text-align:center;padding:2rem 1.5rem;border-top:1px solid rgba(255,255,255,0.05);color:var(--muted);font-size:.8rem}
-    @media(max-width:768px){.converter-grid{grid-template-columns:1fr}.compare-row{grid-template-columns:110px repeat(6,1fr)}.compare-cell{font-size:.7rem;padding:.35rem .3rem}.dd-grid{grid-template-columns:1fr}.how-steps{grid-template-columns:1fr}.header nav{display:none}}
-  </style>
+  
 
   <link rel="stylesheet" href="/style.css">
 
@@ -115,6 +55,7 @@
   gtag('js', new Date());
   gtag('config', 'G-NN3GDL1LEJ');
 </script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body>
 

@@ -15,7 +15,7 @@
 <meta content="Free AI stock analysis tool for NSE, BSE, NASDAQ, NYSE, LSE, TSX, TSE, SSE and more. Pulls live quotes &amp; charts (Yahoo Finance), scans patterns, draws" name="description"/>
 <meta content="stock analysis,AI stock analyzer,live stock chart,NSE stocks,BSE stocks,NASDAQ stocks,NYSE stocks,TSX,LSE,technical analysis,news sentiment,support resistance,free tool" name="keywords"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
-<meta content="#0a0a12" name="theme-color"/>
+<meta content="#08080f" name="theme-color"/>
 <link href="https://www.uptools.in/ai-stock-analyzer/" rel="canonical"/>
 <!-- Open Graph / Twitter -->
 <meta content="AI Stock Analyzer - Live Charts, News Sentiment &amp; Verdict" property="og:title"/>
@@ -72,45 +72,7 @@
     ]
   }
   </script>
-<style>
-    /* Page-local tweaks (kept tiny for performance) */
-    .hero { align-items:center; gap:12px }
-    .grid-2 { display:grid; grid-template-columns:1.1fr .9fr; gap:12px }
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
 
-    @media (max-width: 980px){ .grid-2 { grid-template-columns:1fr; } }
-    .panel { display:grid; gap:10px }
-    .kvi { display:grid; grid-template-columns:repeat(3,1fr); gap:10px }
-    @media (max-width:680px){ .kvi { grid-template-columns:1fr 1fr; } }
-    .badge { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:#0b1326; border:1px solid var(--border); box-shadow: var(--glow-soft); font-size:12px }
-    .mini { font-size:12px; color:var(--muted) }
-    canvas#chart { width:100%; height:360px; background:#0a1224; border:1px solid var(--border); border-radius:12px; box-shadow: var(--glow-soft) }
-    .news-item { padding:10px; border:1px solid var(--border); border-radius:10px; margin-bottom:8px; background:#0b1326 }
-    .ad-slot { display:none }
-    .pill-good{ color:#10b981 } .pill-risk{ color:#f59e0b } .pill-bad{ color:#ef4444 }
-    .verdict { display:flex; gap:10px; align-items:center }
-    .chatbox { display:grid; grid-template-rows:auto 1fr auto; min-height:420px; }
-    .chatlog { overflow:auto; border:1px solid var(--border); border-radius:12px; padding:10px; background:#0a1224 }
-    .msg { margin:6px 0; line-height:1.45 }
-    .msg.ai { color:#eaf4ff } .msg.user{ color:#cfe7ff }
-    .row-inline{ display:flex; gap:8px; flex-wrap:wrap; align-items:center }
-    .nowrap{ white-space:nowrap }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
 
   <meta property="og:description" content="Analyze any ticker across major markets. Real quotes &amp;amp; charts, support/resistance, technical + fundamental snapshot, news sentiment, and Buy/Hold/Sell verdict. Free." />
   <meta property="og:url" content="https://www.uptools.in/ai-stock-analyzer/" />
@@ -130,6 +92,7 @@
   gtag('js', new Date());
   gtag('config', 'G-NN3GDL1LEJ');
 </script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body style="--accent:#22D3EE;--bg1:#0b0f1a;--bg2:#121a2f">
   <a href="#main" class="sr-only skip-link">Skip to content</a>

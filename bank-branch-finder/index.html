@@ -32,57 +32,7 @@
   {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "How do I find a bank branch?","acceptedAnswer": {"@type": "Answer","text": "Enter the bank name and city, then click search. You'll get a list of all branches with addresses and contact details."}},{"@type": "Question","name": "Can I find ATMs?","acceptedAnswer": {"@type": "Answer","text": "Yes! Our tool helps you find both bank branches and ATM locations."}},{"@type": "Question","name": "What information is provided?","acceptedAnswer": {"@type": "Answer","text": "We provide branch address, phone number, email, working hours, and services offered."}}]}
   </script>
 
-  <style>
-    :root {
-      --accent: #0066cc;
-      --accent-2: #0052a3;
-    }
-
-    .tool-container { max-width: 800px; margin: 2rem auto; }
-    .search-group { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
-    .search-group input { padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); }
-    .search-group button { padding: 0.75rem 2rem; background: var(--accent); color: white; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 700; grid-column: 1 / -1; }
-    .search-group button:hover { background: var(--accent-2); }
-
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0; }
-    .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: center; }
-    .feature-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
-    .feature-card p { margin: 0; font-size: 0.9rem; }
-
-    .results-container { margin: 2rem 0; }
-    .branch-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1rem 0; }
-    .branch-card h3 { margin-top: 0; color: var(--accent); }
-    .branch-info { display: grid; gap: 0.5rem; font-size: 0.95rem; }
-    .branch-info strong { color: var(--text); }
-
-    .guide-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; }
-    .guide-section h3 { color: var(--accent); margin-top: 0; }
-    .step-list { list-style: none; padding: 0; counter-reset: step; }
-    .step-list li { counter-increment: step; padding: 1rem; margin: 1rem 0; background: rgba(0, 102, 204, 0.05); border-radius: 0.5rem; position: relative; padding-left: 3.5rem; }
-    .step-list li::before { content: counter(step); position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 2rem; height: 2rem; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
-
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    @media (max-width: 600px) {
-      .search-group { grid-template-columns: 1fr; }
-      .search-group button { grid-column: 1; }
-    }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <link href="https://www.uptools.in/bank-branch-finder/" rel="canonical"/>
 <meta name="keywords" content="bank branch finder, bank branch finder, online tool, free calculator, uptools" />
@@ -97,6 +47,7 @@
   gtag('js', new Date());
   gtag('config', 'G-NN3GDL1LEJ');
 </script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>

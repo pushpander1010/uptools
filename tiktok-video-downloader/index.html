@@ -31,79 +31,7 @@
   {"@context": "https://schema.org","@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://www.uptools.in/"},{"@type": "ListItem","position": 2,"name": "TikTok Video Downloader","item": "https://www.uptools.in/tiktok-video-downloader/"}]}
   </script>
 
-  <style>
-    :root {
-      --accent: #000000;
-      --accent-2: #1a1a1a;
-    }
-
-    .tool-container { max-width: 900px; margin: 2rem auto; }
-
-    .tool-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin: 2rem 0; }
-    .tool-section h2 { color: var(--accent); margin-top: 0; }
-
-    .input-group { display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; }
-    .input-group input { flex: 1; min-width: 250px; padding: 0.9rem; border: 2px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 1rem; }
-    .input-group input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); }
-    .input-group button { padding: 0.9rem 2rem; background: var(--accent); color: white; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 700; font-size: 1rem; transition: all 0.2s; }
-    .input-group button:hover { background: var(--accent-2); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
-
-    .quality-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
-    .quality-option { padding: 1rem; border: 2px solid var(--border); border-radius: var(--radius); text-align: center; cursor: pointer; transition: all 0.2s; }
-    .quality-option:hover { border-color: var(--accent); background: rgba(0, 0, 0, 0.05); }
-    .quality-option.selected { border-color: var(--accent); background: var(--accent); color: white; }
-
-    .preview-container { background: var(--bg); border: 2px dashed var(--border); border-radius: var(--radius); padding: 2rem; text-align: center; min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .preview-container.has-video { border-style: solid; }
-    .preview-video { max-width: 100%; max-height: 400px; border-radius: var(--radius); margin: 1rem 0; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); }
-
-    .download-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
-    .download-btn { flex: 1; min-width: 150px; padding: 0.8rem 1.5rem; border: 2px solid var(--accent); background: transparent; color: var(--accent); border-radius: var(--radius); cursor: pointer; font-weight: 700; transition: all 0.2s; }
-    .download-btn:hover { background: var(--accent); color: white; }
-    .download-btn.primary { background: var(--accent); color: white; }
-
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 2rem 0; }
-    .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: center; }
-    .feature-card .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    .feature-card p { margin: 0; font-size: 0.9rem; font-weight: 600; }
-
-    .guide-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; }
-    .guide-section h3 { color: var(--accent); margin-top: 0; }
-    .step-list { list-style: none; padding: 0; counter-reset: step; }
-    .step-list li { counter-increment: step; padding: 1rem; margin: 0.5rem 0; background: rgba(0, 0, 0, 0.05); border-radius: 0.5rem; position: relative; padding-left: 3.5rem; }
-    .step-list li::before { content: counter(step); position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 2rem; height: 2rem; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
-
-    .warning-box { background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; }
-
-    .status-message { padding: 1rem; border-radius: var(--radius); margin: 1rem 0; display: none; }
-    .status-message.success { background: rgba(0, 0, 0, 0.1); border-left: 4px solid var(--accent); color: var(--accent); display: block; }
-    .status-message.error { background: rgba(255, 71, 87, 0.1); border-left: 4px solid #ff4757; color: #ff4757; display: block; }
-    .status-message.info { background: rgba(122, 162, 255, 0.1); border-left: 4px solid var(--brand); color: var(--brand); display: block; }
-
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    @media (max-width: 600px) {
-      .input-group { flex-direction: column; }
-      .input-group input { min-width: 100%; }
-      .download-buttons { flex-direction: column; }
-      .download-btn { min-width: 100%; }
-    }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <link href="https://www.uptools.in/tiktok-video-downloader/" rel="canonical"/>
 <meta name="keywords" content="tiktok video downloader, tiktok video downloader, online tool, free calculator, uptools" />
@@ -118,6 +46,7 @@
   gtag('js', new Date());
   gtag('config', 'G-NN3GDL1LEJ');
 </script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>

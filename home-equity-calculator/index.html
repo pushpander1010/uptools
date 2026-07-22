@@ -65,73 +65,7 @@
   {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "What is home equity?","acceptedAnswer": {"@type": "Answer","text": "Home equity is the portion of your home that you own outright. It's calculated as: Current Home Value - Outstanding Mortgage Balance. For example, if your home is worth $400K and you owe $250K, you have $150K in equity."}},{"@type": "Question","name": "How do I build home equity?","acceptedAnswer": {"@type": "Answer","text": "Build equity by: 1) Making mortgage payments (reduces loan balance), 2) Home appreciation (increases value), 3) Making extra principal payments, 4) Home improvements that increase value."}},{"@type": "Question","name": "What is a good amount of home equity?","acceptedAnswer": {"@type": "Answer","text": "20% equity is the minimum to avoid PMI. 50%+ equity provides financial flexibility. Most lenders allow borrowing up to 80-85% of home value, so maintaining 15-20% equity is recommended."}}]}
   </script>
 
-  <style>
-    .calc-grid { display: grid; gap: 1.5rem; max-width: 42rem; margin: 0 auto; }
-    .input-group { display: flex; flex-direction: column; gap: .5rem; }
-    .input-group label { font-weight: 500; color: var(--text); }
-    .input-group input { 
-      padding: .75rem; 
-      border: 1px solid rgba(122,162,255,.3); 
-      border-radius: var(--radius); 
-      background: var(--surface); 
-      color: var(--text); 
-      font-size: 1rem;
-    }
-    .btn-calc {
-      padding: 1rem 2rem;
-      background: linear-gradient(135deg, var(--brand), #5a82df);
-      color: white;
-      border: none;
-      border-radius: var(--radius);
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .result-card {
-      background: linear-gradient(135deg, rgba(122,162,255,.1), rgba(90,130,223,.1));
-      border: 1px solid rgba(122,162,255,.3);
-      border-radius: var(--radius);
-      padding: 2rem;
-      margin-top: 2rem;
-    }
-    .result-main { font-size: 3rem; font-weight: 700; color: var(--brand); margin: 1rem 0; }
-    .breakdown { display: grid; gap: 1rem; margin-top: 1.5rem; }
-    .breakdown-item { display: flex; justify-content: space-between; padding: .75rem; background: rgba(122,162,255,.05); border-radius: .5rem; }
-    .equity-bar {
-      width: 100%;
-      height: 40px;
-      background: rgba(122,162,255,.1);
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin: 1rem 0;
-    }
-    .equity-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--brand), #5a82df);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 600;
-      transition: width 0.5s ease;
-    }
-      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <link href="https://www.uptools.in/home-equity-calculator/" rel="canonical"/>
 <meta name="keywords" content="home equity calculator, home equity calculator, online tool, free calculator, uptools" />
@@ -146,6 +80,7 @@
   gtag('js', new Date());
   gtag('config', 'G-NN3GDL1LEJ');
 </script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>

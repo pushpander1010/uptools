@@ -6,7 +6,7 @@
   <title>IPL 2025 Points Table - Live Standings, NRR & | UpTools</title>
   <meta name="description" content="IPL 2025 Points Table with live standings, Net Run Rate (NRR), matches played, wins, losses and playoff qualification tracker. Updated for all 10 IPL teams.">
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta name="theme-color" content="#0a0b0f">
+  <meta name="theme-color" content="#08080f">
 <link href="https://www.uptools.in/ipl-points-table/" rel="canonical"/>
   <meta name="keywords" content="IPL 2025 points table, IPL standings, IPL NRR, IPL playoff qualification, IPL live table, cricket points table">
 
@@ -41,139 +41,7 @@
   }
   </script>
 
-  <style>
-    :root {
-      --bg1: #08090e;
-      --bg2: #0b0f1a;
-      --ink: #e9ecf5;
-      --muted: #a6adbb;
-      --gold: #ffd700;
-      --blue: #4fc3f7;
-      --green: #00e676;
-      --red: #ff5252;
-      --orange: #ff9100;
-      --purple: #ce93d8;
-      --line: rgba(255,255,255,.09);
-      --card: rgba(255,255,255,.04);
-      --playoff: rgba(0,230,118,.08);
-    }
-    body {
-      color: var(--ink);
-      background: radial-gradient(1200px 700px at 15% 0%, rgba(255,215,0,.06), transparent 55%),
-                  radial-gradient(900px 600px at 85% 5%, rgba(79,195,247,.05), transparent 55%),
-                  linear-gradient(180deg, var(--bg1), var(--bg2));
-    }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 20px 16px 40px; display: grid; gap: 16px; }
-    .page-header { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-    .page-icon {
-      width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 26px;
-      background: linear-gradient(135deg, #ffd700, #ff9100);
-      box-shadow: 0 8px 24px rgba(255,215,0,.3);
-      flex-shrink: 0;
-    }
-    h1 { margin: 0; font-size: 1.7rem; text-shadow: 0 0 12px rgba(255,215,0,.35); }
-    .subtitle { color: var(--muted); font-size: .9rem; margin: 2px 0 0; }
-    .card { border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 1rem; }
-    .controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-    .pill-sel { display: flex; gap: 8px; flex-wrap: wrap; }
-    .pill {
-      padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: rgba(0,0,0,.3);
-      color: var(--ink); cursor: pointer; font-size: .85rem; transition: border-color .2s, background .2s;
-    }
-    .pill:hover { border-color: var(--gold); }
-    .pill[aria-pressed="true"] { border-color: var(--gold); background: rgba(255,215,0,.15); color: var(--gold); }
-    .last-updated { margin-left: auto; color: var(--muted); font-size: .8rem; }
-    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
-    thead th {
-      padding: 10px 12px; text-align: left; color: var(--muted); font-weight: 600; font-size: .8rem;
-      border-bottom: 1px solid var(--line); white-space: nowrap; cursor: pointer; user-select: none;
-    }
-    thead th:hover { color: var(--gold); }
-    thead th.sorted { color: var(--gold); }
-    tbody tr { border-bottom: 1px solid var(--line); transition: background .15s; }
-    tbody tr:last-child { border-bottom: 0; }
-    tbody tr:hover { background: rgba(255,255,255,.04); }
-    tbody tr.playoff-zone { background: var(--playoff); }
-    tbody tr.playoff-zone:hover { background: rgba(0,230,118,.12); }
-    td { padding: 11px 12px; white-space: nowrap; }
-    .pos { font-weight: 800; font-size: 1rem; width: 32px; }
-    .pos-1 { color: var(--gold); }
-    .pos-2 { color: #c0c0c0; }
-    .pos-3 { color: #cd7f32; }
-    .pos-4 { color: var(--green); }
-    .team-cell { display: flex; align-items: center; gap: 10px; min-width: 180px; }
-    .team-logo {
-      width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
-      font-size: 18px; flex-shrink: 0; border: 1px solid var(--line);
-    }
-    .team-name { font-weight: 700; }
-    .team-short { color: var(--muted); font-size: .78rem; }
-    .pts { font-weight: 800; font-size: 1.05rem; color: var(--gold); }
-    .nrr-pos { color: var(--green); }
-    .nrr-neg { color: var(--red); }
-    .w { color: var(--green); font-weight: 700; }
-    .l { color: var(--red); }
-    .nr { color: var(--muted); }
-    .form-cell { display: flex; gap: 3px; }
-    .form-dot {
-      width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center;
-      font-size: 10px; font-weight: 800;
-    }
-    .form-W { background: rgba(0,230,118,.25); color: var(--green); }
-    .form-L { background: rgba(255,82,82,.2); color: var(--red); }
-    .form-N { background: rgba(255,255,255,.1); color: var(--muted); }
-    .playoff-badge {
-      display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px;
-      border-radius: 999px; font-size: .72rem; font-weight: 700;
-      background: rgba(0,230,118,.2); color: var(--green); border: 1px solid rgba(0,230,118,.3);
-    }
-    .eliminated-badge {
-      display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px;
-      border-radius: 999px; font-size: .72rem; font-weight: 700;
-      background: rgba(255,82,82,.15); color: var(--red); border: 1px solid rgba(255,82,82,.25);
-    }
-    .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: .8rem; color: var(--muted); align-items: center; }
-    .legend-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 4px; }
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-    .stat-card { border: 1px solid var(--line); border-radius: 12px; background: var(--card); padding: 14px 16px; }
-    .stat-label { color: var(--muted); font-size: .78rem; margin-bottom: 4px; }
-    .stat-val { font-size: 1.3rem; font-weight: 800; }
-    .stat-sub { color: var(--muted); font-size: .78rem; margin-top: 2px; }
-    .faq-item { margin-bottom: 14px; }
-    .faq-item h3 { font-size: .95rem; margin: 0 0 4px; }
-    .faq-item p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.5; }
-    .rel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
-    .rel-link {
-      display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 12px;
-      border: 1px solid var(--line); border-radius: 10px; text-decoration: none; color: var(--ink);
-      background: rgba(255,215,0,.06); font-size: .88rem; text-align: center; transition: background .2s;
-    }
-    .rel-link:hover { background: rgba(255,215,0,.14); }
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    @media (max-width: 600px) {
-      h1 { font-size: 1.35rem; }
-      td, th { padding: 9px 8px; }
-      .team-name { font-size: .88rem; }
-    }
-    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
 
   <link rel="stylesheet" href="/style.css">
 
@@ -185,6 +53,7 @@
   gtag('js', new Date());
   gtag('config', 'G-NN3GDL1LEJ');
 </script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>

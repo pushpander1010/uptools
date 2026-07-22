@@ -7,7 +7,7 @@
 <meta name="description" content="Generate random food images from around the world. Discover new dishes by category: pasta, sushi, curry, desserts, pizza and more. Free tool."/>
 <meta name="keywords" content="random food generator, food images, random dish, food discovery, pasta, sushi, curry, pizza, dessert, food randomizer"/>
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large"/>
-<meta name="theme-color" content="#0a0a12"/>
+<meta name="theme-color" content="#08080f"/>
 <link rel="canonical" href="https://www.uptools.in/food-randomizer/"/>
 <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg"/>
 <link rel="apple-touch-icon" href="/assets/logo/uptools-logo.svg"/>
@@ -25,60 +25,12 @@
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-6216304334889617",enable_page_level_ads:true});</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NN3GDL1LEJ"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NN3GDL1LEJ');</script>
-<style>
-:root{--bg1:#0e0e18;--bg2:#0a0a12;--ink:#e8e8f0;--muted:#a0a0b8;--cyan:#818cf8;--cyan-2:#6366f1;--blue:#a78bfa;--green:#34d399;--red:#f87171;--orange:#fbbf24;--line:rgba(255,255,255,.12);--card:rgba(255,255,255,.06);--surface:rgba(18,18,32,0.92);--radius:.75rem}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;line-height:1.5}
-.container{max-width:900px;margin:0 auto;padding:20px 16px}
-.tool-header{text-align:center;margin-bottom:24px}
-.tool-header .icon{font-size:3rem;margin-bottom:8px}
-.tool-header h1{font-size:1.6rem;font-weight:700;margin-bottom:4px}
-.tool-header p{color:var(--muted);font-size:.95rem}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:16px}
-.categories{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
-.cat-chip{padding:6px 14px;border-radius:99px;font-size:.8rem;cursor:pointer;background:rgba(20,20,35,0.9);border:1px solid var(--line);color:var(--ink);transition:all .2s}
-.cat-chip.active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,.08)}
-.cat-chip:hover{border-color:var(--cyan)}
-.food-card{background:var(--bg1);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:16px;transition:all .3s}
-.food-card .food-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--bg2)}
-.food-card .food-info{padding:16px;text-align:center}
-.food-card .food-name{font-size:1.2rem;font-weight:600;margin-bottom:4px}
-.food-card .food-category{color:var(--cyan);font-size:.85rem}
-.btn-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
-.btn{background:linear-gradient(135deg,var(--cyan),var(--blue));color:#000;border:none;padding:12px 20px;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:600;transition:opacity .2s}
-.btn:hover{opacity:.85}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.btn-outline{background:transparent;border:1px solid var(--line);color:var(--ink)}
-.btn-sm{padding:8px 14px;font-size:.85rem}
-.loading{text-align:center;padding:40px;color:var(--muted)}
-.loading .spinner{display:inline-block;width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.history-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
-.history-item{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;aspect-ratio:1;border:1px solid var(--line);transition:all .2s}
-.history-item:hover{border-color:var(--cyan);transform:scale(1.02)}
-.history-item img{width:100%;height:100%;object-fit:cover}
-.history-item .history-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.8));padding:6px 8px;font-size:.7rem;color:#fff}
-.history-item .fav-dot{position:absolute;top:6px;right:6px;width:24px;height:24px;background:rgba(255,82,82,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;cursor:pointer}
-.fav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
-.section-title{font-size:1.1rem;font-weight:700;margin:20px 0 12px}
-.dos-donts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:600px){.dos-donts{grid-template-columns:1fr}}
-.dos{padding:16px;border-radius:12px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.2)}
-.donts{padding:16px;border-radius:12px;background:rgba(255,82,82,.08);border:1px solid rgba(255,82,82,.2)}
-.dos h3{color:var(--green);margin-bottom:8px}.donts h3{color:var(--red);margin-bottom:8px}
-.dos li,.donts li{color:var(--muted);font-size:.85rem;margin-bottom:4px}
-details{margin:8px 0}details summary{cursor:pointer;font-weight:600;padding:8px 0}
-details p{color:var(--muted);font-size:.9rem;padding-left:12px}
-.related{text-align:center;margin:24px 0}.related a{color:var(--cyan);text-decoration:none;margin:0 8px;font-size:.9rem}.related a:hover{text-decoration:underline}
-footer{text-align:center;padding:24px 0;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:24px}
-@keyframes fadeScale{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
-.fade-scale{animation:fadeScale .4s ease}
-.empty{text-align:center;padding:20px;color:var(--muted);font-size:.9rem}
-</style>
+
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"UpTools Food Randomizer","applicationCategory":"FoodEstablishment","operatingSystem":"Any","url":"https://www.uptools.in/food-randomizer/","description":"Generate random food images from around the world. Discover new dishes by category.","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},{"@type":"ListItem","position":2,"name":"Food Randomizer","item":"https://www.uptools.in/food-randomizer/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where do food images come from?","acceptedAnswer":{"@type":"Answer","text":"Food images are sourced from the Foodish API, a free service providing random food photographs from various cuisines."}},{"@type":"Question","name":"Can I filter by food type?","acceptedAnswer":{"@type":"Answer","text":"Yes, use the category chips to filter by pasta, rice, curry, desserts, pizza, burger, and more."}},{"@type":"Question","name":"Can I save favorite foods?","acceptedAnswer":{"@type":"Answer","text":"Yes, click the heart icon on any food image to save it to your favorites. Stored locally in your browser."}},{"@type":"Question","name":"Is this tool free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free. No signup required."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Use Food Randomizer","step":[{"@type":"HowToStep","name":"Pick Category","text":"Select a food category like Pasta, Pizza, or Desserts from the filter chips."},{"@type":"HowToStep","name":"Discover","text":"Click New Food to get a random dish image and name."},{"@type":"HowToStep","name":"Save","text":"Heart your favorites to build a collection of dishes to try."}]}</script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body>
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6216304334889617" data-ad-slot="9810172647" data-ad-format="auto" data-full-width-responsive="true"></ins>

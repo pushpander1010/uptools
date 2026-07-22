@@ -12,7 +12,7 @@
   <meta name="description" content="Find ONLY real opportunities: domains AVAILABLE now or EXPIRING soon (with expiry dates). Use Seed Keyword Finder, Length-Based Generator, or Regex Filter." />
   <meta name="keywords" content="domain finder, available domains, expiring domains, RDAP, regex domain search, length based domains, pronounceable domains, domain flipping, brandable names" />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta name="theme-color" content="#0a0a12" />
+  <meta name="theme-color" content="#08080f" />
 <link href="https://www.uptools.in/domain-finder/" rel="canonical"/>
 
   <!-- Icons -->
@@ -69,120 +69,7 @@
   }
   </script>
 
-  <style>
-    /* ---------- Base ---------- */
-    *,*::before,*::after{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    img{ max-width:100%; height:auto; }
-    :root{ --header-h:60px; --content-w:1120px; --radius:12px; }
-    body{
-      background:
-        radial-gradient(900px 480px at 12% -10%, #0b1020 0, transparent 50%),
-        linear-gradient(135deg,#0a0f1a,#0a1220);
-    }
-
-    /* ---------- Header ---------- */
-    .site{ position:sticky; top:0; z-index:20; background:rgba(8,12,20,.6); backdrop-filter:blur(6px); border-bottom:1px solid rgba(255,255,255,.06);}
-    .header-inner{ max-width:var(--content-w); margin:0 auto; padding:.6rem .8rem; display:flex; justify-content:space-between; align-items:center; min-height:var(--header-h); }
-    .brand{ display:flex; gap:.5rem; align-items:center; color:#eaf3ff; text-decoration:none; }
-    .nav-links a{ color:#b8c7d9; margin-left:1rem; text-decoration:none; }
-    .nav-links a[aria-current="page"]{ color:#fff; font-weight:700; text-decoration:underline; text-underline-offset:6px; }
-
-    /* ---------- Layout ---------- */
-    main.page{
-      max-width:var(--content-w);
-      margin:0 auto;
-      padding:.75rem;
-      height:calc(100dvh - var(--header-h));
-      display:grid;
-      grid-template-columns: 420px 1fr;
-      gap:.75rem;
-      min-height:560px;
-    }
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    @media (max-width: 1020px){ main.page{ grid-template-columns:1fr; height:auto; } }
-
-    /* ---------- Panels ---------- */
-    .panel,.card{ background:#0f1726; border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); box-shadow:0 10px 30px rgba(0,0,0,.35); }
-    .panel{ display:flex; flex-direction:column; min-height:0; }
-    .panel-header{ padding:.8rem .9rem; border-bottom:1px solid rgba(255,255,255,.08); display:flex; align-items:center; justify-content:space-between; }
-    .panel-title{ display:flex; align-items:center; gap:.5rem; font-weight:800; color:#e9f2ff; }
-    .pill{ display:inline-block; padding:.32rem .6rem; border-radius:10px; background:linear-gradient(135deg,#64ffda,#41c9a8); color:#07161a; font-weight:900; line-height:1; white-space:nowrap; }
-    .panel-body{ padding:.8rem .9rem; display:grid; gap:.75rem; overflow:auto; max-height:calc(100% - 54px); }
-    .section{ border:1px dashed #263248; border-radius:12px; padding:.75rem; display:grid; gap:.6rem; }
-    .section h4{ margin:0; color:#eaf3ff; display:flex; align-items:center; gap:.5rem; font-size:1.02rem; }
-
-    .row-grid{ display:grid; gap:.6rem; }
-    .row-2{ grid-template-columns:1fr 1fr; gap:.6rem; }
-    .row-3{ grid-template-columns:repeat(3,1fr); gap:.6rem; }
-    @media (max-width:950px){ .row-2,.row-3{ grid-template-columns:1fr; } }
-
-    /* Inputs & chips */
-    label{ color:#c7d6e5; font-size:.95rem; }
-    .input,.textarea,select{ background:#0b1322; border:1px solid #263248; color:#e7f0ff; border-radius:10px; padding:.6rem .75rem; outline:none; width:100%; }
-    .textarea{ min-height:120px; resize:vertical; }
-    .chips{ display:flex; flex-wrap:wrap; gap:.5rem; }
-    .chip{ padding:.45rem .7rem; border-radius:999px; background:#0b1322; border:1px solid #263248; color:#a9bed4; cursor:pointer; user-select:none; transition:.15s; position:relative; font-weight:600; }
-    .chip.active{ background:linear-gradient(135deg,rgba(100,255,218,.20),rgba(65,201,168,.20)); border-color:#4bdcb3; color:#eafffb; outline:2px solid rgba(100,255,218,.25); outline-offset:1px; box-shadow:0 0 0 2px rgba(75,220,179,.1) inset; }
-
-    .btn{ border:1px solid #2a3a57; background:#122034; color:#d8e7ff; border-radius:10px; padding:.55rem .9rem; font-weight:700; cursor:pointer; }
-    .btn.primary{ background:linear-gradient(180deg,#13aa87,#0e8c71); border-color:#0b6b57; }
-    .btn.secondary{ background:#10182a; }
-    .btn.ghost{ background:transparent; }
-    .btn.sm{ padding:.35rem .6rem; font-size:.85rem; white-space:nowrap; }
-
-    .kbar{ display:flex; align-items:center; gap:.6rem; font-size:.9rem; color:#9db2c8; }
-    .progress{ height:8px; background:#0b1326; border:1px solid #203052; border-radius:8px; width:100%; overflow:hidden; }
-    .progress>span{ display:block; height:100%; width:0%; background:linear-gradient(90deg,#64ffda,#41c9a8); transition:width .25s ease; }
-
-    /* RIGHT area */
-    .right{ display:grid; grid-template-rows:min-content minmax(0,1fr); gap:.75rem; min-height:0; }
-    .lists{ display:grid; grid-template-columns:1fr 1fr; gap:.75rem; min-height:0; }
-    @media (max-width:950px){ .lists{ grid-template-columns:1fr; } }
-    .card h3{ margin:.8rem .9rem; overflow: auto; display:flex; align-items:center; justify-content:space-between; }
-    .rows{ display:grid; gap:.5rem; overflow:auto; padding:0 .9rem .9rem; max-height:calc(100% - 48px); }
-
-    .rowi{ display:grid; grid-template-columns:1fr auto; gap:.6rem; align-items:center; border:1px dashed #253149; border-radius:10px; padding:.7rem .8rem; background:#0b1326; overflow:hidden; }
-    .n{ font-weight:800; color:#dffaf2; overflow-wrap:anywhere; word-break:break-word; }
-    .meta{ display:flex; flex-wrap:wrap; gap:.45rem; margin-top:.35rem; font-size:.85rem; }
-    .tag{ border:1px solid #2a3a57; background:#0a1224; color:#b9d0ff; padding:.25rem .55rem; border-radius:999px; }
-    .score{ color:#aef8e4; font-weight:800; }
-    .when{ color:#ffd3a3; font-weight:800; }
-    .rank{ color:#cfa9ff; font-weight:800; }
-    .visits{ color:#8ff9ff; font-weight:800; }
-    .badge{ font:700 12px/1 system-ui; border:1px solid #203052; background:#0b1326; color:#cfe7ff; padding:.25rem .55rem; border-radius:999px; }
-
-    /* Regex examples */
-    .examples{ display:flex; flex-wrap:wrap; gap:.4rem; }
-    .ex{ font:600 .9rem/1.2 system-ui; color:#cfe7ff; background:#0b1326; border:1px solid #203052; border-radius:8px; padding:.28rem .5rem; }
-
-    /* Video */
-    .video-card .frame{ position:relative; width:100%; aspect-ratio:16/9; border-top:1px solid rgba(255,255,255,.06); border-bottom-left-radius:var(--radius); border-bottom-right-radius:var(--radius); overflow:hidden; background:#0b1326; }
-    .video-card iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
-    .thumb{ position:absolute; inset:0; cursor:pointer; display:grid; place-items:center; }
-    .thumb img{ width:100%; height:100%; object-fit:cover; }
-    .thumb .play{ position:absolute; width:72px; height:72px; border-radius:999px; background:rgba(0,0,0,.5); border:2px solid #fff; display:grid; place-items:center; }
-    .thumb .play::after{ content:""; border-left:18px solid #fff; border-top:10px solid transparent; border-bottom:10px solid transparent; margin-left:6px; }
-
-    footer{ max-width:var(--content-w); margin:.6rem auto 1rem; color:#9db3c6; text-align:center; }
-    footer a{ color:#9ac7ff; text-decoration:none; }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
 
   <link rel="stylesheet" href="/style.css?v=2.0.0">
 

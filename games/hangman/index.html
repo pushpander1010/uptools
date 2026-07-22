@@ -23,75 +23,7 @@
   {"@context":"https://schema.org","@type":"VideoGame","name":"Hangman","url":"https://www.uptools.in/games/hangman/","applicationCategory":"Game","genre":["Word","Classic","Puzzle"]}
   </script>
   <script src="/games/fullscreen-utils.js" defer></script>
-  <style>
-      body { --accent: #7aa2ff; }
-      .game-wrap { max-width: 680px; margin: 0 auto; }
-      .hangman-svg { display: block; margin: 0 auto; }
-      .word-display { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
-      .letter-box { min-width: 44px; min-height: 44px; width: 44px; height: 44px; border-bottom: 3px solid #7aa2ff; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 900; text-transform: uppercase; }
-      .keyboard { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 12px 0; }
-      .key-btn { min-width: 44px; min-height: 44px; padding: 6px; border-radius: .4rem; border: 1px solid #212a3a; background: #121826; color: #e6edf3; font-weight: 700; cursor: pointer; font-size: .9rem; transition: all .1s; }
-      .key-btn:hover:not(:disabled) { background: #7aa2ff; color: #0b1020; }
-      .key-btn:disabled { opacity: .35; cursor: not-allowed; }
-      .key-btn.wrong { background: #3a0a0a; border-color: #661e1e; color: #ff6b6b; }
-      .key-btn.correct { background: #0a2a1a; border-color: #1e6641; color: #00e5a0; }
-      .hint-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .5rem .75rem; font-size: .9rem; color: #9aa4b2; margin: 8px 0; }
-      .wrong-letters { color: #ff6b6b; font-size: .9rem; min-height: 1.4em; }
-      .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
-      .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-      .overlay {
-        position: absolute;
-        inset: 0;
-        background: rgba(18, 24, 38, 0.95);
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 200;
-        border-radius: .75rem;
-        padding: 1.5rem;
-        text-align: center;
-        backdrop-filter: blur(8px);
-      }
-
-      /* Animated SVG hangman body parts */
-      @keyframes drawHead {
-        0% { opacity: 0; stroke-dashoffset: 100; transform: scale(0.3); transform-origin: 100px 45px; }
-        50% { opacity: 1; transform: scale(1.1); }
-        100% { opacity: 1; stroke-dashoffset: 0; transform: scale(1); }
-      }
-      @keyframes drawLine {
-        0% { opacity: 0; stroke-dashoffset: 80; }
-        60% { opacity: 1; }
-        100% { opacity: 1; stroke-dashoffset: 0; }
-      }
-      .body-part {
-        opacity: 0;
-        stroke-dasharray: 100;
-        stroke-dashoffset: 100;
-      }
-      .body-part.visible.head { animation: drawHead 0.5s ease-out forwards; }
-      .body-part.visible.body { animation: drawLine 0.4s ease-out forwards; }
-      .body-part.visible.larm { animation: drawLine 0.4s ease-out forwards; }
-      .body-part.visible.rarm { animation: drawLine 0.4s ease-out forwards; }
-      .body-part.visible.lleg { animation: drawLine 0.4s ease-out forwards; }
-      .body-part.visible.rleg { animation: drawLine 0.4s ease-out forwards; }
-
-      .skip-link {
-        position: absolute;
-        top: -40px;
-        left: 0;
-        background: #000;
-        color: #fff;
-        padding: 8px;
-        z-index: 10000;
-        transition: top 0.3s;
-      }
-      .skip-link:focus {
-        top: 0;
-      }
-
-  </style>
+  
 
   <link rel="stylesheet" href="/style.css?v=2.0.0">
 

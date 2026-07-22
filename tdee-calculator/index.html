@@ -65,72 +65,7 @@
 {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.uptools.in/"}, {"@type": "ListItem", "position": 2, "name": "Tdee Calculator", "item": "https://www.uptools.in/tdee-calculator/"}]}
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"TDEE Calculator","url":"https://www.uptools.in/tdee-calculator/","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools"}}</script>
-  <style>
-    :root{--accent:#22d3ee;--accent-2:#4ade80;}
-    body{background:radial-gradient(1100px 600px at 10% -5%,#0a1e20 0%,var(--bg) 50%) fixed;}
-    .wrap{max-width:820px;margin:0 auto;padding:1rem 1rem 3rem;}
-    .tool-hero{text-align:center;padding:1.5rem 0 1rem;}
-    .tool-hero h1{font-size:clamp(1.4rem,4vw,2.2rem);background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-    .unit-toggle{display:flex;gap:.5rem;justify-content:center;margin:.75rem 0 1.25rem;}
-    .unit-btn{padding:.45rem 1.1rem;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-weight:700;cursor:pointer;transition:all .18s;}
-    .unit-btn.active{background:var(--accent);color:#071018;}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    @media(max-width:480px){.form-grid{grid-template-columns:1fr;}}
-    .field label{display:block;margin-bottom:.3rem;font-weight:700;color:var(--muted);font-size:.85rem;}
-    .field input,.field select{width:100%;padding:.6rem .75rem;border-radius:10px;background:#0a1224;border:1px solid var(--border);color:var(--text);font:inherit;}
-    .field input:focus,.field select:focus{border-color:var(--accent);outline:none;}
-    .sex-toggle{display:flex;gap:.5rem;}
-    .sex-btn{flex:1;padding:.55rem;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-weight:700;cursor:pointer;transition:all .18s;}
-    .sex-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#071018;}
-    .activity-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.4rem;}
-    .activity-item{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem .75rem;border-radius:10px;border:1px solid var(--border);background:var(--card);cursor:pointer;transition:all .18s;}
-    .activity-item.active{border-color:var(--accent);background:rgba(34,211,238,.1);}
-    .activity-item input[type=radio]{accent-color:var(--accent);margin-top:.15rem;flex-shrink:0;}
-    .activity-label{font-weight:700;font-size:.9rem;}
-    .activity-desc{font-size:.78rem;color:var(--muted);}
-    .calc-btn{width:100%;padding:.9rem;margin-top:1rem;font-size:1.1rem;}
-    /* Results */
-    .results{margin-top:1.5rem;display:none;}
-    .results.show{display:block;}
-    .results-header{text-align:center;margin-bottom:1rem;}
-    .bmr-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem;text-align:center;margin-bottom:1rem;box-shadow:var(--glow-soft);}
-    .bmr-val{font-size:2.5rem;font-weight:900;color:var(--accent);line-height:1;}
-    .bmr-lbl{color:var(--muted);font-size:.85rem;margin-top:.25rem;}
-    .goal-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1rem;}
-    @media(max-width:500px){.goal-cards{grid-template-columns:1fr;}}
-    .goal-card{border-radius:14px;padding:1rem;text-align:center;border:1px solid;}
-    .goal-card.loss{border-color:#f87171;background:rgba(248,113,113,.08);}
-    .goal-card.maintain{border-color:var(--accent);background:rgba(34,211,238,.08);}
-    .goal-card.gain{border-color:#4ade80;background:rgba(74,222,128,.08);}
-    .goal-cal{font-size:1.6rem;font-weight:900;}
-    .goal-card.loss .goal-cal{color:#f87171;}
-    .goal-card.maintain .goal-cal{color:var(--accent);}
-    .goal-card.gain .goal-cal{color:#4ade80;}
-    .goal-name{font-size:.8rem;color:var(--muted);margin-top:.2rem;}
-    .macro-table{width:100%;border-collapse:collapse;margin-top:.75rem;}
-    .macro-table th,.macro-table td{padding:.55rem .75rem;text-align:center;border-bottom:1px solid var(--border);}
-    .macro-table th{color:var(--muted);font-size:.8rem;font-weight:700;}
-    .macro-table td:first-child{text-align:left;}
-    .bar-wrap{height:8px;border-radius:99px;background:#1a2030;overflow:hidden;}
-    .bar-fill{height:100%;border-radius:99px;}
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
 
   <link rel="stylesheet" href="/style.css?v=2.0.0">
 

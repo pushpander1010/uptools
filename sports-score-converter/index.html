@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Free Sports Score Converter by UpTools. Convert scores between different sports formats and scoring systems. Compare basketball, football, tennis, and more." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta name="theme-color" content="#0a0b0f" />
+  <meta name="theme-color" content="#08080f" />
 <link href="https://www.uptools.in/sports-score-converter/" rel="canonical"/>
   <meta name="keywords" content="sports score converter, basketball score, football score, tennis score, sports calculator, score converter" />
 
@@ -27,78 +27,7 @@
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
 
   <script src="/scripts/utils.js?v=1.3.0" type="module"></script>
-  <style>
-    :root{
-      --bg1:#0e0e18;
-      --bg2:#0a0a12;
-      --ink:#e8e8f0;
-      --muted:#a0a0b8;
-      --accent:#ff6b35;
-      --accent-2:#ff8c42;
-      --line:rgba(255,255,255,.12);
-      --card:rgba(255,255,255,.06);
-    }
-    html,body{height:100%}
-    body{
-      color:var(--ink);
-      background:
-        radial-gradient(1200px 800px at 10% 5%, rgba(255,107,53,.08), transparent 55%),
-        radial-gradient(900px 600px at 88% 10%, rgba(255,140,66,.06), transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-    }
-    .wrap{ max-width:1100px; margin:0 auto; padding:24px 16px 32px; display:grid; gap:16px; }
-    .grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:16px; align-items:start; }
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
-    .card{ border:1px solid var(--line); border-radius:14px; background:var(--card); padding:1rem; }
-    .tool-header{ display:flex; align-items:center; gap:12px; margin-bottom:8px; }
-    .tool-icon{
-      width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:24px;
-      background:linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow:0 8px 24px rgba(255,107,53,.3);
-    }
-    h1{margin:0;font-size:1.75rem;text-shadow:0 0 10px rgba(255,107,53,.4);}
-    .inputs{ display:grid; gap:12px; }
-    .row{display:flex;flex-direction:column;gap:6px;}
-    .label{font-weight:600;color:var(--muted);font-size:.9rem;}
-    .input, .select{
-      padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.3);
-      color:var(--ink);font-size:1rem;font-family:inherit;
-      transition:border-color .2s,box-shadow .2s;
-    }
-    .input:focus, .select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,107,53,.15);}
-    .select{cursor:pointer;}
-    .btn{
-      padding:12px 20px;border-radius:10px;border:1px solid var(--accent);
-      background:linear-gradient(135deg, rgba(255,107,53,.2), rgba(255,140,66,.15));
-      color:var(--accent);font-weight:700;cursor:pointer;font-size:1rem;
-      transition:transform .1s,filter .15s;
-    }
-    .btn:hover{filter:brightness(1.15);transform:translateY(-1px);}
-    .result{ display:grid; gap:10px; }
-    .result .row{
-      display:flex;align-items:center;justify-content:space-between;padding:12px 14px;
-      border:1px solid var(--line);border-radius:10px;background:rgba(0,0,0,.25);
-    }
-    .amount{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.2rem;color:var(--accent);}
-    .note{color:var(--muted);font-size:.9rem;margin-top:8px;}
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
 
   <link rel="stylesheet" href="/style.css?v=2.0.0">
 

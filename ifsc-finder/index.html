@@ -14,7 +14,7 @@
 <meta content="Find bank branch details by IFSC code in India. Get bank name, branch, MICR, address, city, state &amp; contact. Bulk lookup, CSV/JSON export, vCard and maps." name="description"/>
 <meta content="ifsc finder, ifsc finder, online tool, free calculator, uptools" name="keywords"/>
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-<meta content="#0a0a12" name="theme-color"/>
+<meta content="#08080f" name="theme-color"/>
 <link href="https://www.uptools.in/ifsc-finder/" rel="canonical"/>
 
 <!-- OG/Twitter -->
@@ -31,20 +31,7 @@
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml">
 <link href="/assets/logo/uptools-logo.svg" rel="apple-touch-icon" sizes="180x180">
 <!-- Critical tiny rules -->
-<style>
-    :root{--bg:#0f1419;--surface:rgba(18,18,32,0.92);--text:#e6edf3;--muted:#9aa4b2;--brand:#7aa2ff;--radius:.75rem;--cardBorder:#212a3a}
-    *{box-sizing:border-box}
-    html{color-scheme:dark light;-webkit-text-size-adjust:100%}
-    body{margin:0;font:400 16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Noto Sans",sans-serif;background:var(--bg);color:var(--text)}
-    img,svg,video{max-width:100%;height:auto}
-    .container{width:min(100% - 24px,1120px);margin-inline:auto}
-    a{color:var(--brand);text-decoration-thickness:.08em;text-underline-offset:.18em}
-    .card{background:var(--surface);border:1px solid var(--cardBorder);border-radius:var(--radius);padding:1rem}
-    .btn{display:inline-block;padding:.65rem .9rem;border-radius:var(--radius);background:var(--brand);color:#0b1020;border:0;font-weight:600}
-    .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--cardBorder)}
-    .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--cardBorder)}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-  </style>
+
 <!-- Non-blocking site CSS -->
 
 <!-- Schema -->
@@ -59,54 +46,7 @@
   {"@context":"https://schema.org","@type":"FinancialService","name":"IFSC Finder","url":"https://www.uptools.in/ifsc-finder/","description":"Find Indian bank branch details using IFSC code, including bank name, branch, MICR, address, city and state. Bulk lookup, CSV/JSON export, vCard and maps.","areaServed":{"@type":"Country","name":"India"},"provider":{"@type":"Organization","name":"UpTools"}}
   </script>
 <!-- Page-scoped styles -->
-<style>
-    body { --accent:#bdb2ff; }
-    .tool-header{display:flex;align-items:center;gap:10px;margin:12px 0}
-    .tool-icon{font-size:22px}
-    .search-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .input.ifsc{text-transform:uppercase;letter-spacing:.08em;font-weight:600}
-    .muted{color:var(--muted);font-size:12px}
-    .bank-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-    .bank-logo{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:color-mix(in oklab,var(--accent) 60%,#000);color:#0b1020;font-weight:800}
-    .bank-logo--img{width:40px;height:40px;border-radius:10px;display:block;object-fit:contain;background:#0000}
-    .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid var(--cardBorder);background:var(--bg);color:var(--text);text-decoration:none;cursor:pointer;font-size:12px}
-    .chip:hover{border-color:var(--accent)}
-    .chips{display:flex;gap:8px;flex-wrap:wrap}
-    .copy-btn,.share-btn{border:1px solid var(--cardBorder);background:var(--bg);color:var(--text);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:12px}
-    .copy-btn:hover,.share-btn:hover{border-color:var(--accent)}
-    .divider{height:1px;background:var(--cardBorder);margin:10px 0}
-    .row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
-    .row:last-child{border-bottom:0}
-    .row.key{font-weight:600}
-    .amount{font-variant-numeric:tabular-nums}
-    .note{opacity:.9}
-    .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-    .skeleton{background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.09),rgba(255,255,255,.05));background-size:200% 100%;animation:loading 1.2s infinite;border-radius:6px;height:16px}
-    @keyframes loading{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-    /* Bulk results table */
-    .table{width:100%;border-collapse:separate;border-spacing:0}
-    .table th,.table td{padding:8px;border-bottom:1px solid var(--cardBorder);text-align:left}
-    .table th{font-weight:700}
-    .status-ok{color:#9cffbf}
-    .status-err{color:#ff9aa2}
-      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
 </link></link></link>  
 
 <meta name="keywords" content="ifsc finder, ifsc finder, online tool, free calculator, uptools" />

@@ -23,70 +23,7 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"VideoGame","name":"Quiz Trivia","url":"https://www.uptools.in/games/quiz-trivia/","applicationCategory":"Game","genre":["Quiz","Brain","Educational"]}
   </script>
-  <style>
-    body { --accent: #f59e0b; }
-    .game-wrap { max-width: 680px; margin: 0 auto; }
-    .game-container { position: relative; max-width: 680px; margin: 12px auto 0; }
-    #quizGameContainer.fullscreen-mode {
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: center !important;
-      background: var(--bg, #0b0f1a) !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      max-width: 100vw !important;
-      max-height: 100vh !important;
-      box-sizing: border-box;
-      padding: 20px !important;
-      overflow-y: auto !important;
-    }
-    #quizGameContainer.fullscreen-mode > #quizSection,
-    #quizGameContainer.fullscreen-mode > #resultBox {
-      width: 100%;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-    .question-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .75rem; padding: 1.25rem; font-size: 1.1rem; font-weight: 600; line-height: 1.6; min-height: 80px; }
-    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
-    @media(max-width:500px){ .options-grid { grid-template-columns: 1fr; } }
-    .opt-btn { padding: .75rem 1rem; border-radius: .5rem; border: 1px solid #212a3a; background: #121826; color: #e6edf3; font-size: .95rem; cursor: pointer; text-align: left; transition: all .15s; line-height: 1.4; min-height: 48px; box-sizing: border-box; width: 100%; }
-    .opt-btn:hover:not(:disabled) { border-color: #f59e0b; background: #1a1a0a; }
-    .opt-btn.correct { background: #0a2a1a; border-color: #00e5a0; color: #00e5a0; }
-    .opt-btn.wrong { background: #2a0a0a; border-color: #ff6b6b; color: #ff6b6b; }
-    .opt-btn:disabled { cursor: not-allowed; }
-    .score-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
-    .score-box { background: #0d1626; border: 1px solid #212a3a; border-radius: .5rem; padding: .5rem 1rem; text-align: center; }
-    .score-val { font-size: 1.5rem; font-weight: 900; color: #f59e0b; }
-    .score-lbl { font-size: .8rem; color: #9aa4b2; }
-    .progress-bar { height: 6px; background: #0d1626; border-radius: 999px; margin: 8px 0; overflow: hidden; }
-    .progress-fill { height: 100%; background: #f59e0b; border-radius: 999px; transition: width .3s; }
-    #feedback { font-size: 1rem; font-weight: 700; min-height: 1.4em; text-align: center; margin-top: 8px; }
-    .result-box { background: #0d1626; border: 1px solid #2a3a5a; border-radius: .75rem; padding: 1.5rem; text-align: center; display: none; }
-    .result-score { font-size: 3rem; font-weight: 900; color: #f59e0b; }
-    .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: .75rem; overflow: hidden; border: 1px solid #212a3a; }
-    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .cat-pill { display: inline-flex; align-items: center; gap: .35rem; padding: .3rem .7rem; border-radius: 999px; background: #182033; border: 1px solid #212a3a; font-size: .8rem; color: #9aa4b2; }
-
-    /* Touch target improvements */
-    #catSel { min-height: 44px; }
-    .btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
 
   <link rel="stylesheet" href="/style.css?v=2.0.0">
 

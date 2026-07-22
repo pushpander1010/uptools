@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg">
   <meta name="description" content="Free Cricket Score Predictor by UpTools. Predict match outcome, win probability, and projected score based on current score, overs, and wickets. Accurate for" />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta name="theme-color" content="#0a0b0f" />
+  <meta name="theme-color" content="#08080f" />
 <link href="https://www.uptools.in/cricket-score-predictor/" rel="canonical"/>
   <meta name="keywords" content="cricket score predictor, win probability calculator, match outcome predictor, cricket winning chance, duckworth lewis, par score, projected score" />
 
@@ -27,111 +27,7 @@
   <meta name="twitter:description" content="Cricket Score Predictor - Win Probability & Match Outcome. Free online tool by UpTools." />
   <meta name="twitter:image" content="https://www.uptools.in/assets/home.png" />
 
-  <style>
-    :root{
-      --bg1:#0e0e18;
-      --bg2:#0a0a12;
-      --ink:#e8e8f0;
-      --muted:#a0a0b8;
-      --cyan:#818cf8;
-      --cyan-2:#6366f1;
-      --blue:#a78bfa;
-      --green:#34d399;
-      --red:#f87171;
-      --orange:#fbbf24;
-      --line:rgba(255,255,255,.12);
-      --card:rgba(255,255,255,.06);
-    }
-    html,body{height:100%}
-    body{
-      color:var(--ink);
-      background:
-        radial-gradient(1200px 800px at 10% 5%, rgba(0,229,255,.08), transparent 55%),
-        radial-gradient(900px 600px at 88% 10%, rgba(41,121,255,.06), transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-    }
-    .wrap{ max-width:1100px; margin:0 auto; padding:24px 16px 32px; display:grid; gap:16px; }
-    .grid{ display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:start; }
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    @media (max-width:900px){.grid{grid-template-columns:1fr};}
-    .card{ border:1px solid var(--line);border-radius:14px;background:var(--card);padding:1rem; }
-    .tool-header{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
-    .tool-icon{
-      width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:24px;
-      background:linear-gradient(135deg, var(--cyan), var(--blue));
-      box-shadow:0 8px 24px rgba(0,229,255,.3);
-    }
-    h1{margin:0;font-size:1.75rem;text-shadow:0 0 10px rgba(0,229,255,.4);}
-    .inputs{display:grid;gap:12px;}
-    .row{display:flex;flex-direction:column;gap:6px;}
-    .label{font-weight:600;color:var(--muted);font-size:.9rem;}
-    .input{
-      padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.3);
-      color:var(--ink);font-size:1rem;font-family:inherit;
-      transition:border-color .2s,box-shadow .2s;
-    }
-    .input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,.15);}
-    .pill-sel{display:flex;flex-wrap:wrap;gap:8px;}
-    .pill{
-      padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:#131622;cursor:pointer;
-      color:var(--ink);transition:transform .1s,border-color .2s;
-    }
-    .pill:hover{transform:translateY(-1px);border-color:rgba(0,229,255,.5);}
-    .pill[aria-pressed="true"]{
-      border-color:var(--cyan);background:rgba(0,229,255,.15);color:#fff;
-      box-shadow:0 0 0 2px rgba(0,229,255,.25);
-    }
-    .btn{
-      padding:12px 20px;border-radius:10px;border:1px solid var(--cyan);
-      background:linear-gradient(135deg, rgba(0,229,255,.2), rgba(0,184,212,.15));
-      color:var(--cyan);font-weight:700;cursor:pointer;font-size:1rem;
-      transition:transform .1s,filter .15s;
-    }
-    .btn:hover{filter:brightness(1.15);transform:translateY(-1px);}
-    .btn.secondary{background:#1a2230;border-color:var(--line);color:var(--ink);}
-    .result{display:grid;gap:10px;}
-    .result .row{
-      display:flex;align-items:center;justify-content:space-between;padding:12px 14px;
-      border:1px solid var(--line);border-radius:10px;background:rgba(0,0,0,.25);
-    }
-    .amount{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.2rem;}
-    .green{color:var(--green);}
-    .orange{color:var(--orange);}
-    .red{color:var(--red);}
-    .cyan{color:var(--cyan);}
-    .bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin:8px 0;}
-    .bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg, var(--cyan), var(--green));transition:width .5s ease;}
-    .note{color:var(--muted);font-size:.9rem;}
-    .rel-links{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px;}
-    @media(max-width:600px){.rel-links{grid-template-columns:1fr;}}
-    .rel-links a{
-      display:flex;align-items:center;justify-content:center;min-height:48px;
-      border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);
-      background:rgba(0,229,255,.08);
-    }
-    .rel-links a:hover{background:rgba(0,229,255,.15);}
-    .faq{margin-top:16px;}
-    .faq h2{font-size:1.1rem;margin:16px 0 8px;}
-    .faqitem{margin-bottom:12px;}
-    .faqitem h3{font-size:.95rem;margin:0 0 4px;}
-    .faqitem p{margin:0;color:var(--muted);font-size:.9rem;}
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
 
   <script type="application/ld+json">
   {

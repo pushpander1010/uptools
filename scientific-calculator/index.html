@@ -65,62 +65,7 @@
 {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.uptools.in/"}, {"@type": "ListItem", "position": 2, "name": "Scientific Calculator", "item": "https://www.uptools.in/scientific-calculator/"}]}
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Scientific Calculator","url":"https://www.uptools.in/scientific-calculator/","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools"}}</script>
-  <style>
-    :root{--accent:#f59e0b;--accent-2:#fbbf24;}
-    body{background:radial-gradient(1100px 600px at 10% -5%,#1a1500 0%,var(--bg) 50%) fixed;}
-    .wrap{max-width:520px;margin:0 auto;padding:1rem 1rem 3rem;}
-    .tool-hero{text-align:center;padding:1.2rem 0 .8rem;}
-    .tool-hero h1{font-size:clamp(1.3rem,4vw,2rem);background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-    /* Calculator */
-    .calc-shell{background:#0a0e1a;border:1px solid #2a3050;border-radius:18px;padding:1rem;box-shadow:0 0 40px rgba(245,158,11,.12);}
-    /* Display */
-    .calc-display{background:#050810;border-radius:12px;padding:.75rem 1rem;margin-bottom:.75rem;border:1px solid #1a2040;min-height:80px;}
-    .calc-expr{color:var(--muted);font-size:.8rem;min-height:1.2rem;word-break:break-all;font-family:monospace;}
-    .calc-val{color:var(--accent);font-size:clamp(1.5rem,6vw,2.2rem);font-weight:900;text-align:right;word-break:break-all;font-family:monospace;line-height:1.2;}
-    /* Mode row */
-    .mode-row{display:flex;gap:.35rem;margin-bottom:.6rem;}
-    .mode-btn{flex:1;padding:.35rem;border-radius:7px;border:1px solid #2a3050;background:#0d1525;color:var(--muted);font-size:.75rem;font-weight:700;cursor:pointer;transition:all .15s;}
-    .mode-btn.active{background:var(--accent);color:#050810;border-color:var(--accent);}
-    /* Button grid */
-    .btn-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem;}
-    .ckey{padding:clamp(.55rem,.9vw,.85rem) .2rem;border-radius:10px;border:1px solid #1e2840;font-weight:800;font-size:clamp(.7rem,2.2vw,.9rem);cursor:pointer;transition:all .15s;touch-action:manipulation;user-select:none;}
-    .ckey:active{transform:scale(.93);}
-    .ckey.num{background:#0f1830;color:var(--text);}
-    .ckey.num:hover{background:#1a2540;border-color:#3a4a70;}
-    .ckey.op{background:#141e38;color:var(--accent);border-color:#2a3860;}
-    .ckey.op:hover{background:#1e2e50;}
-    .ckey.fn{background:#101828;color:#a78bfa;border-color:#252050;}
-    .ckey.fn:hover{background:#1a2438;}
-    .ckey.eq{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#050810;grid-column:span 2;}
-    .ckey.clear{background:#2a0a0a;color:#f87171;border-color:#4a1010;}
-    .ckey.clear:hover{background:#3a1010;}
-    .ckey.zero{grid-column:span 2;}
-    /* History */
-    .history{margin-top:1rem;background:var(--card);border-radius:12px;padding:.75rem;border:1px solid var(--border);}
-    .history h3{margin:0 0 .5rem;font-size:.85rem;color:var(--muted);}
-    .hist-list{max-height:160px;overflow-y:auto;font-size:.8rem;font-family:monospace;}
-    .hist-item{display:flex;justify-content:space-between;padding:.3rem .5rem;border-radius:6px;cursor:pointer;transition:background .12s;}
-    .hist-item:hover{background:rgba(255,255,255,.05);}
-    .hist-expr{color:var(--muted);}
-    .hist-val{color:var(--accent);font-weight:700;}
-    .no-hist{color:var(--muted);font-style:italic;font-size:.8rem;}
-      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
 
   <link rel="stylesheet" href="/style.css?v=2.0.0">
 

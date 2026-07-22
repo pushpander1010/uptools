@@ -14,7 +14,7 @@
     <meta content="Play 2048 online (mobile + desktop). Smooth swipes &amp; arrows, undo, auto-save, best score &amp; best tile, and a clean full-screen play window with a back" name="description"/>
     <link href="https://www.uptools.in/games/2048/" rel="canonical"/>
     <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
-    <meta content="#0f1419" name="theme-color"/>
+    <meta content="#08080f" name="theme-color"/>
     <!-- OpenGraph / Twitter -->
     <meta content="2048 - Free Online Game (Undo, Save, Share) | UpTools" property="og:title"/>
     <meta content="Play 2048 online (mobile + desktop). Smooth swipes &amp; arrows, undo, auto-save, best score &amp; best tile, and a clean full-screen play window with a back button. Share your run to challenge friends!" property="og:description"/>
@@ -32,136 +32,7 @@
 
 <script src="/games/fullscreen-utils.js" defer></script>
 <!-- Per-game styles (CLS-safe) -->
-<style>
-    :root{
-      --accent:#6cf; --accent2:#8bffb0; --danger:#ff6b6b;
-      --bg:#0f1419; --bg1:#0f1419; --bg2:#121a26; --card:#0e1526; --cardBorder:#223249; --muted:#9aa4b2;
-      --board-size: 512px; /* dynamically set via ResizeObserver */
-      --gap: 10px; --tile-radius: 12px;
-    }
-    body{ background: radial-gradient(1100px 700px at 10% -10%, #101a34 0%, var(--bg) 45%) fixed; min-height:100svh; }
-    body.playing{ overflow:hidden; overscroll-behavior:none; }
 
-    /* Home */
-    .game-wrap{ max-width:1100px; margin:0 auto; padding:1rem; }
-    .panel{
-      background:var(--card); border:1px solid var(--cardBorder);
-      border-radius:.85rem; box-shadow:0 6px 30px rgba(0,0,0,.25);
-      padding:1rem; margin:0 auto; overflow:hidden;
-    }
-    .hud{ display:grid; grid-template-columns:repeat(4,1fr); gap:.75rem; align-items:center; margin-bottom:.75rem; }
-    .kpi{ text-align:center; padding:.5rem .75rem; border:1px solid var(--cardBorder); border-radius:.75rem; background:rgba(255,255,255,.02) }
-    .kpi .value{ font-size:1.15rem; font-weight:800; color:var(--accent) }
-    .kpi .label{ font-size:.75rem; color:var(--muted) }
-
-    .controls{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin:.75rem 0 0 }
-    .btn{ padding:.66rem 1.05rem; border:none; border-radius:.75rem; font-weight:800; cursor:pointer; transition: transform .12s ease, box-shadow .12s ease; }
-    .btn.primary{ background:var(--accent); color:#0b1020 }
-    .btn.secondary{ background:transparent; color:#e6edf3; border:1px solid var(--cardBorder) }
-    .btn.danger{ background:var(--danger); color:#0b1020 }
-    .btn:hover{ transform:translateY(-1px); box-shadow:0 8px 26px rgba(0,0,0,.25) }
-    .status{ text-align:center; margin:.75rem 0 0; color:var(--muted); font-weight:600 }
-
-    @media (max-width:760px){ .hud{ grid-template-columns:repeat(2,1fr); } .panel{ padding:.8rem; } }
-
-    /* ======= FULL-SCREEN PLAY WINDOW ======= */
-    #playScreen{
-      position:fixed; inset:0; display:none; z-index:50;
-      background:linear-gradient(180deg, rgba(7,12,20,.96), rgba(9,14,22,.985));
-      /* Use dynamic viewport to avoid iOS URL bar jumps */
-      min-height:100dvh;
-      max-width: 100vw;
-      padding: max(8px, env(safe-area-inset-top)) clamp(8px, 2vw, 18px) max(10px, env(safe-area-inset-bottom));
-    }
-    #playScreen.open{ display:grid; grid-template-rows:auto 1fr auto; gap:.6rem; min-height:100dvh; }
-    .ps-top{
-      display:flex; align-items:center; justify-content:space-between; gap:.5rem;
-      background:rgba(255,255,255,.03); border:1px solid var(--cardBorder); border-radius:.65rem; padding:.5rem .6rem;
-    }
-    .ps-top .left, .ps-top .right{ display:flex; align-items:center; gap:.5rem }
-    .ps-title{ font-weight:900 }
-    .ps-btn{ padding:.5rem .8rem; border-radius:.6rem; border:1px solid var(--cardBorder); background:#0f151f; color:#e6edf3; font-weight:800; cursor:pointer }
-    .ps-btn.primary{ background:var(--accent); color:#0b1020; border-color:var(--accent) }
-
-    .ps-stage{ min-height:0; display:grid; align-items:center; justify-items:start; }
-    .board{
-      width:100vw; height:100%;
-      background:var(--card); border:1px solid var(--cardBorder); border-radius:.85rem;
-      padding:.9rem; display:grid; align-content:center; justify-items:center; overflow:hidden;
-      touch-action:none; /* prevent touch scroll while playing */
-      min-height:0;      /* critical for flex/grid children sizing */
-    }
-
-    .ps-bottom{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center }
-
-    /* Square board that always fits its wrapper (.board) */
-    #board{
-      position:relative;
-      width:var(--board-size);
-      height:var(--board-size);
-      max-width:100%;
-      max-height:100%;
-      background:linear-gradient(180deg,#0c1324,#0b1426);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:16px; padding:var(--gap);
-      display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(4,1fr); gap:var(--gap);
-      box-shadow: 0 0 0 1px rgba(108,240,255,.12), 0 0 40px -15px rgba(108,240,255,.35) inset;
-    }
-    .bgcell{
-      background:#0f162a; border-radius:var(--tile-radius);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
-    }
-
-    .tile{
-          position:absolute; inset:auto;
-          width: calc((var(--board-size) - var(--gap) * 5) / 4);
-          height: calc((var(--board-size) - var(--gap) * 5) / 4);
-          border-radius:var(--tile-radius);
-          display:grid; place-items:center;
-          font-weight:900;
-          font-size:var(--tile-font, clamp(18px, 6.2vmin, 42px));
-          color:#0b1020;
-          transition: transform .12s ease-out;
-          will-change: transform;
-        }
-            .tile.pop{ animation:pop .14s ease-out; }
-            .tile.merge{ animation:merge .16s ease-out; }
-            @keyframes pop{ from{ transform:scale(.72) } to{ transform:scale(1) } }
-            @keyframes merge{ 0%{ transform:scale(1) } 50%{ transform:scale(1.08) } 100%{ transform:scale(1) } }
-
-            /* Responsive tile font size - dynamically set via JS */
-            .tile{ font-size: var(--tile-font, 32px); }
-
-    /* Classic 2048 palette */
-    .n2{background:#eee4da;color:#776e65}
-    .n4{background:#ede0c8;color:#776e65}
-    .n8{background:#f2b179;color:#fff}
-    .n16{background:#f59563;color:#fff}
-    .n32{background:#f67c5f;color:#fff}
-    .n64{background:#f65e3b;color:#fff}
-    .n128{background:#edcf72;color:#243}
-    .n256{background:#edcc61;color:#243}
-    .n512{background:#edc850;color:#243}
-    .n1024{background:#edc53f;color:#243; font-size:clamp(16px, 5.2vmin, 36px)}
-    .n2048{background:linear-gradient(135deg,#6cf,#8bffb0); color:#05202e; font-size:clamp(16px, 5.2vmin, 36px)}
-
-    .note{ color:var(--muted); font-size:.85rem; text-align:center; margin-top:.35rem }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
 <!-- Structured Data -->
 <script type="application/ld+json">
   {

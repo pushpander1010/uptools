@@ -66,58 +66,7 @@
 {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.uptools.in/"}, {"@type": "ListItem", "position": 2, "name": "Gpa Calculator", "item": "https://www.uptools.in/gpa-calculator/"}]}
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"GPA Calculator","url":"https://www.uptools.in/gpa-calculator/","applicationCategory":"EducationApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in"}}</script>
-  <style>
-    :root{--accent:#a78bfa;--accent-2:#22d3ee;}
-    body{background:radial-gradient(1100px 600px at 15% -5%,#1a1033 0%,var(--bg) 50%) fixed;}
-    .wrap{max-width:860px;margin:0 auto;padding:1rem 1rem 3rem;}
-    .tool-hero{text-align:center;padding:1.5rem 0 1rem;}
-    .tool-hero h1{font-size:clamp(1.4rem,4vw,2.2rem);background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-    .tool-hero p{color:var(--muted);margin:.4rem 0 0;}
-    .scale-toggle{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin:.75rem 0 1.25rem;}
-    .scale-btn{padding:.45rem 1.1rem;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-weight:700;cursor:pointer;transition:all .18s;}
-    .scale-btn.active{background:var(--accent);color:#0b0f1a;border-color:var(--accent);}
-    /* Semester */
-    .semester{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem;margin-bottom:1rem;box-shadow:var(--shadow);}
-    .sem-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem;}
-    .sem-title{font-weight:800;font-size:1rem;flex:1;}
-    .sem-gpa-badge{padding:.25rem .7rem;border-radius:20px;font-weight:900;font-size:.9rem;background:rgba(167,139,250,.15);color:var(--accent);border:1px solid var(--accent);}
-    .course-row{display:grid;grid-template-columns:1fr auto auto auto;gap:.4rem;align-items:center;margin-bottom:.4rem;}
-    .course-row input,select{padding:.45rem .6rem;border-radius:8px;background:#0a1224;border:1px solid var(--border);color:var(--text);font:inherit;width:100%;}
-    .course-row input:focus,select:focus{border-color:var(--accent);outline:none;}
-    .icon-btn{background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.1rem;padding:.3rem;line-height:1;transition:color .15s;}
-    .icon-btn:hover{color:#ff6b6b;}
-    .add-course-btn{display:flex;align-items:center;gap:.4rem;padding:.4rem .8rem;border-radius:8px;border:1px dashed var(--border);background:none;color:var(--muted);cursor:pointer;font:inherit;font-size:.85rem;transition:all .15s;margin-top:.4rem;}
-    .add-course-btn:hover{border-color:var(--accent);color:var(--accent);}
-    /* Summary */
-    .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin-bottom:1.25rem;}
-    .kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;box-shadow:var(--glow-soft);}
-    .kpi .val{font-size:2rem;font-weight:900;color:var(--accent);line-height:1;}
-    .kpi .lbl{font-size:.78rem;color:var(--muted);margin-top:.3rem;}
-    .gpa-bar{height:10px;border-radius:99px;background:#1a2030;margin:.5rem 0;overflow:hidden;}
-    .gpa-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .5s cubic-bezier(.4,0,.2,1);}
-    .actions-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;}
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    @media(max-width:500px){.course-row{grid-template-columns:1fr 80px 70px auto;}}
-    .grade-color-good{color:#4ade80;}
-    .grade-color-ok{color:#fbbf24;}
-    .grade-color-bad{color:#f87171;}
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
 
   <link rel="stylesheet" href="/style.css?v=2.0.0">
 

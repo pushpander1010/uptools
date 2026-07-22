@@ -7,7 +7,7 @@
 <meta name="description" content="Generate random fun facts from science, history, nature, tech and more. Copy, share, and browse hundreds of interesting facts. Free online tool."/>
 <meta name="keywords" content="random fact generator, fun facts, interesting facts, trivia, random facts, daily fact, science facts, history facts, nature facts"/>
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large"/>
-<meta name="theme-color" content="#0a0a12"/>
+<meta name="theme-color" content="#08080f"/>
 <link rel="canonical" href="https://www.uptools.in/random-fact-generator/"/>
 <link rel="icon" sizes="50x50" type="image/svg+xml" href="/assets/logo/uptools-logo.svg"/>
 <link rel="apple-touch-icon" href="/assets/logo/uptools-logo.svg"/>
@@ -25,58 +25,12 @@
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-6216304334889617",enable_page_level_ads:true});</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NN3GDL1LEJ"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NN3GDL1LEJ');</script>
-<style>
-:root{--bg1:#0e0e18;--bg2:#0a0a12;--ink:#e8e8f0;--muted:#a0a0b8;--cyan:#818cf8;--cyan-2:#6366f1;--blue:#a78bfa;--green:#34d399;--red:#f87171;--orange:#fbbf24;--line:rgba(255,255,255,.12);--card:rgba(255,255,255,.06);--surface:rgba(18,18,32,0.92);--radius:.75rem}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;line-height:1.5}
-.container{max-width:900px;margin:0 auto;padding:20px 16px}
-.tool-header{text-align:center;margin-bottom:24px}
-.tool-header .icon{font-size:3rem;margin-bottom:8px}
-.tool-header h1{font-size:1.6rem;font-weight:700;margin-bottom:4px}
-.tool-header p{color:var(--muted);font-size:.95rem}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:16px}
-.categories{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
-.cat-chip{padding:6px 14px;border-radius:99px;font-size:.8rem;cursor:pointer;background:rgba(20,20,35,0.9);border:1px solid var(--line);color:var(--ink);transition:all .2s}
-.cat-chip.active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,.08)}
-.cat-chip:hover{border-color:var(--cyan)}
-.fact-card{background:linear-gradient(135deg,rgba(255,145,0,.06),rgba(0,229,255,.06));border:1px solid var(--line);border-radius:16px;padding:32px;text-align:center;margin-bottom:16px;min-height:160px;display:flex;flex-direction:column;justify-content:center;transition:all .3s}
-.fact-emoji{font-size:2.5rem;margin-bottom:12px}
-.fact-text{font-size:1.25rem;line-height:1.6;color:var(--ink);transition:all .3s}
-.fact-category{font-size:.8rem;color:var(--orange);margin-top:12px;font-weight:600}
-.btn-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
-.btn{background:linear-gradient(135deg,var(--cyan),var(--blue));color:#000;border:none;padding:12px 20px;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:600;transition:opacity .2s}
-.btn:hover{opacity:.85}
-.btn-outline{background:transparent;border:1px solid var(--line);color:var(--ink)}
-.btn-sm{padding:8px 14px;font-size:.85rem}
-.search-box{width:100%;background:rgba(10,10,18,0.95);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:10px 14px;font-size:.9rem;outline:none;margin-bottom:16px}
-.search-box:focus{border-color:var(--cyan)}
-.history-list{display:grid;gap:8px}
-.history-item{background:var(--bg1);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;justify-content:space-between;align-items:start;gap:12px}
-.history-item .h-text{font-size:.9rem;flex:1;line-height:1.4}
-.history-item .h-cat{color:var(--orange);font-size:.75rem;margin-top:4px}
-.history-item .h-remove{color:var(--red);cursor:pointer;font-size:.8rem;white-space:nowrap}
-.daily-card{background:linear-gradient(135deg,rgba(0,230,118,.08),rgba(0,229,255,.05));border:1px solid rgba(0,230,118,.2);border-radius:12px;padding:20px;margin-bottom:16px;text-align:center}
-.daily-label{font-size:.8rem;color:var(--green);font-weight:600;margin-bottom:8px}
-.section-title{font-size:1.1rem;font-weight:700;margin:20px 0 12px}
-.dos-donts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:600px){.dos-donts{grid-template-columns:1fr}}
-.dos{padding:16px;border-radius:12px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.2)}
-.donts{padding:16px;border-radius:12px;background:rgba(255,82,82,.08);border:1px solid rgba(255,82,82,.2)}
-.dos h3{color:var(--green);margin-bottom:8px}.donts h3{color:var(--red);margin-bottom:8px}
-.dos li,.donts li{color:var(--muted);font-size:.85rem;margin-bottom:4px}
-details{margin:8px 0}details summary{cursor:pointer;font-weight:600;padding:8px 0}
-details p{color:var(--muted);font-size:.9rem;padding-left:12px}
-.related{text-align:center;margin:24px 0}.related a{color:var(--cyan);text-decoration:none;margin:0 8px;font-size:.9rem}.related a:hover{text-decoration:underline}
-footer{text-align:center;padding:24px 0;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:24px}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.fade-in{animation:fadeIn .35s ease}
-.skip-link{position:absolute;top:-40px;left:0;background:#000;color:#fff;padding:8px;z-index:10000;transition:top .3s}
-.skip-link:focus{top:0}
-</style>
+
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"UpTools Random Fact Generator","applicationCategory":"EntertainmentApplication","operatingSystem":"Any","url":"https://www.uptools.in/random-fact-generator/","description":"Generate random fun facts from science, history, nature, tech and more.","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"publisher":{"@type":"Organization","name":"UpTools","url":"https://www.uptools.in/","logo":{"@type":"ImageObject","url":"https://www.uptools.in/assets/logo/uptools-logo.svg"}}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.uptools.in/"},{"@type":"ListItem","position":2,"name":"Random Fact Generator","item":"https://www.uptools.in/random-fact-generator/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where do facts come from?","acceptedAnswer":{"@type":"Answer","text":"All facts are curated from reliable sources — scientific journals, history records, Guinness World Records, and more. Over 300 facts built in."}},{"@type":"Question","name":"Can I filter by category?","acceptedAnswer":{"@type":"Answer","text":"Yes, pick a category like Science, History, Nature, Tech, Space, Animals, or Food to get facts on a specific topic."}},{"@type":"Question","name":"Can I save facts I like?","acceptedAnswer":{"@type":"Answer","text":"Yes, click the heart to save favorites. They're stored in your browser's local storage."}},{"@type":"Question","name":"Is this tool free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free. No API calls needed — all 300+ facts are built in."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Generate Random Facts","step":[{"@type":"HowToStep","name":"Pick a Category","text":"Select a topic like Science, History, or Animals from the filter chips."},{"@type":"HowToStep","name":"Generate","text":"Click New Fact or search by keyword to find interesting facts."},{"@type":"HowToStep","name":"Save & Share","text":"Heart your favorites, copy facts, or share them on social media."}]}</script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>

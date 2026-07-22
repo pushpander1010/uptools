@@ -32,56 +32,7 @@
   {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "How do I download a LinkedIn video?","acceptedAnswer": {"@type": "Answer","text": "Copy the LinkedIn post URL, paste it into our downloader, select quality, and click download. The video will be saved to your device."}},{"@type": "Question","name": "Can I download LinkedIn course videos?","acceptedAnswer": {"@type": "Answer","text": "Yes! Our downloader supports videos from LinkedIn posts, articles, and course content."}},{"@type": "Question","name": "What's the maximum video length?","acceptedAnswer": {"@type": "Answer","text": "LinkedIn supports videos up to 10 minutes long. We support downloading videos of any length available on LinkedIn."}}]}
   </script>
 
-  <style>
-    :root {
-      --accent: #0A66C2;
-      --accent-2: #084a9e;
-    }
-
-    .tool-container { max-width: 800px; margin: 2rem auto; }
-    .input-group { display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap; }
-    .input-group input { flex: 1; min-width: 200px; padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); }
-    .input-group button { padding: 0.75rem 2rem; background: var(--accent); color: white; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 700; }
-    .input-group button:hover { background: var(--accent-2); }
-
-    .quality-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin: 2rem 0; }
-    .quality-option { padding: 1rem; border: 2px solid var(--border); border-radius: var(--radius); text-align: center; cursor: pointer; transition: all 0.2s; }
-    .quality-option:hover { border-color: var(--accent); background: rgba(10, 102, 194, 0.1); }
-    .quality-option.selected { border-color: var(--accent); background: var(--accent); color: white; }
-
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0; }
-    .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: center; }
-    .feature-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
-    .feature-card p { margin: 0; font-size: 0.9rem; }
-
-    .guide-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; }
-    .guide-section h3 { color: var(--accent); margin-top: 0; }
-    .step-list { list-style: none; padding: 0; counter-reset: step; }
-    .step-list li { counter-increment: step; padding: 1rem; margin: 1rem 0; background: rgba(10, 102, 194, 0.05); border-radius: 0.5rem; position: relative; padding-left: 3.5rem; }
-    .step-list li::before { content: counter(step); position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 2rem; height: 2rem; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
-
-    .warning-box { background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .quality-option, .input-group button { transition: none; }
-    }
-      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <link href="https://www.uptools.in/linkedin-video-downloader/" rel="canonical"/>
 <meta name="keywords" content="linkedin video downloader, linkedin video downloader, online tool, free calculator, uptools" />
@@ -96,6 +47,7 @@
   gtag('js', new Date());
   gtag('config', 'G-NN3GDL1LEJ');
 </script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>

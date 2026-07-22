@@ -7,7 +7,7 @@
   <meta name="description" content="Play the ultimate best friend compatibility quiz! Answer questions about each other and see how well you really know your BFF. 2-player, challenge link," />
   <meta name="keywords" content="best friend quiz,friendship test,bff quiz,how well do you know me,friend compatibility,friendship compatibility test,2 player quiz" />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta name="theme-color" content="#6366f1" />
+  <meta name="theme-color" content="#08080f" />
   <link rel="canonical" href="https://www.uptools.in/games/friendship-test/" />
   <link rel="icon" type="image/svg+xml" href="/assets/logo/uptools-logo.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/uptools-logo.svg" />
@@ -26,96 +26,7 @@
   {"@context":"https://schema.org","@type":"WebApplication","name":"Best Friend Compatibility Test","applicationCategory":"Game","operatingSystem":"Any","url":"https://www.uptools.in/games/friendship-test/","publisher":{"@type":"Organization","name":"UpTools"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
   </script>
 
-  <style>
-    :root{--accent:#6366f1;--accent2:#818cf8;--bg:#0d0f1a;--card:#131629;--muted:#a5b4fc;--cardBorder:color-mix(in oklab,#6366f1 30%,#1e2040)}
-    body{background:radial-gradient(1200px 700px at 10% -10%,#1a1040 0%,transparent 45%),radial-gradient(1000px 600px at 110% 10%,#0d1a40 0%,transparent 45%),linear-gradient(135deg,#0d0f1a,#111428) fixed;min-height:100svh;color:#e6edf3}
-    body::after{content:"";position:fixed;inset:-40px 0 0 0;z-index:0;pointer-events:none;opacity:.12;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><text y="30" font-size="24" fill="%236366f1" opacity="0.6">⭐</text></svg>');background-size:48px 48px;animation:starDrift 60s linear infinite}
-    @keyframes starDrift{0%{background-position:0 0}100%{background-position:0 800px}}
-    header.site,main,footer,#playScreen{position:relative;z-index:1}
-    .game-wrap{max-width:1100px;margin:0 auto;padding:1rem}
-    .panel{background:color-mix(in oklab,var(--card) 95%,transparent);border:1px solid var(--cardBorder);border-radius:.9rem;padding:1rem}
-    .hud{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:.75rem}
-    @media(max-width:720px){.hud{grid-template-columns:repeat(2,1fr)}}
-    .kpi{text-align:center;padding:.6rem .75rem;border:1px solid var(--cardBorder);border-radius:.75rem;background:rgba(255,255,255,.03)}
-    .kpi .value{font-weight:900;font-size:1.15rem;color:var(--accent)}
-    .kpi .label{font-size:.78rem;color:var(--muted)}
-    .bar,.controls{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:.5rem}
-    .difficulty-btn{padding:.55rem .9rem;border-radius:.6rem;border:1px solid var(--cardBorder);background:#131629;color:#e6edf3;font-weight:800;cursor:pointer;transition:all .12s}
-    .difficulty-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:var(--accent)}
-    .btn{padding:.66rem 1.05rem;border:none;border-radius:.75rem;font-weight:900;cursor:pointer}
-    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-    .btn.secondary{background:transparent;color:#e6edf3;border:1px solid var(--cardBorder)}
-    .btn.danger{background:#ef4444;color:#fff}
-    #playScreen{position:fixed;inset:0;display:none;z-index:50;background:linear-gradient(180deg,rgba(13,15,26,.96),rgba(17,20,40,.985));padding:max(8px,env(safe-area-inset-top)) clamp(8px,2vw,18px) max(10px,env(safe-area-inset-bottom))}
-    #playScreen.open{display:grid;grid-template-rows:auto 1fr auto;gap:.6rem}
-    .ps-top{display:flex;align-items:center;justify-content:space-between;gap:.5rem;background:rgba(255,255,255,.04);border:1px solid var(--cardBorder);border-radius:.75rem;padding:.5rem .65rem;flex-wrap:wrap}
-    .ps-btn{padding:.5rem .8rem;border-radius:.6rem;border:1px solid var(--cardBorder);background:#131629;color:#e6edf3;font-weight:800;cursor:pointer}
-    .ps-btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:var(--accent)}
-    .ps-progress{font-weight:900;font-variant-numeric:tabular-nums;padding:.28rem .55rem;border:1px solid var(--cardBorder);border-radius:.5rem;background:#131629}
-    .ps-stage{min-height:0;display:grid;align-items:center;justify-items:center}
-    .board{width:min(1100px,100%);height:100%;background:color-mix(in oklab,var(--card) 96%,transparent);border:1px solid var(--cardBorder);border-radius:.9rem;padding:clamp(.6rem,2vw,1rem);display:grid;grid-template-rows:1fr auto;gap:.6rem;overflow:hidden}
-    .qs{overflow:auto;overscroll-behavior:contain}
-    .qcard{display:grid;gap:.75rem;padding:clamp(.6rem,2.2vw,1rem);border:1px solid var(--cardBorder);border-radius:.8rem;background:#0d0f1a}
-    .qtitle{font-size:1.1rem;font-weight:900}
-    .opt{display:flex;align-items:center;gap:.55rem;padding:.5rem .6rem;border:1px solid var(--cardBorder);border-radius:.65rem;background:#0d0f1a;cursor:pointer}
-    .opt input{accent-color:var(--accent)}
-    .qnav{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
-    .result{text-align:center;padding:.8rem;border:1px solid var(--cardBorder);border-radius:.75rem;background:rgba(255,255,255,.04)}
-    .ps-bottom{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
-    .tiny{font-size:.82rem;color:var(--muted);text-align:center}
-    .note{color:var(--muted)}
-    .video-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:.75rem;overflow:hidden;border:1px solid var(--cardBorder)}
-    .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-    [hidden]{display:none!important}
-
-    /* ── Touch-friendly sizing ── */
-    .btn, .ps-btn, .difficulty-btn, .opt, #fullscreenBtn,
-    #copyRes, #shareWA, #startBtn, #joinBtn, #copyInvite, #resetStats,
-    #nextBtn, #prevBtn, #psBack, #psShare {
-      min-width:44px; min-height:44px;
-      -webkit-tap-highlight-color:transparent;
-      touch-action:manipulation;
-    }
-    /* Ensure label-wrapped radios get tap area too */
-    .opt { min-height:44px; }
-
-    /* ── Touch feedback / active states ── */
-    .btn:active, .ps-btn:active, .difficulty-btn:active,
-    .opt:active, #fullscreenBtn:active,
-    #copyRes:active, #shareWA:active,
-    #startBtn:active, #joinBtn:active, #copyInvite:active, #resetStats:active,
-    #nextBtn:active, #prevBtn:active, #psBack:active, #psShare:active {
-      transform:scale(.96);
-      transition:transform .1s ease;
-    }
-    .btn.primary:active, .ps-btn.primary:active,
-    #startBtn:active, #nextBtn:active {
-      opacity:.85;
-    }
-    .opt:active {
-      background:rgba(99,102,241,.12);
-      border-color:var(--accent);
-    }
-    /* Smooth transitions for all interactive elements */
-    .btn, .ps-btn, .difficulty-btn, .opt {
-      transition:background .15s ease, border-color .15s ease, transform .1s ease, opacity .1s ease;
-    }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
 
   <link rel="stylesheet" href="/style.css?v=2.0.0">
 

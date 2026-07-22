@@ -6,7 +6,7 @@
   <title>GST Number Search & Validator - Verify GSTIN | UpTools</title>
   <meta name="description" content="Verify and validate any GSTIN (GST number) instantly. Check GST registration status, business name, state, registration date. Free, no sign-up, shareable links." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
-  <meta name="theme-color" content="#0a0a12" />
+  <meta name="theme-color" content="#08080f" />
 <link href="https://www.uptools.in/gst-number-search/" rel="canonical"/>
   <meta name="keywords" content="gst number search,gstin validator,verify gstin,gst registration check,gstin lookup,gst number verify india,uptools" />
 
@@ -34,62 +34,7 @@
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a GSTIN?","acceptedAnswer":{"@type":"Answer","text":"GSTIN (Goods and Services Tax Identification Number) is a 15-digit unique identifier assigned to every GST-registered business in India."}},{"@type":"Question","name":"How do I verify a GST number?","acceptedAnswer":{"@type":"Answer","text":"Enter the 15-digit GSTIN in the search box. The tool will validate the format, decode the state code, PAN, entity type, and registration sequence."}},{"@type":"Question","name":"What does a GSTIN contain?","acceptedAnswer":{"@type":"Answer","text":"A GSTIN has: 2-digit state code, 10-digit PAN, 1-digit entity number, 1-digit Z (default), and 1 check digit."}}]}
   </script>
 
-  <style>
-    :root{--bg:#0f1419;--surface:rgba(18,18,32,0.92);--text:#e6edf3;--muted:#9aa4b2;--brand:#7aa2ff;--radius:.75rem;--cardBorder:#212a3a}
-    *{box-sizing:border-box}
-    body{margin:0;font:400 16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text)}
-    a{color:var(--brand)}
-    .card{background:var(--surface);border:1px solid var(--cardBorder);border-radius:var(--radius);padding:1rem}
-    .btn{display:inline-block;padding:.6rem .9rem;border-radius:var(--radius);background:var(--brand);color:#0b1020;border:0;font-weight:700;cursor:pointer}
-    .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--cardBorder)}
-    .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--cardBorder)}
-    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-    .search-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .input.gstin{text-transform:uppercase;letter-spacing:.08em;font-weight:700;font-size:1rem}
-    .muted{color:var(--muted);font-size:12px}
-    .chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;border:1px solid var(--cardBorder);background:var(--bg);color:var(--text);cursor:pointer;font-size:12px}
-    .chip:hover{border-color:var(--brand)}
-    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
-    .row:last-child{border-bottom:0}
-    .row.key{font-weight:700}
-    .divider{height:1px;background:var(--cardBorder);margin:10px 0}
-    .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:999px;font-size:.8rem;font-weight:700}
-    .badge.valid{background:#0a2a1a;border:1px solid #1e6641;color:#00e5a0}
-    .badge.invalid{background:#2a0a0a;border:1px solid #661e1e;color:#ff6b6b}
-    .gstin-visual{display:flex;gap:4px;flex-wrap:wrap;margin:12px 0;font-family:monospace}
-    .gstin-seg{padding:4px 8px;border-radius:6px;font-size:.9rem;font-weight:700;text-align:center}
-    .seg-state{background:#182033;border:1px solid #2a3a5a;color:#7aa2ff}
-    .seg-pan{background:#0a2a1a;border:1px solid #1e6641;color:#00e5a0}
-    .seg-entity{background:#1a1a0a;border:1px solid #3a3a1e;color:#f59e0b}
-    .seg-z{background:#1a0a1a;border:1px solid #3a1e3a;color:#a855f7}
-    .seg-check{background:#0a1a2a;border:1px solid #1e2a3a;color:#00e5ff}
-    .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-    .copy-btn{border:1px solid var(--cardBorder);background:var(--bg);color:var(--text);border-radius:8px;padding:5px 10px;cursor:pointer;font-size:12px}
-    .copy-btn:hover{border-color:var(--brand)}
-    .table{width:100%;border-collapse:separate;border-spacing:0}
-    .table th,.table td{padding:8px;border-bottom:1px solid var(--cardBorder);text-align:left;font-size:.9rem}
-    .table th{font-weight:700}
-    .status-ok{color:#9cffbf}.status-err{color:#ff9aa2}
-    .video-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:.75rem;overflow:hidden;border:1px solid var(--cardBorder)}
-    .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
 
   <link rel="stylesheet" href="/style.css?v=2.0.0">
 

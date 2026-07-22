@@ -10,7 +10,7 @@
 <meta content="Create strong passwords and memorable passphrases. Local encrypted Vault with PIN, labels, search, export/import. Entropy meter, batch generator, copy, mask," name="description"/>
 <meta content="password generator, strong password, passphrase, entropy, secure password, AES-GCM, local vault, offline password tool, UpTools" name="keywords"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" name="robots"/>
-<meta content="#0a0a12" name="theme-color"/>
+<meta content="#08080f" name="theme-color"/>
 <link href="https://www.uptools.in/password-generator/" rel="canonical"/>
 
 <!-- Favicons -->
@@ -33,59 +33,7 @@
 <!-- Common CSS -->
 
 <!-- Page-scoped styles -->
-<style>
-    .tool-grid{display:grid;grid-template-columns:1fr;gap:12px}
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
 
-    @media (min-width: 920px){.tool-grid{grid-template-columns:1.15fr .85fr}}
-    .stack{display:grid;gap:10px}
-    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .grow{flex:1 1 auto}
-    .result-wrap{display:grid;gap:8px}
-    .result{font:600 16px/1.4 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.2px;padding:10px 12px;border-radius:10px;user-select:all;overflow-wrap:anywhere;min-height:42px}
-    .meter{height:8px;border-radius:999px;overflow:hidden;background:var(--bg2,#1a1f2e)}
-    .meter>i{display:block;height:100%;width:0%;transition:width .25s ease}
-    .hint{font-size:.9rem;opacity:.85}
-    .options-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-    @media (min-width:720px){.options-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-    .yt-wrap{aspect-ratio:16/9;width:100%;max-width:720px;border-radius:12px;overflow:hidden;margin-inline:auto}
-    .yt-wrap iframe{width:100%;height:100%;display:block}
-    .kbd{padding:2px 6px;border-radius:6px;border:1px solid var(--line,#2b3142);font:600 12px/1 ui-monospace,monospace}
-    .two-col{display:grid;gap:12px;grid-template-columns:1fr}
-    @media (min-width: 720px){.two-col{grid-template-columns:1fr 1fr}}
-    .badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line,#2b3142);padding:6px 10px;border-radius:999px}
-    .notice{padding:8px 10px;border-radius:8px;border:1px dashed var(--line,#2b3142)}
-    /* Vault */
-    .vault-grid{display:grid;gap:10px}
-    .vault-row{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center}
-    .vault-row .mono{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45vw}
-    @media (min-width: 920px){.vault-row .mono{max-width:28vw}}
-    .pill.sec{background:#0b1326;border:1px solid var(--border)}
-    .btn.icon{min-width:36px;padding:6px 8px}
-    .btn.sm{padding:6px 10px}
-    .sr{position:absolute;left:-9999px}
-    dialog.vault-modal{border:1px solid var(--border);border-radius:12px;max-width:520px;width:min(92vw,520px);background:color-mix(in oklab,var(--card) 95%,transparent);box-shadow:var(--shadow),var(--glow-soft)}
-    dialog.vault-modal::backdrop{background:rgba(0,0,0,.45)}
-    .hr{height:1px;background:color-mix(in oklab,var(--accent) 25%, #243);margin:10px 0}
-    .micro-links{display:inline-flex;gap:8px;margin-left:8px}
-    .linkbtn{background:none;border:none;padding:0;color:var(--link,#8ab4ff);cursor:pointer;font:600 12px/1.2 ui-sans-serif,system-ui}
-    .linkbtn:focus{outline:2px dashed var(--line,#2b3142);outline-offset:2px;border-radius:4px}
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
 <!-- Structured Data -->
 
 <script type="application/ld+json">

@@ -13,7 +13,7 @@
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <meta name="keywords" content="currency converter, currency converter, online tool, free calculator, uptools" />
 
-  <meta name="theme-color" content="#0a0a12" />
+  <meta name="theme-color" content="#08080f" />
 <link href="https://www.uptools.in/currency-converter/" rel="canonical"/>
 
   <!-- Open Graph / Twitter -->
@@ -35,68 +35,7 @@
   <!-- Common CSS (non-blocking) -->
 
   <!-- Page-only tweaks + FX canvas styles -->
-  <style>
-    :root {
-      --accent: #9be7ff;
-      --bg1: #0b1420;
-      --bg2: #0e1e30;
-      --cardBorder: #2a4766;
-    }
-
-    /* ===== Background FX (canvas) ===== */
-    #fxCanvas{
-      position: fixed; inset: 0;
-      width: 100vw; height: 100dvh;
-      z-index: -1; pointer-events: none;
-      block-size: 100dvh; inline-size: 100vw;
-      /* Soft gradient base so it looks good even if JS is off */
-      background:
-        radial-gradient(1200px 600px at 8% -10%, #0b1938 0%, transparent 45%),
-        radial-gradient(1100px 700px at 110% 10%, #0a1731 0%, transparent 45%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
-      filter: saturate(110%);
-    }
-    .fx-mask {
-      position: fixed; inset: 0; z-index: -1; pointer-events: none;
-      background: radial-gradient(1000px 800px at 50% -10%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%);
-      opacity: .35;
-      mix-blend-mode: screen;
-    }
-
-    /* ------- Page components ------- */
-    .fx-presets{ display:flex; flex-wrap:wrap; gap:8px; margin:8px 0 }
-    .chip{ padding:.45rem .6rem; border-radius:999px; border:1px solid var(--border); background:#0b1326; cursor:pointer }
-    .chip:active{ transform:translateY(0) }
-    .grid{ display:grid; gap:12px; grid-template-columns:1fr }
-    @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    @media(min-width:820px){ .grid{ grid-template-columns:1.2fr .8fr } }
-    .kpi{ display:grid; gap:6px }
-    .kpi .row{ display:flex; justify-content:space-between; border-top:1px dashed var(--border); padding:.35rem 0 }
-    .mini{ font-size:.875rem; color:var(--muted) }
-    .spark-wrap{ border:1px solid var(--border); border-radius:12px; padding:8px }
-    .spark{ display:block; width:100%; height:120px }
-    .swap{ min-width:44px }
-    .inline-help{ display:flex; gap:8px; align-items:center }
-    .video-wrap{ width:100%; max-width:880px; margin:0 auto; border-radius:12px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--glow-soft) }
-    .video-wrap iframe{ width:100%; aspect-ratio:16/9; display:block }
-    .ico{ display:inline-grid; place-items:center; width:28px; height:28px; border-radius:7px; border:1px solid var(--border); font-weight:700 }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
 
   <!-- JSON-LD: SoftwareApplication + FAQ -->
 

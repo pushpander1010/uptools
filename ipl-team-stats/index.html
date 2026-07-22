@@ -79,80 +79,7 @@
   }
   </script>
 
-  <style>
-    :root {
-      --bg1: #08090e;
-      --bg2: #0b0f1a;
-      --ink: #e9ecf5;
-      --muted: #a6adbb;
-      --gold: #ffd700;
-      --blue: #4fc3f7;
-      --green: #00e676;
-      --red: #ff5252;
-      --orange: #ff9100;
-      --line: rgba(255,255,255,.09);
-      --card: rgba(255,255,255,.04);
-    }
-    body {
-      color: var(--ink);
-      background: radial-gradient(1200px 700px at 15% 0%, rgba(255,215,0,.06), transparent 55%),
-                  radial-gradient(900px 600px at 85% 5%, rgba(79,195,247,.05), transparent 55%),
-                  linear-gradient(180deg, var(--bg1), var(--bg2));
-    }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 20px 16px 40px; display: grid; gap: 16px; }
-    .page-header { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-    .page-icon {
-      width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 26px;
-      background: linear-gradient(135deg, #ffd700, #ff9100);
-      box-shadow: 0 8px 24px rgba(255,215,0,.3);
-    }
-    h1 { margin: 0; font-size: 1.7rem; text-shadow: 0 0 12px rgba(255,215,0,.35); }
-    .subtitle { color: var(--muted); font-size: .9rem; margin: 2px 0 0; }
-    .card { border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 1rem; }
-    .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
-    thead th {
-      padding: 10px 12px; text-align: left; color: var(--muted); font-weight: 600; font-size: .8rem;
-      border-bottom: 1px solid var(--line); white-space: nowrap;
-    }
-    tbody tr { border-bottom: 1px solid var(--line); transition: background .15s; }
-    tbody tr:hover { background: rgba(255,255,255,.04); }
-    td { padding: 11px 12px; white-space: nowrap; }
-    .team-cell { display: flex; align-items: center; gap: 10px; min-width: 200px; }
-    .team-logo {
-      width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
-      font-size: 18px; border: 1px solid var(--line);
-    }
-    .team-name { font-weight: 700; }
-    .team-short { color: var(--muted); font-size: .78rem; }
-    .titles { color: var(--gold); font-weight: 800; font-size: 1.1rem; }
-    .win-pct { color: var(--green); font-weight: 700; }
-    .stat-highlight { color: var(--gold); font-weight: 800; }
-    .note { color: var(--muted); font-size: .9rem; }
-    .rel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
-    .rel-link {
-      display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 12px;
-      border: 1px solid var(--line); border-radius: 10px; text-decoration: none; color: var(--ink);
-      background: rgba(255,215,0,.06); font-size: .88rem; text-align: center; transition: background .2s;
-    }
-    .rel-link:hover { background: rgba(255,215,0,.14); }
-      @media (max-width: 768px) { :root { --grid-cols: 1fr; } .wrap { padding: 0 1rem; } }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 10000;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-</style>
+  
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:large" />
 <link href="https://www.uptools.in/ipl-team-stats/" rel="canonical"/>
 <meta name="keywords" content="ipl team stats, ipl team stats, online tool, free calculator, uptools" />
@@ -167,6 +94,7 @@
   gtag('js', new Date());
   gtag('config', 'G-NN3GDL1LEJ');
 </script>
+<link rel="stylesheet" href="/style.css?v=2.0.0"/>
 </head>
 <body>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
