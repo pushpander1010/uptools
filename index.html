@@ -34,7 +34,9 @@
 :root{--bg:#0c0c14;--surface:#16161f;--surface-2:#1c1c28;--surface-input:#12121a;--text:#f0f0f5;--text-2:#9898ac;--muted:#686878;--faint:#3a3a4a;--border:rgba(255,255,255,.08);--border-hover:rgba(255,255,255,.14);--radius:12px;--radius-sm:8px;--radius-pill:999px;--accent:#6366f1;--accent-2:#818cf8;--accent-bg:rgba(99,102,241,.1);--accent-border:rgba(99,102,241,.3);--accent-glow:rgba(99,102,241,.15);--cat-finance:#22c55e;--cat-tax:#f59e0b;--cat-banking:#0ea5e9;--cat-crypto:#f97316;--cat-ai:#a855f7;--cat-dev:#06b6d4;--cat-security:#ef4444;--cat-health:#14b8a6;--cat-social:#ec4899;--cat-images:#8b5cf6;--cat-text:#64748b;--cat-fun:#f43f5e;--cat-cricket:#3b82f6;--cat-sports:#3b82f6;--cat-canada:#dc2626;--cat-marketing:#f97316;--cat-networking:#0ea5e9;--cat-education:#8b5cf6;--cat-tools:#6366f1;--cat-whatsapp:#25d366}
 *{box-sizing:border-box}
 html{color-scheme:dark;-webkit-text-size-adjust:100%}
-body{margin:0;font:400 15px/1.6 -apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+body{margin:0;font:400 15px/1.6 -apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;position:relative}
+body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 20% 50%,rgba(99,102,241,.04),transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(168,85,247,.03),transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(236,72,153,.02),transparent 50%);pointer-events:none;z-index:-1;animation:bgShift 30s ease-in-out infinite alternate}
+@keyframes bgShift{0%{transform:translate(0,0)}50%{transform:translate(-2%,1%)}100%{transform:translate(1%,-1%)}}
 img,svg,video{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
 .wrap{width:min(100%-24px,1120px);margin:24px auto}

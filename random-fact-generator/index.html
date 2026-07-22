@@ -292,7 +292,7 @@ let hist=JSON.parse(localStorage.getItem('uptools.facts.hist')||'[]');
 let favs=JSON.parse(localStorage.getItem('uptools.facts.favs')||'[]');
 
 function renderCats(){
-  document.getElementById('categories').innerHTML=`<span class="cat-chip ${activeCat==='all'?'active':''}" data-cat="tools">🎲 All</span>`+CATS.map(c=>`<span class="cat-chip ${activeCat===c.key?'active':''}" data-cat="tools">${c.label}</span>`).join('');
+  document.getElementById('categories').innerHTML=`<span class="cat-chip ${activeCat==='all'?'active':''}">🎲 All</span>`+CATS.map(c=>`<span class="cat-chip ${activeCat===c.key?'active':''}">${c.label}</span>`).join('');
   document.querySelectorAll('.cat-chip').forEach(el=>el.addEventListener('click',()=>{activeCat=el.dataset.cat;renderCats();getFact();}));
 }
 

@@ -89,7 +89,7 @@ let currentFood=null;
 function renderCategories(){
   document.getElementById('categories').innerHTML=CATEGORIES.map(c=>{
     const label=CAT_LABELS[c||'all'];
-    return `<span class="cat-chip ${activeCat===c?'active':''}" data-cat="tools">${label}</span>`;
+    return `<span class="cat-chip ${activeCat===c?'active':''}">${label}</span>`;
   }).join('');
   document.querySelectorAll('.cat-chip').forEach(el=>el.addEventListener('click',()=>{activeCat=el.dataset.cat;renderCategories();getFood();}));
 }
