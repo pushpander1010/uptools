@@ -35,16 +35,16 @@
 *{box-sizing:border-box}
 html{color-scheme:dark;-webkit-text-size-adjust:100%}
 body{margin:0;font:400 15px/1.6 -apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;position:relative}
-body::after{content:"";position:fixed;inset:-50%;width:200%;height:200%;z-index:-1;pointer-events:none;
+body::before{content:"";position:fixed;top:0;left:0;right:0;bottom:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(circle 600px at 20% 30%,rgba(99,102,241,.07),transparent),
-    radial-gradient(circle 500px at 75% 15%,rgba(168,85,247,.06),transparent),
-    radial-gradient(circle 450px at 50% 80%,rgba(236,72,153,.05),transparent),
-    radial-gradient(circle 400px at 10% 70%,rgba(6,182,212,.04),transparent),
-    radial-gradient(circle 350px at 85% 60%,rgba(34,197,94,.03),transparent);
-  animation:orbFloat 25s ease-in-out infinite alternate;
-  filter:blur(40px);opacity:.8}
-@keyframes orbFloat{0%{transform:translate(0,0) scale(1)}33%{transform:translate(3%,-2%) scale(1.02)}66%{transform:translate(-2%,3%) scale(.98)}100%{transform:translate(1%,-1%) scale(1.01)}}
+    radial-gradient(circle 600px at 20% 30%,rgba(99,102,241,.08),transparent 70%),
+    radial-gradient(circle 500px at 75% 15%,rgba(168,85,247,.07),transparent 70%),
+    radial-gradient(circle 450px at 50% 80%,rgba(236,72,153,.06),transparent 70%),
+    radial-gradient(circle 400px at 10% 70%,rgba(6,182,212,.05),transparent 70%),
+    radial-gradient(circle 350px at 85% 60%,rgba(34,197,94,.04),transparent 70%);
+  animation:orbFloat 20s ease-in-out infinite alternate;
+  filter:blur(60px)}
+@keyframes orbFloat{0%{transform:translate(0,0) rotate(0deg) scale(1)}25%{transform:translate(5%,-3%) rotate(2deg) scale(1.03)}50%{transform:translate(-3%,5%) rotate(-1deg) scale(.97)}75%{transform:translate(4%,2%) rotate(1deg) scale(1.02)}100%{transform:translate(-2%,-4%) rotate(-2deg) scale(1.01)}}
 img,svg,video{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
 .wrap{width:min(100%-24px,1120px);margin:24px auto}
@@ -123,7 +123,7 @@ h1{margin:.1rem 0 .25rem;line-height:1.2;font-weight:600}
   </script>
 
 
-  <link rel="stylesheet" href="/style.css?v=4.0.0">
+  <link rel="stylesheet" href="/style.css?v=5.0.0">
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-6216304334889617",enable_page_level_ads:true,google_ad_anchor_slot:"none"});</script>
