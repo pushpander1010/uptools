@@ -395,6 +395,12 @@
   .game-card{padding:16px}
   .game-icon{width:44px;height:44px;font-size:1.4rem}
 }
+
+.nav-tabs{position:relative;display:flex;gap:2px;align-items:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:999px;padding:3px}
+.nav-tab{position:relative;z-index:2;color:var(--text-2);text-decoration:none;padding:7px 16px;border-radius:999px;font-size:13px;font-weight:500;transition:color .3s cubic-bezier(0.4,0,0.2,1);white-space:nowrap}
+.nav-tab:hover{color:var(--text)}
+.nav-tab.active{color:#fff;font-weight:600}
+.tab-indicator{position:absolute;top:3px;left:3px;height:calc(100% - 6px);border-radius:999px;background:linear-gradient(135deg,#6366f1,#8b5cf6);box-shadow:0 2px 12px rgba(99,102,241,0.35);transition:left .35s cubic-bezier(0.4,0,0.2,1),width .35s cubic-bezier(0.4,0,0.2,1);z-index:1}
 </style>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
@@ -431,11 +437,12 @@
           loading="eager">
         <b>UpTools</b>
       </a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="/" class="nav-home">Home</a>
-        <a href="/games/" class="nav-games">Games</a>
-        <a href="/hncker/" class="nav-hncker">HNCKER</a>
-      </nav>
+      <nav aria-label="Primary" class="nav-links nav-tabs" id="navTabs">
+<div class="tab-indicator" id="tabIndicator"></div>
+<a href="/" class="nav-tab" data-tab="home">Home</a>
+<a href="/games/" class="nav-tab" data-tab="games">🎮 Games</a>
+<a href="/hncker/" class="nav-tab" data-tab="hncker">HNCKER</a>
+</nav>
     </div>
   </header>
 
