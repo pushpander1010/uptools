@@ -121,14 +121,14 @@
     "@context":"https://schema.org",
     "@type":"FAQPage",
     "mainEntity":[
-      {"@type":"Question","name":"Where do rates come from?","acceptedAnswer":{"@type":"Answer","text":"We fetch rates from reputable public endpoints (exchangerate.host and Frankfurter). If a call fails due to CORS or network, we fall back to a proxy on our domain."}},
+      {"@type":"Question","name":"Where do rates come from?","acceptedAnswer":{"@type":"Answer","text":"We fetch rates from Frankfurter API and Fawaz Ahmed's Currency API, both free public endpoints with no keys required."}},
       {"@type":"Question","name":"How do I include bank/card fees?","acceptedAnswer":{"@type":"Answer","text":"Adjust the Fee % slider to add a markup/fee to the live rate. This gives a more realistic amount you might pay."}},
       {"@type":"Question","name":"Can I share a conversion?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use Share to copy a link with parameters (amount/from/to/fee). Opening it will auto-prefill the converter."}}
     ]
   }
   </script>
 
-  <link rel="stylesheet" href="/style.css?v=1.3.0">
+  <link rel="stylesheet" href="/style.css?v=2.0.0">
 
 <!-- Paste your Google Analytics 4 Measurement ID below, e.g. G-ABC123XYZ9 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NN3GDL1LEJ"></script>
@@ -203,7 +203,7 @@
             <label class="label" for="from">From</label>
             <select id="from" class="input" aria-label="From currency"></select>
           </div>
-          <button id="swap" class="btn secondary swap" title="Swap From/To" aria-label="Swap">?</button>
+          <button id="swap" class="btn secondary swap" title="Swap From/To" aria-label="Swap">&#8644;</button>
           <div style="flex:1">
             <label class="label" for="to">To</label>
             <select id="to" class="input" aria-label="To currency"></select>
@@ -391,13 +391,6 @@
 
     // Fetch helpers
     async function getRate(base, quote) {
-      async function host() {
-        const r = await fetch(`https://api.exchangerate.host/latest?base=${base}&symbols=${quote}`);
-        if (!r.ok) throw 0;
-        const j = await r.json();
-        if (!j || !j.rates || !j.rates[quote]) throw 0;
-        return { rate: j.rates[quote], ts: j.date || "" };
-      }
       async function frank() {
         const r = await fetch(`https://api.frankfurter.app/latest?from=${base}&to=${quote}`);
         if (!r.ok) throw 0;
@@ -405,13 +398,17 @@
         if (!j || !j.rates || !j.rates[quote]) throw 0;
         return { rate: j.rates[quote], ts: j.date || "" };
       }
-      try { return await host(); } catch {
-        try { return await frank(); } catch {
-          // Proxy fallback (Cloudflare Worker at /api?url=…)
-          const prox = await fetch(`/api?url=${encodeURIComponent(`https://api.exchangerate.host/latest?base=${base}&symbols=${quote}`)}`);
-          const j = await prox.json();
-          if (!j || !j.rates || !j.rates[quote]) throw new Error("rate");
-          return { rate: j.rates[quote], ts: j.date || "" };
+      async function currApi() {
+        const r = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${base.toLowerCase()}.json`);
+        if (!r.ok) throw 0;
+        const j = await r.json();
+        const rate = j?.[base.toLowerCase()]?.[quote.toLowerCase()];
+        if (!rate) throw 0;
+        return { rate, ts: j.date || "" };
+      }
+      try { return await frank(); } catch {
+        try { return await currApi(); } catch {
+          throw new Error("rate");
         }
       }
     }
@@ -423,21 +420,26 @@
       const ed = end.toISOString().slice(0, 10);
 
       async function frank() {
-        const r = await fetch(`https://api.frankfurter.app/${sd}..${ed}?from=${base}&to=${quote}`);
-        if (!r.ok) throw 0;
+        const target = `https://api.frankfurter.app/${sd}..${ed}?from=${base}&to=${quote}`;
+        // Try direct fetch first, fall back to Worker proxy
+        let r;
+        try {
+          r = await fetch(target, { redirect: "follow" });
+        } catch {
+          r = await fetch(`/proxy?u=${encodeURIComponent(target)}`, { redirect: "follow" });
+        }
+        if (!r.ok) throw new Error(`frank ${r.status}`);
         const j = await r.json();
         const entries = Object.entries(j.rates || {}).sort((a, b) => a[0] < b[0] ? -1 : 1)
           .map(([d, obj]) => ({ d, v: obj[quote] }));
-        if (!entries.length) throw 0;
+        if (!entries.length) throw new Error("frank empty");
         return entries;
       }
-      try { return await frank(); } catch {
-        const r = await fetch(`https://api.exchangerate.host/timeseries?base=${base}&symbols=${quote}&start_date=${sd}&end_date=${ed}`);
-        if (!r.ok) throw [];
-        const j = await r.json();
-        const entries = Object.entries(j.rates || {}).sort((a, b) => a[0] < b[0] ? -1 : 1)
-          .map(([d, obj]) => ({ d, v: obj[quote] }));
-        return entries;
+      try {
+        return await frank();
+      } catch (e) {
+        console.warn("History fetch failed:", e);
+        return [];
       }
     }
 
@@ -492,7 +494,12 @@
       const svg = els.spark, path = els.sparkLine;
       const W = 300, H = 120, P = 6;
       svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-      if (!points || !points.length) { path.setAttribute("d", ""); els.sparkStart.textContent = ""; els.sparkEnd.textContent = ""; return; }
+      if (!points || !points.length) {
+        path.setAttribute("d", "");
+        els.sparkStart.textContent = "No history data available";
+        els.sparkEnd.textContent = "";
+        return;
+      }
       const xs = points.map(p => p.d), ys = points.map(p => p.v);
       const min = Math.min(...ys), max = Math.max(...ys), span = max - min || 1;
       const step = (W - P * 2) / (ys.length - 1);
@@ -504,8 +511,10 @@
       });
       path.setAttribute("d", d);
       path.setAttribute("fill", "none");
-      path.setAttribute("stroke", "var(--accent)");
+      path.setAttribute("stroke", "#00e5ff");
       path.setAttribute("stroke-width", "2");
+      path.setAttribute("stroke-linecap", "round");
+      path.setAttribute("stroke-linejoin", "round");
 
       els.sparkStart.textContent = `${xs[0]} • ${nf().format(ys[0])}`;
       els.sparkEnd.textContent = `${xs[xs.length - 1]} • ${nf().format(ys[ys.length - 1])}`;

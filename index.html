@@ -8,7 +8,7 @@
 <meta content="UpTools is a free, privacy-first hub of 300+ tools and 30+ browser games. Calculators, converters, AI writers, social tools, and instant mini-games like Snake," name="description"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="#0f1419" name="theme-color"/>
-<meta content="online games,free games,play games,snake game,2048,tetris,pac-man,typing test,hangman,quiz,browser games,no download games,income tax calculator,gst calculator,emi calculator,currency converter,instagram bio generator,ai writing,ai blog generator,ai tools,json formatter,age calculator, calculators, converters, uptools, mini games, puzzle games" name="keywords"/>
+<meta content="online games,free games,play games,snake game,2048,tetris,pac-man,typing test,hangman,quiz,browser games,no download games,income tax calculator,gst calculator,emi calculator,currency converter,instagram bio generator,ai writing,ai blog generator,ai tools,json formatter,age calculator, calculators, converters, uptools, mini games, puzzle games,email validator,weather forecast,quote generator,phone specs,food randomizer,disposable email check,mx record check,7 day weather,random quotes,phone comparison" name="keywords"/>
 <!-- Canonical & Icons -->
 <link href="https://www.uptools.in/" rel="canonical"/>
 <link href="/assets/logo/uptools-logo.svg" rel="icon" sizes="50x50" type="image/svg+xml"/>
@@ -32,445 +32,188 @@
 <!-- Critical CSS (page-scoped only; global is in /style.css) -->
 <style>
     :root {
-      --bg: #0f1419;
-      --surface: #121826;
-      --text: #e6edf3;
-      --muted: #9aa4b2;
-      --brand: #7aa2ff;
-      --radius: .75rem;
-      --border: #212a3a
+      --bg: #08090a;
+      --bg1: #08090a;
+      --bg2: #0f1011;
+      --card: rgba(255,255,255,0.03);
+      --card-elevated: rgba(255,255,255,0.05);
+      --text: #f7f8f8;
+      --text-secondary: #d0d6e0;
+      --muted: #8a8f98;
+      --faint: #62666d;
+      --accent: #5e6ad2;
+      --accent-hover: #828fff;
+      --accent-light: #7170ff;
+      --border: rgba(255,255,255,0.08);
+      --border-subtle: rgba(255,255,255,0.05);
+      --border-strong: rgba(255,255,255,0.12);
+      --shadow: 0 2px 8px rgba(0,0,0,0.4);
+      --radius: 8px;
+      --radius-sm: 6px;
+      --radius-lg: 12px;
     }
 
-    * {
-      box-sizing: border-box
-    }
-
-    html {
-      color-scheme: dark light;
-      -webkit-text-size-adjust: 100%
-    }
-
+    * { box-sizing: border-box; }
+    html { color-scheme: dark; -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
-      font: 400 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Noto Sans", sans-serif;
+      font: 400 15px/1.6 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg);
-      color: var(--text)
-    }
-
-    img,
-    svg,
-    video {
-      max-width: 100%;
-      height: auto;
-      display: block
-    }
-
-    a {
-      color: var(--brand);
-      text-decoration-thickness: .08em;
-      text-underline-offset: .18em
-    }
-
-    .wrap {
-      width: min(100% - 24px, 1120px);
-      margin: 24px auto
-    }
-
-    .card {
-      background: #121826;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .6rem .9rem;
-      border-radius: var(--radius);
-      background: var(--brand);
-      color: #0b1020;
-      border: 0;
-      font-weight: 800;
-      text-decoration: none;
-      cursor: pointer
-    }
-
-    .btn.secondary {
-      background: #1a2436;
       color: var(--text);
-      border: 1px solid var(--border)
+      -webkit-font-smoothing: antialiased;
     }
+    img, svg, video { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
 
-    .btn.secondary.sm {
-      padding: .45rem .7rem;
-      font-weight: 700
-    }
-
-    .pill,
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: .35rem;
-      padding: .25rem .6rem;
-      border-radius: 999px;
-      background: #182033;
+    .wrap { width: min(100% - 24px, 1120px); margin: 24px auto; }
+    .card {
+      background: var(--card);
       border: 1px solid var(--border);
-      font-size: .85rem;
-      color: var(--muted)
+      border-radius: var(--radius);
+      padding: 1rem;
     }
-
-    .badge {
-      font-size: .75rem;
-      background: #0d1628;
-      color: #9fb5ff;
-      border-color: #2a3a5a
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .5rem .9rem; border-radius: var(--radius-sm);
+      background: var(--accent); color: #fff;
+      border: 0; font-weight: 600; font-size: 14px;
+      text-decoration: none; cursor: pointer;
+      transition: background 0.15s ease;
     }
-
-    .note {
-      color: var(--muted)
+    .btn:hover { background: var(--accent-hover); }
+    .btn.secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
     }
-
-    .note.small {
-      font-size: .9rem
+    .btn.secondary:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+    .btn.secondary.sm { padding: .4rem .7rem; font-weight: 600; font-size: 12px; }
+    .pill, .chip {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .25rem .6rem; border-radius: 999px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      font-size: .8rem; color: var(--text-secondary); font-weight: 500;
     }
-
-    .sr-only {
-      position: absolute;
-      left: -9999px
-    }
+    .badge { font-size: .7rem; background: rgba(255,255,255,0.08); color: var(--accent-light); }
+    .note { color: var(--muted); }
+    .note.small { font-size: .85rem; }
+    .sr-only { position: absolute; left: -9999px; }
 
     /* Header */
     .site {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: linear-gradient(180deg, #0f1419, #0f1419f2 70%, transparent);
-      backdrop-filter: saturate(140%) blur(6px);
-      border-bottom: 1px solid #0f1a2a
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(8,9,10,0.85);
+      backdrop-filter: blur(12px) saturate(120%);
+      border-bottom: 1px solid var(--border-subtle);
     }
-
     .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      width: min(100% - 24px, 1120px);
-      margin: 0 auto;
-      min-height: 56px;
-      padding: 8px 0
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; width: min(100% - 24px, 1120px);
+      margin: 0 auto; min-height: 56px; padding: 0;
     }
-
     .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: .6rem;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 900
+      display: inline-flex; align-items: center; gap: .6rem;
+      color: var(--text); text-decoration: none; font-weight: 600;
     }
     .brand b {
       transition: opacity 0.2s ease, max-width 0.3s ease;
-      overflow: hidden;
-      max-width: 0;
-      opacity: 0;
-      white-space: nowrap
+      overflow: hidden; max-width: 0; opacity: 0; white-space: nowrap;
     }
-    .brand:hover b {
-      max-width: 200px;
-      opacity: 1
-    }
+    .brand:hover b { max-width: 200px; opacity: 1; }
 
-    .nav-links {
-      position: relative;
-      display: flex;
-      gap: .75rem;
-      align-items: center
-    }
+    .nav-links { position: relative; display: flex; gap: 4px; align-items: center; }
     .nav-links a {
-      color: var(--text);
-      opacity: .9;
-      text-decoration: none;
-      padding: .25rem .4rem;
-      border-radius: .5rem;
-      white-space: nowrap
+      color: var(--text-secondary); text-decoration: none;
+      padding: 6px 12px; border-radius: 6px;
+      font-size: 14px; font-weight: 500;
+      transition: color 0.15s ease, background-color 0.15s ease;
+      white-space: nowrap;
     }
-    .nav-links a[aria-current="page"] {
-      background: #182033;
-      border: 1px solid var(--border)
-    }
+    .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+    .nav-links a[aria-current="page"] { color: var(--text); background: rgba(255,255,255,0.08); }
+
     .more-btn {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 8px 14px;
-      border-radius: 6px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      white-space: nowrap
+      position: relative; display: inline-flex; align-items: center; gap: 4px;
+      padding: 6px 12px; border-radius: 6px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      color: var(--text-secondary); font-weight: 500; font-size: 13px;
+      cursor: pointer; white-space: nowrap;
     }
-    .more-btn:hover {
-      background: rgba(255,255,255,0.12)
-    }
-    .more-btn .arrow {
-      font-size: 10px;
-      transition: transform 0.2s ease
-    }
+    .more-btn:hover { background: rgba(255,255,255,0.08); }
+    .more-btn .arrow { font-size: 10px; transition: transform 0.2s ease; }
     .more-menu {
-      display: none;
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      min-width: 200px;
-      background: #0e1628;
-      border: 1px solid var(--border);
-      border-radius: .75rem;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-      padding: 6px 0;
-      z-index: 1000
+      display: none; position: absolute; top: calc(100% + 8px); right: 0;
+      min-width: 200px; background: #191a1b;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      padding: 4px 0; z-index: 1000;
     }
-    .more-menu.open {
-      display: block
-    }
+    .more-menu.open { display: block; }
     .more-menu a {
-      display: block;
-      padding: 10px 16px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none
+      display: block; padding: 8px 14px; font-size: 13px; font-weight: 500;
+      color: var(--text-secondary); text-decoration: none;
     }
-    .more-menu a:hover {
-      background: rgba(255,255,255,0.08)
-    }
+    .more-menu a:hover { background: rgba(255,255,255,0.06); color: var(--text); }
 
     /* Hero */
     .hero {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 12px;
-      align-items: center;
-      min-height: 128px
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 12px; align-items: center; min-height: 128px;
     }
-
-    .hero-logo {
-      width: 48px;
-      height: 48px
-    }
+    .hero-logo { width: 48px; height: 48px; }
 
     /* Games rail */
-    .games-rail {
-      border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
-      box-shadow: 0 0 0 1px color-mix(in oklab, var(--accent) 18%, transparent), 0 10px 30px color-mix(in oklab, var(--accent) 12%, transparent)
-    }
+    .games-rail { border: 1px solid var(--border); }
     .games-rail-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; flex-wrap: wrap;
     }
-    .game-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem
-    }
+    .game-chips { display: flex; flex-wrap: wrap; gap: .5rem; }
     .game-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: .35rem;
-      padding: .5rem .8rem;
-      border-radius: 999px;
-      background: color-mix(in oklab, var(--accent) 10%, #121a2c);
-      border: 1px solid color-mix(in oklab, var(--accent) 35%, var(--border));
-      color: var(--text);
-      font-weight: 700;
-      text-decoration: none;
-      transition: transform .12s ease, background .15s ease, border-color .15s ease
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .45rem .75rem; border-radius: 999px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      color: var(--text-secondary); font-weight: 500; font-size: 13px;
+      text-decoration: none; transition: background 0.15s ease, color 0.15s ease;
     }
-    .game-chip:hover {
-      transform: translateY(-2px);
-      background: color-mix(in oklab, var(--accent) 22%, #121a2c);
-      border-color: var(--accent)
-    }
+    .game-chip:hover { background: rgba(255,255,255,0.08); color: var(--text); }
 
-    h1 {
-      margin: .1rem 0 .25rem 0;
-      line-height: 1.25
-    }
+    h1 { margin: .1rem 0 .25rem 0; line-height: 1.25; font-weight: 600; letter-spacing: -0.02em; }
 
     /* Controls */
-    .controls {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: .75rem;
-      margin: 16px 0 8px
-    }
-
+    .controls { display: grid; grid-template-columns: 1fr; gap: .75rem; margin: 16px 0 8px; }
     .controls .search {
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-      background: #0e1628;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: .4rem .6rem
+      display: flex; align-items: center; gap: .6rem;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: .4rem .6rem;
     }
-
-    .controls .search span {
-      opacity: .8
-    }
-
+    .controls .search span { opacity: .6; }
     .controls .search .input {
-      flex: 1;
-      min-width: 0;
-      background: transparent;
-      border: 0;
-      outline: 0;
-      color: var(--text);
-      font-size: 1rem
+      flex: 1; min-width: 0; background: transparent;
+      border: 0; outline: 0; color: var(--text); font-size: 1rem;
     }
-
-    .filters {
-      display: flex;
-      gap: .5rem;
-      flex-wrap: wrap
-    }
+    .filters { display: flex; gap: .5rem; flex-wrap: wrap; }
 
     /* Category bar */
     .catbar {
-      display: flex;
-      gap: .5rem;
-      overflow: auto;
-      padding: .5rem;
-      border: 1px solid var(--border);
-      border-radius: .75rem;
-      background: #0d1626;
-      scrollbar-width: thin
+      display: flex; gap: .5rem; overflow: auto; padding: .5rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: rgba(255,255,255,0.02); scrollbar-width: thin;
     }
-
     .cat-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: .45rem;
-      padding: .45rem .7rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #121a2c;
-      color: var(--text);
-      white-space: nowrap;
-      font-weight: 700;
-      cursor: pointer
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .4rem .65rem; border-radius: 999px;
+      border: 1px solid var(--border); background: rgba(255,255,255,0.04);
+      color: var(--text-secondary); white-space: nowrap;
+      font-weight: 500; font-size: 13px; cursor: pointer;
     }
-
-    .cat-pill[aria-current="true"] {
-      outline: 2px solid #3b82f6
-    }
+    .cat-pill[aria-current="true"] { border-color: var(--accent); color: var(--text); background: rgba(94,106,210,0.15); }
 
     /* Grid + cards */
     .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 12px
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;
     }
-
-    .tool-card {
-      min-height: 200px
-    }
-
-    .tool-title {
-      display: inline-block
-    }
-
-    .tool-desc {
-      min-height: 2.3em
-    }
-
-    .tags {
-      display: flex;
-      gap: .35rem;
-      flex-wrap: wrap
-    }
-
-    /* Video */
-    .video-shell {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      border-radius: .75rem;
-      overflow: hidden;
-      background: #0b1220;
-      border: 1px solid var(--border)
-    }
-
-    .video-shell iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0
-    }
-
-    /* Hide empty sections fully */
-    .reserved {
-      min-height: var(--reserve, 0)
-    }
-
-    .is-invisible {
-      display: none !important
-    }
-
-    /* Skeletons */
-    .skeleton {
-      position: relative;
-      overflow: hidden;
-      background: #0f1627;
-      border: 1px solid var(--border);
-      border-radius: .75rem
-    }
-
-    .s1 {
-      height: 20px;
-      width: 40%;
-      margin: .3rem 0;
-      border-radius: .35rem
-    }
-
-    .s2 {
-      height: 14px;
-      width: 70%;
-      margin: .25rem 0;
-      border-radius: .35rem
-    }
-
-    .s3 {
-      height: 14px;
-      width: 55%;
-      margin: .25rem 0;
-      border-radius: .35rem
-    }
-
-    .skeleton::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      transform: translateX(-100%);
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .06), transparent);
-      animation: sh .9s infinite
-    }
-
-    @keyframes sh {
-      to {
-        transform: translateX(100%)
-      }
-    }
-  </style>
+</style>
 <!-- Global CSS & (attempt) shared utils -->
 
 <script src="/scripts/utils.js?v=1.3.0" type="module"></script>
@@ -554,12 +297,15 @@
       top: 0;
     }
 
+/* AdSense: hide empty anchor ad + rentry overlays (white box on dark theme mobile) */
+#google-anno-sa, .goog-rentry { display: none !important; }
+ins.adsbygoogle[data-ad-status="unfill-optimized"] { display: none !important; }
 </style>
 
-  <link rel="stylesheet" href="/style.css?v=1.3.0">
+  <link rel="stylesheet" href="/style.css?v=2.0.0">
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
-<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-6216304334889617",enable_page_level_ads:true});</script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-6216304334889617",enable_page_level_ads:true,google_ad_anchor_slot:"none"});</script>
 
 <!-- Paste your Google Analytics 4 Measurement ID below, e.g. G-ABC123XYZ9 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NN3GDL1LEJ"></script>
@@ -807,32 +553,32 @@
 
       // ---- Categories ----
       const CATEGORIES = {
-        all: { label: "All", icon: "🧰", desc: "Every tool on UpTools" },
-        finance: { label: "Finance", icon: "💰", desc: "Money, loans & returns" },
-        tax: { label: "Tax", icon: "🧮", desc: "GST, Income Tax & HST" },
-        banking: { label: "Banking", icon: "🏦", desc: "IFSC & bank utilities" },
-        crypto: { label: "Crypto", icon: "🪙", desc: "Prices, mining & portfolio" },
-        images: { label: "Images", icon: "🖼️", desc: "Convert, edit, generate" },
-        text: { label: "Text", icon: "🔡", desc: "Formatters & counters" },
-        dev: { label: "Developer", icon: "💻", desc: "JSON, UUID, Base64, QR" },
-        security: { label: "Security", icon: "🛡️", desc: "Passwords & QR reader" },
-        networking: { label: "Networking", icon: "🌐", desc: "IP & network helpers" },
-        fun: { label: "Fun", icon: "🎮", desc: "Mini games" },
-        health: { label: "Health", icon: "❤️", desc: "BMI & wellness" },
-        canada: { label: "Canada", icon: "🍁", desc: "CRS & HST tools" },
-        romantic: { label: "Romantic", icon: "💘", desc: "Couple & love utilities" },
-        social: { label: "Social", icon: "📱", desc: "Social media tools" },
-        whatsapp: { label: "WhatsApp", icon: "💬", desc: "WhatsApp tools" },
-        wifi: { label: "WiFi", icon: "📡", desc: "WiFi tools" },
-        ai: { label: "AI", icon: "🤖", desc: "AI-powered tools" },
-        marketing: { label: "Marketing", icon: "📈", desc: "SEO & marketing tools" },
-        cricket: { label: "Cricket", icon: "🏏", desc: "Cricket calculators & stats" },
-        sports: { label: "Sports", icon: "⚽", desc: "Sports calculators & trackers" },
-        fifa: { label: "FIFA WC 2026", icon: "🏆", desc: "FIFA World Cup 2026 tools & calculators" },
-        india: { label: "India", icon: "🇮🇳", desc: "India-specific tools & calculators" },
-        education: { label: "Education", icon: "🎓", desc: "GPA, grades & academic tools" },
-        downloader: { label: "Downloaders", icon: "⬇️", desc: "Video & content downloaders" },
-        tools: { label: "Utilities", icon: "🧰", desc: "Converters, timers & helpers" },
+        all: { label: "All", icon: "", desc: "Every tool on UpTools" },
+        finance: { label: "Finance", icon: "", desc: "Money, loans & returns" },
+        tax: { label: "Tax", icon: "", desc: "GST, Income Tax & HST" },
+        banking: { label: "Banking", icon: "", desc: "IFSC & bank utilities" },
+        crypto: { label: "Crypto", icon: "", desc: "Prices, mining & portfolio" },
+        images: { label: "Images", icon: "", desc: "Convert, edit, generate" },
+        text: { label: "Text", icon: "", desc: "Formatters & counters" },
+        dev: { label: "Developer", icon: "", desc: "JSON, UUID, Base64, QR" },
+        security: { label: "Security", icon: "", desc: "Passwords & QR reader" },
+        networking: { label: "Networking", icon: "", desc: "IP & network helpers" },
+        fun: { label: "Fun", icon: "", desc: "Mini games" },
+        health: { label: "Health", icon: "", desc: "BMI & wellness" },
+        canada: { label: "Canada", icon: "", desc: "CRS & HST tools" },
+        romantic: { label: "Romantic", icon: "", desc: "Couple & love utilities" },
+        social: { label: "Social", icon: "", desc: "Social media tools" },
+        whatsapp: { label: "WhatsApp", icon: "", desc: "WhatsApp tools" },
+        wifi: { label: "WiFi", icon: "", desc: "WiFi tools" },
+        ai: { label: "AI", icon: "", desc: "AI-powered tools" },
+        marketing: { label: "Marketing", icon: "", desc: "SEO & marketing tools" },
+        cricket: { label: "Cricket", icon: "", desc: "Cricket calculators & stats" },
+        sports: { label: "Sports", icon: "", desc: "Sports calculators & trackers" },
+        fifa: { label: "FIFA WC 2026", icon: "", desc: "FIFA World Cup 2026 tools & calculators" },
+        india: { label: "India", icon: "", desc: "India-specific tools & calculators" },
+        education: { label: "Education", icon: "", desc: "GPA, grades & academic tools" },
+        downloader: { label: "Downloaders", icon: "", desc: "Video & content downloaders" },
+        tools: { label: "Utilities", icon: "", desc: "Converters, timers & helpers" },
       };
 
       // ---- Tools (assign categories with `cats`) ----
@@ -1177,6 +923,20 @@
         { slug: "dice-roller", title: "Dice Roller", icon: "🎲", desc: "Roll d4–d20 dice online for games.", href: "/dice-roller/", tags: ["fun"], cats: ["all","fun"], new: true },
         // ── Downloaders ──
         { slug: "youtube-shorts-downloader", title: "YouTube Shorts Downloader", icon: "📱", desc: "Download YouTube Shorts free.", href: "/youtube-shorts-downloader/", tags: ["social","downloader"], cats: ["all","social","downloader"] },
+        // ── New API Tools (July 2026) ──
+        { slug: "email-validator", title: "Email Validator", icon: "✉️", desc: "Validate emails, check disposable & verify MX records.", href: "/email-validator/", tags: ["security","email","validation"], cats: ["all","security","tools"], new: true },
+        { slug: "weather-forecast", title: "Weather Forecast", icon: "🌤️", desc: "7-day forecast & hourly weather for any city.", href: "/weather-forecast/", tags: ["weather","forecast","tools"], cats: ["all","tools"], new: true },
+        { slug: "quote-generator", title: "Quote Generator", icon: "💬", desc: "200+ inspiring quotes from famous people.", href: "/quote-generator/", tags: ["quotes","motivational","fun"], cats: ["all","fun","tools"], new: true },
+        { slug: "phone-specs", title: "Phone Specifications", icon: "📱", desc: "Search & compare phone specs side by side.", href: "/phone-specs/", tags: ["phone","specs","compare"], cats: ["all","tools"], new: true },
+        { slug: "food-randomizer", title: "Food Randomizer", icon: "🍽️", desc: "Discover random dishes from around the world.", href: "/food-randomizer/", tags: ["food","random","fun"], cats: ["all","fun","health"], new: true },
+        { slug: "random-fact-generator", title: "Random Fact Generator", icon: "🧠", desc: "300+ fun facts from science, history, nature & more.", href: "/random-fact-generator/", tags: ["facts","trivia","fun"], cats: ["all","fun"], new: true },
+        // ── Tier 2 API Tools ──
+        { slug: "url-shortener", title: "URL Shortener", icon: "🔗", desc: "Shorten links & generate QR codes free.", href: "/url-shortener/", tags: ["tools","links","qr"], cats: ["all","tools"], new: true },
+        { slug: "color-tool", title: "Color Picker & Converter", icon: "🎨", desc: "Pick colors, convert HEX/RGB/HSL, generate palettes.", href: "/color-tool/", tags: ["design","color","tools"], cats: ["all","tools","images"], new: true },
+        { slug: "poetry-search", title: "Poetry Search", icon: "📖", desc: "Search thousands of poems by title, author, or line.", href: "/poetry-search/", tags: ["poetry","books","education"], cats: ["all","tools","education"], new: true },
+        { slug: "bible-verse", title: "Bible Verse Lookup", icon: "✝️", desc: "Look up scripture in KJV, ASV, WEB translations.", href: "/bible-verse/", tags: ["bible","scripture","religion"], cats: ["all","tools"], new: true },
+        { slug: "quran-verse", title: "Quran Verse Lookup", icon: "☪️", desc: "Read Quran in Arabic & English by Surah.", href: "/quran-verse/", tags: ["quran","islam","religion"], cats: ["all","tools"], new: true },
+        { slug: "nba-stats", title: "NBA Stats", icon: "🏀", desc: "Player stats, game scores & team data live.", href: "/nba-stats/", tags: ["nba","basketball","sports","stats"], cats: ["all","sports"], new: true },
       ];
 
       // ---- Elements ----
@@ -1211,20 +971,19 @@
       }
       function cardHTML(t, favs) {
         const isFav = favs.has(t.slug);
-        const newBadge = t.new ? `<span class="badge pill" style="background:#06b6d4;color:#04121a;font-weight:800">🆕 New</span>` : '';
+        const newBadge = t.new ? `<span class="badge pill" style="background:var(--accent);color:#fff;font-weight:600">New</span>` : '';
         return `
       <article class="tool-card card" data-tags="${(t.tags || []).join(',')}" data-title="${t.title.toLowerCase()}" data-cats="${(t.cats || []).join(',')}">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem">
-          <div aria-hidden="true" style="font-size:20px">${t.icon}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.5rem">
           <span class="badge pill">${badgeFor(t)}</span>${newBadge}
         </div>
-        <a class="tool-title" href="${t.href}" aria-label="${t.title}" style="font-size:1.05rem;font-weight:800;text-decoration:none;color:inherit">${t.title}</a>
-        <p class="tool-desc note">${t.desc}</p>
-        <div class="tags">${tagBadges(t)}</div>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.35rem">
-          <a class="btn" href="${t.href}">Open</a>
+        <a class="tool-title" href="${t.href}" aria-label="${t.title}" style="font-size:1rem;font-weight:600;text-decoration:none;color:var(--text);letter-spacing:-0.01em">${t.title}</a>
+        <p class="tool-desc note" style="margin:.3rem 0 .5rem;font-size:13px;line-height:1.5">${t.desc}</p>
+        <div class="tags" style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:.5rem">${tagBadges(t)}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
+          <a class="btn" href="${t.href}" style="font-size:13px;padding:5px 12px">Open</a>
           <button class="fav btn secondary sm ${isFav ? 'active' : ''}" data-fav="${t.slug}" aria-label="Favourite ${t.title}" title="Favourite">
-            ${isFav ? '★ Favourited' : '☆ Favourite'}
+            ${isFav ? '★' : '☆'}
           </button>
         </div>
       </article>`;
@@ -1461,9 +1220,9 @@
       }
 
       const palette = [
-        [0, 229, 255],   // cyan
-        [124, 77, 255],  // violet
-        [0, 255, 163]    // mint
+        [94, 106, 210],   // indigo
+        [113, 112, 255],  // violet
+        [60, 63, 80]      // muted gray
       ];
 
       function rnd(min, max) { return Math.random() * (max - min) + min; }
