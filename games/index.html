@@ -74,6 +74,329 @@
 
   <link rel="stylesheet" href="/style.css?v=5.0.0">
 
+<style>
+/* =========================================================
+   Games Page — Complete Design System
+   ========================================================= */
+
+/* --- Hero --- */
+.games-hero{
+  text-align:center;
+  padding:2.5rem 1rem 1.5rem;
+  margin-bottom:1.5rem;
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,rgba(99,102,241,.1) 0%,rgba(168,85,247,.04) 50%,transparent 100%);
+  border:1px solid rgba(99,102,241,.15);
+  position:relative;
+  overflow:hidden}
+.games-hero::before{
+  content:"";
+  position:absolute;inset:0;
+  background:radial-gradient(circle 400px at 50% 0%,rgba(99,102,241,.12),transparent 70%);
+  pointer-events:none}
+.games-hero h1{
+  font-size:2.4rem;
+  font-weight:800;
+  letter-spacing:-.04em;
+  margin:0 0 .3rem;
+  background:linear-gradient(135deg,#fff 0%,#c7d2fe 40%,var(--accent-2) 70%,rgba(236,72,153,.7) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  position:relative}
+.games-hero .sub{
+  color:var(--text-2);
+  font-size:.95rem;
+  margin:0;
+  position:relative}
+.games-hero .stats{
+  display:flex;
+  justify-content:center;
+  gap:1.5rem;
+  margin-top:1rem;
+  position:relative}
+.games-hero .stat{
+  display:flex;
+  flex-direction:column;
+  align-items:center}
+.games-hero .stat b{
+  font-size:1.4rem;
+  font-weight:800;
+  color:var(--accent-2)}
+.games-hero .stat span{
+  font-size:.7rem;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.05em}
+
+/* --- Search + Filters --- */
+.controls-bar{
+  display:grid;
+  gap:12px;
+  margin-bottom:1.5rem}
+.controls-bar .search{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--surface-input);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:10px 14px;
+  transition:border-color var(--trans)}
+.controls-bar .search:focus-within{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(99,102,241,.1)}
+.controls-bar .search span{
+  opacity:.5;
+  font-size:1.1rem}
+.controls-bar .search input{
+  flex:1;
+  min-width:0;
+  background:transparent;
+  border:0;
+  outline:0;
+  color:var(--text);
+  font-size:15px}
+.controls-bar .search input::placeholder{
+  color:var(--muted)}
+.btn.alt{
+  background:transparent;
+  color:var(--text-2);
+  border:1px solid var(--border);
+  min-height:36px;
+  font-size:13px;
+  padding:6px 14px;
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  font-weight:500;
+  transition:all var(--trans)}
+.btn.alt:hover{
+  border-color:var(--accent-border);
+  color:var(--text);
+  background:rgba(99,102,241,.05)}
+.filters{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap}
+
+/* --- Section Headers --- */
+.section{margin:20px 0}
+.section h2{
+  font-size:1.2rem;
+  font-weight:700;
+  margin:0 0 12px;
+  color:var(--text)}
+
+/* --- Games Grid --- */
+.games-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px}
+
+/* --- Game Card --- */
+.game-card{
+  display:grid;
+  grid-template-rows:auto auto auto auto auto;
+  gap:10px;
+  padding:22px;
+  border-radius:var(--radius);
+  background:var(--surface);
+  border:1px solid var(--border);
+  transition:all .25s cubic-bezier(.4,0,.2,1);
+  position:relative;
+  overflow:hidden}
+.game-card::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2),rgba(236,72,153,.6));
+  opacity:0;
+  transition:opacity .25s}
+.game-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle 200px at var(--mx,50%) var(--my,50%),rgba(99,102,241,.06),transparent 70%);
+  opacity:0;
+  transition:opacity .3s;
+  pointer-events:none}
+.game-card:hover{
+  border-color:rgba(99,102,241,.25);
+  transform:translateY(-6px);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.35),
+    0 0 0 1px rgba(99,102,241,.1),
+    0 0 30px rgba(99,102,241,.05)}
+.game-card:hover::before{opacity:1}
+.game-card:hover::after{opacity:1}
+
+.game-card .row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between}
+
+/* --- Game Icon --- */
+.game-icon{
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  font-size:1.7rem;
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(168,85,247,.08));
+  border:1px solid rgba(99,102,241,.15);
+  transition:all .25s cubic-bezier(.4,0,.2,1);
+  position:relative}
+.game-icon::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  opacity:0;
+  z-index:-1;
+  transition:opacity .25s}
+.game-card:hover .game-icon{
+  transform:scale(1.12) rotate(-5deg);
+  border-color:rgba(99,102,241,.3);
+  box-shadow:0 4px 16px rgba(99,102,241,.2)}
+.game-card:hover .game-icon::after{opacity:.15}
+
+/* --- Badge --- */
+.badge{
+  font-size:.65rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  padding:3px 10px;
+  border-radius:var(--radius-pill);
+  background:rgba(99,102,241,.1);
+  color:var(--accent-2);
+  border:1px solid rgba(99,102,241,.2)}
+
+/* --- Game Title --- */
+.game-title{
+  font-size:1.05rem;
+  font-weight:700;
+  color:var(--text);
+  text-decoration:none;
+  transition:color .2s;
+  line-height:1.3}
+.game-title:hover{color:var(--accent-2)}
+
+/* --- Game Description --- */
+.game-desc{
+  font-size:.82rem;
+  color:var(--text-2);
+  line-height:1.5;
+  margin:0}
+
+/* --- Tags --- */
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px}
+.tag{
+  font-size:.65rem;
+  padding:2px 8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  color:var(--muted);
+  font-weight:500;
+  text-transform:capitalize;
+  transition:all .2s}
+.game-card:hover .tag{
+  background:rgba(99,102,241,.06);
+  border-color:rgba(99,102,241,.12);
+  color:var(--text-2)}
+
+/* --- CTA Row --- */
+.cta{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:4px}
+.cta .btn{
+  min-height:36px;
+  padding:6px 20px;
+  font-size:.82rem;
+  font-weight:600;
+  border-radius:var(--radius-sm);
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  transition:all .2s;
+  position:relative;
+  overflow:hidden}
+.cta .btn::before{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
+  opacity:0;
+  transition:opacity .2s}
+.cta .btn:hover{
+  filter:brightness(1.1);
+  transform:translateY(-1px);
+  box-shadow:0 4px 16px rgba(99,102,241,.3)}
+.cta .btn:hover::before{opacity:1}
+.cta .btn:active{transform:scale(.97)}
+
+/* --- Fav Button --- */
+.fav{
+  background:none;
+  border:none;
+  color:var(--muted);
+  font-size:.75rem;
+  cursor:pointer;
+  padding:5px 10px;
+  border-radius:6px;
+  transition:all .2s;
+  font-weight:500}
+.fav:hover{
+  color:var(--accent-2);
+  background:rgba(99,102,241,.08)}
+.fav.active{
+  color:#eab308;
+  background:rgba(234,179,8,.08)}
+
+/* --- Neon Canvas --- */
+.neon-canvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  overflow:hidden}
+.n-shape{
+  position:absolute;
+  left:var(--x);
+  top:var(--y);
+  font-size:1.5rem;
+  opacity:.06;
+  animation:float var(--d,8s) ease-in-out infinite alternate;
+  filter:blur(.5px)}
+@keyframes float{
+  0%{transform:translateY(0) rotate(0deg)}
+  100%{transform:translateY(-30px) rotate(10deg)}}
+
+/* --- Small tip text --- */
+.small{font-size:.75rem;color:var(--muted);margin-top:8px}
+
+/* --- Responsive --- */
+@media(max-width:640px){
+  .games-hero h1{font-size:1.6rem}
+  .games-hero{padding:1.5rem 1rem 1rem}
+  .games-grid{grid-template-columns:1fr}
+  .game-card{padding:16px}
+  .game-icon{width:44px;height:44px;font-size:1.4rem}
+}
+</style>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6216304334889617" crossorigin="anonymous"></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-6216304334889617",enable_page_level_ads:true});</script>
 
@@ -121,6 +444,11 @@
     <section class="games-hero">
       <h1>🎮 Free Online Games</h1>
       <p class="sub">Instant play. No sign-ups. Mobile-friendly. Ad-light.</p>
+      <div class="stats">
+        <div class="stat"><b>30+</b><span>Games</span></div>
+        <div class="stat"><b>0</b><span>Sign-ups</span></div>
+        <div class="stat"><b>100%</b><span>Free</span></div>
+      </div>
     </section>
 
     <section class="controls-bar" aria-label="Search and filters">
@@ -190,6 +518,15 @@
       };
       document.addEventListener('visibilitychange', () => setState(document.hidden ? 'paused' : 'running'));
     })();
+
+    /* --- Card mouse glow tracking --- */
+    document.addEventListener('mousemove', e => {
+      document.querySelectorAll('.game-card').forEach(card => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+    });
   </script>
 
   <script>
