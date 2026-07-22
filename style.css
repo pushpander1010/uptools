@@ -11,10 +11,10 @@
   --bg2: #0f0f1a;
 
   /* Surfaces */
-  --card: rgba(255,255,255,0.08);
-  --card-hover: rgba(255,255,255,0.12);
-  --surface-2: rgba(255,255,255,0.1);
-  --surface-3: rgba(255,255,255,0.14);
+  --card: rgba(15,15,25,0.85);
+  --card-hover: rgba(20,20,35,0.9);
+  --surface-2: rgba(20,20,35,0.8);
+  --surface-3: rgba(30,30,50,0.85);
 
   /* Text */
   --text: #f0f0f5;
@@ -162,7 +162,7 @@ header.site{
 .more-btn {
   position:relative; display:inline-flex; align-items:center; gap:4px;
   padding:6px 12px; border-radius:8px;
-  background:rgba(255,255,255,0.08); border:1px solid var(--border);
+  background:rgba(20,20,35,0.85); border:1px solid var(--border);
   color:var(--text-secondary); font-weight:500; font-size:13px;
   cursor:pointer; white-space:nowrap;
 }
@@ -170,7 +170,7 @@ header.site{
 .more-btn .arrow{ font-size:10px; transition:transform 0.2s ease; }
 .more-menu{
   display:none; position:absolute; top:calc(100% + 8px); right:0;
-  min-width:200px; background:rgba(20,20,35,0.92);
+  min-width:200px; background:rgba(15,15,25,0.95);
   backdrop-filter:blur(16px);
   border:1px solid var(--border); border-radius:var(--radius);
   box-shadow:var(--shadow-lg);
@@ -201,7 +201,7 @@ header.site{
   display:inline-flex; align-items:center; gap:5px;
   padding:5px 10px; border-radius:var(--radius-pill); font-size:var(--f12);
   text-decoration:none;
-  background:rgba(255,255,255,0.08); color:var(--text-secondary);
+  background:rgba(20,20,35,0.8); color:var(--text-secondary);
   border:1px solid var(--border); font-weight:500;
   transition:background var(--trans), color var(--trans), border-color var(--trans);
 }
@@ -236,7 +236,7 @@ header.site{
 
 .input, select{
   width:100%; padding:10px 12px; border-radius:var(--radius-sm);
-  background:rgba(255,255,255,0.08); color:var(--text);
+  background:rgba(12,12,22,0.9); color:var(--text);
   border:1px solid var(--border);
   outline:none; transition:border-color var(--trans), background var(--trans), box-shadow var(--trans);
 }
@@ -247,7 +247,7 @@ header.site{
 .textarea{
   width:100%; min-height:90px; resize:vertical;
   padding:10px 12px; border-radius:var(--radius-sm); color:var(--text);
-  background:rgba(255,255,255,0.08); border:1px solid var(--border);
+  background:rgba(20,20,35,0.85); border:1px solid var(--border);
 }
 .textarea:focus{ border-color:var(--accent); box-shadow:0 0 0 3px rgba(99,102,241,0.15); }
 
@@ -275,7 +275,7 @@ input[type="number"]{ -moz-appearance:textfield; }
 .btn:active{ transform:scale(0.98); }
 
 .btn.secondary, a.btn.secondary{
-  background: rgba(255,255,255,0.1); color:var(--text-secondary);
+  background: rgba(20,20,35,0.85); color:var(--text-secondary);
   border:1px solid var(--border);
 }
 .btn.secondary:hover{ background:rgba(255,255,255,0.1); color:var(--text); box-shadow:none; }
@@ -301,7 +301,7 @@ input[type="number"]{ -moz-appearance:textfield; }
 .game-chip{
   display:inline-flex; align-items:center; gap:.35rem;
   padding:.5rem .85rem; border-radius:var(--radius-pill);
-  background:rgba(255,255,255,0.07); border:1px solid var(--border);
+  background:rgba(20,20,35,0.8); border:1px solid var(--border);
   color:var(--text-secondary); font-weight:500; font-size:13px;
   text-decoration:none;
   transition:background var(--trans), color var(--trans), border-color var(--trans), transform var(--trans);
@@ -317,7 +317,7 @@ h1{ margin:.1rem 0 .25rem 0; line-height:1.25; }
 .controls{ display:grid; grid-template-columns:1fr; gap:.75rem; margin:16px 0 8px; }
 .controls .search{
   display:flex; align-items:center; gap:.6rem;
-  background:rgba(255,255,255,0.07); border:1px solid var(--border);
+  background:rgba(20,20,35,0.8); border:1px solid var(--border);
   border-radius:var(--radius); padding:.5rem .7rem;
   transition:border-color var(--trans), box-shadow var(--trans);
 }
@@ -333,12 +333,12 @@ h1{ margin:.1rem 0 .25rem 0; line-height:1.25; }
 .catbar{
   display:flex; gap:.5rem; overflow:auto; padding:.5rem;
   border:1px solid var(--border); border-radius:var(--radius);
-  background:rgba(255,255,255,0.05); scrollbar-width:thin;
+  background:rgba(15,15,25,0.75); scrollbar-width:thin;
 }
 .cat-pill{
   display:inline-flex; align-items:center; gap:.4rem;
   padding:.4rem .7rem; border-radius:var(--radius-pill);
-  border:1px solid var(--border); background:rgba(255,255,255,0.07);
+  border:1px solid var(--border); background:rgba(20,20,35,0.8);
   color:var(--text-secondary); white-space:nowrap;
   font-weight:500; font-size:13px; cursor:pointer;
   transition:background var(--trans), color var(--trans), border-color var(--trans);
@@ -362,7 +362,7 @@ h1{ margin:.1rem 0 .25rem 0; line-height:1.25; }
 .card li a{
   display:flex; align-items:center; gap:10px; padding:12px;
   border-radius:var(--radius-sm); text-decoration:none; color:var(--text-secondary);
-  background:rgba(255,255,255,0.06); border:1px solid var(--border);
+  background:rgba(15,15,25,0.8); border:1px solid var(--border);
   transition:transform var(--trans), border-color var(--trans), color var(--trans);
 }
 .card li a:hover{ transform:translateY(-1px); border-color:var(--border-hover); color:var(--text); }
@@ -426,7 +426,7 @@ h1{ margin:.1rem 0 .25rem 0; line-height:1.25; }
 .amount{ color:var(--accent-4); font-weight:700; font-variant-numeric:tabular-nums; }
 .result{
   margin-top:12px; padding:14px; border-radius:var(--radius);
-  background:rgba(255,255,255,0.07); border:1px solid var(--border);
+  background:rgba(20,20,35,0.8); border:1px solid var(--border);
 }
 
 /* ---------- Tool header ---------- */
@@ -443,7 +443,7 @@ h1{ margin:.1rem 0 .25rem 0; line-height:1.25; }
 .back-btn{
   display:inline-grid; place-items:center; width:36px; height:36px;
   border-radius:var(--radius-sm); text-decoration:none; color:var(--text-secondary);
-  background:rgba(255,255,255,0.08); border:1px solid var(--border);
+  background:rgba(20,20,35,0.85); border:1px solid var(--border);
 }
 .back-btn:hover{ border-color:var(--border-hover); color:var(--text); }
 
